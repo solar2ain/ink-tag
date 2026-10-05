@@ -1,0 +1,295 @@
+{
+  "schemaVersion": 2,
+  "product": "InkTag",
+  "version": "0.2.0",
+  "releaseTag": "v0.2.0-migration.1",
+  "webuiVersion": "1.2.0",
+  "channel": "preview",
+  "components": [
+    "cli",
+    "webui"
+  ],
+  "firmwareSelection": {
+    "published": false,
+    "platforms": [],
+    "boards": [],
+    "kinds": []
+  },
+  "repository": "solar2ain/ink-tag",
+  "generatedAt": "2026-10-05T19:54:46+08:00",
+  "sourceRevision": "6edf5b849352a3009ecca604a37b830a2684d39a",
+  "sourceTreeDirty": false,
+  "licensingStatus": "private-preview-review-required",
+  "boards": [
+    {
+      "boardId": "gr5331_zkc21v",
+      "displayName": "ZKC21V",
+      "mcu": "Goodix GR5331",
+      "platform": "goodix",
+      "status": "beta",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "gr5331_zkc21v",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "0.2 候选；Full、正常签名 OTA、精确身份重连、显示/图槽/Find/激活保持已通过，破坏性 OTA 与签名拒绝矩阵仍待完成。",
+      "notesEn": "0.2 candidate. Full, normal signed OTA, exact-identity reconnect, display/image/Find/activation persistence pass; destructive OTA and signature-rejection matrices remain."
+    },
+    {
+      "boardId": "gr5513_zkc42v",
+      "displayName": "ZKC42V v1.2 (GR5513)",
+      "mcu": "Goodix GR5513",
+      "platform": "goodix",
+      "status": "beta",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "gr551x_zkc42v",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "与 GR5515/GR5513 ZKC42VM 共用最低公共配置应用和 OTA；本板 NFC/RGB 已实测。长期 UC8176 时钟漂移、破坏性 OTA 与冻结产物复验仍是门禁。",
+      "notesEn": "Shares the lowest-common-denominator application and OTA with both ZKC42VM variants; NFC/RGB pass here. Long-run UC8176 clock drift, destructive OTA and frozen-artifact regression remain gates."
+    },
+    {
+      "boardId": "gr5513_zkc42vm",
+      "displayName": "ZKC42VM v1.2 (GR5513)",
+      "mcu": "Goodix GR5513",
+      "platform": "goodix",
+      "status": "beta",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "gr551x_zkc42vm",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "ZKC42V 的精简无 NFC/RGB 变体；使用专用首刷容器与共用应用/OTA，准确 SSD1683 配方的冻结产物回归仍待完成。",
+      "notesEn": "Reduced ZKC42V variant without NFC/RGB. It uses an exact first-flash container and the shared application/OTA; frozen-artifact SSD1683 regression remains."
+    },
+    {
+      "boardId": "gr5515_zkc42vm",
+      "displayName": "ZKC42VM (GR5515)",
+      "mcu": "Goodix GR5515",
+      "platform": "goodix",
+      "status": "beta",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "gr551x_zkc42vm",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "与 GR5513 变体共用应用/OTA；1 MiB 首刷容器独立。224 KiB 布局边界、签名拒绝和中断矩阵需在本芯片复验。",
+      "notesEn": "Shares the application/OTA with GR5513 variants and has a separate 1 MiB first-flash container. The 224 KiB boundary, signature rejection and interruption matrix need this-chip regression."
+    },
+    {
+      "boardId": "om6626_zkc21b",
+      "displayName": "ZKC21B",
+      "mcu": "OnMicro OM6626",
+      "platform": "onmicro",
+      "status": "beta",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "om6626_zkc21b",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "与 ZKC42B 共用应用/OTA；Full、显示、NFC、图槽/轮播、正常 OTA、一次中断重传和随身烤机基线已通过。",
+      "notesEn": "Shares application/OTA with ZKC42B. Full, display, NFC, image/slideshow, normal OTA, one interrupted retransmission and carry-soak baseline pass."
+    },
+    {
+      "boardId": "om6626_zkc42b",
+      "displayName": "ZKC42B",
+      "mcu": "OnMicro OM6626",
+      "platform": "onmicro",
+      "status": "experimental",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "om6626_zkc42b",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "2 MiB 辅助图槽已通过整库写读显示与 OTA 保持；活跃擦写掉电、完整中断/签名矩阵和四边光学复验仍待完成。",
+      "notesEn": "The 2 MiB auxiliary store passes full-capacity write/read/display and OTA retention; active-write power loss, full interruption/signature matrices and edge optical regression remain."
+    },
+    {
+      "boardId": "hs_nowa154",
+      "displayName": "Hanshow Nowa 154R-N",
+      "mcu": "Telink TLSR8359",
+      "platform": "telink",
+      "status": "experimental",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "hs_nowa154",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "0.2 实验候选；共用 192 KiB 应用/Recovery，需完成 layout-v3 Full、正常/中断 OTA、RC 时基烤机和冻结产物复验。",
+      "notesEn": "Experimental 0.2 candidate with the shared 192 KiB application/Recovery. Layout-v3 Full, normal/interrupted OTA, RC timebase soak and frozen-artifact regression remain."
+    },
+    {
+      "boardId": "hs_nebular420",
+      "displayName": "Hanshow Nebular 420R-N",
+      "mcu": "Telink HS9118 / TLSR8359-compatible",
+      "platform": "telink",
+      "status": "experimental",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "hs_nebular420",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "0.2 实验候选；layout-v3、显示、高地址图槽、激活和 Find 基线已测。完整 1 MiB 原始所有权、手机 NFC、全窗验证和中断 OTA 仍是门禁。",
+      "notesEn": "Experimental 0.2 candidate. Layout-v3, display, high-address records, activation and Find baselines pass. Complete 1 MiB ownership, phone NFC, full-window verification and interrupted OTA remain gates."
+    },
+    {
+      "boardId": "aesl22_nrf",
+      "displayName": "Alibaba Cloud AESL 2.1/2.9",
+      "mcu": "Nordic nRF52811",
+      "platform": "nordic",
+      "status": "beta",
+      "releaseScope": "deferred",
+      "lifecycle": "active",
+      "runtimeBoardId": "aesl22_nrf",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "qualified",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "本次延期，不生成 0.2 新固件；后续按明确裁剪的核心能力单独回归和发布。",
+      "notesEn": "Deferred from this release; no new 0.2 firmware is exported. A reduced core capability set will be regressed and released separately."
+    },
+    {
+      "boardId": "nrf52832_priceetag",
+      "displayName": "PriceETag 1.54-inch",
+      "mcu": "Nordic nRF52832",
+      "platform": "nordic",
+      "status": "beta",
+      "releaseScope": "deferred",
+      "lifecycle": "active",
+      "runtimeBoardId": "nrf52832_priceetag",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "qualified",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "本次延期，不生成 0.2 新固件；当前实机回归由 Nordic 平台分支独立完成。",
+      "notesEn": "Deferred from this release; no new 0.2 firmware is exported. Current hardware regression remains in the Nordic platform branch."
+    },
+    {
+      "boardId": "aesl29_da",
+      "displayName": "AESL 2.9-inch",
+      "mcu": "Renesas/Dialog DA14585",
+      "platform": "dialog",
+      "status": "experimental",
+      "releaseScope": "deferred",
+      "lifecycle": "active",
+      "runtimeBoardId": "da14585_aesl",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "本次延期；完整公共屏幕目录已恢复，仍需精确屏幕、持久化、OTA 和功耗回归。",
+      "notesEn": "Deferred; the complete public screen catalog is restored, while exact-panel, persistence, OTA and power regression remain."
+    },
+    {
+      "boardId": "aesl42_da",
+      "displayName": "AESL 4.2-inch",
+      "mcu": "Renesas/Dialog DA14585",
+      "platform": "dialog",
+      "status": "beta",
+      "releaseScope": "deferred",
+      "lifecycle": "active",
+      "runtimeBoardId": "da14585_aesl",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "本次延期，不生成 0.2 新固件；完整公共屏幕目录已恢复，仍需持久化、显示、OTA 和功耗回归。",
+      "notesEn": "Deferred; no new 0.2 firmware is exported. The complete public screen catalog is restored, while persistence, display, OTA and power regression remain."
+    }
+  ],
+  "web": {
+    "type": "web",
+    "name": "InkTag-WebUI-static-v1.2.0.zip",
+    "bytes": 4737175,
+    "sha256": "7d71075af5732da7d0c5982069199f6449c18564ac4fc36f66735429a6fa40d6",
+    "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-migration.1/InkTag-WebUI-static-v1.2.0.zip"
+  },
+  "webStandalone": {
+    "type": "web-standalone",
+    "name": "InkTag-WebUI-standalone-v1.2.0.html",
+    "bytes": 7349399,
+    "sha256": "20076a9c89afef835caae9be688878046d6814f80d41772a73a8b7fc839c8e1d",
+    "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-migration.1/InkTag-WebUI-standalone-v1.2.0.html"
+  },
+  "localServer": {
+    "type": "local-server",
+    "name": "InkTag-local-server-v1.2.0.zip",
+    "bytes": 4811287,
+    "sha256": "7994ac15ed56c5130ca49a467f0215c474758bee6ffc2dc6147e07f548fe66b8",
+    "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-migration.1/InkTag-local-server-v1.2.0.zip"
+  },
+  "flashTools": null,
+  "cli": {
+    "type": "cli",
+    "name": "InkTag-cli-v0.2.0.zip",
+    "bytes": 255675,
+    "sha256": "dc8ae0679ba1e50b48a40d51401874d3dd9957ab24e9732002c297d8ad61512a",
+    "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-migration.1/InkTag-cli-v0.2.0.zip",
+    "requiresPython": ">=3.11"
+  }
+}

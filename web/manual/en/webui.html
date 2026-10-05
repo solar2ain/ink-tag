@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Web console</title><link rel="stylesheet" href="../style.css"></head><body><nav>
+<a href="index.html">InkTag User Manual</a><a href="../../index.html">Back to InkTag Web</a><a href="../zh-CN/index.html">简体中文</a>
+</nav><main><h1 id="web-console-user-guide">Web console user guide</h1>
+<p>InkTag Web has three runtime modes: the Python local server, an HTTPS static site such as GitHub Pages, and a standalone single HTML file. None requires Node.js at runtime. Use a current Chrome or Edge build. Bluetooth access requires HTTPS, <code>localhost</code>, or a browser environment that explicitly permits local-file Bluetooth access.</p>
+<h2 id="connect-a-device">Connect a device</h2>
+<ol>
+<li>Power the tag normally and make sure first-flash or Recovery wiring is no longer asserted.</li>
+<li>Select <strong>Connect device</strong>, then choose the InkTag advertisement whose suffix matches the physical tag.</li>
+<li>Wait for the board ID, firmware version, capabilities, and display profile. Do not send display or OTA commands if the board cannot be identified.</li>
+<li>Select <strong>Connect device</strong> again to choose another tag. Unsupported controls are hidden according to device capabilities.</li>
+</ol>
+<p>The browser remembers authorized Bluetooth devices, although the operating system may still ask for a selection. The normal application and <code>_OTA</code>/Recovery advertisements are different execution roles of the same tag; complete any authorization requested during an update.</p>
+<h2 id="display-calendar-and-clock">Display, calendar, and clock</h2>
+<ul>
+<li>Before first use, verify panel size, colors, controller, and orientation. Save the profile and reconnect once to confirm persistence.</li>
+<li>Clear, calendar, clock, and image transfer are mutually exclusive. Do not remove power while refresh is active. Use Stop and wait for the device acknowledgement before starting a different operation.</li>
+<li>A completed BUSY phase means the controller reported refresh completion; it is not merely the end of BLE transfer. Tri-color, four-color, and cold panels can take substantially longer.</li>
+<li>Stop and recheck the profile after mirrored output, clipping, color bars, an all-red/all-black result, or a BUSY timeout. Avoid repeated refresh attempts with an uncertain profile.</li>
+</ul>
+<h2 id="images-and-slots">Images and slots</h2>
+<p>Crop the source for the panel, then inspect the generated black, white, and color planes. The final transfer uses the physical resolution reported by the device. Canvas rotation is an editing aid and should not require a second manual rotation before sending. Displays without grayscale capability do not expose grayscale-darkening controls.</p>
+<p>Devices with image storage can keep multiple device-ready frames and run a slideshow. Changing to a profile with a different resolution may make stored images incompatible; export them or accept the cleanup prompt before writing replacements.</p>
+<h2 id="ota">OTA</h2>
+<p>The OTA section at the bottom of the page is enabled only after a recognized device reports a supported transport. Select an <code>ota.zip</code> for the exact board ID and wait for upload, validation, role transition, reconnect, and version confirmation. See <a href="ota.html">OTA updates</a> for recovery details.</p>
+<h2 id="privacy-and-troubleshooting">Privacy and troubleshooting</h2>
+<p>The static WebUI processes images and Bluetooth traffic locally in the browser. Network access occurs only for features the user explicitly enables; read the related privacy notice before using them.</p>
+<ul>
+<li>No device appears: check system Bluetooth and scan permissions, target power, filters, and other pages/apps that may own the connection.</li>
+<li>GATT disconnects: wait for display refresh, power-cycle the tag, and reconnect from one control page only.</li>
+<li>Holiday data fails: use HTTP/HTTPS and verify that all static assets were deployed. Failure must not block the basic calendar page.</li>
+<li>The page reports an old version: refresh site caches or download the standalone HTML again from the same Release.</li>
+<li>Unexpected hardware behavior: retain the page log, board ID, profile, firmware version, and reproduction steps, but do not publish device secrets or factory firmware.</li>
+</ul></main></body></html>

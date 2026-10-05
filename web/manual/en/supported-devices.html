@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Supported devices</title><link rel="stylesheet" href="../style.css"></head><body><nav>
+<a href="index.html">InkTag User Manual</a><a href="../../index.html">Back to InkTag Web</a><a href="../zh-CN/index.html">简体中文</a>
+</nav><main><h1 id="supported-boards">Supported boards</h1>
+<p>This table is generated from the private source repository allowlist. Firmware columns list files actually attached to this Release; experimental and future entries are not hardware-qualified releases.</p>
+<div class="table-wrap"><table><thead><tr><th>Board</th><th>MCU</th><th>Release scope</th><th>Status</th><th>Full in this release</th><th>OTA in this release</th><th>Windows</th><th>Linux</th><th>macOS</th></tr></thead><tbody>
+<tr><td>ZKC21V (<code>gr5331_zkc21v</code>)</td><td>Goodix GR5331</td><td>Current candidate</td><td>Beta</td><td>—</td><td>—</td><td>Qualified</td><td>Pending</td><td>Pending</td></tr>
+<tr><td>ZKC42V v1.2 (GR5513) (<code>gr5513_zkc42v</code>)</td><td>Goodix GR5513</td><td>Current candidate</td><td>Beta</td><td>—</td><td>—</td><td>Qualified</td><td>Pending</td><td>Pending</td></tr>
+<tr><td>ZKC42VM v1.2 (GR5513) (<code>gr5513_zkc42vm</code>)</td><td>Goodix GR5513</td><td>Current candidate</td><td>Beta</td><td>—</td><td>—</td><td>Qualified</td><td>Pending</td><td>Pending</td></tr>
+<tr><td>ZKC42VM (GR5515) (<code>gr5515_zkc42vm</code>)</td><td>Goodix GR5515</td><td>Current candidate</td><td>Beta</td><td>—</td><td>—</td><td>Qualified</td><td>Pending</td><td>Pending</td></tr>
+<tr><td>ZKC21B (<code>om6626_zkc21b</code>)</td><td>OnMicro OM6626</td><td>Current candidate</td><td>Beta</td><td>—</td><td>—</td><td>Qualified</td><td>Pending</td><td>Pending</td></tr>
+<tr><td>ZKC42B (<code>om6626_zkc42b</code>)</td><td>OnMicro OM6626</td><td>Current candidate</td><td>Experimental</td><td>—</td><td>—</td><td>Qualified</td><td>Pending</td><td>Pending</td></tr>
+<tr><td>Hanshow Nowa 154R-N (<code>hs_nowa154</code>)</td><td>Telink TLSR8359</td><td>Current candidate</td><td>Experimental</td><td>—</td><td>—</td><td>Qualified</td><td>Pending</td><td>Pending</td></tr>
+<tr><td>Hanshow Nebular 420R-N (<code>hs_nebular420</code>)</td><td>Telink HS9118 / TLSR8359-compatible</td><td>Current candidate</td><td>Experimental</td><td>—</td><td>—</td><td>Qualified</td><td>Pending</td><td>Pending</td></tr>
+<tr><td>Alibaba Cloud AESL 2.1/2.9 (<code>aesl22_nrf</code>)</td><td>Nordic nRF52811</td><td>Deferred</td><td>Beta</td><td>—</td><td>—</td><td>Qualified</td><td>Qualified</td><td>Pending</td></tr>
+<tr><td>PriceETag 1.54-inch (<code>nrf52832_priceetag</code>)</td><td>Nordic nRF52832</td><td>Deferred</td><td>Beta</td><td>—</td><td>—</td><td>Qualified</td><td>Qualified</td><td>Pending</td></tr>
+<tr><td>AESL 2.9-inch (<code>aesl29_da</code>)</td><td>Renesas/Dialog DA14585</td><td>Deferred</td><td>Experimental</td><td>—</td><td>—</td><td>Qualified</td><td>Pending</td><td>Pending</td></tr>
+<tr><td>AESL 4.2-inch (<code>aesl42_da</code>)</td><td>Renesas/Dialog DA14585</td><td>Deferred</td><td>Beta</td><td>—</td><td>—</td><td>Qualified</td><td>Pending</td><td>Pending</td></tr>
+</tbody></table></div>
+<h2 id="notes">Notes</h2>
+<ul>
+<li><code>gr5331_zkc21v</code>: 0.2 candidate. Full, normal signed OTA, exact-identity reconnect, display/image/Find/activation persistence pass; destructive OTA and signature-rejection matrices remain.</li>
+<li><code>gr5513_zkc42v</code>: Shares the lowest-common-denominator application and OTA with both ZKC42VM variants; NFC/RGB pass here. Long-run UC8176 clock drift, destructive OTA and frozen-artifact regression remain gates.</li>
+<li><code>gr5513_zkc42vm</code>: Reduced ZKC42V variant without NFC/RGB. It uses an exact first-flash container and the shared application/OTA; frozen-artifact SSD1683 regression remains.</li>
+<li><code>gr5515_zkc42vm</code>: Shares the application/OTA with GR5513 variants and has a separate 1 MiB first-flash container. The 224 KiB boundary, signature rejection and interruption matrix need this-chip regression.</li>
+<li><code>om6626_zkc21b</code>: Shares application/OTA with ZKC42B. Full, display, NFC, image/slideshow, normal OTA, one interrupted retransmission and carry-soak baseline pass.</li>
+<li><code>om6626_zkc42b</code>: The 2 MiB auxiliary store passes full-capacity write/read/display and OTA retention; active-write power loss, full interruption/signature matrices and edge optical regression remain.</li>
+<li><code>hs_nowa154</code>: Experimental 0.2 candidate with the shared 192 KiB application/Recovery. Layout-v3 Full, normal/interrupted OTA, RC timebase soak and frozen-artifact regression remain.</li>
+<li><code>hs_nebular420</code>: Experimental 0.2 candidate. Layout-v3, display, high-address records, activation and Find baselines pass. Complete 1 MiB ownership, phone NFC, full-window verification and interrupted OTA remain gates.</li>
+<li><code>aesl22_nrf</code>: Deferred from this release; no new 0.2 firmware is exported. A reduced core capability set will be regressed and released separately.</li>
+<li><code>nrf52832_priceetag</code>: Deferred from this release; no new 0.2 firmware is exported. Current hardware regression remains in the Nordic platform branch.</li>
+<li><code>aesl29_da</code>: Deferred; the complete public screen catalog is restored, while exact-panel, persistence, OTA and power regression remain.</li>
+<li><code>aesl42_da</code>: Deferred; no new 0.2 firmware is exported. The complete public screen catalog is restored, while persistence, display, OTA and power regression remain.</li>
+</ul></main></body></html>

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>版本、校验与支持级别</title><link rel="stylesheet" href="../style.css"></head><body><nav>
+<a href="index.html">InkTag 使用手册</a><a href="../../index.html">返回 InkTag Web</a><a href="../en/index.html">English</a>
+</nav><main><h1 id="版本与发布策略">版本与发布策略</h1>
+<p>InkTag 固件、OTA 包、Web 上位机和用户文档使用统一的语义版本号 <code>主版本.次版本.修订号</code>。</p>
+<ul>
+<li><code>0.x.y</code>：功能和协议仍可能变化的预览版本。</li>
+<li><code>1.x.y</code>：完成支持矩阵回归并承诺兼容策略后的稳定版本。</li>
+<li>正式版标签使用 <code>v&lt;版本&gt;</code>；预发布使用独立 SemVer 标签，例如</li>
+<p><code>v0.2.0-preview.1</code>。每个标签只对应一个 GitHub Release。</p>
+</ul>
+<p>发布仓库的 <code>main</code> 始终指向最新一次发布快照。历史版本通过不可变标签和 GitHub Release 保留，不在 <code>main</code> 下累积多个版本目录。一次发布可以只包含 CLI、WebUI 或 筛选后的固件；实际内容以 <code>firmware/manifest.json</code> 为准。</p>
+<p>发布遵循“构建一次、测试同一份字节、再原样提升”的原则。实机测试完成后不得重新编译再发布；所有发布文件必须记录大小和 SHA-256。</p>
+<p>状态含义：</p>
+<ul>
+<li><strong>测试版</strong>：主要流程已经过实机测试，但仍有明确的发布门槛。</li>
+<li><strong>实验性</strong>：可以构建或部分运行，尚未完成完整实机验证。</li>
+<li><strong>规划中</strong>：仅保留路线图信息，不发布固件。</li>
+</ul></main></body></html>
