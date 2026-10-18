@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Devices and panels</title><link rel="stylesheet" href="../style.css"></head><body><nav>
+<a href="index.html">InkTag User Manual</a><a href="../../index.html">Back to InkTag Web</a><a href="../zh-CN/index.html">简体中文</a>
+</nav><main><h1 id="devices-and-panels">Devices and panels</h1>
+<p>Identify the exact MCU and PCB before selecting Full. The <a href="supported-devices.html">support table</a> determines which files and tools are available. A successful screen operation is not full release qualification.</p>
+<h2 id="board-selection">Board selection</h2>
+<div class="table-wrap"><table><thead><tr><th>MCU manufacturer / model</th><th>Original label series / model</th><th>Public IDs</th><th>Difference</th></tr></thead><tbody>
+<tr><td>Goodix GR5331</td><td>ZKC21V</td><td><code>gr5331_zkc21v</code></td><td>Not interchangeable with OM ZKC21V</td></tr>
+<tr><td>Goodix GR5513</td><td>ZKC42V / ZKC42VM (GR5513 revision)</td><td><code>gr5513_zkc42v</code>, <code>gr5513_zkc42vm</code></td><td>Different original-panel recipes</td></tr>
+<tr><td>Goodix GR5515</td><td>ZKC42VM (GR5515 revision)</td><td><code>gr5515_zkc42vm</code></td><td>Different Full container from GR5513; compatible App can be shared</td></tr>
+<tr><td>OnMicro OM6626</td><td>ZKC21V / ZKC21B-NAE4 / ZKC42B-NE4</td><td><code>om6626_zkc21v</code>, <code>om6626_zkc21b</code>, <code>om6626_zkc42b</code></td><td>21V BWR, 21B/42B BWRY; storage differs</td></tr>
+<tr><td>Telink TLSR8359 (Nebular marking: HS9118)</td><td>Hanshow Nowa-154R-N / Nowa-213R-N / Nebular-213R-N / Nebular-420R-N</td><td><code>tlsr8359_nowa154r</code>, <code>tlsr8359_nowa213r</code>, <code>tlsr8359_nebular213r</code>, <code>tlsr8359_nebular420r</code></td><td>HS9118 identifies the marked Nebular package; geometry, selector and Flash capacity differ</td></tr>
+<tr><td>Nordic Semiconductor nRF52832</td><td>PriceETag</td><td><code>nrf52832_priceetag</code></td><td>Not the nRF52811 firmware target</td></tr>
+<tr><td>Nordic Semiconductor nRF52811</td><td>Alibaba Cloud AESL / Hema EL022H2</td><td><code>nrf52811_asel22</code></td><td>Tested PCB is EL022H2, not EL029H2</td></tr>
+<tr><td>Renesas (formerly Dialog) DA14585</td><td>Alibaba Cloud AESL / Hema AESL-2.9 / AESL-4.2</td><td><code>da14585_asel29</code>, <code>da14585_asel42</code></td><td>Shared App; different Full panel defaults</td></tr>
+</tbody></table></div>
+<p>Full can contain boot, Recovery, fonts and board configuration. Shared OTA bytes do not make Full interchangeable. Historical <code>aesl22_nrf</code> / <code>aesl29_da</code> names are not current public download IDs.</p>
+<h2 id="original-panels">Original panels</h2>
+<p>BW is black/white, BWR adds red, BWRY adds yellow, and KWRYGB means black/white/red/yellow/green/blue. Match IC, recipe, native geometry, visible area and orientation.</p>
+<div class="table-wrap"><table><thead><tr><th>PCB / panel</th><th>Driver / adaptation</th><th>Native / visible geometry</th><th>Colors</th></tr></thead><tbody>
+<tr><td>GR5331 / OM ZKC21V</td><td>SSD1680 / zkc21v</td><td>128×250 / 122×250</td><td>BWR</td></tr>
+<tr><td>GR5513 ZKC42V</td><td>UC8276 / zkc42v</td><td>400×300</td><td>BWR</td></tr>
+<tr><td>GR5513/5515 ZKC42VM</td><td>SSD1683 / zkc42vm</td><td>400×300</td><td>BWR</td></tr>
+<tr><td>OM ZKC21B</td><td>JD79661 / zkc21b</td><td>128×250 / 122×250</td><td>BWRY</td></tr>
+<tr><td>OM ZKC42B</td><td>JD79668AA / zkc42b</td><td>400×300</td><td>BWRY</td></tr>
+<tr><td>Nowa154R</td><td>SSD1675 / nowa154r</td><td>152×152</td><td>BWR</td></tr>
+<tr><td>Nebular213R</td><td>JD79676 / nebular213r</td><td>128×250 / 122×250</td><td>BWRY</td></tr>
+<tr><td>Nebular420R</td><td>JD79668AA / nebular420r</td><td>400×300</td><td>BWRY</td></tr>
+<tr><td>Tested PriceETag</td><td>SSD1675</td><td>152×152</td><td>BW</td></tr>
+<tr><td>nRF52811 Hema</td><td>SSD1619</td><td>128×250 / 122×250</td><td>BWR</td></tr>
+<tr><td>DA asel29 E029A33</td><td>SSD1619 / asel29</td><td>128×296</td><td>BWR</td></tr>
+<tr><td>DA asel42 original</td><td>UC8176</td><td>400×300</td><td>BWR</td></tr>
+</tbody></table></div>
+<p>For Nowa213R or unlisted panels, use actual device settings and release instructions. Disconnect power before a swap and verify FPC, wiring and colors. A preset in a dropdown does not prove testing on every PCB. DA 128×296 landscape is only 128 pixels high and uses a compact layout. A ZKC42VM replacement on DA requires SSD1683, not the original UC8176 recipe.</p>
+<h2 id="actual-test-scope">Actual test scope</h2>
+<div class="table-wrap"><table><thead><tr><th>Board</th><th>Tested operations</th><th>Not established</th></tr></thead><tbody>
+<tr><td>GR5331 ZKC21V</td><td>Original clear/calendar/pictures and direction/BWR output</td><td>Arbitrary 128×250 replacements</td></tr>
+<tr><td>GR5513 ZKC42V</td><td>Original clear/calendar; Huawei A0/A1 pages and pictures</td><td>Equivalent coverage on GR5515</td></tr>
+<tr><td>GR5515 ZKC42VM</td><td>Original panel and selected replacement clear results</td><td>All replacement pages/colors/repeated refreshes</td></tr>
+<tr><td>nRF52832 PriceETag</td><td>SSD1675 152×152 BW pages and pictures</td><td>Equivalent 200×200 testing</td></tr>
+<tr><td>nRF52811 EL022H2</td><td>Hema pages/pictures/orientation/panel temperature; Huawei A0 pages/pictures/orientation/colors; A1 pictures/orientation/colors/slideshow</td><td>EL029H2, 400×300 candidates or A0/A1 temperature readback</td></tr>
+<tr><td>DA AESL42</td><td>SES UC8151 104×212 BWR pages/pictures/slots/slideshow</td><td>All SES models or temperature readback</td></tr>
+</tbody></table></div>
+<p>Equal dimensions do not imply equal voltage, waveforms, BUSY polarity or transfer format. Advanced configuration does not automatically identify an unknown IC.</p>
+<h2 id="image-capacity">Image capacity</h2>
+<p>Storage includes the decoded full frame, header and sector alignment, not the JPEG/PNG size. RLE saves transfer bytes, not Flash capacity. Device-reported IDs and capacity are authoritative.</p>
+<div class="table-wrap"><table><thead><tr><th>Panel</th><th>nRF52811 total 472 KiB</th><th>DA total 68 KiB</th></tr></thead><tbody>
+<tr><td>128×250 BWR</td><td>8 KiB/slot, about 59</td><td>8 KiB/slot, about 8</td></tr>
+<tr><td>128×296 BWR</td><td>Follow actual settings</td><td>12 KiB/slot, about 5</td></tr>
+<tr><td>400×300 BWR/BWRY</td><td>32 KiB/slot, about 14; capacity reference, not a tested-panel claim</td><td>32 KiB/slot, about 2</td></tr>
+<tr><td>Huawei A0/A1 768×552 BWRY</td><td>104 KiB/slot, about 4; replacement tests exist</td><td>Frame exceeds storage: no saved slots or autonomous slideshow</td></tr>
+</tbody></table></div>
+<p>DA large panels can use the corresponding direct-transfer path. Image Flash cannot enlarge executable SRAM. Other MCUs have board-specific storage; changing geometry/colors can invalidate old slots. Download needed content first, then clear and re-upload as prompted.</p>
+<h2 id="temperature-and-capabilities">Temperature and capabilities</h2>
+<p>Panel and MCU temperatures have different sources. Missing, stale, busy or unsupported samples appear as <code>--</code>, not 0 °C. A0/A1 panel temperature on nRF52811 is not physically tested; DA availability also depends on controller and sampling state.</p>
+<p>nRF52811 and DA14585 are permanently Free without activation, Find, passwords, NFC actions or Bluetooth renaming. LEDs/buttons/buzzers on other families depend on fitted hardware and actual capabilities. Labels use printable English/ASCII characters; default <code>InkTag XXXX</code> is separate from advertising.</p></main></body></html>

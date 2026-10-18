@@ -28,10 +28,10 @@ Never flash firmware for a similar-looking but different board. See [supported b
 
 ## Start here
 
-- `web/`: content prepared for GitHub Pages. During the private preview, download
+- `webui/`: content prepared for GitHub Pages. During the private preview, download
   `InkTag-WebUI-standalone-*.html` from the matching GitHub Release; enable the hosted
   site after the repository is public or the account supports private Pages
-- `web/manual/`: bilingual user manuals deployed with the WebUI on GitHub Pages
+- `webui/manual/`: bilingual user manuals deployed with the WebUI on GitHub Pages
 - [Web console user guide](docs/en/webui.md)
 - [Full flashing](docs/en/flashing.md)
 - [OTA updates](docs/en/ota.md)
@@ -43,3 +43,5 @@ Never flash firmware for a similar-looking but different board. See [supported b
 ## Safety
 
 Back up the factory firmware before the first flash. Verify the board, supply voltage, SWD/serial wiring, and target firmware. A wrong full image may prevent booting or damage peripherals.
+
+GitHub Pages configuration and activation: [GitHub Pages](docs/en/github-pages.md).

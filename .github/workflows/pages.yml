@@ -5,35 +5,57 @@ on:
   push:
     branches: [main]
     paths:
-      - "web/**"
+      - "webui/**"
+      - "tools/verify-pages.py"
+      - ".github/workflows/pages.yml"
+  pull_request:
+    paths:
+      - "webui/**"
+      - "tools/verify-pages.py"
       - ".github/workflows/pages.yml"
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Validate compiled static site
+        run: python3 tools/verify-pages.py --site webui
+
   deploy:
-    if: github.event_name == 'workflow_dispatch' || github.event.repository.visibility == 'public'
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: validate
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - name: Configure Pages
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Upload Web UI
-        uses: actions/upload-pages-artifact@v5
+      - name: Upload compiled WebUI only
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: web
+          path: webui
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4

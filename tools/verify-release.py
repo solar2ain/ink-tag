@@ -223,8 +223,8 @@ def main() -> int:
     repo = args.repo.resolve()
     manifest, failures = validate_manifest(repo)
     failures.extend(validate_public_tree(repo, include_untracked=args.candidate))
-    if "webui" in manifest.get("components", []) and not (repo / "web" / "index.html").is_file():
-        failures.append("web/index.html is missing")
+    if "webui" in manifest.get("components", []) and not (repo / "webui" / "index.html").is_file():
+        failures.append("webui/index.html is missing")
     if args.assets:
         failures.extend(validate_assets(manifest, args.assets.resolve()))
     if failures:

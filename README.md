@@ -26,9 +26,9 @@
 
 ## 使用入口
 
-- `web/`：GitHub Pages 的部署内容；私有预览期间请从对应 GitHub Release 下载
+- `webui/`：GitHub Pages 的部署内容；私有预览期间请从对应 GitHub Release 下载
   `InkTag-WebUI-standalone-*.html`，仓库公开或账户支持私有 Pages 后再启用在线站点
-- `web/manual/`：随 GitHub Pages 一起部署的中英文操作手册
+- `webui/manual/`：随 GitHub Pages 一起部署的中英文操作手册
 - `cli/`：统一 Python CLI 源码；默认使用中文文档，英文入口见 README.en.md
 - 微信小程序：尚未提供合格编译产物；不会以研究源码冒充发布版本
 - [Web 上位机使用手册](docs/zh-CN/webui.md)
@@ -42,3 +42,5 @@
 ## 安全提示
 
 首次烧录前请备份原厂固件，并核对供电、电压、SWD/串口接线及主板型号。刷错完整固件可能导致设备无法启动或损坏外设。
+
+GitHub Pages 部署配置与启用说明：[GitHub Pages](docs/zh-CN/github-pages.md).
