@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Client updates</title><link rel="stylesheet" href="../style.css"></head><body><nav>
+<a href="index.html">InkTag User Manual</a><a href="../../index.html">Back to InkTag Web</a><a href="../zh-CN/index.html">简体中文</a>
+</nav><main><h1 id="client-updates">Client updates</h1>
+<p><a href="../zh-CN/updates.html">中文</a> | English</p>
+<p>Settings → Client settings → About shows the WebUI version and build identifier. Client versions are checked separately from device firmware.</p>
+<p>Update checks offer stable releases only, containing approved, published attachments.</p>
+<p>The online, standalone HTML and local-service editions use this project&#x27;s GitHub Pages <code>updates/stable.json</code>. Requests contain no device address, identity, password or Find data and require no embedded GitHub token. Failures and timeouts do not block ordinary operations.</p>
+<p>Download approved attachments from the project Releases and follow the installation guide. Checks never install software or flash devices automatically. The first release contains clients only, with an empty firmware list.</p>
+<p>Future OTA recommendations require an exact board_id, firmware family, protocol, layout and compatibility epoch. Missing metadata prevents a recommendation. Updates retain the download → select local file → normal OTA flow. SHA256 checks integrity; it does not replace publisher-signature verification or device attestation.</p>
+<h2 id="release-maintenance">Release maintenance</h2>
+<p><code>releases/record.json</code> (schema 1) is the single release ledger. <code>tools/generate-updates.py</code> verifies downloaded Release bytes and SHA256 before producing the schema 3 stable feed. Unapproved or unpublished candidates are excluded. Firmware publication is disabled in this version.</p>
+<pre><code>python tools/publish-updates.py --repo . --tag &lt;release-tag&gt;</code></pre>
+<p>This is a dry run: no upload, commit or deployment. After independent approval binds the exact commit, ledger, attachments and metadata, an auditor may supply a local approval receipt and <code>--execute</code>. The pipeline pushes a non-deploying staging branch, creates a draft Release, downloads and verifies attachments, publishes the Release, generates/pushes feeds, and lets the existing workflow deploy only <code>webui/</code>. Inspect partial state before retrying any failed publication.</p>
+<p>The Pages workflow requires independent review and a validation job. Private Pages plan restrictions and Actions billing limits still apply; repository visibility is not changed. Live Pages CORS, standalone HTML and mobile access require verification after the first real deployment.</p></main></body></html>

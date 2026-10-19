@@ -1,0 +1,354 @@
+{
+  "schemaVersion": 2,
+  "product": "InkTag",
+  "version": "0.2.0",
+  "releaseTag": "v0.2.0",
+  "webuiVersion": "1.2.0",
+  "channel": "stable",
+  "components": [
+    "cli",
+    "webui"
+  ],
+  "firmwareSelection": {
+    "published": false,
+    "included": false,
+    "platforms": [],
+    "boards": [],
+    "kinds": []
+  },
+  "repository": "solar2ain/ink-tag",
+  "generatedAt": "2026-10-19T23:22:07+08:00",
+  "sourceRevision": "bfb628de7be02ef1e265f1e03c1b1aa6cbfa2228",
+  "sourceTreeDirty": false,
+  "licensingStatus": "private-preview-review-required",
+  "candidateOnly": true,
+  "releaseReady": false,
+  "boards": [
+    {
+      "boardId": "gr5331_zkc21v",
+      "legacyBoardId": "gr5331_zkc21v",
+      "publicBoardId": "gr5331_zkc21v",
+      "displayName": "gr5331_zkc21v",
+      "mcu": "Goodix GR5331",
+      "platform": "goodix",
+      "status": "beta",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "gr5331_zkc21v",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "请按本页支持级别选择对应主板的固件。",
+      "notesEn": "Select firmware for the exact board and its listed support level."
+    },
+    {
+      "boardId": "gr5513_zkc42v",
+      "legacyBoardId": "gr5513_zkc42v",
+      "publicBoardId": "gr5513_zkc42v",
+      "displayName": "gr5513_zkc42v",
+      "mcu": "Goodix GR5513",
+      "platform": "goodix",
+      "status": "beta",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "gr551x_zkc42v",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "请按本页支持级别选择对应主板的固件。",
+      "notesEn": "Select firmware for the exact board and its listed support level."
+    },
+    {
+      "boardId": "gr5513_zkc42vm",
+      "legacyBoardId": "gr5513_zkc42vm",
+      "publicBoardId": "gr5513_zkc42vm",
+      "displayName": "gr5513_zkc42vm",
+      "mcu": "Goodix GR5513",
+      "platform": "goodix",
+      "status": "beta",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "gr551x_zkc42vm",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "请按本页支持级别选择对应主板的固件。",
+      "notesEn": "Select firmware for the exact board and its listed support level."
+    },
+    {
+      "boardId": "gr5515_zkc42vm",
+      "legacyBoardId": "gr5515_zkc42vm",
+      "publicBoardId": "gr5515_zkc42vm",
+      "displayName": "gr5515_zkc42vm",
+      "mcu": "Goodix GR5515",
+      "platform": "goodix",
+      "status": "beta",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "gr551x_zkc42vm",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "请按本页支持级别选择对应主板的固件。",
+      "notesEn": "Select firmware for the exact board and its listed support level."
+    },
+    {
+      "boardId": "om6626_zkc21b",
+      "legacyBoardId": "om6626_zkc21b",
+      "publicBoardId": "om6626_zkc21b",
+      "displayName": "om6626_zkc21b",
+      "mcu": "OnMicro OM6626",
+      "platform": "onmicro",
+      "status": "beta",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "om6626_zkc21b",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "请按本页支持级别选择对应主板的固件。",
+      "notesEn": "Select firmware for the exact board and its listed support level."
+    },
+    {
+      "boardId": "om6626_zkc42b",
+      "legacyBoardId": "om6626_zkc42b",
+      "publicBoardId": "om6626_zkc42b",
+      "displayName": "om6626_zkc42b",
+      "mcu": "OnMicro OM6626",
+      "platform": "onmicro",
+      "status": "experimental",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "om6626_zkc42b",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "请按本页支持级别选择对应主板的固件。",
+      "notesEn": "Select firmware for the exact board and its listed support level."
+    },
+    {
+      "boardId": "tlsr8359_nowa154r",
+      "legacyBoardId": "hs_nowa154",
+      "publicBoardId": "tlsr8359_nowa154r",
+      "displayName": "tlsr8359_nowa154r",
+      "mcu": "Telink TLSR8359",
+      "platform": "telink",
+      "status": "experimental",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "hs_nowa154",
+      "aliases": [
+        "hs_nowa154"
+      ],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "请按本页支持级别选择对应主板的固件。",
+      "notesEn": "Select firmware for the exact board and its listed support level."
+    },
+    {
+      "boardId": "tlsr8359_nebular420r",
+      "legacyBoardId": "hs_nebular420",
+      "publicBoardId": "tlsr8359_nebular420r",
+      "displayName": "tlsr8359_nebular420r",
+      "mcu": "Telink HS9118 / TLSR8359-compatible",
+      "platform": "telink",
+      "status": "experimental",
+      "releaseScope": "candidate",
+      "lifecycle": "active",
+      "runtimeBoardId": "hs_nebular420",
+      "aliases": [
+        "hs_nebular420"
+      ],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "请按本页支持级别选择对应主板的固件。",
+      "notesEn": "Select firmware for the exact board and its listed support level."
+    },
+    {
+      "boardId": "om6626_hsel",
+      "legacyBoardId": "om6626_hsel",
+      "publicBoardId": "om6626_hsel",
+      "displayName": "om6626_hsel",
+      "mcu": "OnMicro OM6626",
+      "platform": "onmicro",
+      "status": "experimental",
+      "releaseScope": "deferred",
+      "lifecycle": "active",
+      "runtimeBoardId": "om6626_hsel",
+      "aliases": [],
+      "flashing": {
+        "windows": "pending",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "请按本页支持级别选择对应主板的固件。",
+      "notesEn": "Select firmware for the exact board and its listed support level."
+    },
+    {
+      "boardId": "nrf52811_asel22",
+      "legacyBoardId": "aesl22_nrf",
+      "publicBoardId": "nrf52811_asel22",
+      "displayName": "nrf52811_asel22",
+      "mcu": "Nordic nRF52811",
+      "platform": "nordic",
+      "status": "beta",
+      "releaseScope": "deferred",
+      "lifecycle": "active",
+      "runtimeBoardId": "aesl22_nrf",
+      "aliases": [
+        "aesl22_nrf"
+      ],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "qualified",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "请按本页支持级别选择对应主板的固件。",
+      "notesEn": "Select firmware for the exact board and its listed support level."
+    },
+    {
+      "boardId": "nrf52832_priceetag",
+      "legacyBoardId": "nrf52832_priceetag",
+      "publicBoardId": "nrf52832_priceetag",
+      "displayName": "nrf52832_priceetag",
+      "mcu": "Nordic nRF52832",
+      "platform": "nordic",
+      "status": "beta",
+      "releaseScope": "deferred",
+      "lifecycle": "active",
+      "runtimeBoardId": "nrf52832_priceetag",
+      "aliases": [],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "qualified",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "请按本页支持级别选择对应主板的固件。",
+      "notesEn": "Select firmware for the exact board and its listed support level."
+    },
+    {
+      "boardId": "da14585_asel29",
+      "legacyBoardId": "aesl29_da",
+      "publicBoardId": "da14585_asel29",
+      "displayName": "da14585_asel29",
+      "mcu": "Renesas/Dialog DA14585",
+      "platform": "dialog",
+      "status": "experimental",
+      "releaseScope": "deferred",
+      "lifecycle": "active",
+      "runtimeBoardId": "da14585_aesl",
+      "aliases": [
+        "aesl29_da"
+      ],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "请按本页支持级别选择对应主板的固件。",
+      "notesEn": "Select firmware for the exact board and its listed support level."
+    },
+    {
+      "boardId": "da14585_asel42",
+      "legacyBoardId": "aesl42_da",
+      "publicBoardId": "da14585_asel42",
+      "displayName": "da14585_asel42",
+      "mcu": "Renesas/Dialog DA14585",
+      "platform": "dialog",
+      "status": "beta",
+      "releaseScope": "deferred",
+      "lifecycle": "active",
+      "runtimeBoardId": "da14585_aesl",
+      "aliases": [
+        "aesl42_da"
+      ],
+      "flashing": {
+        "windows": "qualified",
+        "linux": "pending",
+        "macos": "pending"
+      },
+      "artifacts": [],
+      "artifactState": "not-selected",
+      "notesZh": "请按本页支持级别选择对应主板的固件。",
+      "notesEn": "Select firmware for the exact board and its listed support level."
+    }
+  ],
+  "web": {
+    "type": "web",
+    "name": "InkTag-WebUI-static-v1.2.0.zip",
+    "bytes": 6915940,
+    "sha256": "fcbec88ab138f919ac0e17e9e114250660910ef4aae0f1cd93c595286e29d14b",
+    "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0/InkTag-WebUI-static-v1.2.0.zip"
+  },
+  "webStandalone": {
+    "type": "web-standalone",
+    "name": "InkTag-WebUI-standalone-v1.2.0.html",
+    "bytes": 14830258,
+    "sha256": "69b4fe138956a11b1b2802cb57e5ddc88921e58eb418a2201db1f05e6f63f7d9",
+    "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0/InkTag-WebUI-standalone-v1.2.0.html"
+  },
+  "localServer": {
+    "type": "local-server",
+    "name": "InkTag-local-server-v1.2.0.zip",
+    "bytes": 7026196,
+    "sha256": "d97ba19a87aeb89923e05dad3e91ea16f511a788bcdb2c92b666eb0b4f8524f4",
+    "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0/InkTag-local-server-v1.2.0.zip"
+  },
+  "flashTools": null,
+  "cli": {
+    "type": "cli",
+    "name": "InkTag-cli-v0.2.0.zip",
+    "bytes": 369758,
+    "sha256": "64cdf26079b032706cb409ed0c0fe2eac8a77d26d04ee0ae1a9f85e34718ad52",
+    "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0/InkTag-cli-v0.2.0.zip",
+    "requiresPython": ">=3.11"
+  }
+}

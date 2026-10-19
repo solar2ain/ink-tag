@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 3,
+  "channel": "stable",
+  "candidateOnly": false,
+  "releaseReady": false,
+  "components": {
+    "webui": null,
+    "cli": null,
+    "localServer": null
+  },
+  "firmwareSelection": {
+    "published": false
+  },
+  "firmware": []
+}

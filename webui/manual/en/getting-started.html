@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Getting started</title><link rel="stylesheet" href="../style.css"></head><body><nav>
+<a href="index.html">InkTag User Manual</a><a href="../../index.html">Back to InkTag Web</a><a href="../zh-CN/index.html">简体中文</a>
+</nav><main><h1 id="getting-started">Getting started</h1>
+<h2 id="meet-e-paper">Meet e-paper</h2>
+<p>E-paper offers a paper-like reading experience without a continuously illuminated backlight. It can be comfortable under suitable lighting, but “eye-friendly” is not a medical guarantee. Use suitable lighting, viewing distance and breaks. Read <a href="https://www.good-display.com/faq/1.html">Good Display&#x27;s e-paper FAQ</a> for more information.</p>
+<p>E-paper uses ambient light and needs external lighting in the dark. A full refresh commonly takes several seconds to around fifteen seconds; some colour panels or low temperatures take longer. Flashing is usually normal: keep power stable and wait rather than repeatedly starting operations.</p>
+<p>The panel needs no sustaining power to retain the finished image, even after power is removed. Infrequent refreshes and low-power standby can give a coin cell a long service life. Bluetooth, the MCU and timekeeping still consume energy, however; actual battery life depends on capacity, refresh frequency, temperature, Bluetooth and Find activity. Image retention does not mean zero power for the complete device.</p>
+<p>The Web console&#x27;s three-page introduction includes actual interface screenshots with numbered boxes and arrows. Click a screenshot to enlarge it. You can reopen the introduction from Settings → Client settings → About.</p>
+<h2 id="1-prepare">1 Prepare</h2>
+<p>Use stable power and a Web Bluetooth-capable browser, or Python 3.11 or newer for the CLI. Open the Web console over HTTPS or a local origin and grant Bluetooth permission when requested.</p>
+<p>Identify the actual MCU and board marking. A product name or HS9118 package marking does not uniquely identify the silicon; panels may also have been replaced. The client shows the MCU, while physical flashing uses a board configuration to select its backend. No firmware or first-flash package is supplied in this preview.</p>
+<h2 id="2-connect">2 Connect</h2>
+<p>Select Connect and the device&#x27;s Bluetooth name. Factory application names follow <code>IKT_PLATFORM_ID4</code>; Recovery adds <code>_OTA</code>. A user-facing device label is separate from the Bluetooth name.</p>
+<p>Check Settings → Device settings → Overview, then Settings → Device settings → Display for panel size, resolution, colour and orientation. Do not guess settings when they have not been read from the device.</p>
+<h2 id="3-send-content">3 Send content</h2>
+<p>Process a picture or choose a Create template. Preview the direction and colours, send it and wait for final display completion. Transfer at 100% is not display completion. Supported devices can store pictures and use slideshows. Image clearing and settings reset are different operations.</p>
+<h2 id="4-update-and-get-help">4 Update and get help</h2>
+<p>Use Settings → Device settings → Firmware for ordinary <a href="ota.html">OTA updates</a>. Wired complete flashing is needed for first installation, Recovery upgrades or recovery that cannot be completed wirelessly. Settings → Client settings → About provides project and console links and can reopen the introduction. Keep credentials and private location data out of reports.</p></main></body></html>

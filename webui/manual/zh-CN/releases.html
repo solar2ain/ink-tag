@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>版本、校验与支持级别</title><link rel="stylesheet" href="../style.css"></head><body><nav>
+<a href="index.html">InkTag 使用手册</a><a href="../../index.html">返回 InkTag Web</a><a href="../en/index.html">English</a>
+</nav><main><h1 id="版本和文件校验">版本和文件校验</h1>
+<p>固件和 Web 上位机可以分别更新。请核对发布清单中的各组件版本，不要假定所有文件具有同一版本号。</p>
+<p>下载完整发布包或对应附件后，使用 <code>SHA256SUMS.txt</code> 校验。Windows 可运行 <code>Get-FileHash -Algorithm SHA256 文件名</code>；Linux 使用 <code>sha256sum 文件名</code>；macOS 使用 <code>shasum -a 256 文件名</code>。摘要不同、下载不完整或文件被修改时，不要烧录。</p>
+<p><code>firmware/manifest.json</code> 给出准确公开板型、实际附件、长度、摘要和系统支持状态。完整烧录文件按 PCB 型号选择；兼容同一应用的板型可以共享 OTA 字节，但这不表示可任意交换完整烧录文件。</p>
+<p>稳定版按发布说明使用；测试版或实验性包可能有明确限制。预览候选仅供检查，不表示正式发布或量产批准。没有实际附件的板型暂不能从本包安装。</p></main></body></html>

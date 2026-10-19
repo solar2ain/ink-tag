@@ -1,0 +1,2 @@
+# Preserve the verified bytes of compiled release assets on every platform.
+webui/** -text

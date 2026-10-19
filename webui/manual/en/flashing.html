@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>First flash and recovery</title><link rel="stylesheet" href="../style.css"></head><body><nav>
+<a href="index.html">InkTag User Manual</a><a href="../../index.html">Back to InkTag Web</a><a href="../zh-CN/index.html">简体中文</a>
+</nav><main><h1 id="first-flashing-and-wired-recovery">First flashing and wired recovery</h1>
+<p>Complete flashing installs InkTag on factory firmware, updates fixed Recovery or repairs a device that cannot be recovered wirelessly. Ordinary application updates use <a href="ota.html">OTA</a>. Verify the exact MCU, PCB, supply and file checksum first.</p>
+<h2 id="flashing-environment">Flashing environment</h2>
+<p>No Keil, Arm compiler or frontend build setup is required. Install separately licensed vendor tools/drivers and loaders, not a firmware compilation environment.</p>
+<div class="table-wrap"><table><thead><tr><th>Family</th><th>Windows runtime</th><th>Public launcher</th></tr></thead><tbody>
+<tr><td>GR5331/5513/5515</td><td>Native PowerShell, GProgrammer; J-Link identification for GR551x</td><td><code>flash-goodix.ps1</code>, matching provided complete-flashing image/runtime</td></tr>
+<tr><td>OM6626</td><td>Native PowerShell, J-Link and OM6626 device pack</td><td><code>flash-om6626.ps1</code>; <code>-OmSdkRoot</code> locates the device pack only</td></tr>
+<tr><td>TLSR8359</td><td>Python, pyserial, qualified UART-to-SWS/tool</td><td><code>flash-telink.ps1</code> for included boards</td></tr>
+<tr><td>nRF52811/52832</td><td>J-Link/SWD; external fonts for nRF52811</td><td>No qualified public Nordic complete-flashing launcher yet</td></tr>
+<tr><td>DA14585</td><td>J-Link/J-Flash and external Flash loader; no Keil</td><td>No qualified public Dialog complete-flashing launcher yet</td></tr>
+</tbody></table></div>
+<p>A complete-flashing file in a preview does not mean its runtime is ready. Do not substitute generic erase/loadfile commands or partially copy source-repository scripts.</p>
+<h2 id="wiring">Wiring</h2>
+<p>SWD targets need supply, common ground, SWDIO, SWCLK and probe voltage reference. VTref is not reliable power output. TLSR uses SWS, not generic SWD. Match the exact PCB, keep contacts short and stable, and never apply 5 V or guess unmarked pads.</p>
+<p>EL022H2 wiring does not automatically qualify EL029H2. DA asel29 has TP5=SWCLK, TP6=SWDIO; use actual signal labels for the 4.2-inch large-pad PCB rather than copying TP positions. Do not connect DA VPP/TP3 or program OTP. DA reset is active-high, not ordinary active-low nRESET.</p>
+<p>The default Windows entry requires a factory backup. Explicit <code>-SkipStockBackupCheck</code> skips that requirement without requiring a backup file; chip, capacity, layout, voltage and image checks still apply. Keep recoverable factory copies separately whenever possible.</p>
+<p>Use <code>flash/windows/flash-goodix.ps1</code>, <code>flash-om6626.ps1</code> or <code>flash-telink.ps1</code> with <code>-Board</code> set to the lowercase public MCU/PCB ID, <code>-Firmware</code> for the matching complete flashing and <code>-StockBackup</code> or the explicit skip option. Use <code>-h</code> for exact dependencies and options. Goodix requires GProgrammer; GR551x also uses J-Link identification. OM requires J-Link and the vendor device pack, preserving the fixed state/code/device-information order. Telink requires the Python UART-to-SWS tool and explicit experimental-layout confirmation where applicable. Do not interchange board-specific complete-flashing containers.</p>
+<p>Invoke Windows launchers with <code>powershell -NoProfile -ExecutionPolicy Bypass -File .\flash\windows\flash-goodix.ps1 -h</code>, replacing the script for OM/TLSR. Commands require the exact matching complete-flashing image/runtime in your package.</p>
+<p>Linux entry points report support and preparation. A Windows EXE or PowerShell launch is not qualified native Linux flashing. Unsupported targets refuse hardware writes; <code>bash flash/linux/flash.sh --help</code> lists the current scope. macOS has no one-command complete flashing support. Nordic and Dialog require their independently qualified targets and packages; check the <a href="supported-devices.html">support table</a>.</p>
+<p>Wait for programming and readback verification, follow the power/BOOT instructions, then check the App identity, firmware and panel. For failures, check supply, ground, wiring and tool ownership before a bounded retry. Do not blindly erase unknown regions.</p>
+<h2 id="nordic-and-dialog-differences">Nordic and Dialog differences</h2>
+<p>nRF52811 keeps App internally and fonts externally. First installation needs the same-version internal complete-flashing image and font assets; OTA does not supply missing fonts. A preparation-only writer test is not physical qualification or a complete public entry.</p>
+<p>The DA complete-flashing image includes boot, App, Recovery and fonts, unlike Nordic&#x27;s separate font process. asel29 defaults to SSD1619 128×296 BWR; asel42 to UC8176 400×300 BWR, not SSD1683. Verify the fitted screen after installation.</p>
+<p>Probe/backup may halt the MCU; do not use during clock/power observation. A backup may be old InkTag rather than factory firmware, so retain provenance and checksum. Backup skip does not bypass current identity, voltage or required UICR preservation.</p></main></body></html>

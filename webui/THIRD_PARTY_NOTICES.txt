@@ -1,0 +1,23 @@
+InkTag WebUI third-party notices
+
+This distribution includes open-source JavaScript libraries. Their source and
+license texts are available from the projects below and from the package lock
+in the InkTag source repository.
+
+epdoptimize 1.3.0 - Apache License 2.0
+https://github.com/paperlesspaper/epdoptimize
+
+RgbQuant.js 1.1.2 - MIT License
+https://github.com/leeoniya/RgbQuant.js
+
+React and React DOM - MIT License
+https://github.com/facebook/react
+
+Fabric.js - MIT License
+https://github.com/fabricjs/fabric.js
+
+Dexie.js - Apache License 2.0
+https://github.com/dexie/Dexie.js
+
+Lucide - ISC License
+https://github.com/lucide-icons/lucide
