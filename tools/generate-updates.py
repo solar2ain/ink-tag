@@ -55,6 +55,10 @@ def validate_record(record):
         components=release.get('components')
         if not isinstance(components,dict) or set(components)-set(KINDS):raise UpdateError('Invalid component set')
         seen=set()
+        for value in release.get('sourceMaterials',[]):
+            checked=asset(value,tag)
+            if checked['type']!='source-material' or checked['name'] in seen:raise UpdateError('Invalid corresponding-source attachment')
+            seen.add(checked['name'])
         for key,item in components.items():
             if not isinstance(item,dict):raise UpdateError('Component must be an object')
             version(item.get('version'))

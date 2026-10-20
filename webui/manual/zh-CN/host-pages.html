@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1>主机动态页面：天气站与日期牌</h1>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1 id="主机动态页面天气站与日期牌">主机动态页面：天气站与日期牌</h1>
 <p>中文 | <a href="../en/host-pages.html">English</a></p>
 <p>主机动态页面由电脑获取数据、渲染为图片，再通过蓝牙发送到墨水屏。它不会向设备安装
 脚本，也不依赖浏览器持续打开。运行任务的电脑须持续开机，推送时设备须在蓝牙范围内。</p>
-<h2>1. 在画板编辑</h2>
+<h2 id="1-在画板编辑">1. 在画板编辑</h2>
 <p>打开 WebUI「创作」，选择「天气站」模板或新建「主机动态页面」。天气模板由可编辑
 控件组成，支持移动、四角缩放、复制、配色和普通文字、表格、图片、二维码、笔迹。
 添加控件区末尾的「天气」方形按钮仅在主机动态页面显示，可展开添加天气组合或单个控件。
@@ -61,7 +61,7 @@
 <p>点击「导出主机任务」下载 <code>*.inktag.json</code>。原稿保留控件和绑定，不只是截图，且不会
 自动附加设备地址、密码或账号信息。原生设备控件、设备变量、设备字库和图槽轮播
 不是主机天气功能；不支持的内容在导出时明确提示。旧本地原稿不会被自动删除。</p>
-<h2>2. 导入、渲染与检查</h2>
+<h2 id="2-导入渲染与检查">2. 导入、渲染与检查</h2>
 <p>使用最新版 CLI，在原稿所在目录运行：</p>
 <pre><code class="language-console">inktag host import weather.inktag.json --config weather.toml
 inktag host validate weather.toml
@@ -81,7 +81,7 @@ inktag host render --scene weather.inktag.json --snapshot forecast.json -o weath
 <p>天气来自 <a href="https://open-meteo.com/en/docs">Open-Meteo</a>。请求只包含配置的位置、时区及
 天气字段，不含设备身份、密码、账号或 Find 信息。免费接口适用于非商业用途；商用应
 遵循提供者条款。来源署名保留在快照元数据中。示例/离线快照不能用于定时推送。</p>
-<h2>3. 绑定设备并启用</h2>
+<h2 id="3-绑定设备并启用">3. 绑定设备并启用</h2>
 <pre><code class="language-console">inktag --device IKT_TL_1234 host target
 </code></pre>
 <p>该命令读取一次准确目标，不校时、不启用任务、不推送。将返回的 <code>address</code> 和
@@ -110,7 +110,7 @@ inktag host status weather.toml
 <p>不加 <code>--send</code> 仅生成本机 PNG。<code>--once</code> 只评估一次到期任务；不加时持续运行，Ctrl+C
 停止。后台推送使用已保存的正常认证凭据并检查 Pro，不等待交互式密码。尺寸、色板或
 身份不匹配时拒绝发送，不改屏幕配置、图槽或绑定。具体设备的推送仍需实板验证。</p>
-<h2>4. 定时运行与停止</h2>
+<h2 id="4-定时运行与停止">4. 定时运行与停止</h2>
 <p>推荐每 60 分钟更新。同一任务的预览、推送状态独立；像素未变化不重发，错过周期合并
 为一次，失败保留上次成功状态并退避，不主动清屏。修改原稿会触发重新渲染；修改尺寸
 后应同步 TOML。定时任务以 <code>[sources.home]</code> 为准，改地点时同步编辑其坐标与时区。</p>
@@ -124,7 +124,7 @@ macOS 蓝牙权限取决于实际启动环境；系统服务权限不能视作�
 需要指定时使用 <code>--data-dir /绝对路径/InkTag</code>。离线验证可运行
 <code>host run weather.toml --once --fixture forecast.json --data-dir /绝对路径/测试目录</code>，
 此模式不得与 <code>--send</code> 同用。联网预览失败不会阻止编辑，失败也不会伪装成最新数据。</p>
-<h2>5. 日期牌</h2>
+<h2 id="5-日期牌">5. 日期牌</h2>
 <p>在「创作 → 日期牌」选择屏幕尺寸。大字日期、星期、农历和天气均为可编辑控件，
 横屏左右分栏，竖屏上下排布，小屏优先保留日期和当前天气。日期数字用强调色，温度为黑色。
 大字日期复用设备时钟的绘制数字，不依赖额外字体文件；可调整尺寸和颜色。</p>

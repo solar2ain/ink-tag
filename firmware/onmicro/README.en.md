@@ -6,6 +6,6 @@ No firmware for this platform is published in this release. This directory is on
 
 ## Board index
 
-- `om6626_zkc21b`: om6626_zkc21b (Current candidate)
-- `om6626_zkc42b`: om6626_zkc42b (Current candidate)
-- `om6626_hsel`: om6626_hsel (Deferred)
+- `om6626_zkc21b`: om6626_zkc21b
+- `om6626_zkc42b`: om6626_zkc42b
+- `om6626_hsel`: om6626_hsel

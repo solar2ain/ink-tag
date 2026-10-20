@@ -87,7 +87,7 @@ inktag --device IKT_TL_1234 slideshow stop
 
 使用前请阅读 [安全与隐私说明](SECURITY.md)。请勿在问题反馈中公开密码、激活码、定位数据或私钥。
 
-未来托管部署的配置与限制见 [GitHub Pages](docs/zh-CN/github-pages.md)；本次仅更新私有仓库，不部署站点。
+在线访问及本地版的区别见[在线 WebUI 与本地版](docs/zh-CN/github-pages.md)。
 
 ## 致谢
 

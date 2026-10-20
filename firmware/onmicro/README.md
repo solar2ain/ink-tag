@@ -6,6 +6,6 @@
 
 ## 主板索引
 
-- `om6626_zkc21b`：om6626_zkc21b（本次候选）
-- `om6626_zkc42b`：om6626_zkc42b（本次候选）
-- `om6626_hsel`：om6626_hsel（本次延期）
+- `om6626_zkc21b`：om6626_zkc21b
+- `om6626_zkc42b`：om6626_zkc42b
+- `om6626_hsel`：om6626_hsel

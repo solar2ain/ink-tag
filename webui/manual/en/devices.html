@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1>Devices and panels</h1>
-<p>Identify the exact MCU and PCB before selecting a complete-flashing image. The <a href="supported-devices.html">support table</a> determines which files and tools are available. A successful screen operation is not full release qualification.</p>
-<h2>Board selection</h2>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1 id="devices-and-panels">Devices and panels</h1>
+<p>Identify the exact MCU and board before selecting an installation package. The <a href="supported-devices.html">support table</a> lists compatibility and available downloads. A single successful screen update does not mean every function is supported or tested.</p>
+<h2 id="board-selection">Board selection</h2>
 <table>
 <thead>
 <tr>
@@ -63,7 +63,7 @@
 </tbody>
 </table>
 <p>A complete-flashing image can contain boot, Recovery, fonts and board configuration. Shared OTA bytes do not make these images interchangeable. Historical <code>aesl22_nrf</code> / <code>aesl29_da</code> names are not current public download IDs.</p>
-<h2>Original panels</h2>
+<h2 id="original-panels">Original panels</h2>
 <p>BW is black/white, BWR adds red, BWRY adds yellow, and KWRYGB means black/white/red/yellow/green/blue. Match IC, recipe, native geometry, visible area and orientation.</p>
 <table>
 <thead>
@@ -150,7 +150,7 @@
 </tbody>
 </table>
 <p>For Nowa213R or unlisted panels, use actual device settings and release instructions. Disconnect power before a swap and verify FPC, wiring and colors. A preset in a dropdown does not prove testing on every PCB. DA 128×296 landscape is only 128 pixels high and uses a compact layout. A ZKC42VM replacement on DA requires SSD1683, not the original UC8176 recipe.</p>
-<h2>Actual test scope</h2>
+<h2 id="actual-test-scope">Actual test scope</h2>
 <table>
 <thead>
 <tr>
@@ -193,7 +193,7 @@
 </tbody>
 </table>
 <p>Equal dimensions do not imply equal voltage, waveforms, BUSY polarity or transfer format. Advanced configuration does not automatically identify an unknown IC.</p>
-<h2>Image capacity</h2>
+<h2 id="image-capacity">Image capacity</h2>
 <p>Storage includes the decoded full frame, header and sector alignment, not the JPEG/PNG size. RLE saves transfer bytes, not Flash capacity. Device-reported IDs and capacity are authoritative.</p>
 <table>
 <thead>
@@ -227,6 +227,6 @@
 </tbody>
 </table>
 <p>DA large panels can use the corresponding direct-transfer path. Image Flash cannot enlarge executable SRAM. Other MCUs have board-specific storage; changing geometry/colors can invalidate old slots. Download needed content first, then clear and re-upload as prompted.</p>
-<h2>Temperature and capabilities</h2>
+<h2 id="temperature-and-capabilities">Temperature and capabilities</h2>
 <p>Panel and MCU temperatures have different sources. Missing, stale, busy or unsupported samples appear as <code>--</code>, not 0 °C. A0/A1 panel temperature on nRF52811 is not physically tested; DA availability also depends on controller and sampling state.</p>
 <p>nRF52811 and DA14585 are permanently Free without activation, Find, passwords, NFC actions or Bluetooth renaming. LEDs/buttons/buzzers on other families depend on fitted hardware and actual capabilities. Labels use printable English/ASCII characters; default <code>InkTag XXXX</code> is separate from advertising.</p></main></body></html>

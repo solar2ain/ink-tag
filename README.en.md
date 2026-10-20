@@ -87,7 +87,7 @@ With an existing Python virtual environment, run `python -m pip install .` insid
 
 Read [security and privacy](SECURITY.md). Never include passwords, activation codes, private locations or keys in issue reports.
 
-See [GitHub Pages](docs/en/github-pages.md) for future hosting configuration and limitations. This update changes the private repository only; it does not deploy the site.
+See [hosted WebUI and local clients](docs/en/github-pages.md) for access options and differences.
 
 ## Acknowledgments
 

@@ -1,17 +1,9 @@
-# CLI licensing scope / CLI 许可范围
+# CLI 许可 / CLI licensing
 
-InkTag-owned CLI source code is licensed under GNU Affero General Public License,
-version 3 only (`AGPL-3.0-only`). The complete license is in [LICENSE](LICENSE).
-Third-party components retain their own copyright and license notices.
+InkTag 自有 CLI 源代码采用 GNU Affero General Public License, version 3 only（`AGPL-3.0-only`），完整正文见 [LICENSE](LICENSE)。第三方组件保留各自许可，见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
-Bundled compiled resources, including `src/inktag_cli/_assets/nativePreviewWasm.js`,
-still require review of their licensing, combination with the CLI, and
-Corresponding Source and build-material requirements before public distribution.
-This notice grants no linking exception and does not certify the current package
-as complete Corresponding Source. It does not license the separate WebUI or
-firmware under AGPL.
+当前包包含编译后的渲染组件，其完整对应源码及重新编译资料尚未提供；因此，当前包不是完整的对应源码包，暂不作为正式公开发行包提供。上述 CLI 许可不自动适用于 WebUI 或设备固件。
 
-InkTag 自有 CLI 源代码采用 AGPL-3.0-only，完整正文见 [LICENSE](LICENSE)。第三方
-组件保留其原有版权与许可。内嵌 WASM 等编译资源的许可归属、组合关系及对应源码
-和构建资料仍须在公开分发前核实；本说明不授予链接例外，也不认定当前包已经提供
-完整对应源码。本许可不自动适用于独立的 WebUI 或固件。
+InkTag-owned CLI source is licensed under GNU Affero General Public License, version 3 only (`AGPL-3.0-only`); see [LICENSE](LICENSE). Third-party works keep their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+The current package includes a compiled renderer whose complete Corresponding Source and rebuild materials are not yet supplied. It is not a complete Corresponding Source package and is not yet offered as a formal public release. The CLI grant does not automatically apply to WebUI or device firmware.

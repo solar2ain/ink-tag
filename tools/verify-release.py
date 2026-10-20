@@ -14,7 +14,8 @@ import zipfile
 import tarfile
 from pathlib import Path
 from typing import Iterable
-from release_checks import check_cli_archive, public_readiness
+from release_checks import check_cli_archive, public_readiness, verify_material_delivery, download_materials, archive_files
+import tempfile
 
 
 FORBIDDEN_PARTS = {".sdk", ".tools", ".vendor", "_build", "backups", "factory-backups", "factory_backups"}
@@ -213,6 +214,7 @@ def validate_assets(manifest: dict, assets: Path, repo: Path | None = None) -> l
     failures: list[str] = []
     expected: dict[str, str] = {}
     firmware_names: set[str] = set()
+    material_names={a['name'] for a in manifest.get('sourceMaterials',[])}
     for board in manifest.get("boards", []):
         for artifact in board.get("artifacts", []):
             expected[artifact["name"]] = artifact["sha256"]
@@ -226,6 +228,10 @@ def validate_assets(manifest: dict, assets: Path, repo: Path | None = None) -> l
         expected[cli["name"]] = cli["sha256"]
     for item in manifest.get('cliDistributions', []):
         expected[item['name']] = item['sha256']
+    for item in manifest.get('sourceMaterials', []):
+        expected[item['name']] = item['sha256']
+    if (assets/'RELEASE_NOTES.md').is_file():
+        expected['RELEASE_NOTES.md']=digest(assets/'RELEASE_NOTES.md')
     manifest_name = f"InkTag-v{manifest.get('version')}-manifest.json"
     if (assets / manifest_name).is_file():
         expected[manifest_name] = digest(assets / manifest_name)
@@ -250,7 +256,7 @@ def validate_assets(manifest: dict, assets: Path, repo: Path | None = None) -> l
                         if (relative.name.lower() in AGENT_INSTRUCTIONS or relative.is_absolute() or
                                 '..' in relative.parts or '\\' in member.filename or ':' in member.filename or
                                 {part.lower() for part in relative.parts} & FORBIDDEN_PARTS or
-                                relative.suffix.lower() in FORBIDDEN_SUFFIXES or
+                                relative.suffix.lower() in (FORBIDDEN_SUFFIXES-({'.c','.cpp','.h','.hpp'} if name in material_names else set())) or
                                 (relative.suffix.lower() in FIRMWARE_SUFFIXES and name not in firmware_names)):
                             failures.append(f"forbidden release archive member: {name}: {member.filename}")
                         if not member.is_dir():
@@ -260,6 +266,10 @@ def validate_assets(manifest: dict, assets: Path, repo: Path | None = None) -> l
                                 failures.append(f"possible credential/private key in archive: {name}: {member.filename}")
             except zipfile.BadZipFile:
                 failures.append(f"invalid release ZIP: {name}")
+        descriptions=[a for b in manifest.get('boards',[]) for a in b.get('artifacts',[])]+[manifest.get(k) for k in ('cli','web','webStandalone','localServer','flashTools')]+manifest.get('cliDistributions',[])+manifest.get('sourceMaterials',[])
+        description=next((a for a in descriptions if a and a.get('name')==name),None)
+        if description and path.is_file() and path.stat().st_size!=description.get('bytes'):
+            failures.append('release asset size mismatch: '+name)
         if path.is_file() and (name == manifest.get('cli',{}).get('name') or any(name==a['name'] for a in manifest.get('cliDistributions',[]))):
             try:
                 failures.extend(check_cli_archive(repo or Path(__file__).resolve().parents[1], path))
@@ -291,6 +301,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--repo", type=Path, default=Path.cwd(), help="Release repository root.")
     parser.add_argument("--assets", type=Path, help="Optional release-assets directory to verify.")
     parser.add_argument('--public',action='store_true',help='Also require all public licensing/source review gates to be independently closed.')
+    parser.add_argument('--source-materials-dir',type=Path,help='Directory containing the actual downloaded source deliveries to verify.')
+    parser.add_argument('--download-source-materials',action='store_true',help='Explicitly retrieve and verify approved public source URLs (requires --public).')
     parser.add_argument(
         "--candidate",
         action="store_true",
@@ -310,6 +322,16 @@ def main() -> int:
         failures.extend(validate_assets(manifest, args.assets.resolve(), repo))
     if args.public:
         failures.extend(public_readiness(repo))
+        if not failures:
+            if args.download_source_materials:
+                with tempfile.TemporaryDirectory(prefix='verify-materials-') as temp:
+                    try:
+                        download_materials(repo,Path(temp))
+                        failures.extend(verify_material_delivery(repo,Path(temp)))
+                    except (OSError,ValueError) as error:failures.append('Source download verification failed: '+str(error))
+            elif args.source_materials_dir:
+                failures.extend(verify_material_delivery(repo,args.source_materials_dir))
+            else:failures.append('Actual corresponding-source deliveries must be verified, not only their descriptions')
     if failures:
         print("release verification failed:", file=sys.stderr)
         for failure in failures:

@@ -6,5 +6,5 @@ No firmware for this platform is published in this release. This directory is on
 
 ## Board index
 
-- `da14585_asel29`: da14585_asel29 (Deferred)
-- `da14585_asel42`: da14585_asel42 (Deferred)
+- `da14585_asel29`: da14585_asel29
+- `da14585_asel42`: da14585_asel42

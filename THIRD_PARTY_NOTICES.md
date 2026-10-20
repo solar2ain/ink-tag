@@ -1,32 +1,23 @@
-# Third-party notices
+# 第三方组件与许可 / Third-party components and licenses
 
-The byte-bound partial inventory is
-[`webui/licenses/BUNDLED-INVENTORY.json`](webui/licenses/BUNDLED-INVENTORY.json).
-Observed runtime versions are React/React DOM 19.2.8, Dexie 4.4.5, React Router
-7.18.2 and Leafer runtime 2.2.10 (not a plugin inventory). Exact-version upstream
-license texts and Dexie's additional NOTICE are under `webui/licenses/`.
-Ma Shan Zheng WOFF2 metadata identifies Version 2.003/OFL-1.1. These facts do
-not resolve font modifications/provenance, image rights, every plugin or renderer
-Corresponding Source. Public release remains blocked; see [release-materials.md](release-materials.md).
+InkTag 使用下列第三方组件。它们保留各自版权和许可，不因 CLI 采用 AGPL 而改用另一种许可。适用范围见[许可说明](LICENSING.md)。
 
-This first release contains CLI clients, compiled WebUI and user documentation;
-it contains no firmware or flashing package. Third-party components retain their
-own licenses and are not relicensed by the CLI's AGPL declaration. See
-[LICENSING.md](LICENSING.md) for scope.
-
-| Distribution area | Components identified | License evidence / remaining review |
+| 组件 | 许可 | 许可正文 |
 | --- | --- | --- |
-| CLI Python dependencies | bleak, cryptography, mini-racer, Pillow, qrcode, rich, typer and their installed dependencies | Requirements are declared in `cli/pyproject.toml`; confirm exact resolved versions and their original notices for each distributed package. These are not covered by an InkTag-owned-code grant. |
-| CLI bundled JavaScript | epdoptimize and other rendering/font adapters | Apache-2.0 text for epdoptimize is included in `cli/src/inktag_cli/_assets/EPDOPTIMIZE_LICENSE.txt`; review other resources individually. |
-| CLI compiled GUI module | `nativePreviewWasm.js` | Corresponding Source, build materials and combined-work licensing remain unresolved. |
-| Compiled WebUI | React/React DOM, Fabric, Dexie, Lucide, RgbQuant, epdoptimize, Leafer components/plugins | See `webui/THIRD_PARTY_NOTICES.txt`. Exact versions, full dependency inventory and required notices still need verification. |
-| WebUI font | Ma Shan Zheng | Upstream OFL-1.1 text and copyright are supplied in `webui/licenses/MaShanZheng-OFL.txt`; verify the shipped font's provenance and any modifications. |
-| WebUI images and other fonts | Tutorial/screenshot images, sample artwork and generated font resources | Confirm ownership or redistribution permission for each asset; a filename is not license evidence. |
-| Local-service Find runtime | Runtime files distributed inside the local-service ZIP | Inspect the actual archive, including its bundled `tools/findmy/third_party/os-findmy-e.LICENSE`; confirm any further dependencies and notices. |
+| React / React DOM 19.2.8 | MIT | [React](webui/licenses/react-19.2.8-LICENSE.txt)、[React DOM](webui/licenses/react-dom-19.2.8-LICENSE.txt) |
+| React Router 7.18.2 | MIT | [React Router](webui/licenses/react-router-7.18.2-LICENSE.txt) |
+| Dexie 4.4.5 | Apache-2.0 | [License](webui/licenses/dexie-4.4.5-LICENSE.txt)、[NOTICE](webui/licenses/dexie-4.4.5-NOTICE.txt) |
+| Leafer UI 2.2.10 | MIT | [Leafer UI](webui/licenses/leafer-ui-2.2.10-LICENSE.txt) |
+| Fabric.js | MIT | [Fabric.js](webui/licenses/Fabric-MIT.txt) |
+| RgbQuant.js | MIT | [RgbQuant.js](webui/licenses/RgbQuant-MIT.txt) |
+| Lucide，含 Feather 衍生图标 | ISC / MIT | [Lucide](webui/licenses/Lucide-LICENSE.txt) |
+| epdoptimize | Apache-2.0 | [epdoptimize](webui/licenses/epdoptimize-Apache-2.0.txt) |
+| Ma Shan Zheng 字体 | SIL Open Font License 1.1 | [字体许可](webui/licenses/MaShanZheng-OFL.txt) |
 
-The inventory is **not yet complete** and is a public-release gate. Do not label
-all bundled code as AGPL, assume compiled assets have no attribution duties, or
-treat an upstream project's current license as proof of the exact bundled version.
+CLI 的 Python 依赖及附带组件见 [CLI 第三方声明](cli/THIRD_PARTY_NOTICES.md)。本地服务包中 Find 组件的许可随包提供。
 
-本期不含固件和烧录包。CLI 的 AGPL 声明不替代第三方组件的原许可；表中的未决项
-须在公开分发前完成核查。新增的上游许可文本只补充声明，不代表整个包已通过合规审核。
+部分插件、字体和图片的许可信息尚未齐备，本表不代表全部素材都已取得再分发许可。当前文件暂不作为正式公开发行包提供。第三方许可原文保留其原有语言和内容。
+
+The components listed above retain their own copyright and licenses. The CLI's AGPL grant does not relicense them. See the linked license texts and [CLI third-party notices](cli/THIRD_PARTY_NOTICES.md). The local-server package also supplies the license for its Find component.
+
+License information for some plugins, fonts and images is not yet complete; this list does not grant redistribution rights to every asset. The current files are not yet offered as a formal public release. Original third-party license texts are retained in their original form and language.

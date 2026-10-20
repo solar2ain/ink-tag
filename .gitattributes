@@ -1,2 +1,5 @@
 # Preserve the verified bytes of compiled release assets on every platform.
 webui/** -text
+cli/** -text
+releases/** -text
+firmware/manifest.json -text

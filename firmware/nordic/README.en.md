@@ -6,5 +6,5 @@ No firmware for this platform is published in this release. This directory is on
 
 ## Board index
 
-- `nrf52811_asel22`: nrf52811_asel22 (Deferred)
-- `nrf52832_priceetag`: nrf52832_priceetag (Deferred)
+- `nrf52811_asel22`: nrf52811_asel22
+- `nrf52832_priceetag`: nrf52832_priceetag

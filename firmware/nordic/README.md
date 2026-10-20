@@ -6,5 +6,5 @@
 
 ## 主板索引
 
-- `nrf52811_asel22`：nrf52811_asel22（本次延期）
-- `nrf52832_priceetag`：nrf52832_priceetag（本次延期）
+- `nrf52811_asel22`：nrf52811_asel22
+- `nrf52832_priceetag`：nrf52832_priceetag

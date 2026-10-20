@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1>命令行工具</h1>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1 id="命令行工具">命令行工具</h1>
 <p>CLI 使用同一套 Python 客户端，提供 Windows、Linux 和 macOS 启动入口。需要 Python 3.11 或以上版本；首次安装会安装所需 Python 依赖。macOS 的蓝牙设备标识通常是系统 UUID，不一定是 MAC 地址。</p>
-<h2>安装和启动</h2>
+<h2 id="安装和启动">安装和启动</h2>
 <p>解压 CLI 包后，在包含 <code>cli/</code> 的发布目录运行：</p>
 <p>Windows：</p>
 <pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\cli\install.ps1
@@ -15,7 +15,7 @@ bash cli/inktag.sh --help
 <p>ZIP 包内路径是 <code>inktag-cli/</code>，不是 <code>cli/</code>；进入该目录后，省略命令中的 <code>cli/</code> 前缀。安装入口只建立运行环境，不编译设备固件。Linux 需可用的系统蓝牙服务与适配器；macOS 首次使用请允许终端/Python 的蓝牙权限。缺少 Python 的 <code>venv</code> 功能时，应先安装系统提供的对应组件。</p>
 <p>下方示例使用已安装到虚拟环境的 <code>inktag</code> 命令；使用包内启动入口时，可将 <code>inktag</code> 替换为 Windows 的 <code>powershell -NoProfile -ExecutionPolicy Bypass -File .\inktag.ps1</code>，或 Linux/macOS 的 <code>bash inktag.sh</code>。</p>
 <p>在发布仓库中，可运行 <code>inktag webui start --repo .</code> 启动附带的 <code>webui/</code> 页面。仅安装 CLI ZIP 不含 WebUI 页面；Find 服务请使用独立的本地服务包。未安装 Find 时，WebUI 的其他功能仍可使用。手机局域网访问使用 <code>inktag webui serve --repo . --lan</code>，详见 <a href="webui.html">WebUI 手册</a>。</p>
-<h2>选择设备和读取信息</h2>
+<h2 id="选择设备和读取信息">选择设备和读取信息</h2>
 <pre><code class="language-text">inktag device scan
 inktag --device IKT_NRF_1234 device info
 inktag --device IKT_NRF_1234 screen show
@@ -25,7 +25,7 @@ inktag --device IKT_NRF_1234 diagnostic clock
 <p>将 <code>IKT_NRF_1234</code> 替换为扫描返回的准确蓝牙名。<code>--device</code> 也接受唯一前缀；多台设备可见时使用完整名。可改用 <code>--address ADDRESS</code>，其中地址必须来自扫描，macOS 通常返回 UUID。使用 CLI 前断开 WebUI 对同一台设备的连接。</p>
 <p>普通连接和正常 OTA 默认校时一次。走时观察使用 <code>--no-time-sync</code>，避免改变被测时间。只读输出可按命令帮助选择 JSON 格式。</p>
 <p><code>diagnostic runtime</code> 查看温度、电压及可用状态；<code>diagnostic clock</code> 查看设备与本机时间偏差。这些诊断不自动校时。没有有效值不代表零；支持范围与读数来源见<a href="devices.html">设备说明</a>。</p>
-<h2>屏幕、时间和页面</h2>
+<h2 id="屏幕时间和页面">屏幕、时间和页面</h2>
 <pre><code class="language-console">inktag screen profiles
 inktag --device IKT_NRF_1234 screen set SSD1619_128x250_BWR_HEMA213
 inktag --device IKT_NRF_1234 time sync
@@ -42,7 +42,7 @@ inktag --device IKT_NRF_1234 screen calendar --countdown-name 假期 --countdown
 inktag --device IKT_NRF_1234 screen calendar --clear-countdown
 </code></pre>
 <p><code>0</code> 为周日，<code>1</code> 为周一；倒计时名称最多 4 个字符。断电后恢复的是历史时间，首次使用或更换电池后应校时。</p>
-<h2>图片、图槽和轮播</h2>
+<h2 id="图片图槽和轮播">图片、图槽和轮播</h2>
 <pre><code class="language-console">inktag --device IKT_NRF_1234 image upload photo.jpg --preview preview.png
 inktag --device IKT_NRF_1234 image upload photo.jpg --slot next --name landscape --wire-encoding auto
 inktag --device IKT_NRF_1234 slot list
@@ -57,10 +57,10 @@ inktag --device IKT_NRF_1234 slideshow stop
 <pre><code class="language-console">inktag --device IKT_NRF_1234 slot delete 0
 inktag --device IKT_NRF_1234 slot clear
 </code></pre>
-<h2>设备维护与设置清理</h2>
+<h2 id="设备维护与设置清理">设备维护与设置清理</h2>
 <p><code>diagnostic runtime</code>、<code>diagnostic health</code> 和 <code>diagnostic clock</code> 保留正常的只读设备诊断。<code>led locate</code> 用于寻找设备，<code>display ghost-clean</code> 用于残影清理；<code>nfc status</code> 查看 NFC 状态，<code>nfc action --help</code> 查看页面切换配置。操作范围以设备实际声明的能力为准。辅助开发的波形试验、输入模拟与 OTA 故障注入不包含在用户发行版中。</p>
 <p><code>device reset-settings</code> 恢复普通设置并保留图片；<code>device clear-user-data</code> 删除用户图片并保留设置。两者不是工厂重置。阅读确认内容后再执行；启用密码的设备仍需正常认证，修改或删除密码需新验证原密码。</p>
-<h2>OTA 与 Recovery</h2>
+<h2 id="ota-与-recovery">OTA 与 Recovery</h2>
 <pre><code class="language-console">inktag ota inspect firmware-ota.zip
 inktag --device IKT_NRF_1234 ota update firmware-ota.zip
 inktag --device IKT_NRF_1234 recovery enter
@@ -69,7 +69,7 @@ inktag --device IKT_NRF_1234_OTA recovery resume-app
 <p>文件名替换为匹配主控的实际 OTA 文件：Nordic、GR、OM、TLSR 使用对应发布 ZIP，DA 使用 <code>.img</code>。不要上传完整烧录。日常更新保留默认校时；只有明确的走时连续性测试才使用 <code>--no-time-sync</code>。</p>
 <p>安全退出要求已安装 Recovery 提供能力、应用完整有效且没有未完成写入；旧 Recovery 可能只支持更新。结果未知时不要重发退出或写入命令。详细恢复流程见<a href="ota.html">OTA 与 Recovery</a>。</p>
 <p>CLI 和 WebUI 使用同一套身份、密码、签名、电压与兼容性检查。可用命令不代表每台设备都有对应硬件或权限；不支持的功能会明确拒绝。CLI 包本身不包含 WebUI 页面，需要本地网页服务时另下载<a href="webui.html">本地服务包</a>。</p>
-<h2>主机动态页面与天气站</h2>
+<h2 id="主机动态页面与天气站">主机动态页面与天气站</h2>
 <p>主机负责取数、渲染与定时调度，设备接收普通图片。电脑需要持续运行，推送时设备需在蓝牙范围内。
 可在 WebUI「创作 → 天气站」编辑控件和天气数据源，再点击「导出主机任务」。
 CLI 导入该原稿，保留画板尺寸、色板、几何布局与天气绑定。
@@ -110,6 +110,6 @@ macOS 使用本机 CoreBluetooth UUID；后者不是 MAC，换电脑需重新绑
 <code>inktag --device IKT_TL_1234 host target</code> 可读取一次绑定信息，将返回的 <code>target</code> 字段填入任务；
 重名时改用 <code>--address</code>。此命令不校时、不启用任务、不推送页面。
 推送沿用普通认证与图片传输，并按自定义动态模板策略检查 Pro 激活状态；后台缺少已保存凭据时失败，不等待密码输入。
-本增量尚待实板验证，不代表已完成全部设备资格确认。</p>
+向设备发送前，请先在自己的设备上确认能够正常接收；当前尚未完成所有设备的实际验证。</p>
 <p>像素未变化不重复发送，错过的周期合并处理。失败不主动清屏，成功记录保留并延时重试；预览与推送状态独立。
 将 <code>enabled</code> 改为 <code>false</code> 或用 Ctrl+C 停止运行器。设备 STOP 不会停止电脑上的任务。</p></main></body></html>

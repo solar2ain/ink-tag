@@ -1,8 +1,32 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1>GitHub Pages deployment</h1>
-<p><a href="../zh-CN/github-pages.html">简体中文</a></p>
-<p>The intended site URL is <a href="https://solar2ain.github.io/ink-tag/">https://solar2ain.github.io/ink-tag/</a>. This remains a private preview. This update does not enable or deploy Pages, change repository visibility, or change account settings.</p>
-<p>Only <code>webui/</code> is deployed: compiled assets and HTML manuals. CLI, firmware, recovery backups, device data, and agent instructions are excluded. Pushes and pull requests validate static content without deploying.</p>
-<p>When deployment is explicitly enabled later, select <code>main</code> under Actions → Deploy InkTag Web → Run workflow. Resource references, sensitive files, hidden content, links, and source maps are checked before uploading <code>webui/</code>. No application source or Node.js build environment is required.</p>
-<p>Private-repository Pages and Actions availability depends on the GitHub account plan and billing state. Workflow configuration does not prove the service is available; check Settings → Pages before enabling it. The supplied local package requires neither a public repository nor a plan change.</p>
-<p>Pages serves static content without a local data or Find backend. Device connections still require Web Bluetooth support and explicit user authorization.</p></main></body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1 id="hosted-webui-and-local-clients">Hosted WebUI and local clients</h1>
+<p><a href="../zh-CN/github-pages.html">中文</a> | English</p>
+<p>Open <a href="https://solar2ain.github.io/ink-tag/">InkTag WebUI</a> and consult the <a href="https://solar2ain.github.io/ink-tag-manual/">illustrated manual</a>. If the site is not yet available or cannot be reached, use the downloaded standalone HTML or local-service package.</p>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Use</th>
+<th>Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hosted WebUI</td>
+<td>Open in Chrome or Edge with Web Bluetooth</td>
+<td>No frontend installation; initial loading and update checks require a network; no local backend runs with the hosted page</td>
+</tr>
+<tr>
+<td>Standalone HTML</td>
+<td>Download and open in a compatible browser</td>
+<td>Frontend works offline; Bluetooth still depends on browser support and permission</td>
+</tr>
+<tr>
+<td>Local service</td>
+<td>Install and start using the <a href="webui.html">WebUI guide</a></td>
+<td>Provides local assets and backend features needed by host tasks and Find, subject to actual support</td>
+</tr>
+</tbody>
+</table>
+<p>The page cannot bypass Bluetooth authorization. Mobile support depends on the OS and browser; use a supported desktop browser or CLI if unavailable. The local service can be configured for LAN access as described in the guide; browser Bluetooth still requires a supported secure access context.</p>
+<p>Browsers normally separate device records, settings and assets by origin. Do not assume hosted, standalone and local-service clients share their local data. Never copy control credentials, account sessions or location databases into a public site.</p></main></body></html>

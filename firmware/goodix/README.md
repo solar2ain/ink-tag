@@ -6,7 +6,7 @@
 
 ## 主板索引
 
-- `gr5331_zkc21v`：gr5331_zkc21v（本次候选）
-- `gr5513_zkc42v`：gr5513_zkc42v（本次候选）
-- `gr5513_zkc42vm`：gr5513_zkc42vm（本次候选）
-- `gr5515_zkc42vm`：gr5515_zkc42vm（本次候选）
+- `gr5331_zkc21v`：gr5331_zkc21v
+- `gr5513_zkc42v`：gr5513_zkc42v
+- `gr5513_zkc42vm`：gr5513_zkc42vm
+- `gr5515_zkc42vm`：gr5515_zkc42vm

@@ -6,7 +6,7 @@ No firmware for this platform is published in this release. This directory is on
 
 ## Board index
 
-- `gr5331_zkc21v`: gr5331_zkc21v (Current candidate)
-- `gr5513_zkc42v`: gr5513_zkc42v (Current candidate)
-- `gr5513_zkc42vm`: gr5513_zkc42vm (Current candidate)
-- `gr5515_zkc42vm`: gr5515_zkc42vm (Current candidate)
+- `gr5331_zkc21v`: gr5331_zkc21v
+- `gr5513_zkc42v`: gr5513_zkc42v
+- `gr5513_zkc42vm`: gr5513_zkc42vm
+- `gr5515_zkc42vm`: gr5515_zkc42vm

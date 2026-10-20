@@ -1,74 +1,47 @@
-InkTag WebUI third-party notices
+InkTag WebUI：第三方组件与许可 / Third-party components and licenses
 
-2026-10-20 artifact inspection supplement
---------------------------------------
-Observed compiled versions: React/React DOM 19.2.8, Dexie 4.4.5, React Router
-7.18.2 and Leafer runtime 2.2.10. Exact-version npm license files are under
-licenses/; Dexie's additional NOTICE is licenses/dexie-4.4.5-NOTICE.txt.
-The shipped Ma Shan Zheng WOFF2 metadata identifies Version 2.003, OFL-1.1
-and Copyright 2018 The MaShanZheng Project Authors. This confirms metadata,
-not all modifications/provenance or every generated font's license.
-See licenses/BUNDLED-INVENTORY.json for hashes and unresolved items. Leafer
-runtime version does NOT identify every plugin/version/license. Complete
-plugin, generated-font, renderer-source and image-source review is BLOCKED.
-The mutable upstream branch texts below remain historical references only.
+WebUI 使用下列第三方组件，原有版权及许可继续有效。CLI 的 AGPL 许可不适用于 WebUI，也不改变这些第三方组件的许可。
+WebUI uses the components below. Their original copyrights and licenses remain in effect. The CLI's AGPL grant does not apply to WebUI or relicense these components.
 
-This compiled distribution includes third-party libraries and a font. InkTag's
-CLI AGPL grant does not relicense WebUI or these third-party works. The list is
-not a complete dependency or exact-version audit; public distribution remains
-subject to the release licensing review. No package lock or additional source
-repository is required to read the notices supplied with this distribution.
+React / React DOM 19.2.8 — MIT
+License: licenses/react-19.2.8-LICENSE.txt; licenses/react-dom-19.2.8-LICENSE.txt
+https://github.com/facebook/react
 
-epdoptimize 1.3.0 - Apache License 2.0
+React Router 7.18.2 — MIT
+License: licenses/react-router-7.18.2-LICENSE.txt
+https://github.com/remix-run/react-router
+
+Dexie 4.4.5 — Apache-2.0
+License: licenses/dexie-4.4.5-LICENSE.txt
+NOTICE: licenses/dexie-4.4.5-NOTICE.txt
+https://github.com/dexie/Dexie.js
+
+Leafer UI 2.2.10 — MIT
+License: licenses/leafer-ui-2.2.10-LICENSE.txt
+https://github.com/leaferjs/leafer-ui
+
+Fabric.js — MIT
+License: licenses/Fabric-MIT.txt
+https://github.com/fabricjs/fabric.js
+
+RgbQuant.js — MIT
+License: licenses/RgbQuant-MIT.txt
+https://github.com/leeoniya/RgbQuant.js
+
+epdoptimize — Apache-2.0
+License: licenses/epdoptimize-Apache-2.0.txt
 https://github.com/paperlesspaper/epdoptimize
 
-RgbQuant.js 1.1.2 - MIT License
-https://github.com/leeoniya/RgbQuant.js
-Supplementary upstream text: licenses/RgbQuant-MIT.txt
-
-React and React DOM - MIT License
-https://github.com/facebook/react
-Supplementary upstream text: licenses/React-MIT.txt
-
-Fabric.js - MIT License
-https://github.com/fabricjs/fabric.js
-Supplementary upstream text: licenses/Fabric-MIT.txt
-
-Dexie.js - Apache License 2.0
-https://github.com/dexie/Dexie.js
-Supplementary upstream text: licenses/Dexie-Apache-2.0.txt
-
-Lucide - ISC License, with retained MIT notices for Feather-derived icons
+Lucide / Feather-derived icons — ISC / MIT
+License: licenses/Lucide-LICENSE.txt
 https://github.com/lucide-icons/lucide
-Supplementary upstream text: licenses/Lucide-LICENSE.txt
 
-Leafer UI - MIT License
-https://github.com/leaferjs/leafer-ui
-Supplementary upstream copyright and license text: licenses/Leafer-MIT.txt
-Verify the exact bundled packages, plugins and versions before release; this
-upstream license does not certify the licenses of every Leafer plugin.
-
-Ma Shan Zheng font - SIL Open Font License 1.1
+Ma Shan Zheng 字体 / font — SIL Open Font License 1.1
+License: licenses/MaShanZheng-OFL.txt
+Copyright 2018 The Ma Shan Zheng Project Authors
 https://github.com/google/fonts/tree/main/ofl/mashanzheng
-Copyright and license text: licenses/MaShanZheng-OFL.txt
-Verify the provenance and any modifications of the bundled WOFF2 font.
 
-epdoptimize Apache-2.0 license text: licenses/epdoptimize-Apache-2.0.txt
+部分插件、字体和图片的许可信息尚未齐备；当前文件暂不作为正式公开发行包提供。InkTag 自有 WebUI 的使用和再分发条款见许可说明；第三方许可授予的权利不受此说明限制。
+License information for some plugins, fonts and images is not yet complete, and the current files are not yet offered as a formal public release. See the licensing notice for InkTag-owned WebUI use and redistribution terms. Third-party license grants remain unaffected.
 
-The supplementary upstream files were retrieved on 2026-10-20 from these public
-license URLs (epdoptimize was copied unchanged from the included CLI notice):
-https://raw.githubusercontent.com/facebook/react/main/LICENSE
-https://raw.githubusercontent.com/fabricjs/fabric.js/master/LICENSE
-https://raw.githubusercontent.com/leeoniya/RgbQuant.js/master/LICENSE
-https://raw.githubusercontent.com/dexie/Dexie.js/master/LICENSE
-https://raw.githubusercontent.com/lucide-icons/lucide/main/LICENSE
-https://raw.githubusercontent.com/leaferjs/leafer-ui/main/LICENSE
-https://raw.githubusercontent.com/google/fonts/main/ofl/mashanzheng/OFL.txt
-These branch URLs can change. Confirm the applicable notice from each exact
-bundled version, retaining any additional copyright or NOTICE requirements.
-
-Remaining release requirements: supply exact component versions and applicable
-copyright/license texts for all bundled libraries, plugins, fonts and images.
-Include notices in the static ZIP, local-service ZIP and standalone HTML
-distribution. Existing preview archives have not been regenerated by this
-documentation-only update and are not evidence that these requirements are met.
+许可说明 / Licensing: licenses/LICENSING.txt

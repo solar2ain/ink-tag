@@ -6,5 +6,5 @@ No firmware for this platform is published in this release. This directory is on
 
 ## Board index
 
-- `tlsr8359_nowa154r`: tlsr8359_nowa154r (Current candidate)
-- `tlsr8359_nebular420r`: tlsr8359_nebular420r (Current candidate)
+- `tlsr8359_nowa154r`: tlsr8359_nowa154r
+- `tlsr8359_nebular420r`: tlsr8359_nebular420r

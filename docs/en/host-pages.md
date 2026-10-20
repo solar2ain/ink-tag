@@ -98,7 +98,7 @@ otherwise the runner stays in the foreground, stopped with Ctrl+C. Delivery uses
 the normal shared authentication/image transport and the Pro policy. Missing
 saved credentials fail rather than prompting in the background. Identity, canvas
 or palette mismatches refuse delivery without modifying device settings/slots.
-Physical delivery still requires qualification on the actual target.
+Sending still needs to be verified on your actual device before enabling scheduled delivery.
 
 ## Scheduling and data
 

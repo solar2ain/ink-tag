@@ -45,7 +45,7 @@ def promote(repo:Path,tag:str,approval:Path|None,execute=False,deploy=False):
     release=next((r for r in record['releases'] if r['releaseTag']==tag),None)
     if not release:raise ValueError('Release not present in the reviewed record')
     if release['published']:raise ValueError('Release is immutable; use a new tag')
-    files=[a for item in release['components'].values() for a in item['artifacts']]
+    files=[a for item in release['components'].values() for a in item['artifacts']]+release.get('sourceMaterials',[])
     assets=repo/'.release-assets'/tag
     for item in files:
         path=assets/item['name']
@@ -57,13 +57,16 @@ def promote(repo:Path,tag:str,approval:Path|None,execute=False,deploy=False):
     if not execute:return {'dryRun':True,'plan':plan,'releaseTag':tag}
     if not approval:raise ValueError('An independent approval receipt is required')
     receipt=json.loads(approval.read_text(encoding='utf-8'))
-    if receipt.get('schemaVersion')!=2 or receipt.get('purpose')!='public-client-release' or receipt.get('allowPublish') is not True or receipt.get('releaseTag')!=tag or receipt.get('recordSha256')!=digest(record_path) or receipt.get('artifacts')!={a['name']:a['sha256'] for a in files}:raise ValueError('A new public-release approval must bind this exact candidate')
+    if receipt.get('schemaVersion')!=3 or receipt.get('purpose')!='public-client-release' or receipt.get('allowPublish') is not True or receipt.get('releaseTag')!=tag or receipt.get('recordSha256')!=digest(record_path) or receipt.get('artifacts')!={a['name']:a['sha256'] for a in files}:raise ValueError('A new public-release approval must bind this exact candidate')
     if git(repo,'remote','get-url','origin')!='https://github.com/solar2ain/ink-tag.git' or git(repo,'branch','--show-current')!='main' or git(repo,'status','--porcelain'):raise ValueError('Reviewed clean distribution main with the exact origin is required')
     if receipt.get('distributionHead')!=git(repo,'rev-parse','HEAD'):raise ValueError('Approval does not bind the reviewed distribution commit')
     checks=module(repo/'tools/release_checks.py')
     blocked=checks.public_readiness(repo)
     if blocked:raise ValueError('Public release blocked: '+'; '.join(blocked))
+    materials,material_errors=checks.material_plan(repo)
+    if material_errors or receipt.get('sourceMaterials')!=checks.material_binding(materials):raise ValueError('New approval must bind actual source deliveries and runtime hashes')
     manifest=json.loads((repo/'firmware/manifest.json').read_text(encoding='utf-8'))
+    if manifest.get('sourceMaterials',[])!=release.get('sourceMaterials',[]):raise ValueError('Source attachments differ between manifest and record')
     if manifest.get('firmwareSelection',{}).get('published') or any(b.get('artifacts') for b in manifest.get('boards',[])):raise ValueError('Keep first-release firmware empty before publication')
     workflow=(repo/'.github/workflows/pages.yml').read_text(encoding='utf-8')
     if 'path: webui' not in workflow or 'needs: validate' not in workflow:raise ValueError('Pages PR #1 must be reviewed/integrated before promotion')
@@ -89,6 +92,9 @@ def promote(repo:Path,tag:str,approval:Path|None,execute=False,deploy=False):
             if not path.is_file() or path.stat().st_size!=item['bytes'] or digest(path)!=item['sha256']:raise ValueError('Uploaded attachment verification failed; feeds unchanged')
         for name in metadata:
             if not (downloaded/name).is_file() or digest(downloaded/name)!=digest(assets/name):raise ValueError('Uploaded metadata verification failed; feeds unchanged')
+        checks.download_materials(repo,downloaded,external_only=True)
+        delivered_errors=checks.verify_material_delivery(repo,downloaded)
+        if delivered_errors:raise ValueError('Corresponding-source delivery verification failed: '+'; '.join(delivered_errors))
     subprocess.run(['gh','release','edit',tag,'--repo','solar2ain/ink-tag','--draft=false'],cwd=repo,check=True)
     paths=['releases/record.json','webui/updates/stable.json','webui/firmware/manifest.json']
     state={'releasePublished':True,'feedPushed':False,'pagesDeployed':False,'releaseTag':tag,'feedPaths':paths,'feedCommit':None,'complete':False}

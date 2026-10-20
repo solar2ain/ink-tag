@@ -16,6 +16,11 @@ on:
         description: Deployment request correlation ID
         required: true
         type: string
+      accept_deferred_review:
+        description: Use the exact recorded owner decision for outstanding licensing reviews
+        required: false
+        default: false
+        type: boolean
   push:
     branches: [main]
     paths:
@@ -56,8 +61,13 @@ jobs:
       - name: Validate compiled static site
         run: python3 tools/verify-pages.py --site webui
       - name: Require public review for a deployment
-        if: github.event_name == 'workflow_dispatch'
-        run: python3 tools/verify-release.py --repo . --public
+        if: github.event_name == 'workflow_dispatch' && inputs.accept_deferred_review != true
+        run: python3 tools/verify-release.py --repo . --public --download-source-materials
+      - name: Verify the explicit owner publication decision
+        if: github.event_name == 'workflow_dispatch' && inputs.accept_deferred_review == true
+        run: |
+          python3 tools/verify-release.py --repo .
+          python3 tools/verify-publication-decision.py --repo .
       - name: Bind deployment to the published client record
         if: github.event_name == 'workflow_dispatch'
         env:

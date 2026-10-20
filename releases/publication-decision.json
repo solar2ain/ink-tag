@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "releaseTag": "v0.2.0",
+  "ownerAuthorizedPublication": true,
+  "decidedAt": "2026-10-20T06:06:08.181979+00:00",
+  "deferredChecks": [
+    "cliCorrespondingSourceVerified",
+    "webuiBinaryTermsApproved",
+    "thirdPartyInventoryVerified"
+  ],
+  "readinessSha256": "84e7fe0cf23e4b1437f21096c6a634fc13cbb383dc6a6abb7e06a13afe89a48e",
+  "recordSha256": "0e01a5f5f6abba2581723c9da1e70f4fc965fa04ec2adad45cbb26500c8e8987",
+  "artifacts": {
+    "InkTag-WebUI-static-v1.2.0.zip": "b993ff096916727a5bb680035749229922d6c63339ad296f6a5d85eb67e61b62",
+    "InkTag-WebUI-standalone-v1.2.0.html": "b8f6d23146c9f8d0983e867ca846ac8ed1ba94606280ab2c00ad66d2d3c100eb",
+    "InkTag-cli-v0.2.0.zip": "63a6b25b156d1a07f682e124d820ddf5034eb4e9424b5a53983c7e48cae77215",
+    "inktag_cli-0.2.0-py3-none-any.whl": "0360e6bc87bdcea103f03e854fbd9a37e6e5de054681211d41d11aaad220773c",
+    "inktag_cli-0.2.0.tar.gz": "f94a791ad229c0aaa6f015e69a3414d4f256699dd7eb4afaa3bebbab6ff3bb18",
+    "InkTag-local-server-v1.2.0.zip": "bb4044fc5b4684b79722b34606cc907dd148a2f9449702f3bbceeaf42198401f"
+  }
+}

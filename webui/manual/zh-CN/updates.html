@@ -1,34 +1,15 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1>客户端更新</h1>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1 id="客户端更新">客户端更新</h1>
 <p>中文 | <a href="../en/updates.html">English</a></p>
-<p>InkTag WebUI 在“设置 → 客户端设置 → 关于”中显示自身版本与构建标识。客户端版本与设备固件版本分别检查，不互相替代。</p>
-<p>更新检查仅提供正式版，仅包含已经批准并发布的附件。</p>
-<p>在线版、独立 HTML 和本地服务均读取本项目 GitHub Pages 的 <code>updates/stable.json</code>。请求不包含设备地址、身份、密码或 Find 数据，也不使用内置 GitHub Token。网络故障或超时不影响连接设备与普通操作。</p>
-<p>检查更新后，可从项目 GitHub Releases 下载所需附件并按安装手册更新。网页不会自动安装客户端或刷写设备。第一期仅提供客户端，固件更新列表为空。</p>
-<p>以后提供固件时，必须同时匹配准确 board_id、固件家族及协议、布局和兼容代际。缺少这些信息时不会推荐 OTA。升级仍使用“下载附件 → 选择本地文件 → 正常 OTA”；SHA256 只用于完整性检查，不能代替固件签名验证与设备验身。</p>
-<h2>发布维护</h2>
-<p>公开发布前还必须通过 <code>python tools/verify-release.py --public --candidate</code>
-及实际 ZIP、sdist、wheel 的许可检查。当前内嵌渲染器对应源码、部分插件／字库／
-图片来源及 WebUI 二进制条款尚未核实，不能公开。新的独立审核收据必须采用
-schema 2、purpose <code>public-client-release</code>，绑定最终提交、发布记录和附件哈希；
-旧私有预览收据不适用。</p>
-<p>发布工具默认不部署 Pages。审核并获授权后，只有显式 <code>--execute --deploy-pages</code>
-才会在 Release 回下载校验、正式清单推送全部成功后发起手动部署，传入准确提交。
-不带 <code>--deploy-pages</code> 时结果为 Release 已发布、Pages 待部署，不是整体完成。
-部署失败时检查 <code>.release-local/publication-&lt;tag&gt;.json</code>，不要重复创建 Release。
-Pages 尚未启用、Actions 账号付款／额度限制是外部阻断，工具不修改这些设置。</p>
-<p>唯一发布记录为 <code>releases/record.json</code>（schema 1）。<code>tools/generate-updates.py</code> 校验已下载的 Release 附件大小和 SHA256，再生成 schema 3 正式版清单；未批准或未发布的候选不会出现。当前版本禁止发布固件。</p>
-<pre><code class="language-sh">python tools/publish-updates.py --repo . --tag &lt;版本标签&gt;
-</code></pre>
-<p>以上仅预演，不上传、不提交、不部署。独立审核人员确认精确提交、发布记录、附件和元数据哈希后，才可使用本地审核收据与 <code>--execute</code> 执行：推送审核分支、建立草稿 Release、回下载校验附件、发布 Release、生成并推送清单。执行中途失败时应先检查实际状态，不盲目重试。</p>
-<p><strong>当前脚本不会触发 Pages 部署。</strong> <code>.github/workflows/pages.yml</code> 的部署任务只接受
-<code>main</code> 上的手动触发；普通推送或 PR 仅运行验证。发布脚本结束不代表网页或在线
-更新清单已经更新。待发布授权、许可审核和附件核验全部完成后，维护者还需在
-GitHub Actions 中手动运行 <code>Deploy InkTag Web</code>，选择 <code>main</code>。确认该次运行的提交
-就是包含已批准清单的提交，验证和部署任务均成功，再核对在线 <code>updates/stable.json</code>
-与已审核文件一致，才能宣布网站更新完成。</p>
-<p>上线前须确认 Pages 已启用、Actions 可以实际运行；因账号或计费限制未启动的任务
-不算验证通过。Pages 工作流必须先通过独立审核并包含验证任务；私有仓库的 Pages
-套餐及 Actions 计费限制仍适用，不通过更改可见性绕过。首次真实上线后仍需验证
-跨域读取、独立 HTML 与手机访问。任何文档或代码变动后，都须重新生成相关附件、
-网页手册及校验和，并使审核收据绑定最终提交与文件。</p></main></body></html>
+<p>在 WebUI 的“设置 → 客户端设置 → 关于”中查看当前版本并检查更新。WebUI、CLI 与设备固件的版本分别显示；更新客户端不会自动更新设备。</p>
+<h2 id="下载和安装">下载和安装</h2>
+<ol>
+<li>检查新版本及更新说明，从项目 <a href="https://github.com/solar2ain/ink-tag/releases">GitHub Releases</a> 下载所需附件。尚无附件时表示该版本暂不可下载。</li>
+<li>按<a href="releases.html">下载与校验</a>检查文件，选择适合自己的客户端。</li>
+<li>在线 WebUI：重新打开页面即可获取已上线的版本。独立 HTML：下载新文件后打开；本地服务：停止旧服务，按 <a href="webui.html">WebUI 使用说明</a>更新文件并重新启动，保留原数据目录。</li>
+<li>CLI：按 <a href="cli.html">CLI 手册</a>在原独立环境内更新，运行 <code>inktag --version</code> 确认版本。</li>
+</ol>
+<p>本期不提供固件或有线烧录包，因此没有可安装的设备固件更新。以后有匹配的 OTA 包时，再按<a href="ota.html">无线升级</a>操作；不要使用其他主控或板型的文件。校验和只检查文件完整性，不能代替固件签名验证。</p>
+<h2 id="检查失败怎么办">检查失败怎么办</h2>
+<p>检查超时或网络不可用不会影响连接设备及普通操作。可稍后重试，或直接查看 Releases；网页站点不可用时使用本地版。未找到较新版本不代表所有设备均支持相同功能。</p>
+<p>检查更新不上传设备地址、密码、身份或 Find 数据。安装后若遇到问题，保留本地数据和错误信息，不要通过删除数据目录或重刷设备来修复客户端更新。</p></main></body></html>

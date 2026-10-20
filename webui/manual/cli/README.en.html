@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1 id="inktag-command-line-client">InkTag command-line client</h1>
+<p><a href="README.html">中文</a> | English</p>
+<h2 id="device-credential-persistence">Device credential persistence</h2>
+<p>The default is unchanged: successful authentication caches a reusable control
+credential, not the plaintext password. <code>--password-stdin</code> changes input only;
+it does NOT disable caching. Use
+<code>inktag --no-credential-cache --password-stdin --device IKT_TL_1234 device info</code>
+to avoid reading/writing device credential files, including in OTA children.
+Existing cache files are left untouched; credentials remain in invocation
+memory only. This does not change Find/Apple persistence or promise protection
+from OS swap, terminal recording or other processes.</p>
+<p>InkTag-owned CLI source is licensed under <a href="../../licenses/CLI-AGPL-3.0-only.txt">AGPL-3.0-only</a>. Third-party
+components retain their licenses. Bundled compiled resources still need review
+of Corresponding Source and combined-work obligations; see <a href="LICENSING.html">licensing scope</a>.
+This grant does not automatically apply to the separate WebUI or firmware.</p>
+<p>Python 3.11 or newer is required. Windows: run <code>install.ps1</code>, then <code>inktag.ps1 --help</code>.
+Linux and macOS: run <code>bash install.sh</code>, then <code>bash inktag.sh --help</code>.
+Installation uses this directory's virtual environment and downloads Python dependencies.</p>
+<p>Use the exact identifier returned by scanning. Connections normally synchronize time;
+use <code>--no-time-sync</code> during drift observations. OTA completion includes verified App return.</p>
+<p>After successful device-password authentication, the CLI automatically saves a
+reusable control credential in <code>device-passwords.sqlite3</code> in the user's InkTag
+data directory. It is not a plaintext password, but remains sensitive: do not
+share it, upload it or include it in release attachments. <code>--password-data-dir</code>
+selects its directory. <code>--password-stdin</code> authenticates with an entered password
+but still caches the credential after success; it is not a no-save option.
+See the full release's <code>docs/en/cli.md</code> or the
+<a href="https://solar2ain.github.io/ink-tag/manual/en/cli.html">online manual</a>.</p>
+<h2 id="canvas-weather-stations-and-host-jobs">Canvas weather stations and host jobs</h2>
+<p>In WebUI Create, edit a Weather template, configure its data source, and Export
+host task. Import the editable scene with the current CLI:</p>
+<pre><code class="language-console">inktag host import weather.inktag.json --config weather.toml
+inktag host render --scene weather.inktag.json --demo -o preview.png
+inktag host fetch weather.toml --output forecast.json
+inktag host render --scene weather.inktag.json --snapshot forecast.json -o weather.png
+</code></pre>
+<p>Keep the scene file. Imported jobs start disabled and unbound. Font files are
+local; use <code>--font-file</code> when necessary and check the host preview before enabling.
+See <code>docs/en/host-pages.md</code> in the complete release or the
+<a href="https://solar2ain.github.io/ink-tag/manual/en/host-pages.html">online guide</a>.</p>
+<p>Built-in CLI layouts also remain available:</p>
+<pre><code class="language-console">inktag host templates
+inktag host render weather-paper --demo --size 400x300 -o preview.png
+inktag host locations Hangzhou
+inktag host init weather.toml --latitude 30.27 --longitude 120.15 --label Hangzhou
+inktag host validate weather.toml
+inktag host run weather.toml --once
+</code></pre>
+<p>Jobs start disabled. Edit the TOML file and inspect a preview before enabling.
+Default execution only writes local PNGs; explicit <code>--send</code> is required for
+identity-bound delivery, which still needs physical validation. Omit <code>--once</code>
+to keep the runner active. Targets bind to host Bluetooth addresses; names are
+labels only. <code>inktag --device IKT_TL_1234 host target</code> reads a binding without
+time sync or image delivery. Windows/Linux use MACs; macOS uses host-local
+CoreBluetooth UUIDs. Keep the host running. Open-Meteo's free API is for
+non-commercial use. See <code>docs/en/cli.md</code> in the complete release for details.
+WebUI edits/exports scenes; the CLI runs schedules. Neither starts delivery implicitly.</p></main></body></html>

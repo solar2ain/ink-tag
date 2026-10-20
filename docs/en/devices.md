@@ -1,6 +1,6 @@
 # Devices and panels
 
-Identify the exact MCU and PCB before selecting a complete-flashing image. The [support table](supported-devices.md) determines which files and tools are available. A successful screen operation is not full release qualification.
+Identify the exact MCU and board before selecting an installation package. The [support table](supported-devices.md) lists compatibility and available downloads. A single successful screen update does not mean every function is supported or tested.
 
 ## Board selection
 

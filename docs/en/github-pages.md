@@ -1,13 +1,15 @@
-# GitHub Pages deployment
+# Hosted WebUI and local clients
 
-[简体中文](../zh-CN/github-pages.md)
+[中文](../zh-CN/github-pages.md) | English
 
-The intended site URL is <https://solar2ain.github.io/ink-tag/>. This remains a private preview. This update does not enable or deploy Pages, change repository visibility, or change account settings.
+Open [InkTag WebUI](https://solar2ain.github.io/ink-tag/) and consult the [illustrated manual](https://solar2ain.github.io/ink-tag-manual/). If the site is not yet available or cannot be reached, use the downloaded standalone HTML or local-service package.
 
-Only `webui/` is deployed: compiled assets and HTML manuals. CLI, firmware, recovery backups, device data, and agent instructions are excluded. Pushes and pull requests validate static content without deploying.
+| Client | Use | Difference |
+| --- | --- | --- |
+| Hosted WebUI | Open in Chrome or Edge with Web Bluetooth | No frontend installation; initial loading and update checks require a network; no local backend runs with the hosted page |
+| Standalone HTML | Download and open in a compatible browser | Frontend works offline; Bluetooth still depends on browser support and permission |
+| Local service | Install and start using the [WebUI guide](webui.md) | Provides local assets and backend features needed by host tasks and Find, subject to actual support |
 
-When deployment is explicitly enabled later, select `main` under Actions → Deploy InkTag Web → Run workflow. Resource references, sensitive files, hidden content, links, and source maps are checked before uploading `webui/`. No application source or Node.js build environment is required.
+The page cannot bypass Bluetooth authorization. Mobile support depends on the OS and browser; use a supported desktop browser or CLI if unavailable. The local service can be configured for LAN access as described in the guide; browser Bluetooth still requires a supported secure access context.
 
-Private-repository Pages and Actions availability depends on the GitHub account plan and billing state. Workflow configuration does not prove the service is available; check Settings → Pages before enabling it. The supplied local package requires neither a public repository nor a plan change.
-
-Pages serves static content without a local data or Find backend. Device connections still require Web Bluetooth support and explicit user authorization.
+Browsers normally separate device records, settings and assets by origin. Do not assume hosted, standalone and local-service clients share their local data. Never copy control credentials, account sessions or location databases into a public site.

@@ -1,13 +1,15 @@
-# GitHub Pages 部署
+# 在线 WebUI 与本地版
 
-[English](../en/github-pages.md)
+中文 | [English](../en/github-pages.md)
 
-站点预定地址为 <https://solar2ain.github.io/ink-tag/>。当前仍为私有预览，本次更新不启用或部署 Pages，不改变仓库可见性及账号设置。
+在线入口：[InkTag WebUI](https://solar2ain.github.io/ink-tag/)。图文说明见[使用手册](https://solar2ain.github.io/ink-tag-manual/)。站点尚未开放或无法访问时，请使用下载的独立 HTML 或本地服务包。
 
-部署目录仅为 `webui/`，包含编译资源和 HTML 手册。CLI、固件、恢复备份、设备数据及 agent 指令不进入 Pages。推送和拉取请求只做静态校验，不自动部署。
+| 方式 | 如何使用 | 区别 |
+| --- | --- | --- |
+| 在线 WebUI | 用支持 Web Bluetooth 的 Chrome 或 Edge 打开网址 | 无需安装前端；首次加载和检查更新需要网络；没有随网页运行的本地后台 |
+| 独立 HTML | 下载后在兼容浏览器中打开 | 前端可离线使用，设备连接仍取决于浏览器权限和支持情况 |
+| 本地服务 | 按 [WebUI 手册](webui.md)安装并启动 | 可提供本机素材、定时任务和 Find 所需的后台功能；这些功能按实际支持范围开放 |
 
-将来明确启用部署时，在 Actions → Deploy InkTag Web → Run workflow 选择 `main` 手动运行。部署须先通过资源引用、敏感文件、隐藏内容、链接和 source map 校验，再上传 `webui/`；无需工程源码或 Node.js 构建环境。
+网页不能绕过浏览器的蓝牙授权。手机上的支持取决于系统和浏览器；不能连接时可换用受支持的桌面浏览器或 CLI。本地服务可按手册配置局域网访问，手机连接蓝牙仍需要受浏览器支持的安全访问方式。
 
-私有仓库 Pages 和 Actions 的可用性取决于 GitHub 账号套餐与计费状态。配置文件不证明服务已经可用；启用前应核查 Settings → Pages。无需公开仓库或修改套餐来使用随附本地包。
-
-Pages 是纯静态页面，不提供本地数据或 Find 后端。设备连接仍需支持 Web Bluetooth 的浏览器和用户授权。
+浏览器保存的设备记录、设置和素材通常按访问来源隔离。切换在线版、独立版或本地服务后，不应假定它们共享全部本地数据。不要把控制凭据、账号会话或定位数据库复制到公开网页。

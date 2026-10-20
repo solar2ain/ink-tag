@@ -1,23 +1,13 @@
-# CLI third-party and compiled-component notices
+# CLI 第三方组件 / CLI third-party components
 
-Only InkTag-owned CLI source is granted under AGPL-3.0-only. See LICENSE and
-LICENSING.md. Dependencies retain their own terms; this is not a blanket grant
-for every byte in a wheel or an exception for linked or bundled components.
+InkTag 自有 CLI 源码采用 AGPL-3.0-only。第三方组件保留各自的版权和许可；AGPL 正文见 [LICENSE](LICENSE)，适用范围见 [LICENSING.md](LICENSING.md)。
 
-- epdoptimize: the bundled notice identifies 1.3.0, Apache-2.0; its full notice
-  is also retained at `src/inktag_cli/_assets/EPDOPTIMIZE_LICENSE.txt`.
-- Python dependencies are installed separately from the declared requirements;
-  these client archives do not vendor their wheels. Their licenses and resolved
-  environment must be reviewed when distributing a preinstalled environment.
-- `fontRoles.js`, `nativePreview.js`, `nativePreviewWasm.js`, `hostScene.js` and
-  `legacyDithering.js` are distributed runtime inputs, not proof of complete
-  preferred-form Corresponding Source. In particular the embedded native GUI
-  WASM is instantiated by mini-racer through the font adapter in the CLI process.
+- **epdoptimize 1.3.0**：Apache-2.0。完整正文见 `licenses/EPDOPTIMIZE-LICENSE.txt`。
+- **Python 依赖**：安装时会下载 bleak、cryptography、mini-racer、Pillow、qrcode、rich、typer 及其依赖。各包的许可随对应 Python 包提供。
+- **图形和字体组件**：当前包含有 JavaScript 组件及编译后的渲染模块。编译组件的完整对应源码和相关素材许可信息尚未齐备，见 `licenses/COMPILED-RESOURCES.txt`。
 
-Public distribution remains BLOCKED pending exact provenance, compatible grants,
-complete preferred-form sources, included/generated font data and their notices,
-and reproducible compiler/linker/build scripts and flags for the embedded module.
-The inspection of this repository cannot supply those missing materials. No
-functionality has been removed to hide the problem. See the release licensing
-gate in the repository root. Metadata and inclusion of AGPL text are necessary
-packaging fixes, not a certification of the combined distribution's licensing.
+InkTag-owned CLI source uses AGPL-3.0-only. Third-party works retain their own copyrights and licenses; see [LICENSE](LICENSE) and [LICENSING.md](LICENSING.md).
+
+- **epdoptimize 1.3.0**: Apache-2.0; full text in `licenses/EPDOPTIMIZE-LICENSE.txt`.
+- **Python dependencies**: installation downloads bleak, cryptography, mini-racer, Pillow, qrcode, rich, typer and their dependencies. Each Python package supplies its own license information.
+- **Graphics and font components**: JavaScript components and a compiled renderer are included. Complete Corresponding Source and some asset-license information are not yet supplied; see `licenses/COMPILED-RESOURCES.txt`.

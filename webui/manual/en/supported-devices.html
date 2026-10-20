@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1>Adapted devices</h1>
-<h2>MCUs and devices</h2>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1 id="adapted-devices">Adapted devices</h1>
+<h2 id="mcus-and-devices">MCUs and devices</h2>
 <table>
 <thead>
 <tr>
@@ -44,14 +44,13 @@
 </table>
 <p>HS9118 is a package marking found on some Hanshow chips, not a unique silicon identity. Different actual MCUs have been found under it. Neither a label model nor a board marking alone establishes the installed screen. Identify the actual MCU, board and panel before selecting a tool or image.</p>
 <p>Manufacturer reference: <a href="https://www.goodix.com/en/about_goodix/profile/overview">Goodix company information</a>. See <a href="devices.html">devices and panels</a> for geometry, colour, controller and storage differences.</p>
-<h2>Board and attachment status</h2>
-<p>Select firmware by the exact MCU and PCB model. Firmware columns list included files, not an official release or hardware qualification. Experimental targets are not intended for production; never substitute firmware for a similar board.</p>
+<h2 id="board-and-attachment-status">Board and attachment status</h2>
+<p>This release contains no firmware. Check the exact MCU and board against this compatibility list; listed models do not mean every function has been tested. Experimental devices are not recommended for production. Never substitute another board's firmware.</p>
 <table>
 <thead>
 <tr>
 <th>Board</th>
 <th>MCU</th>
-<th>Release scope</th>
 <th>Status</th>
 <th style="text-align: right;">Complete flashing in this release</th>
 <th style="text-align: right;">OTA in this release</th>
@@ -64,7 +63,6 @@
 <tr>
 <td>gr5331_zkc21v (<code>gr5331_zkc21v</code>)</td>
 <td>Goodix GR5331</td>
-<td>Current candidate</td>
 <td>Beta</td>
 <td style="text-align: right;">—</td>
 <td style="text-align: right;">—</td>
@@ -75,7 +73,6 @@
 <tr>
 <td>gr5513_zkc42v (<code>gr5513_zkc42v</code>)</td>
 <td>Goodix GR5513</td>
-<td>Current candidate</td>
 <td>Beta</td>
 <td style="text-align: right;">—</td>
 <td style="text-align: right;">—</td>
@@ -86,7 +83,6 @@
 <tr>
 <td>gr5513_zkc42vm (<code>gr5513_zkc42vm</code>)</td>
 <td>Goodix GR5513</td>
-<td>Current candidate</td>
 <td>Beta</td>
 <td style="text-align: right;">—</td>
 <td style="text-align: right;">—</td>
@@ -97,7 +93,6 @@
 <tr>
 <td>gr5515_zkc42vm (<code>gr5515_zkc42vm</code>)</td>
 <td>Goodix GR5515</td>
-<td>Current candidate</td>
 <td>Beta</td>
 <td style="text-align: right;">—</td>
 <td style="text-align: right;">—</td>
@@ -108,7 +103,6 @@
 <tr>
 <td>om6626_zkc21b (<code>om6626_zkc21b</code>)</td>
 <td>OnMicro OM6626</td>
-<td>Current candidate</td>
 <td>Beta</td>
 <td style="text-align: right;">—</td>
 <td style="text-align: right;">—</td>
@@ -119,7 +113,6 @@
 <tr>
 <td>om6626_zkc42b (<code>om6626_zkc42b</code>)</td>
 <td>OnMicro OM6626</td>
-<td>Current candidate</td>
 <td>Experimental</td>
 <td style="text-align: right;">—</td>
 <td style="text-align: right;">—</td>
@@ -130,7 +123,6 @@
 <tr>
 <td>tlsr8359_nowa154r (<code>tlsr8359_nowa154r</code>)</td>
 <td>Telink TLSR8359</td>
-<td>Current candidate</td>
 <td>Experimental</td>
 <td style="text-align: right;">—</td>
 <td style="text-align: right;">—</td>
@@ -141,7 +133,6 @@
 <tr>
 <td>tlsr8359_nebular420r (<code>tlsr8359_nebular420r</code>)</td>
 <td>Telink HS9118 / TLSR8359-compatible</td>
-<td>Current candidate</td>
 <td>Experimental</td>
 <td style="text-align: right;">—</td>
 <td style="text-align: right;">—</td>
@@ -152,7 +143,6 @@
 <tr>
 <td>om6626_hsel (<code>om6626_hsel</code>)</td>
 <td>OnMicro OM6626</td>
-<td>Deferred</td>
 <td>Experimental</td>
 <td style="text-align: right;">—</td>
 <td style="text-align: right;">—</td>
@@ -163,7 +153,6 @@
 <tr>
 <td>nrf52811_asel22 (<code>nrf52811_asel22</code>)</td>
 <td>Nordic nRF52811</td>
-<td>Deferred</td>
 <td>Beta</td>
 <td style="text-align: right;">—</td>
 <td style="text-align: right;">—</td>
@@ -174,7 +163,6 @@
 <tr>
 <td>nrf52832_priceetag (<code>nrf52832_priceetag</code>)</td>
 <td>Nordic nRF52832</td>
-<td>Deferred</td>
 <td>Beta</td>
 <td style="text-align: right;">—</td>
 <td style="text-align: right;">—</td>
@@ -185,7 +173,6 @@
 <tr>
 <td>da14585_asel29 (<code>da14585_asel29</code>)</td>
 <td>Renesas/Dialog DA14585</td>
-<td>Deferred</td>
 <td>Experimental</td>
 <td style="text-align: right;">—</td>
 <td style="text-align: right;">—</td>
@@ -196,7 +183,6 @@
 <tr>
 <td>da14585_asel42 (<code>da14585_asel42</code>)</td>
 <td>Renesas/Dialog DA14585</td>
-<td>Deferred</td>
 <td>Beta</td>
 <td style="text-align: right;">—</td>
 <td style="text-align: right;">—</td>
@@ -206,7 +192,7 @@
 </tr>
 </tbody>
 </table>
-<h2>Notes</h2>
+<h2 id="notes">Notes</h2>
 <ul>
 <li><code>gr5331_zkc21v</code>: This package does not include current firmware for this board.</li>
 <li><code>gr5513_zkc42v</code>: This package does not include current firmware for this board.</li>

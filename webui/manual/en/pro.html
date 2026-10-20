@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1>InkTag Pro features and activation</h1>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1 id="inktag-pro-features-and-activation">InkTag Pro features and activation</h1>
 <p><a href="../zh-CN/pro.html">中文</a> | English</p>
 <p>InkTag Free provides everyday display, Bluetooth connections, built-in calendars and clocks, and safe updates. Pro adds a lost-item locator, more image slots, NFC page switching and customization on activation-capable devices. Activation cannot add absent hardware or features omitted from firmware. This preview supplies clients, not firmware or flashing packages.</p>
-<h2>Feature comparison</h2>
+<h2 id="feature-comparison">Feature comparison</h2>
 <table>
 <thead>
 <tr>
@@ -75,7 +75,7 @@
 </tbody>
 </table>
 <p>Picture capacity still depends on geometry, color and Flash capacity. Pro cannot enlarge physical storage. nRF52811 and DA14585 are Free-only: their slots use actual storage capacity without the commercial quota of Pro-capable targets, and activation cannot add Pro features.</p>
-<h2>Tracker and NFC requirements</h2>
+<h2 id="tracker-and-nfc-requirements">Tracker and NFC requirements</h2>
 <table>
 <thead>
 <tr>
@@ -102,10 +102,10 @@
 </tr>
 </tbody>
 </table>
-<h2>Obtain an activation code</h2>
+<h2 id="obtain-an-activation-code">Obtain an activation code</h2>
 <p>A donation-based Pro activation-code process is planned. Channels, eligibility and delivery will be announced on the <a href="https://github.com/solar2ain/ink-tag">project page</a>. No donation/code-request entry is currently open.</p>
 <p>First confirm that the device supports Pro and provide the current device code requested by its activation page. Activation codes are bound to a specific device and cannot activate another. A donation cannot upgrade a Free-only target or guarantee unimplemented hardware/experimental features.</p>
-<h2>Activate in the Web console</h2>
+<h2 id="activate-in-the-web-console">Activate in the Web console</h2>
 <ol>
 <li>Connect the InkTag application and verify MCU, board and device identity.</li>
 <li>Open Settings → Device settings → Activation and read the current device code. If activation is unsupported, do not substitute a code for another model.</li>
@@ -113,7 +113,7 @@
 <li>Wait for device confirmation and read the activation status again. Once it reports Pro, configure the tracker, password or NFC interaction separately; activation does not automatically enable them.</li>
 </ol>
 <p>Keep the activation code secure; do not expose credentials in screenshots, logs or QR codes. Ordinary application OTA preserves activation. Save important data before first complete flashing or wired recovery. For failures, check the device/code match and the reported error rather than bypassing validation.</p>
-<h2>Related guides</h2>
+<h2 id="related-guides">Related guides</h2>
 <ul>
 <li><a href="devices.html">Devices and tested panels</a></li>
 <li><a href="webui.html">Web console</a></li>

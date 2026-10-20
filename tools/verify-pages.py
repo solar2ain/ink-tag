@@ -7,6 +7,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 import re
 from urllib.parse import unquote, urlsplit
+from client_content import validate_html_links
 
 ALLOWED_SUFFIXES = {
     ".html", ".js", ".css", ".json", ".txt", ".wasm", ".png", ".jpg",
@@ -67,6 +68,7 @@ def validate(site: Path) -> list[str]:
                 candidate = (path.parent / unquote(parsed.path)).resolve()
                 if not candidate.is_relative_to(site) or not candidate.is_file():
                     errors.append(f"Missing or out-of-site {kind}: {relative}: {reference}")
+    errors.extend(validate_html_links(site))
     return errors
 
 

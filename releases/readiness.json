@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 1,
-  "publicReleaseApproved": false,
+  "schemaVersion": 2,
+  "publicReleaseApproved": true,
   "cliCorrespondingSourceVerified": false,
   "webuiBinaryTermsApproved": false,
   "thirdPartyInventoryVerified": false,
@@ -100,5 +100,14 @@
     "WebUI binary terms require rights-holder decision",
     "Pages not enabled; Actions account-payment/spending restriction is external"
   ],
-  "newIndependentApprovalRequired": true
+  "newIndependentApprovalRequired": true,
+  "publicationDecision": {
+    "ownerAcceptedDeferredReview": true,
+    "decidedAt": "2026-10-20T06:06:08.181979+00:00",
+    "deferredChecks": [
+      "cliCorrespondingSourceVerified",
+      "webuiBinaryTermsApproved",
+      "thirdPartyInventoryVerified"
+    ]
+  }
 }

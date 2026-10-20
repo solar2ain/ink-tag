@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a href="../index.html">InkTag WebUI</a></nav><main><h1>InkTag</h1>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a href="../index.html">InkTag WebUI</a></nav><main><h1 id="inktag">InkTag</h1>
 <p><a href="README.html">中文</a> | English</p>
 <p>InkTag is low-power display firmware and management system software for electronic shelf labels across several MCU platforms. It turns e-paper into a calendar, clock or picture display for desk signs, photographs and everyday reminders. InkTag WebUI and the shared Python CLI configure screens, manage images and update firmware. Configured devices do not need a continuous computer connection.</p>
 <p>E-paper uses ambient light for a paper-like appearance without a continuously illuminated backlight.</p>
-<h2>Features</h2>
+<h2 id="features">Features</h2>
 <table>
 <thead>
 <tr>
@@ -107,7 +107,7 @@
 </tbody>
 </table>
 <p>The independent nRF52811 and DA14585 projects are Free-only, without these commercial image quotas. Their firmware is not supplied here. Activation cannot add missing hardware. See <a href="en/pro.html">Pro features</a>. Donation-based activation-code distribution is planned; no donation channel or redemption policy is currently announced.</p>
-<h2>E-paper characteristics</h2>
+<h2 id="e-paper-characteristics">E-paper characteristics</h2>
 <ul>
 <li><strong>Paper-like viewing:</strong> reflected ambient light, with external illumination needed in the dark. Eye-friendly is not a medical guarantee; use suitable lighting, distance and breaks.</li>
 <li><strong>Slow, flashing refresh:</strong> a full refresh commonly takes several to around fifteen seconds, and can take longer on colour panels or in the cold. Keep power stable and wait.</li>
@@ -115,9 +115,9 @@
 <li><strong>Suitable for infrequent updates:</strong> low-power standby and infrequent refreshes can give a coin cell a long service life. Actual life depends on the battery, temperature, refresh rate and radio activity.</li>
 </ul>
 <p>Read more: <a href="https://www.good-display.com/faq/1.html">Good Display introduction</a> | <a href="https://www.good-display.cn/news/212.html">中文版</a>.</p>
-<h2>Getting started</h2>
+<h2 id="getting-started">Getting started</h2>
 <p>See the <a href="https://solar2ain.github.io/ink-tag-manual/">illustrated online manual</a> for a walkthrough. These steps require a device already running compatible InkTag firmware.</p>
-<h3>WebUI</h3>
+<h3 id="webui">WebUI</h3>
 <ol>
 <li>Prepare a device already running compatible InkTag firmware and stable power.</li>
 <li>Open WebUI in a Web Bluetooth-capable Chrome or Edge browser, choose Connect and select the actual advertised name.</li>
@@ -125,7 +125,7 @@
 <li>Devices with image storage can save images and run slideshows after disconnecting.</li>
 </ol>
 <p>Factory devices require matching firmware first. This preview supplies no first-flash files: do not use unknown or cross-MCU images. See the <a href="en/getting-started.html">getting-started guide</a>.</p>
-<h3>CLI</h3>
+<h3 id="cli">CLI</h3>
 <p>After installing the CLI, scan for devices, display a calendar or clock, upload an image and start a slideshow:</p>
 <pre><code class="language-console">inktag device scan
 inktag --device IKT_TL_1234 device info
@@ -137,7 +137,7 @@ inktag --device IKT_TL_1234 slideshow start --interval 5m
 inktag --device IKT_TL_1234 slideshow stop
 </code></pre>
 <p>Replace <code>IKT_TL_1234</code> with the scanned Bluetooth name and <code>photo.jpg</code> with your image file. Disconnect WebUI before using the CLI to avoid competing connections, and wait for a screen update to finish before starting another display operation. See the <a href="en/cli.html">CLI guide</a> for more commands.</p>
-<h2>Installation and use</h2>
+<h2 id="installation-and-use">Installation and use</h2>
 <table>
 <thead>
 <tr>
@@ -166,12 +166,12 @@ inktag --device IKT_TL_1234 slideshow stop
 </table>
 <p>The local service defaults to port8787 and keeps data in the current user's persistent InkTag directory. Restarting does not require re-enrolling tags. Do not delete this directory to fix login errors. Enter Apple credentials only in the local interface and use a separately registered account rather than your everyday personal account.</p>
 <p>With an existing Python virtual environment, run <code>python -m pip install .</code> inside the extracted CLI package.</p>
-<h2>User manuals</h2>
+<h2 id="user-manuals">User manuals</h2>
 <p><a href="https://solar2ain.github.io/ink-tag-manual/">Illustrated online manual</a></p>
 <p><a href="en/getting-started.html">Getting started</a> · <a href="en/webui.html">WebUI</a> · <a href="en/cli.html">CLI</a> · <a href="en/supported-devices.html">Adapted devices</a> · <a href="en/pro.html">Pro features</a> · <a href="en/updates.html">Client updates</a> · <a href="en/faq.html">FAQ</a></p>
 <p>Read <a href="SECURITY.html">security and privacy</a>. Never include passwords, activation codes, private locations or keys in issue reports.</p>
-<p>See <a href="en/github-pages.html">GitHub Pages</a> for future hosting configuration and limitations. This update changes the private repository only; it does not deploy the site.</p>
-<h2>Acknowledgments</h2>
+<p>See <a href="en/github-pages.html">hosted WebUI and local clients</a> for access options and differences.</p>
+<h2 id="acknowledgments">Acknowledgments</h2>
 <p>Thanks to <a href="https://github.com/tsl0922/EPD-nRF5">EPD-nRF</a> for the nRF electronic shelf label firmware foundation that informed this project's hardware support and e-paper display implementation.</p>
-<h2>License</h2>
+<h2 id="license">License</h2>
 <p>InkTag-owned CLI source is licensed under AGPL-3.0-only. WebUI is distributed in compiled form only and is not covered by the CLI license. See <a href="LICENSING.html">licensing scope</a> and <a href="THIRD_PARTY_NOTICES.html">third-party notices</a>.</p></main></body></html>

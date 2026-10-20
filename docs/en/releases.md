@@ -1,7 +1,19 @@
-# Versions and checksums
+# Downloads and checksums
 
-Firmware and the Web console may update independently. Check each component's version in the manifest rather than assuming all files share one version.
+[中文](../zh-CN/releases.md) | English
 
-Verify downloads against `SHA256SUMS.txt`: Windows uses `Get-FileHash -Algorithm SHA256 FILE`, Linux uses `sha256sum FILE`, and macOS uses `shasum -a 256 FILE`. Do not flash incomplete, modified or mismatching files.
+Download the required files from [GitHub Releases](https://github.com/solar2ain/ink-tag/releases) and read that version's notes. No listed attachment means no download is available yet. This release contains WebUI, the Python CLI and user guides, with no firmware or wired flashing packages.
 
-`firmware/manifest.json` lists exact public board IDs, included files, sizes, hashes and system support. complete-flashing images are PCB-specific; shared OTA bytes do not make complete-flashing images interchangeable. Preview candidates are for inspection, not formal release or production approval. A board without an included artifact cannot be installed from this package.
+WebUI, CLI and device firmware may have different versions and need not be updated together. Open standalone HTML directly, use the static ZIP for your own hosting, or install the local-service package. See the [CLI guide](cli.md) for CLI installation.
+
+## Check file integrity
+
+Compare each download's SHA256 with `SHA256SUMS.txt` from the same release:
+
+```powershell
+Get-FileHash -Algorithm SHA256 FILE
+```
+
+On Linux use `sha256sum FILE`; on macOS use `shasum -a 256 FILE`. Download again rather than installing incomplete, changed or mismatching files.
+
+Checksums do not replace publisher signatures. When firmware becomes available, match the exact MCU, board and compatibility requirements, and retain both client and device signature checks. Never substitute another similarly named board's file.
