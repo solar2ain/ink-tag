@@ -66,6 +66,10 @@ nRF52811、DA14585 的独立项目采用 Free-only 功能范围，图片容量�
 
 未来托管部署的配置与限制见 [GitHub Pages](docs/zh-CN/github-pages.md)；本次仅更新私有仓库，不部署站点。
 
+## 致谢
+
+感谢 [EPD-nRF](https://github.com/tsl0922/EPD-nRF5) 提供的 nRF 电子价签固件基础，为本项目的硬件适配与电子纸显示实现提供了重要参考。
+
 ## 许可
 
 CLI 自有源码采用 AGPL-3.0-only；WebUI 仅提供编译版，不适用 CLI 许可。详见[许可范围](LICENSING.md)及[第三方声明](THIRD_PARTY_NOTICES.md)。

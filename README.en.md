@@ -66,6 +66,10 @@ Read [security and privacy](SECURITY.md). Never include passwords, activation co
 
 See [GitHub Pages](docs/en/github-pages.md) for future hosting configuration and limitations. This update changes the private repository only; it does not deploy the site.
 
+## Acknowledgments
+
+Thanks to [EPD-nRF](https://github.com/tsl0922/EPD-nRF5) for the nRF electronic shelf label firmware foundation that informed this project's hardware support and e-paper display implementation.
+
 ## License
 
 InkTag-owned CLI source is licensed under AGPL-3.0-only. WebUI is distributed in compiled form only and is not covered by the CLI license. See [licensing scope](LICENSING.md) and [third-party notices](THIRD_PARTY_NOTICES.md).

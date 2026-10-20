@@ -19,8 +19,8 @@
             {
               "type": "web",
               "name": "InkTag-WebUI-static-v1.2.0.zip",
-              "bytes": 7001990,
-              "sha256": "a096355ede1b63a571e33e26557d3f0a2d0380a3214d9addb2b993fe1aa87364",
+              "bytes": 7002173,
+              "sha256": "c96945401a03559d19a61d55c43c5518970fda1eeec0f967ab33dcdc418db48b",
               "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0/InkTag-WebUI-static-v1.2.0.zip"
             },
             {
@@ -55,8 +55,8 @@
             {
               "type": "cli",
               "name": "inktag_cli-0.2.0.tar.gz",
-              "bytes": 358679,
-              "sha256": "32ee8508f4c032373aaabe733af52fc417aee074e2821e407d01b6bfe745ebda",
+              "bytes": 358668,
+              "sha256": "52b09c3bd203d11f752ef67b36af49fc69a61b3dc569147a2f7fe7ac27f61e41",
               "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0/inktag_cli-0.2.0.tar.gz"
             }
           ]
@@ -69,8 +69,8 @@
             {
               "type": "local-server",
               "name": "InkTag-local-server-v1.2.0.zip",
-              "bytes": 7140646,
-              "sha256": "b22ce2584835c0607ea2b202a07d6d7ede576d076eb244f75eebbb0b128f4606",
+              "bytes": 7140829,
+              "sha256": "e746840d18159fbece8722fd7b7b859d06d08438932b2f10f25397912af67451",
               "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0/InkTag-local-server-v1.2.0.zip"
             }
           ]
