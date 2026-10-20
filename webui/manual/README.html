@@ -152,52 +152,8 @@
 </table>
 <p>本地服务默认使用 8787 端口，数据保存在当前用户的 InkTag 持久目录。服务重启不需要重建标签身份；不要删除数据目录来解决登录错误。Apple 账号密码只在本机界面输入，建议使用专门注册的账号，不要使用个人常用账号。</p>
 <p>已有 Python 虚拟环境时，也可在解压后的 CLI 包内运行 <code>python -m pip install .</code>。</p>
-<h2>主控与设备</h2>
-<table>
-<thead>
-<tr>
-<th>主控厂商</th>
-<th>主控</th>
-<th>已研究／适配的价签系列</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>深圳市汇顶科技股份有限公司（Goodix）</td>
-<td>GR5331、GR5513、GR5515</td>
-<td>ZKC21V、ZKC42V、ZKC42VM</td>
-</tr>
-<tr>
-<td>昂瑞微电子（OnMicro）</td>
-<td>OM6626</td>
-<td>ZKC21B-NAE4、ZKC42B-NE4、部分 ZKC21V 及 Hanshow 设备</td>
-</tr>
-<tr>
-<td>泰凌微电子（Telink）</td>
-<td>TLSR8359</td>
-<td>Hanshow Nowa-154R-N、Nowa-213R-N、Nebular-213R-N、Nebular-420R-N</td>
-</tr>
-<tr>
-<td>Nordic Semiconductor</td>
-<td>nRF52832</td>
-<td>PriceETag；本期不提供固件</td>
-</tr>
-<tr>
-<td>Nordic Semiconductor</td>
-<td>nRF52811</td>
-<td>AESL／盒马 EL022H2；独立项目，本期不提供固件</td>
-</tr>
-<tr>
-<td>Renesas／原 Dialog</td>
-<td>DA14585</td>
-<td>AESL-2.9、AESL-4.2／盒马；独立项目，本期不提供固件</td>
-</tr>
-</tbody>
-</table>
-<p>HS9118 是部分 Hanshow 芯片的封装丝印，已发现不同实际主控，不能仅凭该丝印选择工具或镜像。相同价签型号、主板丝印也可能搭配不同屏幕，应核对实际主控、主板和屏幕。</p>
-<p>主控厂商信息见 <a href="https://www.goodix.com/zh/about_goodix/profile/overview">Goodix 公司介绍</a>。具体屏幕分辨率、颜色、控制器和存储差异见<a href="zh-CN/devices.html">设备与屏幕</a>；当前开放范围见<a href="zh-CN/supported-devices.html">支持清单</a>。</p>
 <h2>详细手册</h2>
-<p><a href="zh-CN/getting-started.html">首次使用</a> · <a href="zh-CN/webui.html">WebUI</a> · <a href="zh-CN/cli.html">CLI</a> · <a href="zh-CN/pro.html">Pro 能力</a> · <a href="zh-CN/updates.html">客户端更新</a> · <a href="zh-CN/faq.html">常见问题</a></p>
+<p><a href="zh-CN/getting-started.html">首次使用</a> · <a href="zh-CN/webui.html">WebUI</a> · <a href="zh-CN/cli.html">CLI</a> · <a href="zh-CN/supported-devices.html">已适配设备</a> · <a href="zh-CN/pro.html">Pro 能力</a> · <a href="zh-CN/updates.html">客户端更新</a> · <a href="zh-CN/faq.html">常见问题</a></p>
 <p>使用前请阅读 <a href="SECURITY.html">安全与隐私说明</a>。请勿在问题反馈中公开密码、激活码、定位数据或私钥。</p>
 <p>未来托管部署的配置与限制见 <a href="zh-CN/github-pages.html">GitHub Pages</a>；本次仅更新私有仓库，不部署站点。</p>
 <h2>许可</h2>

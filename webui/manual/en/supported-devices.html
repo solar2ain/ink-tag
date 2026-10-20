@@ -1,5 +1,50 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1>Supported boards</h1>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1>Adapted devices</h1>
+<h2>MCUs and devices</h2>
+<table>
+<thead>
+<tr>
+<th>Manufacturer</th>
+<th>MCU</th>
+<th>Researched / adapted label families</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shenzhen Goodix Technology Co., Ltd.</td>
+<td>GR5331, GR5513, GR5515</td>
+<td>ZKC21V, ZKC42V, ZKC42VM</td>
+</tr>
+<tr>
+<td>OnMicro</td>
+<td>OM6626</td>
+<td>ZKC21B-NAE4, ZKC42B-NE4, some ZKC21V and Hanshow devices</td>
+</tr>
+<tr>
+<td>Telink</td>
+<td>TLSR8359</td>
+<td>Hanshow Nowa-154R-N, Nowa-213R-N, Nebular-213R-N and Nebular-420R-N</td>
+</tr>
+<tr>
+<td>Nordic Semiconductor</td>
+<td>nRF52832</td>
+<td>PriceETag; no firmware in this preview</td>
+</tr>
+<tr>
+<td>Nordic Semiconductor</td>
+<td>nRF52811</td>
+<td>AESL / Hema EL022H2; independent project, no firmware here</td>
+</tr>
+<tr>
+<td>Renesas / formerly Dialog</td>
+<td>DA14585</td>
+<td>AESL-2.9 and AESL-4.2 / Hema; independent project, no firmware here</td>
+</tr>
+</tbody>
+</table>
+<p>HS9118 is a package marking found on some Hanshow chips, not a unique silicon identity. Different actual MCUs have been found under it. Neither a label model nor a board marking alone establishes the installed screen. Identify the actual MCU, board and panel before selecting a tool or image.</p>
+<p>Manufacturer reference: <a href="https://www.goodix.com/en/about_goodix/profile/overview">Goodix company information</a>. See <a href="devices.html">devices and panels</a> for geometry, colour, controller and storage differences.</p>
+<h2>Board and attachment status</h2>
 <p>Select firmware by the exact MCU and PCB model. Firmware columns list included files, not an official release or hardware qualification. Experimental targets are not intended for production; never substitute firmware for a similar board.</p>
 <table>
 <thead>

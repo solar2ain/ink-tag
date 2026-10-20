@@ -58,24 +58,9 @@ The local service defaults to port8787 and keeps data in the current user's pers
 
 With an existing Python virtual environment, run `python -m pip install .` inside the extracted CLI package.
 
-## MCUs and devices
-
-| Manufacturer | MCU | Researched / adapted label families |
-| --- | --- | --- |
-| Shenzhen Goodix Technology Co., Ltd. | GR5331, GR5513, GR5515 | ZKC21V, ZKC42V, ZKC42VM |
-| OnMicro | OM6626 | ZKC21B-NAE4, ZKC42B-NE4, some ZKC21V and Hanshow devices |
-| Telink | TLSR8359 | Hanshow Nowa-154R-N, Nowa-213R-N, Nebular-213R-N and Nebular-420R-N |
-| Nordic Semiconductor | nRF52832 | PriceETag; no firmware in this preview |
-| Nordic Semiconductor | nRF52811 | AESL / Hema EL022H2; independent project, no firmware here |
-| Renesas / formerly Dialog | DA14585 | AESL-2.9 and AESL-4.2 / Hema; independent project, no firmware here |
-
-HS9118 is a package marking found on some Hanshow chips, not a unique silicon identity. Different actual MCUs have been found under it. Neither a label model nor a board marking alone establishes the installed screen. Identify the actual MCU, board and panel before selecting a tool or image.
-
-Manufacturer reference: [Goodix company information](https://www.goodix.com/en/about_goodix/profile/overview). See [devices and panels](docs/en/devices.md) for geometry, colour, controller and storage differences, and the [support list](docs/en/supported-devices.md) for availability.
-
 ## User manuals
 
-[Getting started](docs/en/getting-started.md) · [WebUI](docs/en/webui.md) · [CLI](docs/en/cli.md) · [Pro features](docs/en/pro.md) · [Client updates](docs/en/updates.md) · [FAQ](docs/en/faq.md)
+[Getting started](docs/en/getting-started.md) · [WebUI](docs/en/webui.md) · [CLI](docs/en/cli.md) · [Adapted devices](docs/en/supported-devices.md) · [Pro features](docs/en/pro.md) · [Client updates](docs/en/updates.md) · [FAQ](docs/en/faq.md)
 
 Read [security and privacy](SECURITY.md). Never include passwords, activation codes, private locations or keys in issue reports.
 
