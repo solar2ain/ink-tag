@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import asyncio
+from contextvars import ContextVar
+import os
 import sqlite3
 import struct
 import time
@@ -21,13 +23,29 @@ class PasswordAuthorizationRejected(ValueError):
     """An explicit AUTH rejection, not a transport failure or lost response."""
 
 
+_cache_enabled = ContextVar('inktag_credential_cache_enabled', default=True)
+
+
+def set_credential_cache_enabled(enabled: bool) -> None:
+    """CLI-invocation policy; no secrets are carried in this setting."""
+    _cache_enabled.set(bool(enabled))
+
+
+def credential_cache_enabled() -> bool:
+    return _cache_enabled.get() and os.environ.get('INKTAG_NO_CREDENTIAL_CACHE') != '1'
+
+
 class PasswordCredentialStore:
     """Local bearer V only, isolated from Find/export collections. No plaintext/W."""
     def __init__(self, directory: Path):
         self.path = directory.resolve() / "device-passwords.sqlite3"
+        self.persistent = credential_cache_enabled()
+        self._memory: dict[str, bytes] = {}
 
     def get(self, device_id: str) -> bytes | None:
         device_id_bytes(device_id)
+        if not self.persistent:
+            return self._memory.get(device_id.upper())
         if not self.path.exists():
             return None
         try:
@@ -42,6 +60,12 @@ class PasswordCredentialStore:
         device_id_bytes(device_id)
         if credential is not None and (len(credential) != 32 or not any(credential)):
             raise ValueError("Invalid device password credential")
+        if not self.persistent:
+            if credential is None:
+                self._memory.pop(device_id.upper(), None)
+            else:
+                self._memory[device_id.upper()] = bytes(credential)
+            return
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.path.touch(mode=0o600, exist_ok=True)
         self.path.chmod(0o600)

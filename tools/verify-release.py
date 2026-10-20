@@ -11,8 +11,10 @@ import re
 import subprocess
 import sys
 import zipfile
+import tarfile
 from pathlib import Path
 from typing import Iterable
+from release_checks import check_cli_archive, public_readiness
 
 
 FORBIDDEN_PARTS = {".sdk", ".tools", ".vendor", "_build", "backups", "factory-backups", "factory_backups"}
@@ -34,6 +36,7 @@ FORBIDDEN_SUFFIXES = {
     ".map",
     ".o",
     ".pem",
+    ".sqlite", ".sqlite3", ".db", ".p12", ".pfx", ".log", ".dump", ".bak",
 }
 SECRET_PATTERNS = (
     re.compile(rb"ghp_[A-Za-z0-9]{20,}"),
@@ -106,7 +109,7 @@ def validate_public_tree(repo: Path, include_untracked: bool = False) -> list[st
             failures.append(f"agent instruction file is not public release content: {relative}")
         # Firmware/downloads live only in the separately verified manifest-bound
         # asset directory, never as an unlisted payload in the public source tree.
-        if path.suffix.lower() in FIRMWARE_SUFFIXES:
+        if path.suffix.lower() in FIRMWARE_SUFFIXES | {'.whl'} or path.name.endswith('.tar.gz'):
             failures.append(f"unlisted firmware/archive in public tree: {relative}")
         lowered_parts = {part.lower() for part in relative.parts}
         if lowered_parts & FORBIDDEN_PARTS:
@@ -206,7 +209,7 @@ def validate_manifest(repo: Path) -> tuple[dict, list[str]]:
     return manifest, failures
 
 
-def validate_assets(manifest: dict, assets: Path) -> list[str]:
+def validate_assets(manifest: dict, assets: Path, repo: Path | None = None) -> list[str]:
     failures: list[str] = []
     expected: dict[str, str] = {}
     firmware_names: set[str] = set()
@@ -221,6 +224,8 @@ def validate_assets(manifest: dict, assets: Path) -> list[str]:
     cli = manifest.get("cli")
     if cli:
         expected[cli["name"]] = cli["sha256"]
+    for item in manifest.get('cliDistributions', []):
+        expected[item['name']] = item['sha256']
     manifest_name = f"InkTag-v{manifest.get('version')}-manifest.json"
     if (assets / manifest_name).is_file():
         expected[manifest_name] = digest(assets / manifest_name)
@@ -255,6 +260,11 @@ def validate_assets(manifest: dict, assets: Path) -> list[str]:
                                 failures.append(f"possible credential/private key in archive: {name}: {member.filename}")
             except zipfile.BadZipFile:
                 failures.append(f"invalid release ZIP: {name}")
+        if path.is_file() and (name == manifest.get('cli',{}).get('name') or any(name==a['name'] for a in manifest.get('cliDistributions',[]))):
+            try:
+                failures.extend(check_cli_archive(repo or Path(__file__).resolve().parents[1], path))
+            except (ValueError,OSError,KeyError,zipfile.BadZipFile,tarfile.TarError) as error:
+                failures.append('Invalid CLI licensing artifact: '+name+': '+str(error))
     checksum_path = assets / "SHA256SUMS.txt"
     if not checksum_path.is_file():
         failures.append("SHA256SUMS.txt is missing")
@@ -280,6 +290,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", type=Path, default=Path.cwd(), help="Release repository root.")
     parser.add_argument("--assets", type=Path, help="Optional release-assets directory to verify.")
+    parser.add_argument('--public',action='store_true',help='Also require all public licensing/source review gates to be independently closed.')
     parser.add_argument(
         "--candidate",
         action="store_true",
@@ -296,7 +307,9 @@ def main() -> int:
     if "webui" in manifest.get("components", []) and not (repo / "webui" / "index.html").is_file():
         failures.append("webui/index.html is missing")
     if args.assets:
-        failures.extend(validate_assets(manifest, args.assets.resolve()))
+        failures.extend(validate_assets(manifest, args.assets.resolve(), repo))
+    if args.public:
+        failures.extend(public_readiness(repo))
     if failures:
         print("release verification failed:", file=sys.stderr)
         for failure in failures:

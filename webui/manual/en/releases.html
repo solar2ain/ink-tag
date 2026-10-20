@@ -1,8 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Versions, checksums and support levels</title><link rel="stylesheet" href="../style.css"></head><body><nav>
-<a href="index.html">InkTag User Manual</a><a href="../../index.html">Back to InkTag Web</a><a href="../zh-CN/index.html">简体中文</a>
-</nav><main><h1 id="versions-and-checksums">Versions and checksums</h1>
-<p>Firmware and the Web console may update independently. Check each component&#x27;s version in the manifest rather than assuming all files share one version.</p>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1>Versions and checksums</h1>
+<p>Firmware and the Web console may update independently. Check each component's version in the manifest rather than assuming all files share one version.</p>
 <p>Verify downloads against <code>SHA256SUMS.txt</code>: Windows uses <code>Get-FileHash -Algorithm SHA256 FILE</code>, Linux uses <code>sha256sum FILE</code>, and macOS uses <code>shasum -a 256 FILE</code>. Do not flash incomplete, modified or mismatching files.</p>
 <p><code>firmware/manifest.json</code> lists exact public board IDs, included files, sizes, hashes and system support. complete-flashing images are PCB-specific; shared OTA bytes do not make complete-flashing images interchangeable. Preview candidates are for inspection, not formal release or production approval. A board without an included artifact cannot be installed from this package.</p></main></body></html>

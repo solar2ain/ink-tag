@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a href="../index.html">InkTag WebUI</a></nav><main><h1>Compiled-component materials required before public release</h1>
+<p>Status: <strong>BLOCKED</strong>. This document concerns the actual client files in this
+repository only. No other development repository was accessed for this review.</p>
+<h2>Observed combination</h2>
+<p><code>cli/src/inktag_cli/gui_font_roles.py</code> evaluates <code>fontRoles.js</code> inside mini-racer.
+For native sizing it evaluates <code>nativePreviewWasm.js</code> and <code>nativePreview.js</code>;
+the latter constructs a WebAssembly.Module/Instance and calls the GUI ABI
+<code>nf_config</code>, <code>nf_region</code> and related exports. The render/geometry function is
+an integral runtime path in the same CLI process, not a separate viewer used
+only by WebUI. <code>host_scene.py</code> likewise evaluates the bundled <code>hostScene.js</code>.
+Neither filenames nor separate archive members establish mere aggregation.</p>
+<p>The repository supplies the compiled module and wrappers, but no preferred-form
+native GUI sources, complete generated font inputs, compiler/linker recipe or
+reproducible WASM build. The font replacement and native preview paths are kept
+functional in this LOCAL, UNAPPROVED candidate. A wheel with Python sources and
+AGPL metadata does not resolve the compiled module's Corresponding Source.</p>
+<h2>Executable resolution plan</h2>
+<ol>
+<li>Supply a separately reviewable renderer source-material archive containing
+   every source/definition used by the exact module, preferred-form font inputs,
+   generator scripts, build/link scripts, toolchain versions and flags. Include
+   upstream copyright, modifications, licenses and applicable NOTICE files.</li>
+<li>Establish rights to distribute that exact combination with the AGPL CLI.
+   Obtain explicit grants from the relevant rights holders when necessary. No
+   linking exception or WebUI-wide license grant is supplied by this change.</li>
+<li>Rebuild the module from those materials in an isolated build. Record exact
+   input/output hashes, or explain and test any non-reproducibility. Bind the
+   material archive to the shipped WASM and JS adapter hashes.</li>
+<li>Decide whether renderer materials can be distributed as a minimal independent
+   source package without exposing unrelated WebUI source; all actually required
+   sources still have to be included. Merely moving code to a resource directory
+   or a subprocess is not a determination of licensing compatibility.</li>
+<li>Obtain independent combined-work/source review. Only after evidence exists,
+   close the corresponding-source fields in <code>releases/readiness.json</code>, refresh
+   all artifacts, and issue a NEW exact-commit/byte-bound publication receipt.</li>
+</ol>
+<p><code>python tools/verify-release.py --repo . --public</code> and the executing publication
+path refuse while this review is unresolved. Regular candidate verification
+may pass to permit offline testing; it is not permission to publish.</p>
+<h2>Other missing provenance</h2>
+<ul>
+<li>Leafer runtime exposes 2.2.10, but this does not identify every included plugin,
+  its version, preferred sources or license. Supply the exact package/build
+  inventory and plugin NOTICE files, if any. The upstream core MIT text is not
+  proof of all plugin rights.</li>
+<li>Confirm all native/generated font families, modifications and source inputs.
+  Embedded font shapes and a filename do not establish a license.</li>
+<li>Confirm the shipped WOFF2 origin and modifications against its font metadata
+  and authoritative source; retain OFL notices. Confirm origins/rights of
+  tutorial screenshots and sample images, including generated artwork.</li>
+<li>Confirm the separately packaged Find runtime/dependencies, runtime download
+  permissions, and binary-use/redistribution terms for InkTag-owned WebUI.</li>
+</ul>
+<p>References: GNU AGPLv3 sections 1/6/13 and the GNU GPL FAQ (both from the official
+GNU site); setuptools PEP639 documentation for the packaging metadata only.
+https://www.gnu.org/licenses/agpl-3.0.html
+https://www.gnu.org/licenses/gpl-faq.html
+https://setuptools.pypa.io/en/stable/userguide/license_migration.html</p></main></body></html>

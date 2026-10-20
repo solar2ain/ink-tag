@@ -6,14 +6,6 @@ InkTag 是面向多种主控电子价签的低功耗显示固件和管理系统�
 
 墨水屏利用环境光呈现接近纸张的显示效果，不依靠背光持续发光，在合适照明下具有较舒适的阅读体验。
 
-## 本期内容
-
-本期提供编译后的 WebUI、Python CLI 源码和中英文使用手册，暂不提供固件和有线烧录包。当前为私有预览，尚未正式发布；项目许可证及开放时间将另行确认。请勿把主板支持清单理解为本期固件下载清单。
-
-包含可编辑画板、图片抖动与屏幕效果预览、颜色与图片教程，以及天气站控件和 CLI
-主机定时任务。天气页面可在画板中编辑并导出原稿，由 CLI 获取数据后渲染；
-自动推送需要主机持续在线。操作流程见[天气站与主机动态页面](docs/zh-CN/host-pages.md)。
-
 ## 主要功能（Free / Pro）
 
 | 功能 | 基础功能（Free） | 激活后（Pro） | 说明 |
@@ -85,6 +77,10 @@ HS9118 是部分 Hanshow 芯片的封装丝印，已发现不同实际主控，�
 
 [首次使用](docs/zh-CN/getting-started.md) · [WebUI](docs/zh-CN/webui.md) · [CLI](docs/zh-CN/cli.md) · [Pro 能力](docs/zh-CN/pro.md) · [客户端更新](docs/zh-CN/updates.md) · [常见问题](docs/zh-CN/faq.md)
 
-使用前请阅读 [安全与隐私说明](SECURITY.md)、[第三方组件声明](THIRD_PARTY_NOTICES.md)及[许可状态](LEGAL_REVIEW_REQUIRED.md)。请勿在问题反馈中公开密码、激活码、定位数据或私钥。
+使用前请阅读 [安全与隐私说明](SECURITY.md)。请勿在问题反馈中公开密码、激活码、定位数据或私钥。
 
 未来托管部署的配置与限制见 [GitHub Pages](docs/zh-CN/github-pages.md)；本次仅更新私有仓库，不部署站点。
+
+## 许可
+
+CLI 自有源码采用 AGPL-3.0-only；WebUI 仅提供编译版，不适用 CLI 许可。详见[许可范围](LICENSING.md)及[第三方声明](THIRD_PARTY_NOTICES.md)。

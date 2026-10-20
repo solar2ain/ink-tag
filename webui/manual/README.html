@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a href="../index.html">InkTag WebUI</a></nav><main><h1>InkTag</h1>
+<p>中文 | <a href="README.en.html">English</a></p>
+<p>InkTag 是面向多种主控电子价签的低功耗显示固件和管理系统。它将电子纸变成日历、时钟或图片展示屏，适用于桌面信息牌、照片展示和日常提醒。通过 InkTag WebUI 或 Python CLI，可配置屏幕、管理图片和升级固件；设备完成配置后无需持续连接电脑。</p>
+<p>墨水屏利用环境光呈现接近纸张的显示效果，不依靠背光持续发光，在合适照明下具有较舒适的阅读体验。</p>
+<h2>主要功能（Free / Pro）</h2>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th style="text-align: center;">基础功能（Free）</th>
+<th style="text-align: center;">激活后（Pro）</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>图片、日历、时钟、二维码与设备信息</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>支持范围以设备实际能力为准</td>
+</tr>
+<tr>
+<td>图片存储</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>Free：可视区长边小于 300 像素最多 10 张，其余最多 4 张；Pro 不设数量配额，以图槽总空间为限。实际数量还受图片大小和存储容量限制</td>
+</tr>
+<tr>
+<td>图片轮播</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>保存图片后可按间隔自主切换</td>
+</tr>
+<tr>
+<td>屏幕与引脚配置</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>屏幕型号、方向及已支持的屏幕／LED 引脚设置</td>
+</tr>
+<tr>
+<td>画板与天气站本机预览</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>编辑控件、图片抖动、原稿导出、主机渲染预览</td>
+</tr>
+<tr>
+<td>灯效、按键、蜂鸣器</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>按键、蜂鸣器功能暂未实现；配置入口不代表功能已开放</td>
+</tr>
+<tr>
+<td>更新与 Recovery 维护</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>通过兼容客户端更新已安装的 InkTag</td>
+</tr>
+<tr>
+<td>NFC 碰一碰连接</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>被动设备链接，需要主板配有 NFC；浏览器首次连接仍需授权</td>
+</tr>
+<tr>
+<td>隐藏 InkTag 标识</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">✓</td>
+<td>Free 显示固定标识；Pro 可隐藏或调整</td>
+</tr>
+<tr>
+<td>防丢器（利用苹果 Find My 网络）</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">✓</td>
+<td>需安装兼容固件并配置身份；不是 GPS 实时定位，也不是 Apple 官方客户端</td>
+</tr>
+<tr>
+<td>NFC 切换页面</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">✓</td>
+<td>需对应主板及固件支持</td>
+</tr>
+<tr>
+<td>NFC 传图</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">后续待支持</td>
+<td>尚未开放</td>
+</tr>
+<tr>
+<td>自定义动态布局（设备离线运行）</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">后续待支持</td>
+<td>尚未开放；主机天气站由电脑渲染普通图片，不在设备执行布局</td>
+</tr>
+<tr>
+<td>改广播名、设置密码等更多功能</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">✓</td>
+<td>依设备能力开放</td>
+</tr>
+<tr>
+<td>主机动态天气自动推送</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">✓</td>
+<td>CLI 定时取数与推送；主机需在线，具体目标仍需实板验证</td>
+</tr>
+</tbody>
+</table>
+<p>nRF52811、DA14585 的独立项目采用 Free-only 功能范围，图片容量不套用上述商业配额；其固件不在本期提供。激活不能增加缺失的硬件。Pro 详情见 <a href="zh-CN/pro.html">Pro 能力</a>；捐赠获取激活码的渠道与规则尚未开放，请以项目公告为准。</p>
+<h2>墨水屏的特点</h2>
+<ul>
+<li><strong>类似纸张的显示</strong>：依靠环境光阅读，暗处需要外部照明。“护眼”不代表医疗保证，仍需注意照明、距离和休息。</li>
+<li><strong>刷新较慢并伴随闪烁</strong>：全刷通常需要几秒到十几秒，多色屏或低温下可能更久。请保持供电并等待完成。</li>
+<li><strong>静态保图无需持续供电</strong>：屏幕在刷新后保持画面不需要持续耗电，断电后通常仍能保图；主控、蓝牙和计时并非零功耗。</li>
+<li><strong>适合低频更新</strong>：刷新不频繁、设备保持低功耗待机时，纽扣电池也能使用很长时间。续航取决于电池、温度、刷新与无线活动。</li>
+</ul>
+<p>了解更多：<a href="https://www.good-display.cn/news/212.html">Good Display 中文介绍</a> | <a href="https://www.good-display.com/faq/1.html">English</a>。</p>
+<h2>首次使用</h2>
+<ol>
+<li>准备已安装兼容 InkTag 固件的设备及稳定供电。</li>
+<li>在支持 Web Bluetooth 的 Chrome 或 Edge 中打开 WebUI，点击“连接”并选择实际蓝牙名称。</li>
+<li>在设置中核对主控和屏幕，导入图片或选择创作模板，发送后等待屏幕刷新完成。</li>
+<li>支持图槽的设备可保存图片并启用轮播；断开蓝牙后仍可工作。</li>
+</ol>
+<p>原厂设备需要先安装适配固件；本期没有首次烧录文件，请勿使用不明镜像或其他主控的镜像。完整步骤见<a href="zh-CN/getting-started.html">首次使用</a>。</p>
+<h2>安装与使用</h2>
+<table>
+<thead>
+<tr>
+<th>客户端</th>
+<th>安装方式</th>
+<th>使用说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>在线 WebUI</td>
+<td>正式站点开放后访问 <a href="https://solar2ain.github.io/ink-tag/">InkTag Web</a>；当前优先检查随附本地包</td>
+<td><a href="zh-CN/webui.html">WebUI 手册</a></td>
+</tr>
+<tr>
+<td>本地 WebUI／Find 服务</td>
+<td>安装 Python 3.11+，解压本地服务包；Windows 运行 <code>install.cmd</code>，macOS 运行 <code>install.command</code>，Linux 运行 <code>sh install.sh</code></td>
+<td>Windows Find 还需完整 7-Zip，首次会下载运行依赖；macOS 原生认证仍待真机验证，Linux Find 登录暂未验证</td>
+</tr>
+<tr>
+<td>Python CLI</td>
+<td>解压 CLI 包，按包内说明安装独立环境；Windows、Linux、macOS 使用同一套源码</td>
+<td><a href="zh-CN/cli.html">CLI 手册</a></td>
+</tr>
+</tbody>
+</table>
+<p>本地服务默认使用 8787 端口，数据保存在当前用户的 InkTag 持久目录。服务重启不需要重建标签身份；不要删除数据目录来解决登录错误。Apple 账号密码只在本机界面输入，建议使用专门注册的账号，不要使用个人常用账号。</p>
+<p>已有 Python 虚拟环境时，也可在解压后的 CLI 包内运行 <code>python -m pip install .</code>。</p>
+<h2>主控与设备</h2>
+<table>
+<thead>
+<tr>
+<th>主控厂商</th>
+<th>主控</th>
+<th>已研究／适配的价签系列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>深圳市汇顶科技股份有限公司（Goodix）</td>
+<td>GR5331、GR5513、GR5515</td>
+<td>ZKC21V、ZKC42V、ZKC42VM</td>
+</tr>
+<tr>
+<td>昂瑞微电子（OnMicro）</td>
+<td>OM6626</td>
+<td>ZKC21B-NAE4、ZKC42B-NE4、部分 ZKC21V 及 Hanshow 设备</td>
+</tr>
+<tr>
+<td>泰凌微电子（Telink）</td>
+<td>TLSR8359</td>
+<td>Hanshow Nowa-154R-N、Nowa-213R-N、Nebular-213R-N、Nebular-420R-N</td>
+</tr>
+<tr>
+<td>Nordic Semiconductor</td>
+<td>nRF52832</td>
+<td>PriceETag；本期不提供固件</td>
+</tr>
+<tr>
+<td>Nordic Semiconductor</td>
+<td>nRF52811</td>
+<td>AESL／盒马 EL022H2；独立项目，本期不提供固件</td>
+</tr>
+<tr>
+<td>Renesas／原 Dialog</td>
+<td>DA14585</td>
+<td>AESL-2.9、AESL-4.2／盒马；独立项目，本期不提供固件</td>
+</tr>
+</tbody>
+</table>
+<p>HS9118 是部分 Hanshow 芯片的封装丝印，已发现不同实际主控，不能仅凭该丝印选择工具或镜像。相同价签型号、主板丝印也可能搭配不同屏幕，应核对实际主控、主板和屏幕。</p>
+<p>主控厂商信息见 <a href="https://www.goodix.com/zh/about_goodix/profile/overview">Goodix 公司介绍</a>。具体屏幕分辨率、颜色、控制器和存储差异见<a href="zh-CN/devices.html">设备与屏幕</a>；当前开放范围见<a href="zh-CN/supported-devices.html">支持清单</a>。</p>
+<h2>详细手册</h2>
+<p><a href="zh-CN/getting-started.html">首次使用</a> · <a href="zh-CN/webui.html">WebUI</a> · <a href="zh-CN/cli.html">CLI</a> · <a href="zh-CN/pro.html">Pro 能力</a> · <a href="zh-CN/updates.html">客户端更新</a> · <a href="zh-CN/faq.html">常见问题</a></p>
+<p>使用前请阅读 <a href="SECURITY.html">安全与隐私说明</a>。请勿在问题反馈中公开密码、激活码、定位数据或私钥。</p>
+<p>未来托管部署的配置与限制见 <a href="zh-CN/github-pages.html">GitHub Pages</a>；本次仅更新私有仓库，不部署站点。</p>
+<h2>许可</h2>
+<p>CLI 自有源码采用 AGPL-3.0-only；WebUI 仅提供编译版，不适用 CLI 许可。详见<a href="LICENSING.html">许可范围</a>及<a href="THIRD_PARTY_NOTICES.html">第三方声明</a>。</p></main></body></html>

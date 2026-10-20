@@ -2,12 +2,35 @@
 
 [中文](README.md) | English
 
+## Device credential persistence
+
+The default is unchanged: successful authentication caches a reusable control
+credential, not the plaintext password. `--password-stdin` changes input only;
+it does NOT disable caching. Use
+`inktag --no-credential-cache --password-stdin --device IKT_TL_1234 device info`
+to avoid reading/writing device credential files, including in OTA children.
+Existing cache files are left untouched; credentials remain in invocation
+memory only. This does not change Find/Apple persistence or promise protection
+from OS swap, terminal recording or other processes.
+
+InkTag-owned CLI source is licensed under [AGPL-3.0-only](LICENSE). Third-party
+components retain their licenses. Bundled compiled resources still need review
+of Corresponding Source and combined-work obligations; see [licensing scope](LICENSING.md).
+This grant does not automatically apply to the separate WebUI or firmware.
+
 Python 3.11 or newer is required. Windows: run `install.ps1`, then `inktag.ps1 --help`.
 Linux and macOS: run `bash install.sh`, then `bash inktag.sh --help`.
 Installation uses this directory's virtual environment and downloads Python dependencies.
 
 Use the exact identifier returned by scanning. Connections normally synchronize time;
 use `--no-time-sync` during drift observations. OTA completion includes verified App return.
+
+After successful device-password authentication, the CLI automatically saves a
+reusable control credential in `device-passwords.sqlite3` in the user's InkTag
+data directory. It is not a plaintext password, but remains sensitive: do not
+share it, upload it or include it in release attachments. `--password-data-dir`
+selects its directory. `--password-stdin` authenticates with an entered password
+but still caches the credential after success; it is not a no-save option.
 See the full release's `docs/en/cli.md` or the
 [online manual](https://solar2ain.github.io/ink-tag/manual/en/cli.html).
 ## Canvas weather stations and host jobs

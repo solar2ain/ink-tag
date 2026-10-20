@@ -65,7 +65,7 @@ from .protocol import (
 from .generated_commands_v2 import CapabilityV2
 from .gui_font_roles import MAX_PACKAGE_BYTES, validate_font_package, build_font_config
 from .device_link import build_device_link
-from .password_session import PasswordCredentialStore
+from .password_session import PasswordCredentialStore, set_credential_cache_enabled
 from .device_password import PASSWORD_WARNING
 from .local_service import local_data_directory
 from .transport import InkTagClient, InkTagError, SettingsResetUnconfirmedError, scan_device_status, scan_devices
@@ -292,9 +292,11 @@ def root(
         typer.Option("--no-sync", hidden=True),
     ] = False,
     version: Annotated[bool, typer.Option("--version", help="Show the CLI version and exit.", is_eager=True)] = False,
-    password_stdin: Annotated[bool, typer.Option("--password-stdin", help="Read the device password from stdin instead of a saved credential; never put secrets in arguments.")] = False,
+    password_stdin: Annotated[bool, typer.Option("--password-stdin", help="Read the device password from stdin; this does not disable credential caching. Never put secrets in arguments.")] = False,
     password_data_dir: Annotated[Path | None, typer.Option("--password-data-dir", help="Absolute persistent directory for local device credentials; defaults to the user InkTag data directory.")] = None,
+    no_credential_cache: Annotated[bool, typer.Option("--no-credential-cache", help="Do not read or write saved device control credentials, including in OTA subprocesses. Existing cache files are left untouched.")] = False,
 ) -> None:
+    set_credential_cache_enabled(not no_credential_cache)
     if version:
         typer.echo(f"inktag-cli {__version__}")
         raise typer.Exit()

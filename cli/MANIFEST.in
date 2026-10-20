@@ -1,0 +1,9 @@
+include LICENSE LICENSING.md THIRD_PARTY_NOTICES.md
+recursive-include licenses *.txt
+recursive-include src/inktag_cli/_assets *.js *.cjs *.txt *.json
+global-exclude *.pyc
+prune tests
+exclude src/inktag_cli/_diagnostics.py
+exclude src/inktag_cli/panel_diagnostic.py
+exclude src/inktag_cli/clock_diagnostic.py
+exclude src/inktag_cli/input_simulation.py

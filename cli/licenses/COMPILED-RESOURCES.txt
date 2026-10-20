@@ -1,0 +1,9 @@
+Compiled renderer release blocker
+
+The packaged nativePreviewWasm.js is executable compiled WebAssembly. Its
+preferred-form generating source, complete build scripts, compiler/toolchain
+inputs, font-source provenance and licensing for the combination are not present
+in this repository. Keep all normal font functionality in this local candidate,
+but do not approve public distribution until these materials and rights have
+been supplied and reviewed. A resource label or a separately named file does not
+create a linking exception. No WebUI-wide AGPL grant is made here.

@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a href="../index.html">InkTag WebUI</a></nav><main><h1>InkTag</h1>
+<p><a href="README.html">中文</a> | English</p>
+<p>InkTag is low-power display firmware and management system software for electronic shelf labels across several MCU platforms. It turns e-paper into a calendar, clock or picture display for desk signs, photographs and everyday reminders. InkTag WebUI and the shared Python CLI configure screens, manage images and update firmware. Configured devices do not need a continuous computer connection.</p>
+<p>E-paper uses ambient light for a paper-like appearance without a continuously illuminated backlight.</p>
+<h2>Features</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th style="text-align: center;">Free</th>
+<th style="text-align: center;">Pro</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pictures, calendar, clock, QR and device information</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>Subject to actual device capabilities</td>
+</tr>
+<tr>
+<td>Image storage</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>Free: up to10 images below300px visible long edge, otherwise4. Pro has no count quota within the available image-store space. Image size and physical capacity also limit availability</td>
+</tr>
+<tr>
+<td>Slideshows</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>Stored images can cycle without a continuous BLE connection</td>
+</tr>
+<tr>
+<td>Screen and pin configuration</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>Profile, orientation and supported display/LED routes</td>
+</tr>
+<tr>
+<td>Canvas and local weather preview</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>Editable controls, image dithering, scene export and host rendering</td>
+</tr>
+<tr>
+<td>LEDs, buttons and buzzer</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>Button and buzzer actions are not yet implemented; configuration does not establish support</td>
+</tr>
+<tr>
+<td>Updates and Recovery</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>Requires an already installed compatible InkTag image</td>
+</tr>
+<tr>
+<td>Passive NFC connection link</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td>Requires fitted NFC; initial browser authorization is still required</td>
+</tr>
+<tr>
+<td>Hide the InkTag mark</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">✓</td>
+<td>Free has a fixed mark; Pro can adjust or hide it</td>
+</tr>
+<tr>
+<td>Lost-item locator using Apple's Find My network</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">✓</td>
+<td>Compatible firmware and identity setup required; not real-time GPS or an Apple-certified client</td>
+</tr>
+<tr>
+<td>Switch pages through NFC</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">✓</td>
+<td>Requires supported hardware and firmware</td>
+</tr>
+<tr>
+<td>NFC image transfer</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">Planned</td>
+<td>Not available</td>
+</tr>
+<tr>
+<td>Custom dynamic layouts (device-side)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">Planned</td>
+<td>Not available; host weather sends ordinary images rather than executing layouts on the device</td>
+</tr>
+<tr>
+<td>Advertising-name changes, passwords and more</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">✓</td>
+<td>Subject to device capabilities</td>
+</tr>
+<tr>
+<td>Scheduled host-weather delivery</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">✓</td>
+<td>CLI data lookup and delivery; keep the host online, actual targets still require device validation</td>
+</tr>
+</tbody>
+</table>
+<p>The independent nRF52811 and DA14585 projects are Free-only, without these commercial image quotas. Their firmware is not supplied here. Activation cannot add missing hardware. See <a href="en/pro.html">Pro features</a>. Donation-based activation-code distribution is planned; no donation channel or redemption policy is currently announced.</p>
+<h2>E-paper characteristics</h2>
+<ul>
+<li><strong>Paper-like viewing:</strong> reflected ambient light, with external illumination needed in the dark. Eye-friendly is not a medical guarantee; use suitable lighting, distance and breaks.</li>
+<li><strong>Slow, flashing refresh:</strong> a full refresh commonly takes several to around fifteen seconds, and can take longer on colour panels or in the cold. Keep power stable and wait.</li>
+<li><strong>Image retention without sustaining power:</strong> the finished panel image normally remains without continuous power, even when disconnected. The MCU, Bluetooth and clock still consume energy.</li>
+<li><strong>Suitable for infrequent updates:</strong> low-power standby and infrequent refreshes can give a coin cell a long service life. Actual life depends on the battery, temperature, refresh rate and radio activity.</li>
+</ul>
+<p>Read more: <a href="https://www.good-display.com/faq/1.html">Good Display introduction</a> | <a href="https://www.good-display.cn/news/212.html">中文版</a>.</p>
+<h2>Getting started</h2>
+<ol>
+<li>Prepare a device already running compatible InkTag firmware and stable power.</li>
+<li>Open WebUI in a Web Bluetooth-capable Chrome or Edge browser, choose Connect and select the actual advertised name.</li>
+<li>Check the MCU and screen settings, import a picture or choose a template, then send and wait for display completion.</li>
+<li>Devices with image storage can save images and run slideshows after disconnecting.</li>
+</ol>
+<p>Factory devices require matching firmware first. This preview supplies no first-flash files: do not use unknown or cross-MCU images. See the <a href="en/getting-started.html">getting-started guide</a>.</p>
+<h2>Installation and use</h2>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Installation</th>
+<th>Guide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Online WebUI</td>
+<td>Use <a href="https://solar2ain.github.io/ink-tag/">InkTag Web</a> when published; inspect the supplied local package for this preview</td>
+<td><a href="en/webui.html">WebUI</a></td>
+</tr>
+<tr>
+<td>Local WebUI / Find service</td>
+<td>Python3.11+. Extract the server package; Windows: <code>install.cmd</code>; macOS: <code>install.command</code>; Linux: <code>sh install.sh</code></td>
+<td>Windows Find requires full7-Zip and initial runtime downloads. Native Mac authentication awaits actual-Mac validation; Linux Find login is unqualified</td>
+</tr>
+<tr>
+<td>Python CLI</td>
+<td>Extract the CLI package and install its isolated environment as described inside. One source package serves Windows, Linux and macOS</td>
+<td><a href="en/cli.html">CLI</a></td>
+</tr>
+</tbody>
+</table>
+<p>The local service defaults to port8787 and keeps data in the current user's persistent InkTag directory. Restarting does not require re-enrolling tags. Do not delete this directory to fix login errors. Enter Apple credentials only in the local interface and use a separately registered account rather than your everyday personal account.</p>
+<p>With an existing Python virtual environment, run <code>python -m pip install .</code> inside the extracted CLI package.</p>
+<h2>MCUs and devices</h2>
+<table>
+<thead>
+<tr>
+<th>Manufacturer</th>
+<th>MCU</th>
+<th>Researched / adapted label families</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shenzhen Goodix Technology Co., Ltd.</td>
+<td>GR5331, GR5513, GR5515</td>
+<td>ZKC21V, ZKC42V, ZKC42VM</td>
+</tr>
+<tr>
+<td>OnMicro</td>
+<td>OM6626</td>
+<td>ZKC21B-NAE4, ZKC42B-NE4, some ZKC21V and Hanshow devices</td>
+</tr>
+<tr>
+<td>Telink</td>
+<td>TLSR8359</td>
+<td>Hanshow Nowa-154R-N, Nowa-213R-N, Nebular-213R-N and Nebular-420R-N</td>
+</tr>
+<tr>
+<td>Nordic Semiconductor</td>
+<td>nRF52832</td>
+<td>PriceETag; no firmware in this preview</td>
+</tr>
+<tr>
+<td>Nordic Semiconductor</td>
+<td>nRF52811</td>
+<td>AESL / Hema EL022H2; independent project, no firmware here</td>
+</tr>
+<tr>
+<td>Renesas / formerly Dialog</td>
+<td>DA14585</td>
+<td>AESL-2.9 and AESL-4.2 / Hema; independent project, no firmware here</td>
+</tr>
+</tbody>
+</table>
+<p>HS9118 is a package marking found on some Hanshow chips, not a unique silicon identity. Different actual MCUs have been found under it. Neither a label model nor a board marking alone establishes the installed screen. Identify the actual MCU, board and panel before selecting a tool or image.</p>
+<p>Manufacturer reference: <a href="https://www.goodix.com/en/about_goodix/profile/overview">Goodix company information</a>. See <a href="en/devices.html">devices and panels</a> for geometry, colour, controller and storage differences, and the <a href="en/supported-devices.html">support list</a> for availability.</p>
+<h2>User manuals</h2>
+<p><a href="en/getting-started.html">Getting started</a> · <a href="en/webui.html">WebUI</a> · <a href="en/cli.html">CLI</a> · <a href="en/pro.html">Pro features</a> · <a href="en/updates.html">Client updates</a> · <a href="en/faq.html">FAQ</a></p>
+<p>Read <a href="SECURITY.html">security and privacy</a>. Never include passwords, activation codes, private locations or keys in issue reports.</p>
+<p>See <a href="en/github-pages.html">GitHub Pages</a> for future hosting configuration and limitations. This update changes the private repository only; it does not deploy the site.</p>
+<h2>License</h2>
+<p>InkTag-owned CLI source is licensed under AGPL-3.0-only. WebUI is distributed in compiled form only and is not covered by the CLI license. See <a href="LICENSING.html">licensing scope</a> and <a href="THIRD_PARTY_NOTICES.html">third-party notices</a>.</p></main></body></html>

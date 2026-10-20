@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -8,7 +8,8 @@ dynamic = ["version"]
 description = "Cross-platform command-line client for InkTag e-paper devices"
 readme = "README.md"
 requires-python = ">=3.11"
-license = "LicenseRef-InkTag-Private-Preview"
+license = "AGPL-3.0-only"
+license-files = ["LICENSE", "LICENSING.md", "THIRD_PARTY_NOTICES.md", "licenses/*.txt"]
 authors = [{ name = "InkTag contributors" }]
 dependencies = [
   "bleak>=2.0,<4",
@@ -28,6 +29,7 @@ package-dir = { "" = "src" }
 
 [tool.setuptools.packages.find]
 where = ["src"]
+exclude = ["tests*", "inktag_cli._diagnostics*"]
 
 [tool.setuptools.package-data]
 "inktag_cli._assets" = ["*.js", "*.cjs", "*.txt", "template-*.json"]

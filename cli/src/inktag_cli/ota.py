@@ -413,9 +413,15 @@ def driver_command(
 
 
 def run_update(command: list[str], *, capture_output: bool = False) -> subprocess.CompletedProcess[str]:
+    from .password_session import credential_cache_enabled
+    import os
+    environment = dict(os.environ)
+    if not credential_cache_enabled():
+        environment['INKTAG_NO_CREDENTIAL_CACHE'] = '1'
     return subprocess.run(
         command,
         check=False,
         capture_output=capture_output,
         text=capture_output,
+        env=environment,
     )

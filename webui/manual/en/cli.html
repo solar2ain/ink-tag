@@ -1,30 +1,30 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Command-line client</title><link rel="stylesheet" href="../style.css"></head><body><nav>
-<a href="index.html">InkTag User Manual</a><a href="../../index.html">Back to InkTag Web</a><a href="../zh-CN/index.html">简体中文</a>
-</nav><main><h1 id="command-line-client">Command-line client</h1>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a href="../../index.html">InkTag WebUI</a></nav><main><h1>Command-line client</h1>
 <p>The same Python client provides Windows, Linux and macOS launchers. Python 3.11 or newer is required. On macOS, Bluetooth identifiers may be UUIDs rather than MAC addresses.</p>
-<h2 id="install-and-launch">Install and launch</h2>
+<h2>Install and launch</h2>
 <p>Extract the ZIP and enter <code>inktag-cli</code>; a full release checkout uses <code>cli/</code> instead. Windows:</p>
-<pre><code>powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
-powershell -NoProfile -ExecutionPolicy Bypass -File .\inktag.ps1 --help</code></pre>
+<pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\inktag.ps1 --help
+</code></pre>
 <p>Linux/macOS:</p>
-<pre><code>bash install.sh
-bash inktag.sh --help</code></pre>
+<pre><code class="language-sh">bash install.sh
+bash inktag.sh --help
+</code></pre>
 <p>Launchers create a package-local virtual environment, not a firmware build environment. Linux needs a system Bluetooth service/adapter and Python venv support. Allow terminal/Python Bluetooth access on macOS. To use <code>inktag</code> directly, install with <code>python -m pip install .</code> in your own activated virtual environment; otherwise replace <code>inktag</code> below with the package launcher.</p>
 <p>From the release repository, run <code>inktag webui start --repo .</code> to serve the bundled <code>webui/</code> directory. The CLI ZIP alone does not contain WebUI pages. Use the separate local-server package for Find; other WebUI features remain available without Find installed. Use <code>inktag webui serve --repo . --lan</code> for phone access; see the <a href="webui.html">WebUI guide</a>.</p>
-<h2 id="select-a-device">Select a device</h2>
-<pre><code>inktag device scan
+<h2>Select a device</h2>
+<pre><code class="language-text">inktag device scan
 inktag --address ADDRESS device info
 inktag --address ADDRESS --no-time-sync device health
 inktag ota inspect firmware-ota.zip
 inktag --address ADDRESS ota update firmware-ota.zip --yes
 inktag --address ADDRESS recovery enter
-inktag --address ADDRESS recovery resume-app</code></pre>
+inktag --address ADDRESS recovery resume-app
+</code></pre>
 <p>Use the address or identifier returned by scanning. Command-specific <code>--help</code> lists supported options. Ordinary connections and OTA normally synchronize time once; drift observations use <code>--no-time-sync</code>.</p>
 <p>Alternatively use <code>--device IKT_NRF_1234</code>, replacing the example with the exact scanned name. A unique prefix works, but prefer a full name with multiple nearby devices. Disconnect WebUI from the same device first.</p>
-<h2 id="panel-time-and-pages">Panel, time and pages</h2>
-<pre><code>inktag screen profiles
+<h2>Panel, time and pages</h2>
+<pre><code class="language-console">inktag screen profiles
 inktag --device IKT_NRF_1234 screen show
 inktag --device IKT_NRF_1234 screen set SSD1619_128x250_BWR_HEMA213
 inktag --device IKT_NRF_1234 time sync
@@ -32,33 +32,42 @@ inktag --device IKT_NRF_1234 display calendar
 inktag --device IKT_NRF_1234 display clock
 inktag --device IKT_NRF_1234 display device-info
 inktag --device IKT_NRF_1234 display clear
-inktag --device IKT_NRF_1234 device label &quot;Living room&quot;</code></pre>
+inktag --device IKT_NRF_1234 device label &quot;Living room&quot;
+</code></pre>
 <p>The profile is only for the matching Hema panel; use <code>screen profiles</code> and <code>screen set --help</code> for other screens and advanced geometry. Labels allow 24 printable ASCII bytes and do not rename Bluetooth. Display clear preserves slots. Synchronize after battery replacement or a power interruption.</p>
 <p><code>screen calendar --week-start 1</code> sets Monday; 0 means Sunday. Use <code>--countdown-name Trip --countdown-date 2027-01-01</code> for a target date and <code>--clear-countdown</code> to remove it. Countdown labels allow four characters.</p>
-<h2 id="pictures-slots-and-slideshow">Pictures, slots and slideshow</h2>
-<pre><code>inktag --device IKT_NRF_1234 image upload photo.jpg --preview preview.png
+<h2>Pictures, slots and slideshow</h2>
+<pre><code class="language-console">inktag --device IKT_NRF_1234 image upload photo.jpg --preview preview.png
 inktag --device IKT_NRF_1234 image upload photo.jpg --slot next --name landscape --wire-encoding auto
 inktag --device IKT_NRF_1234 slot list
 inktag --device IKT_NRF_1234 slot show landscape
 inktag --device IKT_NRF_1234 slot download 0 --output photo-0.png
 inktag --device IKT_NRF_1234 slideshow start --interval 5m
-inktag --device IKT_NRF_1234 slideshow stop</code></pre>
+inktag --device IKT_NRF_1234 slideshow stop
+</code></pre>
 <p>Without <code>--slot</code>, upload displays directly. <code>next</code> selects free storage; a specific ID replaces that slot. Add <code>--store-only</code> to save without refreshing. IDs may have gaps. Names and content types are set during upload/replacement, not independently edited; names allow 35 UTF-8 bytes. RLE saves transfer bytes, not storage. Interrupted replacement may lose the old target. <code>--wire-encoding none</code> sends raw data; the obsolete <code>--compression</code> option is not accepted by this client.</p>
 <p><code>slot delete 0</code> deletes one image; <code>slot clear</code> deletes all stored images, with confirmations. Download important images before changing screen geometry.</p>
-<h2 id="diagnostics-and-maintenance">Diagnostics and maintenance</h2>
+<h2>Diagnostics and maintenance</h2>
 <p><code>diagnostic runtime</code>, <code>diagnostic health</code> and <code>diagnostic clock</code> retain normal read-only device diagnostics without synchronizing time. Unavailable values are not zero. Use <code>led locate</code> to locate a device, <code>display ghost-clean</code> for ghost cleaning, <code>nfc status</code> for NFC status and <code>nfc action --help</code> for supported page-switching settings. Device capabilities remain authoritative. Development waveform experiments, input simulation and OTA fault injection are not included in the user distribution.</p>
 <p><code>device reset-settings</code> preserves images; <code>device clear-user-data</code> deletes user images and preserves settings. Neither is factory reset. Read confirmations and respect device authentication/fresh old-password checks.</p>
-<h2 id="updates">Updates</h2>
+<h2>Updates</h2>
 <p>Use the actual compatible release file: Nordic, GR, OM and TLSR use ZIP; DA uses <code>.img</code>. Never substitute complete flashing. Recovery adds <code>_OTA</code> to the factory name; use the exact detected Recovery identity for <code>resume-app</code>. Old Recovery may only support updates. See <a href="ota.html">OTA</a>.</p>
 <p>CLI and WebUI share protocol, identity, authentication, signature and voltage checks. OTA is not first flashing. Safe Recovery exit requires a supporting installed Recovery. Never blindly repeat a command with an unknown outcome.</p>
-<h2 id="host-rendered-pages-and-weather">Host-rendered pages and weather</h2>
-<p>The host fetches data, renders images and schedules delivery. Keep it running and keep targets in Bluetooth range. In WebUI Create, edit a Weather template and its source, then Export host task. The CLI imports the editable scene and reuses its geometry/weather plan. See the <a href="host-pages.html">host-page guide</a> for the full workflow and OS scheduling.</p>
-<pre><code>inktag host import weather.inktag.json --config weather.toml
+<h2>Host-rendered pages and weather</h2>
+<p>The host fetches data, renders images and schedules delivery. Keep it running and
+keep targets in Bluetooth range. In WebUI Create, edit a Weather template and its
+source, then Export host task. The CLI imports the editable scene and reuses its
+geometry/weather plan. See the <a href="host-pages.html">host-page guide</a> for the full
+workflow and OS scheduling.</p>
+<pre><code class="language-console">inktag host import weather.inktag.json --config weather.toml
 inktag host render --scene weather.inktag.json --demo -o preview.png
 inktag host fetch weather.toml --output forecast.json
-inktag host render --scene weather.inktag.json --snapshot forecast.json -o weather.png</code></pre>
-<p>Keep the referenced scene file. Browser/host fonts may differ; select a local <code>--font-file</code> or task <code>font_file</code> and check the CLI PNG. Imported jobs are disabled and unbound. The following built-in layouts also remain available:</p>
-<pre><code>inktag host templates
+inktag host render --scene weather.inktag.json --snapshot forecast.json -o weather.png
+</code></pre>
+<p>Keep the referenced scene file. Browser/host fonts may differ; select a local
+<code>--font-file</code> or task <code>font_file</code> and check the CLI PNG. Imported jobs are disabled
+and unbound. The following built-in layouts also remain available:</p>
+<pre><code class="language-console">inktag host templates
 inktag host locations Hangzhou
 inktag host init weather.toml --latitude 30.27 --longitude 120.15 --label Hangzhou
 inktag host render weather-paper --demo --size 400x300 -o preview.png
@@ -67,9 +76,35 @@ inktag host render weather-paper --snapshot forecast.json -o weather.png
 inktag host validate weather.toml
 inktag host jobs weather.toml
 inktag host run weather.toml --once
-inktag host status weather.toml</code></pre>
-<p><a href="https://open-meteo.com/">Open-Meteo</a> provides weather; its location search uses <a href="https://open-meteo.com/en/docs/geocoding-api">GeoNames data</a>. The free non-commercial API needs no key; commercial use follows the provider&#x27;s terms. Requests include configured location/timezone and weather variables, not device, password, account or Find data. Fonts are local (<code>--font-file</code> if needed), not redistributed. Synthetic previews are labelled DEMO.</p>
-<p>Each TOML <code>[[jobs]]</code> references a <code>scene</code> file or built-in <code>template</code>, and a named <code>[sources.*]</code> source, plus its canvas, palette, target and <code>interval_minutes</code>. Jobs can reuse templates and cached data across screens. They start disabled; inspect the preview before setting <code>enabled = true</code>. A 60-minute interval is recommended.</p>
-<p><code>run --once</code> evaluates due jobs once for an OS task scheduler; omit <code>--once</code> for the foreground loop. Default operation writes PNGs without BLE. Use <code>--fixture forecast.json --data-dir ./weather-test</code> for offline validation. Only explicit <code>--send</code> permits device delivery, requiring a host-reported <code>address</code> plus its real 16-hex <code>expected_device_id</code> (not its Bluetooth address). <code>device</code> is only a display name. Jobs never reselect by name or fall back to a same-name device. Windows/Linux use a MAC; macOS uses a host-local CoreBluetooth UUID, not a MAC or a portable identity. Do not use a browser&#x27;s <code>BluetoothDevice.id</code>. Renaming preserves the binding; address changes require explicit rebinding. Use <code>inktag --device IKT_TL_1234 host target</code> to read the binding, then copy its <code>target</code> fields into the job. Select duplicate names with <code>--address</code> instead. This command does not synchronize time, enable a job or push a page. Delivery reuses normal authentication/image transfer and checks the Pro policy for custom dynamic templates. Missing saved credentials fail without a background password prompt. Physical delivery is still unverified in this increment.</p>
-<p>Unchanged pixels are skipped and missed runs coalesced. Failures keep successful state and back off without clearing the panel. Preview and delivery states are separate. Disable a job in TOML or stop the runner with Ctrl+C; a device STOP does not stop its host&#x27;s job.</p>
+inktag host status weather.toml
+</code></pre>
+<p><a href="https://open-meteo.com/">Open-Meteo</a> provides weather; its location search uses
+<a href="https://open-meteo.com/en/docs/geocoding-api">GeoNames data</a>. The free
+non-commercial API needs no key; commercial use follows the provider's terms.
+Requests include configured location/timezone and weather variables, not device,
+password, account or Find data. Fonts are local (<code>--font-file</code> if needed), not
+redistributed. Synthetic previews are labelled DEMO.</p>
+<p>Each TOML <code>[[jobs]]</code> references a <code>scene</code> file or built-in <code>template</code>, and a named <code>[sources.*]</code> source, plus
+its canvas, palette, target and <code>interval_minutes</code>. Jobs can reuse templates and
+cached data across screens. They start disabled; inspect the preview before
+setting <code>enabled = true</code>. A 60-minute interval is recommended.</p>
+<p><code>run --once</code> evaluates due jobs once for an OS task scheduler; omit <code>--once</code> for
+the foreground loop. Default operation writes PNGs without BLE. Use
+<code>--fixture forecast.json --data-dir ./weather-test</code> for offline validation.
+Only explicit <code>--send</code> permits device delivery, requiring a host-reported
+<code>address</code> plus its real 16-hex <code>expected_device_id</code> (not its Bluetooth address).
+<code>device</code> is only a display name. Jobs never reselect by name or fall back to a
+same-name device. Windows/Linux use a MAC; macOS uses a host-local CoreBluetooth
+UUID, not a MAC or a portable identity. Do not use a browser's <code>BluetoothDevice.id</code>.
+Renaming preserves the binding; address changes require explicit rebinding.
+Use <code>inktag --device IKT_TL_1234 host target</code> to read the binding, then copy its
+<code>target</code> fields into the job. Select duplicate names with <code>--address</code> instead.
+This command does not synchronize time, enable a job or push a page.
+Delivery reuses normal authentication/image transfer and checks the Pro policy
+for custom dynamic templates. Missing saved credentials fail without a background
+password prompt. Physical delivery is still unverified in this increment.</p>
+<p>Unchanged pixels are skipped and missed runs coalesced. Failures keep successful
+state and back off without clearing the panel. Preview and delivery states are
+separate. Disable a job in TOML or stop the runner with Ctrl+C; a device STOP does
+not stop its host's job.</p>
 <p>Commands do not add missing hardware/capabilities. This CLI package does not contain WebUI pages; download the <a href="webui.html">local server</a> separately.</p></main></body></html>

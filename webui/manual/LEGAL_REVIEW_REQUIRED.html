@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a href="../index.html">InkTag WebUI</a></nav><main><h1>Public-release legal gate</h1>
+<p>The licensing decision is <strong>AGPL-3.0-only for InkTag-owned CLI source</strong> and
+<strong>compiled-only distribution for WebUI</strong>. See <a href="LICENSING.html">LICENSING.md</a>.
+This decision does not by itself qualify the current packages for public release.</p>
+<p>Before changing repository visibility to public:</p>
+<ol>
+<li>Align CLI package metadata, source ZIP, sdist and wheel with <code>cli/LICENSE</code>
+   and <code>cli/LICENSING.md</code>; verify that the license is present in actual artifacts.</li>
+<li>Resolve the bundled GUI WASM's license and combination with the AGPL CLI.
+   Establish a complete, permitted Corresponding Source/build-material route,
+   or an alternative reviewed packaging/licensing arrangement. Do not infer a
+   linking exception or silently extend the grant to WebUI.</li>
+<li>Confirm WebUI binary-use and redistribution terms with the rights holder.
+   Keep the CLI grant clearly scoped rather than adding a blanket repository AGPL grant.</li>
+<li>Complete the exact-version third-party inventory, copyrights and license
+   texts for every distributed component, including Leafer packages/plugins,
+   fonts, images and the local Find runtime. Supplementary upstream texts are
+   not proof of the exact bundled version or a completed provenance audit.</li>
+<li>Confirm whether GPL/AGPL derivative or combined works impose further source
+   obligations; a rewrite, refactor or resource label alone does not remove them.</li>
+<li>Keep the first release free of firmware, flashing packages, vendor SDKs,
+   proprietary tools, credentials, user data and agent instruction files.</li>
+<li>Rebuild all affected artifacts, generated manuals, standalone notices,
+   manifests and checksums after the final changes; independently review the
+   exact bytes. Existing preview archives and prior approval receipts do not
+   cover subsequent documentation or code changes.</li>
+</ol>
+<p>Do not mark the release ready or publish while these items remain unresolved.
+No device-side security or physical OTA qualification is asserted by this checklist.</p>
+<h2>Packaging implementation status (2026-10-20)</h2>
+<p>The local candidate now uses PEP639/AGPL-3.0-only metadata for CLI-owned source
+and includes LICENSE, scope and notices in its source ZIP, sdist and actual wheel.
+<code>tools/release_checks.py</code> checks those actual archive bytes; this closes a
+packaging omission, not the renderer Corresponding Source review. Renderer,
+plugin/font/image provenance and WebUI terms remain explicit public blockers in
+<code>releases/readiness.json</code>. See <code>release-materials.md</code> for materials and steps.</p>
+<p>Build locally with an environment containing <code>tools/requirements-package.txt</code>,
+then run <code>python tools/pack-clients.py</code>. This only packages compiled WebUI already
+present here; it does not rebuild WebUI source, sign firmware or publish.
+The artifact binding records the current base commit plus a working-tree file
+fingerprint. There is no final new commit or approval while commits are prohibited.</p></main></body></html>

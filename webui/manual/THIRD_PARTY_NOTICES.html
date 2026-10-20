@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a href="../index.html">InkTag WebUI</a></nav><main><h1>Third-party notices</h1>
+<p>The byte-bound partial inventory is
+<a href="webui/licenses/BUNDLED-INVENTORY.json"><code>webui/licenses/BUNDLED-INVENTORY.json</code></a>.
+Observed runtime versions are React/React DOM 19.2.8, Dexie 4.4.5, React Router
+7.18.2 and Leafer runtime 2.2.10 (not a plugin inventory). Exact-version upstream
+license texts and Dexie's additional NOTICE are under <code>webui/licenses/</code>.
+Ma Shan Zheng WOFF2 metadata identifies Version 2.003/OFL-1.1. These facts do
+not resolve font modifications/provenance, image rights, every plugin or renderer
+Corresponding Source. Public release remains blocked; see <a href="release-materials.html">release-materials.md</a>.</p>
+<p>This first release contains CLI clients, compiled WebUI and user documentation;
+it contains no firmware or flashing package. Third-party components retain their
+own licenses and are not relicensed by the CLI's AGPL declaration. See
+<a href="LICENSING.html">LICENSING.md</a> for scope.</p>
+<table>
+<thead>
+<tr>
+<th>Distribution area</th>
+<th>Components identified</th>
+<th>License evidence / remaining review</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLI Python dependencies</td>
+<td>bleak, cryptography, mini-racer, Pillow, qrcode, rich, typer and their installed dependencies</td>
+<td>Requirements are declared in <code>cli/pyproject.toml</code>; confirm exact resolved versions and their original notices for each distributed package. These are not covered by an InkTag-owned-code grant.</td>
+</tr>
+<tr>
+<td>CLI bundled JavaScript</td>
+<td>epdoptimize and other rendering/font adapters</td>
+<td>Apache-2.0 text for epdoptimize is included in <code>cli/src/inktag_cli/_assets/EPDOPTIMIZE_LICENSE.txt</code>; review other resources individually.</td>
+</tr>
+<tr>
+<td>CLI compiled GUI module</td>
+<td><code>nativePreviewWasm.js</code></td>
+<td>Corresponding Source, build materials and combined-work licensing remain unresolved.</td>
+</tr>
+<tr>
+<td>Compiled WebUI</td>
+<td>React/React DOM, Fabric, Dexie, Lucide, RgbQuant, epdoptimize, Leafer components/plugins</td>
+<td>See <code>webui/THIRD_PARTY_NOTICES.txt</code>. Exact versions, full dependency inventory and required notices still need verification.</td>
+</tr>
+<tr>
+<td>WebUI font</td>
+<td>Ma Shan Zheng</td>
+<td>Upstream OFL-1.1 text and copyright are supplied in <code>webui/licenses/MaShanZheng-OFL.txt</code>; verify the shipped font's provenance and any modifications.</td>
+</tr>
+<tr>
+<td>WebUI images and other fonts</td>
+<td>Tutorial/screenshot images, sample artwork and generated font resources</td>
+<td>Confirm ownership or redistribution permission for each asset; a filename is not license evidence.</td>
+</tr>
+<tr>
+<td>Local-service Find runtime</td>
+<td>Runtime files distributed inside the local-service ZIP</td>
+<td>Inspect the actual archive, including its bundled <code>tools/findmy/third_party/os-findmy-e.LICENSE</code>; confirm any further dependencies and notices.</td>
+</tr>
+</tbody>
+</table>
+<p>The inventory is <strong>not yet complete</strong> and is a public-release gate. Do not label
+all bundled code as AGPL, assume compiled assets have no attribution duties, or
+treat an upstream project's current license as proof of the exact bundled version.</p>
+<p>本期不含固件和烧录包。CLI 的 AGPL 声明不替代第三方组件的原许可；表中的未决项
+须在公开分发前完成核查。新增的上游许可文本只补充声明，不代表整个包已通过合规审核。</p></main></body></html>

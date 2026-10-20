@@ -6,15 +6,6 @@ InkTag is low-power display firmware and management system software for electron
 
 E-paper uses ambient light for a paper-like appearance without a continuously illuminated backlight.
 
-## This preview
-
-This private preview contains compiled WebUI, Python CLI source and bilingual user manuals. Firmware and wired flashing packages are not included. Publication and the project license are pending confirmation. A hardware entry is not a firmware download or release-qualification claim.
-
-It includes the editable canvas, image dithering/device-effect previews, the color
-and image guide, and weather controls with CLI host scheduling. Export the edited
-scene for host rendering; automatic delivery requires the computer to stay online.
-See [weather stations and host pages](docs/en/host-pages.md).
-
 ## Features
 
 | Feature | Free | Pro | Notes |
@@ -86,6 +77,10 @@ Manufacturer reference: [Goodix company information](https://www.goodix.com/en/a
 
 [Getting started](docs/en/getting-started.md) · [WebUI](docs/en/webui.md) · [CLI](docs/en/cli.md) · [Pro features](docs/en/pro.md) · [Client updates](docs/en/updates.md) · [FAQ](docs/en/faq.md)
 
-Read [security and privacy](SECURITY.md), [third-party notices](THIRD_PARTY_NOTICES.md) and [license status](LEGAL_REVIEW_REQUIRED.md). Never include passwords, activation codes, private locations or keys in issue reports.
+Read [security and privacy](SECURITY.md). Never include passwords, activation codes, private locations or keys in issue reports.
 
 See [GitHub Pages](docs/en/github-pages.md) for future hosting configuration and limitations. This update changes the private repository only; it does not deploy the site.
+
+## License
+
+InkTag-owned CLI source is licensed under AGPL-3.0-only. WebUI is distributed in compiled form only and is not covered by the CLI license. See [licensing scope](LICENSING.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
