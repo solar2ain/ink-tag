@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "releaseTag": "v0.2.0",
   "ownerAuthorizedPublication": true,
-  "decidedAt": "2026-10-20T06:06:08.181979+00:00",
+  "decidedAt": "2026-10-20T14:43:38.039679+00:00",
   "deferredChecks": [
     "cliCorrespondingSourceVerified",
     "webuiBinaryTermsApproved",
     "thirdPartyInventoryVerified"
   ],
-  "readinessSha256": "84e7fe0cf23e4b1437f21096c6a634fc13cbb383dc6a6abb7e06a13afe89a48e",
+  "readinessSha256": "6a9cccc01660793ba378c31967a634c9d420f25744aafe905eafa9da2a16dd08",
   "recordSha256": "61b6ec7d6838e928476e9339de08748beb2b7c96b1a0dd707147347b64c10fa7",
   "artifacts": {
     "InkTag-WebUI-static-v1.2.0.zip": "b993ff096916727a5bb680035749229922d6c63339ad296f6a5d85eb67e61b62",
@@ -17,5 +17,12 @@
     "inktag_cli-0.2.0-py3-none-any.whl": "0360e6bc87bdcea103f03e854fbd9a37e6e5de054681211d41d11aaad220773c",
     "inktag_cli-0.2.0.tar.gz": "f94a791ad229c0aaa6f015e69a3414d4f256699dd7eb4afaa3bebbab6ff3bb18",
     "InkTag-local-server-v1.2.0.zip": "bb4044fc5b4684b79722b34606cc907dd148a2f9449702f3bbceeaf42198401f"
-  }
+  },
+  "scope": "pages-only-hotfix",
+  "pagesReceipt": "releases/pages-hotfix-20261020-r2.json",
+  "pagesReceiptSha256": "200b83761580d9317d909d9de768580c74fd4bc067d441658118c59f0e4999e4",
+  "previousDecisionSha256": "701fdf664363d065569bb70172efe03ca6cef2e9482eba927316fece11e53da3",
+  "ownerAuthorizationStatement": "接受，仅授权本次 Pages 热修复",
+  "existingReleaseArtifactsUnchanged": true,
+  "unchangedCLIReviewInherited": true
 }
