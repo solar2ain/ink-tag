@@ -39,12 +39,33 @@ Read more: [Good Display introduction](https://www.good-display.com/faq/1.html) 
 
 ## Getting started
 
+See the [illustrated online manual](https://solar2ain.github.io/ink-tag-manual/) for a walkthrough. These steps require a device already running compatible InkTag firmware.
+
+### WebUI
+
 1. Prepare a device already running compatible InkTag firmware and stable power.
 2. Open WebUI in a Web Bluetooth-capable Chrome or Edge browser, choose Connect and select the actual advertised name.
 3. Check the MCU and screen settings, import a picture or choose a template, then send and wait for display completion.
 4. Devices with image storage can save images and run slideshows after disconnecting.
 
 Factory devices require matching firmware first. This preview supplies no first-flash files: do not use unknown or cross-MCU images. See the [getting-started guide](docs/en/getting-started.md).
+
+### CLI
+
+After installing the CLI, scan for devices, display a calendar or clock, upload an image and start a slideshow:
+
+```console
+inktag device scan
+inktag --device IKT_TL_1234 device info
+inktag --device IKT_TL_1234 display calendar
+inktag --device IKT_TL_1234 display clock
+inktag --device IKT_TL_1234 image upload photo.jpg --slot next --name landscape
+inktag --device IKT_TL_1234 slot list
+inktag --device IKT_TL_1234 slideshow start --interval 5m
+inktag --device IKT_TL_1234 slideshow stop
+```
+
+Replace `IKT_TL_1234` with the scanned Bluetooth name and `photo.jpg` with your image file. Disconnect WebUI before using the CLI to avoid competing connections, and wait for a screen update to finish before starting another display operation. See the [CLI guide](docs/en/cli.md) for more commands.
 
 ## Installation and use
 
@@ -59,6 +80,8 @@ The local service defaults to port8787 and keeps data in the current user's pers
 With an existing Python virtual environment, run `python -m pip install .` inside the extracted CLI package.
 
 ## User manuals
+
+[Illustrated online manual](https://solar2ain.github.io/ink-tag-manual/)
 
 [Getting started](docs/en/getting-started.md) · [WebUI](docs/en/webui.md) · [CLI](docs/en/cli.md) · [Adapted devices](docs/en/supported-devices.md) · [Pro features](docs/en/pro.md) · [Client updates](docs/en/updates.md) · [FAQ](docs/en/faq.md)
 

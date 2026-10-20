@@ -116,6 +116,8 @@
 </ul>
 <p>了解更多：<a href="https://www.good-display.cn/news/212.html">Good Display 中文介绍</a> | <a href="https://www.good-display.com/faq/1.html">English</a>。</p>
 <h2>首次使用</h2>
+<p>图文步骤见<a href="https://solar2ain.github.io/ink-tag-manual/">在线使用手册</a>。设备需已安装兼容 InkTag 固件。</p>
+<h3>使用 WebUI</h3>
 <ol>
 <li>准备已安装兼容 InkTag 固件的设备及稳定供电。</li>
 <li>在支持 Web Bluetooth 的 Chrome 或 Edge 中打开 WebUI，点击“连接”并选择实际蓝牙名称。</li>
@@ -123,6 +125,18 @@
 <li>支持图槽的设备可保存图片并启用轮播；断开蓝牙后仍可工作。</li>
 </ol>
 <p>原厂设备需要先安装适配固件；本期没有首次烧录文件，请勿使用不明镜像或其他主控的镜像。完整步骤见<a href="zh-CN/getting-started.html">首次使用</a>。</p>
+<h3>使用 CLI</h3>
+<p>安装 CLI 后，可扫描设备、显示日历或时钟，上传图片并开启轮播：</p>
+<pre><code class="language-console">inktag device scan
+inktag --device IKT_TL_1234 device info
+inktag --device IKT_TL_1234 display calendar
+inktag --device IKT_TL_1234 display clock
+inktag --device IKT_TL_1234 image upload photo.jpg --slot next --name landscape
+inktag --device IKT_TL_1234 slot list
+inktag --device IKT_TL_1234 slideshow start --interval 5m
+inktag --device IKT_TL_1234 slideshow stop
+</code></pre>
+<p>把 <code>IKT_TL_1234</code> 替换为扫描到的实际蓝牙名称，<code>photo.jpg</code> 替换为自己的图片文件。使用 CLI 前先断开 WebUI，避免同时占用设备；等待当前屏幕刷新完成再执行下一项显示操作。更多命令见 <a href="zh-CN/cli.html">CLI 使用说明</a>。</p>
 <h2>安装与使用</h2>
 <table>
 <thead>
@@ -153,6 +167,7 @@
 <p>本地服务默认使用 8787 端口，数据保存在当前用户的 InkTag 持久目录。服务重启不需要重建标签身份；不要删除数据目录来解决登录错误。Apple 账号密码只在本机界面输入，建议使用专门注册的账号，不要使用个人常用账号。</p>
 <p>已有 Python 虚拟环境时，也可在解压后的 CLI 包内运行 <code>python -m pip install .</code>。</p>
 <h2>详细手册</h2>
+<p><a href="https://solar2ain.github.io/ink-tag-manual/">在线图文使用手册</a></p>
 <p><a href="zh-CN/getting-started.html">首次使用</a> · <a href="zh-CN/webui.html">WebUI</a> · <a href="zh-CN/cli.html">CLI</a> · <a href="zh-CN/supported-devices.html">已适配设备</a> · <a href="zh-CN/pro.html">Pro 能力</a> · <a href="zh-CN/updates.html">客户端更新</a> · <a href="zh-CN/faq.html">常见问题</a></p>
 <p>使用前请阅读 <a href="SECURITY.html">安全与隐私说明</a>。请勿在问题反馈中公开密码、激活码、定位数据或私钥。</p>
 <p>未来托管部署的配置与限制见 <a href="zh-CN/github-pages.html">GitHub Pages</a>；本次仅更新私有仓库，不部署站点。</p>

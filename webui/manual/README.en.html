@@ -116,6 +116,8 @@
 </ul>
 <p>Read more: <a href="https://www.good-display.com/faq/1.html">Good Display introduction</a> | <a href="https://www.good-display.cn/news/212.html">中文版</a>.</p>
 <h2>Getting started</h2>
+<p>See the <a href="https://solar2ain.github.io/ink-tag-manual/">illustrated online manual</a> for a walkthrough. These steps require a device already running compatible InkTag firmware.</p>
+<h3>WebUI</h3>
 <ol>
 <li>Prepare a device already running compatible InkTag firmware and stable power.</li>
 <li>Open WebUI in a Web Bluetooth-capable Chrome or Edge browser, choose Connect and select the actual advertised name.</li>
@@ -123,6 +125,18 @@
 <li>Devices with image storage can save images and run slideshows after disconnecting.</li>
 </ol>
 <p>Factory devices require matching firmware first. This preview supplies no first-flash files: do not use unknown or cross-MCU images. See the <a href="en/getting-started.html">getting-started guide</a>.</p>
+<h3>CLI</h3>
+<p>After installing the CLI, scan for devices, display a calendar or clock, upload an image and start a slideshow:</p>
+<pre><code class="language-console">inktag device scan
+inktag --device IKT_TL_1234 device info
+inktag --device IKT_TL_1234 display calendar
+inktag --device IKT_TL_1234 display clock
+inktag --device IKT_TL_1234 image upload photo.jpg --slot next --name landscape
+inktag --device IKT_TL_1234 slot list
+inktag --device IKT_TL_1234 slideshow start --interval 5m
+inktag --device IKT_TL_1234 slideshow stop
+</code></pre>
+<p>Replace <code>IKT_TL_1234</code> with the scanned Bluetooth name and <code>photo.jpg</code> with your image file. Disconnect WebUI before using the CLI to avoid competing connections, and wait for a screen update to finish before starting another display operation. See the <a href="en/cli.html">CLI guide</a> for more commands.</p>
 <h2>Installation and use</h2>
 <table>
 <thead>
@@ -153,6 +167,7 @@
 <p>The local service defaults to port8787 and keeps data in the current user's persistent InkTag directory. Restarting does not require re-enrolling tags. Do not delete this directory to fix login errors. Enter Apple credentials only in the local interface and use a separately registered account rather than your everyday personal account.</p>
 <p>With an existing Python virtual environment, run <code>python -m pip install .</code> inside the extracted CLI package.</p>
 <h2>User manuals</h2>
+<p><a href="https://solar2ain.github.io/ink-tag-manual/">Illustrated online manual</a></p>
 <p><a href="en/getting-started.html">Getting started</a> · <a href="en/webui.html">WebUI</a> · <a href="en/cli.html">CLI</a> · <a href="en/supported-devices.html">Adapted devices</a> · <a href="en/pro.html">Pro features</a> · <a href="en/updates.html">Client updates</a> · <a href="en/faq.html">FAQ</a></p>
 <p>Read <a href="SECURITY.html">security and privacy</a>. Never include passwords, activation codes, private locations or keys in issue reports.</p>
 <p>See <a href="en/github-pages.html">GitHub Pages</a> for future hosting configuration and limitations. This update changes the private repository only; it does not deploy the site.</p>

@@ -39,12 +39,33 @@ nRF52811、DA14585 的独立项目采用 Free-only 功能范围，图片容量�
 
 ## 首次使用
 
+图文步骤见[在线使用手册](https://solar2ain.github.io/ink-tag-manual/)。设备需已安装兼容 InkTag 固件。
+
+### 使用 WebUI
+
 1. 准备已安装兼容 InkTag 固件的设备及稳定供电。
 2. 在支持 Web Bluetooth 的 Chrome 或 Edge 中打开 WebUI，点击“连接”并选择实际蓝牙名称。
 3. 在设置中核对主控和屏幕，导入图片或选择创作模板，发送后等待屏幕刷新完成。
 4. 支持图槽的设备可保存图片并启用轮播；断开蓝牙后仍可工作。
 
 原厂设备需要先安装适配固件；本期没有首次烧录文件，请勿使用不明镜像或其他主控的镜像。完整步骤见[首次使用](docs/zh-CN/getting-started.md)。
+
+### 使用 CLI
+
+安装 CLI 后，可扫描设备、显示日历或时钟，上传图片并开启轮播：
+
+```console
+inktag device scan
+inktag --device IKT_TL_1234 device info
+inktag --device IKT_TL_1234 display calendar
+inktag --device IKT_TL_1234 display clock
+inktag --device IKT_TL_1234 image upload photo.jpg --slot next --name landscape
+inktag --device IKT_TL_1234 slot list
+inktag --device IKT_TL_1234 slideshow start --interval 5m
+inktag --device IKT_TL_1234 slideshow stop
+```
+
+把 `IKT_TL_1234` 替换为扫描到的实际蓝牙名称，`photo.jpg` 替换为自己的图片文件。使用 CLI 前先断开 WebUI，避免同时占用设备；等待当前屏幕刷新完成再执行下一项显示操作。更多命令见 [CLI 使用说明](docs/zh-CN/cli.md)。
 
 ## 安装与使用
 
@@ -59,6 +80,8 @@ nRF52811、DA14585 的独立项目采用 Free-only 功能范围，图片容量�
 已有 Python 虚拟环境时，也可在解压后的 CLI 包内运行 `python -m pip install .`。
 
 ## 详细手册
+
+[在线图文使用手册](https://solar2ain.github.io/ink-tag-manual/)
 
 [首次使用](docs/zh-CN/getting-started.md) · [WebUI](docs/zh-CN/webui.md) · [CLI](docs/zh-CN/cli.md) · [已适配设备](docs/zh-CN/supported-devices.md) · [Pro 能力](docs/zh-CN/pro.md) · [客户端更新](docs/zh-CN/updates.md) · [常见问题](docs/zh-CN/faq.md)
 
