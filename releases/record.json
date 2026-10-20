@@ -8,7 +8,7 @@
       "channel": "stable",
       "candidateOnly": false,
       "releaseReady": true,
-      "published": false,
+      "published": true,
       "firmware": [],
       "components": {
         "webui": {
