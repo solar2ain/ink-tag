@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "scope": "pages-only-hotfix",
+  "baseMainCommit": "73459a6626d6aadc0e600be8020cd0e655fad03b",
+  "buildId": "web-c3633bbd3142c15adfee",
+  "buildNumber": 2026102116,
+  "ownerAuthorization": {
+    "authorized": true,
+    "statement": "接受，仅授权本次 Pages 更新",
+    "sameUpdateIncludesE6SafetyHint": true,
+    "acknowledgedOutstanding": [
+      "webuiBinaryTermsApproved",
+      "thirdPartyInventoryVerified",
+      "compiled-renderer-corresponding-source-materials"
+    ]
+  },
+  "previousPublicationDecisionSha256": "f44886591a59308b4a3dbc09fc25e26b48f60e3c851704facd66b5fa47aaba47",
+  "existingReleaseTag": "v0.2.0",
+  "existingReleaseRecordSha256": "61b6ec7d6838e928476e9339de08748beb2b7c96b1a0dd707147347b64c10fa7",
+  "existingFirmwareManifestSha256": "e08c2088244b044916cc1eca05a7fc4cf5735dd4cb46b68dfef78848f4b59cde",
+  "existingReleaseArtifactsUnchanged": true,
+  "cliUnchanged": true,
+  "standaloneAttachmentUnchanged": true,
+  "newReleaseCreated": false,
+  "retainedAssets": {
+    "webui/assets/ImagePage-CkZkHMsa.js": "d4bced81841003e58fe0f33283b55b597502541b64741133ad6cc20d40f472ed",
+    "webui/assets/ImagePage-DDIXNGrx.js": "e27158a32fe87a856829ced8fa1d848a8b5778d2f28bea67c8d37c45a60e9269",
+    "webui/assets/ImagePage-DNy4vnuZ.js": "8b0541a728f080ec15b186fd1e0e39780c107fc3299d5222d425d611e4a94f3a",
+    "webui/assets/LeaferEditorPage-CNTHwmNT.js": "9ae37642669b330ebc4ffbbb1821ac1b6936c627248d84dac7c2b15386ac1841",
+    "webui/assets/LeaferEditorPage-Cs80lvWj.css": "8ff4c8f81e4a3e60df6ba760f9d8e90d8ee1d474fc0891c58d8f0bffe8e60445",
+    "webui/assets/LeaferEditorPage-DdbJMURW.js": "8d8af4b871a7b6e7d9a9fe83a995cc1c85ca88b244822574a0b389e49b23a12f",
+    "webui/assets/LeaferEditorPage-Z3W_B_J9.js": "0fd9a312d4e883797e04a62ed48d45eaddc6a049044ab318bec6e365cd30c153",
+    "webui/assets/MaShanZheng-Regular-oqOjKZ8V.woff2": "31563e1b1d107037b3ba46890fd4af7d0bb06d12dc87ab87a53c9757f7cb024a",
+    "webui/assets/connect-BolsT6C-.png": "03d51b542d990a660dddc5e5f29ddeee27964a5d17c947d6f96782e26f59d92a",
+    "webui/assets/editionBadgeBitmap-BRQe8mFe.js": "f08d88647b7ff902a53ef01d3c60c36850a9f6add6c6e37f84489d82646c2af8",
+    "webui/assets/editionBadgeBitmap-CivvjdTF.js": "4f4c44bdb59a9ebe9d795550ae1404df8421c1304f9098e9c49a0f4d839c11c1",
+    "webui/assets/editionBadgeBitmap-DEPN-2Zx.js": "0cea1137ccfe688a3d1270189ee5dbc6d5c01a5b0bfca139bee676ee96e70cc5",
+    "webui/assets/fonts.generated-Ba5ySwAo.js": "546d782ba5d46e8492d3590b8f5bfb72896d407e7e1c3ec9dbf4218e48220c1b",
+    "webui/assets/fonts.generated-DLXO-6gO.js": "c51880f6d8b2c856fe537b6f200c7e4afe6d126c60034adf1710c968bdecb633",
+    "webui/assets/glyphCatalog.generated-1Xg3yjDx.js": "6eff49672777d8b1339a06848e1309081f072a23bdfbf581277dcde792bf36ee",
+    "webui/assets/imageRaster-Cz86LBUr.css": "e503e37ad86c5049c82936b87f92c6bc2b3964223e4ab09ebfc7b2ee51cc04ea",
+    "webui/assets/imageRaster-Do9AFRu-.js": "e962a6b80426cf786cd36de639dd3837f9573f2077627c7166e81df28399caf8",
+    "webui/assets/imageRaster-XN32MMMR.js": "f6e7725165b2ba2d6a65263278b66654cb03f924823d05d777fc613b02985993",
+    "webui/assets/imageRaster-ZF_46jGf.js": "b5efef1c69341b6a0ead07431fb208c6760fd466cbce9107ce3e80c3c6967c85",
+    "webui/assets/index-DSPYld-9.css": "38ad348e4cbbc933302b0696495797a94017dcfa9dd7692faf7588a785cc444c",
+    "webui/assets/index-DmZlWh-o.js": "3b10488d3420ea169a4b8239c2627bf3e63258b532ff011f51e24fa63980659d",
+    "webui/assets/index-Dn_xEQHy.js": "4ba19ffdb347c6959651162c0126fa54110b65292e9f090299906126895c8d8b",
+    "webui/assets/index-J8XrZHsN.js": "17f22ad45e687479b48810854a6f87deeaa3184aeac4c8d201c742408b920307",
+    "webui/assets/index-W8G46deR.css": "bdc05d1a5723230ab7f74ee4a2c145a21c8f703b4033f4f46698f348cdd580d3",
+    "webui/assets/ota-9J1z-bKs.js": "1d34ab781c94f11ce7fec6a52c33128471d695483b82bfbff4db3b978d134792",
+    "webui/assets/ota-BhTNmjww.js": "1a4ce2372bf24d180fd6f5a579fac3b9bfdef23d6a667ab6ce7bdd57f2708dc3",
+    "webui/assets/ota-DLVUh2Or.js": "99527fb7eafdd0d5291107fbf72f78f857629aa511acfa2429f06ee6a32fb7ae",
+    "webui/assets/red-tulips-DOlS5Hyj.png": "87fe784037345f4fcb986a3315ec4e4db3502f3ca6fa7ef149cf1e2e8e8ab248",
+    "webui/assets/scenePreview-BItm2xrJ.js": "fb7ffbe53bf3f0b0d5c5784271d326db3b4a089a2b9f6ae423158d05efda66bb",
+    "webui/assets/scenePreview-DCZ8eSoo.js": "48134878ae56fb817e11506e553651026ebb8cd27be8b77fad1a49446e4e301d",
+    "webui/assets/scenePreview-LZqCjAVf.js": "5510ecb7fdda80e0eb4d52ff205aa0176669daf3d67e7e94c13c7b693ff1ae8a",
+    "webui/assets/schedule-editor-BwIKmkW2.png": "82fa72ac1bf407f2f7841280d5e99e11a980301358aef288691c22add62e8faf",
+    "webui/assets/schedule-template-B35vdVFs.png": "2594901ec44951f62cb06238daf21b0ef3dbf9d490f0e2640dce6a82a0fae24f",
+    "webui/assets/screen-BQVrbDX5.png": "4aa3d04bc7323b422d6afb81d9f8c18df60ef2f1641c86bd8c5e18b61e583f16",
+    "webui/assets/zoom-out-2VCAkEZE.js": "85ac602a12944fb9c5bb2378fae1ebfe14c0db005bf100dceb26815a24d13eea",
+    "webui/assets/zoom-out-B1FghPLa.js": "f0108d1c5243173bfa2cb907ef577aa48a6613e57000388fb75d25c0aaebc15d",
+    "webui/assets/zoom-out-CLQSO6jn.js": "7e20378401c2b6e55707581657d8631ca11d496d54699f87de56be95bc9ae9d2"
+  },
+  "addedAssets": {
+    "webui/assets/ImagePage-BidPUwnt.js": "cf153a412bfcd26920010182f73c1e3d725b6e7f2e177d1e3706147ebd6dc0a4",
+    "webui/assets/LeaferEditorPage-CjMY-fvi.js": "df76d31f82e5d5db4cbf6e812e650fea5bb988691aa33e83012763fe252eae4c",
+    "webui/assets/editionBadgeBitmap-CDpweZZJ.js": "7174b183d55661430b545bcd9e01c3358bae5b92b1e9a4e20153944b72d84691",
+    "webui/assets/fonts.generated-DyxLZzI7.js": "88368cb640ed70c18694511f1183b33713ff62a8045043d3d7588725b3622af6",
+    "webui/assets/imageRaster-xVJJhYDh.js": "fe1ee613d4a4afad1d4ee51c41506a9a4ac406a8c05b6314596bf5e036187457",
+    "webui/assets/index-C75w8Sie.js": "b3f5105d2b3a53daa7f318d9efdcb5c57a6dacb2336416778facd8ff96deded6",
+    "webui/assets/index-CocCT7Di.css": "ff98bafa4eebbafb0cc82ee00cc7155a23b7be79564e66bb74bfbabcac4938ca",
+    "webui/assets/ota-C_hJIxBt.js": "b51e87daaf5c07eb74ede08487fea3db3610cb1287b552189f403ce57906e20c",
+    "webui/assets/scenePreview-DGB6mCJn.js": "d917fe9046ebeb2fc0c6410c50e7e91d2e3264d4b15304573c17999f23c23e4e",
+    "webui/assets/zoom-out-pubW8OjL.js": "1810f47fb66579ed83a7dd6d3ee063f546d30556207d928f44e8149b8bc967db"
+  },
+  "fontLicenseTexts": {
+    "webui/licenses/GPL-2.0.txt": "871c2a85e6bbf7bec65043820b706a265ed95d4e58c577fbb2c9f60c39c26ca7",
+    "webui/licenses/U8g2-LICENSE.txt": "35070a56a2cb59560278c1734c51da94b679bc208c5244625769a0f1df001d30",
+    "webui/licenses/WenQuanYi-Bitmap-Song-NOTICE.txt": "01895d76c8d403da5bd07917bc533b312a57cf74b485463e8a3af61322851aae"
+  },
+  "glyphCatalog": {
+    "path": "webui/assets/glyphCatalog.generated-1Xg3yjDx.js",
+    "sha256": "6eff49672777d8b1339a06848e1309081f072a23bdfbf581277dcde792bf36ee",
+    "faces": {
+      "wqy9": 27535,
+      "wqy12": 27535
+    },
+    "unchangedFromPublished": true,
+    "publicBdfGlyphMetricsAndPixelsMatched": true
+  },
+  "index": {
+    "path": "webui/index.html",
+    "sha256": "e45d0f4bf76ef3dd13bc846a05014f08d23862fce08dd2d8a2f65cc6cc6e455b"
+  },
+  "entry": {
+    "path": "webui/assets/index-C75w8Sie.js",
+    "sha256": "b3f5105d2b3a53daa7f318d9efdcb5c57a6dacb2336416778facd8ff96deded6"
+  },
+  "embeddedWasm": [
+    {
+      "bytes": 792,
+      "sha256": "38a645857737ef6cc834fce038af4ca863e9bf7fcfac5159b5e90a7119fa7385"
+    },
+    {
+      "bytes": 75143,
+      "sha256": "e16926a37c1be75176a214376a65d8ecc780665b1d46f31c79e57acce56bc0d8"
+    }
+  ],
+  "retentionPolicy": "Append immutable hashed assets; retain all prior asset bytes; reject same-name changes. Preserve published manuals, notices and empty feeds; add only three font-license texts and their index links.",
+  "deferredReviewsRemainUnresolved": true,
+  "reviewedAt": "2026-10-21T14:28:54.817711+00:00",
+  "changes": [
+    "In-page font confirmation modal and actual missing-glyph supplementation, preserving existing device font faces",
+    "Image orientation and independent canvas rotation updates",
+    "E6 screen-cable pin-16 insulation safety hint",
+    "Existing requested client layout/image/OTA fixes; no firmware installed or published"
+  ],
+  "remainingEvidence": [
+    "No new physical-device upload or hardware qualification performed by the release auditor",
+    "Firmware optical qualification remains a separate gate",
+    "Public-font matching and attribution texts do not complete compiled renderer corresponding-source delivery or other unresolved reviews"
+  ]
+}
