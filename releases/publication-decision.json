@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "releaseTag": "v0.2.0",
   "ownerAuthorizedPublication": true,
-  "decidedAt": "2026-10-20T14:43:38.039679+00:00",
+  "decidedAt": "2026-10-21T05:52:09.040156+00:00",
   "deferredChecks": [
     "cliCorrespondingSourceVerified",
     "webuiBinaryTermsApproved",
     "thirdPartyInventoryVerified"
   ],
-  "readinessSha256": "6a9cccc01660793ba378c31967a634c9d420f25744aafe905eafa9da2a16dd08",
+  "readinessSha256": "bb5ecd7e599da36d1e5a86c03510510089f9e00b05a6df33ba71047e48ddc49c",
   "recordSha256": "61b6ec7d6838e928476e9339de08748beb2b7c96b1a0dd707147347b64c10fa7",
   "artifacts": {
     "InkTag-WebUI-static-v1.2.0.zip": "b993ff096916727a5bb680035749229922d6c63339ad296f6a5d85eb67e61b62",
@@ -19,9 +19,9 @@
     "InkTag-local-server-v1.2.0.zip": "bb4044fc5b4684b79722b34606cc907dd148a2f9449702f3bbceeaf42198401f"
   },
   "scope": "pages-only-hotfix",
-  "pagesReceipt": "releases/pages-hotfix-20261020-r2.json",
-  "pagesReceiptSha256": "200b83761580d9317d909d9de768580c74fd4bc067d441658118c59f0e4999e4",
-  "previousDecisionSha256": "701fdf664363d065569bb70172efe03ca6cef2e9482eba927316fece11e53da3",
+  "pagesReceipt": "releases/pages-ota-hotfix-20261021-r2.json",
+  "pagesReceiptSha256": "a9b341455960272ba890565bf114b2c69c4ccfd76a7f3c4e45b9bf790e2e9582",
+  "previousDecisionSha256": "d971a0a56a130b3f655589b3cceb2091d23a18d2e24ceacf7a82677aa1bd406f",
   "ownerAuthorizationStatement": "接受，仅授权本次 Pages 热修复",
   "existingReleaseArtifactsUnchanged": true,
   "unchangedCLIReviewInherited": true
