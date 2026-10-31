@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../index.html">InkTag WebUI</a></nav><main><h1 id="客户端更新">客户端更新</h1>
+<p>中文 | <a target="_blank" rel="noopener noreferrer" href="../en/updates.html">English</a></p>
+<p>在 WebUI 的“设置 → 客户端设置 → 关于”中查看当前版本并检查更新。WebUI、CLI 与设备固件的版本分别显示；更新客户端不会自动更新设备。</p>
+<h2 id="下载和安装">下载和安装</h2>
+<ol>
+<li>检查新版本及更新说明，从项目 <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/releases">GitHub Releases</a> 下载所需附件。尚无附件时表示该版本暂不可下载。</li>
+<li>按<a target="_blank" rel="noopener noreferrer" href="releases.html">下载与校验</a>检查文件，选择适合自己的客户端。</li>
+<li>在线 WebUI：重新打开页面即可获取已上线的版本。离线 ZIP：下载新文件后打开；本地服务：停止旧服务，按 <a target="_blank" rel="noopener noreferrer" href="webui.html">WebUI 使用说明</a>更新文件并重新启动，保留原数据目录。</li>
+<li>CLI：按 <a target="_blank" rel="noopener noreferrer" href="cli.html">CLI 手册</a>在原独立环境内更新，运行 <code>inktag --version</code> 确认版本。</li>
+</ol>
+<p>设备固件按准确主控和主板提供，包括 nRF52832、nRF52811 与 DA14585。连接设备后查看可用 OTA 包，或下载匹配文件后按<a target="_blank" rel="noopener noreferrer" href="ota.html">无线升级</a>操作；不要使用其他主控或板型的文件。校验和只检查文件完整性，不能代替固件签名验证。</p>
+<p>自动检查需要设备提供完整的兼容信息。若提示无法自动匹配，请从 Releases 选择适用于当前设备的本地 OTA 包；这不影响正常的升级包校验和手动升级。版本变化见<a target="_blank" rel="noopener noreferrer" href="../CHANGELOG.html">更新记录</a>。</p>
+<p>CLI 也可以直接查询公开固件清单，无需连接设备，例如：</p>
+<pre><code class="language-sh">inktag-cli device ota check --family gr5331_zkel --current-version 0.2.0
+</code></pre>
+<p><code>--family</code> 必须使用设备报告的准确固件家族；相同版本不会提示升级。此命令只查询，不会安装固件。</p>
+<h2 id="检查失败怎么办">检查失败怎么办</h2>
+<p>检查超时或网络不可用不会影响连接设备及普通操作。可稍后重试，或直接查看 Releases；网页站点不可用时使用本地版。未找到较新版本不代表所有设备均支持相同功能。</p>
+<p>检查更新不上传设备地址、密码、身份或 Find 数据。安装后若遇到问题，保留本地数据和错误信息，不要通过删除数据目录或重刷设备来修复客户端更新。</p></main></body></html>

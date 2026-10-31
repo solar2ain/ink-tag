@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../index.html">InkTag WebUI</a></nav><main><h1 id="首次安装与完整烧录">首次安装与完整烧录</h1>
+<p>原厂价签首次安装 InkTag 需要有线烧录；已经运行 InkTag 的设备，日常升级优先使用 <a target="_blank" rel="noopener noreferrer" href="ota.html">OTA</a>。先确认<a target="_blank" rel="noopener noreferrer" href="supported-devices.html">主控、主板丝印和屏幕</a>，再选择对应固件与配置，不要只凭价签的产品名。</p>
+<h2 id="目录结构与文件用途">目录结构与文件用途</h2>
+<p><code>firmware/</code> 只按主控和主板家族分目录，例如 <code>gr551x_zkel</code>；产品型号、丝印与屏幕对应关系写在各目录的 README。</p>
+<pre><code class="language-text">firmware/&lt;主控_主板&gt;/
+  README.md / README.en.md  设备、丝印、配置和一行烧录命令
+  LICENSE / NOTICE...      适用的许可及版权声明
+  ota/                    无线更新文件
+  full/                   首次安装及有线恢复文件
+  tools/
+    setup.ps1 / check.ps1  安装依赖、离线检查（按平台提供）
+    probe.ps1             识别主板
+    backup.ps1            备份（支持的平台提供）
+    flash.ps1             完整烧录入口
+    configs/              可选择的主板与屏幕配置
+    internal/             入口转发和平台依赖，通常不用手动操作
+      native/             原平台后端，原文件及相对目录保留
+</code></pre>
+<p>所有 Windows 示例使用 PowerShell5.1 可执行的一行命令，先进入具体主板目录：</p>
+<pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File &quot;.\tools\flash.ps1&quot; -Firmware &quot;.\full\对应完整固件文件&quot; -Config &quot;.\tools\configs\对应主板配置.toml&quot; -RetryDetect
+</code></pre>
+<p>这是一行命令的结构说明；请复制该主板 README 中填好真实文件名和配置的完整命令。TLSR 还需要实际串口参数。工具仍显式接收固件，不自动挑选或绑定某个旧版本。</p>
+<p><code>ota/</code> 与 <code>full/</code> 中的文件也提供为 GitHub Releases 附件，清单中的大小与 SHA256 相同。App OTA 不会替换 Recovery；不要把 OTA 当作首次完整烧录文件。平台尚缺写入后端的限制仍以对应 README 为准。</p>
+<p>烧录依赖位于平台后端目录，按其 setup/check 提示准备；没有需要的入口时不提供伪按钮或空脚本。维护校验清单保存在 <code>releases/tool-manifests/</code>，不是额外固件族。旧 <code>flash/</code>、厂商分类占位目录已停用。</p>
+<h2 id="选择烧录器">选择烧录器</h2>
+<p><img alt="上侧蓝色 J-Link OB 小板，下侧 CH340 串口小板及外接电阻" src="../assets/flashing/programmers.webp" /></p>
+<ul>
+<li><strong>下侧：CH340 + 1–2 kΩ 电阻。</strong> 用串口模拟 Telink 的 SWS 烧录，成本低，但速度和稳定性较差，接线、USB 串口和系统时序都会影响结果。制作与连接方法参考原作者的 <a target="_blank" rel="noopener noreferrer" href="https://github.com/atc1441/ATC_TLSR_Paper/blob/main/USB_UART_Flashing_connection.jpg">CH340／SWS 接线图</a>。按图连接电阻、SWS、共地和所需复位线，不能当成普通 TX/RX 串口直连；不要把 5V 直接接到价签的电源或信号脚。</li>
+<li><strong>上侧：J-Link OB。</strong> 用于本项目 ARM 主控的 SWD 烧录，按主板说明连接 SWDIO、SWCLK、GND 及必要的电源／复位。它不能代替 TLSR 的 SWS 接线。</li>
+</ul>
+<p>图示两种小板的参考购入价均不到 <strong>人民币 10 元</strong>，不含其他配件；可自行搜索“CH340 USB 转 TTL”“J-Link OB”，以实际商家价格和规格为准。图中是低价小板示意，不代表任意同名板都具有相同兼容性。</p>
+<h2 id="安装软件与驱动">安装软件与驱动</h2>
+<p>J-Link 路径统一使用 <strong>SEGGER J-Link Software and Documentation Pack 7.88j（Windows x64）</strong>，包含 USB 驱动。到 <a target="_blank" rel="noopener noreferrer" href="https://www.segger.com/downloads/jlink/">SEGGER 官方下载页</a>选择对应历史版本；这里的 7.88j 是电脑软件版本，不是小板上标注的硬件版本。保留安装目录，例如 <code>C:\Program Files\SEGGER\JLink_V788j</code>。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>主控</th>
+<th>烧录方式</th>
+<th>需要准备的软件／依赖</th>
+<th>对应目录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GR5331、GR5513／GR5515</td>
+<td>J-Link OB／SWD</td>
+<td>Windows x64；Python 3.12 x64；J-Link 7.88j；Goodix GProgrammer console 2.0.3.0，保留原配 loader、DLL</td>
+<td><code>firmware/gr5331_zkel</code>、<code>gr551x_zkel</code>、<code>gr551x_zkel_internal</code></td>
+</tr>
+<tr>
+<td>OM6626</td>
+<td>J-Link OB／SWD</td>
+<td>Windows x64；Python 3.12.0 x64；J-Link 7.88j；OM6626 的 J-Link 芯片支持文件。按目录内 <code>DEPENDENCIES.txt</code> 安装，包内脚本检查其版本</td>
+<td><code>firmware/om6626_zkel</code></td>
+</tr>
+<tr>
+<td>TLSR8359</td>
+<td>CH340／SWS</td>
+<td>Python 3.11+；CH340 驱动；工具 <code>setup.ps1</code> 所需的串口依赖，无需 J-Link</td>
+<td><code>firmware/tlsr8359_hsel</code></td>
+</tr>
+<tr>
+<td>nRF52811</td>
+<td>当前发行工具使用 J-Link／SWD</td>
+<td>Windows x64；J-Link 7.88j 和 USB 驱动。工具目录已提供便携 Python／依赖，无需另外安装系统 Python</td>
+<td><code>firmware/nrf52811_aesl</code></td>
+</tr>
+<tr>
+<td>nRF52832</td>
+<td>当前发行工具使用 J-Link／SWD</td>
+<td>Windows x64；J-Link 7.88j 和 USB 驱动。工具目录已提供便携 Python／依赖；实际写入是否开放见该目录 README</td>
+<td><code>firmware/nrf52832_priceetag</code></td>
+</tr>
+<tr>
+<td>DA14585</td>
+<td>J-Link OB／SWD</td>
+<td>Windows x64；J-Link 7.88j 和 USB 驱动。工具目录已提供便携 Python／依赖；完整写入还受 README 所列后端条件限制</td>
+<td><code>firmware/da14585_aesl</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>CH340 已被系统识别为串口时，无需重复安装驱动。否则从沁恒官网下载 <a target="_blank" rel="noopener noreferrer" href="https://www.wch.cn/downloads/CH341SER_EXE.html">Windows 驱动</a>或 <a target="_blank" rel="noopener noreferrer" href="https://www.wch.cn/downloads/CH341SER_MAC_ZIP.html">macOS 驱动</a>。不要用照片中的颜色推断线序，以模块和主板的实际标注为准。</p>
+<h3 id="macos-能否烧录">macOS 能否烧录？</h3>
+<ul>
+<li><strong>Telink／CH340-SWS 串口模拟方案可在 macOS 使用</strong>；要使用对应系统和主控的工具，不能直接运行下方 Windows PowerShell 命令。</li>
+<li><strong>nRF／DAPLink 在 macOS 烧录已验证可行，但当前发行工具暂未整合支持。</strong> DAPLink 不是 CH340，nRF 使用 SWD，不是 Telink 的 SWS。</li>
+<li>本期其余有线烧录流程使用 <strong>Windows</strong>。本页描述的是当前发布工具的支持范围，不代表相应芯片在其他系统上绝对不能烧录。</li>
+</ul>
+<p>Mac 上的软件串口时序可参考 <a target="_blank" rel="noopener noreferrer" href="https://github.com/pvvx/TlsrComSwireWriter">pvvx 的 macOS 串口工具说明</a>。外链用于理解制作、接线和平台差异；烧录 InkTag 仍须使用与该主控相符的完整固件与配套流程，不能把其他项目的通用擦写命令套上来。</p>
+<h2 id="下载接线和烧录">下载、接线和烧录</h2>
+<ol>
+<li>从 <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/releases">Releases</a>下载准确目标的<strong>完整固件</strong>；工具以明文目录放在仓库 <code>firmware/&lt;主控_主板&gt;/</code>。工具不含固件，运行时明确传入固件路径。OTA 包不能代替完整固件。</li>
+<li>在上表对应目录打开 Windows PowerShell 5.1 或更新版本，先阅读该目录的中英文 README。里面按设备名、丝印和配置逐项列出可复制的一行命令。</li>
+<li>安装上表的软件，按该主控 README 运行 <code>setup.ps1</code>／<code>check.ps1</code>；公开入口统一放在 <code>tools/</code>；内部依赖路径由平台后端处理，不必手动进入。</li>
+<li>按主板接线，稳定供电、共地，先探测并保存可用的原厂备份，再选择准确配置、执行完整烧录和回读。</li>
+</ol>
+<p>例如在 <strong><code>firmware/gr5331_zkel</code> 目录</strong>查看入口帮助，不连接设备：</p>
+<pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File &quot;.\tools\flash.ps1&quot; -Help
+</code></pre>
+<p>实际烧录请复制该目录 README 对应配置的一行命令，其中会明确包含 <code>-Firmware</code>、<code>-Config</code> 和 <code>-RetryDetect</code>。TLSR 还需指定真实串口，例如 <code>-Port COM3</code>。<code>-RetryDetect</code> 只重试最初的检测，不重放擦写或结果未知的操作。</p>
+<p>完整烧录会清理主控侧用户设置和数据；必要的出厂身份、BLE 地址、校准及同机有效 Pro 按主控说明保留。没有擦除后端的独立外置图片 Flash 会保留。当前某些便携写入入口尚未开放，不能把离线预检成功当作已经可以写入；以每个目录的说明为准。</p>
+<h2 id="连接或启动失败">连接或启动失败</h2>
+<p>检查电池、供电、线序、实际主控及工具版本。不能识别、供电异常或读回失败时停止，保留错误和备份，不反复全擦。若 InkTag Recovery 仍可连接，可使用匹配且可信的 OTA 包恢复。</p>
+<p>普通 WebUI／CLI 使用者不需要安装 MCU SDK、Keil 或编译器。更多说明：<a target="_blank" rel="noopener noreferrer" href="devices.html">设备与屏幕</a> · <a target="_blank" rel="noopener noreferrer" href="ota.html">OTA 与 Recovery</a> · <a target="_blank" rel="noopener noreferrer" href="getting-started.html">首次使用</a>。</p></main></body></html>

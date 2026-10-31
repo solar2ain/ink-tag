@@ -1,0 +1,42 @@
+Tested target: Windows x64, CPython 3.12.0, Windows PowerShell 5.1 / PowerShell 7.
+No SDK, compiler, installed full InkTag CLI, BLE or serial runtime is required.
+
+Python 3.12.0 official acquisition (manual, outside setup):
+https://www.python.org/downloads/release/python-3120/
+Select Windows installer (64-bit). setup explicitly creates a package-local
+standard venv; it never changes a system Python or downloads dependencies.
+Exact direct/transitive packages and official PyPI wheel hashes:
+dependencies/requirements.lock, with redistributable wheels in dependencies/wheels.
+pip is the Python3.12.0 ensurepip bootstrap version, pinned and checked too.
+Python runtime packages: cryptography/cffi/pycparser, unicorn, intelhex,
+qrcode/colorama, PyYAML. The wheels retain their upstream licenses/notices
+(Apache/BSD/MIT and Unicorn GPL/LGPL components as supplied by upstream).
+No optional qrcode image-rendering extras are used; Pillow is not required.
+Dependency versions differing from the lock are refused, not auto-upgraded.
+The matching unmodified official PyPI source distributions, including Unicorn's
+native source tree/build scripts, are supplied in dependencies/sources with
+sources.lock hashes. They are license/source material, not installed or built
+by setup. Preserve the upstream license notices in both wheels and sources.
+
+SEGGER J-Link Software and Documentation Pack 7.88j for Windows:
+https://www.segger.com/downloads/jlink/
+Manual licensed full installation and USB driver required; installing a driver
+can require administrator rights. This package does NOT redistribute SEGGER.
+check verifies the pinned JLink.exe/JFlash.exe/JLinkARM.dll SHA256 and DLL version
+without executing them. INKTAG_JLINK_HOME may select an explicit installation;
+otherwise the fixed Program Files/SEGGER/JLink_V788j path is used, not PATH search.
+These three fingerprints identify the installation, NOT a portable native closure.
+
+Official maintained OM6626 device-support source:
+https://gitee.com/jtcom/OM6626.git  (tools/plugins/jlink)
+Acquire the exact pinned JLinkDevices.xml plus Devices/Onmicro/OM662XX_nombr.elf
+and OM662XX.elf under its license. Vendor loaders are NOT redistributed here.
+No SDK/compiler is used at runtime. With an explicitly supplied extracted pack,
+setup.ps1 -DevicePackSource <directory> copies only these three verified files
+to APPDATA/SEGGER/JLinkDevices/InkTag/OM6626, and refuses any existing destination.
+If already installed, omit DevicePackSource and use check.ps1; no overwrite,
+automatic vendor-tool execution or automatic repair occurs.
+Exact native/device-pack hashes: tools/internal/delivery-dependencies.json.
+No security-policy/certificate changes, network requests, probe access or
+firmware writes are performed by setup/check. Offline-only admission does not
+verify USB driver operation, device reachability or physical write/read timing.

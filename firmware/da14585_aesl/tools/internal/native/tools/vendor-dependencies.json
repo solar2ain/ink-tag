@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "status": "inventory-only-not-environment-qualification",
+  "automaticInstallation": false,
+  "redistributed": false,
+  "segger": {
+    "version": "7.88j",
+    "officialAcquisition": "https://www.segger.com/downloads/jlink/",
+    "files": [
+      {
+        "file": "JLink.exe",
+        "bytes": 370840,
+        "sha256": "405F4D0A239475E5529F6D09A130CF5BBFE53AC97EB25CEC9E492C10DF16C805",
+        "role": "Pinned probe and Commander Full transport"
+      },
+      {
+        "file": "JLink_x64.dll",
+        "bytes": 22173848,
+        "sha256": "6B4A878202DEFB496EE0344FB0583929A40D36D2268548D723B60442D9A3909E",
+        "role": "64-bit pinned Python probe dependency"
+      }
+    ],
+    "policy": "Manual official acquisition; no arbitrary PATH executable, driver/service installation or native version subprocess from environment check."
+  },
+  "guardedFullHelper": {
+    "bundled": false,
+    "file": "InkTag-da14585-guarded-helper-0f183172ce2d.bin",
+    "packagePath": "tools/internal/InkTag-da14585-guarded-helper-0f183172ce2d.bin",
+    "bytes": 2832,
+    "sha256": "0f183172ce2d0ce86bf32c27dde76d2d77ceb0ce1a4f974dea1489ba6395dd7c",
+    "acquisitionStatus": "Not distributed in this tools-only bundle; obtain only an independently reviewed exact-byte project helper. No public acquisition is claimed.",
+    "policy": "External fixed programming dependency, not an App/Recovery/Full image. Redistribution and fresh reproducible build closure are not established by this bundle. Missing/corrupt bytes fail offline validation; no source/SDK search, substitute helper, build or trust override. Portable device writes remain closed even when exact bytes are supplied."
+  }
+}

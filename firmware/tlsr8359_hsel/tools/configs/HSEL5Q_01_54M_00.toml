@@ -1,0 +1,39 @@
+# Hanshow StellarPro-154Q-N
+# Exact stock profile8 pilot; screen/LED routes are bounded persistent data.
+# Optical/power qualification remains open; NFC uses immutable board facts.
+# Unified app-full.zip / layout-v1; preserve the tested 90deg + mirror-X setup.
+# This file does not enable Deep Retention or prove a standby-current target.
+format_version = 1
+board_marking = "HSEL5Q_01_54M_00"
+
+[screen]
+ic = "JD79XXX" # Family driver; exact controller die remains unconfirmed.
+recipe = 4
+color = "BWRY"
+rotation = 90
+mirror_x = true
+mirror_y = false
+
+native_ui_scale = 0 # 0=AUTO; 1=1x; 2=1.5x; 3=2x; 4=1.25x; 5=1.75x
+width = 200
+height = 200
+visible_x = 0
+visible_y = 0
+visible_width = 200
+visible_height = 200
+
+[gpio.display]
+mosi = "PB6"
+clock = "PD7"
+cs = "PD2"
+dc = "PB7"
+reset = "PD4"
+busy = "PA1"
+enable = "PB5"
+enable_active_low = true
+
+[gpio.led]
+red = "PB4"
+green = "PD3"
+blue = "PA7"
+active_low = ["red", "green", "blue"]

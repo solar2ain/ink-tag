@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "entries": {
+    "setup": "tools/setup.ps1",
+    "check": "tools/check.ps1",
+    "probe": "tools/probe.ps1",
+    "backup": "tools/backup.ps1",
+    "flash": "tools/flash.ps1"
+  },
+  "configs": [
+    {
+      "name": "PriceEtag_V1.7.toml",
+      "original": "tools/configs/PriceEtag_V1.7.toml"
+    }
+  ]
+}

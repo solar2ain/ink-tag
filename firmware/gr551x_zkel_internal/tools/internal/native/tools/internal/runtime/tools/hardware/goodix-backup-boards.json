@@ -1,0 +1,43 @@
+{
+  "schema": "inktag-goodix-backup-boards-v1",
+  "authority": "human board-marking clarification, 2026-10-14; archival labels are not live MCU/BOM identification",
+  "boards": {
+    "gr5331_zkc21v": {
+      "chip": "gr5331",
+      "pcb": "ZK_EL_GR5331_2.13_V1.1",
+      "boardNote": "PH2435",
+      "productName": "zkc21v",
+      "markingVisible": true,
+      "nfcFitted": null,
+      "originalUserLabel": "gr5531_zkc21v"
+    },
+    "gr5515_zkc42vm": {
+      "chip": "gr5515",
+      "pcb": "zkc42vm_eailier_version",
+      "boardNote": "",
+      "productName": "zkc42vm",
+      "markingVisible": false,
+      "revisionStatus": "suspected early revision; placeholder supplied by human, not a visible silkscreen",
+      "nfcFitted": null,
+      "originalUserLabel": "gr5515_zkv42vm"
+    },
+    "gr5513_zkc42v": {
+      "chip": "gr5513",
+      "pcb": "ZK_EL_GR42V_V1.2",
+      "boardNote": "CC2324",
+      "productName": "zkc42v",
+      "markingVisible": true,
+      "nfcFitted": null,
+      "nfcEvidenceRequired": "inspect whether the NFC tag IC is physically fitted; PCB marking alone cannot select 42v/42vm"
+    },
+    "gr5513_zkc42vm": {
+      "chip": "gr5513",
+      "pcb": "ZK_EL_GR42V_V1.2",
+      "boardNote": "CC2324",
+      "productName": "zkc42vm",
+      "markingVisible": true,
+      "nfcFitted": null,
+      "nfcEvidenceRequired": "inspect whether the NFC tag IC is physically fitted; PCB marking alone cannot select 42v/42vm"
+    }
+  }
+}

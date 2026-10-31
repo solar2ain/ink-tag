@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "scope": "Frozen offline programmer format codecs only; no CLI application, transport or BLE",
+  "upstreamCommit": "37bb28b31b0edbeacb126f553258c4dc4d1f9572",
+  "files": {
+    "generated_busy_defaults.py": "fbf52a9bdb9e6ba65dab641127106c8113d7b4d580113d95780edd3d7a1159db",
+    "generated_commands_v2.py": "4491401c5fcaf5c5407eacb6113e8d078aa20af52bf8fb691a1488bc0bdb5f32",
+    "generated_release_v1.py": "fc607086de7b28b67be5edeb92a63e8e12d0e499c7adf78b8bd3fdac4c56d03f",
+    "models.py": "f9006ed4d564ceb1e3bdecfc37bc634d2ec047a510e9d8445ecda3c5cd4941d3",
+    "pin_config.py": "41c319c8bdd8d2e85db053e7e6cb5422a9ed9c9d6ba688cd9a148f93d71091be",
+    "protocol.py": "6fd8137a4dbb405de6bb485fc3f49c363127f996c387ae5bc4156cb2eb4f25ac",
+    "safe_archive.py": "45c578c4fc00cd3f820873c25e8b451e5aafee4523832a71fff5d0d93d535976"
+  },
+  "transform": "Private namespace only; listed format module bytes unchanged",
+  "publicProject": "https://github.com/solar2ain/ink-tag"
+}

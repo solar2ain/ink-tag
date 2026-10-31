@@ -1,0 +1,431 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "path": "firmware/nrf52811_aesl/LICENSE",
+      "bytes": 34523,
+      "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/NOTICE.txt",
+      "bytes": 591,
+      "sha256": "8b3fb95bc4b977c2acca546cbf4f4c7b21b2a59c18b244a6d4d8416845ecc9ce",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/README.en.md",
+      "bytes": 4536,
+      "sha256": "a5eb13184a28cd5fbd27c613fec8610d815915b771ba9cbe6072028eb18c8902",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/README.md",
+      "bytes": 4216,
+      "sha256": "2bbe7315cafd949578fe233d25f6cffe76b911c600521ed1e8597885cf6daf35",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/backup.ps1",
+      "bytes": 149,
+      "sha256": "4ec6b545823f9d4afa5d6ee6e4f2816fee79a57cd7fd3ccd84167c98b60a60d2",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/check.ps1",
+      "bytes": 148,
+      "sha256": "c985664a1cd3d3bd3bd396ff0372cee714673a82430748006aff444ce17117b7",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/configs/EL022HWRL-A0.toml",
+      "bytes": 558,
+      "sha256": "62181656c5762baac128780f91b9a63af111b0b220dd43e8d8ddce8a5b79af7b",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/configs/EL022HWRL.toml",
+      "bytes": 639,
+      "sha256": "ab42c125d884e3d62be521904b55cbafeee90ae2d16215fc3ff4569b1ea65a1e",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/flash.ps1",
+      "bytes": 148,
+      "sha256": "6c05d644b88820737af4ed4b38a57a7f7289c9405c792bd8036a86af36cf5edf",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/invoke-native.ps1",
+      "bytes": 1561,
+      "sha256": "5599f2a633287cc8474ddc70afdf87595da8c8e71671fb78b93e123acfe32c45",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/layout.json",
+      "bytes": 439,
+      "sha256": "30ac337a19a29a0974f33a34ecb0ce8935e08059c5818837d2b4ef0366ab1577",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/bundle.json",
+      "bytes": 474,
+      "sha256": "c7a7a28b401583ae3f1fb5d2bd64f263f56fbdffde02cda4bf0f45f598c7e321",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/dependencies/cffi-2.1.1-cp313-cp313-win_amd64.whl",
+      "bytes": 185688,
+      "sha256": "1aa5645c30469b09530c4ebca77ebf8f17618293c58f8549cb1a543a50236e7d",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/dependencies/colorama-0.4.6-py2.py3-none-any.whl",
+      "bytes": 25335,
+      "sha256": "4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/dependencies/cryptography-50.0.0-cp311-abi3-win_amd64.whl",
+      "bytes": 3840395,
+      "sha256": "bd1c592e4d5974f0d08d4888e432157adba757c66da0246918e43677fafa2d30",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/dependencies/pycparser-3.0-py3-none-any.whl",
+      "bytes": 48172,
+      "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/dependencies/python-3.13.16-embeddable-amd64.zip",
+      "bytes": 11439788,
+      "sha256": "589dc1e9d02549ca5f680710307ff9b77f6e3ffc4aa3efccd7fa54eeeafac94b",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/dependencies/pyyaml-6.0.3-cp313-cp313-win_amd64.whl",
+      "bytes": 154090,
+      "sha256": "79005a0d97d5ddabfeeea4cf676af11e647e41d81c9a7722a193022accdb6b7c",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/dependencies/qrcode-8.2-py3-none-any.whl",
+      "bytes": 45986,
+      "sha256": "16e64e0716c14960108e85d853062c9e8bba5ca8252c0b4d0231b9df4060ff4f",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/DEPENDENCIES.en.md",
+      "bytes": 3558,
+      "sha256": "e301c0347d035f5d9649b84f7840113c1ac3c8a9926df56ed215e36180ca80d6",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/DEPENDENCIES.md",
+      "bytes": 3435,
+      "sha256": "db0a9c00b965ccd366624c952058fe653f90b9cdc5601d09d607685aabb85500",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/images/el022h2-swd.jpg",
+      "bytes": 339886,
+      "sha256": "dead106bdfe9cf3f870fe6a7b9ee02ef7ddfc78b0444c8f0dd5366064009336d",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/LICENSE",
+      "bytes": 34523,
+      "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/LICENSES/GPL-3.0.txt",
+      "bytes": 35823,
+      "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/NOTICE.txt",
+      "bytes": 591,
+      "sha256": "8b3fb95bc4b977c2acca546cbf4f4c7b21b2a59c18b244a6d4d8416845ecc9ce",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/package-files.json",
+      "bytes": 9109,
+      "sha256": "ccff5b5b6302da4398826ff7c0d2d7d72a16968626fa138a67a9ed81c1851bf7",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/README.en.md",
+      "bytes": 4351,
+      "sha256": "3039bc25ebd8ddcbfcbd3d7b20cb3669830dbb7b0b12b974c97f4ebc3750cd14",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/README.md",
+      "bytes": 4056,
+      "sha256": "30700ccecf594447459ccbbaf54e15d8353c7120b556f8a1a59f236f25094e54",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/assets/full-writer.bin",
+      "bytes": 1176,
+      "sha256": "d3e34c2be735e84c484198b95c9b10c92798a20c1abacfbb8af3e3a26b854acf",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/assets/full-writer.json",
+      "bytes": 1081,
+      "sha256": "0677d7fe0a88cac7f6c25fcfca9cfea7b186e3e3a1b13a765fc0b7a6eda72179",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/backup.ps1",
+      "bytes": 2943,
+      "sha256": "524f6feeddb5621e352621882f177bb7d94f22d453c4444565812247e18ece35",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/check.ps1",
+      "bytes": 2488,
+      "sha256": "155649dfc218149f6ff0419905038ba619b3943d9718b31967bc147aaca02b14",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/configs/EL022HWRL-A0.toml",
+      "bytes": 558,
+      "sha256": "62181656c5762baac128780f91b9a63af111b0b220dd43e8d8ddce8a5b79af7b",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/configs/EL022HWRL.toml",
+      "bytes": 639,
+      "sha256": "ab42c125d884e3d62be521904b55cbafeee90ae2d16215fc3ff4569b1ea65a1e",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/configs/README.en.md",
+      "bytes": 2676,
+      "sha256": "eb37ce1216b5d75a71745f08910e7c2b13ea2daca9d51cfa1dceee97a7bd4591",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/configs/README.md",
+      "bytes": 2399,
+      "sha256": "db44397ab124acaff8c5580358ef66d356c60b0e1e749daf3fd8b18381e47443",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/flash.ps1",
+      "bytes": 8760,
+      "sha256": "435e15d5931478bfa6161dc67594aebf25425d290892848c73c235b730e6f4ed",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/full-dependencies.lock.json",
+      "bytes": 3675,
+      "sha256": "1f23ef523783eae7a70997e8e19f014255f0de102e4f79e8b12e9b9750b0afae",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/backup-layout.py",
+      "bytes": 8438,
+      "sha256": "b10a476c8483fb9b9027c665b96aa4d139e38ab8fc17b2cd90d49e4ae5ab37ff",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/backup-read-plan.ps1",
+      "bytes": 1232,
+      "sha256": "95048e8714aba1e72e1ffd5f6d40a3852d5f208c28d30bfa39bbf3096f62a9cf",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/board_config.py",
+      "bytes": 5809,
+      "sha256": "edcd67bb256982a726e1b5c35b122a8a428bc181a86de7f133016476c1415e4b",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/capture-jlink.ps1",
+      "bytes": 12879,
+      "sha256": "48e87f72748b2b127751dc441427505a301adc29bd5b972a4225ab60750fff7f",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/full-bundle-guard.ps1",
+      "bytes": 3704,
+      "sha256": "d0817253f3ff72e9813872391574681418abddd8c348db8aeeeeca954d0518a3",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/full-runtime.py",
+      "bytes": 3535,
+      "sha256": "b1a7c450498249ce9a6001c3d2033fba39f78c398f0473db02c13b9906fc231c",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/full-session.py",
+      "bytes": 21673,
+      "sha256": "8efa0a4265d82ec93166067e3f66d51182b2f1eb16bdd3ded508ef688bef7277",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/nrf11_full.py",
+      "bytes": 25647,
+      "sha256": "580b02c2f4977828377f108128a4515957561fb284d563ca83abd137bf951255",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/programmer_codec/__init__.py",
+      "bytes": 73,
+      "sha256": "bc3cded49a6d66711562ff7cc77f83bf472b0322f21b05a206e03ea66470ed1b",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/programmer_codec/generated_busy_defaults.py",
+      "bytes": 847,
+      "sha256": "fbf52a9bdb9e6ba65dab641127106c8113d7b4d580113d95780edd3d7a1159db",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/programmer_codec/generated_commands_v2.py",
+      "bytes": 17749,
+      "sha256": "4491401c5fcaf5c5407eacb6113e8d078aa20af52bf8fb691a1488bc0bdb5f32",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/programmer_codec/generated_release_v1.py",
+      "bytes": 2015,
+      "sha256": "fc607086de7b28b67be5edeb92a63e8e12d0e499c7adf78b8bd3fdac4c56d03f",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/programmer_codec/models.py",
+      "bytes": 7850,
+      "sha256": "f9006ed4d564ceb1e3bdecfc37bc634d2ec047a510e9d8445ecda3c5cd4941d3",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/programmer_codec/pin_config.py",
+      "bytes": 5998,
+      "sha256": "41c319c8bdd8d2e85db053e7e6cb5422a9ed9c9d6ba688cd9a148f93d71091be",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/programmer_codec/protocol.py",
+      "bytes": 12484,
+      "sha256": "6fd8137a4dbb405de6bb485fc3f49c363127f996c387ae5bc4156cb2eb4f25ac",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/programmer_codec/provenance.json",
+      "bytes": 1010,
+      "sha256": "bb62eabfadfc6f35b9b55046c6c8bf2cb73c3ebe4b9225aeba3b3be1299a22d8",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/programmer_codec/safe_archive.py",
+      "bytes": 5004,
+      "sha256": "45c578c4fc00cd3f820873c25e8b451e5aafee4523832a71fff5d0d93d535976",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/python313._pth",
+      "bytes": 46,
+      "sha256": "7ecb59a40ae14c055149693393c2a4790415f5770fc4f73c14dcae391fc4e867",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/qr_codec/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/qr_codec/device_link.py",
+      "bytes": 1045,
+      "sha256": "a73cbce6d92610ff854186b565a2ee8568d4fb6e7a171a7224404d6eb4545a17",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/qr_codec/device_qr.py",
+      "bytes": 1692,
+      "sha256": "440747ef6f79bb2d0d2038d8a0f7631eaca0d37b6c18b55bb117ec8cae957a7e",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/runtime-context.ps1",
+      "bytes": 3605,
+      "sha256": "54362435e75a07a8b84d334ff5ab4578d72cceeecf86c2fca3eb0eb5f997dcb9",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/runtime-files.json",
+      "bytes": 49951,
+      "sha256": "319057ff4a832b499a3b7e86b28d03bf1bc833c643c5a7e1a0b93e133e8be728",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/setup-full-runtime.ps1",
+      "bytes": 2324,
+      "sha256": "0af1b346f8cac40028cac07b70e8cd8978e27987dd44a7399c39f1dbdcb455e0",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/shared/jlink-tools.ps1",
+      "bytes": 13462,
+      "sha256": "a4a9b53b296a0aa1ee59ba2a86262867b15d7ede7849ee3959c5d19c37c53875",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/shared/powershell-cli.ps1",
+      "bytes": 2612,
+      "sha256": "63753f07b6b190313f61ee3c5b3086507ae9045ac77484b5f4a73731a3e823e1",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/terminal-log.ps1",
+      "bytes": 13949,
+      "sha256": "7ffa519d0ef0c037f5899dfd5036166df997d2c457beda3756c25e9d00cb2883",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/validate-backup.py",
+      "bytes": 5422,
+      "sha256": "ba65274cc638db12a141dc245c1ca92254afa70b10bda0a053a407e1970fe5cb",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/internal/validate-full.py",
+      "bytes": 6306,
+      "sha256": "cc95d49cff870bf7ea82371a94b77ce76468a035c26778fd082c4fb4ac2c6330",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/probe.ps1",
+      "bytes": 3198,
+      "sha256": "4bfa87a67da3ec9e9e9fe4460ecb89ea9f62852f97bcf6acde524cf4cec20232",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/internal/native/tools/setup.ps1",
+      "bytes": 1296,
+      "sha256": "945db6ce2b5fa21e8f169d21677d5aa96be1665919e3c4ffc9de9062f9fb2da8",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/probe.ps1",
+      "bytes": 148,
+      "sha256": "9d2e19077e5c315c360420a33d21114caa7e0c4475c831983fb72b2ab17c1fbb",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/nrf52811_aesl/tools/setup.ps1",
+      "bytes": 148,
+      "sha256": "132ee8038115e51d070e9b45e4d5d38ca051ac8ec080dcaf523ce311e8706e25",
+      "category": "runtime"
+    }
+  ]
+}

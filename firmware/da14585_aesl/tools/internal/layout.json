@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "entries": {
+    "setup": "tools/setup.ps1",
+    "check": "tools/check.ps1",
+    "probe": "tools/probe.ps1",
+    "flash": "tools/flash.ps1",
+    "validate": "tools/validate.ps1"
+  },
+  "configs": [
+    {
+      "name": "asel29.toml",
+      "original": "tools/configs/asel29.toml"
+    },
+    {
+      "name": "asel42-ssd1683.toml",
+      "original": "tools/configs/asel42-ssd1683.toml"
+    },
+    {
+      "name": "asel42.toml",
+      "original": "tools/configs/asel42.toml"
+    }
+  ]
+}

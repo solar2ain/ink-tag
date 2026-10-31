@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 2,
+  "version": "0.0.0",
+  "releaseTag": "v0.0.0",
+  "channel": "stable",
+  "sourceTreeDirty": false,
+  "candidateOnly": false,
+  "releaseReady": false,
+  "boards": [],
+  "firmwareSelection": {
+    "published": false
+  },
+  "updates": "https://solar2ain.github.io/ink-tag/updates/stable.json"
+}

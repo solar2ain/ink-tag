@@ -1,0 +1,37 @@
+# Hanshow Nebular-213R-N
+# Unified app-full.zip / layout-v1; retain the recovered 122x250 visible area.
+# Screen and LED defaults remain overridable; exact-board gates still apply.
+format_version = 1
+board_marking = "HSEL4Q_02_13M_30"
+
+[screen]
+ic = "JD79XXX" # Family driver; exact controller die remains unconfirmed.
+recipe = 1
+color = "BWRY"
+rotation = 90
+mirror_x = true
+mirror_y = false
+
+native_ui_scale = 0 # 0=AUTO; 1=1x; 2=1.5x; 3=2x; 4=1.25x; 5=1.75x
+width = 128
+height = 250
+visible_x = 0
+visible_y = 0
+visible_width = 122
+visible_height = 250
+
+[gpio.display]
+mosi = "PB6"
+clock = "PD7"
+cs = "PD2"
+dc = "PB7"
+reset = "PD4"
+busy = "PA1"
+enable = "PB5"
+enable_active_low = true
+
+[gpio.led]
+red = "PB4"
+green = "PD3"
+blue = "PA7"
+active_low = ["red", "green", "blue"]

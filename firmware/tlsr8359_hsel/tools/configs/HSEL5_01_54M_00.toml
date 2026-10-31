@@ -1,0 +1,37 @@
+# Hanshow StellarPro-154R-N
+# Removable FPC-5301 / DEPG0154RWF653CF; native OTP BWR, no fast-mode claim.
+# 43D2 native8 Full/readback, ADC, Recovery/OTA, RGB and display bench-tested 2026-10-16.
+# Stock-traced panel idle pull-ups; no measured-current or release qualification claim.
+# Unified app-full.zip / layout-v1; complete post-write readback required for this pilot.
+format_version = 1
+board_marking = "HSEL5_01_54M_00"
+[screen]
+ic = "JD79653A"
+recipe = 1
+color = "BWR"
+rotation = 90
+mirror_x = true
+mirror_y = false
+native_ui_scale = 0 # 0=AUTO; 1=1x; 2=1.5x; 3=2x; 4=1.25x; 5=1.75x
+width = 200
+height = 200
+visible_x = 0
+visible_y = 0
+visible_width = 200
+visible_height = 200
+
+[gpio.display]
+mosi = "PB6"
+clock = "PB5"
+cs = "PB4"
+dc = "PD7"
+reset = "PD4"
+busy = "PA1"
+enable = "PB7"
+enable_active_low = true
+
+[gpio.led]
+red = "PD2"
+green = "PD3"
+blue = "PA7"
+active_low = ["red", "green", "blue"]

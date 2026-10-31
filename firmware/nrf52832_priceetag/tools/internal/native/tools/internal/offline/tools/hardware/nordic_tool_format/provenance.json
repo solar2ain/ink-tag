@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "frozenSourceCommit": "8f3923e4079bc9e74de4b2ab9d1eba178cf47c64",
+  "purpose": "Tool-private pure data formats; no CLI application/transport/services; refresh explicitly with tests",
+  "inputs": [
+    {
+      "path": "cli/src/inktag_cli/models.py",
+      "sha256": "f9006ed4d564ceb1e3bdecfc37bc634d2ec047a510e9d8445ecda3c5cd4941d3"
+    },
+    {
+      "path": "cli/src/inktag_cli/protocol.py",
+      "sha256": "6fd8137a4dbb405de6bb485fc3f49c363127f996c387ae5bc4156cb2eb4f25ac"
+    },
+    {
+      "path": "cli/src/inktag_cli/generated_commands_v2.py",
+      "sha256": "4491401c5fcaf5c5407eacb6113e8d078aa20af52bf8fb691a1488bc0bdb5f32"
+    },
+    {
+      "path": "cli/src/inktag_cli/generated_release_v1.py",
+      "sha256": "fc607086de7b28b67be5edeb92a63e8e12d0e499c7adf78b8bd3fdac4c56d03f"
+    },
+    {
+      "path": "cli/src/inktag_cli/device_link.py",
+      "sha256": "a73cbce6d92610ff854186b565a2ee8568d4fb6e7a171a7224404d6eb4545a17"
+    },
+    {
+      "path": "cli/src/inktag_cli/device_qr.py",
+      "sha256": "440747ef6f79bb2d0d2038d8a0f7631eaca0d37b6c18b55bb117ec8cae957a7e"
+    },
+    {
+      "path": "cli/src/inktag_cli/_assets/fontRoles.js",
+      "sha256": "79044e1ba45f1b729b721278c7b3ba857e88e94ba3245799d91b9de14de9ec00"
+    },
+    {
+      "path": "tools/sdk/generate-nordic-factory-config.py",
+      "sha256": "44c95bece021533cda1cbe23daeee803769831b53cfbf0c8340397feaaafd642"
+    },
+    {
+      "path": "firmware/factory/native-font-template.json",
+      "sha256": "52602986a8ac141dff31b35b60ee0d1bebce7ad88b74b81c433ceeb2100b56f1"
+    }
+  ],
+  "fontValidationImplementation": "font_package.py: bounded Python translation of frozen fontRoles.js decodeFont/validateNative/parsePackage; pixel allocation omitted, all acceptance predicates retained; no font compiler"
+}

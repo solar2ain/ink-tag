@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="设备与屏幕说明">设备与屏幕说明</h1>
+<p>安装前请核对主控、主板丝印和屏幕。产品型号、主板标记和可下载范围见<a target="_blank" rel="noopener noreferrer" href="supported-devices.html">已适配设备</a>，实测结果与局刷支持见<a target="_blank" rel="noopener noreferrer" href="tested-screens.html">已实测屏幕</a>；本页帮助你选择屏幕配置、了解图片容量和换屏限制。</p>
+<h2 id="选择主板与安装包">选择主板与安装包</h2>
+<ul>
+<li>先核对<a target="_blank" rel="noopener noreferrer" href="supported-devices.html">设备表</a>中的主控和主板丝印，再选择对应安装包。同一产品型号可能有不同硬件版本。</li>
+<li>带 NFC 与不带 NFC 的主板可能印着相同丝印，请选择与实际装配对应的配置。</li>
+<li>完整烧录还会写入启动、恢复程序及屏幕、引脚等初始配置。不同主板即使共用 OTA 应用，也不能直接互换完整烧录包。</li>
+<li>换过屏幕的设备，还需要核对屏幕控制器、颜色、分辨率和接线。</li>
+</ul>
+<h2 id="原屏与控制器">原屏与控制器</h2>
+<p>颜色缩写：BW 为黑白，BWR 为黑白红，BWRY 为黑白红黄，KWRYGB 为黑白红黄绿蓝。控制器型号之外，还需匹配 recipe（驱动配方）、原生分辨率、可视区和方向。</p>
+<h3 id="gr">GR</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>主板／屏幕</th>
+<th>客户端驱动配置</th>
+<th>分辨率与有效显示区域</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GR5331 ZKC21V 原屏</td>
+<td>SSD1680，适配 zkc21v</td>
+<td>128×250；可视 122×250</td>
+<td>三色；不是盒马 SSD1619 同尺寸配置</td>
+</tr>
+<tr>
+<td>GR5513 ZKC42V 原屏</td>
+<td>UC8276，适配 zkc42v</td>
+<td>400×300</td>
+<td>三色；与 SSD1683 配方不同</td>
+</tr>
+<tr>
+<td>GR5513/5515 ZKC42VM 原屏</td>
+<td>SSD1683，适配 zkc42vm</td>
+<td>400×300</td>
+<td>三色；不能仅按 4.2 寸选择另一驱动</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="om6626">OM6626</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>主板／屏幕</th>
+<th>客户端驱动配置</th>
+<th>分辨率与有效显示区域</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OM ZKC21V 原屏</td>
+<td>SSD1680，适配 zkc21v</td>
+<td>128×250；可视 122×250</td>
+<td>三色；不是盒马 SSD1619 同尺寸配置</td>
+</tr>
+<tr>
+<td>OM ZKC21B 原屏</td>
+<td>JD79661，适配 zkc21b</td>
+<td>128×250；可视 122×250</td>
+<td>四色</td>
+</tr>
+<tr>
+<td>OM ZKC42B 原屏</td>
+<td>JD79668AA，适配 zkc42b</td>
+<td>400×300</td>
+<td>四色；与 Nebular 的 recipe 不同</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="tlsr8359">TLSR8359</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>主板／屏幕</th>
+<th>客户端驱动配置</th>
+<th>分辨率与有效显示区域</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hanshow Nowa 154R 原屏</td>
+<td>SSD1675，适配 nowa154r</td>
+<td>152×152</td>
+<td>三色；原厂安装方向需保留</td>
+</tr>
+<tr>
+<td>Hanshow Nebular 213R 原屏</td>
+<td>JD79676，适配 nebular213r</td>
+<td>128×250；可视 122×250</td>
+<td>四色；不能选成三色</td>
+</tr>
+<tr>
+<td>Hanshow Nebular 420R 原屏</td>
+<td>JD79668AA，适配 nebular420r</td>
+<td>400×300</td>
+<td>四色驱动配置</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="nrf52832">nRF52832</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>主板／屏幕</th>
+<th>客户端驱动配置</th>
+<th>分辨率与有效显示区域</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PriceETag 已测屏</td>
+<td>SSD1675</td>
+<td>152×152</td>
+<td>黑白；152×152 与 200×200 不能互换</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="nrf52811">nRF52811</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>主板／屏幕</th>
+<th>客户端驱动配置</th>
+<th>分辨率与有效显示区域</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nRF52811 盒马原屏</td>
+<td>SSD1619</td>
+<td>128×250；可视 122×250</td>
+<td>三色；主板有 512 KiB 外置 Flash</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="da14585">DA14585</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>主板／屏幕</th>
+<th>客户端驱动配置</th>
+<th>分辨率与有效显示区域</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DA asel29 E029A33 原屏</td>
+<td>SSD1619，适配 asel29</td>
+<td>128×296</td>
+<td>三色；横向逻辑高度为 128，使用紧凑布局</td>
+</tr>
+<tr>
+<td>DA asel42 原屏</td>
+<td>UC8176</td>
+<td>400×300</td>
+<td>三色；换装 ZKC42VM 屏应选 SSD1683</td>
+</tr>
+</tbody>
+</table></div>
+<p>Nowa213R 与其他未列出的屏幕，请按设备读回配置和对应说明选择驱动，不要仅按尺寸选择。更换屏幕前请断电，核对排线、供电、引脚和颜色。屏幕设置中能选到某个驱动，不代表它适合当前主板；客户端会自动处理有效显示区域，通常不需要手工裁剪。</p>
+<h2 id="换屏兼容范围">换屏兼容范围</h2>
+<h3 id="gr5331-zkc21v">GR5331 ZKC21V</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>设备</th>
+<th>已支持的屏幕与操作</th>
+<th>使用限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GR5331 ZKC21V</td>
+<td>原屏清屏、日历和图片，方向及黑红显示</td>
+<td>其他 128×250 屏需另行确认兼容性</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="gr5513-zkc42v">GR5513 ZKC42V</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>设备</th>
+<th>已支持的屏幕与操作</th>
+<th>使用限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GR5513 ZKC42V</td>
+<td>原屏清屏/日历；华为 A0/A1 换屏的页面与图片操作</td>
+<td>GR5515 的换屏兼容情况需分别确认</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="gr5515-zkc42vm">GR5515 ZKC42VM</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>设备</th>
+<th>已支持的屏幕与操作</th>
+<th>使用限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GR5515 ZKC42VM</td>
+<td>原屏；部分 Nebular／华为换装屏仅确认清屏可用</td>
+<td>换屏后的页面、颜色和连续刷新尚未全部确认</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="nrf52832-priceetag">nRF52832 PriceETag</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>设备</th>
+<th>已支持的屏幕与操作</th>
+<th>使用限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nRF52832 PriceETag</td>
+<td>SSD1675 152×152 黑白屏的页面与传图</td>
+<td>200×200 屏兼容性尚未确认</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="nrf52811-el022h2">nRF52811 EL022H2</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>设备</th>
+<th>已支持的屏幕与操作</th>
+<th>使用限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nRF52811 EL022H2</td>
+<td>盒马 2.13 三色：页面、图片、方向、屏温；华为 A0：页面/图片/方向/颜色；A1：图片/方向/颜色/轮播</td>
+<td>EL029H2、其他 400×300 换屏及 A0/A1 屏温尚未确认兼容</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="da14585-aesl42">DA14585 AESL42</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>设备</th>
+<th>已支持的屏幕与操作</th>
+<th>使用限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DA14585 AESL42</td>
+<td>SES 2.13 UC8151 104×212 三色换屏：页面、图片、图槽与轮播</td>
+<td>其他 SES 型号及屏温读取尚未确认兼容</td>
+</tr>
+</tbody>
+</table></div>
+<p>同一分辨率的两种控制器可能有不同电压、刷新波形、BUSY 极性和传输格式。请选择具体 IC 与适配项；自定义高级参数不是未知屏幕的自动识别工具。</p>
+<h2 id="图片存储">图片存储</h2>
+<p>下表按 <strong>250×128（也适用于 128×250）、400×300 和 3.98 寸 768×552 图片，以每像素 2 位（2bpp）估算</strong>。E6 使用两个 2bpp 阶段，合计按 <strong>4bpp</strong> 计算，并分别列出 720×480、760×568 两种较大分辨率。</p>
+<p>保存图片会占用完整解码画面，加上 96 字节记录头，再按 4 KiB 对齐。各尺寸单张图片约占：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>图片尺寸</th>
+<th>颜色数据</th>
+<th align="right">单张占用（含记录头与对齐）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>250×128／128×250</td>
+<td>2bpp</td>
+<td align="right">8 KiB</td>
+</tr>
+<tr>
+<td>400×300</td>
+<td>2bpp</td>
+<td align="right">32 KiB</td>
+</tr>
+<tr>
+<td>3.98 寸 768×552</td>
+<td>2bpp</td>
+<td align="right">104 KiB</td>
+</tr>
+<tr>
+<td>E6 3.7 寸 720×480</td>
+<td>4bpp</td>
+<td align="right">172 KiB</td>
+</tr>
+<tr>
+<td>E6 3.64 寸 760×568</td>
+<td>4bpp</td>
+<td align="right">212 KiB</td>
+</tr>
+</tbody>
+</table></div>
+<p>以下张数是<strong>按存储空间计算的容量，尚未套用 Free 版本的数量额度</strong>。支持 Pro 的主控，Free 通常在可视区长边小于 300 像素时最多保存 10 张，其余最多 4 张。<strong>DA14585 和 nRF52811 因固件尺寸限制仅提供 Free，无法激活 Pro，但不限制图槽数量，不套用上述 10／4 张额度</strong>；能存多少张只取决于实际容量。E6 屏幕控制需要 Pro，这两个主控不支持。</p>
+<p>1 KiB = 1,024 字节。<code>0</code> 表示单张图片放不下、无法保存图槽；<code>—</code> 表示不支持 E6。此表用于比较容量，不表示每块主板均可使用表中的全部屏幕，换屏请参阅<a target="_blank" rel="noopener noreferrer" href="tested-screens.html">已实测屏幕</a>。</p>
+<h3 id="gr5331">GR5331</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>配置</th>
+<th align="right">可用图片空间</th>
+<th align="right">250×128</th>
+<th align="right">400×300</th>
+<th align="right">768×552</th>
+<th align="right">E6 720×480</th>
+<th align="right">E6 760×568</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标准配置</td>
+<td align="right">80 KiB</td>
+<td align="right">10</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="gr5513gr5515">GR5513／GR5515</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>配置</th>
+<th align="right">可用图片空间</th>
+<th align="right">250×128</th>
+<th align="right">400×300</th>
+<th align="right">768×552</th>
+<th align="right">E6 720×480</th>
+<th align="right">E6 760×568</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GR5513 内置图片区</td>
+<td align="right">64 KiB</td>
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>GR5513 外置图片区／GR5515 大容量配置</td>
+<td align="right">512 KiB</td>
+<td align="right">64</td>
+<td align="right">16</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="om6626_1">OM6626</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>配置</th>
+<th align="right">可用图片空间</th>
+<th align="right">250×128</th>
+<th align="right">400×300</th>
+<th align="right">768×552</th>
+<th align="right">E6 720×480</th>
+<th align="right">E6 760×568</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无外置图片 Flash</td>
+<td align="right">484 KiB</td>
+<td align="right">60</td>
+<td align="right">15</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td>ZKC42B，外置 2 MiB 图片 Flash 可用时</td>
+<td align="right">2,532 KiB (484 + 2048)</td>
+<td align="right">255</td>
+<td align="right">79</td>
+<td align="right">23</td>
+<td align="right">13</td>
+<td align="right">11</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="tlsr8359_1">TLSR8359</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>配置</th>
+<th align="right">可用图片空间</th>
+<th align="right">250×128</th>
+<th align="right">400×300</th>
+<th align="right">768×552</th>
+<th align="right">E6 720×480</th>
+<th align="right">E6 760×568</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础图片区</td>
+<td align="right">136 KiB</td>
+<td align="right">17</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>Nebular-420R-N，扩展图片区已启用</td>
+<td align="right">648 KiB (136 + 512)</td>
+<td align="right">81</td>
+<td align="right">20</td>
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="nrf52832_1">nRF52832</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>配置</th>
+<th align="right">可用图片空间</th>
+<th align="right">250×128</th>
+<th align="right">400×300</th>
+<th align="right">768×552</th>
+<th align="right">E6 720×480</th>
+<th align="right">E6 760×568</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标准配置</td>
+<td align="right">128 KiB</td>
+<td align="right">16</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="nrf52811_1">nRF52811</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>配置</th>
+<th align="right">可用图片空间</th>
+<th align="right">250×128</th>
+<th align="right">400×300</th>
+<th align="right">768×552</th>
+<th align="right">E6 720×480</th>
+<th align="right">E6 760×568</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EL022H2</td>
+<td align="right">472 KiB</td>
+<td align="right">59</td>
+<td align="right">14</td>
+<td align="right">4</td>
+<td align="right">—</td>
+<td align="right">—</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="da14585_1">DA14585</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>配置</th>
+<th align="right">可用图片空间</th>
+<th align="right">250×128</th>
+<th align="right">400×300</th>
+<th align="right">768×552</th>
+<th align="right">E6 720×480</th>
+<th align="right">E6 760×568</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AESL 系列</td>
+<td align="right">68 KiB</td>
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">—</td>
+<td align="right">—</td>
+</tr>
+</tbody>
+</table></div>
+<p>有多个图片区时，各区分别计算可容纳张数，单张图片不能跨区保存。目前最多使用 255 个图片 ID，因此 ZKC42B 的 250×128 容量估算列为 255 张，即使仍有剩余空间。</p>
+<p>表中的空间仅用于图片，不是整颗 Flash 容量，也不是 App／OTA 空间。同主控不同主板、固件配置，以及外置 Flash 是否可用，都会影响结果，请以连接设备后的容量显示为准。估算假定所存图片均为该尺寸；实际按行对齐、方向与颜色格式不同，张数可能变化。RLE 可减少传输量，但图片保存后仍占完整帧空间；JPEG／PNG 文件大小不决定图槽占用。</p>
+<p>部分大屏可以直接显示，但无法保存图槽或自主轮播。更换屏幕配置前，请先下载需要保留的图片，再按提示清理不兼容图片并重新上传。</p>
+<h2 id="温度与可用功能">温度与可用功能</h2>
+<p>屏温来自屏幕控制器，主控温度来自 MCU，二者不是同一读数。没有有效采样、采样已过期、设备忙或控制器不支持时显示 <code>--</code>，不是 0 °C。nRF52811 的 A0/A1 屏温尚未实测；DA 的屏温可用性同样随控制器和采样状态变化。</p>
+<p>nRF52811 与 DA14585 为永久 Free，不提供 Pro 激活、Find、设备密码、NFC 动作或蓝牙改名。其他系列的 NFC、灯、按键和蜂鸣器取决于实际装配与设备返回的能力；没有硬件时不能靠测试按钮添加。设备备注与蓝牙广播名分开，默认备注是 <code>InkTag XXXX</code>，备注仅使用可打印英文字符。</p></main></body></html>

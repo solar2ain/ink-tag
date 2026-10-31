@@ -1,0 +1,110 @@
+name: Deploy InkTag Web
+run-name: InkTag Pages ${{ inputs.request_id || github.run_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Exact reviewed main commit to deploy
+        required: true
+        type: string
+      release_tag:
+        description: Reviewed client Release tag
+        required: true
+        type: string
+      request_id:
+        description: Deployment request correlation ID
+        required: true
+        type: string
+      accept_deferred_review:
+        description: Use the exact recorded owner decision for outstanding licensing reviews
+        required: false
+        default: false
+        type: boolean
+  push:
+    branches: [main]
+    paths:
+      - "webui/**"
+      - "tools/verify-pages.py"
+      - ".github/workflows/pages.yml"
+  pull_request:
+    paths:
+      - "webui/**"
+      - "tools/verify-pages.py"
+      - ".github/workflows/pages.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          ref: ${{ inputs.expected_commit || github.sha }}
+      - name: Verify exact manual-dispatch revision
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          EXPECTED: ${{ inputs.expected_commit }}
+          TRIGGER_SHA: ${{ github.sha }}
+        run: |
+          test "$GITHUB_REF" = "refs/heads/main"
+          test "$EXPECTED" = "$TRIGGER_SHA"
+          test "$(git rev-parse HEAD)" = "$EXPECTED"
+      - name: Validate compiled static site
+        run: python3 tools/verify-pages.py --site webui
+      - name: Require public review for a deployment
+        if: github.event_name == 'workflow_dispatch' && inputs.accept_deferred_review != true
+        run: python3 tools/verify-release.py --repo . --public --download-source-materials
+      - name: Verify the explicit owner publication decision
+        if: github.event_name == 'workflow_dispatch' && inputs.accept_deferred_review == true
+        run: |
+          python3 tools/verify-release.py --repo .
+          python3 tools/verify-publication-decision.py --repo .
+      - name: Bind deployment to the published client record
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          record=json.loads(Path('releases/record.json').read_text())
+          matching=[r for r in record['releases'] if r['releaseTag']==os.environ['RELEASE_TAG'] and r['published'] and r['releaseReady'] and not r['candidateOnly']]
+          if len(matching)!=1:
+              raise SystemExit('Release publication is not attested by this commit')
+          PY
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+    needs: validate
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          ref: ${{ inputs.expected_commit }}
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload compiled WebUI only
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: webui
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

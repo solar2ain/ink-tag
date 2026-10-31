@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../index.html">InkTag WebUI</a></nav><main><h1 id="inktag-pro-features-and-activation">InkTag Pro features and activation</h1>
+<p><a target="_blank" rel="noopener noreferrer" href="../zh-CN/pro.html">中文</a> | English</p>
+<p>InkTag Free already covers most everyday needs, including pictures, calendars, clocks and device management. Pro adds advanced and experimental features for users who enjoy tinkering and exploring. Activation cannot add absent hardware or unsupported functions.</p>
+<h2 id="feature-comparison">Feature comparison</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Free</th>
+<th>Pro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pictures, built-in calendars and clocks</td>
+<td>Available</td>
+<td>Available</td>
+</tr>
+<tr>
+<td>Non-E6 panel colours, orientation and ordinary full refresh</td>
+<td>Available</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Advanced screen control</td>
+<td>Not available</td>
+<td>Partial refresh on selected screens and E6 control, with compatible hardware, wiring and drivers</td>
+</tr>
+<tr>
+<td>Bluetooth, diagnostics, OTA and Recovery</td>
+<td>Available</td>
+<td>Available</td>
+</tr>
+<tr>
+<td>Stored pictures and slideshows</td>
+<td>Up to10 pictures below300px visible long edge, otherwise4, within actual capacity</td>
+<td>No count quota within the available image-store space</td>
+</tr>
+<tr>
+<td>Anti-loss tracker using Apple's Find My network</td>
+<td>Not available</td>
+<td>After activation and setup, query locations through Find My</td>
+</tr>
+<tr>
+<td>NFC</td>
+<td>Passive UID/device-link reads</td>
+<td>Supported phone-written commands; all NFC device actions require Pro</td>
+</tr>
+<tr>
+<td>Device passwords</td>
+<td>Not available</td>
+<td>Optional password; changing or disabling requires fresh old-password verification</td>
+</tr>
+<tr>
+<td>Device labels</td>
+<td>Editable</td>
+<td>Editable</td>
+</tr>
+<tr>
+<td>Bluetooth advertising name</td>
+<td>Factory name</td>
+<td>Editable within device rules</td>
+</tr>
+<tr>
+<td>Display mark</td>
+<td>Fixed <code>InkTag</code></td>
+<td>Adjustable or hideable <code>InkTag Pro</code></td>
+</tr>
+<tr>
+<td>NFC image transfer (planned)</td>
+<td>—</td>
+<td>Planned; not yet available</td>
+</tr>
+<tr>
+<td>Custom dynamic device layouts (planned)</td>
+<td>—</td>
+<td>Planned; not yet available. The current canvas sends static pictures</td>
+</tr>
+</tbody>
+</table></div>
+<p>Picture capacity still depends on geometry, color and Flash capacity. Pro cannot enlarge physical storage. Firmware-size limits make nRF52811 and DA14585 Free-only: their slots use actual storage capacity without the commercial quota of Pro-capable targets, and activation cannot add Pro features.</p>
+<h2 id="tracker-and-nfc-requirements">Tracker and NFC requirements</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Requirements and limits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Anti-loss tracker</td>
+<td>Uses Apple's Find My network, not real-time GPS. Location updates depend on nearby participating devices and network availability. Currently experimental and disabled by default; requires supported firmware, Pro and separate Find identity setup</td>
+</tr>
+<tr>
+<td>Find queries</td>
+<td>Require a suitable client/backend or local service, not a static Web page alone. Keep local private identity data secure</td>
+</tr>
+<tr>
+<td>NFC interaction</td>
+<td>Requires supported NFC hardware. Phone commands for display-by-picture-name and clearing are Pro device actions; supported commands vary by board</td>
+</tr>
+<tr>
+<td>Passive NFC</td>
+<td>Free can still read UID/device links where supported, without device actions. Passwords and QR credentials are not written to NFC</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="obtain-an-activation-code">Obtain an activation code</h2>
+<p>A Pro activation code is provided after donating to support the project. Follow the donation and code-request information on the <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag">project page</a>.</p>
+<p>InkTag firmware is free to use and the project provides no purchase links. For problems with a merchant purchase, contact that seller. Most Pro features are experimental and stability is not guaranteed; consider this carefully before activating Pro.</p>
+<p>First confirm that the device supports Pro and provide the current device code requested by its activation page. Activation codes are bound to a specific device and cannot activate another. A donation cannot upgrade a Free-only target or guarantee unimplemented hardware/experimental features.</p>
+<h2 id="activate-in-the-web-console">Activate in the Web console</h2>
+<ol>
+<li>Connect the InkTag application and verify MCU, board and device identity.</li>
+<li>Open Settings → Device settings → Activation and read the current device code. If activation is unsupported, do not substitute a code for another model.</li>
+<li>Obtain the matching code through the official process and submit it on that same device's page. Complete password verification when requested.</li>
+<li>Wait for device confirmation and read the activation status again. Once it reports Pro, configure the tracker or password as needed. NFC instructions appear under Interaction.</li>
+</ol>
+<p>Keep the activation code secure; do not expose credentials in screenshots, logs or QR codes. Ordinary application OTA preserves activation. Save important data before first complete flashing or wired recovery. For failures, check the device/code match and the reported error rather than bypassing validation.</p>
+<h2 id="related-guides">Related guides</h2>
+<ul>
+<li><a target="_blank" rel="noopener noreferrer" href="devices.html">Devices and tested panels</a></li>
+<li><a target="_blank" rel="noopener noreferrer" href="webui.html">Web console</a></li>
+<li><a target="_blank" rel="noopener noreferrer" href="cli.html">Command-line client</a></li>
+<li><a target="_blank" rel="noopener noreferrer" href="ota.html">OTA and Recovery</a></li>
+</ul>
+<h2 id="partial-refresh-and-e6">Partial refresh and E6</h2>
+<p>Advanced screen control includes partial refresh on selected screens and E6 control. It requires Pro and compatible hardware, wiring and drivers. Clocks still perform daily full refresh/background changes, and frequent updates use more power. Offline E6 image conversion and preview do not require Pro.</p></main></body></html>

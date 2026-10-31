@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "status": "locked",
+  "closureReviewed": true,
+  "target": {
+    "os": "windows",
+    "arch": "amd64",
+    "pythonAbi": "cp313"
+  },
+  "runtime": {
+    "name": "python-embed",
+    "version": "3.13.16",
+    "file": "python-3.13.16-embed-amd64.zip",
+    "url": "https://www.python.org/ftp/python/3.13.16/python-3.13.16-embed-amd64.zip",
+    "bytes": 11439094,
+    "sha256": "97dae5274cc54867065e8d5a3226e48c35017ed332a0fdb0e27d5b5821961297",
+    "requires": [],
+    "requiresReviewed": true,
+    "targetAbiReviewed": true,
+    "licensesReviewed": true,
+    "licenseEntries": [
+      {
+        "path": "LICENSE.txt",
+        "sha256": "62bec384df47b0328307db41455ff6ea2559e5546b394ac69148561b21703120"
+      }
+    ]
+  },
+  "wheels": [
+    {
+      "name": "pylink-square",
+      "version": "1.7.0",
+      "file": "pylink_square-1.7.0-py2.py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/07/b8/db67ffbb71881b02c169b638bc53c9a1bf0d8f41828e3b48974e77f34419/pylink_square-1.7.0-py2.py3-none-any.whl",
+      "bytes": 86908,
+      "sha256": "f418db3479b3b86e45f821f88cea5397357beed382eb441ab2fd11e1d4d9e1e3",
+      "requires": [
+        "psutil==7.2.2",
+        "six==1.17.0"
+      ],
+      "requiresReviewed": true,
+      "targetAbiReviewed": true,
+      "licensesReviewed": true,
+      "licenseEntries": [
+        {
+          "path": "pylink_square-1.7.0.dist-info/licenses/LICENSE.md",
+          "sha256": "1aaa40c02c54e283ea224eee097864ddb56c521d076d37f8f8baf6479b568ea8"
+        }
+      ],
+      "wheelTags": [
+        "py2-none-any",
+        "py3-none-any"
+      ],
+      "metadataSource": "https://pypi.org/pypi/pylink-square/1.7.0/json"
+    },
+    {
+      "name": "psutil",
+      "version": "7.2.2",
+      "file": "psutil-7.2.2-cp37-abi3-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/b4/90/e2159492b5426be0c1fef7acba807a03511f97c5f86b3caeda6ad92351a7/psutil-7.2.2-cp37-abi3-win_amd64.whl",
+      "bytes": 137737,
+      "sha256": "eb7e81434c8d223ec4a219b5fc1c47d0417b12be7ea866e24fb5ad6e84b3d988",
+      "requires": [],
+      "requiresReviewed": true,
+      "targetAbiReviewed": true,
+      "licensesReviewed": true,
+      "licenseEntries": [
+        {
+          "path": "psutil-7.2.2.dist-info/LICENSE",
+          "sha256": "c7adc4d5d1337a548b967421f1fbe258b93033a0417708fd6f4e38f8ecbceb80"
+        }
+      ],
+      "wheelTags": [
+        "cp37-abi3-win_amd64"
+      ],
+      "metadataSource": "https://pypi.org/pypi/psutil/7.2.2/json"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "file": "six-1.17.0-py2.py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl",
+      "bytes": 11050,
+      "sha256": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
+      "requires": [],
+      "requiresReviewed": true,
+      "targetAbiReviewed": true,
+      "licensesReviewed": true,
+      "licenseEntries": [
+        {
+          "path": "six-1.17.0.dist-info/LICENSE",
+          "sha256": "4375ba20e2b9c6c4e7cad2940a628fd90e95cc3d50ee92aae755715d8ba1fbd0"
+        }
+      ],
+      "wheelTags": [
+        "py2-none-any",
+        "py3-none-any"
+      ],
+      "metadataSource": "https://pypi.org/pypi/six/1.17.0/json"
+    },
+    {
+      "name": "cryptography",
+      "version": "50.0.0",
+      "file": "cryptography-50.0.0-cp311-abi3-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/32/2e/c9db68a0c4bfa28e310707527c0ee3a2bd254104d2e02e68f368e197aa4c/cryptography-50.0.0-cp311-abi3-win_amd64.whl",
+      "bytes": 3840395,
+      "sha256": "bd1c592e4d5974f0d08d4888e432157adba757c66da0246918e43677fafa2d30",
+      "requires": [
+        "cffi==2.1.1"
+      ],
+      "requiresReviewed": true,
+      "targetAbiReviewed": true,
+      "licensesReviewed": true,
+      "licenseEntries": [
+        {
+          "path": "cryptography-50.0.0.dist-info/licenses/LICENSE",
+          "sha256": "3e0c7c091a948b82533ba98fd7cbb40432d6f1a9acbf85f5922d2f99a93ae6bb"
+        },
+        {
+          "path": "cryptography-50.0.0.dist-info/licenses/LICENSE.APACHE",
+          "sha256": "aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe"
+        },
+        {
+          "path": "cryptography-50.0.0.dist-info/licenses/LICENSE.BSD",
+          "sha256": "602c4c7482de6479dd2e9793cda275e5e63d773dacd1eca689232ab7008fb4fb"
+        }
+      ],
+      "wheelTags": [
+        "cp311-abi3-win_amd64"
+      ],
+      "metadataSource": "https://pypi.org/pypi/cryptography/50.0.0/json"
+    },
+    {
+      "name": "cffi",
+      "version": "2.1.1",
+      "file": "cffi-2.1.1-cp313-cp313-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/60/a6/8b149b2c3f2e11aaa1618ef64500b45f50f22c57a977a4dff1aff1f91042/cffi-2.1.1-cp313-cp313-win_amd64.whl",
+      "bytes": 185688,
+      "sha256": "1aa5645c30469b09530c4ebca77ebf8f17618293c58f8549cb1a543a50236e7d",
+      "requires": [
+        "pycparser==3.0"
+      ],
+      "requiresReviewed": true,
+      "targetAbiReviewed": true,
+      "licensesReviewed": true,
+      "licenseEntries": [
+        {
+          "path": "cffi-2.1.1.dist-info/licenses/LICENSE",
+          "sha256": "5ba24ddc57067f9249add644c3afc41a5d6dc37e23433ef759d95df370b0af63"
+        }
+      ],
+      "wheelTags": [
+        "cp313-cp313-win_amd64"
+      ],
+      "metadataSource": "https://pypi.org/pypi/cffi/2.1.1/json"
+    },
+    {
+      "name": "pycparser",
+      "version": "3.0",
+      "file": "pycparser-3.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/0c/c3/44f3fbbfa403ea2a7c779186dc20772604442dde72947e7d01069cbe98e3/pycparser-3.0-py3-none-any.whl",
+      "bytes": 48172,
+      "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992",
+      "requires": [],
+      "requiresReviewed": true,
+      "targetAbiReviewed": true,
+      "licensesReviewed": true,
+      "licenseEntries": [
+        {
+          "path": "pycparser-3.0.dist-info/licenses/LICENSE",
+          "sha256": "0c846399369ea76ddd7b5c44fe6d16497415fcf015f5cbb508c24bf98b81c5b1"
+        }
+      ],
+      "wheelTags": [
+        "py3-none-any"
+      ],
+      "metadataSource": "https://pypi.org/pypi/pycparser/3.0/json"
+    }
+  ],
+  "notes": [
+    "Exact release metadata and archive METADATA/WHEEL/license files reviewed for Windows AMD64 CPython3.13 standard GIL; dev/test/ssh extras and Python<3.11 typing-extensions marker excluded, not installed.",
+    "All original license files remain in unmodified archives and prepared runtime. SEGGER DLL/tools and Renesas loader/XML are manual external dependencies, not redistributed.",
+    "This lock is a dependency/source review; actual isolated setup/ABI, extracted tools and target programming qualification remain separate gates. No pip, system install, driver/service changes or runtime metadata discovery."
+  ]
+}

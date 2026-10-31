@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="inktag">InkTag</h1>
+<p><a target="_blank" rel="noopener noreferrer" href="README.html">中文</a> | English</p>
+<p>InkTag is a cross-platform Bluetooth project for e-paper shelf labels, turning unused tags into desktop calendars, clocks, photo frames and information displays. InkTag provides custom firmware for Bluetooth controllers from Goodix, OnMicro, Telink, Nordic and Dialog. Using Web Bluetooth, you can change pictures, design pages and manage devices directly in a browser, or use the CLI for batch operations, weather stations and scheduled delivery.</p>
+<p>Electronic paper reflects ambient light for a paper-like appearance. After an update, <a target="_blank" rel="noopener noreferrer" href="https://www.eink.com/tech/detail/Benefits">the display needs no power to retain a static image</a>, making it suitable for calendars, photos and reminders. With infrequent refreshes and long standby periods, even a coin-cell-powered tag can offer long battery life. Actual runtime depends on battery capacity, refresh frequency, Bluetooth use and the hardware.</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag-manual/">Illustrated manual</a> · <a target="_blank" rel="noopener noreferrer" href="en/projects.html">Project ideas</a> · <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag/">Open WebUI</a> · <a target="_blank" rel="noopener noreferrer" href="en/webui.html#install-and-open">Use the local client</a> · <a target="_blank" rel="noopener noreferrer" href="CHANGELOG.html">Changelog</a></p>
+<p><img alt="A selection of InkTag devices with different controllers, sizes and screen palettes" src="assets/devices/supported-devices.webp" /></p>
+<p>Some supported devices in use. See <a target="_blank" rel="noopener noreferrer" href="en/supported-devices.html">supported devices</a> and <a target="_blank" rel="noopener noreferrer" href="en/tested-screens.html">tested panels</a> for board markings and exact panel configurations.</p>
+<h2 id="quick-start">Quick start</h2>
+<p>After downloading or cloning this repository, you can open
+<code>webui-standalone/InkTag-WebUI.html</code> directly in a compatible browser, without
+starting a local server or deploying a website. Keep the accompanying <code>assets/</code>
+and other resources. Bluetooth requires browser permission; Find location
+queries still require the local client.</p>
+<h3 id="1-prepare-a-device-and-browser">1. Prepare a device and browser</h3>
+<p>Use a device already running compatible InkTag firmware, with stable power and Bluetooth enabled on your computer or phone. Use Chrome or Edge on desktop. On iPhone/iPad, use <a target="_blank" rel="noopener noreferrer" href="https://apps.apple.com/app/id1492822055">Bluefy</a>. On Android, prefer Chrome. Open the site in that browser rather than an embedded WeChat/in-app window, and grant Bluetooth permission.</p>
+<p>Stock devices need an appropriate first installation. Read <a target="_blank" rel="noopener noreferrer" href="en/flash.html">complete flashing</a> and identify the controller and board first. Choose the firmware, board configuration and tools for your exact device, install them, then connect to InkTag. Available files are listed in the <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/releases">Release attachments</a>.</p>
+<h3 id="2-open-the-webui-and-connect">2. Open the WebUI and connect</h3>
+<p>Open <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag/">InkTag WebUI</a>, click Connect, and select your device in the browser's Bluetooth chooser. Factory names look like <code>IKT_TL_1234</code>; a name ending in <code>_OTA</code> identifies Recovery mode.</p>
+<p>In Settings, check the controller, firmware version and screen configuration. Confirm the actual size, colours and orientation. If Bluetooth is unavailable or the device cannot be found, see <a target="_blank" rel="noopener noreferrer" href="en/faq.html">connection help</a> or try desktop Chrome/Edge.</p>
+<h3 id="3-send-your-first-picture">3. Send your first picture</h3>
+<p>Open Images, import a photo, and adjust cropping, orientation and dithering. Check the preview, choose Send to device, select Display once, and confirm.</p>
+<p>Wait for both transfer and screen refresh to finish. Flashing during a full refresh is normal; the screen may still be updating after transfer reaches 100%.</p>
+<h3 id="4-try-calendars-the-canvas-and-slideshows">4. Try calendars, the canvas and slideshows</h3>
+<ul>
+<li>Select the built-in calendar or clock in display settings.</li>
+<li>Open Create to edit a template or blank canvas with text, images and QR codes. You can send a template without first saving it as a page.</li>
+<li>Save pictures to image slots and enable a slideshow. When storage is full, select an existing slot to replace.</li>
+</ul>
+<p>You can disconnect after completion. The device retains its picture, and supported built-in calendars, clocks and stored-image slideshows continue according to its settings.</p>
+<p>See the <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag-manual/">illustrated manual</a> and <a target="_blank" rel="noopener noreferrer" href="en/getting-started.html">getting started</a> for more detail.</p>
+<h2 id="free-and-pro-features">Free and Pro features</h2>
+<p>InkTag offers a free edition (Free) that already meets most everyday needs. Pro adds advanced and experimental features for users who enjoy tinkering and exploring. Availability depends on the capabilities of the connected device.</p>
+<blockquote>
+<p>[!NOTE]
+<strong>Free firmware and donations</strong></p>
+<p>InkTag firmware is free to use. The project provides no purchase links. If you bought a device or related service from a merchant, contact that seller for purchase-related problems.</p>
+<p>A Pro activation code is provided after donating to support the project. Most Pro features are experimental and stability is not guaranteed. Please consider this carefully before activating Pro.</p>
+</blockquote>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>🆓 Free</th>
+<th>✨ Pro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Images, built-in calendar, clock, device page and QR codes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Crop, rotate, dither, editable canvas and device preview</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Stored images and slideshow</td>
+<td>Normally 10 compact-screen or 4 larger-screen images</td>
+<td>All available qualified storage</td>
+</tr>
+<tr>
+<td>Screen, orientation, display and LED routing</td>
+<td>Where supported</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Status LEDs and adapted buttons/buzzer</td>
+<td>Where supported</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Bluetooth, diagnostics, OTA and Recovery</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Passive NFC device link</td>
+<td>With supported hardware</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Host pages and custom delivery</td>
+<td>Edit and preview</td>
+<td>Advanced content admission follows device entitlement; scheduled delivery requires an online host</td>
+</tr>
+<tr>
+<td>Switch pages or image slots with NFC phone commands</td>
+<td>—</td>
+<td>With supported hardware</td>
+</tr>
+<tr>
+<td>Advanced screen control</td>
+<td>—</td>
+<td>Partial refresh on selected screens and E6 six-colour control, with compatible hardware, wiring and drivers</td>
+</tr>
+<tr>
+<td>User fonts, BLE rename, optional device password</td>
+<td>—</td>
+<td>Where supported</td>
+</tr>
+<tr>
+<td>Adjust/hide InkTag branding</td>
+<td>—</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Anti-loss tracker (Apple Find My network)</td>
+<td>—</td>
+<td>Experimental; register/control broadcasts online, query locations through a local service</td>
+</tr>
+<tr>
+<td>NFC image transfer (planned)</td>
+<td>—</td>
+<td>Planned Pro feature; not yet available</td>
+</tr>
+<tr>
+<td>Custom dynamic device layouts (planned)</td>
+<td>—</td>
+<td>Planned Pro feature; not yet available</td>
+</tr>
+</tbody>
+</table></div>
+<p>Compact means a visible long edge below 300 pixels. <strong>Firmware-size limits make DA14585 and nRF52811 Free-only: Pro cannot be activated on these controllers. Their Free firmware has no image-slot count quota; the 10/4 limits do not apply, and the number of stored pictures is limited only by available storage.</strong> See <a target="_blank" rel="noopener noreferrer" href="en/devices.html#image-capacity">image capacity</a> for storage sizes and estimates. Activation cannot add missing hardware. Partial-refresh clocks still perform a daily full refresh/background change and use more power than infrequent image updates. Offline E6 conversion is available without Pro.</p>
+<p>See <a target="_blank" rel="noopener noreferrer" href="en/pro.html">Pro</a>, <a target="_blank" rel="noopener noreferrer" href="en/host-pages.html">host pages</a>, and <a target="_blank" rel="noopener noreferrer" href="en/devices.html">screens</a>. Expanded partial refresh, custom device-executed layouts, NFC image transfer and disabling BLE advertising are future work, not promises of this version.</p>
+<h2 id="supported-controllers">Supported controllers</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Manufacturer</th>
+<th>Controllers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Goodix</td>
+<td>GR5331, GR5513, GR5515</td>
+</tr>
+<tr>
+<td>OnMicro</td>
+<td>OM6626</td>
+</tr>
+<tr>
+<td>Telink</td>
+<td>TLSR8359 (HS9118)</td>
+</tr>
+<tr>
+<td>Nordic</td>
+<td>nRF52832, nRF52811</td>
+</tr>
+<tr>
+<td>Renesas, formerly Dialog</td>
+<td>DA14585</td>
+</tr>
+</tbody>
+</table></div>
+<p>See <a target="_blank" rel="noopener noreferrer" href="en/supported-devices.html">supported devices</a> for board markings, product names and limitations, and <a target="_blank" rel="noopener noreferrer" href="en/tested-screens.html">tested screens</a> for panels, tested use and partial refresh. A supported controller does not make every board using it compatible.</p>
+<h2 id="choose-how-to-use-inktag">Choose how to use InkTag</h2>
+<h3 id="online-webui">Online WebUI</h3>
+<p>The image page supports crop, canvas rotation, dithering, preview, display-only and stored-slot delivery. The canvas offers text, images, QR codes, weather and date-card templates. Settings expose only capabilities supported by the connected firmware.</p>
+<p>Find is experimental anti-loss based on nearby participants in Apple's Find My network, not real-time GPS. Small labels can be carried with personal belongings. Register online, save an encrypted transfer backup and import it into a local client for location queries. You can also export all tags encrypted when moving computers; see <a target="_blank" rel="noopener noreferrer" href="en/find.html">Find queries and migration</a>.</p>
+<p>Use the online site without installation, or the local service for persistent data and Find. Runtime packages do not require Node.js. See <a target="_blank" rel="noopener noreferrer" href="en/webui.html">WebUI</a> and <a target="_blank" rel="noopener noreferrer" href="en/github-pages.html">online versus local</a>.</p>
+<h3 id="cli-for-batch-operations-and-automation">CLI for batch operations and automation</h3>
+<p>Install Python 3.11 or newer, download/clone this repository or extract the complete CLI ZIP, and enter the root containing both <code>cli/</code> and <code>webui/</code>. Use the unified installer:</p>
+<p><strong>Windows:</strong></p>
+<pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1
+</code></pre>
+<p><strong>macOS / Linux:</strong></p>
+<pre><code class="language-sh">sh install_inktag.sh
+</code></pre>
+<p>This installs the CLI into <code>cli/.venv</code> and automatically installs the <strong>local Find query service dependencies</strong> in a separate <code>find/runtime/.venv</code> under the per-user data directory. It then starts local WebUI and Find in the background (<code>webui start</code>); closing the terminal does not stop them. Setup prints copyable start, stop, status and log commands. New macOS installations store data and logs in <code>~/.inktag/</code>; an existing legacy directory is retained to preserve sessions and tags. System Python is unchanged; installation does not log into Apple, connect devices or clear existing data.</p>
+<p>First setup requires internet access. Windows also requires full 7-Zip and downloads an Apple authentication image of about 292 MB on first setup. macOS uses native system authentication without that image. Location queries on Linux are not yet qualified.</p>
+<p>To install without starting, run <code>powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1 --prepare-only</code> on Windows or <code>sh install_inktag.sh --prepare-only</code> on macOS/Linux. After installation, choose either method below; command arguments are the same.</p>
+<h4 id="method-1-run-the-client-script-without-activation">Method 1: run the client script without activation</h4>
+<p>Run from the repository or complete CLI package root. The script uses Python in <code>cli/.venv</code>; no global PATH entry is required.</p>
+<p><strong>Windows PowerShell:</strong></p>
+<pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\cli\inktag.ps1 device scan
+</code></pre>
+<p><strong>macOS/Linux:</strong></p>
+<pre><code class="language-sh">bash cli/inktag.sh device scan
+</code></pre>
+<p>Replace <code>device scan</code> with another command, such as <code>device -n B892 info</code>, or use <code>--help</code>. If <code>cli/.venv</code> does not exist yet, run the installer first. These client scripts do not install Python itself.</p>
+<h4 id="method-2-activate-the-python-environment-and-use-inktag-cli">Method 2: activate the Python environment and use <code>inktag-cli</code></h4>
+<p>Prepare <code>cli/.venv</code> using the unified installer above, then activate it in your current terminal:</p>
+<p><strong>Windows PowerShell:</strong></p>
+<pre><code class="language-powershell">. .\cli\.venv\Scripts\Activate.ps1
+inktag-cli device scan
+</code></pre>
+<p><strong>macOS/Linux:</strong></p>
+<pre><code class="language-sh">source cli/.venv/bin/activate
+inktag-cli device scan
+</code></pre>
+<p>Activate again in each new terminal; run <code>deactivate</code> to leave. If policy blocks the activation script, use Method 1 instead of changing system execution policy.</p>
+<p>For a manually installed CLI-only environment, first install Python3.11+ and follow the <a target="_blank" rel="noopener noreferrer" href="en/cli.html">CLI guide</a> to create a virtual environment and install <code>cli/</code>. Use the unified installer when you need Find queries so its dependencies are prepared as well. Rerun the installer after updates.</p>
+<p>The examples below use <code>inktag-cli</code> after activation. For Method 1, replace that prefix with the client script invocation:</p>
+<pre><code class="language-console">inktag-cli device --ble-name IKT_TL_1234 info
+inktag-cli display --ble-name IKT_TL_1234 calendar
+inktag-cli image --ble-name IKT_TL_1234 upload photo.jpg --slot next --name photo
+inktag-cli device --ble-name IKT_TL_1234 slot list
+inktag-cli device --ble-name IKT_TL_1234 display slideshow start --interval 5m
+inktag-cli device --ble-name IKT_TL_1234 display slideshow stop
+</code></pre>
+<p>Replace the name and path with your device and image. Disconnect the same device from WebUI before using the CLI. See <a target="_blank" rel="noopener noreferrer" href="en/cli.html">CLI usage</a> for commands, credential caching and troubleshooting.</p>
+<h3 id="local-service-enable-find-device-track-recording">Local service: enable Find device track recording</h3>
+<p>The repository and complete CLI ZIP include local WebUI and the Find query service; no separate server package is needed. Use the unified installer initially, then start with the same client commands:</p>
+<p><strong>Windows:</strong></p>
+<pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\cli\inktag.ps1 webui start --repo . --enable-tls
+</code></pre>
+<p><strong>macOS/Linux:</strong></p>
+<pre><code class="language-sh">bash cli/inktag.sh webui start --repo . --enable-tls
+</code></pre>
+<p>With an activated Python environment, use:</p>
+<pre><code class="language-console">inktag-cli webui start --repo . --enable-tls
+</code></pre>
+<p>Open Find in the local WebUI, log in to your query account, register a tag or import its existing information, then choose “Start recording”. Keep the local service and network available so it can query periodically and save received location reports. A new location is not guaranteed for every query. See <a target="_blank" rel="noopener noreferrer" href="en/webui.html">WebUI usage</a> for installation/LAN access and <a target="_blank" rel="noopener noreferrer" href="en/find.html">Find queries and migration</a>.</p>
+<h2 id="complete-flashing-and-ota">Complete flashing and OTA</h2>
+<p>This version includes clients, guides, OTA and complete firmware for adapted boards, plus independent plaintext programmer tools under <code>firmware/&lt;controller_board&gt;/</code>.</p>
+<p>Stock devices and wired recovery require an exact-controller, exact-board complete-flashing package. This clears MCU-side settings/data; heed the tool's scope warning, preserve identity/calibration and keep stock backups. Some boards retain a separate external image Flash as explicitly stated by the tool.</p>
+<p>Prefer OTA for an existing InkTag installation. Connect in Settings → Firmware to see available firmware packages or select a local signed application. Wait for application attestation and reconnection; 100% transfer is not completion. After a failure, reconnect to confirm the current role/result, then select a matching package to retry if needed; never blindly replay an uncertain write.</p>
+<p>Download firmware, programmer tools and clients from the actual <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/releases">Release attachments</a>. Unlisted files are not available; never substitute a similar name or screen size. See <a target="_blank" rel="noopener noreferrer" href="en/flash.html">complete flashing</a>, <a target="_blank" rel="noopener noreferrer" href="en/ota.html">OTA/Recovery</a> and <a target="_blank" rel="noopener noreferrer" href="en/updates.html">client updates</a>.</p>
+<h2 id="help-and-privacy">Help and privacy</h2>
+<p>E-paper has limited native colours and flashes during full updates. Low temperatures may slow refresh. For connection/display/login issues, see <a target="_blank" rel="noopener noreferrer" href="en/faq.html">FAQ</a>. Report problems through <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/issues">GitHub Issues</a>, including client version, controller, steps, error and redacted logs. Do not share passwords, activation codes, Find keys, sessions or location history; read <a target="_blank" rel="noopener noreferrer" href="SECURITY.html">security/privacy</a>.</p>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>Thanks to <a target="_blank" rel="noopener noreferrer" href="https://github.com/tsl0922/EPD-nRF5">EPD-nRF5</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/atc1441/ATC_TLSR_Paper">ATC_TLSR_Paper</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/paperlesspaper/epdoptimize">epdoptimize</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/olikraus/U8g2_for_Adafruit_GFX">U8g2 for Adafruit GFX</a>, WenQuanYi, <a target="_blank" rel="noopener noreferrer" href="https://github.com/malmeloo/FindMy.py">FindMy.py</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/sacca97/os-findmy-e">os-findmy-e</a>, Leafer, React, Lucide, the controller tooling ecosystem, and everyone contributing hardware, tests and feedback. See <a target="_blank" rel="noopener noreferrer" href="THIRD_PARTY_NOTICES.html">third-party notices</a>.</p>
+<h2 id="license">License</h2>
+<p>InkTag-owned firmware, compiled WebUI and CLI use <a target="_blank" rel="noopener noreferrer" href="https://polyformproject.org/licenses/noncommercial/1.0.0">PolyForm Noncommercial 1.0.0</a> for purposes permitted by its noncommercial terms. Third-party works retain their original terms. See <a target="_blank" rel="noopener noreferrer" href="LICENSING.html">licensing scope</a> for details and component information.</p>
+<p>User documentation © InkTag contributors. All rights reserved.</p></main></body></html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../index.html">InkTag WebUI</a></nav><main><h1 id="inktag-020">InkTag 0.2.0</h1>
+<p>首版发布。</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag-manual/">图文使用手册</a> · <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag/">打开 WebUI</a> · <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/docs/zh-CN/webui.md">使用本地客户端</a></p>
+<h2 id="选择下载内容">选择下载内容</h2>
+<ul>
+<li><strong>在线使用</strong>：直接打开 WebUI。电脑使用 Chrome／Edge，iPhone／iPad 推荐 Bluefy，Android 使用 Chrome。</li>
+<li><strong>本地客户端</strong>：CLI ZIP 包含本地 WebUI 和 Find 后台，需要 Python 3.11 或更新版本。完整解压后安装 CLI，再启动本地 WebUI，步骤见包内 README。</li>
+<li><strong>离线网页</strong>：完整解压 standalone ZIP，打开 <code>InkTag-WebUI.html</code>，保留旁边的资源目录。</li>
+<li><strong>自行托管</strong>：选择静态 WebUI ZIP。</li>
+<li><strong>已安装 InkTag</strong>：选择与实际主控、主板匹配的 OTA 包，通过 WebUI 或 CLI 升级。</li>
+<li><strong>首次安装或有线恢复</strong>：选择完整固件，阅读对应工具目录的中英文 README，并显式传入固件文件。</li>
+</ul>
+<p>烧录工具以明文目录独立提供，不包含或自动选择固件。DA14585 的公开便携工具目前只支持探测和离线预检，实际完整烧录尚未开放。请按各目录说明确认可用操作与依赖，不要仅按屏幕尺寸选择固件。</p>
+<p>下载后核对 <code>SHA256SUMS.txt</code>。客户端更新不会自动刷写设备；传输完成后仍需等待设备回连与验身。使用前请阅读<a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/LICENSING.md">许可说明</a>和各组件声明，尚未齐备的来源／对应源码信息仍在说明中列明。</p>
+<h2 id="english">English</h2>
+<p>Initial release.</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag-manual/">Illustrated manual</a> · <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag/">Open WebUI</a> · <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/docs/en/webui.md">Local client guide</a></p>
+<ul>
+<li>The CLI ZIP includes local WebUI and the Find backend; Python 3.11 or newer is required. Follow its README to install the CLI and start local WebUI.</li>
+<li>For offline browser use, extract the standalone ZIP and open <code>InkTag-WebUI.html</code>, keeping its resources alongside it. A separate static WebUI ZIP is available for hosting.</li>
+<li>Existing InkTag installations use an OTA package matching the actual controller and board. First installation or wired recovery requires complete firmware and the matching programmer/configuration.</li>
+<li>Programmer tools are plaintext directories, independent of firmware downloads. DA14585 portable tools currently support probing and offline validation only; actual complete flashing is not enabled. Follow each bilingual README for available operations and dependencies.</li>
+</ul>
+<p>Use Chrome/Edge on desktop, Bluefy on iPhone/iPad, and Chrome on Android. Verify downloads with <code>SHA256SUMS.txt</code>. Client updates do not automatically flash devices, and transfer completion is not final App attestation. Read the licensing and component notices, including the remaining provenance/Corresponding Source limitations.</p></main></body></html>

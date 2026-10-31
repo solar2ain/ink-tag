@@ -1,0 +1,35 @@
+format_version = 1
+board_marking = "EL022HWRL"
+note = "CAL_VER06"
+
+[screen]
+ic = "SSD1619"
+recipe = 1
+color = "BWR"
+rotation = 270
+mirror_x = false
+mirror_y = false
+native_ui_scale = 0
+width = 128
+height = 250
+visible_x = 0
+visible_y = 0
+visible_width = 122
+visible_height = 250
+
+[gpio.display]
+mosi = "P0.20"
+clock = "P0.19"
+cs = "P0.06"
+dc = "P0.05"
+reset = "P0.04"
+busy = "P0.03"
+enable = "P0.07"
+# Controller/recipe owns CS/RESET/BUSY polarity; only EN polarity is configurable.
+enable_active_low = false
+
+[gpio.led]
+red = "P0.16"
+green = "P0.17"
+blue = "P0.18"
+active_low = ["red", "green", "blue"]

@@ -1,0 +1,36 @@
+# Hanshow HSEL5_01_54M_02 / YW2116. Native OTP SSD-family BWR; no guessed die.
+# Independent selector10, not the _00 JD recipe or P154 recipe1.
+# Stock SHA657390FC...F6168, PB0 VDD, PC0/PC1/PC6/PC4 native contact.
+# Pilot: optical/RF/current/physical Flash qualification remains separate.
+format_version = 1
+board_marking = "HSEL5_01_54M_02"
+[screen]
+ic = "SSD1XXX"
+recipe = 2
+color = "BWR"
+rotation = 90
+mirror_x = true
+mirror_y = false
+native_ui_scale = 0
+width = 200
+height = 200
+visible_x = 0
+visible_y = 0
+visible_width = 200
+visible_height = 200
+
+[gpio.display]
+mosi = "PB6"
+clock = "PB5"
+cs = "PB4"
+dc = "PD7"
+reset = "PD4"
+busy = "PA1"
+enable = "PB7"
+enable_active_low = true
+
+[gpio.led]
+red = "PD2"
+green = "PD3"
+blue = "PA7"
+active_low = ["red", "green", "blue"]

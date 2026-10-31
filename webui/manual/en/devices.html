@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../index.html">InkTag WebUI</a></nav><main><h1 id="devices-and-panels">Devices and panels</h1>
+<p>Check the controller, board marking and screen before installation. The <a target="_blank" rel="noopener noreferrer" href="supported-devices.html">supported-device list</a> covers products and downloads, and <a target="_blank" rel="noopener noreferrer" href="tested-screens.html">tested screens</a> lists physical results and partial refresh. This guide explains screen settings, image capacity and replacement-screen limits.</p>
+<h2 id="choose-a-board-and-installation-package">Choose a board and installation package</h2>
+<ul>
+<li>Match the controller and board marking in the <a target="_blank" rel="noopener noreferrer" href="supported-devices.html">device list</a>. A product name can cover different hardware revisions.</li>
+<li>Some boards share a marking with and without NFC. Select the configuration matching the hardware fitted to your board.</li>
+<li>Complete flashing also installs boot/recovery software and initial screen/pin settings. A shared OTA application does not make complete-flashing packages interchangeable.</li>
+<li>If the screen has been replaced, check its controller, colours, resolution and wiring.</li>
+</ul>
+<h2 id="original-panels">Original panels</h2>
+<p>BW is black/white, BWR adds red, BWRY adds yellow, and KWRYGB means black/white/red/yellow/green/blue. Match IC, recipe, native geometry, visible area and orientation.</p>
+<h3 id="gr">GR</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Board / panel</th>
+<th>Driver / screen profile</th>
+<th>Resolution / usable display area</th>
+<th>Colors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GR5331 ZKC21V</td>
+<td>SSD1680 / zkc21v</td>
+<td>128×250 / 122×250</td>
+<td>BWR</td>
+</tr>
+<tr>
+<td>GR5513 ZKC42V</td>
+<td>UC8276 / zkc42v</td>
+<td>400×300</td>
+<td>BWR</td>
+</tr>
+<tr>
+<td>GR5513/5515 ZKC42VM</td>
+<td>SSD1683 / zkc42vm</td>
+<td>400×300</td>
+<td>BWR</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="om6626">OM6626</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Board / panel</th>
+<th>Driver / screen profile</th>
+<th>Resolution / usable display area</th>
+<th>Colors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OM ZKC21V</td>
+<td>SSD1680 / zkc21v</td>
+<td>128×250 / 122×250</td>
+<td>BWR</td>
+</tr>
+<tr>
+<td>OM ZKC21B</td>
+<td>JD79661 / zkc21b</td>
+<td>128×250 / 122×250</td>
+<td>BWRY</td>
+</tr>
+<tr>
+<td>OM ZKC42B</td>
+<td>JD79668AA / zkc42b</td>
+<td>400×300</td>
+<td>BWRY</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="tlsr8359">TLSR8359</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Board / panel</th>
+<th>Driver / screen profile</th>
+<th>Resolution / usable display area</th>
+<th>Colors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nowa154R</td>
+<td>SSD1675 / nowa154r</td>
+<td>152×152</td>
+<td>BWR</td>
+</tr>
+<tr>
+<td>Nebular213R</td>
+<td>JD79676 / nebular213r</td>
+<td>128×250 / 122×250</td>
+<td>BWRY</td>
+</tr>
+<tr>
+<td>Nebular420R</td>
+<td>JD79668AA / nebular420r</td>
+<td>400×300</td>
+<td>BWRY</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="nrf52832">nRF52832</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Board / panel</th>
+<th>Driver / screen profile</th>
+<th>Resolution / usable display area</th>
+<th>Colors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tested PriceETag</td>
+<td>SSD1675</td>
+<td>152×152</td>
+<td>BW</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="nrf52811">nRF52811</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Board / panel</th>
+<th>Driver / screen profile</th>
+<th>Resolution / usable display area</th>
+<th>Colors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nRF52811 Hema</td>
+<td>SSD1619</td>
+<td>128×250 / 122×250</td>
+<td>BWR</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="da14585">DA14585</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Board / panel</th>
+<th>Driver / screen profile</th>
+<th>Resolution / usable display area</th>
+<th>Colors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DA asel29 E029A33</td>
+<td>SSD1619 / asel29</td>
+<td>128×296</td>
+<td>BWR</td>
+</tr>
+<tr>
+<td>DA asel42 original</td>
+<td>UC8176</td>
+<td>400×300</td>
+<td>BWR</td>
+</tr>
+</tbody>
+</table></div>
+<p>For Nowa213R or unlisted panels, use actual device settings and release instructions. Disconnect power before a swap and verify FPC, wiring and colors. A preset in a dropdown does not prove testing on every PCB. DA 128×296 landscape is only 128 pixels high and uses a compact layout. A ZKC42VM replacement on DA requires SSD1683, not the original UC8176 recipe.</p>
+<h2 id="replacement-screen-compatibility">Replacement-screen compatibility</h2>
+<h3 id="gr5331-zkc21v">GR5331 ZKC21V</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Device</th>
+<th>Supported screens and operations</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GR5331 ZKC21V</td>
+<td>Original clear/calendar/pictures and direction/BWR output</td>
+<td>Other 128×250 replacements need separate compatibility checks</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="gr5513-zkc42v">GR5513 ZKC42V</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Device</th>
+<th>Supported screens and operations</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GR5513 ZKC42V</td>
+<td>Original clear/calendar; Huawei A0/A1 pages and pictures</td>
+<td>GR5515 replacement compatibility must be checked separately</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="gr5515-zkc42vm">GR5515 ZKC42VM</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Device</th>
+<th>Supported screens and operations</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GR5515 ZKC42VM</td>
+<td>Original panel; clear is confirmed on selected Nebular/Huawei replacements</td>
+<td>Replacement pages, colours and repeated refreshes are not all confirmed</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="nrf52832-priceetag">nRF52832 PriceETag</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Device</th>
+<th>Supported screens and operations</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nRF52832 PriceETag</td>
+<td>SSD1675 152×152 BW pages and pictures</td>
+<td>200×200 compatibility is not confirmed</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="nrf52811-el022h2">nRF52811 EL022H2</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Device</th>
+<th>Supported screens and operations</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nRF52811 EL022H2</td>
+<td>Hema pages/pictures/orientation/panel temperature; Huawei A0 pages/pictures/orientation/colors; A1 pictures/orientation/colors/slideshow</td>
+<td>EL029H2, other 400×300 replacements and A0/A1 temperature readback are not confirmed compatible</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="da-aesl42">DA AESL42</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Device</th>
+<th>Supported screens and operations</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DA AESL42</td>
+<td>SES UC8151 104×212 BWR pages/pictures/slots/slideshow</td>
+<td>Other SES models and temperature readback are not confirmed compatible</td>
+</tr>
+</tbody>
+</table></div>
+<p>Equal dimensions do not imply equal voltage, waveforms, BUSY polarity or transfer format. Advanced configuration does not automatically identify an unknown IC.</p>
+<h2 id="image-capacity">Image capacity</h2>
+<p>The table below estimates storage for <strong>250×128 (also 128×250), 400×300 and 3.98-inch 768×552 images at 2 bits per pixel (2bpp)</strong>. E6 uses two 2bpp stages, totaling <strong>4bpp</strong>; both larger E6 sizes, 720×480 and 760×568, are listed separately.</p>
+<p>Saved images use a full decoded frame, a 96-byte record header and 4 KiB alignment. The approximate space per image is:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Image size</th>
+<th>Color data</th>
+<th align="right">Space per image, including header and alignment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>250×128 / 128×250</td>
+<td>2bpp</td>
+<td align="right">8 KiB</td>
+</tr>
+<tr>
+<td>400×300</td>
+<td>2bpp</td>
+<td align="right">32 KiB</td>
+</tr>
+<tr>
+<td>3.98-inch 768×552</td>
+<td>2bpp</td>
+<td align="right">104 KiB</td>
+</tr>
+<tr>
+<td>E6 3.7-inch 720×480</td>
+<td>4bpp</td>
+<td align="right">172 KiB</td>
+</tr>
+<tr>
+<td>E6 3.64-inch 760×568</td>
+<td>4bpp</td>
+<td align="right">212 KiB</td>
+</tr>
+</tbody>
+</table></div>
+<p>The counts below show <strong>storage capacity before Free-edition quotas</strong>. On Pro-capable controllers, Free normally allows 10 pictures when the visible long edge is below 300 pixels, or 4 otherwise. <strong>DA14585 and nRF52811 are Free-only due to firmware-size limits, cannot activate Pro, and have no such count quota.</strong> Storage still has a physical limit. E6 control requires Pro and is unavailable on these two controllers.</p>
+<p>1 KiB = 1,024 bytes. <code>0</code> means that a full image cannot be saved; <code>—</code> means E6 is not supported. This is a capacity comparison, not confirmation that every listed screen works on every board; see <a target="_blank" rel="noopener noreferrer" href="tested-screens.html">tested screens</a>.</p>
+<h3 id="gr5331">GR5331</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th align="right">Available image storage</th>
+<th align="right">250×128</th>
+<th align="right">400×300</th>
+<th align="right">768×552</th>
+<th align="right">E6 720×480</th>
+<th align="right">E6 760×568</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standard</td>
+<td align="right">80 KiB</td>
+<td align="right">10</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="gr5513-gr5515">GR5513 / GR5515</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th align="right">Available image storage</th>
+<th align="right">250×128</th>
+<th align="right">400×300</th>
+<th align="right">768×552</th>
+<th align="right">E6 720×480</th>
+<th align="right">E6 760×568</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GR5513 internal image storage</td>
+<td align="right">64 KiB</td>
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>GR5513 external image storage / larger GR5515 configuration</td>
+<td align="right">512 KiB</td>
+<td align="right">64</td>
+<td align="right">16</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="om6626_1">OM6626</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th align="right">Available image storage</th>
+<th align="right">250×128</th>
+<th align="right">400×300</th>
+<th align="right">768×552</th>
+<th align="right">E6 720×480</th>
+<th align="right">E6 760×568</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Without external image Flash</td>
+<td align="right">484 KiB</td>
+<td align="right">60</td>
+<td align="right">15</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td>ZKC42B with its 2 MiB external image Flash available</td>
+<td align="right">2,532 KiB (484 + 2048)</td>
+<td align="right">255</td>
+<td align="right">79</td>
+<td align="right">23</td>
+<td align="right">13</td>
+<td align="right">11</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="tlsr8359_1">TLSR8359</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th align="right">Available image storage</th>
+<th align="right">250×128</th>
+<th align="right">400×300</th>
+<th align="right">768×552</th>
+<th align="right">E6 720×480</th>
+<th align="right">E6 760×568</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base image storage</td>
+<td align="right">136 KiB</td>
+<td align="right">17</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>Nebular-420R-N with extended image storage enabled</td>
+<td align="right">648 KiB (136 + 512)</td>
+<td align="right">81</td>
+<td align="right">20</td>
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="nrf52832_1">nRF52832</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th align="right">Available image storage</th>
+<th align="right">250×128</th>
+<th align="right">400×300</th>
+<th align="right">768×552</th>
+<th align="right">E6 720×480</th>
+<th align="right">E6 760×568</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standard</td>
+<td align="right">128 KiB</td>
+<td align="right">16</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="nrf52811_1">nRF52811</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th align="right">Available image storage</th>
+<th align="right">250×128</th>
+<th align="right">400×300</th>
+<th align="right">768×552</th>
+<th align="right">E6 720×480</th>
+<th align="right">E6 760×568</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EL022H2</td>
+<td align="right">472 KiB</td>
+<td align="right">59</td>
+<td align="right">14</td>
+<td align="right">4</td>
+<td align="right">—</td>
+<td align="right">—</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="da14585_1">DA14585</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th align="right">Available image storage</th>
+<th align="right">250×128</th>
+<th align="right">400×300</th>
+<th align="right">768×552</th>
+<th align="right">E6 720×480</th>
+<th align="right">E6 760×568</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AESL family</td>
+<td align="right">68 KiB</td>
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">—</td>
+<td align="right">—</td>
+</tr>
+</tbody>
+</table></div>
+<p>Each separate storage area is rounded down independently; an image cannot span two Flash areas. The current image-ID limit is 255, so the ZKC42B estimate for 250×128 stops at 255 even if space remains.</p>
+<p>These sizes refer to image storage only, not total Flash or App/OTA space. Available space can differ with the board, installed firmware and whether external Flash is available. Follow the capacity reported by the connected device. The estimates assume all saved images use the selected size; row padding, orientation and color format can change the actual count. RLE reduces transfer bytes, not stored full-frame size; the original JPEG/PNG file size does not determine slot use.</p>
+<p>Some large screens can be displayed directly without enough room for saved slots or an autonomous slideshow. When changing screen settings, download pictures you want to keep, then clear incompatible images and upload again as prompted.</p>
+<h2 id="temperature-and-capabilities">Temperature and capabilities</h2>
+<p>Panel and MCU temperatures have different sources. Missing, stale, busy or unsupported samples appear as <code>--</code>, not 0 °C. A0/A1 panel temperature on nRF52811 is not physically tested; DA availability also depends on controller and sampling state.</p>
+<p>nRF52811 and DA14585 are permanently Free without activation, Find, passwords, NFC actions or Bluetooth renaming. LEDs/buttons/buzzers on other families depend on fitted hardware and actual capabilities. Labels use printable English/ASCII characters; default <code>InkTag XXXX</code> is separate from advertising.</p></main></body></html>

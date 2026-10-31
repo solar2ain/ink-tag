@@ -1,0 +1,39 @@
+# Hanshow Nebular-420R-N
+# JD79668AA four-colour panel; NFC/Flash/ADC follow the PCB backend.
+# Display/RGB pins are persistent defaults; supported runtime overrides win.
+# Unified app-full.zip / layout-v1; this is the four-colour panel variant.
+format_version = 1
+board_marking = "HSEL4Q_04_20M_33"
+
+[screen]
+ic = "JD79668AA"
+recipe = 1
+color = "BWRY"
+rotation = 0
+mirror_x = false
+mirror_y = true
+
+native_ui_scale = 0 # 0=AUTO; 1=1x; 2=1.5x; 3=2x; 4=1.25x; 5=1.75x
+width = 400
+height = 300
+visible_x = 0
+visible_y = 0
+visible_width = 400
+visible_height = 300
+
+[gpio.display]
+mosi = "PB6"
+clock = "PD7"
+cs = "PD2"
+dc = "PB7"
+reset = "PD4"
+busy = "PA1"
+enable = "PB5"
+enable_active_low = true
+
+[gpio.led]
+# Some units omit the red/green series resistors. This does not change routing.
+red = "PB4"
+green = "PD3"
+blue = "PA7"
+active_low = ["red", "green", "blue"]

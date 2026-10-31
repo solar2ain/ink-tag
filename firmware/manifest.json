@@ -1,0 +1,879 @@
+{
+  "schemaVersion": 2,
+  "product": "InkTag",
+  "version": "0.2.0",
+  "releaseTag": "v0.2.0-20261031.2",
+  "webuiVersion": "1.2.0",
+  "channel": "stable",
+  "components": [
+    "cli",
+    "firmware",
+    "webui"
+  ],
+  "firmwareSelection": {
+    "included": true,
+    "published": false,
+    "boards": [
+      "da14585_aesl",
+      "gr5331_zkel",
+      "gr551x_zkel",
+      "gr551x_zkel_internal",
+      "nrf52811_aesl",
+      "nrf52832_priceetag",
+      "om6626_zkel",
+      "tlsr8359_hsel"
+    ],
+    "kinds": [
+      "ota",
+      "full"
+    ],
+    "publicationRecord": "releases/record.json",
+    "state": "prepared-release-snapshot"
+  },
+  "repository": "solar2ain/ink-tag",
+  "generatedAt": "2026-10-31T16:11:48+08:00",
+  "licensingStatus": "private-preview-review-required",
+  "candidateOnly": false,
+  "releaseReady": true,
+  "boards": [
+    {
+      "boardId": "da14585_aesl",
+      "publicBoardId": "da14585_aesl",
+      "buildTarget": "da14585_aesl",
+      "displayName": "da14585_aesl",
+      "firmwareFamily": "da14585_aesl",
+      "firmwareVersion": "0.2.0.34462",
+      "layout": "DAV1",
+      "compatibility": {
+        "protocolVersion": 16,
+        "compatibilityEpoch": 1,
+        "signedAppSha256": "4dae869e67ce5d36d33d06db92b94efb6aee037b29047fe04d13edb2c297efd5",
+        "fullKind": "native template requiring fresh same-unit factory/OTP capture"
+      },
+      "releaseScope": "candidate",
+      "artifacts": [
+        {
+          "type": "ota",
+          "name": "InkTag-da14585_aesl-ota-v0.2.0.34462-e3c0352c6f9c.img",
+          "bytes": 82564,
+          "sha256": "ada6ad76cb0551014cff9a49ed715a1764b8f7072fae3bd5c2dbe095b2503ef9",
+          "repositoryPath": "firmware/da14585_aesl/ota/InkTag-da14585_aesl-ota-v0.2.0.34462-e3c0352c6f9c.img",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-da14585_aesl-ota-v0.2.0.34462-e3c0352c6f9c.img",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "ada6ad76cb0551014cff9a49ed715a1764b8f7072fae3bd5c2dbe095b2503ef9"
+        },
+        {
+          "type": "full",
+          "name": "InkTag-da14585_aesl-full-v0.2.0.34462-e3c0352c6f9c.bin",
+          "bytes": 262144,
+          "sha256": "e22c3c2d240fa70c3e294d3e641712c42081e2eb438acbe8f8173d5c63c4e6f2",
+          "repositoryPath": "firmware/da14585_aesl/full/InkTag-da14585_aesl-full-v0.2.0.34462-e3c0352c6f9c.bin",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-da14585_aesl-full-v0.2.0.34462-e3c0352c6f9c.bin",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "ada6ad76cb0551014cff9a49ed715a1764b8f7072fae3bd5c2dbe095b2503ef9"
+        }
+      ],
+      "publication": {
+        "target": {
+          "boardId": "da14585_aesl",
+          "family": "da14585_aesl",
+          "protocolVersion": 16,
+          "layout": "DAV1",
+          "compatibilityEpoch": 1
+        },
+        "version": "0.2.0.34462",
+        "releaseVersion": 200,
+        "signaturePolicy": {
+          "algorithm": "ecdsa-p256-sha256",
+          "packageBoard": "da14585_aesl",
+          "keyPolicy": "fixed-production-public-key",
+          "keyId": "inktag-da14585-prod-v1",
+          "authenticates": "application",
+          "bootChainAuthenticatedByThisCheck": false,
+          "proAntiCloneVerifiedByThisCheck": false
+        },
+        "pairing": {
+          "otaSha256": "ada6ad76cb0551014cff9a49ed715a1764b8f7072fae3bd5c2dbe095b2503ef9",
+          "fullSha256": "e22c3c2d240fa70c3e294d3e641712c42081e2eb438acbe8f8173d5c63c4e6f2",
+          "embeddedOtaSha256": "ada6ad76cb0551014cff9a49ed715a1764b8f7072fae3bd5c2dbe095b2503ef9",
+          "nativeHeaderRoles": {
+            "ota": 255,
+            "full": 1
+          },
+          "signedApplicationSha256": "4dae869e67ce5d36d33d06db92b94efb6aee037b29047fe04d13edb2c297efd5"
+        }
+      }
+    },
+    {
+      "boardId": "gr5331_zkel",
+      "publicBoardId": "gr5331_zkel",
+      "buildTarget": "gr5331_zkel",
+      "displayName": "gr5331_zkel",
+      "firmwareFamily": "gr5331_zkc21v",
+      "firmwareVersion": "0.2.0.0",
+      "layout": "layout-v1",
+      "compatibility": {
+        "protocol": 16,
+        "nativeVersion": "0.2.0",
+        "compatibilityEpoch": 1
+      },
+      "releaseScope": "candidate",
+      "artifacts": [
+        {
+          "type": "ota",
+          "name": "InkTag-gr5331_zkel-ota-v0.2.0.0-90cb6f7651dd.zip",
+          "bytes": 244246,
+          "sha256": "82319f08902eaf2b1e0aaa11d1a4f2f8ccc0eb123a8270b034ff35580a82b19e",
+          "repositoryPath": "firmware/gr5331_zkel/ota/InkTag-gr5331_zkel-ota-v0.2.0.0-90cb6f7651dd.zip",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-gr5331_zkel-ota-v0.2.0.0-90cb6f7651dd.zip",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "82319f08902eaf2b1e0aaa11d1a4f2f8ccc0eb123a8270b034ff35580a82b19e"
+        },
+        {
+          "type": "full",
+          "name": "InkTag-gr5331_zkel-full-v0.2.0.0-90cb6f7651dd.zip",
+          "bytes": 361693,
+          "sha256": "a0823973d5feec17875096e8f7fead83e2c3ec6a5e68788e2ad07723c4e37c67",
+          "repositoryPath": "firmware/gr5331_zkel/full/InkTag-gr5331_zkel-full-v0.2.0.0-90cb6f7651dd.zip",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-gr5331_zkel-full-v0.2.0.0-90cb6f7651dd.zip",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "82319f08902eaf2b1e0aaa11d1a4f2f8ccc0eb123a8270b034ff35580a82b19e"
+        }
+      ],
+      "publication": {
+        "target": {
+          "boardId": "gr5331_zkel",
+          "family": "gr5331_zkel",
+          "protocolVersion": 16,
+          "layout": "layout-v1",
+          "compatibilityEpoch": 1
+        },
+        "version": "0.2.0.0",
+        "releaseVersion": 200,
+        "signaturePolicy": {
+          "algorithm": "ecdsa-p256-sha256",
+          "packageBoard": "gr5331_zkc21v",
+          "keyPolicy": "fixed-production-public-key",
+          "keyId": "inktag-gr5331-ota-v1",
+          "authenticates": "application",
+          "bootChainAuthenticatedByThisCheck": false,
+          "proAntiCloneVerifiedByThisCheck": false
+        },
+        "pairing": {
+          "otaSha256": "82319f08902eaf2b1e0aaa11d1a4f2f8ccc0eb123a8270b034ff35580a82b19e",
+          "fullSha256": "a0823973d5feec17875096e8f7fead83e2c3ec6a5e68788e2ad07723c4e37c67",
+          "embeddedOtaSha256": "82319f08902eaf2b1e0aaa11d1a4f2f8ccc0eb123a8270b034ff35580a82b19e"
+        }
+      }
+    },
+    {
+      "boardId": "gr551x_zkel",
+      "publicBoardId": "gr551x_zkel",
+      "buildTarget": "gr551x_zkel",
+      "displayName": "gr551x_zkel",
+      "firmwareFamily": "gr551x_zkc42v",
+      "firmwareVersion": "0.2.0.0",
+      "layout": "layout-v1",
+      "compatibility": {
+        "protocol": 16,
+        "nativeVersion": "0.2.0",
+        "compatibilityEpoch": 1
+      },
+      "releaseScope": "candidate",
+      "artifacts": [
+        {
+          "type": "ota",
+          "name": "InkTag-gr551x_zkel-ota-v0.2.0.0-a4dbb44633f2.zip",
+          "bytes": 267150,
+          "sha256": "e979f12cbbd753a1d6411a28296c601b0445b1230b9b5c996764f616bdbcda79",
+          "repositoryPath": "firmware/gr551x_zkel/ota/InkTag-gr551x_zkel-ota-v0.2.0.0-a4dbb44633f2.zip",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-gr551x_zkel-ota-v0.2.0.0-a4dbb44633f2.zip",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "e979f12cbbd753a1d6411a28296c601b0445b1230b9b5c996764f616bdbcda79"
+        },
+        {
+          "type": "full",
+          "name": "InkTag-gr551x_zkel-full-v0.2.0.0-a4dbb44633f2.zip",
+          "bytes": 392597,
+          "sha256": "86dd6e885f6102b12650c7de6fff8efd0de7d5f69542d31089e84a1f294cf07f",
+          "repositoryPath": "firmware/gr551x_zkel/full/InkTag-gr551x_zkel-full-v0.2.0.0-a4dbb44633f2.zip",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-gr551x_zkel-full-v0.2.0.0-a4dbb44633f2.zip",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "e979f12cbbd753a1d6411a28296c601b0445b1230b9b5c996764f616bdbcda79"
+        }
+      ],
+      "publication": {
+        "target": {
+          "boardId": "gr551x_zkel",
+          "family": "gr551x_zkel",
+          "protocolVersion": 16,
+          "layout": "layout-v1",
+          "compatibilityEpoch": 1
+        },
+        "version": "0.2.0.0",
+        "releaseVersion": 200,
+        "signaturePolicy": {
+          "algorithm": "rsa-2048-pss-sha256",
+          "packageBoard": "gr551x_zkc42v",
+          "keyPolicy": "fixed-production-public-key",
+          "keyId": "inktag-gr551x-ota-v1",
+          "authenticates": "application",
+          "bootChainAuthenticatedByThisCheck": false,
+          "proAntiCloneVerifiedByThisCheck": false
+        },
+        "pairing": {
+          "otaSha256": "e979f12cbbd753a1d6411a28296c601b0445b1230b9b5c996764f616bdbcda79",
+          "fullSha256": "86dd6e885f6102b12650c7de6fff8efd0de7d5f69542d31089e84a1f294cf07f",
+          "embeddedOtaSha256": "e979f12cbbd753a1d6411a28296c601b0445b1230b9b5c996764f616bdbcda79"
+        }
+      }
+    },
+    {
+      "boardId": "gr551x_zkel_internal",
+      "publicBoardId": "gr551x_zkel_internal",
+      "buildTarget": "gr551x_zkel_internal",
+      "displayName": "gr551x_zkel_internal",
+      "firmwareFamily": "gr5513_zkel_internal",
+      "firmwareVersion": "0.2.0.0",
+      "layout": "layout-v1",
+      "compatibility": {
+        "protocol": 16,
+        "nativeVersion": "0.2.0",
+        "compatibilityEpoch": 1
+      },
+      "releaseScope": "candidate",
+      "artifacts": [
+        {
+          "type": "ota",
+          "name": "InkTag-gr551x_zkel_internal-ota-v0.2.0.0-812004284bab.zip",
+          "bytes": 259650,
+          "sha256": "cfb599ae9729842eda9b9658eef484561ad0307cb4f444d6b4e198ad47aae19b",
+          "repositoryPath": "firmware/gr551x_zkel_internal/ota/InkTag-gr551x_zkel_internal-ota-v0.2.0.0-812004284bab.zip",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-gr551x_zkel_internal-ota-v0.2.0.0-812004284bab.zip",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "cfb599ae9729842eda9b9658eef484561ad0307cb4f444d6b4e198ad47aae19b"
+        },
+        {
+          "type": "full",
+          "name": "InkTag-gr551x_zkel_internal-full-v0.2.0.0-812004284bab.zip",
+          "bytes": 370770,
+          "sha256": "ce52ab84d7e67687aa3a1d6f38abac2fd3c345cc481127972b6b26b1d70059a3",
+          "repositoryPath": "firmware/gr551x_zkel_internal/full/InkTag-gr551x_zkel_internal-full-v0.2.0.0-812004284bab.zip",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-gr551x_zkel_internal-full-v0.2.0.0-812004284bab.zip",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "cfb599ae9729842eda9b9658eef484561ad0307cb4f444d6b4e198ad47aae19b"
+        }
+      ],
+      "publication": {
+        "target": {
+          "boardId": "gr5513_zkel_internal",
+          "family": "gr5513_zkel_internal",
+          "protocolVersion": 16,
+          "layout": "layout-v1",
+          "compatibilityEpoch": 1
+        },
+        "version": "0.2.0.0",
+        "releaseVersion": 200,
+        "signaturePolicy": {
+          "algorithm": "rsa-2048-pss-sha256",
+          "packageBoard": "gr5513_zkel_internal",
+          "keyPolicy": "fixed-production-public-key",
+          "keyId": "inktag-gr551x-ota-v1",
+          "authenticates": "application",
+          "bootChainAuthenticatedByThisCheck": false,
+          "proAntiCloneVerifiedByThisCheck": false
+        },
+        "pairing": {
+          "otaSha256": "cfb599ae9729842eda9b9658eef484561ad0307cb4f444d6b4e198ad47aae19b",
+          "fullSha256": "ce52ab84d7e67687aa3a1d6f38abac2fd3c345cc481127972b6b26b1d70059a3",
+          "embeddedOtaSha256": "cfb599ae9729842eda9b9658eef484561ad0307cb4f444d6b4e198ad47aae19b"
+        }
+      }
+    },
+    {
+      "boardId": "nrf52811_aesl",
+      "publicBoardId": "nrf52811_aesl",
+      "buildTarget": "nrf52811_aesl",
+      "displayName": "nrf52811_aesl",
+      "firmwareFamily": "aesl22_nrf",
+      "firmwareVersion": "0.2.0.0",
+      "layout": "v1",
+      "compatibility": {
+        "protocol": "0x10",
+        "compatibilityEpoch": 1,
+        "encodedVersion": 65736,
+        "hwVersion": 52,
+        "firmwareFamily": "aesl22_nrf",
+        "nativeLayoutMarker": "N1V1",
+        "minimumToolsVersion": "0.2.0.1"
+      },
+      "releaseScope": "candidate",
+      "artifacts": [
+        {
+          "type": "ota",
+          "name": "InkTag-nrf52811_aesl-ota-v0.2.0.0-b6fb6ecc78cd.zip",
+          "bytes": 70221,
+          "sha256": "e4eee8f1b59842faf0cff85ed8d30b8fce1e58c114923f863e7feae795a84c5b",
+          "repositoryPath": "firmware/nrf52811_aesl/ota/InkTag-nrf52811_aesl-ota-v0.2.0.0-b6fb6ecc78cd.zip",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-nrf52811_aesl-ota-v0.2.0.0-b6fb6ecc78cd.zip",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "e4eee8f1b59842faf0cff85ed8d30b8fce1e58c114923f863e7feae795a84c5b"
+        },
+        {
+          "type": "full",
+          "name": "InkTag-nrf52811_aesl-full-v0.2.0.0-b6fb6ecc78cd.zip",
+          "bytes": 285098,
+          "sha256": "bb4a082aac1fc595e309d7ed79c7f167de129555930cb5618109fc5441ac3b45",
+          "repositoryPath": "firmware/nrf52811_aesl/full/InkTag-nrf52811_aesl-full-v0.2.0.0-b6fb6ecc78cd.zip",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-nrf52811_aesl-full-v0.2.0.0-b6fb6ecc78cd.zip",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "e4eee8f1b59842faf0cff85ed8d30b8fce1e58c114923f863e7feae795a84c5b"
+        }
+      ],
+      "publication": {
+        "target": {
+          "boardId": "aesl22_nrf",
+          "family": "aesl22_nrf",
+          "protocolVersion": 16,
+          "layout": "N1V1",
+          "compatibilityEpoch": 1
+        },
+        "version": "0.2.0.0",
+        "releaseVersion": 65736,
+        "signaturePolicy": {
+          "algorithm": "ecdsa-p256-sha256",
+          "packageBoard": "aesl22_nrf",
+          "keyPolicy": "fixed-production-public-key",
+          "keyId": "inktag-nordic-prod-v1",
+          "authenticates": "application",
+          "bootChainAuthenticatedByThisCheck": false,
+          "proAntiCloneVerifiedByThisCheck": false
+        },
+        "pairing": {
+          "otaSha256": "e4eee8f1b59842faf0cff85ed8d30b8fce1e58c114923f863e7feae795a84c5b",
+          "fullSha256": "bb4a082aac1fc595e309d7ed79c7f167de129555930cb5618109fc5441ac3b45",
+          "embeddedOtaSha256": "e4eee8f1b59842faf0cff85ed8d30b8fce1e58c114923f863e7feae795a84c5b"
+        }
+      }
+    },
+    {
+      "boardId": "nrf52832_priceetag",
+      "publicBoardId": "nrf52832_priceetag",
+      "buildTarget": "nrf52832_priceetag",
+      "displayName": "nrf52832_priceetag",
+      "firmwareFamily": "nrf52832_priceetag",
+      "firmwareVersion": "0.2.0.0",
+      "layout": "N3V1",
+      "compatibility": {
+        "hwVersion": 56,
+        "layoutMarker": "N3V1",
+        "compatibilityEpoch": 1
+      },
+      "releaseScope": "candidate",
+      "artifacts": [
+        {
+          "type": "ota",
+          "name": "InkTag-nrf52832_priceetag-ota-v0.2.0.0-411fb02cbf64.zip",
+          "bytes": 135801,
+          "sha256": "4a7d3fd05bf1dbcdd43b74c472ae31de1337339199eab6cf9aa2335156488452",
+          "repositoryPath": "firmware/nrf52832_priceetag/ota/InkTag-nrf52832_priceetag-ota-v0.2.0.0-411fb02cbf64.zip",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-nrf52832_priceetag-ota-v0.2.0.0-411fb02cbf64.zip",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "4a7d3fd05bf1dbcdd43b74c472ae31de1337339199eab6cf9aa2335156488452"
+        },
+        {
+          "type": "full",
+          "name": "InkTag-nrf52832_priceetag-full-v0.2.0.0-411fb02cbf64.zip",
+          "bytes": 478343,
+          "sha256": "fc670f031de7407d45414f10394aa1451231fa117bebb37db07e085f2ccff8e6",
+          "repositoryPath": "firmware/nrf52832_priceetag/full/InkTag-nrf52832_priceetag-full-v0.2.0.0-411fb02cbf64.zip",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-nrf52832_priceetag-full-v0.2.0.0-411fb02cbf64.zip",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "4a7d3fd05bf1dbcdd43b74c472ae31de1337339199eab6cf9aa2335156488452"
+        }
+      ],
+      "publication": {
+        "target": {
+          "boardId": "nrf52832_priceetag",
+          "family": "nrf52832_priceetag",
+          "protocolVersion": 16,
+          "layout": "N3V1",
+          "compatibilityEpoch": 1
+        },
+        "version": "0.2.0.0",
+        "releaseVersion": 65736,
+        "signaturePolicy": {
+          "algorithm": "ecdsa-p256-sha256",
+          "packageBoard": "nrf52832_priceetag",
+          "keyPolicy": "fixed-production-public-key",
+          "keyId": "inktag-nordic-prod-v1",
+          "authenticates": "application",
+          "bootChainAuthenticatedByThisCheck": false,
+          "proAntiCloneVerifiedByThisCheck": false
+        },
+        "pairing": {
+          "otaSha256": "4a7d3fd05bf1dbcdd43b74c472ae31de1337339199eab6cf9aa2335156488452",
+          "fullSha256": "fc670f031de7407d45414f10394aa1451231fa117bebb37db07e085f2ccff8e6",
+          "embeddedOtaSha256": "4a7d3fd05bf1dbcdd43b74c472ae31de1337339199eab6cf9aa2335156488452"
+        }
+      }
+    },
+    {
+      "boardId": "om6626_zkel",
+      "publicBoardId": "om6626_zkel",
+      "buildTarget": "om6626_zkel",
+      "displayName": "om6626_zkel",
+      "firmwareFamily": "om6626_zkc",
+      "firmwareVersion": "0.2.0.0",
+      "layout": "layout-v1",
+      "compatibility": {
+        "arbitraryExternalFlashModificationProtected": false,
+        "minimumToolsVersion": "0.2.0.2",
+        "requiredBootEntry": {
+          "qualifiedFullRequired": true,
+          "recoveryXipAddress": 4210688,
+          "romAppFirstSector": 4
+        },
+        "requiredToolCapabilities": [
+          "preserves-app-signature-tail"
+        ]
+      },
+      "releaseScope": "candidate",
+      "artifacts": [
+        {
+          "type": "ota",
+          "name": "InkTag-om6626_zkel-ota-v0.2.0.0-c4de6cfb54d7.zip",
+          "bytes": 293358,
+          "sha256": "a4d401e2f1dbc48b7d00da031764daf4b60f8d5a44da7bd7a563329106e60f9d",
+          "repositoryPath": "firmware/om6626_zkel/ota/InkTag-om6626_zkel-ota-v0.2.0.0-c4de6cfb54d7.zip",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-om6626_zkel-ota-v0.2.0.0-c4de6cfb54d7.zip",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "a4d401e2f1dbc48b7d00da031764daf4b60f8d5a44da7bd7a563329106e60f9d"
+        },
+        {
+          "type": "full",
+          "name": "InkTag-om6626_zkel-full-v0.2.0.0-c4de6cfb54d7.zip",
+          "bytes": 540632,
+          "sha256": "e1bc095819b1f40340ef65ec8e32cf7ef6d713a03700acdc7ad8072978495af2",
+          "repositoryPath": "firmware/om6626_zkel/full/InkTag-om6626_zkel-full-v0.2.0.0-c4de6cfb54d7.zip",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-om6626_zkel-full-v0.2.0.0-c4de6cfb54d7.zip",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "a4d401e2f1dbc48b7d00da031764daf4b60f8d5a44da7bd7a563329106e60f9d"
+        }
+      ],
+      "publication": {
+        "target": {
+          "boardId": "om6626_zkcxxb",
+          "family": "om6626_zkcxxb",
+          "protocolVersion": 16,
+          "layout": "layout-v1",
+          "compatibilityEpoch": 1
+        },
+        "version": "0.2.0.0",
+        "releaseVersion": 200,
+        "signaturePolicy": {
+          "algorithm": "ecdsa-p256-sha256",
+          "packageBoard": "om6626_zkcxxb",
+          "keyPolicy": "fixed-production-public-key",
+          "keyId": "inktag-om6626-ota-v1",
+          "authenticates": "application",
+          "bootChainAuthenticatedByThisCheck": false,
+          "proAntiCloneVerifiedByThisCheck": false
+        },
+        "pairing": {
+          "otaSha256": "a4d401e2f1dbc48b7d00da031764daf4b60f8d5a44da7bd7a563329106e60f9d",
+          "fullSha256": "e1bc095819b1f40340ef65ec8e32cf7ef6d713a03700acdc7ad8072978495af2",
+          "embeddedOtaSha256": "a4d401e2f1dbc48b7d00da031764daf4b60f8d5a44da7bd7a563329106e60f9d"
+        }
+      }
+    },
+    {
+      "boardId": "tlsr8359_hsel",
+      "publicBoardId": "tlsr8359_hsel",
+      "buildTarget": "tlsr8359_hsel",
+      "displayName": "tlsr8359_hsel",
+      "firmwareFamily": "tlsr8359_hanshow",
+      "firmwareVersion": "0.2.0.0",
+      "layout": "layout-v1",
+      "compatibility": {
+        "minimumToolsVersion": "0.2.0.1",
+        "requiredToolCapabilities": [
+          "tlsr-address-bound-full-v1"
+        ]
+      },
+      "releaseScope": "candidate",
+      "artifacts": [
+        {
+          "type": "ota",
+          "name": "InkTag-tlsr8359_hsel-ota-v0.2.0.0-8ce05d0ff1c9.zip",
+          "bytes": 237164,
+          "sha256": "7504cde15453b89ff81ab754c24be4d85718d442da7a82ecfb7b3ca9505fee82",
+          "repositoryPath": "firmware/tlsr8359_hsel/ota/InkTag-tlsr8359_hsel-ota-v0.2.0.0-8ce05d0ff1c9.zip",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-tlsr8359_hsel-ota-v0.2.0.0-8ce05d0ff1c9.zip",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "7504cde15453b89ff81ab754c24be4d85718d442da7a82ecfb7b3ca9505fee82"
+        },
+        {
+          "type": "full",
+          "name": "InkTag-tlsr8359_hsel-full-v0.2.0.0-8ce05d0ff1c9.zip",
+          "bytes": 188634,
+          "sha256": "c93d92ea2f07e8a767965ff9737e207f9faf05697e2bfae97137b0a411a0c457",
+          "repositoryPath": "firmware/tlsr8359_hsel/full/InkTag-tlsr8359_hsel-full-v0.2.0.0-8ce05d0ff1c9.zip",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-tlsr8359_hsel-full-v0.2.0.0-8ce05d0ff1c9.zip",
+          "candidateOnly": false,
+          "qualification": "reviewed-publication-candidate",
+          "variant": null,
+          "embeddedOtaSha256": "7504cde15453b89ff81ab754c24be4d85718d442da7a82ecfb7b3ca9505fee82"
+        }
+      ],
+      "publication": {
+        "target": {
+          "boardId": "tlsr8359_hanshow",
+          "family": "tlsr8359_hanshow",
+          "protocolVersion": 16,
+          "layout": "layout-v1",
+          "compatibilityEpoch": 1
+        },
+        "version": "0.2.0.0",
+        "releaseVersion": 200,
+        "signaturePolicy": {
+          "algorithm": "ecdsa-p256-sha256",
+          "packageBoard": "tlsr8359_hanshow",
+          "keyPolicy": "fixed-production-public-key",
+          "keyId": "inktag-tlsr8359-ota-prod-v1",
+          "authenticates": "application",
+          "bootChainAuthenticatedByThisCheck": false,
+          "proAntiCloneVerifiedByThisCheck": false
+        },
+        "pairing": {
+          "otaSha256": "7504cde15453b89ff81ab754c24be4d85718d442da7a82ecfb7b3ca9505fee82",
+          "fullSha256": "c93d92ea2f07e8a767965ff9737e207f9faf05697e2bfae97137b0a411a0c457",
+          "embeddedOtaSha256": "7504cde15453b89ff81ab754c24be4d85718d442da7a82ecfb7b3ca9505fee82"
+        }
+      }
+    }
+  ],
+  "web": {
+    "type": "web",
+    "name": "InkTag-WebUI-static-v1.2.0-20261031.2.zip",
+    "bytes": 21776127,
+    "sha256": "20ef2f3e94f651689b27cc82ed49b3419975ac46682f38cd31e4754724aea0f8",
+    "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-WebUI-static-v1.2.0-20261031.2.zip"
+  },
+  "webStandalone": {
+    "type": "web-standalone",
+    "name": "InkTag-WebUI-standalone-v1.2.0-20261031.2.zip",
+    "bytes": 10089579,
+    "sha256": "0a3c0cb9feb4a2244dc66fe5dabcc3735a06db9c6f03d12226df2d54a153b973",
+    "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-WebUI-standalone-v1.2.0-20261031.2.zip"
+  },
+  "webResources": null,
+  "localServer": null,
+  "flashTools": null,
+  "cli": {
+    "type": "cli",
+    "name": "InkTag-cli-v0.2.0-20261031.2.zip",
+    "bytes": 22308831,
+    "sha256": "c785ba63c9329cfe2111c1f08c674a49900c69979337026aaa229d526f02f4a0",
+    "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-cli-v0.2.0-20261031.2.zip",
+    "requiresPython": ">=3.11",
+    "includesLocalServer": true
+  },
+  "programmerTools": [
+    {
+      "buildTarget": "da14585_aesl",
+      "toolsVersion": "0.2.0.12",
+      "compatibility": {
+        "protocolIdsUnchanged": true,
+        "nativeLayoutUnchanged": true,
+        "firmwareDeltaBytes": 0,
+        "portableWriterClosed": true,
+        "requiresInkTagCli": false,
+        "firmwareIncluded": false,
+        "configuredWriterQualified": false,
+        "externalHelperBundled": false,
+        "physicalQualification": false,
+        "proApplicable": false,
+        "protectedSelectorMayRemainUnknown": true
+      },
+      "root": "firmware/da14585_aesl",
+      "inventory": "releases/tool-manifests/da14585_aesl.json",
+      "bytes": 14986,
+      "sha256": "82faefe48225a265c0d1e88cbaf77600e71b98db037f8ab8975bf440844b4f87",
+      "publicLayout": "gr551x-style-v1",
+      "nativeBackendUnchanged": {
+        "nativeFiles": 49,
+        "entries": [
+          "check",
+          "flash",
+          "probe",
+          "setup",
+          "validate"
+        ],
+        "configurations": 3
+      },
+      "documentationRevision": "20261030.1",
+      "documentationSourceSha256": "c68aa59f7ee62ed2f7321e993aae43e85021a4b228a47c7ce93c85261ae46093"
+    },
+    {
+      "buildTarget": "gr5331_zkel",
+      "toolsVersion": "0.2.0.0",
+      "compatibility": {
+        "platform": "windows-x64",
+        "python": "CPython3.12-x64",
+        "kind": "tools-only",
+        "format": "plaintext-directory",
+        "firmwarePair": "not-applicable",
+        "fullWriter": "existing-guarded-pilot; no new physical qualification"
+      },
+      "root": "firmware/gr5331_zkel",
+      "inventory": "releases/tool-manifests/gr5331_zkel.json",
+      "bytes": 23662,
+      "sha256": "c66779de683881f68fecddc5389c9c4d5dd8395da38a0ae459e70fa592274b0d",
+      "publicLayout": "gr551x-style-v1",
+      "nativeBackendUnchanged": {
+        "nativeFiles": 79,
+        "entries": [
+          "backup",
+          "check",
+          "flash",
+          "probe",
+          "restore",
+          "setup"
+        ],
+        "configurations": 1
+      },
+      "documentationRevision": "20261030.1",
+      "documentationSourceSha256": "c68aa59f7ee62ed2f7321e993aae43e85021a4b228a47c7ce93c85261ae46093"
+    },
+    {
+      "buildTarget": "gr551x_zkel",
+      "toolsVersion": "0.2.0.0",
+      "compatibility": {
+        "platform": "windows-x64",
+        "python": "CPython3.12-x64",
+        "kind": "tools-only",
+        "format": "plaintext-directory",
+        "firmwarePair": "not-applicable",
+        "fullWriter": "existing-guarded-pilot; no new physical qualification"
+      },
+      "root": "firmware/gr551x_zkel",
+      "inventory": "releases/tool-manifests/gr551x_zkel.json",
+      "bytes": 24596,
+      "sha256": "6b3a7482addcd60cae105cc6a2a005f80cc3933fbc7c0fca679942663a15ecee",
+      "publicLayout": "gr551x-style-v1",
+      "nativeBackendUnchanged": {
+        "nativeFiles": 81,
+        "entries": [
+          "backup",
+          "check",
+          "flash",
+          "probe",
+          "restore",
+          "setup"
+        ],
+        "configurations": 3
+      },
+      "documentationRevision": "20261030.1",
+      "documentationSourceSha256": "c68aa59f7ee62ed2f7321e993aae43e85021a4b228a47c7ce93c85261ae46093"
+    },
+    {
+      "buildTarget": "gr551x_zkel_internal",
+      "toolsVersion": "0.2.0.0",
+      "compatibility": {
+        "platform": "windows-x64",
+        "python": "CPython3.12-x64",
+        "kind": "tools-only",
+        "format": "plaintext-directory",
+        "firmwarePair": "not-applicable",
+        "fullWriter": "existing-guarded-pilot; no new physical qualification"
+      },
+      "root": "firmware/gr551x_zkel_internal",
+      "inventory": "releases/tool-manifests/gr551x_zkel_internal.json",
+      "bytes": 24482,
+      "sha256": "91c122b02d462017a991fe76b1f48d07ac8c84023d276c90d8fadea86b038957",
+      "publicLayout": "gr551x-style-v1",
+      "nativeBackendUnchanged": {
+        "nativeFiles": 79,
+        "entries": [
+          "backup",
+          "check",
+          "flash",
+          "probe",
+          "restore",
+          "setup"
+        ],
+        "configurations": 1
+      },
+      "documentationRevision": "20261030.1",
+      "documentationSourceSha256": "c68aa59f7ee62ed2f7321e993aae43e85021a4b228a47c7ce93c85261ae46093"
+    },
+    {
+      "buildTarget": "nrf52811_aesl",
+      "toolsVersion": "0.2.0.4",
+      "compatibility": {},
+      "root": "firmware/nrf52811_aesl",
+      "inventory": "releases/tool-manifests/nrf52811_aesl.json",
+      "bytes": 16712,
+      "sha256": "9b04cd1d1dfaaf40e5885d0b9a18f7c24003f81b9a7bc79a6bcd4e1e632daa39",
+      "publicLayout": "gr551x-style-v1",
+      "nativeBackendUnchanged": {
+        "nativeFiles": 58,
+        "entries": [
+          "backup",
+          "check",
+          "flash",
+          "probe",
+          "setup"
+        ],
+        "configurations": 2
+      },
+      "documentationRevision": "20261030.1",
+      "documentationSourceSha256": "c68aa59f7ee62ed2f7321e993aae43e85021a4b228a47c7ce93c85261ae46093"
+    },
+    {
+      "buildTarget": "nrf52832_priceetag",
+      "toolsVersion": "0.2.0.3",
+      "compatibility": {
+        "os": "windows-amd64",
+        "programmer": "J-Link7.88j",
+        "firmwareProvided": false,
+        "offlineNativeValidator": {
+          "hwVersion": 56,
+          "layoutMarker": "N3V1",
+          "compatibilityEpoch": 1
+        },
+        "fullWriter": "guarded-pending-HW56-qualification"
+      },
+      "root": "firmware/nrf52832_priceetag",
+      "inventory": "releases/tool-manifests/nrf52832_priceetag.json",
+      "bytes": 15403,
+      "sha256": "3dfff66db4241a29a1ab23ce58bfdeb6ed0439af5eb3a62f96aa5dd0ad52ea02",
+      "publicLayout": "gr551x-style-v1",
+      "nativeBackendUnchanged": {
+        "nativeFiles": 49,
+        "entries": [
+          "backup",
+          "check",
+          "flash",
+          "probe",
+          "setup"
+        ],
+        "configurations": 1
+      },
+      "documentationRevision": "20261030.1",
+      "documentationSourceSha256": "c68aa59f7ee62ed2f7321e993aae43e85021a4b228a47c7ce93c85261ae46093"
+    },
+    {
+      "buildTarget": "om6626_zkel",
+      "toolsVersion": "0.2.0.7",
+      "compatibility": {
+        "firmwareIncluded": false,
+        "platform": "windows-x64",
+        "supportedLayouts": [
+          "layout-v1"
+        ],
+        "toolCapabilities": [
+          "preserves-app-signature-tail",
+          "preserves-valid-native-pro",
+          "clears-health-history",
+          "optional-old-state-defaults",
+          "same-operation-uid-address-default"
+        ]
+      },
+      "root": "firmware/om6626_zkel",
+      "inventory": "releases/tool-manifests/om6626_zkel.json",
+      "bytes": 23354,
+      "sha256": "5ac5b59549a41089d2db1a7498c6e4a15454147a95eb24db4eab29331220b4cc",
+      "publicLayout": "gr551x-style-v1",
+      "nativeBackendUnchanged": {
+        "nativeFiles": 80,
+        "entries": [
+          "backup",
+          "check",
+          "flash",
+          "probe",
+          "setup"
+        ],
+        "configurations": 3
+      },
+      "documentationRevision": "20261030.1",
+      "documentationSourceSha256": "c68aa59f7ee62ed2f7321e993aae43e85021a4b228a47c7ce93c85261ae46093"
+    },
+    {
+      "buildTarget": "tlsr8359_hsel",
+      "toolsVersion": "0.2.0.8",
+      "compatibility": {
+        "toolCapabilities": [
+          "tlsr-address-bound-full-v1",
+          "tlsr-complete-pro-retention-v1"
+        ]
+      },
+      "root": "firmware/tlsr8359_hsel",
+      "inventory": "releases/tool-manifests/tlsr8359_hsel.json",
+      "bytes": 26596,
+      "sha256": "737cc39350f336704190d4494dab932eeef364419a04f19a0ac996ba61ad48b2",
+      "publicLayout": "gr551x-style-v1",
+      "nativeBackendUnchanged": {
+        "nativeFiles": 85,
+        "entries": [
+          "backup",
+          "flash",
+          "probe",
+          "setup"
+        ],
+        "configurations": 12
+      },
+      "documentationRevision": "20261030.1",
+      "documentationSourceSha256": "c68aa59f7ee62ed2f7321e993aae43e85021a4b228a47c7ce93c85261ae46093"
+    }
+  ],
+  "distributionBaseCommit": "7bfc47b870b1a0c9f8441a0aa48f216c24d116d1",
+  "cliDistributions": [
+    {
+      "type": "cli",
+      "name": "inktag_cli-0.2.0-py3-none-any.whl",
+      "bytes": 437633,
+      "sha256": "22995485c3c444f0959948f90624c69d73f55aaed903159bb5c083df770ce6aa",
+      "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/inktag_cli-0.2.0-py3-none-any.whl"
+    },
+    {
+      "type": "cli",
+      "name": "inktag_cli-0.2.0.tar.gz",
+      "bytes": 409575,
+      "sha256": "98b8424401c7eaf07549fc869280a5d36dbc32f4cf72fa6910b51f22ce7939ab",
+      "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/inktag_cli-0.2.0.tar.gz"
+    }
+  ],
+  "firmwareRepositoryIncluded": true
+}

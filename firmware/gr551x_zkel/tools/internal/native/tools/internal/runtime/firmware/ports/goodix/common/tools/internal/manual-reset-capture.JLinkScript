@@ -1,0 +1,90 @@
+// Cortex-M4 manual-RESET capture. No device-specific register/Flash access.
+// SEGGER InitTarget runs before generic CPU enumeration. Only DAP/debug
+// power, CPUID and DHCSR are accessed here; the MCU reader runs afterwards.
+// https://kb.segger.com/InitTarget()
+static int _Used;
+static int _UnstableReported;
+
+static int _UnstableCore(void) {
+  if (_UnstableReported == 0) {
+    _UnstableReported = 1;
+    JLINK_SYS_Report("GR_CAPTURE_UNSTABLE: inconsistent or invalid core read; waiting for stable SWD contact, no Flash access.");
+  }
+  return 1;
+}
+
+static int _TryCore(void) {
+  int r;
+  U32 v;
+  U32 confirm;
+  r = JLINK_CORESIGHT_Configure("IRPre=0;DRPre=0;IRPost=0;DRPost=0;IRLenDevice=4");
+  if (r < 0) { return 1; }
+  v = JLINK_CORESIGHT_ReadDP(JLINK_CORESIGHT_DP_REG_IDCODE);
+  if ((v & 0x0F000FFF) != 0x0B000477) { return 1; }
+  r = JLINK_CORESIGHT_WriteDP(JLINK_CORESIGHT_DP_REG_ABORT, 0x1E);
+  r |= JLINK_CORESIGHT_WriteDP(JLINK_CORESIGHT_DP_REG_CTRL_STAT, 0x50000000);
+  if (r < 0) { return 1; }
+  v = JLINK_CORESIGHT_ReadDP(JLINK_CORESIGHT_DP_REG_CTRL_STAT);
+  if ((v & 0xA0000000) != 0xA0000000) { return 1; }
+  r = JLINK_CORESIGHT_WriteDP(JLINK_CORESIGHT_DP_REG_SELECT, 0);
+  r |= JLINK_CORESIGHT_WriteAP(JLINK_CORESIGHT_AP_REG_CTRL, 0x23000002);
+  r |= JLINK_CORESIGHT_WriteAP(JLINK_CORESIGHT_AP_REG_ADDR, 0xE000ED00);
+  if (r < 0) { return 1; }
+  v = JLINK_CORESIGHT_ReadAP(JLINK_CORESIGHT_AP_REG_DATA);
+  if (v == 0 || v == 0xFFFFFFFF) { return 1; }
+  r = JLINK_CORESIGHT_WriteAP(JLINK_CORESIGHT_AP_REG_ADDR, 0xE000ED00);
+  if (r < 0) { return 1; }
+  confirm = JLINK_CORESIGHT_ReadAP(JLINK_CORESIGHT_AP_REG_DATA);
+  if (confirm != v) { return _UnstableCore(); }
+  confirm = JLINK_CORESIGHT_ReadDP(JLINK_CORESIGHT_DP_REG_CTRL_STAT);
+  if ((confirm & 0xA00000B2) != 0xA0000000) { return _UnstableCore(); }
+  // ARM CPUID must contain its implementer and architectural encoding.
+  // A torn sample such as 010FC041 is not evidence of a different MCU.
+  if ((v & 0xFF000000) != 0x41000000 ||
+      ((v & 0x000F0000) != 0x000F0000 && (v & 0x000F0000) != 0x000C0000)) {
+    return _UnstableCore();
+  }
+  if ((v & 0xFF00FFF0) != 0x4100C240) {
+    JLINK_SYS_Report1("GR_CAPTURE_WRONG_CPUID=", v);
+    return -1;
+  }
+  r = JLINK_CORESIGHT_WriteAP(JLINK_CORESIGHT_AP_REG_ADDR, 0xE000EDF0);
+  r |= JLINK_CORESIGHT_WriteAP(JLINK_CORESIGHT_AP_REG_DATA, 0xA05F0003);
+  if (r < 0) { return 1; }
+  v = JLINK_CORESIGHT_ReadAP(JLINK_CORESIGHT_AP_REG_DATA);
+  // Require S_HALT plus both C_DEBUGEN/C_HALT, not just bit0. A stale
+  // CPUID410FC241 also satisfies the old 20001 mask but is not DHCSR.
+  if ((v & 0x20003) != 0x20003) { return _UnstableCore(); }
+  return 0;
+}
+
+int InitTarget(void) {
+  int r;
+  U32 start;
+  U32 polls;
+  U32 elapsed;
+  CPU = CORTEX_M4;
+  if (_Used) { return -1; }
+  _Used = 1;
+  JLINK_SYS_Report("GR_CAPTURE_READY: continuous SWD capture active; press RESET now.");
+  start = JLINK_GetTime();
+  polls = 0;
+  do {
+    polls = polls + 1;
+    r = _TryCore();
+    elapsed = JLINK_GetTime() - start;
+    if (r == 0) {
+      JLINK_SYS_Report1("GR_CAPTURE_POLLS=", polls);
+      JLINK_SYS_Report1("GR_CAPTURE_ELAPSED_MS=", elapsed);
+      JLINK_SYS_Report("GR_CAPTURE_HALTED: Cortex-M4 halted before generic enumeration.");
+      return 0;
+    }
+    if (r < 0) { return -1; }
+    JLINK_SYS_Sleep(1);
+    elapsed = JLINK_GetTime() - start;
+  } while (elapsed < 30000);
+  JLINK_SYS_Report1("GR_CAPTURE_POLLS=", polls);
+  JLINK_SYS_Report1("GR_CAPTURE_ELAPSED_MS=", elapsed);
+  JLINK_SYS_Report("GR_CAPTURE_TIMEOUT: no Cortex-M4 contact; no Flash access.");
+  return -1;
+}

@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../index.html">InkTag WebUI</a></nav><main><h1 id="downloads-and-checksums">Downloads and checksums</h1>
+<p><a target="_blank" rel="noopener noreferrer" href="../zh-CN/releases.html">中文</a> | English</p>
+<p>Download the required files from <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/releases">GitHub Releases</a> and read that version's notes. No listed attachment means no download is available yet. This version provides WebUI, the Python CLI, user guides, OTA and complete firmware for adapted boards, and independent plaintext programmer tools. Tools are under <code>firmware/&lt;controller_board&gt;/</code> and require an explicitly supplied compatible complete-firmware file.</p>
+<p>WebUI, CLI and device firmware may have different versions and need not be updated together. Extract the standalone ZIP and open its HTML, use the static ZIP for your own hosting, or install the CLI bundle with local WebUI. See the <a target="_blank" rel="noopener noreferrer" href="cli.html">CLI guide</a> for CLI installation.</p>
+<h2 id="check-file-integrity">Check file integrity</h2>
+<p>Compare each download's SHA256 with <code>SHA256SUMS.txt</code> from the same release:</p>
+<pre><code class="language-powershell">Get-FileHash -Algorithm SHA256 FILE
+</code></pre>
+<p>On Linux use <code>sha256sum FILE</code>; on macOS use <code>shasum -a 256 FILE</code>. Download again rather than installing incomplete, changed or mismatching files.</p>
+<p>Checksums do not replace publisher signatures. When installing firmware, match the exact MCU, board and compatibility requirements, and retain both client and device signature checks. Never substitute another similarly named board's file.</p></main></body></html>

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="inktag-command-line-client">InkTag command-line client</h1>
+<p><a target="_blank" rel="noopener noreferrer" href="README.html">中文</a> | English</p>
+<p>InkTag CLI connects to devices, sends images, manages displays and performs OTA updates. It also runs WebUI, Find queries and host weather jobs. Use <code>inktag-cli</code> or the equivalent <code>inktag</code> executable.</p>
+<h2 id="quick-start">Quick start</h2>
+<p>Install Python 3.11 or newer, download/clone this repository or extract the complete CLI ZIP, and enter the root containing both <code>cli/</code> and <code>webui/</code>. Use the unified installer:</p>
+<p><strong>Windows:</strong></p>
+<pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1
+</code></pre>
+<p><strong>macOS / Linux:</strong></p>
+<pre><code class="language-sh">sh install_inktag.sh
+</code></pre>
+<p>This installs the CLI into <code>cli/.venv</code> and automatically installs the <strong>local Find query service dependencies</strong> in a separate <code>find/runtime/.venv</code> under the per-user data directory. It then starts local WebUI and Find in the background (<code>webui start</code>); closing the terminal does not stop them. Setup prints copyable start, stop, status and log commands. New macOS installations store data and logs in <code>~/.inktag/</code>; an existing legacy directory is retained to preserve sessions and tags. System Python is unchanged; installation does not log into Apple, connect devices or clear existing data.</p>
+<p>First setup requires internet access. Windows also requires full 7-Zip and downloads an Apple authentication image of about 292 MB on first setup. macOS uses native system authentication without that image. Location queries on Linux are not yet qualified.</p>
+<p>To install without starting, run <code>powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1 --prepare-only</code> on Windows or <code>sh install_inktag.sh --prepare-only</code> on macOS/Linux. Then choose either method below; command arguments are identical.</p>
+<h3 id="method-1-run-the-client-script-without-activation">Method 1: run the client script without activation</h3>
+<p>Run from the repository or complete package root; the scripts use the installed <code>cli/.venv</code>:</p>
+<pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\cli\inktag.ps1 device scan
+</code></pre>
+<pre><code class="language-sh">bash cli/inktag.sh device scan
+</code></pre>
+<p>Rerun the unified installer after an update. For CLI-only use without Find queries, enter <code>cli/</code> and use the existing <code>install.ps1</code> or <code>bash install.sh</code> instead.</p>
+<p>The unified installers are provided in this repository and the complete <strong>CLI ZIP</strong>. For a wheel/sdist only, run <code>python -m venv .venv</code>, activate that environment with <code>. .\.venv\Scripts\Activate.ps1</code> on Windows or <code>source .venv/bin/activate</code> on macOS/Linux, then run <code>python -m pip install "path to the downloaded .whl or .tar.gz"</code>. In an extracted directory containing <code>pyproject.toml</code>, <code>python -m pip install .</code> also works. These distributions do not include the complete-package root installers or the Find query service.</p>
+<h3 id="manually-create-a-cli-environment-instead-of-the-installer">Manually create a CLI environment instead of the installer</h3>
+<p>Install Python3.11+, then run from the repository or complete package root. Windows:</p>
+<pre><code class="language-powershell">python -m venv cli\.venv
+.\cli\.venv\Scripts\python.exe -m pip install .\cli
+</code></pre>
+<p>macOS/Linux:</p>
+<pre><code class="language-sh">python3 -m venv cli/.venv
+cli/.venv/bin/python -m pip install ./cli
+</code></pre>
+<p>These commands install only the CLI. Prefer the unified installer when Find queries are needed, so their dependencies are prepared too. Do not recreate a working existing environment.</p>
+<h3 id="method-2-activate-the-environment-and-use-inktag-cli">Method 2: activate the environment and use <code>inktag-cli</code></h3>
+<p>In the current Windows PowerShell session:</p>
+<pre><code class="language-powershell">. .\cli\.venv\Scripts\Activate.ps1
+</code></pre>
+<p>In the current macOS / Linux terminal:</p>
+<pre><code class="language-sh">source cli/.venv/bin/activate
+</code></pre>
+<p>After activation, use <code>inktag-cli</code> (or <code>inktag</code>) directly, or <code>python -m inktag_cli</code>. Each new terminal needs activation again. If you prefer not to activate, or policy blocks the activation script, keep using the wrappers; no system execution-policy change is needed. Run <code>deactivate</code> to leave the environment.</p>
+<pre><code class="language-sh">inktag-cli -h
+inktag-cli device scan
+inktag-cli device -n B892 info
+inktag-cli display -n B892 calendar
+inktag-cli image -n B892 upload photo.png --slot next --name &quot;Holiday&quot;
+</code></pre>
+<h3 id="start-the-local-webui-from-the-cli">Start the local WebUI from the CLI</h3>
+<p>Return to the extracted <code>InkTag-client</code> root:</p>
+<pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\cli\inktag.ps1 webui start --repo . --enable-tls
+</code></pre>
+<pre><code class="language-sh">bash cli/inktag.sh webui start --repo . --enable-tls
+</code></pre>
+<p>For mainly WebUI/Find use, run <code>powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1</code> (Windows) or <code>sh install_inktag.sh</code> (macOS/Linux) from the extracted package root instead. These prepare the local WebUI/Find environment and start the service; they do not register CLI commands globally. The Find environment is in <code>find/runtime/.venv</code> under the per-user data directory, separate from <code>cli/.venv</code>. See <a target="_blank" rel="noopener noreferrer" href="../en/webui.html">WebUI usage</a> for default data locations.</p>
+<p>Every command and subcommand supports <code>-h</code> and <code>--help</code>; consult current help for complete parameters. The examples below use <code>inktag-cli</code> in an activated environment. Otherwise replace that prefix with the wrapper invocation.</p>
+<p>Scanning, connecting, rendering and querying show a spinner with live <code>elapsed</code> time in a terminal. Image uploads also show progress. The indicator clears on completion or cancellation and pauses for password and confirmation prompts. JSON output, redirected output and foreground service logs remain animation-free.</p>
+<p><code>device scan</code> and initial discovery for other device commands default to at most 30 seconds. Connection commands continue early once a target is selected. Device management, image, display, OTA and host jobs all use this default. Set <code>--scan-timeout SECONDS</code> after <code>device</code>, for example <code>device -n B892 --scan-timeout 45 info</code>; this does not change the post-switch OTA or Recovery deadlines. Scanning shows the discovered device count live and comma-separated BLE names on the next line. It clears the live status before the result table. Ctrl+C also lists devices already found and exits with code 130. Other commands clear their waiting status when they finish.</p>
+<p>Successful connections display the BLE name and address without <code>--verbose</code>. Native OTA connections first report that the BLE link is connected; this does not mean the update has completed. With <code>--json</code>, connection notices are separate JSON lines on stderr; stdout contains only the command result.</p>
+<h2 id="select-one-or-more-devices">Select one or more devices</h2>
+<p>Connection options follow <code>device</code>, <code>image</code> or <code>display</code>, before the subcommand:</p>
+<pre><code class="language-sh">inktag-cli device -n B892 info
+inktag-cli device -a AA:BB:CC:DD:EE:FF info
+inktag-cli device -n B892,6775 info
+inktag-cli device -a AA:BB:CC:DD:EE:01,AA:BB:CC:DD:EE:02 health
+inktag-cli --json device -n B892,6775 health
+</code></pre>
+<p><code>-n</code> / <code>--ble-name</code> accepts a case-insensitive unique substring of the BLE name. Exact names take priority. An ambiguous substring lists candidates instead of operating on them. Chip UIDs are not selectors. <code>-a</code> / <code>--ble-address</code> selects an exact address; macOS uses the CoreBluetooth identifier shown by scanning.</p>
+<p>Separate multiple targets with commas. If both names and addresses are supplied, the lists must have equal lengths: each name/address pair refers to the same device. Duplicate targets are removed. Batch operations run sequentially and report each result; failed writes are never automatically retried. Ctrl+C stops remaining operations. Separate terminals can operate on different devices concurrently.</p>
+<p>Connection options include <code>--scan-timeout</code>, <code>--connect-timeout</code>, <code>--no-time-sync</code> and device authentication. Ordinary connections synchronize time by default; use <code>--no-time-sync</code> to preserve it. Read-only diagnostic commands follow their documented behavior.</p>
+<h2 id="command-overview">Command overview</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>device scan / info / status / health / watch / verify / restart</code></td>
+<td>Discover, inspect, observe, verify and restart devices</td>
+</tr>
+<tr>
+<td><code>device display</code>, or <code>display</code></td>
+<td>Calendar, clock, device page, clear, stop and slideshow</td>
+</tr>
+<tr>
+<td><code>device image</code>, or <code>image</code></td>
+<td>Convert and upload images; list algorithms</td>
+</tr>
+<tr>
+<td><code>device slot</code></td>
+<td>List, show, download and delete stored images</td>
+</tr>
+<tr>
+<td><code>device setting</code></td>
+<td>Names, QR, screen, pins, buttons, fonts and password</td>
+</tr>
+<tr>
+<td><code>device led / time</code></td>
+<td>Indicator policy, lighting, device time and synchronization</td>
+</tr>
+<tr>
+<td><code>device ota / recovery</code></td>
+<td>Inspect/install OTA packages; enter Recovery or return to App</td>
+</tr>
+<tr>
+<td><code>device activation</code></td>
+<td>Authorization status, activation requests and activation codes</td>
+</tr>
+<tr>
+<td><code>device diagnostic</code></td>
+<td>Health, runtime and clock diagnostics where supported</td>
+</tr>
+<tr>
+<td><code>device findmy</code></td>
+<td>Enable/disable and inspect device-side Find</td>
+</tr>
+<tr>
+<td><code>findmy</code></td>
+<td>Local account, identities, queries and tracking; <code>findmy device</code> also manages the device</td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td>Host-rendered pages, weather, templates and scheduled jobs</td>
+</tr>
+<tr>
+<td><code>webui</code></td>
+<td>Foreground/background WebUI, status, stop, restart and logs</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="device-settings">Device settings</h2>
+<pre><code class="language-sh">inktag-cli device -n B892 setting show
+inktag-cli device -n B892 setting ble-name show
+inktag-cli device -n B892 setting ble-name set IKT_OM_B892
+inktag-cli device -n B892 setting device-name set &quot;My desk&quot;
+inktag-cli device -n B892 setting device-url set &quot;https://example.com/&quot;
+inktag-cli device -n B892 setting screen show
+inktag-cli device -n B892 setting screen profiles
+inktag-cli device -n B892 setting pins show
+inktag-cli device -n B892 setting pins set --config pins.json --yes
+</code></pre>
+<p><code>ble-name</code> changes the broadcast name used for discovery. <code>device-name</code> is printed on the device information page and currently accepts up to 24 printable ASCII bytes. <code>device-url</code> sets its QR URL/text; <code>device-url sync</code> updates managed links from the current BLE name. QR content cannot currently be read back from the device.</p>
+<p><code>setting pins</code> combines the JSON sections <code>screen</code>, <code>led</code>, <code>buttons</code> and <code>buzzer</code>. Omitted sections retain their current values. This example changes only the two buttons:</p>
+<pre><code class="language-json">{
+  &quot;buttons&quot;: [
+    {&quot;gpio&quot;: 26, &quot;activeLow&quot;: true, &quot;pull&quot;: &quot;up&quot;},
+    {&quot;gpio&quot;: 255, &quot;activeLow&quot;: false, &quot;pull&quot;: &quot;none&quot;}
+  ]
+}
+</code></pre>
+<p>GPIO 255 means disconnected. Use the <code>configuration</code> returned by <code>pins show</code> as the screen/LED format. BUSY/RESET behavior follows the screen driver; board EN and LED polarity remain configurable. TXD/RXD are not exposed. There are at most two user buttons, normally active-low; buzzer mode/pins replace a separate enable switch. Only device-reported editable settings can be changed.</p>
+<p>Screen/LED and button/buzzer writes are separate. A failure reports confirmed sections; read current configuration before deciding what to do next. <code>pins restore-screen-led-defaults</code> restores only screen/LED routing.</p>
+<pre><code class="language-sh">inktag-cli device -n B892 setting button show
+inktag-cli device -n B892 setting button set single next
+inktag-cli device -n B892 nfc usage
+inktag-cli device nfc commands calendar
+</code></pre>
+<p>Both buttons share single/double/long-press actions. NFC has no mode selector or off switch. <code>device nfc usage</code> reads device instructions and advertised phone commands; <code>device nfc commands calendar</code> generates command text locally. On the phone, use NFC Tools: Write → Add a record → Text. Phone commands require Pro and supporting firmware; reading the device link does not execute a device action.</p>
+<p>Use <code>setting font info / build / install</code> for fonts, <code>setting screen mark / calendar</code> for the InkTag mark and calendar preferences, and <code>setting buzzer test</code> for a short output test.</p>
+<h2 id="passwords-and-clearing-data">Passwords and clearing data</h2>
+<p>Enter passwords through hidden prompts or <code>--password-stdin</code>, never command arguments. Successful authentication normally caches a reusable control credential. <code>--password-stdin</code> alone does not disable caching; <code>--no-credential-cache</code> prevents reading/writing reusable credentials on disk. Device authentication and throttling remain in effect.</p>
+<p>Use <code>setting password status / set / disable</code>. <code>setting reset-settings --yes</code> clears ordinary settings/password while preserving images, Pro, Find and factory identity; an enabled password still requires the original password. <code>setting clear-user-data --yes</code> clears user images/playback references while preserving settings, Pro, Find and factory identity. <code>device restart</code> only reboots.</p>
+<p>Clearing can use <code>--expected-device-id</code> to verify the intended device before acting. This verifies identity; it is not a selector. If a result is unconfirmed, reconnect and inspect state rather than repeating the clearing operation.</p>
+<h2 id="images-displays-and-ota">Images, displays and OTA</h2>
+<p><code>image process</code> converts images offline and <code>image algorithms</code> lists algorithms. Uploads support <code>--slot next</code> or a specific slot, <code>--name</code>, and <code>--store-only</code>; an occupied slot can be explicitly replaced. Batch uploads process images for each target's actual screen. Static displays and device-executed dynamic layouts are different capabilities.</p>
+<pre><code class="language-sh">inktag-cli device -n B892 display slideshow start --interval 30m
+inktag-cli device -n B892 slot list
+inktag-cli device ota inspect app.zip
+inktag-cli device -n B892 ota update app.zip
+inktag-cli device -n B892 recovery enter
+inktag-cli device -n B892_OTA recovery exit
+</code></pre>
+<p>OTA requires a matching signed package and verifies package integrity, publisher signature and the returned device identity/state. Recovery entry is separate from choosing an OTA package. Use <code>recovery exit</code> to return to App; it is the same as <code>recovery resume-app</code>. Complete flashing uses separate MCU programmer tools.</p>
+<p>A short BLE name also works, for example <code>device -n 43D2 recovery exit</code>. Select a full name or address if several devices match. Platforms share connection, return-request and application-ready stages; use <code>--verbose</code> for connection diagnostics. <code>--json</code> retains native result fields and writes progress events to stderr.</p>
+<h2 id="webui-local-logs-and-find">WebUI, local logs and Find</h2>
+<pre><code class="language-sh">inktag-cli webui serve
+inktag-cli webui start --enable-tls
+inktag-cli webui status
+inktag-cli webui log -f
+inktag-cli webui log --service find -f
+inktag-cli webui restart --enable-tls
+inktag-cli webui stop
+inktag-cli findmy identity list
+</code></pre>
+<p><code>serve</code> runs in the foreground with terminal access logs. <code>start</code> runs in the background and writes logs under the user data directory. Startup opens a browser unless <code>--no-open</code> is supplied. HTTP is the default; <code>--enable-tls</code> or explicit certificate options select HTTPS. Restart does not silently inherit a previous TLS mode. A running instance with different HTTP/HTTPS settings requires an explicit restart.</p>
+<p>Run one service per data directory. <code>serve</code> and <code>start</code> share its registration; use <code>restart</code> to switch HTTP/HTTPS without replacing certificates. If <code>status</code> finds a reachable but unregistered service, close the original <code>serve</code> window before starting again. Read-only status checks do not take control of unknown processes.</p>
+<p>For phone access use <code>webui serve --lan</code>, which prepares LAN HTTPS and an access password. Logs include method, path, status and duration, without request bodies/query parameters. Navigation through <code>#</code> routes does not necessarily make an HTTP request or produce an access log.</p>
+<p>Find is experimental. <code>findmy</code> detects the actual local service URL and HTTPS certificate. Select another local instance using <code>findmy --server URL --ca-cert CA.pem</code>. Certificate verification is not disabled and HTTPS is not silently downgraded. Account login and verification live under <code>findmy account</code>, with hidden password/code prompts. <code>findmy tracking</code> manages query schedules and saved history. CLI and WebUI share local sessions and identities.</p>
+<h2 id="host-dynamic-pages">Host dynamic pages</h2>
+<p>Templates live under <code>host template</code>; there is no top-level <code>template</code> command. Create jobs with <code>host init / import</code>; use <code>host fetch / render / validate</code> for data, rendering and validation. <code>host run --once</code> can be called by an OS scheduler. Preview is the default; only explicit <code>--send</code> permits delivery. Automatic updates require an online host within BLE range. Jobs bind the actual BLE address and expected device identity rather than relying only on names.</p>
+<p>See the <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag-manual/">InkTag user manual</a> for further guidance. Applicable licensing and third-party notices are provided in the project license files.</p></main></body></html>

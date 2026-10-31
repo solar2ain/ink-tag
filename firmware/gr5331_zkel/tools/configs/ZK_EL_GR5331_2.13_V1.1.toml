@@ -1,0 +1,33 @@
+format_version = 1
+board_marking = "ZK_EL_GR5331_2.13_V1.1"
+
+[screen]
+ic = "SSD1680"
+recipe = 1
+color = "BWR"
+rotation = 90
+mirror_x = false
+mirror_y = true
+native_ui_scale = 0
+width = 128
+height = 250
+visible_x = 0
+visible_y = 0
+visible_width = 122
+visible_height = 250
+
+[gpio.display]
+mosi = "GPIO8"
+clock = "GPIO9"
+cs = "GPIO10"
+dc = "GPIO11"
+reset = "GPIO12"
+busy = "GPIO13"
+enable = "AON6"
+enable_active_low = false
+
+[gpio.led]
+red = "MSIO2"
+green = "MSIO1"
+blue = "MSIO0"
+active_low = ["red", "green", "blue"]

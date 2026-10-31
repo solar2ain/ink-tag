@@ -1,0 +1,39 @@
+{
+  "format": 1,
+  "chip": "DA14585",
+  "files": {
+    "firmware/ports/dialog/da14585/tools/README.md": "README.md",
+    "firmware/ports/dialog/da14585/tools/README.en.md": "README.en.md",
+    "firmware/ports/dialog/da14585/tools/probe.ps1": "tools/probe.ps1",
+    "firmware/ports/dialog/da14585/tools/flash.ps1": "tools/flash.ps1",
+    "firmware/ports/dialog/da14585/tools/validate.ps1": "tools/validate.ps1",
+    "firmware/ports/dialog/da14585/tools/setup.ps1": "tools/setup.ps1",
+    "firmware/ports/dialog/da14585/tools/check.ps1": "tools/check.ps1",
+    "firmware/ports/dialog/da14585/tools/dependencies.lock.json": "tools/dependencies.lock.json",
+    "firmware/ports/dialog/da14585/tools/vendor-dependencies.json": "tools/vendor-dependencies.json",
+    "firmware/ports/dialog/da14585/tools/configs/asel29.toml": "tools/configs/asel29.toml",
+    "firmware/ports/dialog/da14585/tools/configs/asel42.toml": "tools/configs/asel42.toml",
+    "firmware/ports/dialog/da14585/tools/configs/asel42-ssd1683.toml": "tools/configs/asel42-ssd1683.toml",
+    "firmware/ports/dialog/da14585/tools/internal/context.ps1": "tools/internal/context.ps1",
+    "firmware/ports/dialog/da14585/tools/internal/dependency-runtime.py": "tools/internal/dependency-runtime.py",
+    "firmware/ports/dialog/da14585/tools/internal/host-common.ps1": "tools/internal/host-common.ps1",
+    "tools/powershell-cli.ps1": "tools/internal/powershell-cli.ps1",
+    "tools/jlink-tools.ps1": "tools/internal/jlink-tools.ps1",
+    "tools/da-backup-archive.ps1": "tools/internal/da-backup-archive.ps1",
+    "tools/hardware/probe-da14585-dap.py": "tools/internal/probe-da14585-dap.py",
+    "tools/hardware/da14585-board-config.py": "tools/internal/da14585-board-config.py",
+    "tools/hardware/da14585-image-verify.py": "tools/internal/da14585-image-verify.py",
+    "tools/hardware/da14585-full-state.py": "tools/internal/da14585-full-state.py",
+    "tools/hardware/da14585-full-transaction.py": "tools/internal/da14585-full-transaction.py",
+    "tools/hardware/da14585-full-backend.py": "tools/internal/da14585-full-backend.py",
+    "tools/hardware/da14585-dap-session.py": "tools/internal/da14585-dap-session.py",
+    "tools/hardware/da14585-commander-readback.py": "tools/internal/da14585-commander-readback.py",
+    "tools/hardware/da14585-commander-session.py": "tools/internal/da14585-commander-session.py",
+    "tools/hardware/da14585-conpty.py": "tools/internal/da14585-conpty.py",
+    "tools/hardware/da14585-commander-backend.py": "tools/internal/da14585-commander-backend.py",
+    "LICENSE": "LICENSE"
+  },
+  "externalFiles": {
+    "_build/dialog/da14585_guarded_helper/InkTag-da14585-guarded-helper-0f183172ce2d.bin": "tools/internal/InkTag-da14585-guarded-helper-0f183172ce2d.bin"
+  }
+}

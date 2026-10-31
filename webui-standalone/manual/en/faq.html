@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="frequently-asked-questions">Frequently asked questions</h1>
+<h2 id="device-not-found">Device not found</h2>
+<p>Check power, Bluetooth permission and the exact name. Close other programs using the same device and allow a short role-transition delay. A timeout alone does not prove damaged firmware or connection contention.</p>
+<h2 id="slow-display-updates">Slow display updates</h2>
+<p>Refresh duration depends on colour, temperature, controller and mode. Transfer completion is not screen completion. For errors or abnormal BUSY behavior, check the panel configuration before repeating a refresh.</p>
+<h2 id="unavailable-features-and-readings">Unavailable features and readings</h2>
+<p>Capabilities depend on hardware, firmware and entitlement. nRF52811 and DA14585 are Free-only and use actual picture capacity without activation. On Pro-capable targets, activation unlocks all available slots. Unavailable measurements display <code>--</code>, not zero. Capacity remains the device-reported limit for the current panel. The Free <code>InkTag</code> mark cannot be hidden; authorized Pro devices can hide <code>InkTag Pro</code>. See <a target="_blank" rel="noopener noreferrer" href="pro.html">Pro features and activation</a> for the Apple Find My tracker, NFC interaction and code process.</p>
+<h2 id="time-after-power-loss">Time after power loss</h2>
+<p>A device cannot account for time while unpowered. A saved estimate may be inaccurate; ordinary client connections normally synchronize it. Use CLI <code>--no-time-sync</code> during drift observations.</p>
+<h2 id="wired-tools">Wired tools</h2>
+<p>Use them for first installation, fixed-Recovery updates or a device that cannot be recovered wirelessly. Ordinary application updates use OTA. Reports should include the exact MCU/PCB, firmware, panel and reproduction, never credentials or factory dumps.</p>
+<h2 id="the-page-opens-on-a-phone-but-bluetooth-does-not-connect">The page opens on a phone but Bluetooth does not connect</h2>
+<p>Use Chrome or Edge on desktop. On iPhone/iPad, use <a target="_blank" rel="noopener noreferrer" href="https://apps.apple.com/app/id1492822055">Bluefy</a>. On Android, prefer Chrome. Open the site in that browser rather than an embedded WeChat/in-app window, and grant Bluetooth permission.</p>
+<p>Use HTTPS or a loopback origin. For phone access to a computer, follow the local-service trusted HTTPS setup. A page loading in Safari or an embedded browser does not mean Bluetooth is available.</p></main></body></html>

@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "targets": {
+    "gr5331_zkel": {
+      "chip": "gr5331",
+      "sourceChips": [
+        "gr5331"
+      ],
+      "sourceFamilies": [
+        "gr5331_zkel",
+        "gr5331_zkc21v"
+      ],
+      "brand": "zkel"
+    },
+    "gr551x_zkel": {
+      "chip": "gr551x",
+      "sourceChips": [
+        "gr551x",
+        "gr5513",
+        "gr5515"
+      ],
+      "sourceFamilies": [
+        "gr551x_zkel",
+        "gr551x_zkc42v"
+      ],
+      "brand": "zkel"
+    },
+    "gr551x_zkel_internal": {
+      "chip": "gr551x",
+      "sourceChips": [
+        "gr551x",
+        "gr5513"
+      ],
+      "sourceFamilies": [
+        "gr551x_zkel_internal",
+        "gr5513_zkel_internal"
+      ],
+      "brand": "zkel"
+    },
+    "om6626_zkel": {
+      "chip": "om6626",
+      "sourceChips": [
+        "om6626"
+      ],
+      "sourceFamilies": [
+        "om6626_zkel",
+        "om6626_zkc",
+        "om6626_zkcxxb"
+      ],
+      "brand": "zkel"
+    },
+    "om6626_hsel": {
+      "chip": "om6626",
+      "sourceChips": [
+        "om6626"
+      ],
+      "sourceFamilies": [
+        "om6626_hsel",
+        "om6626_hsela"
+      ],
+      "brand": "hsel"
+    },
+    "nrf52832_priceetag": {
+      "chip": "nrf52832",
+      "sourceChips": [
+        "nrf52832"
+      ],
+      "sourceFamilies": [
+        "nrf52832_priceetag"
+      ],
+      "brand": "priceetag"
+    },
+    "nrf52811_aesl": {
+      "chip": "nrf52811",
+      "sourceChips": [
+        "nrf52811"
+      ],
+      "sourceFamilies": [
+        "nrf52811_aesl",
+        "aesl22_nrf"
+      ],
+      "brand": "aesl"
+    },
+    "tlsr8359_hsel": {
+      "chip": "tlsr8359",
+      "sourceChips": [
+        "tlsr8359"
+      ],
+      "sourceFamilies": [
+        "tlsr8359_hsel",
+        "tlsr8359_hanshow"
+      ],
+      "brand": "hsel"
+    },
+    "da14585_aesl": {
+      "chip": "da14585",
+      "sourceChips": [
+        "da14585"
+      ],
+      "sourceFamilies": [
+        "da14585_aesl",
+        "aesl42_da",
+        "aesl29_da"
+      ],
+      "brand": "aesl"
+    }
+  },
+  "brands": [
+    "zkel",
+    "hsel",
+    "aesl",
+    "priceetag"
+  ]
+}

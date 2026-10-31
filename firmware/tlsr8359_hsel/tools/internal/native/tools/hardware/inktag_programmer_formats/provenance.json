@@ -1,0 +1,113 @@
+{
+  "schema": "inktag-tlsr-programmer-formats-v1",
+  "sourceCommit": "0b8537ff9f168fad09b84e75d51855aabc0f4ae5",
+  "namespace": "inktag_programmer_formats",
+  "externalCliRequired": false,
+  "files": {
+    "tools/hardware/inktag_programmer_formats/__init__.py": {
+      "sourcePath": "cli/src/inktag_cli/__init__.py",
+      "sourceSha256": "391ce37d834f29229f5c9ef567948ef0a56bffaa866050f9b4b4d360966909b7",
+      "runtimeSha256": "391ce37d834f29229f5c9ef567948ef0a56bffaa866050f9b4b4d360966909b7",
+      "bytes": 85,
+      "transformation": "private-programmer-import-namespace-v1"
+    },
+    "tools/hardware/inktag_programmer_formats/_version.py": {
+      "sourcePath": "cli/src/inktag_cli/_version.py",
+      "sourceSha256": "815645351d4dd82606b014c7d012704977b9a665d5a125e04ea235646ccb0a7b",
+      "runtimeSha256": "815645351d4dd82606b014c7d012704977b9a665d5a125e04ea235646ccb0a7b",
+      "bytes": 91,
+      "transformation": "private-programmer-import-namespace-v1"
+    },
+    "tools/hardware/inktag_programmer_formats/generated_commands_v2.py": {
+      "sourcePath": "cli/src/inktag_cli/generated_commands_v2.py",
+      "sourceSha256": "4491401c5fcaf5c5407eacb6113e8d078aa20af52bf8fb691a1488bc0bdb5f32",
+      "runtimeSha256": "4491401c5fcaf5c5407eacb6113e8d078aa20af52bf8fb691a1488bc0bdb5f32",
+      "bytes": 17749,
+      "transformation": "private-programmer-import-namespace-v1"
+    },
+    "tools/hardware/inktag_programmer_formats/generated_busy_defaults.py": {
+      "sourcePath": "cli/src/inktag_cli/generated_busy_defaults.py",
+      "sourceSha256": "fbf52a9bdb9e6ba65dab641127106c8113d7b4d580113d95780edd3d7a1159db",
+      "runtimeSha256": "fbf52a9bdb9e6ba65dab641127106c8113d7b4d580113d95780edd3d7a1159db",
+      "bytes": 847,
+      "transformation": "private-programmer-import-namespace-v1"
+    },
+    "tools/hardware/inktag_programmer_formats/generated_release_v1.py": {
+      "sourcePath": "cli/src/inktag_cli/generated_release_v1.py",
+      "sourceSha256": "fc607086de7b28b67be5edeb92a63e8e12d0e499c7adf78b8bd3fdac4c56d03f",
+      "runtimeSha256": "fc607086de7b28b67be5edeb92a63e8e12d0e499c7adf78b8bd3fdac4c56d03f",
+      "bytes": 2015,
+      "transformation": "private-programmer-import-namespace-v1"
+    },
+    "tools/hardware/inktag_programmer_formats/models.py": {
+      "sourcePath": "cli/src/inktag_cli/models.py",
+      "sourceSha256": "f9006ed4d564ceb1e3bdecfc37bc634d2ec047a510e9d8445ecda3c5cd4941d3",
+      "runtimeSha256": "f9006ed4d564ceb1e3bdecfc37bc634d2ec047a510e9d8445ecda3c5cd4941d3",
+      "bytes": 7850,
+      "transformation": "private-programmer-import-namespace-v1"
+    },
+    "tools/hardware/inktag_programmer_formats/protocol.py": {
+      "sourcePath": "cli/src/inktag_cli/protocol.py",
+      "sourceSha256": "6fd8137a4dbb405de6bb485fc3f49c363127f996c387ae5bc4156cb2eb4f25ac",
+      "runtimeSha256": "6fd8137a4dbb405de6bb485fc3f49c363127f996c387ae5bc4156cb2eb4f25ac",
+      "bytes": 12484,
+      "transformation": "private-programmer-import-namespace-v1"
+    },
+    "tools/hardware/inktag_programmer_formats/pin_config.py": {
+      "sourcePath": "cli/src/inktag_cli/pin_config.py",
+      "sourceSha256": "41c319c8bdd8d2e85db053e7e6cb5422a9ed9c9d6ba688cd9a148f93d71091be",
+      "runtimeSha256": "41c319c8bdd8d2e85db053e7e6cb5422a9ed9c9d6ba688cd9a148f93d71091be",
+      "bytes": 5998,
+      "transformation": "private-programmer-import-namespace-v1"
+    },
+    "tools/hardware/inktag_programmer_formats/ota.py": {
+      "sourcePath": "cli/src/inktag_cli/ota.py",
+      "sourceSha256": "a2ecab700bef20082e622670526b6ba15cf4146831368fb9a55d2f90ba652084",
+      "runtimeSha256": "13fc53213ecd0781faa3210de7cee10b2e8a1c797a8a1ae8cde495b960396212",
+      "bytes": 18050,
+      "transformation": "private-programmer-import-namespace-v1"
+    },
+    "tools/hardware/inktag_programmer_formats/tlsr_layout.py": {
+      "sourcePath": "cli/src/inktag_cli/tlsr_layout.py",
+      "sourceSha256": "2fde0f3a2a7a20d1f9fa5a801263fc053ed309a85508f540d763f79bbd8100d7",
+      "runtimeSha256": "2fde0f3a2a7a20d1f9fa5a801263fc053ed309a85508f540d763f79bbd8100d7",
+      "bytes": 3389,
+      "transformation": "private-programmer-import-namespace-v1"
+    },
+    "tools/hardware/inktag_programmer_formats/safe_archive.py": {
+      "sourcePath": "cli/src/inktag_cli/safe_archive.py",
+      "sourceSha256": "45c578c4fc00cd3f820873c25e8b451e5aafee4523832a71fff5d0d93d535976",
+      "runtimeSha256": "45c578c4fc00cd3f820873c25e8b451e5aafee4523832a71fff5d0d93d535976",
+      "bytes": 5004,
+      "transformation": "private-programmer-import-namespace-v1"
+    },
+    "tools/hardware/inktag_programmer_formats/aux_io.py": {
+      "sourcePath": "cli/src/inktag_cli/aux_io.py",
+      "sourceSha256": "62de0f15af878459339df8ac1dd25c1603c2dd1c6a65517543af613ccaa32d4b",
+      "runtimeSha256": "62de0f15af878459339df8ac1dd25c1603c2dd1c6a65517543af613ccaa32d4b",
+      "bytes": 3801,
+      "transformation": "private-programmer-import-namespace-v1"
+    },
+    "tools/hardware/inktag_programmer_formats/device_link.py": {
+      "sourcePath": "cli/src/inktag_cli/device_link.py",
+      "sourceSha256": "a73cbce6d92610ff854186b565a2ee8568d4fb6e7a171a7224404d6eb4545a17",
+      "runtimeSha256": "a73cbce6d92610ff854186b565a2ee8568d4fb6e7a171a7224404d6eb4545a17",
+      "bytes": 1045,
+      "transformation": "private-programmer-import-namespace-v1"
+    },
+    "tools/hardware/inktag_programmer_formats/device_qr.py": {
+      "sourcePath": "cli/src/inktag_cli/device_qr.py",
+      "sourceSha256": "440747ef6f79bb2d0d2038d8a0f7631eaca0d37b6c18b55bb117ec8cae957a7e",
+      "runtimeSha256": "440747ef6f79bb2d0d2038d8a0f7631eaca0d37b6c18b55bb117ec8cae957a7e",
+      "bytes": 1692,
+      "transformation": "private-programmer-import-namespace-v1"
+    },
+    "tools/hardware/inktag_programmer_formats/nfc_command.py": {
+      "sourcePath": "cli/src/inktag_cli/nfc_command.py",
+      "sourceSha256": "4fb8546faf30c2255c48cbe5d100df6ed5b5942b14e17d4cc86c1f86ace63a16",
+      "runtimeSha256": "4fb8546faf30c2255c48cbe5d100df6ed5b5942b14e17d4cc86c1f86ace63a16",
+      "bytes": 5421,
+      "transformation": "private-programmer-import-namespace-v1"
+    }
+  }
+}

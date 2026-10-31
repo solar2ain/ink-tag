@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "toolsVersion": "0.2.0.4",
+  "platform": "windows-amd64",
+  "pythonVersion": "3.13.16",
+  "archives": [
+    {
+      "file": "cffi-2.1.1-cp313-cp313-win_amd64.whl",
+      "sha256": "1aa5645c30469b09530c4ebca77ebf8f17618293c58f8549cb1a543a50236e7d",
+      "bytes": 185688,
+      "url": "https://files.pythonhosted.org/packages/60/a6/8b149b2c3f2e11aaa1618ef64500b45f50f22c57a977a4dff1aff1f91042/cffi-2.1.1-cp313-cp313-win_amd64.whl",
+      "kind": "wheel"
+    },
+    {
+      "file": "colorama-0.4.6-py2.py3-none-any.whl",
+      "sha256": "4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6",
+      "bytes": 25335,
+      "url": "https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl",
+      "kind": "wheel"
+    },
+    {
+      "file": "cryptography-50.0.0-cp311-abi3-win_amd64.whl",
+      "sha256": "bd1c592e4d5974f0d08d4888e432157adba757c66da0246918e43677fafa2d30",
+      "bytes": 3840395,
+      "url": "https://files.pythonhosted.org/packages/32/2e/c9db68a0c4bfa28e310707527c0ee3a2bd254104d2e02e68f368e197aa4c/cryptography-50.0.0-cp311-abi3-win_amd64.whl",
+      "kind": "wheel"
+    },
+    {
+      "file": "pycparser-3.0-py3-none-any.whl",
+      "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992",
+      "bytes": 48172,
+      "url": "https://files.pythonhosted.org/packages/0c/c3/44f3fbbfa403ea2a7c779186dc20772604442dde72947e7d01069cbe98e3/pycparser-3.0-py3-none-any.whl",
+      "kind": "wheel"
+    },
+    {
+      "file": "python-3.13.16-embeddable-amd64.zip",
+      "sha256": "589dc1e9d02549ca5f680710307ff9b77f6e3ffc4aa3efccd7fa54eeeafac94b",
+      "bytes": 11439788,
+      "url": "https://www.python.org/ftp/python/3.13.16/python-3.13.16-embeddable-amd64.zip",
+      "kind": "python"
+    },
+    {
+      "file": "pyyaml-6.0.3-cp313-cp313-win_amd64.whl",
+      "sha256": "79005a0d97d5ddabfeeea4cf676af11e647e41d81c9a7722a193022accdb6b7c",
+      "bytes": 154090,
+      "url": "https://files.pythonhosted.org/packages/97/c9/39d5b874e8b28845e4ec2202b5da735d0199dbe5b8fb85f91398814a9a46/pyyaml-6.0.3-cp313-cp313-win_amd64.whl",
+      "kind": "wheel"
+    },
+    {
+      "file": "qrcode-8.2-py3-none-any.whl",
+      "sha256": "16e64e0716c14960108e85d853062c9e8bba5ca8252c0b4d0231b9df4060ff4f",
+      "bytes": 45986,
+      "url": "https://files.pythonhosted.org/packages/dd/b8/d2d6d731733f51684bbf76bf34dab3b70a9148e8f2cef2bb544fccec681a/qrcode-8.2-py3-none-any.whl",
+      "kind": "wheel"
+    }
+  ],
+  "packages": [
+    {
+      "name": "cryptography",
+      "version": "50.0.0"
+    },
+    {
+      "name": "cffi",
+      "version": "2.1.1"
+    },
+    {
+      "name": "pycparser",
+      "version": "3.0"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3"
+    },
+    {
+      "name": "qrcode",
+      "version": "8.2"
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6"
+    }
+  ],
+  "native": {
+    "name": "SEGGER J-Link Software and Documentation Pack",
+    "version": "7.88j",
+    "redistributed": false,
+    "officialUrl": "https://www.segger.com/downloads/jlink/",
+    "termsUrl": "https://www.segger.com/products/debug-probes/j-link/tools/terms-of-use/",
+    "files": [
+      {
+        "name": "JLink.exe",
+        "sha256": "405f4d0a239475e5529f6d09a130cf5bbfe53ac97eb25cec9e492c10df16c805"
+      },
+      {
+        "name": "JLinkARM.dll",
+        "sha256": "7d61c9cc53b6383837ccd01ad0732f7798e249fc0b2adeaad3b967c906794e9f"
+      }
+    ]
+  },
+  "chip": "nrf52811",
+  "sourceToolsVersion": "1.0.12"
+}

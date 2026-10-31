@@ -1,0 +1,40 @@
+"""Fixed OM programmer closure shared by packaging and public projection.
+
+Data only: no CLI/release frontend, transport, device or signing imports.
+"""
+
+OM_FULL_OFFLINE_RUNTIME_FILES = (
+    'tools/hardware/board_config.py',
+    'tools/hardware/onmicro_tool_files.py',
+    'tools/hardware/onmicro_full_base.py',
+    'tools/hardware/onmicro_full_config.py',
+    'tools/hardware/onmicro_configured_full.py',
+    'tools/hardware/activation_preservation.py',
+    'tools/hardware/onmicro_factory_init.py',
+    'tools/hardware/onmicro_full_prepare.py',
+    'tools/hardware/onmicro_full_writer.py',
+    'tools/hardware/onmicro_full_execution.py',
+    'tools/hardware/onmicro_rom_loader_model.py',
+    'tools/hardware/onmicro_flash_identity.py',
+    'tools/hardware/onmicro_source_capture.py',
+    'tools/hardware/onmicro_controlled_loader.py',
+    'tools/hardware/onmicro_full_loader.py',
+    'tools/hardware/requirements-om-full.txt',
+    'tools/hardware/requirements.txt',
+    'tools/hardware/_om_full_formats/__init__.py',
+    'tools/hardware/_om_full_formats/provenance.json',
+    'tools/hardware/_om_full_formats/onmicro_package.py',
+    'tools/hardware/_om_full_formats/safe_archive.py',
+    'tools/hardware/_om_full_formats/pin_config.py',
+    'tools/hardware/_om_full_formats/generated_busy_defaults.py',
+    'tools/hardware/_om_full_formats/protocol.py',
+    'tools/hardware/_om_full_formats/models.py',
+    'tools/hardware/_om_full_formats/generated_commands_v2.py',
+    'tools/hardware/_om_full_formats/generated_release_v1.py',
+    'tools/hardware/_om_full_formats/device_qr.py',
+    'tools/hardware/_om_full_formats/device_link.py',
+    'firmware/ports/onmicro/om6626/tools/configs/HSELAQ_04_37MG_38.toml',
+    'firmware/ports/onmicro/om6626/tools/configs/ZK_EL_OM21BA_V1.1.toml',
+    'firmware/ports/onmicro/om6626/tools/configs/ZK_EL_OM42BA_V1.0.toml',
+    'firmware/ports/onmicro/om6626/tools/configs/ZK_EL_OM6626_2.13_V1.1.toml',
+)

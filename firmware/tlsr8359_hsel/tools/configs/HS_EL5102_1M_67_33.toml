@@ -1,0 +1,37 @@
+# Hanshow Nowa-213R-N
+# Unified app-full.zip / layout-v1; retain the recovered 122x250 visible area.
+# Screen and LED defaults remain overridable; exact-board gates still apply.
+format_version = 1
+board_marking = "HS_EL5102_1M_67_33"
+
+[screen]
+ic = "UC8XXX" # Family driver; exact controller die remains unconfirmed.
+recipe = 1
+color = "BWR"
+rotation = 90
+mirror_x = true
+mirror_y = false
+
+native_ui_scale = 0 # 0=AUTO; 1=1x; 2=1.5x; 3=2x; 4=1.25x; 5=1.75x
+width = 128
+height = 250
+visible_x = 0
+visible_y = 0
+visible_width = 122
+visible_height = 250
+
+[gpio.display]
+mosi = "PB6"
+clock = "PB5"
+cs = "PB4"
+dc = "PD7"
+reset = "PD4"
+busy = "PA1"
+enable = "PB7"
+enable_active_low = true
+
+[gpio.led]
+red = "PD2"
+green = "PD3"
+blue = "PA7"
+active_low = ["red", "green", "blue"]

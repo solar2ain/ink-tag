@@ -1,0 +1,242 @@
+[
+  {
+    "path": "dependencies/cffi-2.1.1-cp313-cp313-win_amd64.whl",
+    "bytes": 185688,
+    "sha256": "1aa5645c30469b09530c4ebca77ebf8f17618293c58f8549cb1a543a50236e7d"
+  },
+  {
+    "path": "dependencies/colorama-0.4.6-py2.py3-none-any.whl",
+    "bytes": 25335,
+    "sha256": "4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"
+  },
+  {
+    "path": "dependencies/cryptography-50.0.0-cp311-abi3-win_amd64.whl",
+    "bytes": 3840395,
+    "sha256": "bd1c592e4d5974f0d08d4888e432157adba757c66da0246918e43677fafa2d30"
+  },
+  {
+    "path": "dependencies/pycparser-3.0-py3-none-any.whl",
+    "bytes": 48172,
+    "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992"
+  },
+  {
+    "path": "dependencies/python-3.13.16-embeddable-amd64.zip",
+    "bytes": 11439788,
+    "sha256": "589dc1e9d02549ca5f680710307ff9b77f6e3ffc4aa3efccd7fa54eeeafac94b"
+  },
+  {
+    "path": "dependencies/pyyaml-6.0.3-cp313-cp313-win_amd64.whl",
+    "bytes": 154090,
+    "sha256": "79005a0d97d5ddabfeeea4cf676af11e647e41d81c9a7722a193022accdb6b7c"
+  },
+  {
+    "path": "dependencies/qrcode-8.2-py3-none-any.whl",
+    "bytes": 45986,
+    "sha256": "16e64e0716c14960108e85d853062c9e8bba5ca8252c0b4d0231b9df4060ff4f"
+  },
+  {
+    "path": "LICENSE",
+    "bytes": 4694,
+    "sha256": "75f5f2ae732cdc31adf8ad90a42ed4ed47476b3f27fcdf90de13e79d6788309d"
+  },
+  {
+    "path": "LICENSING.md",
+    "bytes": 1261,
+    "sha256": "70b6b926885201904c6ee3c48c31dfa58c83da63418756118c86feee2c7e6599"
+  },
+  {
+    "path": "README.en.md",
+    "bytes": 4300,
+    "sha256": "1d0e4a2eab667db6003c631bc25dc1cdc31038e51ba30f7e4a99dc1924b673b7"
+  },
+  {
+    "path": "README.md",
+    "bytes": 3918,
+    "sha256": "9dd0dd3d3450bef39cbaa4fe66a786d5b3daff592486ab8457c0f6acc1a64ec7"
+  },
+  {
+    "path": "THIRD_PARTY_NOTICES.md",
+    "bytes": 709,
+    "sha256": "75013d0bd95130bfb103bea2caa4f09fc4055b2e081b521856c72f60593a4986"
+  },
+  {
+    "path": "tools/backup.ps1",
+    "bytes": 6322,
+    "sha256": "3e89b9e6e6b262f7a735a3fa2d67d8d5710e3f93d2edd25d63117f605a2bbe1d"
+  },
+  {
+    "path": "tools/bundle.json",
+    "bytes": 410,
+    "sha256": "186b00dfe2da9e8094b61fefa3ee8b8153d1b9f68fd1dfc42ac6488ff5c32adc"
+  },
+  {
+    "path": "tools/check.ps1",
+    "bytes": 1766,
+    "sha256": "a78fc8a33b69220b02d1104dc6e0da3da611a78840e4b03d1216130a6c81d04e"
+  },
+  {
+    "path": "tools/configs/PriceEtag_V1.7.toml",
+    "bytes": 738,
+    "sha256": "3c0215157a3f1758fba335fd014a20b10b8cac4c14db8497130dfb28bbbce3ed"
+  },
+  {
+    "path": "tools/dependencies.lock.json",
+    "bytes": 3617,
+    "sha256": "e42786b8e952a00e4dc72e1cec24bddd491ab9a1ce810e4eed775d9cbea0cd5b"
+  },
+  {
+    "path": "tools/flash.ps1",
+    "bytes": 10865,
+    "sha256": "ceb1f93f25a845d9f433844ab6eaf1cf539f6b62b5a4b297706de8ebd29bb1c9"
+  },
+  {
+    "path": "tools/internal/backup-archive.ps1",
+    "bytes": 6829,
+    "sha256": "d251282babbf63c1a040adfbf7021e253dd7f15d9ad892248845f6485fffd4d0"
+  },
+  {
+    "path": "tools/internal/invoke-nrf52832-swd.ps1",
+    "bytes": 41512,
+    "sha256": "6455e133d03e28d604b6546ce4630ff68a9553491c7a4be58882c62011a3cc43"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/activation_preservation.py",
+    "bytes": 3454,
+    "sha256": "9f4309a6aa06f29fb2338a752c011272377245429e50e49cb7bd97cda72962e1"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/board_config.py",
+    "bytes": 5809,
+    "sha256": "edcd67bb256982a726e1b5c35b122a8a428bc181a86de7f133016476c1415e4b"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/nordic-backup-archive.py",
+    "bytes": 8581,
+    "sha256": "741114b5576ec2873b38905575d6c5337c170811ad9bad38bb26892ec64b7bab"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/nordic_board_family.py",
+    "bytes": 1619,
+    "sha256": "47c84b75955d9b601db646f2351e4c1a930124e631f793d72a0d86cec8233ee6"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/nordic_environment.py",
+    "bytes": 451,
+    "sha256": "e3af059b0a42a401689c1e4e96ef846fd6f0c6a1bfad6241ee791be6ec2913bf"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/nordic_full_bundle.py",
+    "bytes": 15310,
+    "sha256": "1e5a5c69f8b93079ddb4f9fcc9f316149b4e25ba212fc1782a29fb6016206d4b"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/nordic_full_cleanup.py",
+    "bytes": 2057,
+    "sha256": "027b83a0b551194a7e3ba7c6b13da57c5caca76acf6f0d341bb1901c6f5aac96"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/nordic_full_config.py",
+    "bytes": 8590,
+    "sha256": "b08257f6936e422e8109b6e1c6dd209453eb2d8bffa4736ebaf4ee363bea4121"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/nordic_full_retention.py",
+    "bytes": 2912,
+    "sha256": "d3409daef70bf471255dcebed24a87556f79a7bf10c6700e4cc4f17ec766e7b8"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/nordic_tool_format/__init__.py",
+    "bytes": 87,
+    "sha256": "f4f14f0517d1c86cfe7672dc5557baec18a53e91c2870e626ada687fc032325f"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/nordic_tool_format/device_link.py",
+    "bytes": 1045,
+    "sha256": "a73cbce6d92610ff854186b565a2ee8568d4fb6e7a171a7224404d6eb4545a17"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/nordic_tool_format/device_qr.py",
+    "bytes": 1692,
+    "sha256": "440747ef6f79bb2d0d2038d8a0f7631eaca0d37b6c18b55bb117ec8cae957a7e"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/nordic_tool_format/factory.py",
+    "bytes": 6665,
+    "sha256": "dcd76917c5be34b03916c6a6a8c2bf88f98e57cd8b3aaeb2f6e3ec09eade1f8b"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/nordic_tool_format/font_package.py",
+    "bytes": 6902,
+    "sha256": "a6968d529a3ce11b0ca8ded2fb8e085d450674534a802693f153ced8ef1c8b00"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/nordic_tool_format/provenance.json",
+    "bytes": 1852,
+    "sha256": "ca98f01398ea2b5f2971753559bf83af14a1c4b2345ad7ef6086e37487365419"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/nordic_tool_format/screen.py",
+    "bytes": 3711,
+    "sha256": "18a55452291e0d493ee8b6078aaecdd6c8c5fbb16f09a8d3792fa71c1aa21555"
+  },
+  {
+    "path": "tools/internal/offline/tools/hardware/nordic_tool_format/screen_registry.py",
+    "bytes": 7200,
+    "sha256": "729f2fd9226ced5058045b5ebacc0ac74ba4015e3f2a6153c172e64175860ca1"
+  },
+  {
+    "path": "tools/internal/offline/tools/jlink-tools.ps1",
+    "bytes": 4389,
+    "sha256": "ce6e5b060d335dddcdaad32ce85e3bc5a5240f48eeb56e1156b9a45d290132bf"
+  },
+  {
+    "path": "tools/internal/offline/tools/powershell-cli.ps1",
+    "bytes": 3106,
+    "sha256": "2a0651a4cdeff9bc46f3002fa2f6b30aeb0a207932831868c53312c557a570ce"
+  },
+  {
+    "path": "tools/internal/offline/tools/sdk/merge-ihex.py",
+    "bytes": 3771,
+    "sha256": "1a3708730568501b41f698a17eb161250bf3bc0d2195ad895c16ff741f7cb7b5"
+  },
+  {
+    "path": "tools/internal/offline/tools/sdk/nordic-full-settings.py",
+    "bytes": 26838,
+    "sha256": "f5ced0b10c3507bad6ee731b1cf45b9c9197509bd70bc4a909a9a0e03887f061"
+  },
+  {
+    "path": "tools/internal/offline/tools/sdk/nrf52832-tail-layout.py",
+    "bytes": 2144,
+    "sha256": "8fb829914b4d33a660cf6f449620e971c5d7e727b9ec11b16058e18ff426c28d"
+  },
+  {
+    "path": "tools/internal/python313._pth",
+    "bytes": 79,
+    "sha256": "b7052067530b4ca25d7549c374453373649368537154d1930def120362746a8e"
+  },
+  {
+    "path": "tools/internal/runtime-files.json",
+    "bytes": 49351,
+    "sha256": "4343dc150565047f2efc7d5f43196ea724ce31390133f5677f3222214f72f83b"
+  },
+  {
+    "path": "tools/internal/runtime.ps1",
+    "bytes": 4612,
+    "sha256": "251fe6447f7b7606427fe041cc71777739966cbabdc552dcce00627859f076ac"
+  },
+  {
+    "path": "tools/internal/terminal-log.ps1",
+    "bytes": 15327,
+    "sha256": "81ecbab2714c57fc20244f90cc109b09ea66d882c376aea77f307e5c3d93c4c9"
+  },
+  {
+    "path": "tools/probe.ps1",
+    "bytes": 4192,
+    "sha256": "55361f9c1f14b2bf7494ea21ac7514bb61ffc601ee2970966c748d2ec2db7d23"
+  },
+  {
+    "path": "tools/setup.ps1",
+    "bytes": 2595,
+    "sha256": "b244a5d3a42cdb309f1b39ee232895f492d00fbb5b9a510294919aa4e3b32b3d"
+  }
+]

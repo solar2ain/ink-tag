@@ -1,0 +1,1570 @@
+{
+  "schemaVersion": 1,
+  "developmentLayouts": {
+    "telink/tlsr8359-layout-v1": {
+      "layout": "layout-v1",
+      "compatibilityEpoch": 3,
+      "boardConfigSchema": 1,
+      "applicationLimitBytes": 258048,
+      "recoveryAddress": 262144,
+      "recoveryLimitBytes": 69632,
+      "userFontRegion": {
+        "start": 331776,
+        "sizeBytes": 32768
+      },
+      "settingsAddresses": [
+        364544,
+        368640
+      ],
+      "recoveryStateAddresses": [
+        372736,
+        376832
+      ],
+      "imageStoreExtents": [
+        {
+          "start": 380928,
+          "sizeBytes": 139264
+        }
+      ],
+      "factoryRange": {
+        "start": 520192,
+        "sizeBytes": 4096
+      },
+      "ordinaryOtaMigration": false,
+      "fullReinitializationRequired": true,
+      "fontProtocolStatus": "pending-shared-policy; embedded-defaults-only",
+      "hardwareQualified": false,
+      "releaseQualified": false,
+      "qualification": "Human-frozen config/geometry, offline preparation only; no device write while revised font protocol and human hardware instructions are pending. Prior board entries remain historical hardware facts."
+    },
+    "telink/tlsr8359-v6": {
+      "layout": "single-with-ble-recovery-v6",
+      "compatibilityEpoch": 3,
+      "applicationLimitBytes": 245760,
+      "settingsAddresses": [
+        245760,
+        249856
+      ],
+      "recoveryStateAddresses": [
+        253952,
+        258048
+      ],
+      "recoveryAddress": 262144,
+      "recoveryLimitBytes": 65536,
+      "guiAssetBanks": [
+        {
+          "start": 327680,
+          "sizeBytes": 16384
+        },
+        {
+          "start": 344064,
+          "sizeBytes": 16384
+        }
+      ],
+      "imageStoreExtents": [
+        {
+          "start": 360448,
+          "sizeBytes": 159744
+        }
+      ],
+      "factoryRange": {
+        "start": 520192,
+        "sizeBytes": 4096
+      },
+      "ordinaryOtaMigration": false,
+      "fullReinitializationRequired": true,
+      "hardwareQualified": false,
+      "releaseQualified": false,
+      "qualification": "Human-selected continuous layout; owning incremental builds and host gates only. Per-board ota/imageStore facts below remain the prior installed v5 baseline, not v6 hardware evidence."
+    }
+  },
+  "boards": {
+    "aesl22_nrf": {
+      "buildInMainRepository": false,
+      "label": "Alibaba Cloud AESL 2.1/2.9",
+      "mcuFamily": "Nordic nRF52",
+      "mcu": "nRF52811",
+      "port": "nordic/nrf52811",
+      "lowFrequencyClock": {
+        "source": "external-32.768-khz-crystal",
+        "assembled": true,
+        "configuredAccuracyPpm": 50,
+        "evidence": "User visual inspection of the current blue PCB: separate 32.000 MHz crystal plus a smaller 32.768 kHz-class crystal marked 327042 or H03389; exact LF crystal part/tolerance remains unidentified",
+        "qualification": "Board-default LFXO configuration is implemented; cold-start, BLE/DFU, timing-drift and current measurements remain exact-board gates"
+      },
+      "artifact": "InkTag-aesl22_nrf",
+      "lfclkSource": "lfxo",
+      "lfclkQualification": "32.768 kHz crystal physically fitted on the current bench PCB; firmware selection and BLE/OTA/time/current regression remain pending",
+      "defaultScreenProfile": "SSD1619_128x250_BWR_HEMA213",
+      "panelWiring": "runtime-configurable; current fixture defaults to the original Alibaba/Hema HINK-E0213A67 2.13-inch BWR panel on the common EL022H2 EPD bus",
+      "panelReplaceable": true,
+      "led": "RGB channels on P0.16/P0.18/P0.17, active low; exact red/green/blue mapping pending physical qualification; current system LED uses P0.18 only and exposes DEFAULT/OFF without custom color/effect claims",
+      "button": {
+        "present": false
+      },
+      "productModels": [
+        "EL022H2ARL",
+        "EL022H2WRL",
+        "EL029H2"
+      ],
+      "manufacturer": "SOLUM",
+      "deploymentBrand": "Alibaba Cloud Computing Ltd.",
+      "productFamily": "Alibaba Cloud AESL / CloudESL",
+      "flashRequirement": "Verified 192 KiB internal Flash and 24 KiB RAM. The exact EL022H2 bench PCB also has a separately packaged 512 KiB FM25Q04 auxiliary SPI NOR; moving the two-page Settings Journal there frees the former internal data pages and makes the contiguous internal application/OTA window 68 KiB. Code still cannot execute from the auxiliary part.",
+      "auxiliaryFlash": {
+        "status": "qualified-read-idempotent-program-readback",
+        "part": "Fudan Micro FM25Q04",
+        "jedecId": "A14013",
+        "capacityBytes": 524288,
+        "supplyVoltage": "2.7-3.6 V",
+        "bus": "direct-GPIO SPI mode 0",
+        "pins": {
+          "cs": "P0.12",
+          "miso": "P0.13",
+          "sclk": "P0.14",
+          "mosi": "P0.15"
+        },
+        "imageStore": {
+          "range": "0x0A000-0x7FFFF",
+          "sizeBytes": 483328,
+          "sectorSizeBytes": 4096,
+          "sectorCount": 118,
+          "format": "InkTag typed image records; validity header is committed last",
+          "origin": "all sectors after the owner-released settings and font/reserve regions"
+        },
+        "originalFactoryBackupSha256": "F15C30A60BCC1678B6573CD7A26E86EFDADD6327A763280FF27A65F1AFDB3ED2",
+        "fontAssets": {
+          "range": "0x02000-0x04FFF",
+          "sizeBytes": 12288,
+          "payloadBytes": 9821,
+          "schema": 1,
+          "artifact": "InkTag-aesl22_nrf-font-assets.bin",
+          "qualifiedArtifactSha256": "B7D6EEBFE590A254163238F3DF7DFB7DC5570AD691CBFAE69E39C4F09D14A6DE"
+        },
+        "settingsJournal": {
+          "range": "0x00000-0x01FFF",
+          "sizeBytes": 8192,
+          "format": "two 4 KiB append-only A/B pages; record and page commit words are programmed last"
+        },
+        "fontReserveRange": "0x05000-0x09FFF",
+        "fontReserveBytes": 20480,
+        "qualification": "2026-09-10 exact-board evidence: six matching RDID reads, valid SFDP with 4-Mbit density and 4/32/64-KiB erase opcodes, complete 512-KiB read, bounded last-sector program/read/erase qualification, then 39-page font programming plus full 12-KiB byte comparison and an independent matching SHA-256 readback. The production runtime then passed blank-journal creation, 150 consecutive setting writes, two A/B compactions and reset persistence. The typed image-store adapter has host coverage for dirty factory bytes, lazy sector erase, 256-byte physical-page splitting, commit/read/delete, cleanup above sector 64 and low-voltage failure; exact-board record/slideshow and interrupted-write regression remain release gates."
+      },
+      "ota": {
+        "transport": "Nordic signed Secure DFU over BLE",
+        "mode": "single-bank application update with fixed-name recovery",
+        "applicationLimitBytes": 69632,
+        "bootloaderStart": "0x0002A000",
+        "imageStore": "FM25Q04 0x0000A000-0x0007FFFF (472 KiB/118 sectors of typed image records; Free quota is five compact or two normal/large records)",
+        "settingsJournal": "FM25Q04 0x00000000-0x00001FFF (two 4 KiB InkTag journal pages)"
+      },
+      "notes": "One nRF52811/S112 application and OTA artifact covers the Alibaba Cloud AESL family. The bounded 0.2.0 core uses frozen protocol 0x20 for identity, time, screen profile, direct transfer, persistent label/settings, native pages, typed image records/slideshow, health telemetry, reset and Buttonless DFU. It retains the complete common UC/JD/SSD controller/profile catalog, including both 152x152 and 200x200 1.54-inch geometries. The target does not compile or advertise activation, Find, NFC or custom layouts; it also leaves the fixed BLE name, unqualified input/buzzer, health thresholds and scoped lifecycle actions unadvertised. Image records use the owner-released 472 KiB range after the settings and font/reserve regions in FM25Q04; the original complete 512 KiB image remains backed up off-device, and allocation erases only sectors selected for a new record. The permanently Free target exposes the common quota of five compact or two normal/large records. Direct transfer retains the default 20-byte ATT payload and Recovery derives InkTag_NRF_<ID4>_OTA from the same factory identity as the application. EL022H2 external-Flash identification/backup, bounded write/erase, font provisioning/readback, runtime Journal creation/compaction, time/profile reset persistence, Hema 2.13 BWR native/direct/record output, record/slideshow, active-write reset recovery and signed OTA retransmission passed on hardware. Hard power-loss interruption, optical branding, current and long-soak regression remain open. EL029H2 is a user-identified replaceable-panel variant whose shared PCB, external-Flash identity/wiring and display profile still require exact-board regression."
+    },
+    "nrf52832_priceetag": {
+      "label": "PriceETag",
+      "mcuFamily": "Nordic nRF52",
+      "mcu": "nRF52832 xxAA / AAE0 (FICR verified)",
+      "port": "nordic/nrf52832",
+      "lowFrequencyClock": {
+        "source": "external-32.768-khz-crystal",
+        "assembled": true,
+        "configuredAccuracyPpm": 20,
+        "evidence": "User visual inspection plus preserved factory SoftDevice clock tuple 01 00 00 07 at 0x2F2A8 (XTAL, no RC calibration, 20 ppm)",
+        "qualification": "Board-default LFXO configuration is implemented; repeat cold-start, BLE/DFU, timing-drift and current measurements before release"
+      },
+      "artifact": "InkTag-nrf52832_priceetag",
+      "lfclkSource": "lfxo",
+      "lfclkAccuracyPpm": 20,
+      "lfclkQualification": "32.768 kHz crystal physically fitted; preserved stock SoftDevice configuration 01 00 00 07 selects LFXO/20 ppm. InkTag selection regression remains pending",
+      "panelReplaceable": true,
+      "defaultScreenProfile": "SSD1675_152x152_BW_STANDARD",
+      "panel": "user-confirmed 1.54-inch 200x200 black/white; stock executable also contains a recovered SSD1675-family 152x152/2,888-byte compatibility path and 100-byte LUT",
+      "displayTransform": "PriceETag board only, recovered 152x152 SSD1675 path: keep stock X+/Y- controller mode, reverse streamed row order, and preserve each row's byte/bit order; diagnostic v109 calendar orientation passed on hardware",
+      "panelWiring": {
+        "mosi": "P0.08",
+        "sclk": "P0.09",
+        "cs": "P0.10",
+        "dc": "P0.11",
+        "reset": "P0.12",
+        "busy": "P0.13",
+        "powerEnable": null,
+        "evidence": "Recovered from direct GPIO and SPI0 accesses in the preserved stock firmware"
+      },
+      "led": null,
+      "button": {
+        "present": true,
+        "gpio": "P0.02",
+        "activeLevel": "low",
+        "status": "recovered from the stock BUTTON module: it reads P0 IN at 0x50000510, extracts bit 2 and triggers on zero; hold during reset/power-on enters InkTag Secure DFU"
+      },
+      "flashRequirement": "Verified 512 KiB Flash and 64 KiB RAM from FICR plus a complete stock Flash/FICR/UICR backup; HW56 Full relocation additionally requires a fresh current-state backup, image/Settings inventory and reviewed migrate-or-discard decision, and remains blocked pending exact-board qualification",
+      "ota": {
+        "transport": "Nordic signed Secure DFU over BLE",
+        "mode": "single-bank application update with button recovery",
+        "applicationLimitBytes": 163840,
+        "bootloaderStart": "0x00058000",
+        "imageStore": "0x00060000-0x0007FFFF (128 KiB / 32 sectors; HW56 Full-only migration)",
+        "guiAssetStore": "Native ITFA3 single user region 0x0004E000-0x00055FFF (32 KiB); default fonts embedded in App",
+        "settingsJournal": "0x00056000-0x00057FFF (two 4 KiB InkTag journal pages; replaces generic FDS)"
+      },
+      "notes": "HW56 source keeps App start 0x26000, moves Recovery to 0x58000 through explicit MBR selectors and preserves stock UICR. HW56 is not yet hardware-qualified. The following feature notes are historical HW55 evidence, not qualification of new addresses or fonts. InkTag replaces stock FDS with a bounded two-page settings journal and replaces the unknown stock signing key with the shared InkTag Nordic key while preserving the board's UICR page. The 0.2.0 application uses frozen protocol 0x20 without legacy commands and advertises the qualified P0.02 input, exact-board-qualified offline activation and default-off Pro-only EXPERIMENTAL_FIND. Activation rejection/install, soft-reset and two-OTA persistence plus guarded test cleanup pass; production exposes no cleanup/Debug path. Find payload/cadence and connection pause/resume pass, but production FIND remains unqualified pending current, Apple-report and long-run evidence. The health/crash backend remains unadvertised; its raw policy follows the common 2400/2000/0/2400/2600 mV warning/critical/display/Flash/OTA thresholds and invalid-ADC fail-safe. Fresh fail-closed Flash/OTA checks now guard every actual erase/write submission, while thresholdsQualified stays false pending exact-board load/sag evidence. NFC, buzzer/auxiliary GPIO, LED, layout/debug and scoped lifecycle remain unadvertised. No LED behavior is expected. The first BLE-only InkTag image persisted placeholder 0xFF pins; current firmware migrates that record to the recovered board defaults."
+    },
+    "hs_nowa154": {
+      "label": "Hanshow Nowa-154R-N",
+      "mcuFamily": "Telink TLSR82xx",
+      "mcu": "TLSR8359; exact package suffix remains to be recorded",
+      "port": "telink/tlsr8359",
+      "artifact": "InkTag-hs_nowa154",
+      "applicationArtifact": "InkTag-tlsr8359_hanshow",
+      "lfclkSource": "internal-rc",
+      "lfclkQualification": "No low-frequency crystal fitted on the exact inspected board; no add-on footprint capability is claimed",
+      "supplyMeasurement": {
+        "source": "MCU VDD sampled through otherwise-unused PB1 with the B85 GPIO/VBAT 1/8-scale method; PB1 is restored high-impedance after every sample",
+        "validRangeMv": [
+          1800,
+          3600
+        ],
+        "warningMv": 2400,
+        "criticalMv": 2000,
+        "displayMinMv": 0,
+        "flashMinMv": 2400,
+        "otaMinMv": 2600,
+        "thresholdsQualified": false
+      },
+      "defaultScreenProfile": "HANSHOW_NOWA_154_BWR",
+      "displayTransform": "Default logical frame rotates 90 degrees and mirrors X to match the mounted FPC/viewing side; upright device-info, calendar, clock and uploaded-record pages passed on InkTag_TL_9903",
+      "panel": "FPC-8002, 1.54-inch 152x152 BWR; factory SSD1675-family OTP full-refresh path",
+      "panelReplaceable": false,
+      "physicalFlashSizeBytes": 524288,
+      "verifiedFlashWindowSizeBytes": 524288,
+      "flashRequirement": "Two matching 0x000000-0x07FFFF reads, non-mirrored halves and upper-half data; baseline SHA-256 E70D15BF930087FCA297B9EB6E5031BF84908D7672012A7B01B81C3932A5CA04. Actual-board read-only MSPI identification repeatedly returned JEDEC 856013 and status 0x002C, identifying a Puya P25Q40SH 4-Mbit/512-KiB Flash. Exact external/on-package attribution remains pending.",
+      "firstFlash": {
+        "format": "bounded-flash-window-bin",
+        "startAddress": 0,
+        "imageSizeBytes": 524288,
+        "selectorAddress": 520448,
+        "selectorId": 1,
+        "flashJedecId": "856013",
+        "uartSws": {
+          "writeBaud": 576000,
+          "readBaud": 921600,
+          "activationMs": 20000,
+          "clockMHz": 0
+        },
+        "experimental": true,
+        "preserveRanges": [
+          "0x0007F000-0x0007FFFF"
+        ]
+      },
+      "ota": {
+        "transport": "Telink Recovery v2 large indexed packets over BLE",
+        "layout": "single-with-ble-recovery-v5-experimental",
+        "applicationStart": "0x00000000",
+        "applicationRegionBytes": 229376,
+        "applicationLimitBytes": 229376,
+        "recoveryStart": "0x00040000",
+        "recoveryLimitBytes": 65536,
+        "recoveryState": "0x00050000-0x00051FFF",
+        "qualification": "official B85 0x40000 secondary-boot support plus source/build/host validation; full layout migration, normal update, 10/50/95% interruption retransmission and unconfirmed-trial reset require exact-board testing"
+      },
+      "imageStore": {
+        "extents": [
+          {
+            "start": "0x00054000",
+            "sizeBytes": 176128
+          }
+        ],
+        "sizeBytes": 176128,
+        "recordPolicy": "Layout v5: 43 contiguous base sectors; only exact 1-MiB Nebular-420R adds 128 high sectors. Records never cross the immutable 0x7F000 factory page. Guarded Full migration preserves current Settings, relocates ITFA and repacks referenced images; ordinary OTA is v5-only. No separate Find/keyring region."
+      },
+      "panelWiring": {
+        "mosi": "PB6",
+        "sclk": "PB5",
+        "cs": "PB4",
+        "dc": "PD7",
+        "reset": "PD4",
+        "busy": "PA1, active high",
+        "powerEnable": "PB7, active low; released with 10 kOhm pull-up while parked",
+        "activeState": "RESET/DC/CS/CLK/MOSI outputs and BUSY input, all floating pulls; RESET starts low, CS high, CLK low",
+        "parkedState": "six panel signal drivers disabled with 10 kOhm pull-ups; PB7 rail control released with 10 kOhm pull-up",
+        "resetSequence": "low 2 ms, high 2 ms",
+        "bus": "factory direct-GPIO mode-0 serializer; each command/data byte has its own CS-low interval; PB6 becomes input for reads",
+        "evidence": "Recovered from the preserved Hanshow display vtable and SSD1675 overlay. PC5 is a stock input/wakeup and must not be driven; PB7 rail-control net identity remains subject to physical continuity/refresh confirmation"
+      },
+      "panelRecipe": {
+        "controller": "SSD1675-compatible; exact A/B suffix unconfirmed",
+        "logicalResolution": "152x152",
+        "visibleResolution": "152x152",
+        "color": "BWR",
+        "transfer": "two 2,888-byte 1-bpp planes; color plane bytes inverted from InkTag canonical",
+        "addressing": "X counter 1, Y counter 151 with descending scan",
+        "waveform": "controller OTP full refresh; no host LUT",
+        "busyPolarity": "active high"
+      },
+      "nfc": true,
+      "nfcController": "FM11NC08-compatible at 7-bit I2C address 0x57; PC0=SDA, PC1=SCL, PC6=active-low per-contact-transaction select, PC4=active-low IRQ/wake. Contact presence, repeated phone presentation and E103/E104 Type-4 NDEF phone read/write pass; a phone-written FAST record survived software reset and BLE readback. The experimental file uses the factory 900-byte CC limit while BLE/CLI single-packet management remains 192 bytes. Production qualification stays false pending ISO14443-4 chaining, battery-removal persistence, retention, power and broader phone/action tests",
+      "find": {
+        "mode": "keyring-rotation",
+        "experimentalAvailable": true,
+        "defaultEnabled": false,
+        "productionQualified": false,
+        "physicalGates": "Derived-address RF payload capture, GATT pause/resume, software-reset persistence and enabled-config persistence across a later application OTA passed on InkTag_TL_9903. Cold-power persistence, measured 8s/2s cadence, long-run current and Apple-report observation remain"
+      },
+      "led": "Qualified active-low RGB status output: red=PD2, green=PD3 and blue=PA7/SWS. Ten-second per-channel diagnostics and the common startup/connection sequence passed on InkTag_TL_9903; every blue-off phase restores PA7 to SWS. Persistent all/critical/off presets are Free and custom scene overrides remain Pro. Current consumption and long-soak behavior remain board-level release gates.",
+      "button": {
+        "present": false
+      },
+      "factoryUart": {
+        "status": "not-initialized-by-selected-stock-path",
+        "baudRate": null,
+        "tx": "external TX-labelled contact exists; MCU GPIO route unmapped",
+        "rx": "external RX-labelled contact exists; MCU GPIO route unmapped",
+        "evidence": "The preserved lower-512-KiB selected image has no references to the B85 0x800090-0x80009F UART register block. Generic multi-product SDK UART code is not exact-board routing evidence."
+      },
+      "auxIo": {
+        "supported": false,
+        "defaultEnabled": false,
+        "buttonGpio": 255,
+        "buzzerGpio": 255,
+        "candidatePolicy": "Reuse a physically identified normal UART RX contact for an active-low wake button and a PWM-capable normal UART TX contact for a passive piezo only after exact contact-to-MCU continuity is proven.",
+        "reason": "The board exposes TX/RX-labelled contacts, but the CH340 programmer uses PA7/SWS and neither contact has been mapped to an MCU GPIO. B85 pinmux alternatives are not board wiring evidence. PB1 is also used for bounded supply sampling, PD3 is the green LED, PD7/PB7 are panel signals and PC5 is an unknown stock wake input."
+      },
+      "buildQualified": true,
+      "hardwareQualified": false,
+      "experimental": true,
+      "notes": "Shares one byte-identical application and OTA payload with Nebular-420R-N. Full clear, black/red polarity, orientation and normal BLE OTA pass on the current board; sleep current remains an exact-board gate. On 2026-09-10 InkTag_TL_9903 installed and attested the shared 171,200-byte application body / CRC32 4CF93EFE, then accepted a signed bench-key IKAC1 Pro sequence 1 for activation ID C18272862A4984DF. Pro and the enabled experimental Find public key survived software reset; the exact derived-address Apple payload was captured after GATT disconnect. A later same-byte GUI_default confirmation OTA again attested 171,200 / 4CF93EFE and preserved both Pro and the enabled Find configuration; the derived-address payload resumed after disconnect. The standard activation-test Free cleanup loop, cold-power Find persistence, current and Apple-report evidence remain pending. Type-4 NDEF remains experimental and production-unqualified until the complete phone write/readback, battery-removal, chaining, retention and power matrix passes."
+    },
+    "hs_nowa213": {
+      "label": "Hanshow Nowa-213R-N (experimental unit 01)",
+      "mcuFamily": "Telink TLSR82xx",
+      "mcu": "TLSR8359 family by read-only SWS; exact package suffix pending",
+      "port": "telink/tlsr8359",
+      "artifact": "InkTag-hs_nowa213",
+      "applicationArtifact": "InkTag-tlsr8359_hanshow",
+      "lfclkSource": "internal-rc candidate",
+      "lfclkQualification": "Not yet electrically qualified on Nowa-213R-N",
+      "supplyMeasurement": {
+        "source": "PB1 VDD 1/8-scale method is a Nowa-154 sibling candidate, not yet meter-qualified here",
+        "validRangeMv": [
+          1800,
+          3600
+        ],
+        "warningMv": 2400,
+        "criticalMv": 2000,
+        "displayMinMv": 0,
+        "flashMinMv": 2400,
+        "otaMinMv": 2600,
+        "thresholdsQualified": false
+      },
+      "defaultScreenProfile": "HANSHOW_NOWA_213_BWR",
+      "displayTransform": "Transform 5 (90-degree rotation plus horizontal mirror); upright landscape clear/calendar physically observed on unit 01",
+      "panel": "P213124-MF1-A, 26-contact FPC with outer contacts unconnected and inner 24 standard contacts by owner observation; 250x122 BWR stock geometry, exact IC unknown",
+      "panelReplaceable": false,
+      "physicalFlashSizeBytes": 524288,
+      "verifiedFlashWindowSizeBytes": 524288,
+      "flashRequirement": "Two matching complete non-mirrored 512 KiB SWS reads, SHA-256 E11F55F32B4ECDF1798C80B78A22B1A52AF0DC8000B711C94B640AE66A703DB2; repeated JEDEC 856013 supports Puya P25Q40SH 512 KiB candidate. Canonical private backup: factory_backups/tlsr8359/P213124-MF1-A/stock-flash.bin.",
+      "firstFlash": {
+        "format": "bounded-flash-window-bin",
+        "startAddress": 0,
+        "imageSizeBytes": 524288,
+        "selectorAddress": 520448,
+        "selectorId": 3,
+        "flashJedecId": "856013",
+        "uartSws": {
+          "writeBaud": 460800,
+          "readBaud": 921600,
+          "activationMs": 20000,
+          "clockMHz": 0
+        },
+        "experimental": true,
+        "preserveRanges": [
+          "0x0007F000-0x0007FFFF"
+        ]
+      },
+      "ota": {
+        "transport": "Telink Recovery v2 large indexed packets over BLE",
+        "layout": "single-with-ble-recovery-v5-experimental",
+        "applicationStart": "0x00000000",
+        "applicationRegionBytes": 229376,
+        "applicationLimitBytes": 229376,
+        "recoveryStart": "0x00040000",
+        "recoveryLimitBytes": 65536,
+        "recoveryState": "0x00050000-0x00051FFF",
+        "qualification": "Unit 01 preserving v4-to-v5 guarded Full installed App FDFDC5BF and fixed Recovery 9E9AFE5F, sampled 105216/524288-byte verification, retained Pro/Find/immutable ID and native profile. Shared CLI ordinary OTA attested FDFDC5BF then operational QR/ITFA/PackBits App C61AAC81 with default time sync. Multi-position interruption, true power cuts and full-window readback remain pending; see docs/research/tlsr8359-nowa213-v5-closeout.md."
+      },
+      "imageStore": {
+        "extents": [
+          {
+            "start": "0x00054000",
+            "sizeBytes": 176128
+          }
+        ],
+        "sizeBytes": 176128,
+        "recordPolicy": "Layout v5: 43 contiguous base sectors; only exact 1-MiB Nebular-420R adds 128 high sectors. Records never cross the immutable 0x7F000 factory page. Guarded Full migration preserves current Settings, relocates ITFA and repacks referenced images; ordinary OTA is v5-only. No separate Find/keyring region."
+      },
+      "panelWiring": {
+        "mosi": "PB6 candidate",
+        "sclk": "PB5 candidate",
+        "cs": "PB4 candidate",
+        "dc": "PD7 candidate",
+        "reset": "PD4 candidate",
+        "busy": "PA1 candidate, active low",
+        "powerEnable": "PB7 active-low candidate",
+        "parkedState": "Five bus pins input/pull-up 10 kOhm; PA1 BUSY_N input disabled/floating after panel sleep. Exact-board A/B reduced idle from 220 to about 90 microamps; direct pin electrical proof pending",
+        "resetSequence": "low 2 ms, high 2 ms candidate",
+        "bus": "factory GPIO bit serializer candidate",
+        "evidence": "See docs/research/hanshow-nowa-213r-n.md; selected-profile/physical proof still pending"
+      },
+      "panelRecipe": {
+        "controller": "UC-style two-plane MTP command family; exact COG IC unconfirmed",
+        "logicalResolution": "250x122",
+        "nativeBytePitch": "128x250",
+        "visibleResolution": "122x250 native, transform 5 gives 250x122 landscape",
+        "color": "BWR",
+        "transfer": "two 4,000-byte 1-bpp planes; red data byte inversion physically observed",
+        "waveform": "controller MTP full refresh; no host LUT identified",
+        "busyPolarity": "active low candidate"
+      },
+      "nfc": true,
+      "nfcController": "FM11-compatible contact bus on PC0/PC1/PC6/PC4; owner passed system URL, NFC Tools/TagInfo NDEF read, phone NDEF write and text-command page action on unit 01. Power-cycle retention/current matrix remains experimental.",
+      "find": {
+        "mode": "public-only-p224-v2-pilot",
+        "experimentalAvailable": true,
+        "defaultEnabled": false,
+        "productionQualified": false,
+        "physicalGates": "Unit 01 v2 Apple-report/decryption and earlier real power-cycle retention observed. Current v5 preserving Full and ordinary OTA retain identity; current long-soak, instrument power and production qualification remain pending."
+      },
+      "led": "Unit-01 direct-channel RGB test passed: red PD2, green PD3, blue PA7/SWS. Owner observed application boot RGB/green-ready and updated fixed-Recovery RGB/blue-ready scenes plus even blue OTA download flashes.",
+      "button": {
+        "present": false
+      },
+      "auxIo": {
+        "supported": false,
+        "defaultEnabled": false,
+        "buttonGpio": 255,
+        "buzzerGpio": 255
+      },
+      "buildQualified": true,
+      "hardwareQualified": false,
+      "experimental": true,
+      "notes": "Experimental unit 01; release-excluded. Complete stock baseline is preserved. V5 preserving Full, ordinary OTA, owner-confirmed upright BWR calendar/temperature, QR commit, inactive-bank complete four-font ITFA and RAW/PackBits upload/display/matching readback passed. Pro11/Find v2/immutable ID retained. Ordinary ADV and CONN Suspend enabled; 30s connected sleep counters advance without crashes. Historical same-fixture parked BUSY idle measured about 90 microamps; no current-artifact instrument qualification. Both Deep Retention modes remain off. One shared TLSR8359 App/OTA serves all four selectors; selector3 here. Power cuts, interruption/long soak, current, production Type-4 electrical bounds, browser/phone matrix and voltage thresholds remain pending. See docs/research/tlsr8359-nowa213-v5-closeout.md."
+    },
+    "hs_nebular213": {
+      "label": "Hanshow Nebular-213R-N (experimental unit 01)",
+      "mcuFamily": "Telink TLSR82xx",
+      "mcu": "HS9118-marked package; TLSR8359-compatible SWS, die suffix unconfirmed",
+      "port": "telink/tlsr8359",
+      "artifact": "InkTag-hs_nebular213",
+      "applicationArtifact": "InkTag-tlsr8359_hanshow",
+      "lfclkSource": "internal-rc candidate",
+      "lfclkQualification": "Not yet electrically qualified on Nebular-213R-N",
+      "supplyMeasurement": {
+        "source": "PB1 VDD 1/8-scale method is a sibling candidate, not yet meter-qualified here",
+        "validRangeMv": [
+          1800,
+          3600
+        ],
+        "warningMv": 2400,
+        "criticalMv": 2000,
+        "displayMinMv": 0,
+        "flashMinMv": 2400,
+        "otaMinMv": 2600,
+        "thresholdsQualified": false
+      },
+      "defaultScreenProfile": "HANSHOW_NEBULAR_213_BWRY",
+      "displayTransform": "Transform 5; unit-01 calendar is upright in landscape after packed-frame correction",
+      "panel": "AN0213A250-122KS682 / HS-E2.13ME-V1.0-M, 250x122 BWRY glass; user-confirmed stable red/yellow registered image on 2026-09-28; JD-compatible stock command family, COG die unconfirmed",
+      "panelReplaceable": false,
+      "physicalFlashSizeBytes": 524288,
+      "verifiedFlashWindowSizeBytes": 524288,
+      "flashRequirement": "Two matching complete reads each of lower 0x00000-0x7FFFF and upper 0x80000-0xFFFFF; all four SHA-256 0B7C7491E5078851A4657F6E2EB95CFC3639A433D29D3AF2AB9F7D6EA347B3E3. Upper is byte-for-byte alias, not independent storage; repeated JEDEC EB6013. Canonical private backup: factory_backups/tlsr8359/HS-E2.13ME-V1.0-M/stock-flash.bin.",
+      "firstFlash": {
+        "format": "bounded-flash-window-bin",
+        "startAddress": 0,
+        "imageSizeBytes": 524288,
+        "selectorAddress": 520448,
+        "selectorId": 4,
+        "flashJedecId": "EB6013",
+        "uartSws": {
+          "writeBaud": 460800,
+          "readBaud": 460800,
+          "activationMs": 20000,
+          "clockMHz": 24
+        },
+        "experimental": true,
+        "preserveRanges": [
+          "0x0007F000-0x0007FFFF"
+        ]
+      },
+      "ota": {
+        "transport": "Telink Recovery v2 large indexed packets over BLE",
+        "layout": "single-with-ble-recovery-v5-experimental",
+        "applicationStart": "0x00000000",
+        "applicationRegionBytes": 229376,
+        "applicationLimitBytes": 229376,
+        "recoveryStart": "0x00040000",
+        "recoveryLimitBytes": 65536,
+        "recoveryState": "0x00050000-0x00051FFF",
+        "qualification": "Guarded first flash completed; SWS readback stopped at 0x04CA00 so Recovery is not fully verified. Several ordinary exact-board shared-CLI OTAs attested running App CRC and completed post-update time sync."
+      },
+      "imageStore": {
+        "extents": [
+          {
+            "start": "0x00054000",
+            "sizeBytes": 176128
+          }
+        ],
+        "sizeBytes": 176128,
+        "recordPolicy": "Layout v5: 43 contiguous base sectors; only exact 1-MiB Nebular-420R adds 128 high sectors. Records never cross the immutable 0x7F000 factory page. Guarded Full migration preserves current Settings, relocates ITFA and repacks referenced images; ordinary OTA is v5-only. No separate Find/keyring region."
+      },
+      "panelWiring": {
+        "mosi": "PB6 candidate",
+        "sclk": "PD7 observed display response",
+        "cs": "PD2 observed display response",
+        "dc": "PB7 observed display response",
+        "reset": "PD4 candidate",
+        "busy": "PA1 candidate, active low",
+        "powerEnable": "PB5 candidate; panel refreshed with this GPIO mapping",
+        "parkedState": "Nebular-family pull-down candidate; PA1 parking and leakage need measurement",
+        "resetSequence": "high/low/high candidate",
+        "bus": "factory GPIO bit serializer candidate",
+        "evidence": "Nowa-like pin mapping did not refresh the panel. Nebular-family mapping produced a physical red/black refresh on unit 01; individual continuity and voltage measurements remain pending."
+      },
+      "panelRecipe": {
+        "controller": "JD79xxx-compatible packed-BWR command family; exact COG die unconfirmed",
+        "logicalResolution": "250x122",
+        "nativeBytePitch": "128x250 provisional",
+        "visibleResolution": "122x250 native, transform 5 optically passed for landscape calendar",
+        "color": "BWR",
+        "transfer": "one complete 8000-byte packed 2-bpp DTM1 frame; white-clear and native black/white/red calendar optically passed on unit 01",
+        "waveform": "stock PSR/BTST/PLL/CDI/TRES/GSST/E7/E9; MTP full refresh candidate",
+        "busyPolarity": "active low candidate"
+      },
+      "nfc": true,
+      "nfcController": "FM11-compatible contact endpoint detected on unit 01; PC0/PC1/PC6/PC4 candidate from sibling, phone RF test pending",
+      "find": {
+        "mode": "public-only-p224-v2-pilot",
+        "experimentalAvailable": true,
+        "defaultEnabled": false,
+        "productionQualified": false
+      },
+      "led": "PB4 red, PD3 green, PA7/SWS blue candidate from Nebular-420; bounded diagnostic exposed, optical channel qualification pending",
+      "button": {
+        "present": false
+      },
+      "auxIo": {
+        "supported": false,
+        "defaultEnabled": false,
+        "buttonGpio": 255,
+        "buzzerGpio": 255
+      },
+      "buildQualified": true,
+      "hardwareQualified": false,
+      "experimental": true,
+      "notes": "Exact-board stock is preserved; 512-KiB alias and profile-3 geometry confirmed. Shared App/Recovery boot, ordinary OTA, white clear, upright three-colour calendar, registered BWR image upload/show/slot readback, contact NFC probe, device-bound bench Pro and short public-only Find windows pass. NFC EEPROM change returns persistence error. LED optical, phone NFC, panel temperature, power and long Find soak remain experimental gates."
+    },
+    "hs_nebularpro154q": {
+      "label": "Hanshow NebularPro-154Q-N / HSEL4Q_01_54M_31",
+      "mcuFamily": "Telink TLSR82xx",
+      "mcu": "HS9118-marked package; TLSR8359-compatible, exact die unconfirmed",
+      "port": "telink/tlsr8359",
+      "artifact": "InkTag-hs_nebularpro154q",
+      "applicationArtifact": "InkTag-tlsr8359_hanshow",
+      "lfclkSource": "unknown",
+      "lfclkQualification": "No exact-board physical clock evidence",
+      "defaultScreenProfile": "HSEL4Q_01_54M_31_BWRY_EXPERIMENTAL",
+      "panel": "200x200 BWRY stock selector24/profile12; JD-compatible, exact COG unknown",
+      "panelReplaceable": false,
+      "physicalFlashSizeBytes": null,
+      "verifiedFlashWindowSizeBytes": 524288,
+      "flashRequirement": "Matched independent512-KiB originals SHA2565FFE668D7062A648874CE9DF654495E36F2A4F5CA49385BA25FC56BC4B2F848B; factory_backups/tlsr8359/HSEL4Q_01_54M_31/20261013T130733Z-72027be3. Bounded experimental Full only; not physical capacity qualification.",
+      "firstFlash": {
+        "format": "bounded-flash-window-bin",
+        "startAddress": 0,
+        "imageSizeBytes": 524288,
+        "selectorAddress": 520448,
+        "selectorId": 5,
+        "flashJedecId": "EB6013",
+        "experimental": true,
+        "uartSws": {
+          "writeBaud": 460800,
+          "readBaud": 460800,
+          "activationMs": 30000,
+          "clockMHz": 0
+        }
+      },
+      "supplyMeasurement": {
+        "source": "Exact selected stock PB0:1C3E4/18084 ->32C68 ->32B58 drive-high VDD ADC",
+        "thresholdsQualified": false
+      },
+      "panelWiring": {
+        "mosi": "PB6",
+        "sclk": "PD7",
+        "cs": "PD2",
+        "dc": "PB7",
+        "reset": "PD4",
+        "busy": "PA1 active low",
+        "powerEnable": "PB5 active low",
+        "evidence": "Exact stock busflag1 ->3A360 ->11000 SPI callbacks ->33BCC(group1); reset/BUSY branch3A4F8. Physical continuity/rails still pending."
+      },
+      "led": {
+        "red": "PB4",
+        "green": "PD3",
+        "blue": "PA7",
+        "activeLow": true,
+        "blueSharesSws": true,
+        "qualification": "Stock busflag1 selected2647C/24B4C/24B78/24C0C; optical test pending"
+      },
+      "nfc": {
+        "sda": "PC0",
+        "scl": "PC1",
+        "select": "PC6",
+        "irq": "PC4",
+        "i2cAddress": "0x57",
+        "qualification": "Stock323DC ->33A70(group2),23554/23DEE and31808 header detector; runtime exact header required; tap/write pending"
+      },
+      "button": {
+        "present": false,
+        "qualification": "No positive exact-board input evidence"
+      },
+      "buildQualified": true,
+      "hardwareQualified": false,
+      "experimental": true,
+      "notes": "Selector5 experimental software pilot; one common App/OTA. Stock-confirmed PB0 ADC/RGB/NFC reuse maintained backends, with invalid/low-voltage refusal intact. Separate stock recipe preserves conditional92 trim read/BTST,41/40 temperature and AUTO17/A5. Full requires a package declaring peripheral backend5 and exact original preservation, including STF1 shadow for stock Factory markers. Actual Full/ADC/LED/NFC/pixels/orientation/temperature/electrical/current/OTA validation remains open; release excluded."
+    },
+    "hs_hsel3_266q": {
+      "label": "Hanshow PolarisPro-260Q-N / HSEL3_02_66M_36",
+      "mcuFamily": "Telink TLSR82xx",
+      "mcu": "HS9118-marked package; TLSR8359-compatible, exact die unconfirmed",
+      "port": "telink/tlsr8359",
+      "artifact": "InkTag-hs_hsel3_266q",
+      "applicationArtifact": "InkTag-tlsr8359_hanshow",
+      "lfclkSource": "unknown",
+      "lfclkQualification": "No exact-board physical clock evidence",
+      "defaultScreenProfile": "HSEL3_02_66M_36_BWRY",
+      "panel": "152x296 BWRY stock selector18/profile1; JD-compatible, exact COG unknown",
+      "panelReplaceable": false,
+      "physicalFlashSizeBytes": null,
+      "verifiedFlashWindowSizeBytes": 524288,
+      "flashRequirement": "Matched independent512-KiB originals SHA2562563E1CCBF88C09BB0732A9523BD66F9BA783CBF57CCCF3B3625CB9ADF58DD71; factory_backups/hs9118/HSEL3_02_66M_36/20261013T235502463Z-3a9a135b. This does not qualify InkTag Full or physical capacity.",
+      "firstFlash": {
+        "format": "bounded-flash-window-bin",
+        "startAddress": 0,
+        "imageSizeBytes": 524288,
+        "selectorAddress": 520448,
+        "selectorId": 6,
+        "flashJedecId": "EB6013",
+        "uartSws": {
+          "writeBaud": 460800,
+          "readBaud": 921600,
+          "activationMs": 30000,
+          "clockMHz": 0
+        }
+      },
+      "panelWiring": {
+        "mosi": "PB6",
+        "sclk": "PD7",
+        "cs": "PD2",
+        "dc": "PB7",
+        "reset": "PD4",
+        "busy": "PA1 active low",
+        "powerEnable": "PB5 active low",
+        "evidence": "Exact stock busflag1 ->3A4B0/3A6F4 ->11000 callbacks ->31A34(group1). Physical continuity/rails still pending."
+      },
+      "led": {
+        "red": "PB4",
+        "green": "PD3",
+        "blue": "PA7",
+        "activeLow": true
+      },
+      "nfc": true,
+      "supplyMeasurement": {
+        "source": "PB0 selected stock1BB78/309EC/308D8/3086C drive-high VDD",
+        "thresholdsQualified": false
+      },
+      "button": {
+        "present": false,
+        "qualification": "No positive exact-board input evidence"
+      },
+      "buildQualified": true,
+      "hardwareQualified": false,
+      "experimental": true,
+      "notes": "Selector6 current-v1 software candidate: exact PB0 VDD/RGB and lower512KiB mapped, existing distinct recipe3 retained. Positive native55 contact presence and exact A4/03 EEPROM-ready initialization are adapted; new-byte contact/phone/RF qualification remains open. Same shared App/Recovery and uniform Suspend/Deep policy; pixels/orientation/temperature/current and release qualification remain separate. See docs/research/tlsr-pending-boards-20261023.md; release-excluded."
+    },
+    "hs_hsel5101_200bwr": {
+      "label": "Hanshow HS_EL5101_5M_60_04 (200x200 BWR, product unconfirmed)",
+      "mcuFamily": "Telink TLSR82xx",
+      "mcu": "TLSR8359-compatible; exact package identification pending",
+      "port": "telink/tlsr8359",
+      "artifact": "InkTag-hs_hsel5101_200bwr",
+      "applicationArtifact": "InkTag-tlsr8359_hanshow",
+      "lfclkSource": "unknown",
+      "lfclkQualification": "No exact-board physical clock or accuracy qualification; candidate uses the existing TLSR8359 clock backend.",
+      "defaultScreenProfile": "SSD1681_P154030_BWR",
+      "panel": "P154030 / FPC P154030-MF1-A, glass P154030-0306; 200x200 BWR, SSD1681-compatible, exact die unknown",
+      "panelReplaceable": true,
+      "panelQualification": "EPD Lab exact panel card/white optical evidence at about20.2s on ESP32-S3; this is not TLSR PCB GPIO/ADC/Full qualification.",
+      "physicalFlashSizeBytes": null,
+      "verifiedFlashWindowSizeBytes": 524288,
+      "flashRequirement": "Matched independent originals SHA256 FAD626AB07DBB19A0AB844F284DE699E6AD55F467FB48EA815AB9A9B13CECCC6; factory_backups/tlsr8359/HS_EL5101_5M_60_04/20261014T015753542Z-fc05943e. Stock JEDEC856013; Full is bounded to the verified lower512KiB. New-package hardware and total physical capacity qualification remain separate.",
+      "firstFlash": {
+        "format": "bounded-flash-window-bin",
+        "startAddress": 0,
+        "imageSizeBytes": 524288,
+        "selectorAddress": 520448,
+        "selectorId": 7,
+        "flashJedecId": "856013",
+        "uartSws": {
+          "writeBaud": 576000,
+          "readBaud": 921600,
+          "activationMs": 30000,
+          "clockMHz": 0
+        }
+      },
+      "panelWiring": {
+        "mosi": "PB6",
+        "sclk": "PB5",
+        "cs": "PB4",
+        "dc": "PD7",
+        "reset": "PD4",
+        "busy": "PA1 active high",
+        "powerEnable": "PB7 active low",
+        "evidence": "Exact selected stock module3D000: bus3D000/11C/144, BUSY3D16C, rail3D8BC/8EC, reset3D930. Physical continuity pending."
+      },
+      "led": {
+        "red": "PD2",
+        "green": "PD3",
+        "blue": "PA7",
+        "activeLow": true
+      },
+      "nfc": true,
+      "supplyMeasurement": {
+        "source": "PB0 stock drive-high VDD path225F8/224F0/224B4; existing calibrated sampler",
+        "thresholdsQualified": false
+      },
+      "buildQualified": true,
+      "hardwareQualified": false,
+      "experimental": true,
+      "notes": "Selector7 current-v1 projection reuses stock-confirmed PB0, low-active RGB and PC0/PC1/PC6/PC4 contact backend. Historical A3FF Full/ADC/NFC/record/LOW32K software evidence is not new-byte hardware qualification. Default screen200x200 BWR recipe1, clockwise90+mirrorX. Current build, pending optical/RF/calibrated-current and new App/Recovery gates: docs/research/tlsr-p154-v1-closeout-20261023.md. Common product semantics and uniform Suspend/Deep policy; release excluded."
+    },
+    "hs_stellarpro154q": {
+      "label": "Hanshow StellarPro-154Q-N / HSEL5Q_01_54M_00",
+      "mcuFamily": "Telink TLSR82xx",
+      "mcu": "TLSR8359-compatible bench target; HS9118 marking is not a universal die identity",
+      "port": "telink/tlsr8359",
+      "artifact": "InkTag-hs_stellarpro154q",
+      "applicationArtifact": "InkTag-tlsr8359_hanshow",
+      "lfclkSource": "unknown",
+      "lfclkQualification": "No exact-board physical clock or accuracy qualification; candidate uses the existing TLSR8359 clock backend.",
+      "defaultScreenProfile": null,
+      "panel": "Stock profile8,200x200 BWRY; initially disabled for owner-authorized BLE/OTA bring-up",
+      "panelReplaceable": true,
+      "physicalFlashSizeBytes": null,
+      "verifiedFlashWindowSizeBytes": 524288,
+      "firstFlash": {
+        "format": "bounded-flash-window-bin",
+        "startAddress": 0,
+        "imageSizeBytes": 524288,
+        "selectorAddress": 520448,
+        "selectorId": 9,
+        "flashJedecId": "EB6013",
+        "uartSws": {
+          "writeBaud": 460800,
+          "readBaud": 460800,
+          "activationMs": 30000,
+          "clockMHz": 0
+        }
+      },
+      "supplyMeasurement": {
+        "source": "PB0 stock drive-high VDD ADC path19890/1B1BC→2D234→2D120→2D0B4",
+        "thresholdsQualified": false
+      },
+      "led": null,
+      "nfc": null,
+      "experimental": true,
+      "buildQualified": false,
+      "hardwareQualified": false,
+      "notes": "See docs/research/tlsr-stellarpro154q-hardware.md. Complete independent stock SHA B30853E383EE5FB0AC08E1F74224CC40345B2585349FB055B1A14CAAC90B3F38. No panel/LED/NFC qualification is inherited. No-panel Full is a bench candidate, not release approval."
+    },
+    "hs_hsel5154m02": {
+      "label": "Hanshow StellarPro-154R-N / HSEL5_01_54M_02 / YW2116",
+      "mcuFamily": "Telink TLSR82xx",
+      "mcu": "HS9118-marked package; TLSR8359-compatible, exact die unconfirmed",
+      "port": "telink/tlsr8359",
+      "artifact": "InkTag-hs_hsel5154m02",
+      "applicationArtifact": "InkTag-tlsr8359_hanshow",
+      "lfclkSource": "unknown",
+      "lfclkQualification": "No exact-board physical clock evidence; shared uniform Suspend/Deep backend",
+      "defaultScreenProfile": "HSEL5_01_54M_02_BWR",
+      "panel": "200x200 BWR native OTP SSD-family; exact COG unknown",
+      "panelReplaceable": false,
+      "physicalFlashSizeBytes": null,
+      "verifiedFlashWindowSizeBytes": 524288,
+      "flashRequirement": "Matched independent512KiB originals SHA256657390FC222759770B82FC670DAE1BD49CB594865B84E4D8586245CAA33F6168; factory_backups/tlsr8359/HSEL5_01_54M_02/20261014T041053142Z-1c2be6fc. Fresh exact UID/Factory and complete verification required; not physical-capacity or release qualification.",
+      "firstFlash": {
+        "format": "bounded-flash-window-bin",
+        "startAddress": 0,
+        "imageSizeBytes": 524288,
+        "selectorAddress": 520448,
+        "selectorId": 10,
+        "flashJedecId": "856013",
+        "uartSws": {
+          "writeBaud": 460800,
+          "readBaud": 460800,
+          "activationMs": 30000,
+          "clockMHz": 29
+        }
+      },
+      "panelWiring": {
+        "mosi": "PB6",
+        "sclk": "PB5",
+        "cs": "PB4",
+        "dc": "PD7",
+        "reset": "PD4",
+        "busy": "PA1 active high",
+        "powerEnable": "PB7 active low",
+        "evidence": "Exact stock module3D000, BUSY3D9DC/3D238 loops nonzero, rail3D32C/35C, H/L/H reset3D3A0, signal park3D528 code3/10k-up. Physical qualification pending."
+      },
+      "led": {
+        "red": "PD2",
+        "green": "PD3",
+        "blue": "PA7",
+        "activeLow": true
+      },
+      "nfc": true,
+      "supplyMeasurement": {
+        "source": "Exact stock194A0->26454/264C4->263DA->26310 PB0 drive-high VDD",
+        "thresholdsQualified": false
+      },
+      "buildQualified": true,
+      "hardwareQualified": false,
+      "experimental": true,
+      "notes": "Selector10 software pilot; distinct SSD1XXX recipe2, full200x200 BWR/transform5. Native A4/03 NFC base initializer requires positive NC55 format proof and omits HSEL3 FFE6=55. No physical/RF/optical/current/release qualification inferred. Same shared App/Recovery, uniform sleep, no fitted AUX inferred."
+    },
+    "hs_stellar154": {
+      "label": "Hanshow StellarPro-154R-N / HSEL5_01_54M_00",
+      "mcuFamily": "Telink TLSR82xx",
+      "mcu": "HS9118-marked package; TLSR8359-compatible, exact die unconfirmed",
+      "port": "telink/tlsr8359",
+      "artifact": "InkTag-hs_stellar154",
+      "applicationArtifact": "InkTag-tlsr8359_hanshow",
+      "lfclkSource": "unknown",
+      "lfclkQualification": "No exact-board physical clock or accuracy qualification; candidate uses the existing TLSR8359 clock backend.",
+      "defaultScreenProfile": "STELLAR_154_JD79653A_BWR",
+      "panel": "FPC-5301 / DEPG0154RWF653CF; JD79653A CHIP_REV0; 200x200 BWR",
+      "panelReplaceable": true,
+      "physicalFlashSizeBytes": null,
+      "verifiedFlashWindowSizeBytes": 524288,
+      "flashRequirement": "Matched independent original SHA37AD2F79B7F92ACB6FB902CCAE22081FA7443CBB156D4D49BA5D414030BEFFB3, JEDEC856013. Read window is not physical/Full qualification.",
+      "firstFlash": {
+        "format": "bounded-flash-window-bin",
+        "startAddress": 0,
+        "imageSizeBytes": 524288,
+        "selectorAddress": 520448,
+        "selectorId": 8,
+        "flashJedecId": "856013",
+        "uartSws": {
+          "writeBaud": 460800,
+          "readBaud": 460800,
+          "activationMs": 30000,
+          "clockMHz": 0
+        }
+      },
+      "supplyMeasurement": {
+        "source": "Exact stock2081C->190C4->24A04->248FC GPIO0101/PB0 drive-high VDD;43D2 donor-PB0 CLI3264..3265mV valid",
+        "thresholdsQualified": false
+      },
+      "panelWiring": {
+        "mosi": "PB6",
+        "sclk": "PB5",
+        "cs": "PB4",
+        "dc": "PD7",
+        "reset": "PD4",
+        "busy": "PA1 active low",
+        "powerEnable": "PB7 active low",
+        "evidence": "Exact original module3D870/990/9C4 software SPI;3D9F8 BUSY;3D32C/35C rail;3D3A0 reset.43D2 CLI GPIO correction and human-observed screen pass; transform5. Stock3D528 parks six signals10k-up; rail3D35C10k-up."
+      },
+      "led": "rgb",
+      "nfc": "hardware",
+      "buildQualified": true,
+      "hardwareQualified": false,
+      "experimental": true,
+      "notes": "Selector8 owner-authorized exact43D2 Full pilot; fresh UID/MAC/Factory and default complete readback required. Original stock and donor-selector CLI evidence support PB0/GPIO/RGB/NFC routes, not release/power/threshold/Recovery qualification. Native OTP flow; no new LUT/voltage/PLL/partial claim. No upper extent; unmatched or old screen-only base refused."
+    },
+    "hs_nebular420": {
+      "label": "Hanshow Nebular-420R-N",
+      "mcuFamily": "Telink TLSR82xx",
+      "mcu": "HS9118 package; user identifies TLSR8359, official die/package mapping remains pending",
+      "port": "telink/tlsr8359",
+      "artifact": "InkTag-hs_nebular420",
+      "applicationArtifact": "InkTag-tlsr8359_hanshow",
+      "lfclkSource": "internal-rc",
+      "lfclkQualification": "No low-frequency crystal fitted on the exact inspected board; no add-on footprint capability is claimed",
+      "supplyMeasurement": {
+        "source": "MCU VDD sampled through otherwise-unused PB1 with the B85 GPIO/VBAT 1/8-scale method; PB1 is restored high-impedance after every sample",
+        "validRangeMv": [
+          1800,
+          3600
+        ],
+        "warningMv": 2400,
+        "criticalMv": 2000,
+        "displayMinMv": 0,
+        "flashMinMv": 2400,
+        "otaMinMv": 2600,
+        "thresholdsQualified": false
+      },
+      "defaultScreenProfile": "HANSHOW_NEBULAR_420_BWRY",
+      "panel": "AN0420A300-400BJ668-L04, 4.2-inch logical 400x300; JD79668AA packed-2bpp controller and the original panel physically produce black, white, red and yellow (the marketed 420R stock artwork uses BWR only)",
+      "panelReplaceable": false,
+      "physicalFlashSizeBytes": 1048576,
+      "verifiedFlashWindowSizeBytes": 524288,
+      "flashRequirement": "Two matching original 0x000000-0x07FFFF reads with programmed data in both 256-KiB halves of that preserved lower window; baseline SHA-256 86271B4DA80A1C30E9D3B6E82ADEEF081BF0CD18580D74CAE9C8BABAA2DC3DB3. Actual-board read-only MSPI identification repeatedly returned JEDEC EB6014 and status 0x002C, matching the TH25Q-80UA 8-Mbit/1-MiB vendor definition. Preserved physical-upper-half samples (0x080000-0x087FFF, 0x0F0000-0x0FFFFF and a later 180,224-byte run from 0x080000) are erased 0xFF; the user confirmed the factory upper half contains no required data and no further original upper-half backup is required. The first-flash artifact remains deliberately bounded to the preserved lower 512 KiB stock window; only the qualified runtime record backend owns the upper half.",
+      "firstFlash": {
+        "format": "bounded-flash-window-bin",
+        "startAddress": 0,
+        "imageSizeBytes": 524288,
+        "selectorAddress": 520448,
+        "selectorId": 2,
+        "flashJedecId": "EB6014",
+        "uartSws": {
+          "writeBaud": 460800,
+          "readBaud": 460800,
+          "activationMs": 60000,
+          "clockMHz": 24
+        },
+        "experimental": true,
+        "preserveRanges": [
+          "0x0007F000-0x0007FFFF"
+        ]
+      },
+      "ota": {
+        "transport": "Telink Recovery v2 large indexed packets over BLE",
+        "layout": "single-with-ble-recovery-v5-experimental",
+        "applicationStart": "0x00000000",
+        "applicationRegionBytes": 229376,
+        "applicationLimitBytes": 229376,
+        "recoveryStart": "0x00040000",
+        "recoveryLimitBytes": 65536,
+        "recoveryState": "0x00050000-0x00051FFF",
+        "qualification": "official B85 0x40000 secondary-boot support plus source/build/host validation; full layout migration, normal update, 10/50/95% interruption retransmission and unconfirmed-trial reset require exact-board testing"
+      },
+      "imageStore": {
+        "extents": [
+          {
+            "start": "0x00054000",
+            "sizeBytes": 176128
+          },
+          {
+            "start": "0x00080000",
+            "sizeBytes": 524288
+          }
+        ],
+        "sizeBytes": 700416,
+        "recordPolicy": "Layout v5: 43 contiguous base sectors; only exact 1-MiB Nebular-420R adds 128 high sectors. Records never cross the immutable 0x7F000 factory page. Guarded Full migration preserves current Settings, relocates ITFA and repacks referenced images; ordinary OTA is v5-only. No separate Find/keyring region."
+      },
+      "panelWiring": {
+        "mosi": "PB6",
+        "sclk": "PD7",
+        "cs": "PD2",
+        "dc": "PB7",
+        "reset": "PD4",
+        "busy": "PA1/BUSY_N, active low",
+        "powerEnable": "PB5, active low; released with 10 kOhm pull-up while parked",
+        "activeState": "profile-7 TLSR hardware-SPI group B6/B7/D2/D7 plus PA1 BUSY_N and PD4 RESET",
+        "parkedState": "six panel signal drivers disabled with 100 kOhm pull-downs; PB5 rail control released with 10 kOhm pull-up",
+        "resetSequence": "normal JD79668 initialization: high 200 ms, low 200 ms, high 200 ms; shorter 10 ms phases are reserved for timeout recovery",
+        "bus": "TLSR hardware SPI mode 0 at 3 MHz, bidirectional shared-data mode on PB6",
+        "evidence": "Recovered from the preserved Hanshow profile-7 display vtable and JD79668 overlay. PC5 is a stock input/wakeup and must not be driven; PB5 rail-control net identity remains subject to physical continuity/refresh confirmation"
+      },
+      "panelRecipe": {
+        "controller": "JD79668/JD79668AA high confidence; exact COG die unconfirmed",
+        "logicalResolution": "400x300",
+        "controllerResolution": "400x300",
+        "visibleResolution": "400x300 PTL",
+        "color": "BWRY controller/panel path; marketed 420R stock content is BWR",
+        "transfer": "30,000-byte packed 2-bpp DTM1; black=00, white=01, yellow=10, red=11",
+        "addressing": "logical GUI mirrored on Y to match the recovered bottom-to-top stock record",
+        "waveform": "controller MTP/OTP profile with explicit PON, DRF 12 00 and POF 02 00; no host LUT",
+        "busyPolarity": "active low BUSY_N"
+      },
+      "displayTransform": "Default logical frame mirrors Y so the top-to-bottom GUI stream matches the recovered bottom-to-top upright stock record; exact mounting orientation remains an actual-panel gate",
+      "nfc": true,
+      "nfcController": "FM11NC08-compatible at 7-bit I2C address 0x57; PC0=SDA, PC1=SCL, PC6=select/enable, PC4=active-low IRQ/wake. Contact presence is qualified. The PC4 field-action and E103/E104 Type-4 NDEF paths are explicit experimental candidates on this exact board. They reuse the Nowa-recovered 03/0F/1F interrupt masks and 03B5=A0 cold-init write because the fitted controller, address and wiring match, but remain production-unqualified until Nebular phone read/write, rearm, persistence, retention and power tests pass.",
+      "find": {
+        "mode": "keyring-rotation",
+        "experimentalAvailable": true,
+        "defaultEnabled": false,
+        "productionQualified": false,
+        "physicalGates": "repeated Apple-report rate, uploader attribution limits, long-run current and battery life; one exact-board derived-address RF and report/decryption cycle has passed"
+      },
+      "led": "Active-low RGB status output: red=PB4, green=PD3, blue=PA7/SWS. On 2026-10-11 the user confirmed most 420R boards have the red/green series resistors fitted; only the first bench unit has open paths. Use the normal RGB mask for this board selector: unfitted channels simply remain dark, with no blue substitution, resistor bridging or device-ID variant. Blue-off restores SWS. The common all/critical/off policies remain Free and Pro alike. Updated-candidate RGB optics/current/long-soak qualification remains pending; preserve the first unit's historical blue-only evidence.",
+      "button": {
+        "present": false
+      },
+      "factoryUart": {
+        "status": "not-initialized-by-selected-stock-path",
+        "baudRate": null,
+        "tx": "external TX-labelled contact exists; MCU GPIO route unmapped",
+        "rx": "external RX-labelled contact exists; MCU GPIO route unmapped",
+        "evidence": "A corrected whole-image call-graph audit shows that startup passes 0x000249F0 as a data pointer to physical 0x01E914, not as a baud rate. Generic UART divider and TX/RX pinmux helpers exist at physical 0x011914/0x02FB6C and 0x02FB30, but neither has a direct caller or stored function pointer in the preserved image, so the selected path does not identify package pins or PCB contacts."
+      },
+      "auxIo": {
+        "supported": false,
+        "defaultEnabled": false,
+        "buttonGpio": 255,
+        "buzzerGpio": 255,
+        "candidatePolicy": "Reuse a physically identified normal UART RX contact for an active-low wake button and a PWM-capable normal UART TX contact for a passive piezo only after exact contact-to-MCU continuity is proven.",
+        "reason": "The board exposes TX/RX-labelled contacts, but the CH340 programmer uses PA7/SWS and neither contact has been mapped to an MCU GPIO. B85 pinmux alternatives are not board wiring evidence. PB1 is also used for bounded supply sampling, PD3 is the green LED, PD7/PB7 are panel signals and PC5 is an unknown stock wake input."
+      },
+      "buildQualified": true,
+      "hardwareQualified": false,
+      "experimental": true,
+      "notes": "Shares one byte-identical application and OTA payload with Nowa-154R-N. Full clear, packed-frame polarity, orientation, the qualified high-extent image-store pressure matrix and normal/interrupted BLE OTA pass on the current board; sleep current and long-run power remain physical release gates. Contact presence is qualified; phone wake/action and Type-4 read/write are enabled only as an exact-board experiment and remain unqualified until the recorded phone matrix passes."
+    },
+    "gr5331_zkc21v": {
+      "label": "ZKC21V",
+      "mcuFamily": "Goodix GR533x",
+      "mcu": "GR5331",
+      "port": "goodix/gr5331",
+      "artifact": "InkTag-gr5331_zkc21v",
+      "lfclkSource": "internal-rc",
+      "lfclkQualification": "Exact v1.1 PCB has an unpopulated low-frequency-crystal footprint; default remains internal RC and a populated modification requires separate qualification",
+      "defaultScreenProfile": "ZKC21V_213_BWR",
+      "panelReplaceable": false,
+      "nfc": false,
+      "nfcCodePackaged": true,
+      "unpopulatedNfcFootprint": "Observed on the exact ZKC21V v1.1 no-NFC assembly. Its controller nets are not mapped or released for GPIO reuse.",
+      "factoryPads": "Accessible without shell removal: RST | TX | SWDIO | SWCLK | CLKTRIM | GND. An additional RX-labelled PCB contact is visible only after shell removal. CLKTRIM is a production 32 MHz crystal calibration contact, exact GPIO unresolved",
+      "factoryUart": {
+        "instance": "UART0",
+        "baudRate": 115200,
+        "tx": "AON_GPIO6 / QFN48 pin 38; high-confidence match for the exposed TX contact, but shared with the panel power-enable net",
+        "rx": "AON_GPIO7 / QFN48 pin 39; matches the RX-labelled PCB contact that is visible only after shell removal and is not part of the exterior six-contact row",
+        "evidence": "The preserved factory Boot and application independently construct the same UART0 pinmux (TX mux 7, RX mux 8); the factory app_io dispatch identifies old-SDK IO type 4 as AON"
+      },
+      "auxIo": {
+        "supported": false,
+        "defaultEnabled": false,
+        "reason": "TX/AON_GPIO6 conflicts with the qualified panel power enable. The internal RX/AON_GPIO7 contact is a wake-button candidate, but requires shell removal and its continuity, boot-held-low and recovery behavior are not yet qualified. CLKTRIM, reset and SWD remain reserved."
+      },
+      "experimentalBuzzer": {
+        "status": "proposed-unqualified",
+        "defaultEnabled": false,
+        "pin": "AON_GPIO6 / exterior TX / panel power enable",
+        "mode": "screen-exclusive bounded passive-piezo PWM after panel deep sleep",
+        "requiredSequence": "finish or reject active display work; send SSD1680 deep sleep; hold panel reset low and release the SPI/control pins; run bounded PWM; stop low and allow the panel rail to discharge; cold-reset and fully initialize the controller before the next display operation",
+        "physicalGates": "prove VGH/VGL/VCOM remain off during sound, no visible pixel change or ghosting, no SPI back-power, acceptable battery droop, no BLE reset, and a successful maintenance refresh afterwards"
+      },
+      "ota": {
+        "layout": "single-with-ble-recovery-v3",
+        "application": "0x00220000",
+        "slotSizeBytes": 233472,
+        "recoveryState": [
+          "0x0027C000",
+          "0x0027D000"
+        ]
+      },
+      "otaPilot": {
+        "layout": "single-with-ble-recovery-v4",
+        "status": "unqualified",
+        "release": false,
+        "migration": "guarded Full only; ordinary OTA requires the exact installed GL40 marker and inverse",
+        "application": "0x00220000",
+        "slotSizeBytes": 262144,
+        "payloadLimitBytes": 261240,
+        "layoutMarker": "0x30344C47",
+        "userFontStart": "0x00260000",
+        "userFontSizeBytes": 32768,
+        "recoveryState": [
+          "0x00268000",
+          "0x00269000"
+        ],
+        "imageStoreStart": "0x0026A000",
+        "imageStoreMaxSizeBytes": 81920
+      },
+      "imageStore": {
+        "start": "0x0026A000",
+        "sizeBytes": 81920,
+        "recordPolicy": "release-v1 logical and physical main-Flash extent; fixed slots keyed by the exact screen profile, capacity depends on frame stride; registry geometry is not current exact-board qualification"
+      },
+      "findKeyringStore": "none; P-224 Find uses one protected 16-byte seed in NVDS protected Settings record 31 and derives time-slot public keys without storing a public-key ring",
+      "panelWiring": {
+        "mosi": "GPIO08",
+        "sclk": "GPIO09",
+        "cs": "GPIO0A",
+        "dc": "GPIO0B",
+        "reset": "GPIO0C",
+        "busy": "GPIO0D",
+        "powerEnable": "AON GPIO06"
+      },
+      "displayTransform": "Factory ZKC21V recipe uses transform 9. The current-only application does not reinterpret unpublished transform-5 records; install Full or clear the old development settings before testing this baseline.",
+      "led": "RGB, MSIO0/1/2 (encoded 0x80/0x81/0x82), active low",
+      "notes": "The factory panel is EPD_213_BWR_SSD1680 and is soldered to the PCB; replacement is not treated as a normal field operation. Runtime screen records describe controller and geometry but do not imply that the panel is mechanically replaceable. The common GR5331 artifact packages the NFC command/configuration layer for reported NFC-equipped ZKC21V variants, but the known v1.1 board remains NFC-disabled and no candidate pin is touched until an exact variant is qualified."
+    },
+    "gr551x_zkc42vm": {
+      "label": "ZKC42VM",
+      "mcuFamily": "Goodix GR551x",
+      "mcu": "GR5513BENDU or GR5515I0ND; detected before first flash",
+      "flashRequirement": "GR5513 uses a 512 KiB first-flash container; GR5515I0ND uses 1 MiB. Both share one application and OTA artifact",
+      "port": "goodix/gr551x",
+      "artifact": "InkTag-gr551x_zkc42v",
+      "applicationTarget": "gr551x_zkc42v",
+      "lfclkSource": "internal-rc",
+      "lfclkQualification": "Both inspected GR5515 no-revision and GR5513 v1.2 ZKC42VM PCBs leave the low-frequency-crystal footprint unpopulated; each modification requires separate qualification",
+      "defaultScreenProfile": "ZKC42VM_420_BWR",
+      "nfc": false,
+      "panelReplaceable": true,
+      "optionalScreenProfiles": [
+        {
+          "profile": "LENMORY_H364F067_E6",
+          "panel": "H364F067-2601A",
+          "controller": "JD79665CA",
+          "geometry": "760x568 controller canvas; reported 568x758 visible glass with two Source padding pixels still to be frozen",
+          "power": "PCB_3.64A is passive, while the ESL main board provides the complete display boost circuit; exact GDR/RESE/PREVGH/PREVGL rail and BUSY timing still require measurement on the selected board",
+          "status": "recipe integrated and host-tested; GR551x optical/electrical qualification pending",
+          "refresh": "two full packed-2bpp frames, Area0 then no-reset Area6; no partial/fast-refresh claim"
+        }
+      ],
+      "ota": {
+        "layout": "single-with-ble-recovery-v5",
+        "application": "0x01020000",
+        "slotSizeBytes": 258048,
+        "recoveryState": [
+          "0x010FA000",
+          "0x010FB000"
+        ],
+        "qualification": "unqualified-full-layout-pilot; v3/v4 migration is exact-chip Full-only"
+      },
+      "otaPilot": {
+        "layout": "single-with-ble-recovery-v6",
+        "status": "unqualified",
+        "release": false,
+        "migration": "guarded Full only; ordinary OTA requires the exact installed GRL6 marker and inverse",
+        "application": "0x01020000",
+        "slotSizeBytes": 335872,
+        "payloadLimitBytes": 334968,
+        "layoutMarker": "0x364C5247",
+        "userFontStart": "0x01072000",
+        "userFontSizeBytes": 32768,
+        "recoveryState": [
+          "0x0107A000",
+          "0x0107B000"
+        ],
+        "imageStoreStart": "0x0107C000",
+        "imageStoreMaxSizeBytes": 524288,
+        "gr5513ImageBackend": "qualified TD40 only; no package-Flash fallback"
+      },
+      "imageStore": {
+        "start": "0x0107C000",
+        "sizeBytes": 524288,
+        "recordPolicy": "variable-size records keyed by screen model and resolution",
+        "runtimeCapacityGate": "release-v1 logical extent: GR5515 maps the full 512 KiB to main Flash; qualified GR5513 maps the full extent to TD40 physical offsets 0x00000-0x7FFFF only after exact fitted-NOR detection. No package-Flash fallback or mixed extent; registry maximum is not capacity or exact-board qualification. GR5513 Full explicit-all remains refused until external clear-all is qualified",
+        "gr5513AuxiliaryFlash": {
+          "jedecId": "EB6013",
+          "capacityBytes": 524288,
+          "sclk": "GPIO25",
+          "mosi": "GPIO16",
+          "miso": "AON_GPIO0",
+          "cs": "AON_GPIO2"
+        }
+      },
+      "findKeyringStore": "none; P-224 Find uses one protected 16-byte seed in NVDS protected Settings record 31 and derives time-slot public keys without storing a public-key ring",
+      "panelWiring": {
+        "mosi": "GPIO04",
+        "sclk": "GPIO10",
+        "cs": "GPIO19",
+        "dc": "GPIO05",
+        "reset": "GPIO07",
+        "busy": "GPIO06",
+        "powerEnable": "GPIO18"
+      },
+      "factoryVariants": {
+        "gr5513": "package IDs 5/7, 512 KiB; HINK-E042A13-FPC-A0 / HE042A55; vendor application recovers MOSI P4, SCLK P3, CS P2, DC P5, RST P7, BUSY P6 and EN P24; SSD1683-compatible clear and native device-information page are physically qualified",
+        "gr5515": "package ID 4, 1 MiB; SSD1683 wiring above is hardware-qualified"
+      },
+      "auxIo": {
+        "defaultEnabled": false,
+        "button": "GPIO26 / RXD on GR5513; GPIO26 / IO is a factory-code-supported pad inference on GR5515; active-low with pull-up; deep-sleep wake not yet qualified",
+        "buzzer": "GPIO30 / TXD or UTX; passive single-ended PWM; default 2000 Hz",
+        "rejectedPins": "CRC, SWCLK, SWDIO, RST and hidden power contacts remain reserved"
+      },
+      "unpopulatedNfcFootprint": "Observed on no-NFC ZKC42VM assemblies. Candidate controller nets remain unmapped and reserved for possible future expansion work.",
+      "led": null,
+      "notes": "ZKC42VM is the simplified ZKC42V product variant: it omits NFC and the RGB status LED. One lowest-common-denominator GR551x application/OTA, published under the aggregate gr551x_zkc42v target, serves the confirmed GR5513 and GR5515 ZKC42VM PCBs plus the GR5513 ZKC42V PCB. Full images remain exact-board/chip-qualified and the flasher refuses an unknown package. Known ZKC42VM revisions use SSD1683-compatible panels; the top-level EPD wiring applies to GR5515, while the GR5513 wiring is selected at runtime from its package ID. The GR5513 v1.2 TD40 is a separate data Flash and does not enlarge executable XIP space."
+    },
+    "gr551x_zkc42v": {
+      "label": "ZKC42V-N v1.2",
+      "mcuFamily": "Goodix GR551x",
+      "mcu": "GR5513BEND package ID 5; confirmed over read-only SWD",
+      "flashRequirement": "512 KiB package Flash; the fitted TD40 is reported to match the qualified ZKC42VM GR5513 data Flash but still requires this board's JEDEC/SFDP and record I/O regression",
+      "port": "goodix/gr551x",
+      "artifact": "InkTag-gr551x_zkc42v",
+      "applicationTarget": "gr551x_zkc42v",
+      "lfclkSource": "internal-rc",
+      "lfclkQualification": "The currently inspected ZKC42V leaves its low-frequency-crystal footprint unpopulated; exact PCB revision and any populated modification remain separate gates",
+      "applicationArtifact": "InkTag-gr551x_zkc42v",
+      "defaultScreenProfile": "ZKC42V_420_BWR",
+      "panel": "HE042AD7A2, 4.2-inch 400x300 BWR; factory type 0x6E uses a UC8176/UC8xxx-compatible DTM1/DTM2 and PON/DRF/POF command path",
+      "panelReplaceable": true,
+      "buildQualified": true,
+      "hardwareQualified": false,
+      "nfc": true,
+      "nfcController": "Fitted GT / N692 / 226; preserved factory application names a GT23NT081D driver. InkTag read-only probing has physically confirmed 7-bit I2C address 0x55, GPIO0/GPIO1 I2C, GPIO10 active-high enable and an 8-byte UID. The experimental exact-board path samples active-low AON GPIO3 through the 180/200/1500 ms field-session gate and can dispatch a configurable tap action. A test candidate additionally reads Type-2 NDEF Text after RF quiet and consumes a bounded replay-safe IKNC1 command; phone RF write/read and command execution remain unqualified, and wake plus MCU-side NDEF write stay disabled.",
+      "ota": {
+        "layout": "single-with-ble-recovery-v5",
+        "application": "0x01020000",
+        "slotSizeBytes": 258048,
+        "recoveryState": [
+          "0x010FA000",
+          "0x010FB000"
+        ],
+        "qualification": "unqualified-full-layout-pilot; v3/v4 migration is exact-chip Full-only"
+      },
+      "otaPilot": {
+        "layout": "single-with-ble-recovery-v6",
+        "status": "unqualified",
+        "release": false,
+        "migration": "guarded Full only; ordinary OTA requires the exact installed GRL6 marker and inverse",
+        "application": "0x01020000",
+        "slotSizeBytes": 335872,
+        "payloadLimitBytes": 334968,
+        "layoutMarker": "0x364C5247",
+        "userFontStart": "0x01072000",
+        "userFontSizeBytes": 32768,
+        "recoveryState": [
+          "0x0107A000",
+          "0x0107B000"
+        ],
+        "imageStoreStart": "0x0107C000",
+        "imageStoreMaxSizeBytes": 524288,
+        "gr5513ImageBackend": "qualified TD40 only; no package-Flash fallback"
+      },
+      "imageStore": {
+        "start": "0x0107C000",
+        "sizeBytes": 524288,
+        "recordPolicy": "release-v1 logical extent maps entirely to qualified TD40 physical offsets 0x00000-0x7FFFF; exact fitted-NOR detection required, no package-Flash fallback or mixed extent. Registry maximum is not capacity or exact-board qualification; GR5513 Full explicit-all remains refused until external clear-all is qualified"
+      },
+      "panelWiring": {
+        "mosi": "GPIO04",
+        "sclk": "GPIO03",
+        "cs": "GPIO02",
+        "dc": "GPIO05",
+        "reset": "GPIO07",
+        "busy": "GPIO06",
+        "powerEnable": "GPIO24",
+        "evidence": "Preserved ZKC42V-N stock record bytes: CS=02, BS=FF, RST=07, CLK=03, MOSI=04, DC=05, BUSY=06, EN=18"
+      },
+      "factoryModel": "ZKC42V-N",
+      "firstFlash": {
+        "selectorAddress": 3840,
+        "selectorId": 1,
+        "requiredPackageId": 5,
+        "fullArtifact": "InkTag-gr5513_zkc42v-factory.bin",
+        "stockBackupSha256": "bd51f9f0306279a7e7cd2703d01a460fba9002ce187008871e2e329cf4fe7cc1"
+      },
+      "findKeyringStore": "none; P-224 Find uses one protected 16-byte seed in NVDS protected Settings record 31 and derives time-slot public keys without storing a public-key ring",
+      "led": "Three active-low channels recovered from the stock one-by-one R/B/G test and optically confirmed on the v1.2 bench board: MSIO0=red, MSIO1=green and GPIO31=blue. The exact board selector gates them into InkTag's common RGB status-scene engine.",
+      "notes": "Uses the byte-identical GR551x application and signed OTA artifact shared with ZKC42VM. Only the bounded non-executable Full-image board selector differs. The selector also chooses the ZKC42V-specific UC8176 recipe while ZKC42VM remains SSD1683 and does not touch the ZKC42V NFC/LED pins. Actual hardware has passed BLE identity/OTA-service verification, read-only NFC UID probing, all three RGB LED channel optical checks, white clear, upright full black/red/white native device-information page, calendar and clock; faint retained factory-price content after repeated maintenance refreshes still requires ghosting regression. NFC field detection and configurable tap dispatch pass on the bench. Type-2 NDEF read and replay-safe harmless command consumption are implemented as a test candidate; phone RF writes, stale/error behavior, wake and static-NDEF restoration remain physical qualification items."
+    },
+    "om6626_zkc42b": {
+      "label": "ZKC42B",
+      "mcuFamily": "OnMicro OM66xx",
+      "mcu": "OM6626",
+      "port": "onmicro/om6626",
+      "artifact": "InkTag-om6626_zkc42b",
+      "lfclkSource": "internal-rc",
+      "lfclkQualification": "Exact v1.0 PCB has an unpopulated low-frequency-crystal footprint; firmware uses the always-running 32.768 kHz PMU counter and remains internal-RC/non-precision pending a temperature/drift soak; a populated modification requires separate board selection and qualification",
+      "applicationArtifact": "InkTag-om6626_zkcxxb",
+      "panelReplaceable": false,
+      "defaultScreenProfile": "ZKC42B_420_BWRY",
+      "panel": "4.2-inch 400x300 BWRY; factory panel type 0xB3, exact controller die not marked/confirmed",
+      "flashRequirement": "Verified non-mirrored 1 MiB main SPI Flash (C86514) from the complete ZKC42B-NE4 stock backup. The v1.0 PCB also carries a separate 2 MiB GT25Q16A on SPI0; two identical full reads confirmed JEDEC C46015, SFDP and non-mirrored capacity. Layout v2 releases the stock-picture prefix by user instruction on 2026-09-28; keep archival backups and main factory calibration.",
+      "nfc": true,
+      "nfcController": "Factory type 0x01 selects GT23NT081D-named external tag at 7-bit I2C address 0x55; exact RF standard, I2C/IRQ/power pins and register compatibility are not yet physically qualified",
+      "ota": {
+        "layout": "single-with-ble-recovery-v2",
+        "application": "0x0042B000",
+        "slotSizeBytes": 303104,
+        "recoveryState": [
+          "0x0047D000",
+          "0x0047E000"
+        ]
+      },
+      "imageStore": {
+        "extents": [
+          "0x00482000-0x004FBFFF",
+          "GT25Q16A:0x000000-0x1FFFFF"
+        ],
+        "sizeBytes": 2596864,
+        "recordPolicy": "layout v2 candidate: one continuous internal extent before auxiliary Flash, one stable record-ID namespace; a record never spans an extent or device boundary; Full migration and exact-board regression pending",
+        "auxiliaryFlash": {
+          "status": "hardware-qualified; layout-v2-full-store-regression-pending",
+          "part": "GT25Q16A",
+          "jedecId": "C46015",
+          "capacityBytes": 2097152,
+          "storageOffsetBytes": 0,
+          "storageBytes": 2097152,
+          "backupSha256": "76C9866890DAB1007E5268F593E7F6D31A4C72E6334F19C7E0E8081EEFF73DFF",
+          "bus": "SPI0",
+          "miso": "PAD8",
+          "mosi": "PAD9",
+          "cs": "PAD10",
+          "sclk": "PAD11",
+          "runtimeGate": "persisted om6626_zkc42b selector plus matching JEDEC ID and SFDP signature"
+        }
+      },
+      "guiAssetStore": "ITFA v1 package format; layout v2 A/B banks 0x00475000-0x00478FFF and 0x00479000-0x0047CFFF; 16 KiB each, header committed last; exact-board qualification pending",
+      "findKeyringStore": "none; public-only Find v2 P56/K16 is in protected Settings record 31, no separate keyring extent",
+      "panelWiring": {
+        "mosi": "GPIO21",
+        "sclk": "GPIO15",
+        "cs": "GPIO22",
+        "dc": "GPIO20",
+        "reset": "GPIO16",
+        "busy": "GPIO03",
+        "powerEnable": "GPIO07",
+        "evidence": "Recovered from the stock B3 board record; physical continuity validation remains pending"
+      },
+      "led": "RGB; red=GPIO04/BOOT, blue=GPIO17 (0x11), green=GPIO18 (0x12), active-low; all three channels and optical colours were confirmed independently on the ZKC42B v1.0 bench board",
+      "displayTransform": {
+        "gui": "180-degree rotation plus horizontal mirror",
+        "uploadedPicture": "180-degree rotation plus horizontal mirror",
+        "status": "implemented from current hardware orientation report; four-edge image regression pending"
+      },
+      "factoryModel": "ZKC42B-NE4",
+      "buildQualified": true
+    },
+    "om6626_zkc21b": {
+      "label": "ZKC21B",
+      "mcuFamily": "OnMicro OM66xx",
+      "mcu": "OM6626",
+      "port": "onmicro/om6626",
+      "artifact": "InkTag-om6626_zkc21b",
+      "lfclkSource": "internal-rc",
+      "lfclkQualification": "Exact v1.1 PCB has an unpopulated low-frequency-crystal footprint; firmware uses the always-running 32.768 kHz PMU counter and remains internal-RC/non-precision pending a temperature/drift soak; a populated modification requires separate board selection and qualification",
+      "applicationArtifact": "InkTag-om6626_zkcxxb",
+      "panelReplaceable": false,
+      "defaultScreenProfile": "ZKC21B_213_BWRY",
+      "panel": "HINK-E0213A349 flex / E0213A386N577006 back marking, 2.13-inch BWRY; controller RAM/transfer stride is 128x250 from factory type 0xB2; JD79661 is the leading compatibility candidate but the exact die remains unconfirmed; built-in GUI currently uses a provisional raw-column 0..121 (122x250) visible viewport",
+      "flashRequirement": "Verified non-mirrored 1 MiB SPI Flash (C86514) from the complete ZKC21B-NAE4 stock backup",
+      "factoryPads": "All PCB test/debug contacts on the inspected ZKC21B require shell removal before they are visible or reachable; exact order, labels and GPIO mapping remain to be recorded",
+      "nfc": true,
+      "nfcController": "Factory type 0x01 selects GT23NT081D-named external tag at 7-bit I2C address 0x55; exact RF standard, I2C/IRQ/power pins and register compatibility are not yet physically qualified",
+      "ota": {
+        "layout": "single-with-ble-recovery-v2",
+        "application": "0x0042B000",
+        "slotSizeBytes": 303104,
+        "recoveryState": [
+          "0x0047D000",
+          "0x0047E000"
+        ]
+      },
+      "imageStore": {
+        "extents": [
+          "0x00482000-0x004FBFFF"
+        ],
+        "sizeBytes": 499712,
+        "recordPolicy": "layout v2 candidate: one continuous internal extent; typed variable-size records keep stable record IDs; no auxiliary data Flash; Full migration and exact-board regression pending"
+      },
+      "guiAssetStore": "ITFA v1 package format; layout v2 A/B banks 0x00475000-0x00478FFF and 0x00479000-0x0047CFFF; 16 KiB each, header committed last; exact-board qualification pending",
+      "findKeyringStore": "none; public-only Find v2 P56/K16 is in protected Settings record 31, no separate keyring extent",
+      "panelWiring": {
+        "mosi": "GPIO21",
+        "sclk": "GPIO15",
+        "cs": "GPIO22",
+        "dc": "GPIO20",
+        "reset": "GPIO16",
+        "busy": "GPIO03",
+        "powerEnable": "GPIO07",
+        "evidence": "Recovered from the stock B2 board record; physical continuity validation remains pending"
+      },
+      "led": "RGB; red=GPIO04/BOOT, blue=GPIO17 (0x11), green=GPIO18 (0x12); firmware currently uses active-low GR-compatible semantics pending final polarity regression",
+      "displayTransform": {
+        "gui": "90-degree landscape rotation plus vertical mirror, with provisional 122x250 raw viewport",
+        "uploadedPicture": "90-degree rotation plus vertical mirror in the raw 128x250 transfer orientation",
+        "status": "updated after the 2026-08-27 hardware device-information-page report showed the previous presentation was 180 degrees upside down; four-edge picture regression remains pending"
+      },
+      "factoryModel": "ZKC21B-NAE4",
+      "buildQualified": true,
+      "notes": "This is not the GR5331-based ZKC21V and must never use gr5331_zkc21v firmware. The original firmware uses a fixed-address copy/staging OTA image; InkTag uses its own board-locked swap layout. RGB channels were found with targeted scans: red=0x04, blue=0x11, green=0x12. GPIO04 is also sampled as BOOT during reset, so red must only be driven after normal startup."
+    },
+    "om6626_zkc21v": {
+      "label": "ZKC21V (-N NFC assembly)",
+      "mcuFamily": "OnMicro OM66xx",
+      "mcu": "OM6626",
+      "port": "onmicro/om6626",
+      "artifact": "InkTag-om6626_zkc21v",
+      "lfclkSource": "internal-rc",
+      "lfclkQualification": "OM6626 common PMU 32.768 kHz internal-RC timebase; exact -N PCB crystal population and drift remain to be checked, so no precision claim",
+      "applicationArtifact": "InkTag-om6626_zkcxxb",
+      "panelReplaceable": false,
+      "defaultScreenProfile": "ZKC21V_213_BWR",
+      "panel": "Factory type 0x5B selects an SSD1680-compatible 128x250 BWR dual-plane path; physical FPC/COG marking and mounted orientation remain unconfirmed",
+      "flashRequirement": "Exact -N OM6626 board has two byte-identical 1 MiB J-Flash 7.88j readouts, SHA-256 C066F33212A5BFD277EC5900FC25D9E9E09B971E9BD623345759FF154A07EC64. High/low 512 KiB halves differ. No auxiliary Flash is fitted, confirmed by user on 2026-09-28; -N denotes NFC, not extra Flash",
+      "nfc": true,
+      "nfcController": "Factory -N option has the same 27-byte external Type-2-tag configuration as OM ZKC21B/ZKC42B: I2C address 0x55, PAD0/PAD1 bus, PAD2 field IRQ and PAD19 enable. Physical UID/NDEF/RF qualification pending",
+      "ota": {
+        "layout": "single-with-ble-recovery-v2",
+        "application": "0x0042B000",
+        "slotSizeBytes": 303104,
+        "recoveryState": [
+          "0x0047D000",
+          "0x0047E000"
+        ]
+      },
+      "imageStore": {
+        "extents": [
+          "0x00482000-0x004FBFFF"
+        ],
+        "sizeBytes": 499712,
+        "recordPolicy": "layout v2 candidate: same continuous internal extent as shared OM application; no fitted auxiliary Flash; Full migration and exact-board regression pending"
+      },
+      "panelWiring": {
+        "mosi": "GPIO21",
+        "sclk": "GPIO15",
+        "cs": "GPIO22",
+        "dc": "GPIO20",
+        "reset": "GPIO16",
+        "busy": "GPIO03",
+        "powerEnable": "GPIO07",
+        "evidence": "Recovered from this board's stock 0xA7000 record; electrical/refresh verification pending"
+      },
+      "led": "Exact-board optical RGB mapping: red GPIO04, green GPIO18, blue GPIO17, active-low; application startup round and green-ready flashes observed. Recovery LED and long-power evidence remain separate gates",
+      "factoryModel": "ZKC21V-N",
+      "buildQualified": false,
+      "notes": "ZKC21V is the model, -N denotes the NFC-equipped assembly option. This OM6626 PCB is not the GR5331 ZKC21V. Shared application/OTA bytes are required; only the non-executable Full-image factory selector differs. NFC, LED, panel, Find v2 and OTA require exact-board evidence before release."
+    },
+    "aesl42_da": {
+      "buildInMainRepository": false,
+      "label": "Hema AESL-4.2",
+      "mcuFamily": "Dialog/Renesas SmartBond",
+      "mcu": "DA14585",
+      "port": "dialog/da14585",
+      "artifact": "InkTag-aesl42_da",
+      "lfclkSource": "lfxo",
+      "lfclkQualification": "32.768 kHz crystal physically fitted on the current 4.2-inch PCB; firmware XTAL32 selection and BLE/SUOTA/time/current regression remain pending",
+      "applicationArtifact": "InkTag-da14585_aesl",
+      "applicationTarget": "da14585_aesl",
+      "defaultScreenProfile": "UC8176_400x300_BWR_STANDARD",
+      "panel": "User-confirmed UC8176 4.2-inch 400x300 BWR panel on the qualified bench unit",
+      "panelReplaceable": true,
+      "flashRequirement": "Exact 256 KiB stock range read SHA-256 B3E3FF4D5F4E38E6A3639CE8458B85607E67D645C3061ABC76AFEC1E749EE097; physical Flash chip marking/JEDEC capacity remains to be recorded",
+      "lowFrequencyClock": {
+        "source": "lfxo",
+        "frequencyHz": 32768,
+        "assembly": "installed",
+        "evidence": "User visually confirmed the installed low-frequency crystal on this exact board on 2026-09-06; research record 933e8fc",
+        "qualified": false,
+        "qualification": "Separately verify XTAL32 cold boot, BLE/GATT and SUOTA/Recovery reconnect, sleep/wake, host-synchronized read-only time samples across the longest display operation, time error, average current and long no-SWD operation"
+      },
+      "ota": {
+        "transport": "Dialog SDK6 SUOTA over BLE",
+        "layout": "single-app-with-fixed-ble-recovery-v3",
+        "application": "0x00004000-0x0001BFFF",
+        "recovery": "0x0001C000-0x00023FFF",
+        "recoveryJournal": [
+          "0x00037000",
+          "0x0003B000"
+        ],
+        "applicationLimitBytes": 95744
+      },
+      "panelWiring": {
+        "mosi": "P2.0",
+        "sclk": "P0.1",
+        "cs": "P2.1",
+        "dc": "P0.7",
+        "reset": "P1.0",
+        "busy": "P1.1",
+        "busSelect": "P2.2",
+        "powerEnable": "P2.3",
+        "evidence": "Recovered from the stock startup path and qualified with the shared UC8176 flow"
+      },
+      "led": null,
+      "button": {
+        "present": false
+      },
+      "imageStore": "0x00024000-0x00034FFF (68 KiB typed-record extent; Free quota is at most 5 compact or 2 normal/large records and is further capped by exact frame transaction capacity; profiles whose one record exceeds the extent do not advertise image records)",
+      "find": {
+        "supported": false,
+        "reason": "DA14585 is a frozen Free-only target; Find and activation are not compiled or advertised"
+      },
+      "auxIo": {
+        "supported": false,
+        "defaultEnabled": false,
+        "buttonRole": "future active-low wake input on a qualified UART RX pad",
+        "buzzerRole": "future single-ended passive piezo on a qualified UART TX pad",
+        "gpioMapping": null,
+        "qualification": "Photograph and trace exact pads; reject EPD/Flash/boot/debug conflicts; verify held-low boot, wake and PWM before advertising"
+      },
+      "buildQualified": true,
+      "hardwareQualified": false,
+      "notes": "Uses the unified Free-only da14585_aesl application and a board-specific stock-derived 256 KiB first-flash wrapper. The application retains all registered public EPD drivers/recipes, shared native pages, direct transfer, profile management, OTA/Recovery and the bounded 68 KiB image store; activation and Find are omitted. On 2026-09-13 this exact selector with the replaceable SES SE2213FS093 2.13-inch profile passed calendar/clock/device-info, direct and stored BWR images with the device-side Free mark, five-record quota/sixth rejection/download/hole reuse/slideshow/clear, cancellation, settings/profile reset and OTA persistence, runtime direct SWD attach, and 3.296-3.301 V status correlated with 3.300 V J-Link VTref. Temperature correctly remains unavailable because no die or panel Celsius source is qualified. Extended sleep is disabled after reproducing BLE loss at its 30-second transition; event-aware CPU idle remains. Normal and deliberately interrupted OTA both reach verified Recovery commit, records/settings survive, Recovery remains directly SWD-attachable after 35 seconds, and the next explicit connection attests the application. The shared Windows CLI still fails its first automatic post-reboot attestation even though that next explicit connection succeeds. Controlled-supply thresholds/current, cold-power soak and the stock 4.2 panel remain gates."
+    },
+    "aesl29_da": {
+      "buildInMainRepository": false,
+      "label": "Hema AESL-2.9",
+      "mcuFamily": "Dialog/Renesas SmartBond",
+      "mcu": "DA14585",
+      "port": "dialog/da14585",
+      "artifact": "InkTag-aesl29_da",
+      "lfclkSource": "lfxo",
+      "lfclkQualification": "32.768 kHz crystal physically fitted on the current 2.9-inch PCB; firmware XTAL32 selection and BLE/SUOTA/time/current regression remain pending",
+      "applicationArtifact": "InkTag-da14585_aesl",
+      "applicationTarget": "da14585_aesl",
+      "defaultScreenProfile": null,
+      "panel": "Stock records establish 128x296 geometry; SSD1619 BWR is the current controller candidate and remains unqualified on hardware",
+      "panelReplaceable": true,
+      "flashRequirement": "Exact 256 KiB stock range read SHA-256 21EC46C7919A1687481658E647BA4A759DB2F0502B5078704E2DFA9080EC1662; physical Flash chip marking/JEDEC capacity remains to be recorded",
+      "lowFrequencyClock": {
+        "source": "lfxo",
+        "frequencyHz": 32768,
+        "assembly": "installed",
+        "evidence": "User visually confirmed the installed low-frequency crystal on this exact board on 2026-09-06; research record 933e8fc",
+        "qualified": false,
+        "qualification": "Separately verify XTAL32 cold boot, BLE/GATT and SUOTA/Recovery reconnect, sleep/wake, host-synchronized read-only time samples across the longest display operation, time error, average current and long no-SWD operation"
+      },
+      "ota": {
+        "transport": "Dialog SDK6 SUOTA over BLE",
+        "layout": "single-app-with-fixed-ble-recovery-v3",
+        "application": "0x00004000-0x0001BFFF",
+        "recovery": "0x0001C000-0x00023FFF",
+        "recoveryJournal": [
+          "0x00037000",
+          "0x0003B000"
+        ],
+        "applicationLimitBytes": 95744
+      },
+      "panelWiring": {
+        "mosi": "P2.0",
+        "sclk": "P0.1",
+        "cs": "P2.1",
+        "dc": "P0.7",
+        "reset": "P1.0",
+        "busy": "P1.1",
+        "busSelect": "P2.2",
+        "powerEnable": "P2.3",
+        "evidence": "Recovered from the stock startup path; display-controller qualification is pending"
+      },
+      "led": null,
+      "button": {
+        "present": false
+      },
+      "imageStore": "0x00024000-0x00034FFF (68 KiB typed-record extent; Free quota is at most 5 compact or 2 normal/large records and is further capped by exact frame transaction capacity; profiles whose one record exceeds the extent do not advertise image records)",
+      "find": {
+        "supported": false,
+        "reason": "DA14585 is a frozen Free-only target; Find and activation are not compiled or advertised"
+      },
+      "auxIo": {
+        "supported": false,
+        "defaultEnabled": false,
+        "buttonRole": "future active-low wake input on a qualified UART RX pad",
+        "buzzerRole": "future single-ended passive piezo on a qualified UART TX pad",
+        "gpioMapping": null,
+        "qualification": "Photograph and trace exact pads; reject EPD/Flash/boot/debug conflicts; verify held-low boot, wake and PWM before advertising"
+      },
+      "buildQualified": true,
+      "hardwareQualified": false,
+      "notes": "Uses the unified Free-only da14585_aesl application and a board-specific stock-derived 256 KiB first-flash wrapper. It retains all registered public EPD drivers/recipes, shared native pages, direct transfer, profile management, OTA/Recovery and the bounded 68 KiB image store; activation and Find are omitted. SmartSnippets Toolbox 5.0.10.2434 with a 3.3 V CH340 completed only the former-layout full first flash and cold-boot BLE advertising; J-Flash attach was unreliable before first flash, and DAPLink virtual COM did not complete SPI Flash operations. Select and persist the qualified 2.9-inch profile before any display operation; the repacked layout, image records, voltage, V2 and SUOTA regression remain pending."
+    }
+  }
+}

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="inktag-pro-功能与激活">InkTag Pro 功能与激活</h1>
+<p>中文 | <a target="_blank" rel="noopener noreferrer" href="../en/pro.html">English</a></p>
+<p>InkTag 免费版本（Free）已能满足大部分日常使用需求，包括图片、日历、时钟和设备维护。Pro 增加更多高级和实验功能，适合喜欢折腾、愿意探索的用户。激活不改变主板硬件，也不增加设备未支持的功能。</p>
+<h2 id="功能对照">功能对照</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>Free</th>
+<th>Pro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>图片、内置日历和时钟</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>非 E6 屏幕原生颜色、方向与普通全刷</td>
+<td>支持</td>
+<td>相同</td>
+</tr>
+<tr>
+<td>高级屏幕控制</td>
+<td>不提供</td>
+<td>部分屏幕局刷与 E6 六色屏幕控制；需兼容硬件、接线和驱动，离线转换及预览不受限制</td>
+</tr>
+<tr>
+<td>蓝牙连接、诊断、OTA 与 Recovery</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>图片存储与轮播</td>
+<td>可视区长边小于 300 像素最多 10 张，其余最多 4 张，且不超过实际容量</td>
+<td>不设数量配额，以设备图槽总空间为限</td>
+</tr>
+<tr>
+<td>防丢器（苹果 Find My 网络）</td>
+<td>不提供</td>
+<td>激活并配置后，可利用 Find My 网络查询设备位置</td>
+</tr>
+<tr>
+<td>NFC</td>
+<td>被动读取 UID 与设备链接</td>
+<td>支持手机写入的短指令；所有 NFC 设备操作均需 Pro</td>
+</tr>
+<tr>
+<td>设备密码</td>
+<td>不提供</td>
+<td>可设置设备密码；修改或关闭需重新验证原密码</td>
+</tr>
+<tr>
+<td>设备备注</td>
+<td>可修改</td>
+<td>可修改</td>
+</tr>
+<tr>
+<td>蓝牙广播名</td>
+<td>保持出厂名称</td>
+<td>可按设备规则修改</td>
+</tr>
+<tr>
+<td>显示标识</td>
+<td>固定显示 <code>InkTag</code></td>
+<td>可调整或隐藏 <code>InkTag Pro</code></td>
+</tr>
+<tr>
+<td>NFC 传图（待开发）</td>
+<td>—</td>
+<td>规划中，尚不可用</td>
+</tr>
+<tr>
+<td>自定义动态设备布局（待开发）</td>
+<td>—</td>
+<td>规划中，尚不可用；当前画板发送静态图片</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>InkTag 固件免费使用，项目未提供购买链接。若从商家购买后遇到问题，请联系购买渠道的商家。捐赠支持项目后可获得 Pro 激活码；大部分 Pro 功能属于实验功能，无法保证稳定性，请谨慎开通。</p>
+</blockquote>
+<p>图槽数量仍受屏幕尺寸、颜色与存储容量限制，Pro 不会扩大物理存储。nRF52811 和 DA14585 因固件尺寸限制仅提供 Free 功能，图片数量按实际容量开放，不套用 10／4 张额度，也不能通过激活增加 Pro 功能。</p>
+<h2 id="防丢器与-nfc">防丢器与 NFC</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>使用条件与限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>防丢器</td>
+<td>利用苹果 Find My 网络，不是 GPS 实时定位；位置更新依赖附近参与网络的设备与网络状态。当前为实验功能，默认关闭，需要支持的固件、Pro 授权及单独的 Find 身份配置</td>
+</tr>
+<tr>
+<td>Find 查询</td>
+<td>使用具备相应后端的客户端或本地服务；并非只打开静态网页就能查询。妥善保存本地私有数据，不公开身份密钥</td>
+</tr>
+<tr>
+<td>NFC 交互</td>
+<td>主板需具有受支持的 NFC 硬件；通过手机命令按图片名称显示及清屏等设备动作均需 Pro。不同板型支持的指令可能不同</td>
+</tr>
+<tr>
+<td>被动 NFC</td>
+<td>Free 在相应硬件上仍可读取 UID 和设备链接，不执行设备操作；不向 NFC 写入设备密码或二维码凭据</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="获取激活码">获取激活码</h2>
+<p>Pro 激活码通过捐赠支持项目后提供。捐赠方式与领取说明以<a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag">项目页面</a>公布的信息为准。</p>
+<p>领取前先确认设备支持 Pro，并按激活页面要求提供当前设备码。激活码与指定设备绑定，不能用于其他设备。捐赠不代表 Free-only 型号能够升级，也不代表尚未支持的硬件或实验功能获得保证。</p>
+<h2 id="在-web-上位机中激活">在 Web 上位机中激活</h2>
+<ol>
+<li>连接运行 InkTag 的设备，确认主控、板型和设备身份。</li>
+<li>打开“设置 → 设备设置 → 激活”，读取页面显示的当前设备码。若提示“该设备不支持激活”，不要使用其他型号的激活码。</li>
+<li>按正式领取流程取得与该设备匹配的激活码，在同一设备的页面输入并提交。已启用设备密码时，先按页面提示完成验证。</li>
+<li>等待设备确认，再读取激活状态。页面显示 Pro 后，防丢器和密码可按需单独设置，NFC 使用说明位于交互页面。</li>
+</ol>
+<p>请妥善保存激活码，不公开截图、日志或二维码中的凭据。普通应用 OTA 保留激活状态；首次完整烧录或有线恢复前应另行保存重要数据。激活失败时查看提示与日志，确认设备和代码匹配，不使用绕过校验的操作。</p>
+<h2 id="相关说明">相关说明</h2>
+<ul>
+<li><a target="_blank" rel="noopener noreferrer" href="devices.html">设备与已测屏幕</a></li>
+<li><a target="_blank" rel="noopener noreferrer" href="webui.html">Web 上位机</a></li>
+<li><a target="_blank" rel="noopener noreferrer" href="cli.html">命令行工具</a></li>
+<li><a target="_blank" rel="noopener noreferrer" href="ota.html">更新与 Recovery</a></li>
+</ul></main></body></html>

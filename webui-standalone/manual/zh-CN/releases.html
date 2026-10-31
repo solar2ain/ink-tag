@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="下载与文件校验">下载与文件校验</h1>
+<p>中文 | <a target="_blank" rel="noopener noreferrer" href="../en/releases.html">English</a></p>
+<p>从项目的 <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/releases">GitHub Releases</a> 下载所需文件并阅读该版本说明。尚未列出附件时，表示暂不可下载。本版提供 WebUI、Python CLI、使用手册、已适配主板的 OTA 与完整固件，以及独立的明文烧录工具。烧录工具位于仓库的 <code>firmware/&lt;主控_主板&gt;/</code>；执行烧录时必须另行提供匹配的完整固件。</p>
+<p>WebUI、CLI 和设备固件的版本可以不同，不必一起升级。离线 ZIP 可直接打开，静态 ZIP 适合自行托管，CLI 本地版用于本机部署；CLI 安装见<a target="_blank" rel="noopener noreferrer" href="cli.html">CLI 使用说明</a>。</p>
+<h2 id="核对下载是否完整">核对下载是否完整</h2>
+<p>将下载文件的 SHA256 与同版本 <code>SHA256SUMS.txt</code> 对照：</p>
+<pre><code class="language-powershell">Get-FileHash -Algorithm SHA256 文件名
+</code></pre>
+<p>Linux 使用 <code>sha256sum 文件名</code>，macOS 使用 <code>shasum -a 256 文件名</code>。摘要不同、下载中断或文件被修改时，重新下载，不要继续安装。</p>
+<p>校验和不能代替发布者签名。安装设备固件时，须核对准确主控、板型及兼容性，并保留客户端和设备的签名检查。没有对应附件时不要使用名称相近的其他型号文件。</p></main></body></html>

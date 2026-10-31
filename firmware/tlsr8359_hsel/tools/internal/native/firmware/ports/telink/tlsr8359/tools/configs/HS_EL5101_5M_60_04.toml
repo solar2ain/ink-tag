@@ -1,0 +1,39 @@
+# Hanshow HS_EL5101_5M_60_04 / removable P154030, 200x200 BWR.
+# SSD1681 is the human-selected screen name; use the maintained recipe1.
+# PB0 supply, PD2/PD3/PA7 RGB and PC0/PC1/PC6/PC4 NFC are stock-recovered.
+# Historical A3FF software tests do not qualify newly built layout-v1 bytes.
+# Shared Suspend/Deep policy; no per-board product-function switches.
+format_version = 1
+board_marking = "HS_EL5101_5M_60_04"
+
+[screen]
+ic = "SSD1XXX" # Registered wire controller; WebUI name: SSD1681 1.54-inch.
+recipe = 1
+color = "BWR"
+rotation = 90
+mirror_x = true
+mirror_y = false
+
+native_ui_scale = 0 # 0=AUTO; 1=1x; 2=1.5x; 3=2x; 4=1.25x; 5=1.75x
+width = 200
+height = 200
+visible_x = 0
+visible_y = 0
+visible_width = 200
+visible_height = 200
+
+[gpio.display]
+mosi = "PB6"
+clock = "PB5"
+cs = "PB4"
+dc = "PD7"
+reset = "PD4"
+busy = "PA1"
+enable = "PB7"
+enable_active_low = true
+
+[gpio.led]
+red = "PD2"
+green = "PD3"
+blue = "PA7"
+active_low = ["red", "green", "blue"]

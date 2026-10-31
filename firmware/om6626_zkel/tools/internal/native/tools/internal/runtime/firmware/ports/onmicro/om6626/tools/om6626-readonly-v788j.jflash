@@ -1,0 +1,59 @@
+  AppVersion = 78810
+  FileVersion = 2
+[GENERAL]
+  aATEModuleSel[24] = 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  ConnectMode = 0
+  CurrentFile = ""
+  DataFileSAddr = 0x00000000
+  GUIMode = 0
+  HostName = ""
+  TargetIF = 1
+  USBPort = 0
+  USBSerialNo = 0x00000000
+  UseATEModuleSelection = 0
+[JTAG]
+  IRLen = 0
+  MultipleTargets = 0
+  NumDevices = 0
+  Speed0 = 100
+  Speed1 = 100
+  TAP_Number = 0
+  UseAdaptive0 = 0
+  UseAdaptive1 = 0
+  UseMaxSpeed0 = 0
+  UseMaxSpeed1 = 0
+[CPU]
+  NumInitSteps = 0
+  NumExitSteps = 0
+  UseScriptFile = 0
+  ScriptFile = ""
+  RAMAddr = 0x20000000
+  RAMSize = 0x00010000
+  CheckCoreID = 0
+  CoreID = 0x00000000
+  CoreIDMask = 0x0F000FFF
+  UseAutoSpeed = 0x00000001
+  ClockSpeed = 0x00000000
+  EndianMode = 0
+  ChipName = "Onmicro OM662XX_NOMBR"
+[FLASH]
+  aRangeSel[1] = 0-255
+  BankName = "SPI Flash"
+  BankSelMode = 1
+  BaseAddr = 0x00400000
+  LoaderName = "SPI_Flash"
+  NumBanks = 1
+[PRODUCTION]
+  AutoPerformsDisconnect = 0
+  AutoPerformsErase = 0
+  AutoPerformsProgram = 0
+  AutoPerformsStartApp = 0
+  AutoPerformsVerify = 0
+  EnableTargetPower = 0
+  EraseType = 1
+  TargetPowerDelay = 0x00000014
+  VerifyType = 1
+[PERFORMANCE]
+  DisableSkipBlankDataOnProgram = 0x00000000
+  PerfromBlankCheckPriorEraseChip = 0x00000001
+  PerfromBlankCheckPriorEraseSelectedSectors = 0x00000001

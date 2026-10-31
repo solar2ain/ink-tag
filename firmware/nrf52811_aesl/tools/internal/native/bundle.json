@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "chip": "nrf52811",
+  "firmwareFamily": "aesl22_nrf",
+  "artifactKind": "tools-only",
+  "fullWriter": "native-v1",
+  "runtimeKind": "portable",
+  "toolsVersion": "0.2.0.4",
+  "sourceToolsVersion": "1.0.12",
+  "buildTarget": "nrf52811_aesl",
+  "brand": "aesl",
+  "buildId": "tools-20261030T072956Z-6daa367a",
+  "firmwareIncluded": false,
+  "baseline": "inktag-release-v1",
+  "releaseApproved": false,
+  "hardwareQualified": false
+}

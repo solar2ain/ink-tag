@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "22625715a064b88675036a8e9df9fb8ab54f8826",
+  "purpose": "immutable pure format/public-verification/default-QR snapshot owned by OM tools; runtime never imports the CLI",
+  "files": {
+    "onmicro_package.py": {
+      "historicalSource": "cli/src/inktag_cli/onmicro_package.py",
+      "sha256": "1ce179a18b4103a0d0735197d3fe4adc665e967ddb3ba191b7b6d47d80eafc37"
+    },
+    "safe_archive.py": {
+      "historicalSource": "cli/src/inktag_cli/safe_archive.py",
+      "sha256": "45c578c4fc00cd3f820873c25e8b451e5aafee4523832a71fff5d0d93d535976"
+    },
+    "pin_config.py": {
+      "historicalSource": "cli/src/inktag_cli/pin_config.py",
+      "sha256": "41c319c8bdd8d2e85db053e7e6cb5422a9ed9c9d6ba688cd9a148f93d71091be"
+    },
+    "protocol.py": {
+      "historicalSource": "cli/src/inktag_cli/protocol.py",
+      "sha256": "6fd8137a4dbb405de6bb485fc3f49c363127f996c387ae5bc4156cb2eb4f25ac"
+    },
+    "models.py": {
+      "historicalSource": "cli/src/inktag_cli/models.py",
+      "sha256": "f9006ed4d564ceb1e3bdecfc37bc634d2ec047a510e9d8445ecda3c5cd4941d3"
+    },
+    "generated_commands_v2.py": {
+      "historicalSource": "cli/src/inktag_cli/generated_commands_v2.py",
+      "sha256": "4491401c5fcaf5c5407eacb6113e8d078aa20af52bf8fb691a1488bc0bdb5f32"
+    },
+    "generated_busy_defaults.py": {
+      "historicalSource": "cli/src/inktag_cli/generated_busy_defaults.py",
+      "sha256": "fbf52a9bdb9e6ba65dab641127106c8113d7b4d580113d95780edd3d7a1159db"
+    },
+    "generated_release_v1.py": {
+      "historicalSource": "cli/src/inktag_cli/generated_release_v1.py",
+      "sha256": "fc607086de7b28b67be5edeb92a63e8e12d0e499c7adf78b8bd3fdac4c56d03f"
+    },
+    "device_qr.py": {
+      "historicalSource": "cli/src/inktag_cli/device_qr.py",
+      "sha256": "440747ef6f79bb2d0d2038d8a0f7631eaca0d37b6c18b55bb117ec8cae957a7e"
+    },
+    "device_link.py": {
+      "historicalSource": "cli/src/inktag_cli/device_link.py",
+      "sha256": "a73cbce6d92610ff854186b565a2ee8568d4fb6e7a171a7224404d6eb4545a17"
+    }
+  }
+}

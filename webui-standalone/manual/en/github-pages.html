@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="online-and-local-editions">Online and local editions</h1>
+<p>Use Chrome or Edge on desktop. On iPhone/iPad, use <a target="_blank" rel="noopener noreferrer" href="https://apps.apple.com/app/id1492822055">Bluefy</a>. On Android, prefer Chrome. Open the site in that browser rather than an embedded WeChat/in-app window, and grant Bluetooth permission.</p>
+<p><a target="_blank" rel="noopener noreferrer" href="../zh-CN/github-pages.html">简体中文</a> | English</p>
+<p>Open <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag/">InkTag WebUI</a> without installing anything. Chrome or Edge with Web Bluetooth is recommended. Click Connect and authorize the correct device on the first connection.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Edition</th>
+<th>Best for</th>
+<th>Find</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Online WebUI</td>
+<td>Connecting, images, canvas editing and device management</td>
+<td>Enrollment and broadcast control; location queries require the local service</td>
+</tr>
+<tr>
+<td>Standalone ZIP</td>
+<td>Keeping the WebUI offline</td>
+<td>Same device controls; extract everything and keep assets beside the HTML</td>
+</tr>
+<tr>
+<td>Static ZIP</td>
+<td>Hosting the website yourself</td>
+<td>No query backend</td>
+</tr>
+<tr>
+<td>CLI ZIP with local WebUI</td>
+<td>Local data, Find queries and automation</td>
+<td>Local query backend; follow first-use dependency setup</td>
+</tr>
+</tbody>
+</table></div>
+<p>Local operation requires Python 3.11 or later, but not Node.js. See <a target="_blank" rel="noopener noreferrer" href="webui.html">WebUI setup</a> and <a target="_blank" rel="noopener noreferrer" href="find.html">Find migration</a>.</p>
+<p>For phone access to a computer's local service, use the same LAN and trusted HTTPS as shown by the launcher. Ordinary LAN HTTP generally cannot use browser Bluetooth. The phone browser must support Web Bluetooth too.</p>
+<p>If the online site cannot load, try again later or use a local edition. Changing origins or browsers, or clearing site data, can remove saved settings and Bluetooth permissions; export device information first. Updating a client never automatically flashes firmware.</p></main></body></html>

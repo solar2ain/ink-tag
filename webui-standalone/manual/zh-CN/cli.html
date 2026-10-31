@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="inktag-命令行客户端">InkTag 命令行客户端</h1>
+<p><a target="_blank" rel="noopener noreferrer" href="../en/cli.html">English</a></p>
+<p>InkTag CLI 可以连接设备、发送图片、管理显示内容和执行 OTA，也能启动 WebUI、查询 Find 和运行主机天气任务。命令名为 <code>inktag-cli</code>，也可以使用 <code>inktag</code>；两者功能相同。</p>
+<h2 id="快速开始">快速开始</h2>
+<p>安装 Python 3.11 或更新版本，从本仓库下载／拉取代码，或解压完整 CLI ZIP，进入同时包含 <code>cli/</code> 和 <code>webui/</code> 的根目录。推荐使用统一安装入口：</p>
+<p><strong>Windows：</strong></p>
+<pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1
+</code></pre>
+<p><strong>macOS／Linux：</strong></p>
+<pre><code class="language-sh">sh install_inktag.sh
+</code></pre>
+<p>脚本会把 CLI 安装到 <code>cli/.venv</code>，并自动安装<strong>本地 Find 查询服务的依赖</strong>；Find 环境单独位于用户数据目录的 <code>find/runtime/.venv</code>。安装完成后以后台模式启动本地 WebUI 和 Find 查询服务（<code>webui start</code>）；关闭终端不会停止服务。安装完成时会显示可直接复制的启动、停止、状态和日志命令。macOS 新安装的数据和日志位于 <code>~/.inktag/</code>；已有旧目录时继续使用原目录，避免丢失会话或标签信息。不会修改系统 Python，也不会自动登录 Apple、连接设备或清除已有数据。</p>
+<p>首次安装需要联网。Windows 还需预先安装完整版 7-Zip，首次会下载约 292 MB 的 Apple 认证组件镜像；macOS 使用系统原生认证组件，无需该镜像。Linux 的位置查询仍未完成资格验证。</p>
+<p>只安装、不启动：Windows 运行 <code>powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1 --prepare-only</code>；macOS／Linux 运行 <code>sh install_inktag.sh --prepare-only</code>。后续使用下面两种方式之一，命令参数完全相同。</p>
+<h3 id="方式一直接运行客户端脚本无需激活">方式一：直接运行客户端脚本（无需激活）</h3>
+<p>在仓库／完整包根目录运行，脚本使用已安装的 <code>cli/.venv</code>：</p>
+<pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\cli\inktag.ps1 device scan
+</code></pre>
+<pre><code class="language-sh">bash cli/inktag.sh device scan
+</code></pre>
+<p>更新后重新运行统一安装脚本即可。只需要 CLI、不需要 Find 查询时，也可进入 <code>cli/</code>，运行原有的 <code>install.ps1</code> 或 <code>bash install.sh</code>。</p>
+<p>上述统一安装入口在本仓库与完整 <strong>CLI ZIP</strong> 中均提供。若仅安装 wheel／sdist，请自行运行 <code>python -m venv .venv</code>，Windows 使用 <code>. .\.venv\Scripts\Activate.ps1</code>、macOS／Linux 使用 <code>source .venv/bin/activate</code> 激活这个环境，再运行 <code>python -m pip install "下载的 .whl 或 .tar.gz 文件路径"</code>。解压后含 <code>pyproject.toml</code> 的源码目录也可运行 <code>python -m pip install .</code>。这类文件不包含完整包根目录的统一安装入口和 Find 查询服务。</p>
+<h3 id="自行准备-cli-环境未使用统一安装时">自行准备 CLI 环境（未使用统一安装时）</h3>
+<p>先安装 Python 3.11+，再从仓库／完整包根目录创建环境并安装 CLI。Windows：</p>
+<pre><code class="language-powershell">python -m venv cli\.venv
+.\cli\.venv\Scripts\python.exe -m pip install .\cli
+</code></pre>
+<p>macOS／Linux：</p>
+<pre><code class="language-sh">python3 -m venv cli/.venv
+cli/.venv/bin/python -m pip install ./cli
+</code></pre>
+<p>上述命令只安装 CLI。需要本地 Find 查询时，优先使用前面的统一安装入口，一并准备查询依赖；无需重建已有且正常的环境。</p>
+<h3 id="方式二激活环境后使用-inktag-cli">方式二：激活环境后使用 <code>inktag-cli</code></h3>
+<p>以下激活命令从仓库／完整包根目录运行；自行安装 wheel／sdist 时请使用自己创建的 <code>.venv</code> 路径。Windows 在当前 PowerShell 中运行：</p>
+<pre><code class="language-powershell">. .\cli\.venv\Scripts\Activate.ps1
+</code></pre>
+<p>macOS／Linux 在当前终端中运行：</p>
+<pre><code class="language-sh">source cli/.venv/bin/activate
+</code></pre>
+<p>激活后，本文中的 <code>inktag-cli</code>（或 <code>inktag</code>）命令可直接使用，也可运行 <code>python -m inktag_cli</code>。每个新终端需要重新激活；若不想激活或系统限制激活脚本，继续使用上面的包装脚本，不必修改系统执行策略。退出环境运行 <code>deactivate</code>。</p>
+<pre><code class="language-sh">inktag-cli -h
+inktag-cli device scan
+inktag-cli device -n B892 info
+inktag-cli display -n B892 calendar
+inktag-cli image -n B892 upload photo.png --slot next --name &quot;旅行&quot;
+</code></pre>
+<h3 id="从-cli-启动本地-webui">从 CLI 启动本地 WebUI</h3>
+<p>回到解压后的 <code>InkTag-client</code> 根目录：</p>
+<pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\cli\inktag.ps1 webui start --repo . --enable-tls
+</code></pre>
+<pre><code class="language-sh">bash cli/inktag.sh webui start --repo . --enable-tls
+</code></pre>
+<p>如果主要使用网页和 Find，也可直接运行解压根目录的 <code>powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1</code>（Windows）或 <code>sh install_inktag.sh</code>（macOS／Linux）。这组入口准备本地 WebUI／Find 环境并启动服务，不会在系统里注册 CLI 命令。Find 环境位于用户数据目录的 <code>find/runtime/.venv</code>，与上面的 <code>cli/.venv</code> 分开；默认数据位置见 <a target="_blank" rel="noopener noreferrer" href="webui.html">WebUI 使用说明</a>。</p>
+<p>每个命令及子命令都支持 <code>-h</code> 和 <code>--help</code>，完整参数以当前命令帮助为准。以下示例使用已激活环境中的 <code>inktag-cli</code>；未激活时，用包装脚本替换命令开头即可。</p>
+<p>扫描、连接、渲染和查询等操作在终端中显示旋转指示和实时 <code>elapsed</code>。图片上传同时显示进度；完成或取消后自动收起。输入密码或确认操作时暂停动画。<code>--json</code>、输出重定向和日志服务不显示动画。</p>
+<p><code>device scan</code> 与其他设备命令的首次发现默认最多 30 秒，连接命令找到目标后会提前继续。设备管理、图片、显示、OTA 和主机任务均使用这个默认值。可在 <code>device</code> 后用 <code>--scan-timeout 秒数</code> 调整，例如 <code>device -n B892 --scan-timeout 45 info</code>；它不改变 OTA 或 Recovery 切换后的等待时限。扫描时会实时显示已发现设备数，下一行用逗号列出蓝牙名。结束后清除动态状态并显示结果表；按 Ctrl+C 取消时，也会列出已发现的设备，退出码为 130。其他命令结束时同样收起等待状态。</p>
+<p>连接完成后会显示蓝牙名和地址，无需开启 <code>--verbose</code>。原生 OTA 连接会先提示蓝牙链路已连接；这不代表升级已完成。使用 <code>--json</code> 时，连接提示以独立 JSON 行写入 stderr，stdout 仍只包含命令结果。</p>
+<h2 id="选择一台或多台设备">选择一台或多台设备</h2>
+<p>设备参数放在 <code>device</code>、<code>image</code>、<code>display</code> 等对应入口后面，子命令前面：</p>
+<pre><code class="language-sh">inktag-cli device -n B892 info
+inktag-cli device -a AA:BB:CC:DD:EE:FF info
+inktag-cli device -n B892,6775 info
+inktag-cli device -a AA:BB:CC:DD:EE:01,AA:BB:CC:DD:EE:02 health
+inktag-cli --json device -n B892,6775 health
+</code></pre>
+<p><code>-n</code>／<code>--ble-name</code> 匹配蓝牙名称，支持不区分大小写的唯一名称片段。完整名称优先；片段匹配多台时会列出候选，不直接操作。不能用芯片 UID 选择设备。<code>-a</code>／<code>--ble-address</code> 使用精确蓝牙地址；macOS 使用扫描结果中的 CoreBluetooth 标识。</p>
+<p>逗号分隔多个目标。若同时给名称和地址，两份列表必须等长，按位置配对为同一台设备的名称和地址；一台设备不会因此执行两次。重复目标会去重。批量默认逐台执行，分别报告结果；一台失败不会自动重试该操作。按 Ctrl+C 停止余下操作。不同设备也可在不同终端同时运行命令。</p>
+<p>连接参数还包括 <code>--scan-timeout</code>、<code>--connect-timeout</code>、<code>--no-time-sync</code> 和设备认证选项。普通连接默认校时；走时观察或需要保留设备时间时使用 <code>--no-time-sync</code>。只读诊断按各命令说明执行。</p>
+<h2 id="命令入口">命令入口</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>入口</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>device scan / info / status / health / watch / verify / restart</code></td>
+<td>扫描、设备信息、状态、健康、观察、核对和重启</td>
+</tr>
+<tr>
+<td><code>device display</code>，或 <code>display</code></td>
+<td>日历、时钟、设备页、清屏、停止和轮播</td>
+</tr>
+<tr>
+<td><code>device image</code>，或 <code>image</code></td>
+<td>图片转换、算法列表和上传</td>
+</tr>
+<tr>
+<td><code>device slot</code></td>
+<td>列出、显示、下载、删除图片槽</td>
+</tr>
+<tr>
+<td><code>device setting</code></td>
+<td>名称、二维码、屏幕、引脚、按键、字体和密码</td>
+</tr>
+<tr>
+<td><code>device led / time</code></td>
+<td>状态灯、灯光操作、时间读取和同步</td>
+</tr>
+<tr>
+<td><code>device ota / recovery</code></td>
+<td>OTA 包检查、升级、进入 Recovery 和返回应用</td>
+</tr>
+<tr>
+<td><code>device activation</code></td>
+<td>查看授权、导出激活请求、安装激活码</td>
+</tr>
+<tr>
+<td><code>device diagnostic</code></td>
+<td>健康、运行状态和走时诊断；功能取决于设备</td>
+</tr>
+<tr>
+<td><code>device findmy</code></td>
+<td>设备端 Find 启用、关闭和状态</td>
+</tr>
+<tr>
+<td><code>findmy</code></td>
+<td>本机 Find 账号、身份、查询、追踪；设备操作也可用 <code>findmy device</code></td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td>主机动态页面、天气数据、模板和定时任务</td>
+</tr>
+<tr>
+<td><code>webui</code></td>
+<td>WebUI 前台、后台、状态、停止、重启及日志</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="设备设置">设备设置</h2>
+<pre><code class="language-sh">inktag-cli device -n B892 setting show
+inktag-cli device -n B892 setting ble-name show
+inktag-cli device -n B892 setting ble-name set IKT_OM_B892
+inktag-cli device -n B892 setting device-name set &quot;My desk&quot;
+inktag-cli device -n B892 setting device-url set &quot;https://example.com/&quot;
+inktag-cli device -n B892 setting screen show
+inktag-cli device -n B892 setting screen profiles
+inktag-cli device -n B892 setting pins show
+inktag-cli device -n B892 setting pins set --config pins.json --yes
+</code></pre>
+<p><code>ble-name</code> 是用来搜索连接的蓝牙广播名。<code>device-name</code> 是设备信息页显示名称，目前为最多 24 字节的可打印英文字符。<code>device-url</code> 设置设备信息页二维码的 URL 或文本；<code>device-url sync</code> 根据当前蓝牙名更新托管链接。当前固件暂不支持二维码内容回读。</p>
+<p><code>setting pins</code> 统一管理 <code>screen</code>、<code>led</code>、<code>buttons</code> 和 <code>buzzer</code> 四个 JSON 区域。未提供的区域保留当前值。示例只修改两个按键：</p>
+<pre><code class="language-json">{
+  &quot;buttons&quot;: [
+    {&quot;gpio&quot;: 26, &quot;activeLow&quot;: true, &quot;pull&quot;: &quot;up&quot;},
+    {&quot;gpio&quot;: 255, &quot;activeLow&quot;: false, &quot;pull&quot;: &quot;none&quot;}
+  ]
+}
+</code></pre>
+<p>GPIO 255 表示未连接。屏幕和 LED 的格式可参考 <code>pins show</code> 返回的 <code>configuration</code>。屏幕 BUSY／RESET 等行为由所选驱动决定；板卡 EN 和 LED 保留有效电平设置。不提供 TXD/RXD 配置。按键最多两个，默认低电平有效；蜂鸣器通过模式和引脚配置，无需另一个启用开关。仅能修改设备实际声明可编辑的项目。</p>
+<p>屏幕/LED 与按键/蜂鸣器是分步写入；如果失败，结果会列出已经确认的区域，请先读取当前配置再决定下一步。<code>pins restore-screen-led-defaults</code> 只恢复屏幕和 LED 默认接线。</p>
+<pre><code class="language-sh">inktag-cli device -n B892 setting button show
+inktag-cli device -n B892 setting button set single next
+inktag-cli device -n B892 nfc usage
+inktag-cli device nfc commands calendar
+</code></pre>
+<p>两个按键共用单击、双击、长按动作。NFC 无需选择模式或开关；<code>device nfc usage</code> 只读显示设备的使用说明及已声明的手机命令。用 <code>device nfc commands calendar</code> 在本地生成命令文本，再在手机 NFC Tools 中选择“写入 → 添加记录 → 文本”。手机写命令需要 Pro 和对应固件支持，读取设备链接不执行设备动作。</p>
+<p>字体使用 <code>setting font info / build / install</code>。图标显示和日历偏好在 <code>setting screen mark / calendar</code>。短蜂鸣器测试使用 <code>setting buzzer test</code>。</p>
+<h2 id="密码与清理">密码与清理</h2>
+<p>设备密码通过隐藏提示或 <code>--password-stdin</code> 输入，不把密码放在命令参数中。默认会保存可复用控制凭据；<code>--password-stdin</code> 不代表不缓存。<code>--no-credential-cache</code> 禁止读取和写入本机控制凭据，仍保留设备端密码验证与限速。</p>
+<p><code>setting password status / set / disable</code> 管理设备密码。<code>setting reset-settings --yes</code> 清除普通设置和设备密码，保留图片、Pro、Find 和出厂身份；密码已启用时仍需原密码。<code>setting clear-user-data --yes</code> 清除用户图片与播放引用，保留设置、Pro、Find 和出厂身份。<code>device restart</code> 只重启。</p>
+<p>清理命令可使用 <code>--expected-device-id</code> 核验预期设备身份；这是操作前核验，不是设备选择方式。结果未确认时先重连读取状态，不自动重复清理。</p>
+<h2 id="图片显示和-ota">图片、显示和 OTA</h2>
+<p><code>image process</code> 离线转换图片，<code>image algorithms</code> 查看算法；均不需要设备。上传可指定 <code>--slot next</code> 或具体图槽、<code>--name</code> 和 <code>--store-only</code>，满槽时可显式选择覆盖。批量上传会针对每台设备的实际屏幕处理图片。静态显示不等于设备动态布局。</p>
+<pre><code class="language-sh">inktag-cli device -n B892 display slideshow start --interval 30m
+inktag-cli device -n B892 slot list
+inktag-cli device ota inspect app.zip
+inktag-cli device -n B892 ota update app.zip
+inktag-cli device -n B892 recovery enter
+inktag-cli device -n B892_OTA recovery exit
+</code></pre>
+<p>OTA 使用与主板匹配的已签名包，保留包完整性、签名和更新后身份/状态检查。进入 Recovery 与选择 OTA 包是独立操作。返回应用使用 <code>recovery exit</code>（与 <code>recovery resume-app</code> 相同）。完整烧录使用独立主控工具，不通过 CLI 代替烧录器。</p>
+<p>返回应用也可以用蓝牙短名，例如 <code>device -n 43D2 recovery exit</code>；匹配到多台时需指定完整名称或地址。各平台显示相同的连接、请求返回和应用就绪阶段，详细连接诊断用 <code>--verbose</code> 查看；<code>--json</code> 的原始结果字段保持不变，阶段提示写到 stderr。</p>
+<h2 id="webui本地日志与-find">WebUI、本地日志与 Find</h2>
+<pre><code class="language-sh">inktag-cli webui serve
+inktag-cli webui start --enable-tls
+inktag-cli webui status
+inktag-cli webui log -f
+inktag-cli webui log --service find -f
+inktag-cli webui restart --enable-tls
+inktag-cli webui stop
+inktag-cli findmy identity list
+</code></pre>
+<p><code>serve</code> 前台运行，访问日志直接显示在终端；<code>start</code> 后台运行，日志写入用户数据目录。启动后自动打开浏览器，可用 <code>--no-open</code> 关闭。默认 HTTP，显式提供 <code>--enable-tls</code> 或证书参数才使用 HTTPS；重启不隐式继承之前的 TLS 模式。已有服务与请求协议不符时会提示重启。</p>
+<p>同一数据目录只运行一个服务，<code>serve</code> 与 <code>start</code> 共用状态登记；切换 HTTP/HTTPS 使用 <code>restart</code>，不需要覆盖证书。若 <code>status</code> 提示服务可访问但未登记，请先关闭原来的 <code>serve</code> 窗口，再重新启动；只读状态检查不会接管未知进程。</p>
+<p>手机访问使用 <code>webui serve --lan</code>，自动准备局域网 HTTPS 和访问口令。服务器只记录请求方法、路径、状态码和耗时，不记录请求正文及查询参数。页面的 <code>#</code> 路由切换不一定发起 HTTP 请求，因此不一定产生访问日志。</p>
+<p>Find 是实验功能。<code>findmy</code> 默认识别本机服务实际地址及 HTTPS 证书；其他本地实例可用 <code>findmy --server URL --ca-cert CA.pem</code>。不会通过关闭证书验证自动降级连接。账号登录/验证码在 <code>findmy account</code> 下，密码和验证码通过隐藏提示输入；<code>findmy tracking</code> 管理自动查询及本地历史。CLI 与 WebUI 使用同一份本地会话和身份数据。</p>
+<h2 id="主机动态页面">主机动态页面</h2>
+<p>模板入口为 <code>host template</code>，不再使用顶层 <code>template</code>。<code>host init / import</code> 创建任务，<code>host fetch / render / validate</code> 获取数据、渲染和检查，<code>host run --once</code> 可供系统定时任务调用。默认只生成本地预览；显式 <code>--send</code> 才发送到设备。自动更新需要主机保持在线并在设备蓝牙范围内。任务绑定实际蓝牙地址及预期设备身份，不能仅依赖名称相同。</p>
+<p>更多使用说明见 <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag-manual/">InkTag 使用手册</a>。许可与第三方声明见项目的许可文件。</p></main></body></html>

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "toolsVersion": "0.2.0.3",
+  "chip": "nrf52832",
+  "buildTarget": "nrf52832_priceetag",
+  "brand": "priceetag",
+  "firmwareFamily": "nrf52832_priceetag",
+  "layout": null,
+  "firmware": null,
+  "fullWriterQualified": false,
+  "kind": "tools-only",
+  "firmwareVersion": null,
+  "firmwareSelection": "external-required",
+  "config": "tools/configs/PriceEtag_V1.7.toml"
+}

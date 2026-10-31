@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "toolsVersion": "0.2.0.12",
+  "requiresInkTagCli": false,
+  "bleRuntimeRequired": false,
+  "hostQrGeneration": false,
+  "pythonExternalModules": [
+    "_cffi_backend",
+    "cryptography",
+    "pylink"
+  ],
+  "localPowerShellHelpGuard": "tools/internal/powershell-cli.ps1",
+  "scripts": {
+    "tools/check.ps1": {
+      "language": "powershell",
+      "cliProcessRequired": false
+    },
+    "tools/flash.ps1": {
+      "language": "powershell",
+      "cliProcessRequired": false
+    },
+    "tools/internal/context.ps1": {
+      "language": "powershell",
+      "cliProcessRequired": false
+    },
+    "tools/internal/da-backup-archive.ps1": {
+      "language": "powershell",
+      "cliProcessRequired": false
+    },
+    "tools/internal/da14585-board-config.py": {
+      "language": "python",
+      "imports": [
+        "argparse",
+        "hashlib",
+        "json",
+        "pathlib",
+        "re",
+        "runpy",
+        "struct",
+        "tomllib",
+        "zlib"
+      ],
+      "privateFiles": [
+        "da14585-full-state.py"
+      ]
+    },
+    "tools/internal/da14585-commander-backend.py": {
+      "language": "python",
+      "imports": [
+        "hashlib",
+        "pathlib",
+        "re",
+        "runpy",
+        "struct",
+        "time",
+        "zlib"
+      ],
+      "privateFiles": [
+        "da14585-commander-session.py",
+        "da14585-full-backend.py"
+      ]
+    },
+    "tools/internal/da14585-commander-readback.py": {
+      "language": "python",
+      "imports": [
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "struct",
+        "subprocess",
+        "time"
+      ],
+      "privateFiles": []
+    },
+    "tools/internal/da14585-commander-session.py": {
+      "language": "python",
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "queue",
+        "re",
+        "runpy",
+        "threading",
+        "time"
+      ],
+      "privateFiles": [
+        "da14585-commander-readback.py",
+        "da14585-conpty.py"
+      ]
+    },
+    "tools/internal/da14585-conpty.py": {
+      "language": "python",
+      "imports": [
+        "ctypes",
+        "subprocess"
+      ],
+      "privateFiles": []
+    },
+    "tools/internal/da14585-dap-session.py": {
+      "language": "python",
+      "imports": [
+        "ctypes"
+      ],
+      "privateFiles": []
+    },
+    "tools/internal/da14585-full-backend.py": {
+      "language": "python",
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "pylink",
+        "runpy",
+        "struct",
+        "time",
+        "zlib"
+      ],
+      "privateFiles": [
+        "da14585-commander-readback.py",
+        "da14585-dap-session.py",
+        "da14585-full-state.py",
+        "da14585-image-verify.py"
+      ]
+    },
+    "tools/internal/da14585-full-state.py": {
+      "language": "python",
+      "imports": [
+        "re",
+        "struct",
+        "zlib"
+      ],
+      "privateFiles": []
+    },
+    "tools/internal/da14585-full-transaction.py": {
+      "language": "python",
+      "imports": [
+        "__future__",
+        "argparse",
+        "dataclasses",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "runpy",
+        "stat",
+        "struct",
+        "time",
+        "zlib"
+      ],
+      "privateFiles": [
+        "da14585-board-config.py",
+        "da14585-commander-backend.py",
+        "da14585-full-backend.py",
+        "da14585-full-state.py",
+        "da14585-image-verify.py"
+      ]
+    },
+    "tools/internal/da14585-image-verify.py": {
+      "language": "python",
+      "imports": [
+        "argparse",
+        "cryptography",
+        "hashlib",
+        "json",
+        "pathlib",
+        "re",
+        "runpy",
+        "struct",
+        "zlib"
+      ],
+      "privateFiles": [
+        "da14585-full-state.py"
+      ]
+    },
+    "tools/internal/dependency-runtime.py": {
+      "language": "python",
+      "imports": [
+        "_cffi_backend",
+        "argparse",
+        "cryptography",
+        "hashlib",
+        "importlib",
+        "json",
+        "os",
+        "pathlib",
+        "struct",
+        "sys",
+        "zipfile"
+      ],
+      "privateFiles": []
+    },
+    "tools/internal/host-common.ps1": {
+      "language": "powershell",
+      "cliProcessRequired": false
+    },
+    "tools/internal/jlink-tools.ps1": {
+      "language": "powershell",
+      "cliProcessRequired": false
+    },
+    "tools/internal/powershell-cli.ps1": {
+      "language": "powershell",
+      "cliProcessRequired": false
+    },
+    "tools/internal/probe-da14585-dap.py": {
+      "language": "python",
+      "imports": [
+        "argparse",
+        "hashlib",
+        "json",
+        "pathlib",
+        "pylink",
+        "runpy",
+        "struct",
+        "time"
+      ],
+      "privateFiles": [
+        "da14585-dap-session.py"
+      ]
+    },
+    "tools/probe.ps1": {
+      "language": "powershell",
+      "cliProcessRequired": false
+    },
+    "tools/setup.ps1": {
+      "language": "powershell",
+      "cliProcessRequired": false
+    },
+    "tools/validate.ps1": {
+      "language": "powershell",
+      "cliProcessRequired": false
+    }
+  }
+}

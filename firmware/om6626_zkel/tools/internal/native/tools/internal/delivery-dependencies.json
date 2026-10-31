@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "toolsVersion": "0.2.0.7",
+  "sourceToolsVersion": "0.2.0-tools.7",
+  "toolCapabilities": ["preserves-app-signature-tail", "preserves-valid-native-pro", "clears-health-history", "optional-old-state-defaults", "same-operation-uid-address-default"],
+  "supportedOS": "Windows x64",
+  "testedPowerShell": [
+    "5.1",
+    "7"
+  ],
+  "pythonVersion": "3.12.0",
+  "pythonDownload": "https://www.python.org/downloads/release/python-3120/",
+  "pythonPackages": {
+    "pip": "23.2.1",
+    "cryptography": "50.0.0",
+    "cffi": "2.1.1",
+    "pycparser": "3.0",
+    "unicorn": "2.1.4",
+    "intelhex": "2.3.0",
+    "qrcode": "8.2",
+    "colorama": "0.4.6",
+    "PyYAML": "6.0.3"
+  },
+  "jlinkVersion": "7.88j",
+  "jlinkDownload": "https://www.segger.com/downloads/jlink/",
+  "jlinkRedistributed": false,
+  "jlinkFiles": {
+    "JLink.exe": "405f4d0a239475e5529f6d09a130cf5bbfe53ac97eb25cec9e492c10df16c805",
+    "JFlash.exe": "430754990cab7277c0c3ae3e23245d248d27fa2d27d5be7508fcacc878368913",
+    "JLinkARM.dll": "7d61c9cc53b6383837ccd01ad0732f7798e249fc0b2adeaad3b967c906794e9f"
+  },
+  "devicePackSource": "https://gitee.com/jtcom/OM6626.git",
+  "devicePackSubdirectory": "tools/plugins/jlink",
+  "devicePackRedistributed": false,
+  "devicePackFiles": {
+    "JLinkDevices.xml": "12f821b52aabddca30300bd10710ecae3be313d08d3b70da90481abf36f9ec60",
+    "Devices/Onmicro/OM662XX_nombr.elf": "9a53c01b9363371e8eff44a7a9de80e2942e96025aede3ade8053875ab6ad640",
+    "Devices/Onmicro/OM662XX.elf": "8523643fc138b84601c850571499068d36da954b60e7a3aa0be68386ad8e13af"
+  },
+  "licenseBoundary": "SEGGER software and vendor loaders are not redistributed; user supplies official licensed installation/device support. Only required device-support files are copied by explicit setup. No SDK or compiler is needed at runtime."
+}

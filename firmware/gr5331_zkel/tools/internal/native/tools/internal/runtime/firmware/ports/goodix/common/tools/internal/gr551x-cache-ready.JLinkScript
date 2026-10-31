@@ -1,0 +1,18 @@
+// GR551x-only strict detection extension. Read the existing SDK RAM cache,
+// never eFuse hardware or Flash. Leave ROM running until its valid marker.
+static int _CacheWaitReported;
+static int _Gr551xCacheReady(void) {
+  int r;
+  U32 v;
+  r = JLINK_CORESIGHT_WriteAP(JLINK_CORESIGHT_AP_REG_ADDR, 0x0080322C);
+  if (r < 0) { return 1; }
+  v = JLINK_CORESIGHT_ReadAP(JLINK_CORESIGHT_AP_REG_DATA);
+  if ((v & 0xFFFF0000) != 0x47440000) {
+    if (_CacheWaitReported == 0) {
+      _CacheWaitReported = 1;
+      JLINK_SYS_Report("GR_PACKAGE_CACHE_WAIT: core responds; waiting for ROM package cache before halt.");
+    }
+    return 1;
+  }
+  return 0;
+}

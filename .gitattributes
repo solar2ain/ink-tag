@@ -1,0 +1,8 @@
+# Preserve the exact reviewed release bytes on every platform.
+* -text
+webui/** -text
+cli/** -text
+releases/** -text
+firmware/manifest.json -text
+firmware/** -text
+tools/** -text

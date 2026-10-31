@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="supported-devices-and-board-identification">Supported devices and board identification</h1>
+<p><a target="_blank" rel="noopener noreferrer" href="../zh-CN/supported-devices.html">中文</a> | English</p>
+<p>Check the controller, board marking and fitted screen before choosing an installation package. Product names and screen sizes alone do not identify compatible hardware. Installation is not recommended where compatibility is still unconfirmed.</p>
+<h2 id="gr5331">GR5331</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Board marking</th>
+<th>Product</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ZK_EL_GR5331_2.13_V1.1</code></td>
+<td>ZKC21V</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="gr5513">GR5513</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Board marking</th>
+<th>Product</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ZK_EL_GR42V_V1.2</code></td>
+<td>ZKC42VM</td>
+</tr>
+<tr>
+<td><code>ZK_EL_GR42V_V1.2</code></td>
+<td>ZKC42V-N (NFC fitted)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="gr551x">GR551x</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Board marking</th>
+<th>Product</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ZK_EL_GR_2.13_V1.2</code></td>
+<td>ZKC21V (GR551x batch)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="gr5515">GR5515</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Board marking</th>
+<th>Product</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Confirm before installation</td>
+<td>Early ZKC42VM</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="om6626">OM6626</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Board marking</th>
+<th>Product</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ZK_EL_OM6626_2.13_V1.1</code></td>
+<td>ZKC21V-N (OM variant)</td>
+</tr>
+<tr>
+<td><code>ZK_EL_OM21BA_V1.1</code></td>
+<td>ZKC21B-NAE4</td>
+</tr>
+<tr>
+<td><code>ZK_EL_OM42BA_V1.0</code></td>
+<td>ZKC42B-NE4</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="tlsr8359-hs9118">TLSR8359 (HS9118)</h2>
+<p>Updated 2026-10-28. Identify the complete board marking and fitted panel; completed tests and remaining checks are listed separately.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Board marking</th>
+<th>Product</th>
+<th>Original screen</th>
+<th>Tested use and installation notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HS_EL5101_5M_66_05</td>
+<td>Hanshow Nowa-154R-N</td>
+<td>1.54 inch, 152×152, three colours</td>
+<td>Native pages, images, stored images and orientation tested; do not use a 200×200 board configuration</td>
+</tr>
+<tr>
+<td>HS_EL5101_5M_60_04</td>
+<td>Hanshow Stellar-S3TN@ (product label not yet confirmed)</td>
+<td>1.54 inch, 200×200, three colours</td>
+<td>P154030 assembly tested; the E0154A07-A1 assembly still needs confirmation</td>
+</tr>
+<tr>
+<td>HS_EL5102_1M_67_33</td>
+<td>Hanshow Nowa-213R-N</td>
+<td>2.13 inch, 128×250, three colours</td>
+<td>Calendar, native pages, images, storage and slideshow tested</td>
+</tr>
+<tr>
+<td>HSEL4Q_02_13M_30</td>
+<td>Hanshow Nebular-213R-N</td>
+<td>2.13 inch, 128×250, four colours</td>
+<td>Complete refresh, native pages and images tested; use a separate configuration from Nowa-213R-N</td>
+</tr>
+<tr>
+<td>HSEL4Q_04_20M_33</td>
+<td>Hanshow Nebular-420R-N</td>
+<td>4.2 inch, 400×300, three or four colours</td>
+<td>Use SSD1683 or JD79668AA according to the fitted panel</td>
+</tr>
+<tr>
+<td>HSEL5_01_54M_00</td>
+<td>Hanshow StellarPro-154R-N, earlier version</td>
+<td>1.54 inch, 200×200, three colours, replaceable panel</td>
+<td>JD79653A; orientation, colours, native pages, fonts, RGB and NFC tested</td>
+</tr>
+<tr>
+<td>HSEL5_01_54M_02</td>
+<td>Hanshow StellarPro-154R-N, later version (YW2116 batch)</td>
+<td>1.54 inch, 200×200, three colours, fixed panel</td>
+<td>Clock, calendar, device page, fonts, panel temperature, voltage display and phone NFC reading tested; use this board's separate screen profile</td>
+</tr>
+<tr>
+<td>HSEL5Q_01_54M_00</td>
+<td>Hanshow StellarPro-154Q-N</td>
+<td>1.54 inch, 200×200, four colours</td>
+<td>Basic communication, OTA and configuration tested; complete-panel image and colours still unconfirmed, so installation is not yet recommended</td>
+</tr>
+<tr>
+<td>HSEL4Q_01_54M_31</td>
+<td>Hanshow NebularPro-154Q-N</td>
+<td>1.54 inch, 200×200, four colours</td>
+<td>Original-panel native pages, Chinese fonts and digits visually confirmed; NFC tested; complete-flashing verification still needs completion</td>
+</tr>
+<tr>
+<td>HSEL3_02_66M_36</td>
+<td>Hanshow PolarisPro-260Q-N</td>
+<td>2.66 inch, 152×296, four colours</td>
+<td>Calendar, portrait images, user fonts and orientation tested; NFC and standby current need separate confirmation</td>
+</tr>
+</tbody>
+</table></div>
+<p>The earlier and later StellarPro-154R-N share a product name but use different boards: <code>_00</code> has a replaceable panel and <code>_02</code> has a fixed panel. Their panel drivers differ. Matching pins do not make their complete board or screen configurations interchangeable.</p>
+<p><code>E0154A07-A1</code> is not an established interchangeable replacement for the tested <code>P154030-MF1-A / P154030-0306</code> assembly. Check the product, board marking and FPC separately rather than choosing by 200×200 resolution alone.</p>
+<p>The new TLSR firmware with startup signature verification is still being tested and is not yet a recommended installation. Existing display/function tests above do not replace startup and complete-flashing checks for that new version. See <a target="_blank" rel="noopener noreferrer" href="tested-screens.html#original-hanshow-screens">tested screens</a> for panel coverage and partial refresh.</p>
+<h2 id="nrf52832">nRF52832</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Board marking</th>
+<th>Product</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PriceETag V1.7</code></td>
+<td>PriceETag</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="nrf52811">nRF52811</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Board marking</th>
+<th>Product</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EL022HWRL</code></td>
+<td>AESL / Hema EL022H2</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="da14585">DA14585</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Board marking</th>
+<th>Product</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Confirm before installation</td>
+<td>AESL / Hema AESL-2.9 and AESL-4.2</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <a target="_blank" rel="noopener noreferrer" href="../zh-CN/supported-devices.html">detailed device table</a> includes screen sizes and installation notes. Early GR5515 and some DA14585 boards need further identification before selecting an installation package.</p>
+<p>ZKC21V and ZKC42VM have different hardware variants, and Nebular-420R-N can have different screens. Some boards share a marking with and without NFC; select the configuration matching the hardware fitted to your board.</p>
+<p>This release includes WebUI, CLI, user guides and firmware for supported devices, including nRF52832, nRF52811 and DA14585. Firmware and complete-flashing tools are provided by controller and board. Use only actual <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/releases">Release attachments</a>. Installation on TLSR boards with unconfirmed screen compatibility is not recommended.</p>
+<p>See <a target="_blank" rel="noopener noreferrer" href="tested-screens.html">tested screens and partial refresh</a>, <a target="_blank" rel="noopener noreferrer" href="devices.html">device/screen details</a>, <a target="_blank" rel="noopener noreferrer" href="flash.html">complete flashing</a>, and <a target="_blank" rel="noopener noreferrer" href="ota.html">OTA/Recovery</a>. Hardware capability and the connected device's declarations determine which functions are available.</p></main></body></html>

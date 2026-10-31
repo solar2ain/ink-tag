@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="client-updates">Client updates</h1>
+<p><a target="_blank" rel="noopener noreferrer" href="../zh-CN/updates.html">中文</a> | English</p>
+<p>View the version and check for updates under Settings → Client settings → About. WebUI, CLI and device firmware versions are independent; updating a client does not update a device.</p>
+<h2 id="download-and-install">Download and install</h2>
+<ol>
+<li>Read the release notes and download the required attachment from <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/releases">GitHub Releases</a>. If none is listed, that version is not available for download.</li>
+<li>Follow <a target="_blank" rel="noopener noreferrer" href="releases.html">downloads and checksums</a> and choose your client.</li>
+<li>Hosted WebUI: reopen the page for the deployed version. Standalone HTML: download and open the new file. Local service: stop the old service, update as described in <a target="_blank" rel="noopener noreferrer" href="webui.html">WebUI</a>, then restart using the same data directory.</li>
+<li>CLI: update in its existing isolated environment using the <a target="_blank" rel="noopener noreferrer" href="cli.html">CLI guide</a>, then check <code>inktag --version</code>.</li>
+</ol>
+<p>Device firmware is provided for exact controllers and boards, including nRF52832, nRF52811 and DA14585. Connect to view available OTA packages, or download a matching file and follow <a target="_blank" rel="noopener noreferrer" href="ota.html">wireless updates</a>; never substitute another MCU or board's file. Checksums check file integrity, not publisher signatures.</p>
+<p>Automatic matching requires complete compatibility information from the device. If matching is unavailable, select a local OTA package for your device from Releases; normal package validation and manual updates remain available. See the <a target="_blank" rel="noopener noreferrer" href="../CHANGELOG.html">changelog</a> for version changes.</p>
+<p>The CLI can also query the public firmware catalogue without connecting to a device:</p>
+<pre><code class="language-sh">inktag-cli device ota check --family gr5331_zkel --current-version 0.2.0
+</code></pre>
+<p>Use the exact firmware family reported by your device. Equal versions do not trigger an update recommendation. This command only checks; it does not install firmware.</p>
+<h2 id="if-checking-fails">If checking fails</h2>
+<p>A timeout or network failure does not prevent connections or ordinary use. Retry later or check Releases directly; use the local client if the hosted site is unavailable. No newer version does not mean every device supports identical features.</p>
+<p>Update checks send no device address, password, identity or Find data. Keep your local data and error details when troubleshooting; do not delete the data directory or reflash a device to fix a client update.</p></main></body></html>

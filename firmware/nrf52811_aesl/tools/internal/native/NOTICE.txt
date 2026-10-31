@@ -1,0 +1,5 @@
+InkTag Windows tools are provided under the accompanying AGPL-3.0 license.
+The inherited GPL-3.0 notice is retained under LICENSES.
+Portable CPython and Python dependencies retain their licenses in their bundled archives and metadata.
+SEGGER software and drivers are not redistributed; install the specified official J-Link pack separately.
+This tools-only package contains host tools and their portable dependencies. Firmware is supplied separately through an explicit flash parameter. No firmware, private keys, SDKs, compilers, private firmware sources or saved device data are included.

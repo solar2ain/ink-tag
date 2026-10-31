@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "entries": {
+    "setup": "firmware/ports/telink/tlsr8359/tools/setup.ps1",
+    "probe": "firmware/ports/telink/tlsr8359/tools/probe.ps1",
+    "backup": "firmware/ports/telink/tlsr8359/tools/backup.ps1",
+    "flash": "firmware/ports/telink/tlsr8359/tools/flash.ps1"
+  },
+  "configs": [
+    {
+      "name": "HSEL3_02_66M_36.toml",
+      "original": "firmware/ports/telink/tlsr8359/tools/configs/HSEL3_02_66M_36.toml"
+    },
+    {
+      "name": "HSEL4Q_01_54M_31.toml",
+      "original": "firmware/ports/telink/tlsr8359/tools/configs/HSEL4Q_01_54M_31.toml"
+    },
+    {
+      "name": "HSEL4Q_02_13M_30.toml",
+      "original": "firmware/ports/telink/tlsr8359/tools/configs/HSEL4Q_02_13M_30.toml"
+    },
+    {
+      "name": "HSEL4Q_04_20M_33-SSD1683.toml",
+      "original": "firmware/ports/telink/tlsr8359/tools/configs/HSEL4Q_04_20M_33-SSD1683.toml"
+    },
+    {
+      "name": "HSEL4Q_04_20M_33-YW2427.toml",
+      "original": "firmware/ports/telink/tlsr8359/tools/configs/HSEL4Q_04_20M_33-YW2427.toml"
+    },
+    {
+      "name": "HSEL4Q_04_20M_33.toml",
+      "original": "firmware/ports/telink/tlsr8359/tools/configs/HSEL4Q_04_20M_33.toml"
+    },
+    {
+      "name": "HSEL5Q_01_54M_00.toml",
+      "original": "firmware/ports/telink/tlsr8359/tools/configs/HSEL5Q_01_54M_00.toml"
+    },
+    {
+      "name": "HSEL5_01_54M_00.toml",
+      "original": "firmware/ports/telink/tlsr8359/tools/configs/HSEL5_01_54M_00.toml"
+    },
+    {
+      "name": "HSEL5_01_54M_02.toml",
+      "original": "firmware/ports/telink/tlsr8359/tools/configs/HSEL5_01_54M_02.toml"
+    },
+    {
+      "name": "HS_EL5101_5M_60_04.toml",
+      "original": "firmware/ports/telink/tlsr8359/tools/configs/HS_EL5101_5M_60_04.toml"
+    },
+    {
+      "name": "HS_EL5101_5M_66_05.toml",
+      "original": "firmware/ports/telink/tlsr8359/tools/configs/HS_EL5101_5M_66_05.toml"
+    },
+    {
+      "name": "HS_EL5102_1M_67_33.toml",
+      "original": "firmware/ports/telink/tlsr8359/tools/configs/HS_EL5102_1M_67_33.toml"
+    }
+  ]
+}

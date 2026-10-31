@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../index.html">InkTag WebUI</a></nav><main><h1 id="tested-screens-and-partial-refresh">Tested screens and partial refresh</h1>
+<p><a target="_blank" rel="noopener noreferrer" href="../zh-CN/tested-screens.html">中文</a> | English</p>
+<p>This page lists screens with physical InkTag test results. Use it to choose a screen profile alongside <a target="_blank" rel="noopener noreferrer" href="supported-devices.html">supported boards</a> and the <a target="_blank" rel="noopener noreferrer" href="devices.html">screen replacement guide</a>.</p>
+<p><strong>Matching size, resolution or connector does not establish interchangeability.</strong> Check the panel marking, colours, board wiring and exact driver profile. A driver appearing in Settings does not mean every panel using that controller has been tested.</p>
+<h2 id="reading-the-partial-refresh-column">Reading the partial-refresh column</h2>
+<ul>
+<li><strong>Clock partial refresh</strong> means updating the clock-digit region on the listed supported board/panel/profile combination. It requires activated Pro and does not provide arbitrary image-region updates.</li>
+<li><strong>Not offered</strong> means current InkTag does not offer partial refresh for that combination. It does not establish a theoretical controller limitation.</li>
+<li><strong>Not verified</strong> means existing tests do not establish working partial refresh.</li>
+<li><strong>Available, visual result not fully checked</strong> means the clock function exists but the exact board/panel's image and ghosting have not been completely checked.</li>
+</ul>
+<p>The partial-refresh clock still performs a daily full refresh and changes its background. First display, maintenance and state changes may also need full refresh. Frequent updates use more power than occasional image changes.</p>
+<h2 id="original-zkc-screens">Original ZKC screens</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Panel / product</th>
+<th>Size and resolution</th>
+<th>Colours</th>
+<th>Driver profile</th>
+<th>Physically tested use</th>
+<th>Partial refresh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GR5331 ZKC21V original</td>
+<td>2.13 inch, 128×250</td>
+<td>Black/white/red</td>
+<td>SSD1680, ZKC21V</td>
+<td>Calendar, clock and images; clock-region updates visually confirmed</td>
+<td>Clock partial refresh, Pro required; some samples retain faint grey ghosting</td>
+</tr>
+<tr>
+<td>Small GR5513 ZKC21V, MF213M0001 / MOFANG M001-4</td>
+<td>2.13 inch, 128×250</td>
+<td>Black/white/red</td>
+<td>SSD1680, ZKC21V</td>
+<td>Minute updates, recovery after midnight full refresh, images, fonts and slideshow tested</td>
+<td>Clock function available with Pro; visual result not fully checked</td>
+</tr>
+<tr>
+<td>OM ZKC21V-N original</td>
+<td>2.13 inch, 128×250</td>
+<td>Black/white/red</td>
+<td>SSD1680 driver, ZKC21V</td>
+<td>Readable calendar and device page; complete display edges and stored-image display still need confirmation</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>ZKC42V, HE042AD7A2 / HINK-E042A48-A1</td>
+<td>4.2 inch, 400×300</td>
+<td>Black/white/red</td>
+<td>UC8276, ZKC42V</td>
+<td>Clear, calendar, clock and device page on GR5513</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>ZKC42VM, HE042A55 / HINK-E042A13-FPC-A0</td>
+<td>4.2 inch, 400×300</td>
+<td>Black/white/red</td>
+<td>SSD1683, ZKC42VM</td>
+<td>Original-panel full refresh</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>ZKC21B, HINK-E0213A349</td>
+<td>2.13 inch, 128×250</td>
+<td>Black/white/red/yellow</td>
+<td>JD79661 driver, ZKC21B</td>
+<td>Clear, calendar, clock and image tests on OM6626; top-edge display still needs complete confirmation</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>ZKC42B original</td>
+<td>4.2 inch, 400×300</td>
+<td>Black/white/red/yellow</td>
+<td>JD79668AA driver, ZKC42B</td>
+<td>Images and stored-image display on OM6626, with calendar Chinese text, dates and digits visually confirmed</td>
+<td>Not offered</td>
+</tr>
+</tbody>
+</table></div>
+<p>Some 128×250 panels have a visible width of 122 pixels. The client handles this automatically; do not choose a different controller because of that difference.</p>
+<h2 id="original-hanshow-screens">Original Hanshow screens</h2>
+<p>The different 200×200 panels below need separate profiles. SSD1681 is the display name for the compatible command path; the exact silicon is not independently identified. “JD family” also leaves the exact IC unconfirmed. Match the specific panel or board.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Panel / identifying mark</th>
+<th>Size and resolution</th>
+<th>Colours</th>
+<th>Driver profile</th>
+<th>Physically tested use</th>
+<th>Partial refresh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nowa-154R-N, FPC-8002, HS_EL5101_5M_66_05</td>
+<td>1.54 inch, 152×152</td>
+<td>Black/white/red</td>
+<td>SSD1675, Nowa 154R</td>
+<td>TLSR8359: clear, native pages, images and stored images</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>P154030-MF1-A / P154030-0306, HS_EL5101_5M_60_04</td>
+<td>1.54 inch, 200×200</td>
+<td>Black/white/red</td>
+<td>SSD1681 profile for P154030</td>
+<td>TLSR8359: clear, calendar, images, native pages and orientation; use this panel's separate profile</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>StellarPro-154R-N earlier replaceable-panel version, FPC-5301 / DEPG0154RWF653CF, HSEL5_01_54M_00</td>
+<td>1.54 inch, 200×200</td>
+<td>Black/white/red</td>
+<td>JD79653A, Stellar 154</td>
+<td>TLSR8359: orientation, colours, user fonts, clock, calendar and device page</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>StellarPro-154R-N later fixed-panel version, HSEL5_01_54M_02 (YW2116 batch)</td>
+<td>1.54 inch, 200×200</td>
+<td>Black/white/red</td>
+<td>SSD1681-compatible driver, separate HSEL5_01_54M_02 profile; exact IC unconfirmed</td>
+<td>TLSR8359: clock, device page, calendar, user fonts, panel temperature and voltage display; fixed original panel</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>NebularPro-154Q-N, HSEL4Q_01_54M_31</td>
+<td>1.54 inch, 200×200</td>
+<td>Black/white/red/yellow</td>
+<td>JD family, separate HSEL4Q_01_54M_31 profile; exact IC unconfirmed</td>
+<td>TLSR8359: calendar, clock, device page and four font roles tested; Chinese, English and time digits visually confirmed</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>Nowa-213R-N, P213124-MF1-A</td>
+<td>2.13 inch, 128×250</td>
+<td>Black/white/red</td>
+<td>UC factory profile, Nowa 213R</td>
+<td>TLSR8359: calendar visually confirmed; stored images and page operations tested</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>Nebular-213R-N, AN0213A250-122KS682 / HS-E2.13ME-V1.0-M</td>
+<td>2.13 inch, 128×250</td>
+<td>Black/white/red/yellow</td>
+<td>JD79676, Nebular 213R</td>
+<td>TLSR8359: full refresh, native pages and images</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>PolarisPro-260Q-N, HSEL3_02_66M_36</td>
+<td>2.66 inch, 152×296</td>
+<td>Black/white/red/yellow</td>
+<td>JD family, HSEL3_02_66M_36</td>
+<td>TLSR8359: calendar, portrait images, user fonts and orientation</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>Nebular-420R-N, YW2520 four-colour assembly</td>
+<td>4.2 inch, 400×300</td>
+<td>Black/white/red/yellow</td>
+<td>JD79668AA, Nebular 420R</td>
+<td>TLSR8359 original panel; clear, calendar and four-colour images visually confirmed on GR5513 replacements</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>Nebular-420R-N, YW2427 three-colour assembly</td>
+<td>4.2 inch, 400×300</td>
+<td>Black/white/red</td>
+<td>SSD1683</td>
+<td>Original-panel display on TLSR8359; separate from the four-colour assembly above</td>
+<td>Not offered</td>
+</tr>
+</tbody>
+</table></div>
+<p>The P154030 client profile is named SSD1681; it does not cover every similar 200×200 connector. HSEL5_01_54M_00 and _02 are the replaceable- and fixed-panel versions and require different profiles. The E0154A07-A1 assembly remains unconfirmed and is not merged into the tested P154030 entry. GR5515 replacement tests with the Nebular four-colour panel currently establish clear-only operation.</p>
+<h2 id="huawei-398-inch-four-colour-screens">Huawei 3.98-inch four-colour screens</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Panel</th>
+<th>Resolution</th>
+<th>Colours</th>
+<th>Driver profile</th>
+<th>Physically tested use</th>
+<th>Partial refresh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Huawei A0</td>
+<td>768×552</td>
+<td>Black/white/red/yellow</td>
+<td>JD79665AA, Huawei A0</td>
+<td>GR5513: clear, calendar and four-colour images; TLSR8359: calendar and images; nRF52811: pages, images and orientation</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>Huawei A1</td>
+<td>768×552</td>
+<td>Black/white/red/yellow</td>
+<td>JD79665AA, Huawei A1</td>
+<td>GR5513: clear, calendar and four-colour images; GR5331: clear and calendar; TLSR8359: calendar, device page and images; nRF52811: images, orientation and slideshow</td>
+<td>Not offered</td>
+</tr>
+</tbody>
+</table></div>
+<p>Choose the separate A0 or A1 profile. Related GR5515 replacements currently have clear-only results, not the complete display coverage above. Direct display does not guarantee that a board can store the image; DA14585, for example, has insufficient image storage for a complete four-colour frame at this resolution.</p>
+<h2 id="e6-six-colour-screens">E6 six-colour screens</h2>
+<p>None of these profiles offers clock partial refresh. Physical control requires Pro; six-colour conversion and offline preview remain free.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Panel / identifying mark</th>
+<th>Size and resolution</th>
+<th>Driver profile</th>
+<th>Physically tested use and limits</th>
+<th>Partial refresh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Osprey HT0154A10 / HINK-T0154A10-A1</td>
+<td>1.54 inch, 240×240</td>
+<td>IST7513, HT0154A10</td>
+<td>TLSR8359: image transfer, calendar and panel temperature reported working</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>Osprey HT0169A06 / HINK-T0169A06-A0</td>
+<td>1.69 inch, 400×400, circular visible area</td>
+<td>IST7601, HT0169A06</td>
+<td>TLSR8359: Pro clear, calendar and direct image uploads tested, with panel temperature readings; Free screen control is refused. Overall visual result, ghosting and long-term power still need confirmation</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>Osprey HT037A02 / HINK-T037A02-A1</td>
+<td>3.7 inch, 720×480</td>
+<td>IST7601 / JD7601, HT037A02</td>
+<td>Display reported working; orientation and calendar had earlier issues, and cold-start/standby consumption still needs confirmation</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>H364F067-2601A</td>
+<td>Approximately 3.64 inch, 760×568</td>
+<td>JD79665CA, H364F067 E6</td>
+<td>TLSR8359: calendar, device page, image transfer and stored-image playback tested; visible edges, complete colour result and power still need confirmation</td>
+<td>Not offered</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>When using an Osprey E6 screen on an ordinary price-tag board, insulate connector pin16 with tape so it stays disconnected.</strong> Otherwise the screen may heat up and draw excessive current. Power off first and verify connector orientation. Do not copy this wiring change to other screens with different connectors.</p>
+<h2 id="other-tested-screens">Other tested screens</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Panel / product</th>
+<th>Size and resolution</th>
+<th>Colours</th>
+<th>Driver profile</th>
+<th>Physically tested use</th>
+<th>Partial refresh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PriceETag original</td>
+<td>1.54 inch, 152×152</td>
+<td>Black/white</td>
+<td>SSD1675</td>
+<td>Pages and images on nRF52832</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>Hema EL022H2 original</td>
+<td>2.13 inch, 128×250</td>
+<td>Black/white/red</td>
+<td>SSD1619</td>
+<td>Pages, images, orientation and panel temperature on nRF52811</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>SES SE2213FS093 / A1360067-00</td>
+<td>2.13 inch, 104×212</td>
+<td>Black/white/red</td>
+<td>UC8151, SES 2.13</td>
+<td>Clear, calendar, clock, images and slideshow on a DA14585 replacement setup</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>AESL-4.2 original</td>
+<td>4.2 inch, 400×300</td>
+<td>Black/white/red</td>
+<td>UC8176</td>
+<td>Complete-page refresh; a replacement ZKC42VM panel needs SSD1683 instead</td>
+<td>Not offered</td>
+</tr>
+<tr>
+<td>SSD1677 four-grey screen</td>
+<td>4.26 inch, 800×480</td>
+<td>Four grey levels</td>
+<td>SSD1677</td>
+<td>Clear, calendar and four-grey images visually confirmed on GR5513 and GR5515</td>
+<td>Not offered</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="screens-not-yet-confirmed-fully-working">Screens not yet confirmed fully working</h2>
+<ul>
+<li><strong>StellarPro-154Q-N, HSEL5Q_01_54M_00, 1.54 inch 200×200 four-colour</strong>: basic communication, OTA, configuration and screen commands were tested, but complete-panel images and colours are not yet confirmed. NebularPro-154Q results do not establish this panel's behaviour.</li>
+<li><strong>SES SE2266FS093, 2.66 inch, 152×296 black/white/red:</strong> a calendar was displayed, but BUSY subsequently timed out. It is not listed as normally supported.</li>
+<li><strong>AESL-2.9, E029A33, 128×296:</strong> an SSD1619 adaptation exists, but this page does not claim a verified complete display result.</li>
+<li><strong>Other Hanshow 200×200 four-colour originals:</strong> HSEL3 or same-size three-colour results do not establish support; confirm the specific screen/profile.</li>
+</ul>
+<h2 id="before-using-a-replacement">Before using a replacement</h2>
+<ul>
+<li>Results apply to the listed board/panel combinations, not every production batch or replacement board.</li>
+<li>Follow the connected device's actual partial-refresh support. Changing the panel, orientation, wiring or fonts may invalidate it.</li>
+<li>Physical E6 six-colour control requires Pro. Offline image conversion and preview do not.</li>
+<li>Power off before changing screens and check the connector and supply. Stop if a panel heats up, draws unusual current or fails to refresh.</li>
+</ul>
+<p>See <a target="_blank" rel="noopener noreferrer" href="webui.html">WebUI</a> for profile and image controls, and <a target="_blank" rel="noopener noreferrer" href="supported-devices.html">supported devices</a> for boards and installation packages.</p></main></body></html>

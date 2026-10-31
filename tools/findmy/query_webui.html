@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InkTag Find</title>
+    <link rel="stylesheet" href="/query_webui.css">
+    <script src="/query_webui.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="side-nav" aria-label="InkTag Find">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>InkTag</span>
+        </div>
+        <div class="product-mark"><span>F</span><small>Find</small></div>
+        <div class="side-footer">本机服务</div>
+      </aside>
+
+      <main class="workspace">
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">INKTAG FIND</p>
+            <h1>查找标签位置</h1>
+            <p class="subtitle">查询并在本机解密 Apple Find 网络返回的最新位置报告。</p>
+          </div>
+          <div class="badges" aria-label="运行边界">
+            <span>开源本地服务</span>
+            <span class="caution">非 Apple 官方客户端</span>
+          </div>
+        </header>
+
+        <section class="privacy-panel" aria-labelledby="privacy-title">
+          <div class="privacy-icon" aria-hidden="true">i</div>
+          <div>
+            <h2 id="privacy-title">隐私与账号说明</h2>
+            <p>Apple 账号名保存在本机数据库并显示在本页；密码不会写入磁盘。账号信息只由本机服务发送给 Apple，不会发送给 InkTag 或其他服务器；成功登录后的无密码会话在 Windows 使用当前用户的 DPAPI，在 macOS/Linux 使用本机 AES-256 密钥加密保存，退出登录会立即删除。</p>
+            <p>本机服务直接连接 Apple 的非公开接口，不经过 InkTag 或其他账号代理服务器。本工具不是 Apple 官方客户端；接口可能变化，账号也可能受到功能限制。建议使用专门注册的 Apple 账号，不要使用个人常用账号。标签派生种子只由本机服务读取，不会发送到浏览器、Apple 或地图服务。</p>
+          </div>
+        </section>
+
+        <section class="identity-card" aria-label="Find 查询身份">
+          <div><span class="label">Find 地址</span><strong id="device-address">读取中…</strong></div>
+          <div><span class="label">广播密钥指纹</span><strong id="key-fingerprint">读取中…</strong></div>
+          <div><span class="label">Apple 查询账号</span><strong id="apple-account-username">--</strong></div>
+          <div><span class="label">查询状态</span><strong id="session-state">未登录</strong></div>
+        </section>
+          <div class="identity-actions">
+            <p>每台实体标签都应使用不同的 16-byte 随机种子。种子通过受控离线流程写入设备与本机数据库，双方按 UTC 每 15 分钟独立派生 P-224 身份；WebUI 不生成、导出或通过 BLE 下发秘密种子。</p>
+          </div>
+
+        <section class="panel identity-library" aria-labelledby="identity-library-title">
+          <div class="panel-heading">
+            <span class="step">⌖</span>
+            <div><h2 id="identity-library-title">标签身份库</h2><p>设备名称用于实体标签分组，蓝牙名称用于连接识别，Find 备注由用户在本机管理；界面会去除重复名称。同一设备轮换的身份归在一起，离线或丢失后仍可查询，也可删除不再需要的本机身份和轨迹。</p></div>
+          </div>
+          <div id="identity-list" class="identity-list"></div>
+          <p class="identity-note">独立 WebUI 不连接蓝牙，可修改 Find 备注；设备名称和蓝牙名称由主 WebUI 连接对应标签后同步。</p>
+        </section>
+
+        <section class="panel" id="login-panel">
+          <div class="panel-heading">
+            <span class="step">1</span>
+            <div><h2>登录查询账号</h2><p>账号仅用于向 Apple 的报告接口鉴权。</p></div>
+          </div>
+          <form id="login-form" autocomplete="off">
+            <label>Apple 账号<input id="email" name="email" type="email" inputmode="email" autocomplete="off" required></label>
+            <label>密码<input id="password" name="password" type="password" autocomplete="new-password" required></label>
+            <label class="consent">
+              <input id="consent" type="checkbox" required>
+              <span>我已阅读隐私与账号说明，并了解本机将直接访问 Apple 的非公开接口，并承担可能的账号风险。</span>
+            </label>
+            <button type="submit" class="primary">登录</button>
+          </form>
+        </section>
+
+        <section class="panel" id="two-factor-panel" hidden>
+          <div class="panel-heading">
+            <span class="step">2</span>
+            <div><h2>双重认证</h2><p>选择接收方式，发送验证码后在此提交。</p></div>
+          </div>
+          <div class="phase-success">
+            <span aria-hidden="true">✓</span>
+            <div><strong>账号密码验证通过</strong><p>登录表单已收起，现在只差双重认证。</p></div>
+          </div>
+          <label>验证方式<select id="two-factor-method"></select></label>
+          <p id="two-factor-warning" hidden></p>
+          <div class="button-row">
+            <button id="request-code" type="button" class="secondary">发送验证码</button>
+            <button id="restart-login" type="button" class="quiet-button">更换账号</button>
+          </div>
+          <form id="code-form" autocomplete="off">
+            <label>验证码<input id="code" type="text" inputmode="numeric" pattern="[0-9]{4,8}" maxlength="8" autocomplete="one-time-code" required></label>
+            <button type="submit" class="primary">完成登录</button>
+          </form>
+        </section>
+
+        <section class="panel" id="query-panel" hidden>
+          <p id="query-warning" role="alert" hidden></p>
+          <div class="panel-heading">
+            <span class="step">3</span>
+            <div><h2>查询最新报告</h2><p>显示当前 Find 广播密钥可解密的最新一条报告。</p></div>
+          </div>
+          <div class="button-row">
+            <button id="query-report" type="button" class="primary">查询最新位置</button>
+            <button id="update-track" type="button" class="secondary">查看最新轨迹</button>
+            <button id="logout" type="button" class="secondary">退出并清除会话</button>
+          </div>
+          <div id="report" class="report" hidden>
+            <div><span class="label">报告时间</span><strong id="report-time">--</strong></div>
+            <div><span class="label">距现在</span><strong id="report-age">--</strong></div>
+            <div><span class="label">纬度</span><strong id="report-latitude">--</strong></div>
+            <div><span class="label">经度</span><strong id="report-longitude">--</strong></div>
+            <div><span class="label">水平精度</span><strong id="report-accuracy">--</strong></div>
+            <div><span class="label">置信度 / 状态</span><strong id="report-detail">--</strong></div>
+            <button id="copy-coordinates" type="button" class="secondary">复制坐标</button>
+            <div id="map-card" class="map-card" hidden>
+              <div class="map-copy">
+                <div>
+                  <span class="map-kicker">位置地图</span>
+                  <h3 id="map-coordinates">--</h3>
+                  <p id="map-explanation">图钉不是精确门牌，请结合水平精度范围判断。</p>
+                </div>
+                <div class="map-actions" aria-label="地图服务">
+                <button id="show-baidu-map" type="button" class="map-provider" aria-pressed="true">百度地图</button>
+                <button id="show-amap-map" type="button" class="map-provider" aria-pressed="false">高德地图</button>
+                <button id="show-osm-map" type="button" class="map-provider" aria-pressed="false">OSMap</button>
+                </div>
+              </div>
+              <div class="map-frame-shell">
+                <iframe id="embedded-map" title="Find 报告位置地图" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+                <button id="open-map" class="map-expand" type="button" aria-label="放大地图" title="放大地图">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M21 16v5h-5"/></svg>
+                </button>
+                <div id="map-info-card" class="map-info-card" hidden><strong id="map-info-title">InkTag Find 位置</strong><span id="map-info-detail">--</span></div>
+              </div>
+              <div class="map-recovery"><span>地图空白？</span><button id="reload-map" type="button">重新加载</button><a id="open-map-provider" target="_blank" rel="noreferrer">在百度打开</a></div>
+              <p class="map-privacy">打开地图后，当前 WGS-84 坐标及图钉说明会发送给所选地图服务。地图服务负责中国地图坐标转换。</p>
+            </div>
+          </div>
+        </section>
+
+        <div id="message" class="message" role="status" aria-live="polite"></div>
+      </main>
+    </div>
+
+    <div id="map-modal" class="modal-backdrop" hidden>
+      <section class="map-dialog" role="dialog" aria-modal="true" aria-labelledby="map-dialog-title">
+        <header>
+          <div>
+            <span class="map-kicker">位置详情</span>
+            <h2 id="map-dialog-title">InkTag Find 位置</h2>
+            <p id="modal-map-meta">--</p>
+          </div>
+          <button id="close-map" class="icon-button" type="button" aria-label="关闭地图">×</button>
+        </header>
+        <div class="map-dialog-toolbar">
+          <div class="map-actions" aria-label="放大地图服务">
+            <button id="modal-baidu-map" type="button" class="map-provider" aria-pressed="true">百度地图</button>
+            <button id="modal-amap-map" type="button" class="map-provider" aria-pressed="false">高德地图</button>
+            <button id="modal-osm-map" type="button" class="map-provider" aria-pressed="false">OSMap</button>
+          </div>
+          <div class="map-recovery"><button id="reload-modal-map" type="button">重新加载</button><a id="open-modal-map-provider" target="_blank" rel="noreferrer">在百度打开</a></div>
+          <span id="modal-map-accuracy" class="map-accuracy-summary">精度范围 --</span>
+        </div>
+        <div class="map-dialog-frame">
+          <iframe id="enlarged-map" title="放大的 Find 报告位置地图" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+          <div id="modal-map-info-card" class="map-info-card modal-map-info-card" hidden><strong id="modal-map-info-title">InkTag Find 位置</strong><span id="modal-map-info-detail">--</span></div>
+        </div>
+        <dl class="map-details">
+          <div><dt>Find 地址</dt><dd id="modal-map-address">--</dd></div>
+          <div><dt>报告时间</dt><dd id="modal-map-time">--</dd></div>
+          <div><dt>报告坐标</dt><dd id="modal-map-coordinates">--</dd></div>
+        </dl>
+      </section>
+    </div>
+
+    <div id="track-modal" class="modal-backdrop" hidden>
+      <section class="track-dialog" role="dialog" aria-modal="true" aria-labelledby="track-dialog-title">
+        <header>
+          <div><span class="map-kicker">本机轨迹</span><h2 id="track-dialog-title">标签轨迹</h2><p id="track-dialog-meta">0 个位置点 · 仅保存在本机</p></div>
+          <button id="close-track" class="icon-button" type="button" aria-label="关闭轨迹">×</button>
+        </header>
+        <div class="track-toolbar">
+          <label>定期查询间隔<select id="track-interval"><option value="15">15 分钟</option><option value="30">30 分钟</option><option value="60">1 小时</option><option value="180">3 小时</option><option value="360">6 小时</option></select></label>
+          <button id="toggle-track" class="secondary" type="button">启用定期记录</button>
+          <button id="clear-track" class="quiet-button danger-text" type="button">清除轨迹</button>
+          <div class="track-view-switch" aria-label="轨迹显示方式">
+            <button id="show-track-plot" type="button" aria-pressed="true">轨迹图</button>
+            <button id="show-track-list" type="button" aria-pressed="false">记录列表</button>
+          </div>
+        </div>
+        <div id="track-map-config" class="track-map-config">
+          <div class="map-actions" aria-label="轨迹地图服务">
+            <button type="button" class="map-provider" data-track-map-provider="baidu" aria-pressed="false">百度地图</button>
+            <button type="button" class="map-provider" data-track-map-provider="amap" aria-pressed="false">高德地图</button>
+            <button type="button" class="map-provider" data-track-map-provider="osm" aria-pressed="true">OSMap</button>
+          </div>
+          <label id="track-map-key-label" hidden><span id="track-map-key-caption">百度地图 AK</span><input id="track-map-key" type="password" autocomplete="off" placeholder="未填写时自动使用 OSMap"></label>
+          <button id="draw-track-map" type="button" class="primary" hidden>绘制轨迹</button>
+        </div>
+        <p class="track-note">默认只展示最近 24 小时；报告在本机最多保留 90 天。“查看最新轨迹”会先查询最新位置并自动去重。</p>
+        <div id="track-plot" class="track-plot-shell"></div>
+        <div id="track-list" class="track-list"></div>
+      </section>
+    </div>
+
+    <div id="page-confirm-modal" class="modal-backdrop" hidden>
+      <form id="page-confirm-form" class="page-confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="page-confirm-title" aria-describedby="page-confirm-message">
+        <header><div><span class="page-confirm-icon">!</span><h2 id="page-confirm-title">请确认</h2></div><button id="close-page-confirm" class="icon-button" type="button" aria-label="关闭">×</button></header>
+        <p id="page-confirm-message"></p>
+        <label id="page-confirm-input-label" hidden><span id="page-confirm-input-caption"></span><input id="page-confirm-input" maxlength="64"></label>
+        <footer><button id="cancel-page-confirm" class="secondary" type="button">取消</button><button id="accept-page-confirm" class="primary" type="submit">确认</button></footer>
+      </form>
+    </div>
+  </body>
+</html>

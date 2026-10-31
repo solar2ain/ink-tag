@@ -1,0 +1,481 @@
+{
+  "schemaVersion": 1,
+  "kind": "tools-only",
+  "chip": "tlsr8359",
+  "buildTarget": "tlsr8359_hsel",
+  "brand": "hsel",
+  "buildId": "tlsr-hsel3-defaults-tools-20261029",
+  "toolsVersion": "0.2.0.8",
+  "sourceCommit": "1fac3c81bd0f0ddd3af8f52d20a935df2024fc3d",
+  "firmwareIncluded": false,
+  "firmware": null,
+  "layout": null,
+  "compatibility": {
+    "toolCapabilities": [
+      "tlsr-address-bound-full-v1",
+      "tlsr-complete-pro-retention-v1"
+    ]
+  },
+  "deviceAccess": false,
+  "releaseApproved": false,
+  "dependencies": {
+    "backend": {
+      "TLSR825xComFlasher.py": "c3a76d6b06d1bd77f7c81cb2ece04ef696435c26739a46b28f2963dd69b1d6e9",
+      "LICENSE": "640514163b17f977adc997cb16f51871122cfb0555ebad1a3f01e167b7ba8857",
+      "README.md": "b9059c747f74723da8a11a7d3a04170799c7ac7b2fb637ff169a381e6d6117d8"
+    },
+    "python": ">=3.11",
+    "requirements": "firmware/ports/telink/tlsr8359/tools/requirements-tools.txt"
+  },
+  "formatLibrary": {
+    "namespace": "inktag_programmer_formats",
+    "externalCliRequired": false,
+    "sourceOrigins": {
+      "tools/hardware/inktag_programmer_formats/__init__.py": {
+        "sourcePath": "cli/src/inktag_cli/__init__.py",
+        "sourceSha256": "391ce37d834f29229f5c9ef567948ef0a56bffaa866050f9b4b4d360966909b7",
+        "runtimeSha256": "391ce37d834f29229f5c9ef567948ef0a56bffaa866050f9b4b4d360966909b7",
+        "bytes": 85,
+        "transformation": "private-programmer-import-namespace-v1"
+      },
+      "tools/hardware/inktag_programmer_formats/_version.py": {
+        "sourcePath": "cli/src/inktag_cli/_version.py",
+        "sourceSha256": "815645351d4dd82606b014c7d012704977b9a665d5a125e04ea235646ccb0a7b",
+        "runtimeSha256": "815645351d4dd82606b014c7d012704977b9a665d5a125e04ea235646ccb0a7b",
+        "bytes": 91,
+        "transformation": "private-programmer-import-namespace-v1"
+      },
+      "tools/hardware/inktag_programmer_formats/generated_commands_v2.py": {
+        "sourcePath": "cli/src/inktag_cli/generated_commands_v2.py",
+        "sourceSha256": "4491401c5fcaf5c5407eacb6113e8d078aa20af52bf8fb691a1488bc0bdb5f32",
+        "runtimeSha256": "4491401c5fcaf5c5407eacb6113e8d078aa20af52bf8fb691a1488bc0bdb5f32",
+        "bytes": 17749,
+        "transformation": "private-programmer-import-namespace-v1"
+      },
+      "tools/hardware/inktag_programmer_formats/generated_busy_defaults.py": {
+        "sourcePath": "cli/src/inktag_cli/generated_busy_defaults.py",
+        "sourceSha256": "fbf52a9bdb9e6ba65dab641127106c8113d7b4d580113d95780edd3d7a1159db",
+        "runtimeSha256": "fbf52a9bdb9e6ba65dab641127106c8113d7b4d580113d95780edd3d7a1159db",
+        "bytes": 847,
+        "transformation": "private-programmer-import-namespace-v1"
+      },
+      "tools/hardware/inktag_programmer_formats/generated_release_v1.py": {
+        "sourcePath": "cli/src/inktag_cli/generated_release_v1.py",
+        "sourceSha256": "fc607086de7b28b67be5edeb92a63e8e12d0e499c7adf78b8bd3fdac4c56d03f",
+        "runtimeSha256": "fc607086de7b28b67be5edeb92a63e8e12d0e499c7adf78b8bd3fdac4c56d03f",
+        "bytes": 2015,
+        "transformation": "private-programmer-import-namespace-v1"
+      },
+      "tools/hardware/inktag_programmer_formats/models.py": {
+        "sourcePath": "cli/src/inktag_cli/models.py",
+        "sourceSha256": "f9006ed4d564ceb1e3bdecfc37bc634d2ec047a510e9d8445ecda3c5cd4941d3",
+        "runtimeSha256": "f9006ed4d564ceb1e3bdecfc37bc634d2ec047a510e9d8445ecda3c5cd4941d3",
+        "bytes": 7850,
+        "transformation": "private-programmer-import-namespace-v1"
+      },
+      "tools/hardware/inktag_programmer_formats/protocol.py": {
+        "sourcePath": "cli/src/inktag_cli/protocol.py",
+        "sourceSha256": "6fd8137a4dbb405de6bb485fc3f49c363127f996c387ae5bc4156cb2eb4f25ac",
+        "runtimeSha256": "6fd8137a4dbb405de6bb485fc3f49c363127f996c387ae5bc4156cb2eb4f25ac",
+        "bytes": 12484,
+        "transformation": "private-programmer-import-namespace-v1"
+      },
+      "tools/hardware/inktag_programmer_formats/pin_config.py": {
+        "sourcePath": "cli/src/inktag_cli/pin_config.py",
+        "sourceSha256": "41c319c8bdd8d2e85db053e7e6cb5422a9ed9c9d6ba688cd9a148f93d71091be",
+        "runtimeSha256": "41c319c8bdd8d2e85db053e7e6cb5422a9ed9c9d6ba688cd9a148f93d71091be",
+        "bytes": 5998,
+        "transformation": "private-programmer-import-namespace-v1"
+      },
+      "tools/hardware/inktag_programmer_formats/ota.py": {
+        "sourcePath": "cli/src/inktag_cli/ota.py",
+        "sourceSha256": "a2ecab700bef20082e622670526b6ba15cf4146831368fb9a55d2f90ba652084",
+        "runtimeSha256": "13fc53213ecd0781faa3210de7cee10b2e8a1c797a8a1ae8cde495b960396212",
+        "bytes": 18050,
+        "transformation": "private-programmer-import-namespace-v1"
+      },
+      "tools/hardware/inktag_programmer_formats/tlsr_layout.py": {
+        "sourcePath": "cli/src/inktag_cli/tlsr_layout.py",
+        "sourceSha256": "2fde0f3a2a7a20d1f9fa5a801263fc053ed309a85508f540d763f79bbd8100d7",
+        "runtimeSha256": "2fde0f3a2a7a20d1f9fa5a801263fc053ed309a85508f540d763f79bbd8100d7",
+        "bytes": 3389,
+        "transformation": "private-programmer-import-namespace-v1"
+      },
+      "tools/hardware/inktag_programmer_formats/safe_archive.py": {
+        "sourcePath": "cli/src/inktag_cli/safe_archive.py",
+        "sourceSha256": "45c578c4fc00cd3f820873c25e8b451e5aafee4523832a71fff5d0d93d535976",
+        "runtimeSha256": "45c578c4fc00cd3f820873c25e8b451e5aafee4523832a71fff5d0d93d535976",
+        "bytes": 5004,
+        "transformation": "private-programmer-import-namespace-v1"
+      },
+      "tools/hardware/inktag_programmer_formats/aux_io.py": {
+        "sourcePath": "cli/src/inktag_cli/aux_io.py",
+        "sourceSha256": "62de0f15af878459339df8ac1dd25c1603c2dd1c6a65517543af613ccaa32d4b",
+        "runtimeSha256": "62de0f15af878459339df8ac1dd25c1603c2dd1c6a65517543af613ccaa32d4b",
+        "bytes": 3801,
+        "transformation": "private-programmer-import-namespace-v1"
+      },
+      "tools/hardware/inktag_programmer_formats/device_link.py": {
+        "sourcePath": "cli/src/inktag_cli/device_link.py",
+        "sourceSha256": "a73cbce6d92610ff854186b565a2ee8568d4fb6e7a171a7224404d6eb4545a17",
+        "runtimeSha256": "a73cbce6d92610ff854186b565a2ee8568d4fb6e7a171a7224404d6eb4545a17",
+        "bytes": 1045,
+        "transformation": "private-programmer-import-namespace-v1"
+      },
+      "tools/hardware/inktag_programmer_formats/device_qr.py": {
+        "sourcePath": "cli/src/inktag_cli/device_qr.py",
+        "sourceSha256": "440747ef6f79bb2d0d2038d8a0f7631eaca0d37b6c18b55bb117ec8cae957a7e",
+        "runtimeSha256": "440747ef6f79bb2d0d2038d8a0f7631eaca0d37b6c18b55bb117ec8cae957a7e",
+        "bytes": 1692,
+        "transformation": "private-programmer-import-namespace-v1"
+      },
+      "tools/hardware/inktag_programmer_formats/nfc_command.py": {
+        "sourcePath": "cli/src/inktag_cli/nfc_command.py",
+        "sourceSha256": "4fb8546faf30c2255c48cbe5d100df6ed5b5942b14e17d4cc86c1f86ace63a16",
+        "runtimeSha256": "4fb8546faf30c2255c48cbe5d100df6ed5b5942b14e17d4cc86c1f86ace63a16",
+        "bytes": 5421,
+        "transformation": "private-programmer-import-namespace-v1"
+      }
+    },
+    "frozenSourceCommit": "0b8537ff9f168fad09b84e75d51855aabc0f4ae5",
+    "provenanceSha256": "411add7276b679e30d9539593015b944126a4021845755c35d0b870be49cf06b"
+  },
+  "files": {
+    ".tools/telink/TlsrComSwireWriter/LICENSE": {
+      "bytes": 1235,
+      "sha256": "640514163b17f977adc997cb16f51871122cfb0555ebad1a3f01e167b7ba8857"
+    },
+    ".tools/telink/TlsrComSwireWriter/README.md": {
+      "bytes": 2896,
+      "sha256": "b9059c747f74723da8a11a7d3a04170799c7ac7b2fb637ff169a381e6d6117d8"
+    },
+    ".tools/telink/TlsrComSwireWriter/TLSR825xComFlasher.py": {
+      "bytes": 22411,
+      "sha256": "c3a76d6b06d1bd77f7c81cb2ece04ef696435c26739a46b28f2963dd69b1d6e9"
+    },
+    "LICENSE": {
+      "bytes": 35823,
+      "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809"
+    },
+    "README.en.md": {
+      "bytes": 10661,
+      "sha256": "a321e659e6cf6262944ca704e0c35b306292be54b87aa0c830c2ea19438bb8c5"
+    },
+    "README.md": {
+      "bytes": 10098,
+      "sha256": "7e14b01c719a7cfd19ff9ef48af351ea27d31ebc69e1bf35924dfbd32e528a38"
+    },
+    "THIRD_PARTY_NOTICES.md": {
+      "bytes": 1141,
+      "sha256": "710f3c1038f6a9dac5781560c6d19feea8852d2b08627db780c660b4415744ef"
+    },
+    "cli/LICENSE": {
+      "bytes": 4694,
+      "sha256": "75f5f2ae732cdc31adf8ad90a42ed4ed47476b3f27fcdf90de13e79d6788309d"
+    },
+    "firmware/boards/boards.json": {
+      "bytes": 95701,
+      "sha256": "68dcd465dde461fe85d4d66265f2d849279dbf503dfb6fd221454219b86dd6db"
+    },
+    "firmware/ports/telink/tlsr8359/tools/backup.ps1": {
+      "bytes": 8200,
+      "sha256": "dbe79dec23e4c69612816558a73213d30e87ab96c4d9ebe4dbacc2ac3f7fc4a8"
+    },
+    "firmware/ports/telink/tlsr8359/tools/backup.sh": {
+      "bytes": 311,
+      "sha256": "47bf0bded512be05d01ae98bab5f5d30c53133b16137e2a8cc1086bfeda88400"
+    },
+    "firmware/ports/telink/tlsr8359/tools/check.py": {
+      "bytes": 3557,
+      "sha256": "726fe3266902b174909198754d0b864f318a9fa991b7fbbacfea30b26535088f"
+    },
+    "firmware/ports/telink/tlsr8359/tools/configs/HSEL3_02_66M_36.toml": {
+      "bytes": 932,
+      "sha256": "9d177a9ed69672fa4a12cd844db061759727a7f7c314a5214f45557707e205f3"
+    },
+    "firmware/ports/telink/tlsr8359/tools/configs/HSEL4Q_01_54M_31.toml": {
+      "bytes": 888,
+      "sha256": "ea6f7fe5fd982db7c57b99f9f6f41072ddd31c2a6d21f263197a0982c139c390"
+    },
+    "firmware/ports/telink/tlsr8359/tools/configs/HSEL4Q_02_13M_30.toml": {
+      "bytes": 812,
+      "sha256": "2e2b997bddc42378197496787ff22e9246d618a5fd34034ec52b0a6427d6aba3"
+    },
+    "firmware/ports/telink/tlsr8359/tools/configs/HSEL4Q_04_20M_33-SSD1683.toml": {
+      "bytes": 816,
+      "sha256": "2b1991254fe0eb8b4bd11cea905bf9cdb042f23330ef9e606781406badad57e9"
+    },
+    "firmware/ports/telink/tlsr8359/tools/configs/HSEL4Q_04_20M_33-YW2427.toml": {
+      "bytes": 853,
+      "sha256": "cdd3fd9f51b29e98f093eb3f9ad74d604bef6c92b664c00be49a589dab1c9aa2"
+    },
+    "firmware/ports/telink/tlsr8359/tools/configs/HSEL4Q_04_20M_33.toml": {
+      "bytes": 901,
+      "sha256": "3733b2fe68df4643b6f1668dcd834344cad0b418335f49583569e235084c586d"
+    },
+    "firmware/ports/telink/tlsr8359/tools/configs/HSEL5Q_01_54M_00.toml": {
+      "bytes": 972,
+      "sha256": "ddc45b22970d60e2aad1cb59305b04f05e5cfa787057941469ab3993d9be747b"
+    },
+    "firmware/ports/telink/tlsr8359/tools/configs/HSEL5_01_54M_00.toml": {
+      "bytes": 942,
+      "sha256": "15b43642beaa70fe2c04f4db4c0984fc664c887fbdff9fd8f8f53a455716d2cb"
+    },
+    "firmware/ports/telink/tlsr8359/tools/configs/HSEL5_01_54M_02.toml": {
+      "bytes": 809,
+      "sha256": "71302cd97a0ac8ea1ed876a48a67f84740e5608424a681683f67a9ccc37526bc"
+    },
+    "firmware/ports/telink/tlsr8359/tools/configs/HS_EL5101_5M_60_04.toml": {
+      "bytes": 994,
+      "sha256": "3bf9b3060bd2e717a0ae6aacd01f865bfe827af7d7ef2d049fc74db7dbc8f5d7"
+    },
+    "firmware/ports/telink/tlsr8359/tools/configs/HS_EL5101_5M_66_05.toml": {
+      "bytes": 750,
+      "sha256": "6e7abf2dbe72e7fc199559560ac70a8b4eb94e708294fa2dbc15c32311b34ce7"
+    },
+    "firmware/ports/telink/tlsr8359/tools/configs/HS_EL5102_1M_67_33.toml": {
+      "bytes": 809,
+      "sha256": "37a71baa7e8d1f2a133d7ec35f7d2b3b064e0bdacaba1749898607a084f4dc90"
+    },
+    "firmware/ports/telink/tlsr8359/tools/flash.ps1": {
+      "bytes": 7809,
+      "sha256": "befe65d4960da5aeec15c44086f01e753be7e641fe575a253d96195c4afa615f"
+    },
+    "firmware/ports/telink/tlsr8359/tools/flash.sh": {
+      "bytes": 303,
+      "sha256": "369289891ef99e6186c235589cf0ba1e1b5b2dfd0aa98d29ef7911fdc4d51846"
+    },
+    "firmware/ports/telink/tlsr8359/tools/internal/backup-operation.ps1": {
+      "bytes": 14601,
+      "sha256": "9d7df29a3339a62b080bf69d416815dee5e123d4034393117b45b80f1f8a560a"
+    },
+    "firmware/ports/telink/tlsr8359/tools/internal/backup-verify-operation.ps1": {
+      "bytes": 5715,
+      "sha256": "0ee8d80d6f9d5b7facbda6328e03095ec9d9aff46f54dce0c7d23bbf2a0d23dd"
+    },
+    "firmware/ports/telink/tlsr8359/tools/internal/full-flash.ps1": {
+      "bytes": 17709,
+      "sha256": "28ecb2222439064cb1b256419b2b694dd6aadb5ce0a4c027843f6c573fb9e617"
+    },
+    "firmware/ports/telink/tlsr8359/tools/internal/invoke-tlsr8359-uart-sws.ps1": {
+      "bytes": 12724,
+      "sha256": "77ac1bc1a40f5d4249d7f8708b840d24cc8cd10ace658e71bd1e14f038a29620"
+    },
+    "firmware/ports/telink/tlsr8359/tools/internal/probe-operation.ps1": {
+      "bytes": 6643,
+      "sha256": "6f7617a85c342801ede691937d069b2381f621a1d03cfd82345f9609913457ec"
+    },
+    "firmware/ports/telink/tlsr8359/tools/internal/terminal-log.ps1": {
+      "bytes": 9480,
+      "sha256": "eb1470a6a171317309c17570505e4922b255b15fc4b892c0f5fb318ad7d25f0b"
+    },
+    "firmware/ports/telink/tlsr8359/tools/internal/tlsr825x-early-activate.py": {
+      "bytes": 69534,
+      "sha256": "fcaf8e9ca764ff0af295941e1e70f5b1904489a8a23c02f27797a99d46c0c34d"
+    },
+    "firmware/ports/telink/tlsr8359/tools/internal/tlsr825x-flash-identify.py": {
+      "bytes": 12560,
+      "sha256": "2a4033942b01d63a3e6e96d0b9e1e7a4b8aa7329475243edc779e3109427bf4e"
+    },
+    "firmware/ports/telink/tlsr8359/tools/internal/tlsr8359-reset.py": {
+      "bytes": 1111,
+      "sha256": "bfc91ec20e77a1d40b4eb6a07a131f2e69e14aad0b9063176ee259af89e13709"
+    },
+    "firmware/ports/telink/tlsr8359/tools/internal/tlsr8359-uart-sws-common.ps1": {
+      "bytes": 34252,
+      "sha256": "636fd0af3812511dd4abbb13f82b39e391583670b6a8dc97c58b028d1287edc6"
+    },
+    "firmware/ports/telink/tlsr8359/tools/probe.ps1": {
+      "bytes": 4521,
+      "sha256": "f6f0e9f966762b821881204eaa07f26cb3fd2956866d612171d11202e80b519a"
+    },
+    "firmware/ports/telink/tlsr8359/tools/probe.sh": {
+      "bytes": 310,
+      "sha256": "3352c83574fd2ba05d486ef29bd7538a6c7c43aaabe8a51e71769af88ac3977d"
+    },
+    "firmware/ports/telink/tlsr8359/tools/requirements-tools.txt": {
+      "bytes": 174,
+      "sha256": "d7af141e689fb560f3ebd873b54ae4f5a42335dcf9464f5b3ee7c8caf2f08235"
+    },
+    "firmware/ports/telink/tlsr8359/tools/setup.ps1": {
+      "bytes": 280,
+      "sha256": "4d214e32c7c887b8a80f235e35ff6251d1de839ae6ff4f018ee6229eb1e68ac0"
+    },
+    "release/build-targets.json": {
+      "bytes": 2209,
+      "sha256": "2c2d463cdbe4578c7ed1ccb9035d1d11a38cbb8a8d5cda7bee3aead3b64eb8b8"
+    },
+    "tools/hardware/activation_preservation.py": {
+      "bytes": 3454,
+      "sha256": "9f4309a6aa06f29fb2338a752c011272377245429e50e49cb7bd97cda72962e1"
+    },
+    "tools/hardware/analyze-tlsr8359-backup.py": {
+      "bytes": 6192,
+      "sha256": "e498e72cf80aa274d9a4f1fbae247baa2f5a93d55587bc28571c5ac4274f0545"
+    },
+    "tools/hardware/ble_factory_address.py": {
+      "bytes": 1631,
+      "sha256": "9763c149fef51dab2dfb69db6445cc1346dc490cdb0b09c12444d32f4c182aac"
+    },
+    "tools/hardware/board_config.py": {
+      "bytes": 5809,
+      "sha256": "edcd67bb256982a726e1b5c35b122a8a428bc181a86de7f133016476c1415e4b"
+    },
+    "tools/hardware/flash-workflow.py": {
+      "bytes": 64362,
+      "sha256": "90b910b3ee1a4ae2a84b10f4602d87827343ebc1ec38ab473ad8d70a3d6125c6"
+    },
+    "tools/hardware/inktag_programmer_formats/__init__.py": {
+      "bytes": 85,
+      "sha256": "391ce37d834f29229f5c9ef567948ef0a56bffaa866050f9b4b4d360966909b7"
+    },
+    "tools/hardware/inktag_programmer_formats/_version.py": {
+      "bytes": 91,
+      "sha256": "815645351d4dd82606b014c7d012704977b9a665d5a125e04ea235646ccb0a7b"
+    },
+    "tools/hardware/inktag_programmer_formats/aux_io.py": {
+      "bytes": 3801,
+      "sha256": "62de0f15af878459339df8ac1dd25c1603c2dd1c6a65517543af613ccaa32d4b"
+    },
+    "tools/hardware/inktag_programmer_formats/device_link.py": {
+      "bytes": 1045,
+      "sha256": "a73cbce6d92610ff854186b565a2ee8568d4fb6e7a171a7224404d6eb4545a17"
+    },
+    "tools/hardware/inktag_programmer_formats/device_qr.py": {
+      "bytes": 1692,
+      "sha256": "440747ef6f79bb2d0d2038d8a0f7631eaca0d37b6c18b55bb117ec8cae957a7e"
+    },
+    "tools/hardware/inktag_programmer_formats/generated_busy_defaults.py": {
+      "bytes": 847,
+      "sha256": "fbf52a9bdb9e6ba65dab641127106c8113d7b4d580113d95780edd3d7a1159db"
+    },
+    "tools/hardware/inktag_programmer_formats/generated_commands_v2.py": {
+      "bytes": 17749,
+      "sha256": "4491401c5fcaf5c5407eacb6113e8d078aa20af52bf8fb691a1488bc0bdb5f32"
+    },
+    "tools/hardware/inktag_programmer_formats/generated_release_v1.py": {
+      "bytes": 2015,
+      "sha256": "fc607086de7b28b67be5edeb92a63e8e12d0e499c7adf78b8bd3fdac4c56d03f"
+    },
+    "tools/hardware/inktag_programmer_formats/models.py": {
+      "bytes": 7850,
+      "sha256": "f9006ed4d564ceb1e3bdecfc37bc634d2ec047a510e9d8445ecda3c5cd4941d3"
+    },
+    "tools/hardware/inktag_programmer_formats/nfc_command.py": {
+      "bytes": 5421,
+      "sha256": "4fb8546faf30c2255c48cbe5d100df6ed5b5942b14e17d4cc86c1f86ace63a16"
+    },
+    "tools/hardware/inktag_programmer_formats/ota.py": {
+      "bytes": 18050,
+      "sha256": "13fc53213ecd0781faa3210de7cee10b2e8a1c797a8a1ae8cde495b960396212"
+    },
+    "tools/hardware/inktag_programmer_formats/pin_config.py": {
+      "bytes": 5998,
+      "sha256": "41c319c8bdd8d2e85db053e7e6cb5422a9ed9c9d6ba688cd9a148f93d71091be"
+    },
+    "tools/hardware/inktag_programmer_formats/protocol.py": {
+      "bytes": 12484,
+      "sha256": "6fd8137a4dbb405de6bb485fc3f49c363127f996c387ae5bc4156cb2eb4f25ac"
+    },
+    "tools/hardware/inktag_programmer_formats/provenance.json": {
+      "bytes": 6149,
+      "sha256": "411add7276b679e30d9539593015b944126a4021845755c35d0b870be49cf06b"
+    },
+    "tools/hardware/inktag_programmer_formats/safe_archive.py": {
+      "bytes": 5004,
+      "sha256": "45c578c4fc00cd3f820873c25e8b451e5aafee4523832a71fff5d0d93d535976"
+    },
+    "tools/hardware/inktag_programmer_formats/tlsr_layout.py": {
+      "bytes": 3389,
+      "sha256": "2fde0f3a2a7a20d1f9fa5a801263fc053ed309a85508f540d763f79bbd8100d7"
+    },
+    "tools/hardware/tlsr-stock-archive.ps1": {
+      "bytes": 7462,
+      "sha256": "eafec7894c21f44bae8803eed3f34de7b2b42d6c1fe63c3ee834b56439c46201"
+    },
+    "tools/hardware/tlsr-terminal-entry.py": {
+      "bytes": 13881,
+      "sha256": "56ef35eb41f501a2b4dff0401fa0da756345394b9b066bd10fb3fe31997775f5"
+    },
+    "tools/hardware/tlsr_backup_resume.py": {
+      "bytes": 22816,
+      "sha256": "471fb87da91f767ef1e408042bfe394a2af409bc19f963b3ca4048b739a929e4"
+    },
+    "tools/hardware/tlsr_backup_verify.py": {
+      "bytes": 6407,
+      "sha256": "0d4fb3d75644c41dd9f9a0b4751d1e4305ab8c71c7ae0179ec2386a63f5840d9"
+    },
+    "tools/hardware/tlsr_factory_config.py": {
+      "bytes": 2686,
+      "sha256": "87fc93ad83a753a2f287fb03c4ba98f2fa2cfc18bb94fb53c67ac66f21857a64"
+    },
+    "tools/hardware/tlsr_flash_jedec.py": {
+      "bytes": 3008,
+      "sha256": "2513d40698459630f6830c2cb5e5d502e8d8921dee51b71c2d2766823d828f71"
+    },
+    "tools/hardware/tlsr_full_flash_address.py": {
+      "bytes": 10464,
+      "sha256": "b433cd3ffcefd563b3807096a8e674d03491cd5585094263458be3fd0c3b96c2"
+    },
+    "tools/hardware/tlsr_full_flash_archive.py": {
+      "bytes": 9856,
+      "sha256": "5984e3d4833be5e79fd909385541591795e80e931d4eb15cd9c9d6df44255978"
+    },
+    "tools/hardware/tlsr_full_flash_base.py": {
+      "bytes": 11633,
+      "sha256": "1d3396ce7e779fa83747e5156aa4ae37e34b1cf1d66c1453f8eb0fc8580acbfb"
+    },
+    "tools/hardware/tlsr_full_flash_config.py": {
+      "bytes": 21667,
+      "sha256": "17f14a434e741f0d0846af07c6f80e983381fefabb7c00380ac95c71ebde4b76"
+    },
+    "tools/hardware/tlsr_full_flash_contract.py": {
+      "bytes": 2672,
+      "sha256": "be784ca7af0f40c84183c092a733a5bc6a5193a91017deeae598d96f98c5586a"
+    },
+    "tools/hardware/tlsr_full_flash_entitlement.py": {
+      "bytes": 8296,
+      "sha256": "430414e0b822d4aef683d91164697f9820a273ccf39e4dcfd76c1c6105277de0"
+    },
+    "tools/hardware/tlsr_full_flash_format.py": {
+      "bytes": 1759,
+      "sha256": "3d5e6fed84f15e91f6645ec962a15109f557ffe03d965c981e7cf9626fa31ad9"
+    },
+    "tools/hardware/tlsr_full_flash_plan.py": {
+      "bytes": 4443,
+      "sha256": "e989d4c9306d0b2a6bd3c6e6714f0cdb5fd6ef7dec2d1f74ccac24955b63d42c"
+    },
+    "tools/hardware/tlsr_full_flash_source.py": {
+      "bytes": 1651,
+      "sha256": "d09c5eb7f626e8e75e842effe70b38ed434bb3a23f46b24db49209db1bdaa10a"
+    },
+    "tools/hardware/tlsr_full_flash_state.py": {
+      "bytes": 9665,
+      "sha256": "302db95498dfe44e4f9a772b9b97e6c14d201f62c0b464a6e6317b3e355cee06"
+    },
+    "tools/hardware/tlsr_full_flash_transport.py": {
+      "bytes": 8892,
+      "sha256": "6e157bd1c2539a178f67d9dc6855de8e6f5352e7a9c36dfc5792b4eb8697ae39"
+    },
+    "tools/hardware/tlsr_full_flash_v1.py": {
+      "bytes": 9872,
+      "sha256": "08bf4440e246397cf95bcc30906ee40c8a924adf5d024eaf0202b1cf84c878f4"
+    },
+    "tools/hardware/tlsr_full_flash_write_plan.py": {
+      "bytes": 7919,
+      "sha256": "edf342fc0e1acb2db2f8d77433d6710b8bc554cc661703ae730f6b133dea13c3"
+    },
+    "tools/hardware/tlsr_trusted_entry_profile.py": {
+      "bytes": 1978,
+      "sha256": "f0a3845f01afe2d9ef2169a781d2b19436b7fd9b6e8505a57387139d72acf358"
+    },
+    "tools/powershell-cli.ps1": {
+      "bytes": 3106,
+      "sha256": "2a0651a4cdeff9bc46f3002fa2f6b30aeb0a207932831868c53312c557a570ce"
+    },
+    "tools/stock-backup.ps1": {
+      "bytes": 11807,
+      "sha256": "aa4d9523f4c4a4fde59a003e608d0941e5509bf9662bfb007266e3e1fdc2cab7"
+    }
+  }
+}

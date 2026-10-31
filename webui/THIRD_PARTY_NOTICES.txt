@@ -1,0 +1,43 @@
+InkTag WebUI：第三方组件与许可 / Third-party components and licenses
+
+WebUI 使用下列第三方组件，原有版权及许可继续有效。InkTag 的项目许可不改变这些第三方组件的许可。
+WebUI uses the components below. Their original copyrights and licenses remain in effect. InkTag project terms do not relicense these components.
+
+React / React DOM 19.2.8 — MIT
+License: licenses/react-19.2.8-LICENSE.txt; licenses/react-dom-19.2.8-LICENSE.txt
+https://github.com/facebook/react
+
+React Router 7.18.2 — MIT
+License: licenses/react-router-7.18.2-LICENSE.txt
+https://github.com/remix-run/react-router
+
+Dexie 4.4.5 — Apache-2.0
+License: licenses/dexie-4.4.5-LICENSE.txt
+NOTICE: licenses/dexie-4.4.5-NOTICE.txt
+https://github.com/dexie/Dexie.js
+
+Leafer UI 2.2.10 — MIT
+License: licenses/leafer-ui-2.2.10-LICENSE.txt
+https://github.com/leaferjs/leafer-ui
+
+RgbQuant.js — MIT
+License: licenses/RgbQuant-MIT.txt
+https://github.com/leeoniya/RgbQuant.js
+
+epdoptimize — Apache-2.0
+License: licenses/epdoptimize-Apache-2.0.txt
+https://github.com/paperlesspaper/epdoptimize
+
+Lucide / Feather-derived icons — ISC / MIT
+License: licenses/Lucide-LICENSE.txt
+https://github.com/lucide-icons/lucide
+
+Ma Shan Zheng 字体 / font — SIL Open Font License 1.1
+License: licenses/MaShanZheng-OFL.txt
+Copyright 2018 The Ma Shan Zheng Project Authors
+https://github.com/google/fonts/tree/main/ofl/mashanzheng
+
+部分插件、字体和图片的许可信息尚未齐备；当前文件暂不作为正式公开发行包提供。InkTag 自有 WebUI 的使用和再分发条款见许可说明；第三方许可授予的权利不受此说明限制。
+License information for some plugins, fonts and images is not yet complete, and the current files are not yet offered as a formal public release. See the licensing notice for InkTag-owned WebUI use and redistribution terms. Third-party license grants remain unaffected.
+
+许可说明 / Licensing: licenses/LICENSING.txt

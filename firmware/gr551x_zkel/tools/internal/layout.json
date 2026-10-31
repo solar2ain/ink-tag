@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "entries": {
+    "setup": "tools/setup.ps1",
+    "check": "tools/check.ps1",
+    "probe": "tools/probe.ps1",
+    "backup": "tools/backup.ps1",
+    "flash": "tools/flash.ps1",
+    "restore": "tools/restore.ps1"
+  },
+  "configs": [
+    {
+      "name": "zkc42vm_eailier_version.toml",
+      "original": "tools/configs/zkc42vm_eailier_version.toml"
+    },
+    {
+      "name": "ZK_EL_GR42V_V1.2.toml",
+      "original": "tools/configs/ZK_EL_GR42V_V1.2.toml"
+    },
+    {
+      "name": "ZK_EL_GR42V_V1.2_w_NFC.toml",
+      "original": "tools/configs/ZK_EL_GR42V_V1.2_w_NFC.toml"
+    }
+  ]
+}

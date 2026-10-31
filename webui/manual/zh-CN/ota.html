@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../index.html">InkTag WebUI</a></nav><main><h1 id="无线更新与-recovery">无线更新与 Recovery</h1>
+<p>OTA 更新应用固件，通常保留设备配置和内容。首次安装、Recovery 本身更新或无法无线恢复时，请使用<a target="_blank" rel="noopener noreferrer" href="flash.html">完整烧录</a>。不要修改 OTA 包或将完整烧录文件当作 OTA 上传。</p>
+<h2 id="更新步骤">更新步骤</h2>
+<ol>
+<li>从发布包选择与准确主控和板型对应的 OTA 文件，并校验 SHA-256。</li>
+<li>稳定供电，连接设备，在“设置 → 设备设置 → 固件”中选择文件。</li>
+<li>等待文件验证、进入 Recovery、传输和设备校验完成。</li>
+<li>按提示重连普通应用，确认设备身份、实际运行镜像和版本。正常更新还会校时一次。</li>
+</ol>
+<p>文件验证的勾选标志只表示包通过检查；传输到 100% 也不是最终成功。只有最终应用验证完成，才表示 OTA 完成。</p>
+<h2 id="recovery-的使用">Recovery 的使用</h2>
+<p>Recovery 是设备的无线更新模式，通常显示对应身份的 <code>_OTA</code> 蓝牙名。CLI 和 WebUI 可在已安装 Recovery 提供相应能力时安全返回正常应用。旧 Recovery 或应用无效时可能只允许上传合格固件，不能强制退出。</p>
+<p>CLI 入口为 <code>inktag --address ADDRESS recovery enter</code> 和 <code>recovery resume-app</code>；应用进入 Recovery 仍受设备密码验证控制。Recovery 校验固件签名、兼容性和完整性，不会以退出操作替代这些检查。</p>
+<h2 id="发生中断或错误">发生中断或错误</h2>
+<p>保留错误提示和文件摘要，确认设备目前处于应用还是 Recovery。不要重放结果未知的退出、复位或写入命令。应用未返回时，进度完成不能当作成功；按客户端提示恢复传输或使用对应完整烧录恢复路径。</p>
+<p>蓝牙地址一致也不保证浏览器可直接复用缓存服务。角色切换时需要重新识别实际服务和身份；不要连接附近相似名称的另一台设备。</p></main></body></html>

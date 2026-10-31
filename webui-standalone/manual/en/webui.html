@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="web-console">Web console</h1>
+<p>Use Chrome or Edge on desktop. On iPhone/iPad, use <a target="_blank" rel="noopener noreferrer" href="https://apps.apple.com/app/id1492822055">Bluefy</a>. On Android, prefer Chrome. Open the site in that browser rather than an embedded WeChat/in-app window, and grant Bluetooth permission.</p>
+<p>Scanning the device-information QR or opening a link with a <code>ble</code> parameter attempts an exact-name connection to a device already authorized for this origin. If unavailable, a connection dialog appears. Click <strong>Choose Bluetooth device</strong> to open the browser chooser and confirm the target. First-time Bluetooth permission requires a user gesture; the page cannot silently grant it. Cancellation stops automatic attempts, and normal device-password checks remain in force.</p>
+<p>Use the hosted HTTPS site, compiled static files, standalone HTML or CLI bundle with local WebUI. These packages do not require Node.js at runtime. The browser must support Web Bluetooth; otherwise use the <a target="_blank" rel="noopener noreferrer" href="cli.html">CLI</a>.</p>
+<h2 id="install-and-open">Install and open</h2>
+<p>Use the <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag/">hosted WebUI</a> directly, or install locally as follows:</p>
+<p>Install Python 3.11 or newer, download/clone this repository or extract the complete CLI ZIP, and enter the root containing both <code>cli/</code> and <code>webui/</code>. Use the unified installer:</p>
+<p><strong>Windows:</strong></p>
+<pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1
+</code></pre>
+<p><strong>macOS / Linux:</strong></p>
+<pre><code class="language-sh">sh install_inktag.sh
+</code></pre>
+<p>This installs the CLI into <code>cli/.venv</code> and automatically installs the <strong>local Find query service dependencies</strong> in a separate <code>find/runtime/.venv</code> under the per-user data directory. It then starts local WebUI and Find in the background (<code>webui start</code>); closing the terminal does not stop them. Setup prints copyable start, stop, status and log commands. New macOS installations store data and logs in <code>~/.inktag/</code>; an existing legacy directory is retained to preserve sessions and tags. System Python is unchanged; installation does not log into Apple, connect devices or clear existing data.</p>
+<p>First setup requires internet access. Windows also requires full 7-Zip and downloads an Apple authentication image of about 292 MB on first setup. macOS uses native system authentication without that image. Location queries on Linux are not yet qualified.</p>
+<p>To install without starting, run <code>powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1 --prepare-only</code> on Windows or <code>sh install_inktag.sh --prepare-only</code> on macOS/Linux. Afterwards use the CLI wrappers without activating an environment:</p>
+<pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\cli\inktag.ps1 --help
+</code></pre>
+<pre><code class="language-sh">bash cli/inktag.sh --help
+</code></pre>
+<p>Rerun the unified installer after an update. For CLI-only use without Find queries, enter <code>cli/</code> and use the existing <code>install.ps1</code> or <code>bash install.sh</code> instead.</p>
+<p>The default address is <code>http://127.0.0.1:8787/</code>. Data defaults to <code>%LOCALAPPDATA%/InkTag</code> on Windows, <code>~/.inktag/</code> on macOS (existing installations retain their previous directory), or <code>$XDG_DATA_HOME/inktag</code> on Linux (<code>~/.local/share/inktag</code> if unset). Keep identity databases and Apple sessions out of public directories. Static-only WebUI and standalone do not include the query service.</p>
+<h3 id="phone-and-lan-access">Phone and LAN access</h3>
+<p>Local-only operation does not add a login step. To enable phone access, run this from the CLI bundle with local WebUI:</p>
+<pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\cli\inktag.ps1 webui serve --repo . --lan
+</code></pre>
+<pre><code class="language-sh">bash cli/inktag.sh webui serve --repo . --lan
+</code></pre>
+<p>With an activated environment, use <code>inktag-cli webui serve --repo . --lan</code>. The service discovers local addresses, prepares HTTPS and displays the browser address and a password for this run. Connect the phone to the same network and sign in as <code>inktag</code>. Trust only the certificate generated by your own computer. The phone browser must trust the certificate for Bluetooth access; some mobile browsers do not support Web Bluetooth at all.</p>
+<p>Allow the selected port through the local firewall; do not expose a private-data/Find service directly to the internet. Custom DNS names can use <code>--allowed-host NAME</code>; existing certificates use <code>--tls-cert</code> and <code>--tls-key</code>. Advanced deployments may supply a stable service password using <code>--access-password-stdin</code>. This is separate from device and Apple passwords. Most users do not need these advanced options.</p>
+<h2 id="canvas-and-weather-station">Canvas and weather station</h2>
+<p>The canvas under Create supports text, image frames, tables, lists, QR codes and
+brush strokes. Double-click an image frame to select an image and choose fit and
+dithering options. Device-effect preview simulates the target palette locally;
+it neither connects nor refreshes a device. Static pages can use browser fonts
+without installing device font resources.</p>
+<p>Weather templates use editable values, icons, trend charts and forecast controls.
+Export a host task, then use the CLI to bind its target and run the schedule.
+Closing the browser does not stop the CLI. See <a target="_blank" rel="noopener noreferrer" href="host-pages.html">Host pages and weather station</a>.</p>
+<h2 id="browser-preferences">Browser preferences</h2>
+<p>The local service keeps recently used compiled assets in <code>webui-build-cache/</code>
+inside its data directory for 30 days, so an open page can still load its old
+modules after an update. Only hash-named static files are cached, not accounts,
+device credentials or Find data. Retry an image-tool loading failure locally;
+finish any device operation before refreshing the whole page. Clear image removes
+only the current imported image, without reloading or deleting device pictures.</p>
+<p>Settings → Client settings → Preferences selects browser-default, Simplified Chinese or English, and system, light or dark appearance. Selections belong to the current browser origin, not the device. English currently covers navigation, preferences and the tutorial; detailed device text may retain its original language.</p>
+<p>Reopen the tutorial under Settings → Client settings → About. Different hosts/ports have separate settings. Clearing site data resets preferences; blocked storage makes changes session-only. Operation progress and waiting indicators remain visible.</p>
+<h2 id="nfc-and-input-extensions">NFC and input extensions</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Conditions and behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tap to connect (Free)</td>
+<td>A qualified NFC tag exposes its existing console link to the phone. First Bluetooth use still requires browser permission. Reading a link does not execute a device action.</td>
+</tr>
+<tr>
+<td>NFC page switching (Pro)</td>
+<td>Page changes and supported short commands require Pro, reported hardware support and the existing password protection. NFC image transfer is not yet available.</td>
+</tr>
+<tr>
+<td>Buttons and buzzer</td>
+<td>Unavailable extensions are marked not implemented and cannot be written. Qualified onboard buttons remain available according to actual device capabilities.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="connect-and-use">Connect and use</h2>
+<p>Select Connect and the exact Bluetooth name. Wait for identity and settings to load. Connection history shows the Bluetooth name first and the device label below. Recovery is a separate role and may require another browser grant.</p>
+<p>The introduction appears on first use and can be reopened under Settings → Client settings → About. Settings groups Overview, Display, Hardware, Interaction, Activation, Firmware, Logs and Tests under Device settings; Preferences and About belong to Client settings and work without a device connection.</p>
+<p>Check the panel configuration before sending content. Wait for display completion, not just transfer completion. Read any image-clear confirmation before changing an incompatible panel profile. Password management uses device operations; changing or deleting a password requires fresh verification of the old password.</p>
+<p>Settings → Device settings → Activation serves Pro-capable devices. See <a target="_blank" rel="noopener noreferrer" href="pro.html">Pro features and activation</a> for the Apple Find My tracker, more slots, NFC interaction and activation steps.</p>
+<h2 id="first-picture-and-stored-images">First picture and stored images</h2>
+<ol>
+<li>Check Settings → Device settings → Display for the current controller, preset, colors and orientation.</li>
+<li>Import a picture and adjust cropping, rotation and colors using the device preview.</li>
+<li>Display it directly or save in an available slot.</li>
+<li>Wait for transfer and physical refresh. Flashing is usually part of the waveform; 100% transfer is not refresh completion.</li>
+</ol>
+<p>Create offers templates with previews. The introductory tutorial includes screenshots with boxes/arrows and can be reopened in About. Resources lists actual slot IDs, display/download/delete actions and slideshow controls. IDs can have gaps. Slideshow runs autonomously after disconnecting; stop explicitly when finished.</p>
+<p>See <a target="_blank" rel="noopener noreferrer" href="devices.html">device/panel capacity</a>. Changing geometry/colors may invalidate stored pictures. Download important content first and read the explicit image-clear confirmation; saving a setting and deleting pictures are different operations.</p>
+<p>Settings → Device settings → Firmware handles OTA. Package validation alone is not OTA success: device validation and a verified return to the application must follow. For errors or an unknown result, read the message and logs before taking another action. Diagnostics show unavailable values as <code>--</code>; MCU and panel temperatures are distinct. Keep private Find data and credentials out of shared reports.</p>
+<h2 id="find-queries-and-migration">Find queries and migration</h2>
+<p>The static edition can enroll tags and save encrypted migration material. The local edition can import or export the entire library. See <a target="_blank" rel="noopener noreferrer" href="find.html">Find queries and encrypted migration</a>.</p>
+<h2 id="nfc-usage">NFC usage</h2>
+<p>For devices with NFC, Settings → Interaction shows instructions only. There is no mode selector, save action or NFC off switch.</p>
+<p>Read the tag with a phone to open its device link; the first Bluetooth connection still needs browser permission. Phone commands require Pro and supporting firmware: in NFC Tools choose Write → Add a record → Text, enter a supported command, and touch the tag. Examples include <code>NEXT</code>, <code>CALENDAR</code>, and <code>CLOCK</code>. The interface lists only commands advertised by the device. An existing image name may be used where supported.</p>
+<p>An ordinary touch is not a separate page-switching mode. NFC image transfer is not available yet.</p>
+<h2 id="offline-resources">Offline resources</h2>
+<p>Download <code>InkTag-WebUI-standalone-*.zip</code>, extract the entire ZIP, and open <code>InkTag-WebUI.html</code>. The HTML, fonts and guide photos are in the same ZIP. Keep the <code>assets</code> folder beside the HTML; no separate resource download is needed.</p>
+<p>Removing optional resources makes the corresponding calligraphy font and guide photo unavailable. Device connections, your own image processing and OTA still work. Artwork using a missing font prompts you to restore it before sending.</p></main></body></html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="在线版与本地版">在线版与本地版</h1>
+<p>电脑推荐 Chrome 或 Edge；iPhone／iPad 推荐 <a target="_blank" rel="noopener noreferrer" href="https://apps.apple.com/app/id1492822055">Bluefy</a>；Android 首选 Chrome。不要在微信等内置窗口中连接设备，请在上述浏览器中打开网页并允许蓝牙访问。</p>
+<p>中文 | <a target="_blank" rel="noopener noreferrer" href="../en/github-pages.html">English</a></p>
+<p>在线使用可直接打开 <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag/">InkTag WebUI</a>，无需安装。建议使用支持 Web Bluetooth 的 Chrome 或 Edge；首次连接时，点击连接按钮并授权准确的设备。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>使用方式</th>
+<th>适合什么情况</th>
+<th>Find</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>在线 WebUI</td>
+<td>直接连接、传图、编辑页面和管理设备</td>
+<td>可登记和控制设备广播；查询位置需本地服务</td>
+</tr>
+<tr>
+<td>standalone ZIP</td>
+<td>希望把网页保存在本机</td>
+<td>与在线版相同；完整解压后打开 HTML，保留 assets 文件夹</td>
+</tr>
+<tr>
+<td>静态 ZIP</td>
+<td>自行托管网页</td>
+<td>不包含查询后台</td>
+</tr>
+<tr>
+<td>CLI ZIP（含本地 WebUI）</td>
+<td>需要本机数据、Find 查询或自动化任务</td>
+<td>提供本地查询服务，首次使用按提示配置依赖</td>
+</tr>
+</tbody>
+</table></div>
+<p>本地版需要 Python 3.11 或以上，不需要 Node.js。安装与启动步骤见 <a target="_blank" rel="noopener noreferrer" href="webui.html">WebUI 使用说明</a>；Find 查询与设备信息迁移见 <a target="_blank" rel="noopener noreferrer" href="find.html">Find 手册</a>。</p>
+<p>手机访问电脑上的本地服务时，两者需在同一局域网，并按启动提示使用可信 HTTPS。普通局域网 HTTP 通常不能使用浏览器蓝牙；手机浏览器自身也需支持 Web Bluetooth。</p>
+<p>在线站点加载失败时可稍后重试或使用本地版。切换网址、浏览器或清理网站数据可能影响已授权设备及浏览器内保存的设置，请先导出需要保留的设备信息。客户端更新不会自动刷写固件。</p></main></body></html>

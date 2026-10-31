@@ -1,0 +1,33 @@
+format_version = 1
+board_marking = "zkc42vm_eailier_version"
+
+[screen]
+ic = "SSD1683"
+recipe = 1
+color = "BWR"
+rotation = 0
+mirror_x = false
+mirror_y = false
+native_ui_scale = 0
+width = 400
+height = 300
+visible_x = 0
+visible_y = 0
+visible_width = 400
+visible_height = 300
+
+[gpio.display]
+mosi = "GPIO4"
+clock = "GPIO16"
+cs = "GPIO25"
+dc = "GPIO5"
+reset = "GPIO7"
+busy = "GPIO6"
+enable = "GPIO24"
+enable_active_low = false
+
+[gpio.led]
+red = "NONE"
+green = "NONE"
+blue = "NONE"
+active_low = []

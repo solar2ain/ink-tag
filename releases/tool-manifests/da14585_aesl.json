@@ -1,0 +1,377 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "path": "firmware/da14585_aesl/LICENSE",
+      "bytes": 35823,
+      "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/README.en.md",
+      "bytes": 5498,
+      "sha256": "8353731e7ebc982e99434c1e5d9baf19cd3e769fe3f71c97df9e70ab28cc0a1d",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/README.md",
+      "bytes": 5058,
+      "sha256": "d5b0af2b69bee0774dcc365e94283e25a789e1b24575062d1557b2f7a4db715f",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/check.ps1",
+      "bytes": 148,
+      "sha256": "c985664a1cd3d3bd3bd396ff0372cee714673a82430748006aff444ce17117b7",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/configs/asel29.toml",
+      "bytes": 597,
+      "sha256": "fcece5b344980e62384a69fe631361d6c4ee5fb79eab1ea2d86513d6b06e3b8e",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/configs/asel42-ssd1683.toml",
+      "bytes": 593,
+      "sha256": "3fe3af291b6577fe743a5a9d40001d035181a01721815f919c14710af831a6f0",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/configs/asel42.toml",
+      "bytes": 595,
+      "sha256": "d3876be4badf98565c7cfd1188b3e351db8c2ea00083febd644068ae3030616d",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/flash.ps1",
+      "bytes": 148,
+      "sha256": "6c05d644b88820737af4ed4b38a57a7f7289c9405c792bd8036a86af36cf5edf",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/invoke-native.ps1",
+      "bytes": 1561,
+      "sha256": "5599f2a633287cc8474ddc70afdf87595da8c8e71671fb78b93e123acfe32c45",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/layout.json",
+      "bytes": 533,
+      "sha256": "bb5828fab380c37c81536742da6d11bce3574c94db4d751cf10a0a6fa55a39b7",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/dependencies/cffi-2.1.1-cp313-cp313-win_amd64.whl",
+      "bytes": 185688,
+      "sha256": "1aa5645c30469b09530c4ebca77ebf8f17618293c58f8549cb1a543a50236e7d",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/dependencies/cryptography-50.0.0-cp311-abi3-win_amd64.whl",
+      "bytes": 3840395,
+      "sha256": "bd1c592e4d5974f0d08d4888e432157adba757c66da0246918e43677fafa2d30",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/dependencies/psutil-7.2.2-cp37-abi3-win_amd64.whl",
+      "bytes": 137737,
+      "sha256": "eb7e81434c8d223ec4a219b5fc1c47d0417b12be7ea866e24fb5ad6e84b3d988",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/dependencies/pycparser-3.0-py3-none-any.whl",
+      "bytes": 48172,
+      "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/dependencies/pylink_square-1.7.0-py2.py3-none-any.whl",
+      "bytes": 86908,
+      "sha256": "f418db3479b3b86e45f821f88cea5397357beed382eb441ab2fd11e1d4d9e1e3",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/dependencies/python-3.13.16-embed-amd64.zip",
+      "bytes": 11439094,
+      "sha256": "97dae5274cc54867065e8d5a3226e48c35017ed332a0fdb0e27d5b5821961297",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/dependencies/six-1.17.0-py2.py3-none-any.whl",
+      "bytes": 11050,
+      "sha256": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/LICENSE",
+      "bytes": 35823,
+      "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/licenses/cffi-2.1.1-cp313-cp313-win_amd64.whl/cffi-2.1.1.dist-info/licenses/LICENSE",
+      "bytes": 1123,
+      "sha256": "5ba24ddc57067f9249add644c3afc41a5d6dc37e23433ef759d95df370b0af63",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/licenses/cryptography-50.0.0-cp311-abi3-win_amd64.whl/cryptography-50.0.0.dist-info/licenses/LICENSE",
+      "bytes": 197,
+      "sha256": "3e0c7c091a948b82533ba98fd7cbb40432d6f1a9acbf85f5922d2f99a93ae6bb",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/licenses/cryptography-50.0.0-cp311-abi3-win_amd64.whl/cryptography-50.0.0.dist-info/licenses/LICENSE.APACHE",
+      "bytes": 11360,
+      "sha256": "aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/licenses/cryptography-50.0.0-cp311-abi3-win_amd64.whl/cryptography-50.0.0.dist-info/licenses/LICENSE.BSD",
+      "bytes": 1532,
+      "sha256": "602c4c7482de6479dd2e9793cda275e5e63d773dacd1eca689232ab7008fb4fb",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/licenses/psutil-7.2.2-cp37-abi3-win_amd64.whl/psutil-7.2.2.dist-info/LICENSE",
+      "bytes": 1577,
+      "sha256": "c7adc4d5d1337a548b967421f1fbe258b93033a0417708fd6f4e38f8ecbceb80",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/licenses/pycparser-3.0-py3-none-any.whl/pycparser-3.0.dist-info/licenses/LICENSE",
+      "bytes": 1543,
+      "sha256": "0c846399369ea76ddd7b5c44fe6d16497415fcf015f5cbb508c24bf98b81c5b1",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/licenses/pylink_square-1.7.0-py2.py3-none-any.whl/pylink_square-1.7.0.dist-info/licenses/LICENSE.md",
+      "bytes": 10181,
+      "sha256": "1aaa40c02c54e283ea224eee097864ddb56c521d076d37f8f8baf6479b568ea8",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/licenses/python-3.13.16-embed-amd64.zip/LICENSE.txt",
+      "bytes": 33861,
+      "sha256": "62bec384df47b0328307db41455ff6ea2559e5546b394ac69148561b21703120",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/licenses/six-1.17.0-py2.py3-none-any.whl/six-1.17.0.dist-info/LICENSE",
+      "bytes": 1066,
+      "sha256": "4375ba20e2b9c6c4e7cad2940a628fd90e95cc3d50ee92aae755715d8ba1fbd0",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/README.en.md",
+      "bytes": 5322,
+      "sha256": "08e8493778fa92588615aea7d73e66d4702b8b630676b088878ab1130487097a",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/README.md",
+      "bytes": 4907,
+      "sha256": "24295c268d31bae82ce040b462538d89a0269dc64cc49e2c1ca4633300d34f90",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tool-manifest.json",
+      "bytes": 8382,
+      "sha256": "840c186836c5e5fda857688f73c38cfc57b9576cb80e7a75e834555688cc3ad7",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/check.ps1",
+      "bytes": 1963,
+      "sha256": "4573e60c39904107ad63ee7c13f097a275cd3de9b0dfc52a29984a4dca232c9f",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/configs/asel29.toml",
+      "bytes": 597,
+      "sha256": "fcece5b344980e62384a69fe631361d6c4ee5fb79eab1ea2d86513d6b06e3b8e",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/configs/asel42-ssd1683.toml",
+      "bytes": 593,
+      "sha256": "3fe3af291b6577fe743a5a9d40001d035181a01721815f919c14710af831a6f0",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/configs/asel42.toml",
+      "bytes": 595,
+      "sha256": "d3876be4badf98565c7cfd1188b3e351db8c2ea00083febd644068ae3030616d",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/dependencies.lock.json",
+      "bytes": 7100,
+      "sha256": "061ba0c6a11c13f395f1800ff4ff03921b00f44e07d93b8279e74952e8472b5f",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/dependency-closure.json",
+      "bytes": 5147,
+      "sha256": "63cbce5a7b0414cd9f537c04e5e54b62a1e9235dd87ced52b9dc606b5b9d85ad",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/flash.ps1",
+      "bytes": 12730,
+      "sha256": "3f4475ccc25068680b7e8b0e835bdf235d735f0fdf8f88ad97a22063ef32079a",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/context.ps1",
+      "bytes": 8014,
+      "sha256": "ca11b1c87167a7deeb29a15414d621f12a3cbcf21d894fd04e48341b021dd180",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/da-backup-archive.ps1",
+      "bytes": 11368,
+      "sha256": "1541236f2cf04b35d91575bd71ac855364d843381d55cdc884c1a1e91e42e68a",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/da14585-board-config.py",
+      "bytes": 8235,
+      "sha256": "4f5b021c9022408609adddb23fa44cb7497fb3a152718ae5db9f3ebc87ad7898",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/da14585-commander-backend.py",
+      "bytes": 22354,
+      "sha256": "fb2dba20011600d1ab5652a8be80a0ab87aabfc439b695961e94f1d4806b7f48",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/da14585-commander-readback.py",
+      "bytes": 7012,
+      "sha256": "b3eba06204d33fc3390b0f4c17641859bf4847fa15a8e15ba59623c6bccb4044",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/da14585-commander-session.py",
+      "bytes": 13823,
+      "sha256": "a8f0d6959874c1ef80ee289225852811597386d73a4879d62c8d5f93733d2487",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/da14585-conpty.py",
+      "bytes": 7528,
+      "sha256": "198f96e89b76c69727361074ca5528081bed7b94a119ad9ef724915ab81f4582",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/da14585-dap-session.py",
+      "bytes": 1360,
+      "sha256": "3c96a761be4eb76ac8d157c97986bb9efbc9f170d2e17486e0fcc735e19b22a7",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/da14585-full-backend.py",
+      "bytes": 36147,
+      "sha256": "b50eff37cfb2e23aee24c89454801f7a6e9dc749f85eadbc6536df0428c9caf2",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/da14585-full-state.py",
+      "bytes": 9217,
+      "sha256": "fde46bc0521d1740eb5f4d2bbdbc1a737dc489957f632134e83d35ff7cfeadc4",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/da14585-full-transaction.py",
+      "bytes": 38910,
+      "sha256": "6cd095643f2fcde11afcc578830737c3787684d726c703492afb66a776f00284",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/da14585-image-verify.py",
+      "bytes": 9467,
+      "sha256": "9117de8ac9089e19c1663a015119c4590a281ff4e26b911b72b911fc767578eb",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/dependency-runtime.py",
+      "bytes": 6782,
+      "sha256": "e5c6a48b8a7514dafd2ef5639f82c8f783b30284d07d9588235e7cd1a8983cff",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/host-common.ps1",
+      "bytes": 21746,
+      "sha256": "acf83211cb096317b51747fbbde60486635119b0fe7f3cdd373f092a29e8a84d",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/jlink-tools.ps1",
+      "bytes": 4389,
+      "sha256": "ce6e5b060d335dddcdaad32ce85e3bc5a5240f48eeb56e1156b9a45d290132bf",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/portable-files.json",
+      "bytes": 2760,
+      "sha256": "b9d30d7b73d6aa42046445ebf0068fdc8129dd9a4bf121d58f312f1029007b99",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/powershell-cli.ps1",
+      "bytes": 3087,
+      "sha256": "ef84090846f21f33ef8d085c3567adff13280f8e4bb963ba74e67d9b11acd165",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/internal/probe-da14585-dap.py",
+      "bytes": 10421,
+      "sha256": "81f20618e2c47fef3583ea0119b6e193bca7eebd1efc4bcf4dea66e9cc99664e",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/probe.ps1",
+      "bytes": 5719,
+      "sha256": "a02099c00b44d97ab822bc107447c1d4f254773362d030ca4711bda5de9cd529",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/setup.ps1",
+      "bytes": 3640,
+      "sha256": "4f5c55838a81bdeffb8458d54e4a2b8fe8914b20ae7ae4acadb6750faf6aa1e6",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/validate.ps1",
+      "bytes": 3438,
+      "sha256": "f2181f40fae71d8a6bbf0620faf183468205d58d6a04657e1c40c907cacfd560",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/internal/native/tools/vendor-dependencies.json",
+      "bytes": 1735,
+      "sha256": "97077f346be087c8e32546f806bd5fa005241891ad6fec90b4b8c71b9b3f390b",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/probe.ps1",
+      "bytes": 148,
+      "sha256": "9d2e19077e5c315c360420a33d21114caa7e0c4475c831983fb72b2ab17c1fbb",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/setup.ps1",
+      "bytes": 148,
+      "sha256": "132ee8038115e51d070e9b45e4d5d38ca051ac8ec080dcaf523ce311e8706e25",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/da14585_aesl/tools/validate.ps1",
+      "bytes": 151,
+      "sha256": "39a80441d6bfc2308ee74583645913995356f0797d7892105f7c3a76cc71a778",
+      "category": "runtime"
+    }
+  ]
+}

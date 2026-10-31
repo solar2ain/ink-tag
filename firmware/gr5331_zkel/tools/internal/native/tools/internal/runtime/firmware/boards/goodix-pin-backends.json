@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "scope": "offline-reviewed-pads-only",
+  "backends": {
+    "gr5331_zkc21v": {
+      "family": 51, "board_id": 1, "mcu": 49,
+      "board_marking": "ZK_EL_GR5331_2.13_V1.1", "physical_board_marking": "ZK_EL_GR5331_2.13_V1.1", "assembly": "no_nfc", "product_name": "zkc21v", "nfc_fitted": false,
+      "usable": [[8, 9, 10, 11, 12, 13], [6], [0, 1, 2]],
+      "aux": [255, 255, 255], "rail": 70,
+      "default_pins": [8, 9, 10, 11, 12, 13, 70, 130, 129, 128, 255, 255],
+      "default_active_low": 916,
+      "screen": {"ic": "SSD1680", "recipe": 1, "color": "BWR", "rotation": 90, "mirror_x": false, "mirror_y": true, "native_ui_scale": 0, "width": 128, "height": 250, "visible_x": 0, "visible_y": 0, "visible_width": 122, "visible_height": 250}
+    },
+    "gr5513_zkc21v": {
+      "family": 85, "board_id": 1, "mcu": 19,
+      "board_marking": "ZK_EL_GR_2.13_V1.2", "physical_board_marking": "ZK_EL_GR_2.13_V1.2", "assembly": "nfc_unqualified", "product_name": "zkc21v", "nfc_fitted": false,
+      "evidence": "Original 19428bd50c21: screen record 0x57000/type0x5B, 128x250 SSD1680-compatible; native probe package7. LED scatter 0x0102A608->0x00804020 contains PWM channel MASKS A/B/A (1/2/1), not GPIO indices. Consumer 0x0101E99C selects PWM0 for first two colors/PWM1 for third; stock physical output test 0x0101554C uses MSIO1/GPIO31/MSIO0, and 0x0101E9E4 restores GPIO31 inactive high. Negative drive. NFC record 0x57100 erased; backend disabled, physical fit unknown. Aux remains disabled.",
+      "usable": [[2, 3, 4, 5, 6, 7, 24, 31], [], [0, 1]],
+      "aux": [255, 255, 255], "rail": 24,
+      "default_pins": [4, 3, 2, 5, 7, 6, 24, 128, 129, 31, 255, 255],
+      "default_active_low": 896,
+      "screen": {"ic": "SSD1680", "recipe": 1, "color": "BWR", "rotation": 90, "mirror_x": false, "mirror_y": true, "native_ui_scale": 0, "width": 128, "height": 250, "visible_x": 0, "visible_y": 0, "visible_width": 122, "visible_height": 250}
+    },
+    "gr5513_zkc42v": {
+      "family": 85, "board_id": 2, "mcu": 19,
+      "board_marking": "ZK_EL_GR42V_V1.2_w_NFC", "physical_board_marking": "ZK_EL_GR42V_V1.2", "assembly": "nfc", "product_name": "zkc42v", "nfc_fitted": true,
+      "usable": [[2, 3, 4, 5, 6, 7, 24, 31], [], [0, 1]],
+      "aux": [255, 255, 255], "rail": 24,
+      "default_pins": [4, 3, 2, 5, 7, 6, 24, 128, 129, 31, 255, 255],
+      "default_active_low": 948,
+      "screen": {"ic": "UC8276", "recipe": 1, "color": "BWR", "rotation": 0, "mirror_x": false, "mirror_y": false, "native_ui_scale": 0, "width": 400, "height": 300, "visible_x": 0, "visible_y": 0, "visible_width": 400, "visible_height": 300}
+    },
+    "gr5513_zkc42vm": {
+      "family": 85, "board_id": 3, "mcu": 19,
+      "board_marking": "ZK_EL_GR42V_V1.2", "physical_board_marking": "ZK_EL_GR42V_V1.2", "assembly": "no_nfc", "product_name": "zkc42vm", "nfc_fitted": false,
+      "usable": [[2, 3, 4, 5, 6, 7, 24], [], []],
+      "aux": [26, 30, 255], "rail": 24,
+      "default_pins": [4, 3, 2, 5, 7, 6, 24, 255, 255, 255, 255, 255],
+      "default_active_low": 20,
+      "screen": {"ic": "SSD1683", "recipe": 1, "color": "BWR", "rotation": 0, "mirror_x": false, "mirror_y": false, "native_ui_scale": 0, "width": 400, "height": 300, "visible_x": 0, "visible_y": 0, "visible_width": 400, "visible_height": 300}
+    },
+    "gr5515_zkc42vm": {
+      "family": 85, "board_id": 3, "mcu": 21,
+      "board_marking": "zkc42vm_eailier_version", "physical_board_marking": null, "assembly": "no_nfc", "product_name": "zkc42vm", "nfc_fitted": false,
+      "usable": [[4, 5, 6, 7, 16, 24, 25], [], []],
+      "aux": [26, 30, 255], "rail": 24,
+      "default_pins": [4, 16, 25, 5, 7, 6, 24, 255, 255, 255, 255, 255],
+      "default_active_low": 20,
+      "screen": {"ic": "SSD1683", "recipe": 1, "color": "BWR", "rotation": 0, "mirror_x": false, "mirror_y": false, "native_ui_scale": 0, "width": 400, "height": 300, "visible_x": 0, "visible_y": 0, "visible_width": 400, "visible_height": 300}
+    }
+  }
+}

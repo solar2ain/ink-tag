@@ -1,0 +1,331 @@
+{
+  "schemaVersion": 1,
+  "platform": "windows-x64",
+  "python": {
+    "implementation": "CPython",
+    "major": 3,
+    "minor": 12,
+    "bits": 64,
+    "tested": "3.12.0",
+    "source": "https://www.python.org/downloads/windows/"
+  },
+  "powershell": {
+    "minimum": "5.1",
+    "tested": [
+      "5.1",
+      "7.x"
+    ],
+    "hardwareSupport": "existing Windows backend only"
+  },
+  "native": {
+    "jlink": {
+      "files": {
+        "JLink.exe": {
+          "bytes": 370840,
+          "sha256": "405f4d0a239475e5529f6d09a130cf5bbfe53ac97eb25cec9e492c10df16c805"
+        },
+        "JLinkARM.dll": {
+          "bytes": 20937880,
+          "sha256": "7d61c9cc53b6383837ccd01ad0732f7798e249fc0b2adeaad3b967c906794e9f"
+        }
+      },
+      "systemDlls": [
+        "ADVAPI32.dll",
+        "HID.DLL",
+        "IPHLPAPI.DLL",
+        "KERNEL32.dll",
+        "SETUPAPI.dll",
+        "SHELL32.dll",
+        "USER32.dll",
+        "WS2_32.dll"
+      ],
+      "version": "7.88j",
+      "source": "https://www.segger.com/downloads/jlink/",
+      "acquisition": "user-official-install-import",
+      "destination": ".tools/jlink/7.88j"
+    },
+    "gprogrammer": {
+      "files": {
+        "api-ms-win-crt-convert-l1-1-0.dll": {
+          "bytes": 22208,
+          "sha256": "ba51a438d47331deef6178345b235e768a4e648d43fd44e28b95e7292cd4f04c"
+        },
+        "api-ms-win-crt-environment-l1-1-0.dll": {
+          "bytes": 18624,
+          "sha256": "1f62695f9fb0fc6feca4283bb4be26eeea1c5f10368ad51c8a5d910d3e105188"
+        },
+        "api-ms-win-crt-filesystem-l1-1-0.dll": {
+          "bytes": 20160,
+          "sha256": "9480bb7257c40483e6cb6433cdd90871d55912bdbcfb87f33c11d7401f50f94a"
+        },
+        "api-ms-win-crt-heap-l1-1-0.dll": {
+          "bytes": 18624,
+          "sha256": "ed8b2def856e4effce4856efcc7f3c35fb7e3428287ba8851cde2da8df1d1c58"
+        },
+        "api-ms-win-crt-locale-l1-1-0.dll": {
+          "bytes": 18624,
+          "sha256": "37489d3f078513ecccb7bfb9f18ec1338d011b91ad091085ad1db02f633a23bf"
+        },
+        "api-ms-win-crt-math-l1-1-0.dll": {
+          "bytes": 28864,
+          "sha256": "1d8e2b59452b927cc3e0f75b2d5277b667a503c53507fdac11d3d8b44986080d"
+        },
+        "api-ms-win-crt-multibyte-l1-1-0.dll": {
+          "bytes": 25792,
+          "sha256": "86cc087d197b1243413c0963b6f132648489fe26a4a11a7a77163744810e9165"
+        },
+        "api-ms-win-crt-runtime-l1-1-0.dll": {
+          "bytes": 22720,
+          "sha256": "8afdaf1c630aecb97ab5625ac8483664643c526bd705decfae0daaf2481f0a81"
+        },
+        "api-ms-win-crt-stdio-l1-1-0.dll": {
+          "bytes": 24256,
+          "sha256": "8824840d84f561d2b46d13f30484683c36328850a596f1e2ee48bca2e7de2d30"
+        },
+        "api-ms-win-crt-string-l1-1-0.dll": {
+          "bytes": 24256,
+          "sha256": "6147eb7e5bd6ac004301350ef4b168e552b82e301e14dcf3b10df88d833dc1be"
+        },
+        "api-ms-win-crt-time-l1-1-0.dll": {
+          "bytes": 20672,
+          "sha256": "dc7f41906edf362829b5e9157ba0c1da73ce32f95b4cb468cce96521c4c4ac8c"
+        },
+        "api-ms-win-crt-utility-l1-1-0.dll": {
+          "bytes": 18624,
+          "sha256": "dd0d05feadf990eaa82d691be1990a2bd2ebe7f9874880d1871760dc15d9b3c1"
+        },
+        "balboa2btconfig/balboa2bt_dfu_jlink.bin": {
+          "bytes": 91024,
+          "sha256": "4084271068841c6badfdbb8fca04525ae5d038f779a8c18c6a8b584a2cdb875b"
+        },
+        "balboa2btconfig/balboa2bt_dfu_uart.bin": {
+          "bytes": 93104,
+          "sha256": "c5ec5701937d3b60b4f3ccebf1883d553ecb0fbcdfe38b0dd8e2d76927d6733d"
+        },
+        "balboa2config/balboa2_dfu_jlink.bin": {
+          "bytes": 78720,
+          "sha256": "24dbd0a268a13285b1bf165ea92703cb26f4833955e24faafe001448f6076420"
+        },
+        "balboa2config/dfu_uart_balboa2.bin": {
+          "bytes": 128128,
+          "sha256": "12040bf79db52ccaefbdd9684d80bd0e67fbacb0ec1c5e2bbf232433bbeb0362"
+        },
+        "balboaconfig/dfu_jlink_c4.bin": {
+          "bytes": 46944,
+          "sha256": "95040e824ddaf3f110909937695711e23070f7ab6f2e1abd8bf77ebd6663bb8f"
+        },
+        "balboaconfig/dfu_jlink_down.bin": {
+          "bytes": 48256,
+          "sha256": "2ef2c3367ae5e9dcbe44c3ba9eea666f3279612226e150c3ec2b58cdfb0f850e"
+        },
+        "balboaconfig/dfu_uart_down.bin": {
+          "bytes": 59312,
+          "sha256": "4d54b47bdca8fd10fd275be62d964cecd699a45b8b7fb46e00383344f2c7aaae"
+        },
+        "baliconfig/dfu_jlink_bali.bin": {
+          "bytes": 52928,
+          "sha256": "75ddb8ff3843a3058e76a4647ac0a5fa24b52beb3115d772bb57444d0f2cdb2a"
+        },
+        "baliconfig/dfu_uart_bali.bin": {
+          "bytes": 75952,
+          "sha256": "2b4a9e80a53334a063adbd91695d9c17e9ea4326a7bac058e41f3249edc95288"
+        },
+        "cairoconfig/gr533x/dfu_jlink_down.bin": {
+          "bytes": 19904,
+          "sha256": "a5b4b29a61c1b94cc62c994fdd75bbc9b7108d95020ba8c8fdd218c1f6aedc93"
+        },
+        "cairoconfig/gr533x/dfu_uart_down.bin": {
+          "bytes": 28528,
+          "sha256": "d9631eabd95145472308019ec423c915fa2c69c6e0299b8219e624564df5865e"
+        },
+        "cairoconfig/gr5405/dfu_jlink_down.bin": {
+          "bytes": 16880,
+          "sha256": "7a7106c043f90bec73133db48fe6e4c1ea4380c3bca25fb1b8545bb6104bf24b"
+        },
+        "cairoconfig/gr5405/dfu_uart_down.bin": {
+          "bytes": 26112,
+          "sha256": "d42b00776a49e767106f91985582f795c37adbc2eb419d5e3ecc881749a16750"
+        },
+        "config/balboa2_efuse_config.json": {
+          "bytes": 9344,
+          "sha256": "15390b5fdf4741fff0c4f2147357badba5a937e4426d6f2482702d2518724330"
+        },
+        "config/balboa_nvds_config.json": {
+          "bytes": 1277,
+          "sha256": "3027db1a9dc2314bf5d85554ee49db0741f5cee76ce53d29c5fe1b3a342a43eb"
+        },
+        "config/bali_efuse_config.json": {
+          "bytes": 9891,
+          "sha256": "51dd62d61551cef0d6bf5e83dd5a28fb60e7a9d4ac10a44db3883e27701a129f"
+        },
+        "config/cairo_efuse_config.json": {
+          "bytes": 4424,
+          "sha256": "32fc966a4854c54ce4b1e66f411560dd3820d5de5680eaa31fef81cd9a8392d3"
+        },
+        "config/cairo_nvds_config.json": {
+          "bytes": 1277,
+          "sha256": "10de41ed1baba7501b353b8ebb0afd72536d5481b9285c064ab6dc32b6881a97"
+        },
+        "config/cairo_otp_config.json": {
+          "bytes": 14817,
+          "sha256": "058c9da81f27978c90fe858f05c3cfd4783af0dd49f4252d211c27cbacf65e98"
+        },
+        "config/db.json": {
+          "bytes": 26296,
+          "sha256": "f50a5fef3bcc57b2578ca08b4ed6425f4490a9f258bf682b70ef603ae532b0e6"
+        },
+        "config/efuse_config.json": {
+          "bytes": 4557,
+          "sha256": "f160092ef4d090d32ac3dee2be52b528c94496c5baf4ad978f7a5dec14ea9e14"
+        },
+        "config/flash_id.json": {
+          "bytes": 6387,
+          "sha256": "41c2c676c2a3053c4faaba20870f6fc3bf14c7535fa662a60d93244354b95608"
+        },
+        "config/gr5405_otp_config.json": {
+          "bytes": 14817,
+          "sha256": "02a331b8ad1c400d3931bff0cbf537cc99207ef5374b33c743c2a77c1630b584"
+        },
+        "config/nvds_common_config.json": {
+          "bytes": 146,
+          "sha256": "28efcbab0659137320135251e7da63a5c2d92c47be5f4a28fd114b9abc1dbb91"
+        },
+        "config/nvds_config.json": {
+          "bytes": 1277,
+          "sha256": "10de41ed1baba7501b353b8ebb0afd72536d5481b9285c064ab6dc32b6881a97"
+        },
+        "config/yos_dev_efuse_config.json": {
+          "bytes": 2152,
+          "sha256": "a10365fcac3ad6591ff76912c19c4c2cbefd81a1e8b0a59ac284b5d3ce5e339f"
+        },
+        "config/yos_file_efuse_config.json": {
+          "bytes": 2723,
+          "sha256": "0e24f7334ed58ce38fd2d2e09f67cef144fc4d004697c5a8ab9b42511de36506"
+        },
+        "GR5xxx_console.exe": {
+          "bytes": 912384,
+          "sha256": "c2409d766b2fc853a46984efa534b3b4522202ef5c121e870929709e98255af0"
+        },
+        "JLinkARM.dll": {
+          "bytes": 14422920,
+          "sha256": "dc265dff77746053947e7e9a003ee457354ee2f27070bf2cfa5bfa8630aeea57"
+        },
+        "libcrypto-1_1.dll": {
+          "bytes": 2093568,
+          "sha256": "8776d3609fd9a79328902fb16e1483385cab009f6bae23de3d62262f20feb5ca"
+        },
+        "libssl-1_1.dll": {
+          "bytes": 504320,
+          "sha256": "cbb9395225d2fcbfb2bffa1625b4e0aa8bf2dbd15804db41f95e57fe24bdda29"
+        },
+        "msvcp140.dll": {
+          "bytes": 440120,
+          "sha256": "9c1dc36d319382e1501cdeaae36bad5b820ea84393ef6149e377d2fb2fc361a5"
+        },
+        "Qt5Core.dll": {
+          "bytes": 4770816,
+          "sha256": "982924acb0859fd4170161ae7ab5ac7c32f4b12ec525a46dced5b957b880d033"
+        },
+        "Qt5SerialPort.dll": {
+          "bytes": 60416,
+          "sha256": "255151ee93cf1058b564b4ff8d214e67009b0d7fc26d4822cbd6ce53e656fed8"
+        },
+        "vcruntime140.dll": {
+          "bytes": 83784,
+          "sha256": "6823b98c3e922490a2f97f54862d32193900077e49f0360522b19e06e6da24b4"
+        }
+      },
+      "systemDlls": [
+        "ADVAPI32.dll",
+        "COMCTL32.dll",
+        "GDI32.dll",
+        "KERNEL32.dll",
+        "MPR.dll",
+        "SETUPAPI.dll",
+        "SHELL32.dll",
+        "USER32.dll",
+        "VERSION.dll",
+        "WINMM.dll",
+        "WS2_32.dll",
+        "bcrypt.dll",
+        "comdlg32.dll",
+        "iphlpapi.dll",
+        "ole32.dll"
+      ],
+      "version": "2.0.3.0",
+      "source": "https://www.goodix.com/en/software_tool/gprogrammer_ble",
+      "acquisition": "user-official-install-import",
+      "destination": ".tools/gprogrammer/_._"
+    }
+  },
+  "wheels": [
+    {
+      "name": "cffi",
+      "version": "2.1.1",
+      "file": "cffi-2.1.1-cp312-cp312-win_amd64.whl",
+      "bytes": 185919,
+      "sha256": "f53e442b08449d42821fa4a4fba000095af9f62742a500f978a9f557ec44339a",
+      "licenseFiles": [
+        "cffi-2.1.1.dist-info/licenses/LICENSE"
+      ],
+      "source": "https://pypi.org/project/cffi/2.1.1/"
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6",
+      "file": "colorama-0.4.6-py2.py3-none-any.whl",
+      "bytes": 25335,
+      "sha256": "4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6",
+      "licenseFiles": [
+        "colorama-0.4.6.dist-info/licenses/LICENSE.txt"
+      ],
+      "source": "https://pypi.org/project/colorama/0.4.6/"
+    },
+    {
+      "name": "cryptography",
+      "version": "50.0.0",
+      "file": "cryptography-50.0.0-cp311-abi3-win_amd64.whl",
+      "bytes": 3840395,
+      "sha256": "bd1c592e4d5974f0d08d4888e432157adba757c66da0246918e43677fafa2d30",
+      "licenseFiles": [
+        "cryptography-50.0.0.dist-info/licenses/LICENSE",
+        "cryptography-50.0.0.dist-info/licenses/LICENSE.APACHE",
+        "cryptography-50.0.0.dist-info/licenses/LICENSE.BSD"
+      ],
+      "source": "https://pypi.org/project/cryptography/50.0.0/"
+    },
+    {
+      "name": "pycparser",
+      "version": "3.0",
+      "file": "pycparser-3.0-py3-none-any.whl",
+      "bytes": 48172,
+      "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992",
+      "licenseFiles": [
+        "pycparser-3.0.dist-info/licenses/LICENSE"
+      ],
+      "source": "https://pypi.org/project/pycparser/3.0/"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3",
+      "file": "pyyaml-6.0.3-cp312-cp312-win_amd64.whl",
+      "bytes": 154003,
+      "sha256": "5fcd34e47f6e0b794d17de1b4ff496c00986e1c83f7ab2fb8fcfe9616ff7477b",
+      "licenseFiles": [
+        "pyyaml-6.0.3.dist-info/licenses/LICENSE"
+      ],
+      "source": "https://pypi.org/project/PyYAML/6.0.3/"
+    },
+    {
+      "name": "qrcode",
+      "version": "8.2",
+      "file": "qrcode-8.2-py3-none-any.whl",
+      "bytes": 45986,
+      "sha256": "16e64e0716c14960108e85d853062c9e8bba5ca8252c0b4d0231b9df4060ff4f",
+      "licenseFiles": [
+        "qrcode-8.2.dist-info/LICENSE"
+      ],
+      "source": "https://pypi.org/project/qrcode/8.2/"
+    }
+  ]
+}

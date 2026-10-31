@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "releaseTag": "v0.2.0-pre.20261030.1",
+  "ownerAuthorizedPublication": true,
+  "decidedAt": "2026-10-30T19:50:56.240285+08:00",
+  "deferredChecks": [
+    "cliCorrespondingSourceVerified",
+    "webuiBinaryTermsApproved",
+    "thirdPartyInventoryVerified"
+  ],
+  "readinessSha256": "7d3cbab4e00ea5af9a6a93492e330d28e12f1c46ff07816b7754ec3d6047eda6",
+  "recordSha256": "10c68956a3442c4b4cf934fe8f2afcc96c989fd40026482f3d379d5c39acde88",
+  "artifacts": {
+    "InkTag-WebUI-static-v1.2.0-pre.20261030.1.zip": "b272d0427c988e4744a31ab17daa8163edf5613536dcd95db7846cdb5fb349ee",
+    "InkTag-WebUI-standalone-v1.2.0-pre.20261030.1.zip": "e2ab0eadad71d2d069caf2b39b3e17a5542a2de980a8683b4857bf58732e1add",
+    "InkTag-cli-v0.2.0-pre.20261030.1.zip": "57e0676ba6dc37b057ed3690a6a8b17094b0f53922ed1d4aa4f5a9943fbb3aac",
+    "inktag_cli-0.2.0-py3-none-any.whl": "a17c230d0fb5ac51e90f32cb49e921abe75e19a809110fc27ca43592b61c1a81",
+    "inktag_cli-0.2.0.tar.gz": "baf05b5a919e958d18fac40c49c980802fac753f5f363b87374ab34ddd7222ab"
+  },
+  "scope": "client-prerelease-tools-and-pages",
+  "previousDecisionSha256": "865dab162f93642bb7d3846f6e98aaf34bd9484ed9cddea60e87515da2b1a3ac",
+  "ownerAuthorizationStatement": "Replace the existing prerelease with the latest WebUI, CLI, plaintext programmer tools and bilingual user documentation; push and publish for remote review. Firmware remains excluded. Previously outstanding source/licensing reviews remain incomplete.",
+  "firmwareIncluded": false,
+  "programmerToolsIncluded": true,
+  "programmerInventories": {
+    "da14585_aesl": {
+      "toolsVersion": "0.2.0.12",
+      "inventory": "firmware/tool-manifests/da14585_aesl.json",
+      "bytes": 11550,
+      "sha256": "256f0e44759222d65bd76df5ece1ab004b6d7cb3055685311c8031a495a7c89c"
+    },
+    "gr5331_zkel": {
+      "toolsVersion": "0.2.0.0",
+      "inventory": "firmware/tool-manifests/gr5331_zkel.json",
+      "bytes": 19284,
+      "sha256": "97bcc60e2dc56fa5cf3a0cbd13861776e701eac7b4a355ce57584ac22c036bf7"
+    },
+    "gr551x_zkel": {
+      "toolsVersion": "0.2.0.0",
+      "inventory": "firmware/tool-manifests/gr551x_zkel.json",
+      "bytes": 19729,
+      "sha256": "09a843cece8bd051f126dffcd8f7b138117299f3cbde70092bb13cfc873286bc"
+    },
+    "gr551x_zkel_internal": {
+      "toolsVersion": "0.2.0.0",
+      "inventory": "firmware/tool-manifests/gr551x_zkel_internal.json",
+      "bytes": 19991,
+      "sha256": "5bd9ca54a44b354a4e0f2bb3788042c5debe14a8a1fed45121a7279fd072b049"
+    },
+    "nrf52811_aesl": {
+      "toolsVersion": "0.2.0.3",
+      "inventory": "firmware/tool-manifests/nrf52811_aesl.json",
+      "bytes": 13135,
+      "sha256": "49cef4610d93abbec974537c4516f382533c7dc82e129d81d711e90ca71d6d14"
+    },
+    "nrf52832_priceetag": {
+      "toolsVersion": "0.2.0.3",
+      "inventory": "firmware/tool-manifests/nrf52832_priceetag.json",
+      "bytes": 11608,
+      "sha256": "e976c6741d75114eeee48c4f27d33cccea240c68d32e58bc570b7ed4795e3115"
+    },
+    "om6626_zkel": {
+      "toolsVersion": "0.2.0.7",
+      "inventory": "firmware/tool-manifests/om6626_zkel.json",
+      "bytes": 18724,
+      "sha256": "69b6fa1816ff712e43e280630123d650e2c004941aa598223a4cdb4ad2aeba1e"
+    },
+    "tlsr8359_hsel": {
+      "toolsVersion": "0.2.0.8",
+      "inventory": "firmware/tool-manifests/tlsr8359_hsel.json",
+      "bytes": 20533,
+      "sha256": "326f57cb9bfbb546b3d59420ee1cb92e235d2c698423772e4bf2d5c3ada02113"
+    }
+  }
+}

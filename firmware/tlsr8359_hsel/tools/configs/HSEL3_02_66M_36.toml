@@ -1,0 +1,39 @@
+# Hanshow PolarisPro-260Q-N
+# Human-confirmed product; stock-derived 152x296 display routing.
+# Stock-confirmed PB0 VDD and low-active PB4/PD3/PA7 RGB.
+# Exact-unit NC55 header proved; native initializer enters hardware pilot.
+# Current App/Recovery and optical/electrical/current tests remain open.
+format_version = 1
+board_marking = "HSEL3_02_66M_36"
+
+[screen]
+ic = "JD79XXX" # Family driver; exact controller die remains unconfirmed.
+recipe = 3
+color = "BWRY"
+rotation = 90
+mirror_x = true
+mirror_y = false
+
+native_ui_scale = 0 # 0=AUTO; 1=1x; 2=1.5x; 3=2x; 4=1.25x; 5=1.75x
+width = 152
+height = 296
+visible_x = 0
+visible_y = 0
+visible_width = 152
+visible_height = 296
+
+[gpio.display]
+mosi = "PB6"
+clock = "PD7"
+cs = "PD2"
+dc = "PB7"
+reset = "PD4"
+busy = "PA1"
+enable = "PB5"
+enable_active_low = true
+
+[gpio.led]
+red = "PB4"
+green = "PD3"
+blue = "PA7"
+active_low = ["red", "green", "blue"]

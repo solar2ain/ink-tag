@@ -1,0 +1,557 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "path": "firmware/om6626_zkel/README.en.md",
+      "bytes": 5098,
+      "sha256": "0f864ba4443c1332877047a042ff922ed9e33ff44419f2178c16d774ca2dc1a4",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/README.md",
+      "bytes": 4773,
+      "sha256": "7580896691b74bb8f552ad9017f605edbd7f39661f7f797e0ccdd4ec50e0b4ba",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/backup.ps1",
+      "bytes": 149,
+      "sha256": "4ec6b545823f9d4afa5d6ee6e4f2816fee79a57cd7fd3ccd84167c98b60a60d2",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/check.ps1",
+      "bytes": 148,
+      "sha256": "c985664a1cd3d3bd3bd396ff0372cee714673a82430748006aff444ce17117b7",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/configs/ZK_EL_OM21BA_V1.1.toml",
+      "bytes": 724,
+      "sha256": "addcf57294403cd0fc545bd3381d79b494b6cacf5c654ffb3236f6f556119e99",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/configs/ZK_EL_OM42BA_V1.0.toml",
+      "bytes": 727,
+      "sha256": "453269b1182d9b7c56f2f54046990c17d88f752252c26b2a77f66c9fc38d167e",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/configs/ZK_EL_OM6626_2.13_V1.1.toml",
+      "bytes": 974,
+      "sha256": "ba5a6007dbbd94dbf11f61b2f5c76b9f11a510b588e482ac3a25c66a804d3669",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/flash.ps1",
+      "bytes": 148,
+      "sha256": "6c05d644b88820737af4ed4b38a57a7f7289c9405c792bd8036a86af36cf5edf",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/invoke-native.ps1",
+      "bytes": 1561,
+      "sha256": "5599f2a633287cc8474ddc70afdf87595da8c8e71671fb78b93e123acfe32c45",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/layout.json",
+      "bytes": 589,
+      "sha256": "6f0a8196cf1b3c713579f2d18163a2f2ad6ce6f5e6a8e64ab31185301db74f24",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/bundle.json",
+      "bytes": 18207,
+      "sha256": "fa91656415d64e049680de2b1de5b4c0aafde98c6fc7fdde786b053e62bf70f1",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/requirements.lock",
+      "bytes": 990,
+      "sha256": "0a90f2211d79f3432ea4589634bd14bd9750f50efff239ac7d4a0e4f519eb27e",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/sources/cffi-2.1.1.tar.gz",
+      "bytes": 530807,
+      "sha256": "dd31f52ea1086513bb9df30f8fcee9b8918323ae067a3d5b78bc826a000712be",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/sources/colorama-0.4.6.tar.gz",
+      "bytes": 27697,
+      "sha256": "08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/sources/cryptography-50.0.0.tar.gz",
+      "bytes": 880201,
+      "sha256": "eeac2acb5a20ed25e0ad6d1df9891a520b78b404266b6d11778f25d5d691a6c9",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/sources/intelhex-2.3.0.tar.gz",
+      "bytes": 44513,
+      "sha256": "892b7361a719f4945237da8ccf754e9513db32f5628852785aea108dcd250093",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/sources/pip-23.2.1.tar.gz",
+      "bytes": 2109449,
+      "sha256": "fb0bd5435b3200c602b5bf61d2d43c2f13c02e29c1707567ae7fbc514eb9faf2",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/sources/pycparser-3.0.tar.gz",
+      "bytes": 103492,
+      "sha256": "600f49d217304a5902ac3c37e1281c9fe94e4d0489de643a9504c5cdfdfc6b29",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/sources/pyyaml-6.0.3.tar.gz",
+      "bytes": 130960,
+      "sha256": "d76623373421df22fb4cf8817020cbb7ef15c725b9d5e45f17e189bfc384190f",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/sources/qrcode-8.2.tar.gz",
+      "bytes": 43317,
+      "sha256": "35c3f2a4172b33136ab9f6b3ef1c00260dd2f66f858f24d88418a015f446506c",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/sources/unicorn-2.1.4.tar.gz",
+      "bytes": 2900334,
+      "sha256": "00567a70e323f749b419cd86bee4f9115beab7ebba32194581c090cbb7c59cff",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/sources.lock",
+      "bytes": 845,
+      "sha256": "25c89319c58ff67ca6a6bf219e3b0295dc712a9d30e087016855254aac274ca8",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/wheels/cffi-2.1.1-cp312-cp312-win_amd64.whl",
+      "bytes": 185919,
+      "sha256": "f53e442b08449d42821fa4a4fba000095af9f62742a500f978a9f557ec44339a",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/wheels/colorama-0.4.6-py2.py3-none-any.whl",
+      "bytes": 25335,
+      "sha256": "4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/wheels/cryptography-50.0.0-cp311-abi3-win_amd64.whl",
+      "bytes": 3840395,
+      "sha256": "bd1c592e4d5974f0d08d4888e432157adba757c66da0246918e43677fafa2d30",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/wheels/intelhex-2.3.0-py2.py3-none-any.whl",
+      "bytes": 50914,
+      "sha256": "87cc5225657524ec6361354be928adfd56bcf2a3dcc646c40f8f094c39c07db4",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/wheels/pip-23.2.1-py3-none-any.whl",
+      "bytes": 2086091,
+      "sha256": "7ccf472345f20d35bdc9d1841ff5f313260c2c33fe417f48c30ac46cccabf5be",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/wheels/pycparser-3.0-py3-none-any.whl",
+      "bytes": 48172,
+      "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/wheels/pyyaml-6.0.3-cp312-cp312-win_amd64.whl",
+      "bytes": 154003,
+      "sha256": "5fcd34e47f6e0b794d17de1b4ff496c00986e1c83f7ab2fb8fcfe9616ff7477b",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/wheels/qrcode-8.2-py3-none-any.whl",
+      "bytes": 45986,
+      "sha256": "16e64e0716c14960108e85d853062c9e8bba5ca8252c0b4d0231b9df4060ff4f",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/dependencies/wheels/unicorn-2.1.4-cp37-abi3-win_amd64.whl",
+      "bytes": 15943079,
+      "sha256": "d7107500c64ce5c168fbff6bef9485b5db1350050036f4cea568650cf8bdbdf5",
+      "category": "dependency"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/DEPENDENCIES.txt",
+      "bytes": 2886,
+      "sha256": "5b058f9c8441b0c0fa897aee38394ba592060a6f98b44d6c8e9e348c53b51743",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/licenses/InkTag-GPL-3.txt",
+      "bytes": 35823,
+      "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/README.en.md",
+      "bytes": 4897,
+      "sha256": "fa00930ed59c8038a23f21aea17286193e84f2898c43554903a04dc4b672a447",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/README.md",
+      "bytes": 4597,
+      "sha256": "bf815beefc28ae67bb52ca4753647b7fbfe93ce3849de98c5e354885747ad9b2",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/README.txt",
+      "bytes": 4597,
+      "sha256": "bf815beefc28ae67bb52ca4753647b7fbfe93ce3849de98c5e354885747ad9b2",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/backup.ps1",
+      "bytes": 192,
+      "sha256": "4b657be5814a0a1a3f9a0e0f7a64f230456854ef40e1495b7a308ba13f0f748b",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/check.ps1",
+      "bytes": 1224,
+      "sha256": "e1555191d3e3a71601310bb011c7057dbe82e4ff974f0399f49a682f1a8f7234",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/configs/ZK_EL_OM21BA_V1.1.toml",
+      "bytes": 724,
+      "sha256": "addcf57294403cd0fc545bd3381d79b494b6cacf5c654ffb3236f6f556119e99",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/configs/ZK_EL_OM42BA_V1.0.toml",
+      "bytes": 727,
+      "sha256": "453269b1182d9b7c56f2f54046990c17d88f752252c26b2a77f66c9fc38d167e",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/configs/ZK_EL_OM6626_2.13_V1.1.toml",
+      "bytes": 974,
+      "sha256": "ba5a6007dbbd94dbf11f61b2f5c76b9f11a510b588e482ac3a25c66a804d3669",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/flash.ps1",
+      "bytes": 191,
+      "sha256": "3a265411729b46c7fbfbf2f93af00cd0ed44e56463da93d3a813348379bebcc9",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/delivery-common.ps1",
+      "bytes": 4211,
+      "sha256": "d542850ffed5011eb809427c94451060a7db2348d2dac3059b30151937ea9fd3",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/delivery-dependencies.json",
+      "bytes": 1870,
+      "sha256": "4415acac1d21bf78d5d37fafc2aea5461b22de28d66c64721f590234518563ef",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/delivery-entry.ps1",
+      "bytes": 5252,
+      "sha256": "29bcb0df2f1ccd71526de8f5949f6da47aeb28174b7fc0f4abe207b9b62992b6",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/delivery-runtime.py",
+      "bytes": 3658,
+      "sha256": "3730df48261a47dccba00b984775d1fcf8f40e9fcd974671e2434d0f00fa51b7",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/firmware/ports/onmicro/om6626/tools/backup.ps1",
+      "bytes": 5574,
+      "sha256": "17dc175419581004dbe344afa5e534dbe8b05157dde9b122447cbfe34fc1b54f",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/firmware/ports/onmicro/om6626/tools/flash.ps1",
+      "bytes": 57209,
+      "sha256": "b76840a052cb7287cd8fe2be361f6c7655ff1dd75c72a37b7bee98b3ba132d8c",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/firmware/ports/onmicro/om6626/tools/internal/backup-import.ps1",
+      "bytes": 1792,
+      "sha256": "142283f77efe6264dc467f1f4e8f683ecc2cf4345b5a048c9b04a4c14b5f39b1",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/firmware/ports/onmicro/om6626/tools/internal/backup-jlink.ps1",
+      "bytes": 18069,
+      "sha256": "9ea70f15dc3ae1c8cd6253007ee7c14b295fd469dd5b59c666ca34803195d8b6",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/firmware/ports/onmicro/om6626/tools/internal/full-read-halt.JLinkScript",
+      "bytes": 449,
+      "sha256": "ed086b1d929753ded137522bda2d0869fc56d86727156fa432f49afb19c85b1e",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/firmware/ports/onmicro/om6626/tools/internal/probe-native.ps1",
+      "bytes": 8650,
+      "sha256": "1e1033d61b9b916263b85465c8b70edf8d5b22e41057cd819b2cff4bb3b6d6f7",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/firmware/ports/onmicro/om6626/tools/internal/probe-om6626.ps1",
+      "bytes": 2707,
+      "sha256": "d5ea13cf10d635f7c3ed20d0edde09707644ad2ffcf34467ddb2dec29f56961e",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/firmware/ports/onmicro/om6626/tools/internal/readonly-process.ps1",
+      "bytes": 6395,
+      "sha256": "d922d97a339a881d1fe22c466d1775f6a5e89cbbb2908f88f8652fe682187b82",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/firmware/ports/onmicro/om6626/tools/om6626-readonly-v788j.jflash",
+      "bytes": 1378,
+      "sha256": "0efaad642a2ecc5f6efcdbd76191b2b2ae0c99c249781b438bca8a113090d9b4",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/firmware/ports/onmicro/om6626/tools/probe.ps1",
+      "bytes": 4472,
+      "sha256": "05317e06ba72e0a289078b6612fe8b67299fde628d8797ab23cdc70c306df69c",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/firmware/ports/onmicro/om6626/tools/terminal-log.ps1",
+      "bytes": 21873,
+      "sha256": "e62f338d60d98f0b32775d1a4c4cdcc8d3520a54a83be3eda1d59a99ec0f36f0",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/_om_full_formats/__init__.py",
+      "bytes": 83,
+      "sha256": "51164202ae601ee12d800268176be1548087fce86c74c48ac1d847c3c5533cb4",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/_om_full_formats/device_link.py",
+      "bytes": 1045,
+      "sha256": "a73cbce6d92610ff854186b565a2ee8568d4fb6e7a171a7224404d6eb4545a17",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/_om_full_formats/device_qr.py",
+      "bytes": 1692,
+      "sha256": "440747ef6f79bb2d0d2038d8a0f7631eaca0d37b6c18b55bb117ec8cae957a7e",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/_om_full_formats/generated_busy_defaults.py",
+      "bytes": 847,
+      "sha256": "fbf52a9bdb9e6ba65dab641127106c8113d7b4d580113d95780edd3d7a1159db",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/_om_full_formats/generated_commands_v2.py",
+      "bytes": 17749,
+      "sha256": "4491401c5fcaf5c5407eacb6113e8d078aa20af52bf8fb691a1488bc0bdb5f32",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/_om_full_formats/generated_release_v1.py",
+      "bytes": 2015,
+      "sha256": "fc607086de7b28b67be5edeb92a63e8e12d0e499c7adf78b8bd3fdac4c56d03f",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/_om_full_formats/models.py",
+      "bytes": 7850,
+      "sha256": "f9006ed4d564ceb1e3bdecfc37bc634d2ec047a510e9d8445ecda3c5cd4941d3",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/_om_full_formats/onmicro_package.py",
+      "bytes": 9247,
+      "sha256": "1ce179a18b4103a0d0735197d3fe4adc665e967ddb3ba191b7b6d47d80eafc37",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/_om_full_formats/pin_config.py",
+      "bytes": 5998,
+      "sha256": "41c319c8bdd8d2e85db053e7e6cb5422a9ed9c9d6ba688cd9a148f93d71091be",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/_om_full_formats/protocol.py",
+      "bytes": 12484,
+      "sha256": "6fd8137a4dbb405de6bb485fc3f49c363127f996c387ae5bc4156cb2eb4f25ac",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/_om_full_formats/provenance.json",
+      "bytes": 2098,
+      "sha256": "8a257ec077e9da5b9c6db51d0a7d502b9b23e71127a4915ce86c4fc3fefaa603",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/_om_full_formats/safe_archive.py",
+      "bytes": 5004,
+      "sha256": "45c578c4fc00cd3f820873c25e8b451e5aafee4523832a71fff5d0d93d535976",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/activation_preservation.py",
+      "bytes": 3454,
+      "sha256": "9f4309a6aa06f29fb2338a752c011272377245429e50e49cb7bd97cda72962e1",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/board_config.py",
+      "bytes": 5809,
+      "sha256": "edcd67bb256982a726e1b5c35b122a8a428bc181a86de7f133016476c1415e4b",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/onmicro_configured_full.py",
+      "bytes": 16304,
+      "sha256": "bf96507f4a3722ab113487b3f01df23c276bf6a1542b489b737ff18a293c3761",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/onmicro_controlled_loader.py",
+      "bytes": 3383,
+      "sha256": "cdf84933f48bc7ff7fc64cb3ab09c20f0991ba30b392504542c56390a4b14cb4",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/onmicro_factory_init.py",
+      "bytes": 14716,
+      "sha256": "56c042ea8c6d4ae4fc3db3c67dfc2dead305251f94ffac1b6e9bc1dcf8eccdd9",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/onmicro_flash_identity.py",
+      "bytes": 4730,
+      "sha256": "0ab7f7db3b53fbe8e07e289ee7326bbda19e05d4bee3607635bf26df8840ed5a",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/onmicro_full_base.py",
+      "bytes": 5582,
+      "sha256": "fcf78d25bcb24cf0e5229d502e31fb1d3993f9506fb9918a9ad7313a84638d7c",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/onmicro_full_config.py",
+      "bytes": 8034,
+      "sha256": "0892a3928a4db2fb9441e70a4037573440e3fd42eb07f5194fc1272eca288274",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/onmicro_full_execution.py",
+      "bytes": 952,
+      "sha256": "6e9d717ec9a9b8dd3827e1fe727bf9b1e13ecc0459ec8f31ee56e03e2d5c0166",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/onmicro_full_loader.py",
+      "bytes": 2587,
+      "sha256": "602237bbd66d57c4a39ee30af83b005268a998e7b041ba8316a370faa914a1bc",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/onmicro_full_prepare.py",
+      "bytes": 14320,
+      "sha256": "748ca359f2de58ca3496005292b5a1fd7e38670f191ba43a34b6f3220dbed780",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/onmicro_full_writer.py",
+      "bytes": 14157,
+      "sha256": "0ff8bae4cc288ae011c389ca9e78ee960e24914ebc125d2c3dfbb42e4075a447",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/onmicro_rom_loader_model.py",
+      "bytes": 1670,
+      "sha256": "1f0d681c4e9a571459bfca0cb7bd917472900acb8391f301cbf04437e05982af",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/onmicro_source_capture.py",
+      "bytes": 5617,
+      "sha256": "0dc5313a419d9838a6f2aae2c432df5fab1163edf69eb84a409c29a7fe711539",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/onmicro_tool_files.py",
+      "bytes": 1943,
+      "sha256": "732599a392b0addd5ef2ee5747a3b111db59978493375f0175a9e23809b3bc17",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/requirements-om-full.txt",
+      "bytes": 165,
+      "sha256": "483d6c212bce7026391fb79a1960cfcafb90881db229bc7f2770f548d1a54d66",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/requirements.txt",
+      "bytes": 94,
+      "sha256": "53ca03579a0469a82625e8a249f44f66c98efb5f1434ffaa69fd0ac4d0f7924e",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/jlink-tools.ps1",
+      "bytes": 4389,
+      "sha256": "ce6e5b060d335dddcdaad32ce85e3bc5a5240f48eeb56e1156b9a45d290132bf",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/internal/runtime/tools/powershell-cli.ps1",
+      "bytes": 3106,
+      "sha256": "2a0651a4cdeff9bc46f3002fa2f6b30aeb0a207932831868c53312c557a570ce",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/probe.ps1",
+      "bytes": 191,
+      "sha256": "f235c037008e514d203134841ab27d44cbc50ec6c0aa4b2df2562971228f5667",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/internal/native/tools/setup.ps1",
+      "bytes": 2874,
+      "sha256": "e8d1ab997ba64fba70b681d01e63ab528c205fe0a11b8a8b010b66fb5050bc18",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/probe.ps1",
+      "bytes": 148,
+      "sha256": "9d2e19077e5c315c360420a33d21114caa7e0c4475c831983fb72b2ab17c1fbb",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/om6626_zkel/tools/setup.ps1",
+      "bytes": 148,
+      "sha256": "132ee8038115e51d070e9b45e4d5d38ca051ac8ec080dcaf523ce311e8706e25",
+      "category": "runtime"
+    }
+  ]
+}

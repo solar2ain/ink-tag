@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "entries": {
+    "setup": "tools/setup.ps1",
+    "check": "tools/check.ps1",
+    "probe": "tools/probe.ps1",
+    "backup": "tools/backup.ps1",
+    "flash": "tools/flash.ps1",
+    "restore": "tools/restore.ps1"
+  },
+  "configs": [
+    {
+      "name": "ZK_EL_GR5331_2.13_V1.1.toml",
+      "original": "tools/configs/ZK_EL_GR5331_2.13_V1.1.toml"
+    }
+  ]
+}

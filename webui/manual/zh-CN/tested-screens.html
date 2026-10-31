@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../index.html">InkTag WebUI</a></nav><main><h1 id="已实测屏幕与局部刷新">已实测屏幕与局部刷新</h1>
+<p>中文 | <a target="_blank" rel="noopener noreferrer" href="../en/tested-screens.html">English</a></p>
+<p>本页列出在 InkTag 上进行过实际屏幕测试的型号，帮助你选择屏幕配置。主板丝印与产品型号见<a target="_blank" rel="noopener noreferrer" href="supported-devices.html">已适配设备</a>，换屏和接线说明见<a target="_blank" rel="noopener noreferrer" href="devices.html">设备与屏幕</a>。</p>
+<p><strong>同样的尺寸、分辨率或排线，不代表可以互换。</strong> 请同时核对屏幕标记、颜色、主板接线和驱动方案。某个驱动出现在设置列表中，不代表所有使用该控制器的屏幕都已测试。</p>
+<h2 id="局刷列怎么读">局刷列怎么读</h2>
+<ul>
+<li><strong>时钟局刷</strong>：当前 InkTag 在表中指定的主板、屏幕和配置上提供的时钟数字区域刷新，需要激活 Pro。不是任意图片或任意区域都可以局刷。</li>
+<li><strong>未提供</strong>：当前 InkTag 没有为这一组合提供局刷；不代表控制器在其他方案下绝对做不到。</li>
+<li><strong>未验证</strong>：已有的测试不足以确认局刷是否正常。</li>
+<li><strong>已提供，显示效果待确认</strong>：已有时钟局刷功能，但这一主板与屏幕的画面、残影还没有完整检查。</li>
+</ul>
+<p>局刷时钟每天仍会全屏刷新并改变背景。首次显示、维护刷新或状态变化时也可能全刷，频繁更新比偶尔换图更耗电。</p>
+<h2 id="zkc-系列原屏">ZKC 系列原屏</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>屏幕／产品</th>
+<th>尺寸与分辨率</th>
+<th>颜色</th>
+<th>驱动方案</th>
+<th>已实测的使用范围</th>
+<th>局刷</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GR5331 版 ZKC21V 原屏</td>
+<td>2.13 寸，128×250</td>
+<td>黑白红</td>
+<td>SSD1680，ZKC21V</td>
+<td>日历、时钟和图片；时钟局刷区域已有实屏确认</td>
+<td>支持时钟局刷，需 Pro；部分样屏仍有浅灰残影</td>
+</tr>
+<tr>
+<td>GR5513 小板 ZKC21V 原屏，MF213M0001／MOFANG M001-4</td>
+<td>2.13 寸，128×250</td>
+<td>黑白红</td>
+<td>SSD1680，ZKC21V</td>
+<td>时钟分钟更新、零点全刷后恢复局刷，以及图片、字库和轮播已有测试</td>
+<td>已提供时钟局刷，需 Pro；显示效果待确认</td>
+</tr>
+<tr>
+<td>OM 版 ZKC21V-N 原屏</td>
+<td>2.13 寸，128×250</td>
+<td>黑白红</td>
+<td>SSD1680 对应驱动，ZKC21V</td>
+<td>已点亮并显示可读日历、设备页；完整显示边缘和图槽显示尚待确认</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>ZKC42V 原屏，HE042AD7A2／HINK-E042A48-A1</td>
+<td>4.2 寸，400×300</td>
+<td>黑白红</td>
+<td>UC8276，ZKC42V</td>
+<td>GR5513 上清屏、日历、时钟和设备页面</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>ZKC42VM 原屏，HE042A55／HINK-E042A13-FPC-A0</td>
+<td>4.2 寸，400×300</td>
+<td>黑白红</td>
+<td>SSD1683，ZKC42VM</td>
+<td>原屏完整刷新</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>ZKC21B 原屏，HINK-E0213A349</td>
+<td>2.13 寸，128×250</td>
+<td>黑白红黄</td>
+<td>JD79661 对应驱动，ZKC21B</td>
+<td>OM6626 上已有清屏、日历、时钟与传图测试；上边缘显示尚待完整确认</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>ZKC42B 原屏</td>
+<td>4.2 寸，400×300</td>
+<td>黑白红黄</td>
+<td>JD79668AA 对应驱动，ZKC42B</td>
+<td>OM6626 上图片与图槽显示正常，日历中文、日期和数字已目视确认</td>
+<td>未提供</td>
+</tr>
+</tbody>
+</table></div>
+<p>2.13 寸 128×250 屏幕的实际可视宽度可能为 122 像素，客户端会自动处理。不要因此改选另一个同尺寸控制器。</p>
+<h2 id="hanshow-原屏">Hanshow 原屏</h2>
+<p>下表列出的不同 200×200 屏幕必须分别选择驱动方案，不能因为尺寸相同而混用。SSD1681 是对应兼容路径的显示名称，具体芯片尚未独立核实；“JD 系列”也不表示已确认完整 IC 型号。请匹配表中的具体屏幕或主板。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>屏幕／识别标记</th>
+<th>尺寸与分辨率</th>
+<th>颜色</th>
+<th>驱动方案</th>
+<th>已实测的使用范围</th>
+<th>局刷</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nowa-154R-N，FPC-8002，HS_EL5101_5M_66_05</td>
+<td>1.54 寸，152×152</td>
+<td>黑白红</td>
+<td>SSD1675，Nowa 154R</td>
+<td>TLSR8359：清屏、内置页面、图片与图槽</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>P154030-MF1-A／P154030-0306，HS_EL5101_5M_60_04</td>
+<td>1.54 寸，200×200</td>
+<td>黑白红</td>
+<td>SSD1681，对应 P154030</td>
+<td>TLSR8359：清屏、日历、图片、内置页面和方向；按这一屏幕单独选择配置</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>StellarPro-154R-N 早期可换屏版，FPC-5301／DEPG0154RWF653CF，HSEL5_01_54M_00</td>
+<td>1.54 寸，200×200</td>
+<td>黑白红</td>
+<td>JD79653A，Stellar 154</td>
+<td>TLSR8359：方向、三色、用户字库、时钟、日历与设备页</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>StellarPro-154R-N 后期固定屏版，HSEL5_01_54M_02（YW2116 批次）</td>
+<td>1.54 寸，200×200</td>
+<td>黑白红</td>
+<td>SSD1681 兼容驱动，HSEL5_01_54M_02 独立方案；精确芯片型号未确认</td>
+<td>TLSR8359：时钟、设备页、日历、用户字库、屏温与电压显示；原屏不可换</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>NebularPro-154Q-N，HSEL4Q_01_54M_31</td>
+<td>1.54 寸，200×200</td>
+<td>黑白红黄</td>
+<td>JD 系列，HSEL4Q_01_54M_31 独立方案；精确芯片型号未确认</td>
+<td>TLSR8359：日历、时钟、设备页及四类用户字库已测试，中文、英文和时间数字已目视确认</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>Nowa-213R-N，P213124-MF1-A</td>
+<td>2.13 寸，128×250</td>
+<td>黑白红</td>
+<td>UC 原厂驱动，Nowa 213R</td>
+<td>TLSR8359：日历已有目视确认，图槽与页面操作已有测试</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>Nebular-213R-N，AN0213A250-122KS682／HS-E2.13ME-V1.0-M</td>
+<td>2.13 寸，128×250</td>
+<td>黑白红黄</td>
+<td>JD79676，Nebular 213R</td>
+<td>TLSR8359：完整刷新、内置页面与图片</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>PolarisPro-260Q-N，HSEL3_02_66M_36</td>
+<td>2.66 寸，152×296</td>
+<td>黑白红黄</td>
+<td>JD 系列，HSEL3_02_66M_36</td>
+<td>TLSR8359：日历、竖向图片、用户字库与方向</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>Nebular-420R-N，YW2520 四色装配</td>
+<td>4.2 寸，400×300</td>
+<td>黑白红黄</td>
+<td>JD79668AA，Nebular 420R</td>
+<td>TLSR8359 原屏；GR5513 换屏后的清屏、日历与四色图片已有目视确认</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>Nebular-420R-N，YW2427 三色装配</td>
+<td>4.2 寸，400×300</td>
+<td>黑白红</td>
+<td>SSD1683</td>
+<td>TLSR8359 上的原屏显示；与上面四色装配分开选择</td>
+<td>未提供</td>
+</tr>
+</tbody>
+</table></div>
+<p>P154030 的客户端驱动名为 SSD1681，不代表所有相似排线的 200×200 屏都可选这一方案。HSEL5_01_54M_00 与 _02 分别对应可换屏与固定屏版本，使用不同驱动，不能互换配置。E0154A07-A1 装配仍待确认，不与 P154030 合并为同一实测屏幕。GR5515 换装 Nebular 四色屏目前仅确认清屏。</p>
+<h2 id="华为-398-寸四色屏">华为 3.98 寸四色屏</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>屏幕</th>
+<th>分辨率</th>
+<th>颜色</th>
+<th>驱动方案</th>
+<th>已实测的使用范围</th>
+<th>局刷</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>华为 A0</td>
+<td>768×552</td>
+<td>黑白红黄</td>
+<td>JD79665AA，华为 A0</td>
+<td>GR5513：清屏、日历、四色图片；TLSR8359：日历与图片；nRF52811：页面、图片和方向</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>华为 A1</td>
+<td>768×552</td>
+<td>黑白红黄</td>
+<td>JD79665AA，华为 A1</td>
+<td>GR5513：清屏、日历、四色图片；GR5331：清屏、日历；TLSR8359：日历、设备页和图片；nRF52811：图片、方向与轮播</td>
+<td>未提供</td>
+</tr>
+</tbody>
+</table></div>
+<p>A0 与 A1 应选择各自对应的驱动方案，不能只按分辨率选择。GR5515 的相关换屏目前仅确认清屏，不等同于上表的完整显示范围。大屏能直接显示，不代表每块主板都能保存图槽；例如 DA14585 的图片存储不足以保存这一尺寸的完整四色图片。</p>
+<h2 id="e6-六色屏">E6 六色屏</h2>
+<p>以下屏幕均不提供时钟局刷，实际屏幕控制需要 Pro。六色图片转换与离线预览可以免费使用。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>屏幕／识别标记</th>
+<th>尺寸与分辨率</th>
+<th>驱动方案</th>
+<th>已实测的使用范围与限制</th>
+<th>局刷</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>鱼鹰 HT0154A10／HINK-T0154A10-A1</td>
+<td>1.54 寸，240×240</td>
+<td>IST7513，HT0154A10</td>
+<td>TLSR8359：传图、日历和屏温已有正常反馈</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>鱼鹰 HT0169A06／HINK-T0169A06-A0</td>
+<td>1.69 寸，400×400，圆形可视</td>
+<td>IST7601，HT0169A06</td>
+<td>TLSR8359：已测 Pro 下清屏、日历与直接传图，读取屏温；Free 下屏幕控制会拒绝。完整画面、残影和长期耗电仍待确认</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>鱼鹰 HT037A02／HINK-T037A02-A1</td>
+<td>3.7 寸，720×480</td>
+<td>IST7601／JD7601，HT037A02</td>
+<td>已有显示可用反馈；横竖屏、日历曾有异常，冷启动与待机耗电仍需确认</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>H364F067-2601A</td>
+<td>约 3.64 寸，760×568</td>
+<td>JD79665CA，H364F067 E6</td>
+<td>TLSR8359：日历、设备页、传图及图槽回放已有测试；可视边缘、完整颜色效果和耗电仍待确认</td>
+<td>未提供</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>鱼鹰 E6 屏接普通价签主板时，排线第 16 脚需要用绝缘胶带贴住，使其悬空。</strong> 否则可能发热并显著耗电。请在断电后处理，并再次核对排线方向；不要将这一接法直接套用到其他不同排线的屏幕。</p>
+<h2 id="其他已测屏幕">其他已测屏幕</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>屏幕／产品</th>
+<th>尺寸与分辨率</th>
+<th>颜色</th>
+<th>驱动方案</th>
+<th>已实测的使用范围</th>
+<th>局刷</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PriceETag 原屏</td>
+<td>1.54 寸，152×152</td>
+<td>黑白</td>
+<td>SSD1675</td>
+<td>nRF52832 上的页面与图片</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>盒马 EL022H2 原屏</td>
+<td>2.13 寸，128×250</td>
+<td>黑白红</td>
+<td>SSD1619</td>
+<td>nRF52811 上的页面、图片、方向和屏温</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>SES SE2213FS093／A1360067-00</td>
+<td>2.13 寸，104×212</td>
+<td>黑白红</td>
+<td>UC8151，SES 2.13</td>
+<td>DA14585 换屏后的清屏、日历、时钟、图片与轮播</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>AESL-4.2 原屏</td>
+<td>4.2 寸，400×300</td>
+<td>黑白红</td>
+<td>UC8176</td>
+<td>完整刷新；更换 ZKC42VM 屏时需改选 SSD1683</td>
+<td>未提供</td>
+</tr>
+<tr>
+<td>SSD1677 四灰屏</td>
+<td>4.26 寸，800×480</td>
+<td>四级灰度</td>
+<td>SSD1677</td>
+<td>GR5513、GR5515 上清屏、日历与四灰图片已目视确认</td>
+<td>未提供</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="尚未确认完整正常的屏幕">尚未确认完整正常的屏幕</h2>
+<ul>
+<li><strong>StellarPro-154Q-N，HSEL5Q_01_54M_00，1.54 寸 200×200 四色</strong>：基础通信、OTA、配置及屏幕命令已测试，但完整画面与颜色还没有确认；不要用 NebularPro-154Q 的结果代替。</li>
+<li><strong>SES SE2266FS093，2.66 寸 152×296 黑白红</strong>：曾显示出日历，但随后仍有 BUSY 超时，暂不列为正常支持。</li>
+<li><strong>AESL-2.9，E029A33，128×296</strong>：已有 SSD1619 适配资料，本页尚不将它列为完整显示已验证。</li>
+<li><strong>其他 200×200 Hanshow 四色原屏</strong>：不能用 HSEL3 或同尺寸三色屏的成功结果代替，仍需匹配并确认自己的屏幕。</li>
+</ul>
+<h2 id="使用时还要注意">使用时还要注意</h2>
+<ul>
+<li>本页的“已实测”针对列出的屏幕与主板组合，不代表所有同型号批次、所有换屏主板都能直接使用。</li>
+<li>局刷支持以连接后设备实际报告为准。更换屏幕、方向、接线或字库后，原来的局刷条件可能不再满足。</li>
+<li>E6 六色屏的实际控制需要 Pro；离线图片转换和预览不受此限制。</li>
+<li>更换屏幕前先断电，确认排线与供电。屏幕发热、异常耗电或刷新失败时，应停止操作并核对接线。</li>
+</ul>
+<p>如何选择驱动和处理图片见<a target="_blank" rel="noopener noreferrer" href="webui.html">WebUI 使用说明</a>；主板与安装包见<a target="_blank" rel="noopener noreferrer" href="supported-devices.html">已适配设备</a>。</p></main></body></html>

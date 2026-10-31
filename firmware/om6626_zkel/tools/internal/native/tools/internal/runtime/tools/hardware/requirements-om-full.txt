@@ -1,0 +1,6 @@
+-r requirements.txt
+# OM-only portable offline replay. No installed CLI/BLE, ELF, SDK or compiler.
+cryptography>=44,<51
+unicorn==2.1.4
+intelhex>=2.3,<3
+qrcode>=8,<9

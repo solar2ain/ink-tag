@@ -1,0 +1,5 @@
+图形与字体组件 / Graphics and font components
+
+CLI 包含编译后的图形渲染组件，用于字体尺寸计算和画面处理。当前尚未提供该组件的完整对应源码及重新编译资料；本包不能作为完整对应源码包使用。需要修改或重新编译这些组件时，请等待项目提供相应下载和许可说明。项目非商用许可仅适用于 InkTag 自有部分，不替代第三方许可或对应源码义务；组合包许可兼容性仍待核实。
+
+The CLI includes a compiled graphics renderer used for font sizing and image processing. Complete Corresponding Source and rebuild materials are not yet provided, so this is not a complete Corresponding Source package. If you need to modify or rebuild these components, wait for the relevant downloads and licensing information. The project NonCommercial grant covers only InkTag-owned parts; it does not replace third-party licenses or source obligations. Combined-package license compatibility remains unconfirmed.

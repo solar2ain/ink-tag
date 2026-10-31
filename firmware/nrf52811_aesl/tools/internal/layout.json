@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "entries": {
+    "setup": "tools/setup.ps1",
+    "check": "tools/check.ps1",
+    "probe": "tools/probe.ps1",
+    "backup": "tools/backup.ps1",
+    "flash": "tools/flash.ps1"
+  },
+  "configs": [
+    {
+      "name": "EL022HWRL-A0.toml",
+      "original": "tools/configs/EL022HWRL-A0.toml"
+    },
+    {
+      "name": "EL022HWRL.toml",
+      "original": "tools/configs/EL022HWRL.toml"
+    }
+  ]
+}
