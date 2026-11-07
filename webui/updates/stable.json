@@ -5,26 +5,26 @@
   "releaseReady": true,
   "components": {
     "webui": {
-      "version": "1.2.0",
-      "buildId": "web-28c43b8a0a47e4817cec",
-      "buildNumber": 2026103104,
+      "version": "0.2.1",
+      "buildId": "web-2fadb16b8347bc4ad5bd",
+      "buildNumber": 2026110703,
       "artifacts": [
         {
           "type": "web",
-          "name": "InkTag-WebUI-static-v1.2.0-20261031.2.zip",
-          "bytes": 21776127,
-          "sha256": "20ef2f3e94f651689b27cc82ed49b3419975ac46682f38cd31e4754724aea0f8",
-          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-WebUI-static-v1.2.0-20261031.2.zip"
+          "name": "InkTag-WebUI-static-v0.2.1-20261107.1.zip",
+          "bytes": 10064813,
+          "sha256": "483c2d9a402f3b7de340b6fd1a48167521fc5bf06ce51fc5315b2519cd97d154",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.1-20261107.1/InkTag-WebUI-static-v0.2.1-20261107.1.zip"
         },
         {
           "type": "web-standalone",
-          "name": "InkTag-WebUI-standalone-v1.2.0-20261031.2.zip",
-          "bytes": 10089579,
-          "sha256": "0a3c0cb9feb4a2244dc66fe5dabcc3735a06db9c6f03d12226df2d54a153b973",
-          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-WebUI-standalone-v1.2.0-20261031.2.zip"
+          "name": "InkTag-WebUI-standalone-v0.2.1-20261107.1.zip",
+          "bytes": 10093387,
+          "sha256": "8991697e890a368b4ac6919c995fc07879be0dfb790b4b714583c6add99b2127",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.1-20261107.1/InkTag-WebUI-standalone-v0.2.1-20261107.1.zip"
         }
       ],
-      "releaseTag": "v0.2.0-20261031.2",
+      "releaseTag": "v0.2.1-20261107.1",
       "channel": "stable",
       "candidateOnly": false,
       "releaseReady": true,

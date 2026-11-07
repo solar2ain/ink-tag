@@ -119,7 +119,14 @@ def generate(record,assets_root:Path):
                 # Verify actual, previously downloaded Release bytes before exposing a link.
                 verified_artifacts(item,release['releaseTag'],assets_root)
                 current=selected[key]
-                ordering=compare(item['version'],current['version']) if current else 1
+                # A component's numbering can be aligned with the project
+                # (WebUI 1.2.0 -> 0.2.1). The approved project release takes
+                # precedence; compare component versions/builds within it.
+                project=version(release['releaseTag'][1:])[0]
+                previous_project=version(current['releaseTag'][1:])[0] if current else None
+                ordering=((project>previous_project)-(project<previous_project)
+                          if current and project!=previous_project else
+                          compare(item['version'],current['version']) if current else 1)
                 if current and ordering==0 and item['buildNumber']==current['buildNumber'] and item['buildId']!=current['buildId']:raise UpdateError('Ambiguous same-version build ordering')
                 if ordering>0 or ordering==0 and item['buildNumber']>current['buildNumber']:
                     selected[key]={**deepcopy(item),'releaseTag':release['releaseTag'],'channel':channel,

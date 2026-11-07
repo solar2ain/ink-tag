@@ -46,3 +46,23 @@ def test_empty_component_record_does_not_bypass_stable_channel_policy(tmp_path):
  record=fixture(tmp_path);entry=record['releases'][1]
  entry['channel']='stable';entry['components']={}
  with pytest.raises(ValueError):feeds.validate_record(record)
+
+
+@pytest.mark.parametrize('reverse', [False, True])
+@pytest.mark.parametrize('ready', [False, True])
+def test_project_release_precedes_legacy_component_numbering(tmp_path, reverse, ready):
+ record=fixture(tmp_path)
+ old=record['releases'][0]
+ old['components']['webui']=old['components'].pop('cli')
+ old['components']['webui']['version']='1.2.0'
+ old['components']['webui']['artifacts'][0]['type']='web'
+ new=copy.deepcopy(old);tag='v0.2.1-20261107.1'
+ new.update(releaseTag=tag,published=ready,releaseReady=ready,candidateOnly=not ready)
+ new['components']['webui'].update(version='0.2.1',buildNumber=2026110703,buildId='new-project-build')
+ new['components']['webui']['artifacts'][0]['downloadUrl']=f'https://github.com/{feeds.REPOSITORY}/releases/download/{tag}/client.zip'
+ folder=tmp_path/tag;folder.mkdir();(folder/'client.zip').write_bytes((tmp_path/'v0.2.0/client.zip').read_bytes())
+ record['releases'].append(new)
+ if reverse:record['releases'].reverse()
+ chosen=feeds.generate(record,tmp_path)['stable']['components']['webui']
+ assert chosen['releaseTag']==(tag if ready else 'v0.2.0')
+ assert chosen['version']==('0.2.1' if ready else '1.2.0')
