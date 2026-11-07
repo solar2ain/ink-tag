@@ -9,7 +9,7 @@
     "thirdPartyInventoryVerified"
   ],
   "readinessSha256": "58df0e7a87e4bf3f1d896c0d79f006f61f3ebb22d4230d8e10d9b339bedcad18",
-  "recordSha256": "df1c6b3fc520d68bb457ff10665c3bf5dc9cf1aee2619075f4b77ac7976bd19f",
+  "recordSha256": "0c68f8ee6511d9ab18228d49e75b625efb47a4cf1b0ac1f37d950523ddcd6dcc",
   "permittedPublishedRecordSha256": "0c68f8ee6511d9ab18228d49e75b625efb47a4cf1b0ac1f37d950523ddcd6dcc",
   "manifestSha256": "0880c49c8cabf6e2e1de852f18fe80cbf4808da6b7c81536201c37ed2f14c131",
   "artifacts": {
@@ -477,5 +477,5 @@
       "sha256": "f0df16fc76c8e3749ab73e666f63f0d9f9445387e829793451d3c499f720e83c"
     }
   },
-  "publicationStatus": "owner-authorized-candidate"
+  "publicationStatus": "release-assets-downloaded-and-verified"
 }
