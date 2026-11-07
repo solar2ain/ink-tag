@@ -152,10 +152,18 @@ def main() -> None:
     parser.add_argument("--debug", "-d", action="store_true")
     parser.add_argument('--uid-output', type=Path, help='Fresh confirmed read-only UID receipt; no overwrite.')
     parser.add_argument('--expected-jedec', help='Optional historical Config JEDEC. Missing registration or a supported model difference requires interactive y/N confirmation.')
+    parser.add_argument('--expected-uid', help='Optional exact16-byte native UID guard before halted-clock preparation.')
+    parser.add_argument('--halted-program-clock24', action='store_true', help='Internal Full preparation: exact stopped-unit SDK24M clock; no Flash write, hold CPU until qualified write.')
+    parser.add_argument('--hold-cpu', action='store_true', help='Internal Full preparation: do not reset/run after the confirmed UID capture.')
     parser.add_argument("--retry-detect", action="store_true")
     parser.add_argument("--detect-timeout", type=int, default=0)
     parser.add_argument("--detect-interval", type=int, default=1)
     args = parser.parse_args()
+    if args.hold_cpu != args.halted_program_clock24 or (args.hold_cpu and not args.uid_output):
+        raise SystemExit('Halted programming clock requires UID output and explicit hold-cpu; no device accessed.')
+    if args.expected_uid and (not args.halted_program_clock24 or len(args.expected_uid)!=32 or
+            any(c not in '0123456789abcdefABCDEF' for c in args.expected_uid)):
+        raise SystemExit('Exact UID guard requires valid32-hex halted-clock preparation; no device accessed.')
     if not 50 <= args.reset_pulse_ms <= 2000:
         raise SystemExit('RESET pulse must be 50..2000 ms; no device accessed.')
     if args.uid_output and (args.uid_output.exists() or (args.expected_jedec is not None and
@@ -169,6 +177,7 @@ def main() -> None:
     adapter_path = Path(__file__).with_name("tlsr825x-early-activate.py")
     adapter = load_adapter(adapter_path)
     backend = adapter.load_backend(args.backend.resolve())
+    adapter.install_windows_serial_partial_write(backend)
     adapter.install_exact_sws_frames(backend)
     adapter.install_early_activation(backend, retry_detect=args.retry_detect,
         detect_timeout_seconds=args.detect_timeout, detect_interval_seconds=args.detect_interval,
@@ -180,7 +189,8 @@ def main() -> None:
     serial_port.reset_input_buffer()
     serial_port.timeout = 0.1
     try:
-        backend.activate(serial_port, args.activation_ms)
+        if args.activation_ms > 0:
+            backend.activate(serial_port, args.activation_ms)
         if args.clock_mhz:
             speed_ready = backend.set_sws_speed(
                 serial_port, args.clock_mhz * 1_000_000
@@ -219,6 +229,15 @@ def main() -> None:
             consent = confirm_registered_jedec(observed_jedec, args.expected_jedec)
             samples = [bounded_read(read_uid,backend, serial_port) for _ in range(3)]
             uid = confirmed_uid(samples)
+            if args.expected_uid and uid.hex().upper()!=args.expected_uid.upper():
+                raise RuntimeError('Exact unit differs before halted-clock preparation; no clock/Flash write')
+            clock_preparation = None
+            if args.halted_program_clock24:
+                clock_preparation = adapter.prepare_halted_programming_link(
+                    backend, serial_port, uid, valid_jedec_ids[0],
+                    lambda b,p: bounded_read(read_uid,b,p), confirmed_uid,
+                    lambda b,p: bounded_read(read_jedec_id,b,p))
+                print('HALTED PROGRAM LINK: registered460800 verified; mode='+clock_preparation['mode']+'; CPU remains stopped, firmware startup clock unchanged. No Flash write.',flush=True)
             receipt = {'schema': 'inktag-tlsr-live-flash-uid-v1', 'port': args.port,
                        'jedec': observed_jedec, 'uidHex': uid.hex().upper(),
                        'samples': [x.hex().upper() for x in samples],
@@ -227,13 +246,15 @@ def main() -> None:
                        'backendSha256': hashlib.sha256(args.backend.read_bytes()).hexdigest().upper(),
                        'finishedUtc': datetime.now(timezone.utc).isoformat(),
                        'identityAlgorithm': 'shipping Flash UID FNV1a; no selector fallback',
-                       'flashWrites': 0, **consent}
+                       'flashWrites': 0, 'clockPreparation':clock_preparation,
+                       'cpuHeld':args.hold_cpu, **consent}
             args.uid_output.parent.mkdir(parents=True, exist_ok=True)
             with args.uid_output.open('x', encoding='utf-8') as stream:
                 stream.write(json.dumps(receipt, indent=2) + '\n')
             print('Flash UID: three matching read-only samples captured; no MAC/trim written.')
     finally:
-        backend.sws_wr_addr_usbcom(serial_port, 0x006F, bytearray([0x22]))
+        if not args.hold_cpu:
+            backend.sws_wr_addr_usbcom(serial_port, 0x006F, bytearray([0x22]))
         serial_port.close()
 
 

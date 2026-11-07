@@ -10,6 +10,9 @@ from typing import Any
 
 from .image_encoding import RgbaFrame
 
+DEFAULT_IMAGE_CONTRAST = 1.1
+DEFAULT_IMAGE_STRENGTH = 0.8
+
 
 @dataclass(frozen=True)
 class ImageAlgorithm:
@@ -36,7 +39,7 @@ IMAGE_ALGORITHMS = (
     ImageAlgorithm(13, "blueNoise", "Blue Noise", "spatial", True),
     ImageAlgorithm(14, "riemersma", "Riemersma", "spatial", True),
     ImageAlgorithm(15, "simple2D", "Simple 2D (experimental)", "spatial", False),
-    ImageAlgorithm(16, "legacyOstromoukhov", "Ostromoukhov three-point", "spatial", True),
+    ImageAlgorithm(16, "legacyOstromoukhov", "InkTag adaptive three-point", "spatial", True),
 )
 
 PROCESSING_PRESETS = (
@@ -69,8 +72,8 @@ _ALIASES = {
 class ImageProcessOptions:
     algorithm: str = "auto"
     preset: str = "balanced"
-    contrast: float = 1.0
-    strength: float = 1.0
+    contrast: float = DEFAULT_IMAGE_CONTRAST
+    strength: float = DEFAULT_IMAGE_STRENGTH
     heavy_ink: bool = False
 
     def validated(self) -> "ImageProcessOptions":
@@ -243,14 +246,14 @@ def _run_javascript_processor(request: dict[str, Any]) -> dict[str, Any]:
         raise RuntimeError("mini-racer is required for WebUI-compatible image algorithms") from exc
 
     assets = files("inktag_cli._assets")
-    legacy_source = assets.joinpath("legacyDithering.js").read_text(encoding="utf-8")
-    legacy_source = legacy_source.rsplit("export {", 1)[0]
+    dither_source = assets.joinpath("inktag_dither.js").read_text(encoding="utf-8")
+    dither_source = dither_source.rsplit("export {", 1)[0]
     epd_source = assets.joinpath("epdoptimize.cjs").read_text(encoding="utf-8")
     context = MiniRacer()
     context.set_hard_memory_limit(512 * 1024 * 1024)
     try:
         context.eval("var exports = {};" + epd_source + "\n; globalThis.__inktagEpdExports = exports;")
-        context.eval(legacy_source)
+        context.eval(dither_source)
         context.eval(_PROCESSOR_JAVASCRIPT)
         raw_request = json.dumps(request, separators=(",", ":"))
         promise = context.eval(
@@ -431,7 +434,7 @@ async function inktagRunImageProcess(config) {
   let output;
   if (direct) {
     const dithered = ditherImage(image, inktagLegacyAlgorithm(config.algorithm), inktagLegacyStrength(config.algorithm, config.strength), mode, { heavyInk: config.heavyInk });
-    output = inktagMapLegacyNative(decodeProcessedData(processImageData(dithered, mode), image.width, image.height, mode), palette, mode);
+    output = inktagMapLegacyNative(dithered, palette, mode);
   } else {
     const source = inktagCanvas(image), preview = inktagCanvas(image), device = inktagCanvas(image);
     const options = Object.assign({

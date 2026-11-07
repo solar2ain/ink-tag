@@ -25,8 +25,8 @@ dc = "P0.05"
 reset = "P0.04"
 busy = "P0.03"
 enable = "P0.07"
-# Controller/recipe owns CS/RESET/BUSY polarity; only EN polarity is configurable.
-enable_active_low = false
+# Controller/recipe owns CS/RESET/BUSY polarity; this list describes EN only.
+active_low = []
 
 [gpio.led]
 red = "P0.16"

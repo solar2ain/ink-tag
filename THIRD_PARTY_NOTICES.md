@@ -16,8 +16,8 @@ InkTag 使用下列第三方组件。它们保留各自版权和许可，不因 
 
 CLI 的 Python 依赖及附带组件见 [CLI 第三方声明](cli/THIRD_PARTY_NOTICES.md)。完整 CLI 包中 Find 查询组件的许可随包提供。
 
-部分插件、字体和图片的许可信息尚未齐备，本表不代表全部素材都已取得再分发许可。当前文件暂不作为正式公开发行包提供。第三方许可原文保留其原有语言和内容。
+部分插件、字体和图片的许可信息尚未齐备，本表不代表全部素材都已取得再分发许可。第三方许可原文保留其原有语言和内容。
 
 The components listed above retain their own copyright and licenses. InkTag project terms do not relicense them. See the linked license texts and [CLI third-party notices](cli/THIRD_PARTY_NOTICES.md). The complete CLI bundle also supplies the license for its Find query component.
 
-License information for some plugins, fonts and images is not yet complete; this list does not grant redistribution rights to every asset. The current files are not yet offered as a formal public release. Original third-party license texts are retained in their original form and language.
+License information for some plugins, fonts and images is not yet complete; this list does not grant redistribution rights to every asset. Original third-party license texts are retained in their original form and language.

@@ -73,6 +73,9 @@ from .local_service import local_data_directory
 from .transport import InkTagClient, InkTagError, SettingsResetUnconfirmedError, scan_device_status, scan_devices
 
 
+DEFAULT_RECOVERY_RETURN_TIMEOUT = 90.0
+
+
 _INPUT_ACTIONS = {
     "disabled": "disabled",
     "next": "nextPage",
@@ -261,6 +264,11 @@ class CliContext:
     @staticmethod
     def _verbose_phase(message: str) -> None:
         error_console.print(f"[dim]BLE[/dim] {message}")
+
+    def _lifecycle_phase(self, message: str) -> None:
+        if not self.json_output or self.verbose:
+            with pause_waiting():
+                error_console.print(message, markup=False)
 
 
 @app.callback(invoke_without_command=True)
@@ -998,16 +1006,24 @@ def device_reset(
         bool,
         typer.Option("--yes", "-y", help="Confirm the device reboot without prompting."),
     ] = False,
+    reconnect_timeout: Annotated[float, typer.Option(
+        "--reconnect-wait", min=5.0, max=300.0,
+        help="Seconds to observe restart and verify the same application's return.")] = 90.0,
 ) -> None:
     options = _context(context)
     _require_confirmation(options, yes, "Reboot the selected device?")
+    if options.password_stdin:
+        options = replace(options, password_stdin=False,
+            transient_password=_read_password("Device password: ", True))
 
-    async def operation() -> str:
-        async with options.client() as client:
-            return await client.reset()
+    from .lifecycle import restart_application
 
-    reply = _run(options, operation())
-    _emit(options, {"ok": True, "action": "reset", "deviceReply": reply})
+    async def operation() -> dict:
+        async with options.client(auto_sync_time=False) as client:
+            return await restart_application(client, reconnect_timeout=reconnect_timeout,
+                synchronize=not options.preserve_device_time, on_phase=options._lifecycle_phase)
+
+    _emit(options, _run(options, operation()), title="Device restart completed")
 
 
 
@@ -1425,7 +1441,7 @@ def time_sync(
 @time_app.command("set", help="Set an explicit device date/time using ordinary SET_TIME, without RUN_TEST. Leaves that time set; use time sync to restore host time.")
 def time_set(
     context: typer.Context,
-    at: Annotated[str, typer.Option("--at", help="ISO date/time in 2000–2099. No offset means this computer's local timezone.")],
+    at: Annotated[str, typer.Option("--at", help="ISO device date/time. No offset means this computer's local timezone; firmware may reject unsupported dates.")],
     view: Annotated[str, typer.Option(help="Optional completed redraw: none, calendar or clock.")] = "none",
     timeout: Annotated[float, typer.Option(min=5.0, max=180.0, help="Seconds to wait for SET_TIME acknowledgement and each optional display refresh wait.")] = 100.0,
 ) -> None:
@@ -2748,6 +2764,9 @@ async def _recovery_enter_operation(options: CliContext) -> dict[str, Any]:
         result["verifiedRole"] = verification["role"]
         result["recoveryName"] = verification["recoveryName"]
         result["modeSetSent"] = verification["modeSetSent"]
+        if "recoveryVersion" in verification:
+            result["recoveryVersion"] = verification["recoveryVersion"]
+            result["recoveryEpoch"] = verification["recoveryEpoch"]
     return result
 
 
@@ -2755,13 +2774,13 @@ async def _recovery_enter_operation(options: CliContext) -> dict[str, Any]:
 def recovery_status(
     context: typer.Context,
 ) -> None:
-    """Read existing TLSR Recovery status without resume, transfer or time sync."""
-    from ._drivers.ota_tlsr8359 import read_recovery_status
+    """Read Recovery information without resume, transfer or time sync."""
+    from .recovery_status import read_status
 
     options = _context(context)
     try:
         with pause_waiting(), redirect_stdout(sys.stderr) if options.json_output else nullcontext():
-            result = asyncio.run(read_recovery_status(
+            result = asyncio.run(read_status(
                 name=options.device,
                 address=options.address,
                 scan_timeout=options.scan_timeout, connect_timeout=options.connect_timeout,
@@ -2782,9 +2801,9 @@ def recovery_resume_app(
             "--reconnect-wait",
             min=5.0,
             max=120.0,
-            help="Application return budget. OM includes ACK, cleanup, discovery and GATT identity readback.",
+            help="Application return timeout in seconds, shared by all platforms (default: 90).",
         ),
-    ] = 30.0,
+    ] = DEFAULT_RECOVERY_RETURN_TIMEOUT,
 ) -> None:
     """Ask an idle Recovery to resume an untouched, locally valid application.
 
@@ -2794,6 +2813,9 @@ def recovery_resume_app(
     options = _context(context)
     selected_device = options.device
     selected_address = options.address
+    if options.password_stdin and not options.preserve_device_time:
+        options = replace(options, password_stdin=False,
+            transient_password=_read_password("Device password: ", True))
     if not selected_device and not selected_address:
         _emit_error(options, "provide device --ble-name or --ble-address for the Recovery device")
         raise typer.Exit(1)
@@ -2860,6 +2882,9 @@ def recovery_resume_app(
             reconnect_timeout=reconnect_timeout,
             **platform_options,
         )
+        from .lifecycle import finish_recovery_return
+        result = await finish_recovery_return(options, result, address=resolved_address,
+            on_phase=lambda message: recovery_phase('syncing-clock' if message.startswith('Synchronizing') else 'verifying-app'))
         recovery_phase('app-ready')
         return result
 
@@ -2951,12 +2976,15 @@ def ota_update(
     clock_sync_error: str | None = None
     if result.returncode == 0 and not no_sync:
         sync_options = replace(options, password_stdin=False, transient_password=transient_password) if transient_password is not None else options
-        if (info.transport == "nordic" and options.device and
-                re.fullmatch(r"(?:IKT|InkTag)_NRF_[0-9A-F]{4}_OTA", options.device, re.IGNORECASE)):
-            # Recovery has a different BLE address. Reconnect by its stable App
-            # name, never subtract from/guess the Recovery's address.
-            sync_options = replace(sync_options, device=options.device[:-4], address=None)
-        clock_sync_error = _run(options, _sync_time_after_ota(sync_options))
+        try:
+            if info.transport == "nordic":
+                from .ota import nordic_attested_application
+                app_address, app_name = nordic_attested_application(info, result)
+                sync_options = replace(sync_options, device=app_name, address=app_address)
+        except ValueError as error:
+            clock_sync_error = str(error)
+        else:
+            clock_sync_error = _run(options, _sync_time_after_ota(sync_options))
         clock_synced = clock_sync_error is None
         if clock_sync_error and not options.json_output:
             error_console.print(

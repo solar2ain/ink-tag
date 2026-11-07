@@ -14,10 +14,6 @@ InkTag 是一个跨平台的墨水屏价签蓝牙项目，可以让闲置的电�
 
 ## 快速开始
 
-已经下载或拉取本仓库？也可以直接用兼容的浏览器打开
-`webui-standalone/InkTag-WebUI.html`，无需启动本地服务或部署网站。
-请保留旁边的 `assets/` 等配套资源。蓝牙功能需要浏览器授权；Find 轨迹查询仍需本地客户端。
-
 ### 1. 准备设备和浏览器
 
 准备一台已安装兼容 InkTag 固件的设备，保持稳定供电，并打开电脑或手机的蓝牙。电脑推荐 Chrome 或 Edge；iPhone／iPad 推荐 [Bluefy](https://apps.apple.com/app/id1492822055)；Android 首选 Chrome。不要在微信等内置窗口中连接设备，请在上述浏览器中打开网页并允许蓝牙访问。
@@ -26,7 +22,9 @@ InkTag 是一个跨平台的墨水屏价签蓝牙项目，可以让闲置的电�
 
 ### 2. 打开网页并连接
 
-打开 [InkTag WebUI](https://solar2ain.github.io/ink-tag/)，点击“连接”，在浏览器的蓝牙选择框中选择你的设备并授权。设备的默认蓝牙名类似 `IKT_TL_1234`；名称末尾带 `_OTA` 的是固件恢复模式。
+打开 [InkTag WebUI](https://solar2ain.github.io/ink-tag/)，或用兼容浏览器打开本地 [standalone HTML 页面](webui-standalone/InkTag-WebUI.html)，点击“连接”，在浏览器的蓝牙选择框中选择你的设备并授权。设备的默认蓝牙名类似 `IKT_TL_1234`；名称末尾带 `_OTA` 的是固件恢复模式。
+
+本地 standalone 页面无需启动服务或部署网站；下载或拉取仓库后，保留 `webui-standalone/` 下的 HTML 和配套资源即可使用。Find 轨迹查询仍需本地客户端。
 
 连接后，到“设置”查看主控、固件版本和屏幕配置，确认屏幕尺寸、颜色与方向符合实际设备。若浏览器没有蓝牙入口或找不到设备，先看[连接问题](docs/zh-CN/faq.md)，也可以换用电脑端 Chrome／Edge。
 
@@ -51,11 +49,11 @@ InkTag 是一个跨平台的墨水屏价签蓝牙项目，可以让闲置的电�
 InkTag 提供免费版本（Free），已能够满足大部分日常使用需求。Pro 提供更多高级和实验功能，适合喜欢折腾、愿意探索的用户。所有功能均以设备实际提供的能力为准。
 
 > [!NOTE]
-> **使用与捐赠提醒**
+> **使用提醒**
 >
 > InkTag 固件免费使用，项目未提供购买链接。若从商家购买设备或相关服务后遇到问题，请联系购买渠道的商家。
 >
-> 捐赠支持项目后可获得 Pro 激活码。大部分 Pro 功能属于实验功能，无法保证稳定性，请谨慎开通。
+> 赞助支持本项目后可以获得 Pro 激活码。大部分 Pro 功能属于实验功能，请谨慎开通。
 
 | 功能 | 🆓 Free | ✨ Pro |
 | --- | --- | --- |
@@ -122,7 +120,15 @@ sh install_inktag.sh
 
 脚本会把 CLI 安装到 `cli/.venv`，并自动安装**本地 Find 查询服务的依赖**；Find 环境单独位于用户数据目录的 `find/runtime/.venv`。安装完成后以后台模式启动本地 WebUI 和 Find 查询服务（`webui start`）；关闭终端不会停止服务。安装完成时会显示可直接复制的启动、停止、状态和日志命令。macOS 新安装的数据和日志位于 `~/.inktag/`；已有旧目录时继续使用原目录，避免丢失会话或标签信息。不会修改系统 Python，也不会自动登录 Apple、连接设备或清除已有数据。
 
-首次安装需要联网。Windows 还需预先安装完整版 7-Zip，首次会下载约 292 MB 的 Apple 认证组件镜像；macOS 使用系统原生认证组件，无需该镜像。Linux 的位置查询仍未完成资格验证。
+首次安装需要联网。macOS 使用系统原生认证组件，无需 7-Zip 或下面的 Apple 镜像。Linux 的位置查询仍未完成资格验证。
+
+**Windows 安装准备：**
+
+先安装 [7-Zip 完整版](https://www.7-zip.org/download.html)（通常选 x64，保留默认安装目录），再运行上面的安装命令。首次准备 Find 查询服务会下载并解压约 292 MB 的认证组件，需要联网。
+
+安装 7-Zip 时请允许管理员授权。若 InkTag 安装提示“拒绝访问”或 `WinError 5`，请使用有权访问所示数据目录的管理员账户，以管理员身份运行 PowerShell 后重试；不要删除原有数据。
+
+正常使用本人可写的数据目录时，无需一直以管理员身份运行 InkTag。
 
 只安装、不启动：Windows 运行 `powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1 --prepare-only`；macOS／Linux 运行 `sh install_inktag.sh --prepare-only`。安装完成后，下面两种使用方式任选一种，命令参数完全相同。
 
@@ -225,7 +231,6 @@ inktag-cli webui start --repo . --enable-tls
 
 感谢以下项目的作者与贡献者：
 
-- [EPD-nRF5](https://github.com/tsl0922/EPD-nRF5)：电子价签固件、屏幕驱动与客户端实现的基础和参考。
 - [ATC_TLSR_Paper](https://github.com/atc1441/ATC_TLSR_Paper)：Hanshow／TLSR8359 价签的硬件资料与开放实现参考。
 - [epdoptimize](https://github.com/paperlesspaper/epdoptimize)：电子纸图片颜色量化与抖动。
 - [U8g2 for Adafruit GFX](https://github.com/olikraus/U8g2_for_Adafruit_GFX) 及文泉驿字体项目：字形渲染与中文字体资源。

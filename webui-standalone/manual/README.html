@@ -7,14 +7,12 @@
 <p><img alt="部分运行 InkTag 的价签设备，包含不同主控、尺寸和屏幕颜色" src="assets/devices/supported-devices.webp" /></p>
 <p>部分支持设备实物。主控、主板丝印与屏幕配置详见<a target="_blank" rel="noopener noreferrer" href="zh-CN/supported-devices.html">已适配设备</a>和<a target="_blank" rel="noopener noreferrer" href="zh-CN/tested-screens.html">已实测屏幕</a>。</p>
 <h2 id="快速开始">快速开始</h2>
-<p>已经下载或拉取本仓库？也可以直接用兼容的浏览器打开
-<code>webui-standalone/InkTag-WebUI.html</code>，无需启动本地服务或部署网站。
-请保留旁边的 <code>assets/</code> 等配套资源。蓝牙功能需要浏览器授权；Find 轨迹查询仍需本地客户端。</p>
 <h3 id="1-准备设备和浏览器">1. 准备设备和浏览器</h3>
 <p>准备一台已安装兼容 InkTag 固件的设备，保持稳定供电，并打开电脑或手机的蓝牙。电脑推荐 Chrome 或 Edge；iPhone／iPad 推荐 <a target="_blank" rel="noopener noreferrer" href="https://apps.apple.com/app/id1492822055">Bluefy</a>；Android 首选 Chrome。不要在微信等内置窗口中连接设备，请在上述浏览器中打开网页并允许蓝牙访问。</p>
 <p>设备仍是原厂固件时，请先阅读<a target="_blank" rel="noopener noreferrer" href="zh-CN/flash.html">完整烧录说明</a>，核对主控和主板。按准确设备选择固件、主板配置和配套工具；完成安装后再连接 InkTag。可下载文件以 <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/releases">Releases 实际附件</a>为准。</p>
 <h3 id="2-打开网页并连接">2. 打开网页并连接</h3>
-<p>打开 <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag/">InkTag WebUI</a>，点击“连接”，在浏览器的蓝牙选择框中选择你的设备并授权。设备的默认蓝牙名类似 <code>IKT_TL_1234</code>；名称末尾带 <code>_OTA</code> 的是固件恢复模式。</p>
+<p>打开 <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag/">InkTag WebUI</a>，或用兼容浏览器打开本地 <a target="_blank" rel="noopener noreferrer" href="../InkTag-WebUI.html">standalone HTML 页面</a>，点击“连接”，在浏览器的蓝牙选择框中选择你的设备并授权。设备的默认蓝牙名类似 <code>IKT_TL_1234</code>；名称末尾带 <code>_OTA</code> 的是固件恢复模式。</p>
+<p>本地 standalone 页面无需启动服务或部署网站；下载或拉取仓库后，保留 <code>webui-standalone/</code> 下的 HTML 和配套资源即可使用。Find 轨迹查询仍需本地客户端。</p>
 <p>连接后，到“设置”查看主控、固件版本和屏幕配置，确认屏幕尺寸、颜色与方向符合实际设备。若浏览器没有蓝牙入口或找不到设备，先看<a target="_blank" rel="noopener noreferrer" href="zh-CN/faq.html">连接问题</a>，也可以换用电脑端 Chrome／Edge。</p>
 <h3 id="3-发送第一张图片">3. 发送第一张图片</h3>
 <p>进入“图片”，导入照片，调整裁剪、方向和抖动效果。预览满意后点击“发送到设备”，先选择“仅显示一次”，确认发送。</p>
@@ -31,9 +29,9 @@
 <p>InkTag 提供免费版本（Free），已能够满足大部分日常使用需求。Pro 提供更多高级和实验功能，适合喜欢折腾、愿意探索的用户。所有功能均以设备实际提供的能力为准。</p>
 <blockquote>
 <p>[!NOTE]
-<strong>使用与捐赠提醒</strong></p>
+<strong>使用提醒</strong></p>
 <p>InkTag 固件免费使用，项目未提供购买链接。若从商家购买设备或相关服务后遇到问题，请联系购买渠道的商家。</p>
-<p>捐赠支持项目后可获得 Pro 激活码。大部分 Pro 功能属于实验功能，无法保证稳定性，请谨慎开通。</p>
+<p>赞助支持本项目后可以获得 Pro 激活码。大部分 Pro 功能属于实验功能，请谨慎开通。</p>
 </blockquote>
 <div class="table-wrap"><table>
 <thead>
@@ -174,7 +172,11 @@
 <pre><code class="language-sh">sh install_inktag.sh
 </code></pre>
 <p>脚本会把 CLI 安装到 <code>cli/.venv</code>，并自动安装<strong>本地 Find 查询服务的依赖</strong>；Find 环境单独位于用户数据目录的 <code>find/runtime/.venv</code>。安装完成后以后台模式启动本地 WebUI 和 Find 查询服务（<code>webui start</code>）；关闭终端不会停止服务。安装完成时会显示可直接复制的启动、停止、状态和日志命令。macOS 新安装的数据和日志位于 <code>~/.inktag/</code>；已有旧目录时继续使用原目录，避免丢失会话或标签信息。不会修改系统 Python，也不会自动登录 Apple、连接设备或清除已有数据。</p>
-<p>首次安装需要联网。Windows 还需预先安装完整版 7-Zip，首次会下载约 292 MB 的 Apple 认证组件镜像；macOS 使用系统原生认证组件，无需该镜像。Linux 的位置查询仍未完成资格验证。</p>
+<p>首次安装需要联网。macOS 使用系统原生认证组件，无需 7-Zip 或下面的 Apple 镜像。Linux 的位置查询仍未完成资格验证。</p>
+<p><strong>Windows 安装准备：</strong></p>
+<p>先安装 <a target="_blank" rel="noopener noreferrer" href="https://www.7-zip.org/download.html">7-Zip 完整版</a>（通常选 x64，保留默认安装目录），再运行上面的安装命令。首次准备 Find 查询服务会下载并解压约 292 MB 的认证组件，需要联网。</p>
+<p>安装 7-Zip 时请允许管理员授权。若 InkTag 安装提示“拒绝访问”或 <code>WinError 5</code>，请使用有权访问所示数据目录的管理员账户，以管理员身份运行 PowerShell 后重试；不要删除原有数据。</p>
+<p>正常使用本人可写的数据目录时，无需一直以管理员身份运行 InkTag。</p>
 <p>只安装、不启动：Windows 运行 <code>powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1 --prepare-only</code>；macOS／Linux 运行 <code>sh install_inktag.sh --prepare-only</code>。安装完成后，下面两种使用方式任选一种，命令参数完全相同。</p>
 <h4 id="方式一直接运行客户端脚本无需激活环境">方式一：直接运行客户端脚本（无需激活环境）</h4>
 <p>在仓库／完整 CLI 包根目录运行。脚本会使用 <code>cli/.venv</code> 中的 Python，不需要把 <code>inktag-cli</code> 加到系统 PATH。</p>
@@ -237,7 +239,6 @@ inktag-cli device --ble-name IKT_TL_1234 display slideshow stop
 <h2 id="致谢">致谢</h2>
 <p>感谢以下项目的作者与贡献者：</p>
 <ul>
-<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/tsl0922/EPD-nRF5">EPD-nRF5</a>：电子价签固件、屏幕驱动与客户端实现的基础和参考。</li>
 <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/atc1441/ATC_TLSR_Paper">ATC_TLSR_Paper</a>：Hanshow／TLSR8359 价签的硬件资料与开放实现参考。</li>
 <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/paperlesspaper/epdoptimize">epdoptimize</a>：电子纸图片颜色量化与抖动。</li>
 <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/olikraus/U8g2_for_Adafruit_GFX">U8g2 for Adafruit GFX</a> 及文泉驿字体项目：字形渲染与中文字体资源。</li>

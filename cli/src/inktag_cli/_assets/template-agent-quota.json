@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "agent-quota",
+  "name": "Agent quota",
+  "description": "Compact remaining-quota board for Codex and other agents",
+  "maxItems": 8,
+  "palette": {
+    "background": "#ffffff",
+    "ink": "#191919",
+    "accent": "#c42d30",
+    "rule": "#b9b9b9"
+  },
+  "sample": {
+    "title": "AGENT QUOTA",
+    "updated": "OCT 06  22:30",
+    "items": [
+      { "label": "CODEX 5H", "remaining": 72, "reset": "RESET 03:12" },
+      { "label": "CODEX WEEK", "remaining": 46, "reset": "RESET OCT 11" },
+      { "label": "OTHER AGENT", "remaining": 84, "reset": "RESET 04:20" }
+    ]
+  }
+}

@@ -1,62 +1,52 @@
-# InkTag gr551x_zkel_internal complete-flashing guide
+# InkTag GR standalone tools
 
 Shared layout: `ota/`, `full/`, `tools/`; configurations are in `tools/configs/`. Run the commands from this board directory. The original backend is retained under `tools/internal/native/`; tools still require an explicit firmware argument.
 
 
-[中文](README.md) | English
+This is a firmware-free **tools-only plaintext directory**. The target, tool
+version, dependencies and file hashes are bound by `tools/internal/native/inktag-goodix-tools.json`.
+Keep the complete directory structure. Git, firmware source, an SDK, a compiler
+and an installed InkTag CLI are not required.
 
-**Tools 0.2.0.0** for Windows x64 and Windows PowerShell **5.1** (also PowerShell 7). Tools and firmware are separate; InkTag CLI is not required.
+Directory guidance, configuration selection and complete-flashing instructions
+are maintained in the [flashing guide](../../docs/en/flash.md), also available
+[online](https://github.com/solar2ain/ink-tag/blob/main/docs/en/flash.md).
+Use `-h` or `--help` on `tools/setup.ps1`, `check.ps1`, `probe.ps1`, `backup.ps1`
+and `flash.ps1` for their actual parameters.
 
-## Before starting
+## Offline dependencies
 
-1. Keep the complete tools directory and open a terminal **in the directory containing this README**. Each code block below is one independently copyable command; no `&` prefix is used.
-2. Download the matching **complete firmware**, keep its original filename and place it in the **`full/` subdirectory** of this tools directory. Do not pass an OTA package to the complete-flashing tool.
-3. Match the product, PCB marking and actual panel before selecting a configuration. A product can have different boards, and a board can use different panels.
-4. Connect stable power, ground and programming wires. Keep the default confirmation and complete readback, especially for the first flash.
+Supported hosts are Windows x64, CPython 3.12 x64, Windows PowerShell 5.1 and
+PowerShell 7. Locked Python wheels are included. Setup creates a bundle-local
+environment without changing system Python. Setup/check do not start device
+operations, install USB drivers or change the global execution policy.
 
-Complete-firmware filename used below: `InkTag-gr551x_zkel_internal-full-v0.2.0.0-812004284bab.zip`. If you move or rename it, change only the `-Firmware` path. The tool does not bind to, search for or download this firmware version.
+Native programs are not redistributed. Obtain the following from their official
+providers and accept their licenses:
 
-Apart from required `-Firmware` and `-Config`, flashing commands add only `-RetryDetect`. It retries initial detection, never programming or an operation with an unknown result. Speed, timeout and confirmation retain their defaults.
+- [SEGGER J-Link 7.88j](https://www.segger.com/downloads/jlink/).
+- [Goodix GProgrammer console 2.0.3.0](https://www.goodix.com/en/software_tool/gprogrammer_ble),
+  retaining its supplied JLinkARM.dll 6.18c and loader/configuration files.
 
-## Prepare the tools
+Exact versions and hashes are recorded in
+`tools/internal/native/tools/internal/dependencies-windows-x64.lock.json`; see setup help for import
+parameters. Other files with the same names or different versions are not
+implicitly qualified. Install drivers manually using vendor instructions.
 
-Install Python 3.12 x64, official SEGGER J-Link 7.88j and Goodix GProgrammer console 2.0.3.0, retaining its loaders and DLL. Adjust both installation directories below; exact dependencies are specified in `tools/internal/native/tools/internal/dependencies-windows-x64.lock.json`.
+## Operation boundaries
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\setup.ps1" -Offline -JLinkHome "C:\Program Files\SEGGER\JLink_V788j" -GProgrammerHome "C:\Goodix\GProgrammer"
-```
+Probe/backup do not require firmware. Flash requires an explicit `-Config`
+matching the physical PCB and screen, and an external compatible signed
+complete-firmware package supplied with `-Firmware`. The tools do not select,
+download, embed or pin a firmware version. Missing required arguments fail
+before device access even with `-Yes`. Signature, target, capacity, layout and
+App/Recovery pairing checks remain mandatory. Cleanup and retention scope are
+described in the flashing guide and the actual operation warning.
 
+DryRun and offline validation are not physical qualification. Full retains the
+existing guarded backend; a tools update does not qualify additional boards or
+stock restore. `restore.ps1` remains guarded. Inspect an unknown write outcome
+before attempting another operation.
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\check.ps1"
-```
-
-## Select the product and PCB configuration
-
-### ZKC21V (GR551x variant) — ZK_EL_GR_2.13_V1.2.toml
-
-- PCB marking: **ZK_EL_GR_2.13_V1.2**.
-- Panel: 128×250, black/white/red.
-- Configuration: `tools/configs/ZK_EL_GR_2.13_V1.2.toml`. Check the GR5513/GR5515 controller; do not use the complete firmware for the 4.2-inch board.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Firmware ".\full\InkTag-gr551x_zkel_internal-full-v0.2.0.0-812004284bab.zip" -Config ".\tools\configs\ZK_EL_GR_2.13_V1.2.toml" -RetryDetect
-```
-
-## Data handling and verification
-
-Complete flashing resets device settings, passwords, device-side Find data, user fonts, old image state and crash records. Images may be invalidated rather than securely erased; unsupported external Flash is retained. This tool does not delete host Apple sessions, Find identities or location history.
-
-Required factory identity, Bluetooth address and calibration are preserved according to the tool rules. Only an existing valid Pro record read from the same device in this operation is retained, never from another device or an old backup. Factory devices and devices without valid authorization initialize as Free.
-
-Enter `y` only after reading the confirmation. Success requires all mandatory readback and verification steps; 100% in one phase is not completion. On error, check wiring, target, firmware and configuration before starting another write.
-
-## Probe, backup and help
-
-`probe.ps1` detects a device without firmware. Where included, `backup.ps1` separately saves factory contents. Both are in the same tools subdirectory used above. Check their help and output locations first; do not probe during timing or power measurements.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Help
-```
-
-Tools contain no signing keys, vendor SDK, firmware source or user backups. Keep the whole directory and supplied LICENSE, NOTICE and dependency/font/icon notices; do not copy only one script.
+Third-party licenses and copyrights remain intact. See `LICENSE`,
+`THIRD_PARTY_NOTICES.md` and the dependency files.

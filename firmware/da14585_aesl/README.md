@@ -1,87 +1,62 @@
-# InkTag da14585_aesl 完整烧录说明
-
-统一目录：`ota/`、`full/`、`tools/`。配置位于 `tools/configs/`，下列命令在本主板目录运行。平台原生后端保存在 `tools/internal/native/`，不直接修改；工具仍需显式传入固件。
-
+# DA14585 工具
 
 中文 | [English](README.en.md)
 
-工具版本 **0.2.0.12**。适用于 Windows x64、Windows PowerShell **5.1**（也支持 PowerShell 7）。工具与固件独立提供，不需要安装 InkTag CLI。
+工具版本 **0.2.0.12**。用于 Windows x64 上的 DA14585 探测、固件与主板配置检查。工具独立于 InkTag CLI，不包含固件、SDK、编译器或厂商调试器。
 
-## 开始前
+> [!NOTE]
+> 本目录可以探测设备、离线检查固件及配置，**暂不支持实际完整烧录**。所需 RAM 辅助程序未随包提供，目前没有公开下载入口；即使自行提供该文件，便携工具的写入入口仍未开放。`-Yes` 不会解除限制。此版本不提供独立备份命令。
 
-1. 保留完整工具目录，在**本 README 所在目录**打开终端。下方每个代码块都是可单独复制的一行命令，不使用 `&`。
-2. 下载对应主控的 **完整固件**，保留文件原名，放在本目录的 **full/** 目录。不要将 OTA 包交给完整烧录工具。
-3. 核对设备型号、主板丝印与实际屏幕，再选择下方配置。同一型号可能存在不同主板；同一主板也可能换装不同屏幕。
-4. 接好稳定电源、共地和烧录线。保持默认确认和完整回读；首次烧录不要跳过回读。
+## 准备环境
 
-本版示例使用的完整固件文件：`InkTag-da14585_aesl-full-v0.2.0.34462-e3c0352c6f9c.bin`。如果移动或重命名文件，只需替换 `-Firmware` 路径；工具不会绑定、自动搜索或下载这一版固件。
-
-除必需的 `-Firmware`、`-Config` 外，烧录命令默认只加 `-RetryDetect`。它只重试最初的设备检测，不会重放擦写或结果未知的操作。速度、超时和确认方式均使用工具默认值。
-
-> [!WARNING]
-> **当前便携工具尚未开放实际完整烧录。** 下方列出每个配置的完整调用方式，但直接执行会在写入前拒绝。可在命令末尾加 `-DryRun` 做离线预检；预检成功不代表可以写入。不要用 `-Yes` 或修改脚本绕过限制。
->
-> DA 所需 RAM 辅助程序未随包提供，目前也没有公开下载入口。本版不提供独立备份命令。
-
-## 准备工具
-
-安装官方 J-Link **7.88j** 与 USB 驱动；便携 Python 和所需依赖已随目录提供，无需 SDK、编译器或系统 Python。只连接一只探针时使用默认选择；连接多只时需额外指定 `-JLinkSerial`，避免选错。
+保留完整目录结构，在工具目录打开 64 位 PowerShell 5.1 或 7，运行：
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\setup.ps1"
+& .\tools\setup.ps1
+& .\tools\check.ps1
 ```
 
+随目录提供 Python 3.13.16 和固定版本依赖。安装只创建本目录的 `tools/.runtime`，不联网、不修改系统 Python、驱动、服务或执行策略。检查不会连接设备。
+
+探测还需要自行安装 [SEGGER J-Link 7.88j](https://www.segger.com/downloads/jlink/)。默认目录为 `C:/Program Files/SEGGER/JLink_V788j`；其他位置可在当前 PowerShell 设置 `INKTAG_JLINK_HOME`。所需文件及校验值见 `tools/vendor-dependencies.json`，检查失败时请核对版本，不要替换成未经检查的程序。
+
+## 探测设备
+
+接好稳定电源、共地和 SWD 后执行：
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\check.ps1"
+& .\tools\probe.ps1 -Chip DA14585
+& .\tools\probe.ps1 -Chip DA14585 -JLinkSerial 20090928 -FrequencyHz 1000000
 ```
 
-## 按设备和主板选择配置
+将示例序列号换成你的探针序列号。连接多个探针时必须明确选择。探测默认 1 MHz；`-FrequencyHz` 的单位是 Hz，须为整千赫兹。也接受 `-SpeedKHz`，两者不能同时使用。`-JLink`、`-Snr` 是 `-JLinkSerial` 的别名。
 
-### AESL／盒马 AESL-2.9 — asel29.toml
+默认只探测一次。需要等待接触稳定时可加 `-RetryDetect -TimeoutSeconds 60`；它只重试探测，不重放写入或结果未知的操作。探测会影响设备的调试电源状态，请不要在功耗或走时测试期间使用。
 
-- 主板丝印：**未见丝印**。
-- 屏幕：128×296，黑白红。
-- 配置：`tools/configs/asel29.toml`。2.9 寸原屏；当前便携工具未开放实际完整烧录。
+## 检查完整固件与配置
+
+完成环境准备后，可执行以下离线检查；不连接设备，也不需要 J-Link 或 RAM 辅助程序：
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Firmware ".\full\InkTag-da14585_aesl-full-v0.2.0.34462-e3c0352c6f9c.bin" -Config ".\tools\configs\asel29.toml" -RetryDetect
+& .\tools\validate.ps1 -Chip DA14585 -Firmware 'D:\Firmware\InkTag-da14585_aesl-full.bin' -Config .\tools\configs\asel29.toml
 ```
 
-### AESL／盒马 AESL-4.2 — asel42.toml
+根据实际硬件选择配置，三个配置使用同一份完整固件：
 
-- 主板丝印：**未见丝印**。
-- 屏幕：400×300，黑白红。
-- 配置：`tools/configs/asel42.toml`。4.2 寸 UC8176 原屏；当前便携工具未开放实际完整烧录。
+| 配置 | 屏幕 |
+| --- | --- |
+| `asel29.toml` | 已适配的 AESL 2.9 寸原屏 |
+| `asel42.toml` | 已适配的 AESL 4.2 寸 UC8176 原屏 |
+| `asel42-ssd1683.toml` | 同主板换装 SSD1683 400×300 屏 |
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Firmware ".\full\InkTag-da14585_aesl-full-v0.2.0.34462-e3c0352c6f9c.bin" -Config ".\tools\configs\asel42.toml" -RetryDetect
-```
+不要仅凭屏幕尺寸选择配置。配置提供屏幕引脚和板级 EN 有效电平；其他屏幕信号的有效电平由驱动决定。
 
-### AESL／盒马 AESL-4.2（换装 SSD1683 屏） — asel42-ssd1683.toml
+检查会核对 App 签名、原生镜像格式、CRC、布局、容量及配置。Recovery、加载器和 GUI 的格式或 CRC 检查不等于签名验证。检查成功只表示文件通过离线检查，不表示当前设备可以安全烧录。
 
-- 主板丝印：**未见丝印**。
-- 屏幕：400×300，黑白红。
-- 配置：`tools/configs/asel42-ssd1683.toml`。同一 4.2 寸主板，换装 HINK-E042A13-FPC-A0／SSD1683 400×300 屏；当前便携工具未开放实际完整烧录。
+`flash.ps1 -DryRun` 还可查看完整烧录预检，须提供同样的 `-Firmware` 和 `-Config` 参数。完整烧录预检默认 SWD 为 500000 Hz、SRAM 块为 256 字节；本目录的实际写入仍不可用。固件必须单独传入，工具不会自动选择固件。
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Firmware ".\full\InkTag-da14585_aesl-full-v0.2.0.34462-e3c0352c6f9c.bin" -Config ".\tools\configs\asel42-ssd1683.toml" -RetryDetect
-```
+## 帮助、日志与许可
 
-## 烧录后的数据与检查
+各入口支持 `-Help`。探测支持 `-DryRun`，不会打开探针。一般日志显示阶段和已用时间，`-Verbose` 展开细节；失败记录会保留，不自动重新开始操作。
 
-完整烧录会重置设备设置、密码、设备端 Find 信息、用户字库、旧图片状态与崩溃记录。旧图片可能只是失效，并非安全擦除；无法清理的独立外置 Flash 保留。主机上的 Apple 会话、Find 身份资料和轨迹不由本工具删除。
-
-主板必需的出厂身份、蓝牙地址及校准按工具规则保留。本主控仅提供 Free 功能，不支持激活 Pro。
-
-看到确认提示后再输入 `y`。最终成功以全部要求的回读与验证通过为准；单个阶段达到 100% 不代表完成。遇到错误先检查接线、目标、固件和配置，不盲目重复擦写。
-
-## 探测、备份和帮助
-
-`probe.ps1` 用于探测，不需要固件；已有 `backup.ps1` 时可单独保存原厂内容。它们位于上面的同一工具子目录。先查看入口帮助和输出位置，不在走时或功耗测试期间探测。
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Help
-```
-
-工具不包含密钥、厂商 SDK、固件源码或用户备份。保留整个目录及随附 LICENSE、NOTICE、字体／图标及依赖许可文件；不要只复制单个脚本。
+请保留 `tools/`、`dependencies/`、`licenses/` 及清单文件。`tool-manifest.json` 记录文件大小和 SHA256。许可全文见本目录 `LICENSE` 和 `licenses/`；第三方文件保留原许可。工具不含密钥、设备备份或用户数据。

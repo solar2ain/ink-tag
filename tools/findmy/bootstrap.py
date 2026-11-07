@@ -118,7 +118,16 @@ def prepare_windows_auth(cache: Path, *, no_install: bool) -> None:
         if candidate.is_file():
             seven_zip = str(candidate)
     if not seven_zip:
-        raise RuntimeError("Install full 7-Zip to prepare Windows Apple authentication; account data was not accessed.")
+        raise RuntimeError(
+            "Full 7-Zip (7z.exe) is required for first-time Windows Find setup. "
+            "Download the Windows .exe installer for your system from https://www.7-zip.org/download.html "
+            "and install it in the default C:/Program Files/7-Zip folder (not the standalone 7zr.exe). "
+            "Approve the Windows administrator prompt to install 7-Zip, then rerun install_inktag.ps1. "
+            "If installation or data-folder access is denied, use an administrator account with access "
+            "to the intended InkTag data folder and choose Run as administrator in PowerShell. "
+            "7-Zip only extracts the verified Apple authentication image; iTunes is not installed. "
+            "Account data was not accessed."
+        )
     prepare(cache, seven_zip)
 
 

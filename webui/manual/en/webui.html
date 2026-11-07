@@ -13,7 +13,14 @@
 <pre><code class="language-sh">sh install_inktag.sh
 </code></pre>
 <p>This installs the CLI into <code>cli/.venv</code> and automatically installs the <strong>local Find query service dependencies</strong> in a separate <code>find/runtime/.venv</code> under the per-user data directory. It then starts local WebUI and Find in the background (<code>webui start</code>); closing the terminal does not stop them. Setup prints copyable start, stop, status and log commands. New macOS installations store data and logs in <code>~/.inktag/</code>; an existing legacy directory is retained to preserve sessions and tags. System Python is unchanged; installation does not log into Apple, connect devices or clear existing data.</p>
-<p>First setup requires internet access. Windows also requires full 7-Zip and downloads an Apple authentication image of about 292 MB on first setup. macOS uses native system authentication without that image. Location queries on Linux are not yet qualified.</p>
+<p>First setup requires internet access. macOS uses native system authentication and does not need 7-Zip or the Apple image below. Location queries on Linux are not yet qualified.</p>
+<p><strong>Windows prerequisites:</strong></p>
+<ol>
+<li>Download the Windows <code>.exe</code> installer for your system from the <a target="_blank" rel="noopener noreferrer" href="https://www.7-zip.org/download.html">official 7-Zip website</a> (usually x64; use ARM64 for an ARM PC). Install the full version in the default <code>C:\Program Files\7-Zip</code> folder. The standalone <code>7zr.exe</code> is insufficient.</li>
+<li>Approve the Windows administrator prompt when installing 7-Zip; use an administrator account if necessary. First-time InkTag Find setup uses <code>7z.exe</code> to extract a verified Apple authentication image of about 292 MB. It does not install iTunes. A complete cached setup does not need extraction again.</li>
+<li>Run the InkTag installation command above. If it reports <strong>Access denied</strong> or <code>WinError 5</code>, use an administrator account with access to the reported data folder, right-click PowerShell and choose <strong>Run as administrator</strong>, then enter the InkTag directory and rerun the command. Check the account and path in the error; do not delete existing data. Switching accounts or choosing a new <code>--data-dir</code> uses a separate profile.</li>
+</ol>
+<p>Normal InkTag use with your own writable data folder does not require administrator privileges.</p>
 <p>To install without starting, run <code>powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1 --prepare-only</code> on Windows or <code>sh install_inktag.sh --prepare-only</code> on macOS/Linux. Afterwards use the CLI wrappers without activating an environment:</p>
 <pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\cli\inktag.ps1 --help
 </code></pre>

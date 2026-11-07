@@ -182,9 +182,9 @@ def compiled_bindings() -> dict[str, str]:
               "firmware/ports/telink/common/src/inktag_tlsr_image_flash.h",
               "firmware/common/storage/inktag_image_fixed_store.inc",
               "firmware/common/storage/inktag_image_fixed_store.h",
-              "firmware/common/gui/GUI.h",
-              "firmware/common/gui/GUI.c",
-              "firmware/common/gui/GUI_default.inc",
+              "firmware/common/gui/inktag_gui.h",
+              "firmware/common/gui/inktag_gui.c",
+              "firmware/common/gui/inktag_gui_default.inc",
               "firmware/common/gui/inktag_gui_font_roles.h",
               "firmware/common/gui/inktag_gui_fixed_layout.h",
               "firmware/common/gui/inktag_gui_large_digits.h",
@@ -203,8 +203,8 @@ def compiled_bindings() -> dict[str, str]:
               "firmware/ports/telink/tlsr8359/src/inktag_tlsr_gui_assets.h",
               "firmware/ports/telink/tlsr8359/src/inktag_tlsr_user_font_storage.c",
               "firmware/ports/telink/tlsr8359/src/inktag_tlsr_user_font_storage.h",
-              "firmware/common/gui/fonts.c",
-              "firmware/common/gui/fonts.h",
+              "firmware/common/gui/inktag_gui_fonts.c",
+              "firmware/common/gui/inktag_gui_fonts.h",
               "firmware/common/gui/inktag_gui_assets.h",
               "firmware/common/gui/inktag_gui_asset_package.h",
               "firmware/common/gui/inktag_gui_asset_package.c",
@@ -227,13 +227,13 @@ def compiled_bindings() -> dict[str, str]:
               "firmware/ports/telink/common/src/inktag_tlsr_aux_backend.h",
               "firmware/ports/telink/common/src/inktag_tlsr_aux_io.c",
               "firmware/ports/telink/common/src/inktag_tlsr_aux_io.h",
-              "firmware/common/epd/EPD_screen.c",
-              "firmware/common/epd/EPD_screen.h",
+              "firmware/common/epd/inktag_epd_screen.c",
+              "firmware/common/epd/inktag_epd_screen.h",
               "firmware/common/epd/inktag_screen_busy.h",
-              "firmware/common/epd/EPD_driver.h",
-              "firmware/common/epd/EPD_runtime.c",
-              "firmware/common/epd/UC8xxx.c",
-              "firmware/common/epd/OspreyE6.inc"]
+              "firmware/common/epd/inktag_epd_driver.h",
+              "firmware/common/epd/inktag_epd_runtime.c",
+              "firmware/common/epd/inktag_epd_uc.c",
+              "firmware/common/epd/inktag_epd_e6.inc"]
     return {path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest().upper() for path in paths}
 
 
@@ -345,8 +345,6 @@ def validate_board_config(data: dict) -> dict:
 def read_board_config(path: str | Path) -> dict:
     result = validate_board_config(load_board_config(path))
     result["configuration_sha256"] = hashlib.sha256(Path(path).read_bytes()).hexdigest().upper()
-    # The optional manufacturing note is host archive selection only. It never
-    # changes selector/GPIO/App bytes and is not an asserted MCU identity.
-    suffix=Path(path).stem.removeprefix(result['board_marking']+'-')
-    result['archive_board_note']=suffix if re.fullmatch(r'YW\d{4}',suffix) else ''
+    # Screen selection is explicit IC/recipe data; filenames and production
+    # remarks never choose a different archive or immutable board identity.
     return result

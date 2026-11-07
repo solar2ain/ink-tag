@@ -209,9 +209,13 @@ def encode_v2_time(when: datetime, week_start: int) -> bytes:
     timezone_minutes = int(when.utcoffset().total_seconds() // 60)
     if not -840 <= timezone_minutes <= 840:
         raise ValueError("timezone offset must be within -14:00..+14:00")
-    epoch = int(when.timestamp())
-    if not 946684800 <= epoch <= 4102444799:
-        raise ValueError("time must be between 2000 and 2099")
+    timestamp = when.timestamp()
+    epoch = int(timestamp)
+    # Both the wire UTC value and the device local clock use uint32 seconds.
+    # The device owns any narrower persistence/rendering admission policy.
+    local_epoch = epoch + timezone_minutes * 60
+    if not 0 <= timestamp < 0x100000000 or not 0 <= local_epoch <= 0xFFFFFFFF:
+        raise ValueError("device UTC/local time must fit unsigned 32-bit seconds")
     return struct.pack("<IhB", epoch, timezone_minutes, week_start)
 
 

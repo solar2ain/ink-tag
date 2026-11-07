@@ -7,5 +7,5 @@ if errorlevel 1 (
     py -3 "%~dp0install.py" %*
 )
 set "installExit=%ERRORLEVEL%"
-if not "%installExit%"=="0" echo Install failed. Check Python 3.11+, full 7-Zip and the error above.
+if not "%installExit%"=="0" echo Install failed. See the error above; existing data was not cleared.
 exit /b %installExit%

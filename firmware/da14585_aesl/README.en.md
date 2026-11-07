@@ -1,87 +1,62 @@
-# InkTag da14585_aesl complete-flashing guide
-
-Shared layout: `ota/`, `full/`, `tools/`; configurations are in `tools/configs/`. Run the commands from this board directory. The original backend is retained under `tools/internal/native/`; tools still require an explicit firmware argument.
-
+# DA14585 tools
 
 [中文](README.md) | English
 
-**Tools 0.2.0.12** for Windows x64 and Windows PowerShell **5.1** (also PowerShell 7). Tools and firmware are separate; InkTag CLI is not required.
+Tools version **0.2.0.12**. Device probing and offline firmware/board configuration checks for Windows x64. These tools run independently of InkTag CLI and contain no firmware, SDK, compiler or vendor debugger.
 
-## Before starting
+> [!NOTE]
+> Probing and offline validation are available. **Actual complete flashing is not available in this portable directory.** The required RAM helper is not included and has no public download location. Supplying it does not enable the portable writer, and `-Yes` cannot bypass this restriction. A separate backup command is not provided in this version.
 
-1. Keep the complete tools directory and open a terminal **in the directory containing this README**. Each code block below is one independently copyable command; no `&` prefix is used.
-2. Download the matching **complete firmware**, keep its original filename and place it in the **`full/` subdirectory** of this tools directory. Do not pass an OTA package to the complete-flashing tool.
-3. Match the product, PCB marking and actual panel before selecting a configuration. A product can have different boards, and a board can use different panels.
-4. Connect stable power, ground and programming wires. Keep the default confirmation and complete readback, especially for the first flash.
+## Prepare the environment
 
-Complete-firmware filename used below: `InkTag-da14585_aesl-full-v0.2.0.34462-e3c0352c6f9c.bin`. If you move or rename it, change only the `-Firmware` path. The tool does not bind to, search for or download this firmware version.
-
-Apart from required `-Firmware` and `-Config`, flashing commands add only `-RetryDetect`. It retries initial detection, never programming or an operation with an unknown result. Speed, timeout and confirmation retain their defaults.
-
-> [!WARNING]
-> **Actual complete flashing is not enabled in the current portable tools.** Complete invocations are listed for every configuration below, but execution is rejected before writing. Append `-DryRun` for offline preflight; a successful preflight does not enable writing. Do not use `-Yes` or modify scripts to bypass this restriction.
->
-> The DA RAM helper is not bundled and has no public download location. This version has no separate backup command.
-
-## Prepare the tools
-
-Install official J-Link **7.88j** and its USB driver. Portable Python and dependencies are included; no SDK, compiler or system Python is required. One connected probe uses the default selection. With multiple probes, explicitly add `-JLinkSerial` to select the correct one.
+Keep the entire directory together. In a 64-bit PowerShell 5.1 or 7 terminal opened here, run:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\setup.ps1"
+& .\tools\setup.ps1
+& .\tools\check.ps1
 ```
 
+Python 3.13.16 and pinned dependencies are included. Setup creates only the local `tools/.runtime`; it does not access the network or change system Python, drivers, services or execution policy. Checking does not connect to devices.
+
+For probing, install [SEGGER J-Link 7.88j](https://www.segger.com/downloads/jlink/) separately. The default directory is `C:/Program Files/SEGGER/JLink_V788j`; set `INKTAG_JLINK_HOME` in your current PowerShell session for a different location. Required files and hashes are listed in `tools/vendor-dependencies.json`. If checking fails, correct the version rather than substituting an unchecked program.
+
+## Probe a device
+
+Connect stable power, ground and SWD, then run:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\check.ps1"
+& .\tools\probe.ps1 -Chip DA14585
+& .\tools\probe.ps1 -Chip DA14585 -JLinkSerial 20090928 -FrequencyHz 1000000
 ```
 
-## Select the product and PCB configuration
+Replace the example serial with your probe's serial. Select an exact probe when several are connected. Probing defaults to 1 MHz. `-FrequencyHz` is in Hz and must be a whole number of kHz. `-SpeedKHz` is also accepted, but cannot be combined with `-FrequencyHz`. `-JLink` and `-Snr` alias `-JLinkSerial`.
 
-### AESL / Hema AESL-2.9 — asel29.toml
+By default there is one detection attempt. Add `-RetryDetect -TimeoutSeconds 60` to wait for a stable connection; this retries detection only, never a write or an operation with an unknown result. Probing affects debug power state; do not use it during power or clock measurements.
 
-- PCB marking: **No visible marking**.
-- Panel: 128×296, black/white/red.
-- Configuration: `tools/configs/asel29.toml`. Original 2.9-inch panel; actual complete flashing is not enabled in the current portable tools.
+## Validate complete firmware and configuration
+
+After environment preparation, use this offline command. It does not connect to a device and requires neither J-Link nor the RAM helper:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Firmware ".\full\InkTag-da14585_aesl-full-v0.2.0.34462-e3c0352c6f9c.bin" -Config ".\tools\configs\asel29.toml" -RetryDetect
+& .\tools\validate.ps1 -Chip DA14585 -Firmware 'D:\Firmware\InkTag-da14585_aesl-full.bin' -Config .\tools\configs\asel29.toml
 ```
 
-### AESL / Hema AESL-4.2 — asel42.toml
+Choose the configuration for your actual hardware. These configurations share one complete firmware image:
 
-- PCB marking: **No visible marking**.
-- Panel: 400×300, black/white/red.
-- Configuration: `tools/configs/asel42.toml`. Original 4.2-inch UC8176 panel; actual complete flashing is not enabled in the current portable tools.
+| Configuration | Screen |
+| --- | --- |
+| `asel29.toml` | Adapted AESL 2.9-inch original screen |
+| `asel42.toml` | Adapted AESL 4.2-inch original UC8176 screen |
+| `asel42-ssd1683.toml` | SSD1683 400×300 replacement on the same board |
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Firmware ".\full\InkTag-da14585_aesl-full-v0.2.0.34462-e3c0352c6f9c.bin" -Config ".\tools\configs\asel42.toml" -RetryDetect
-```
+Screen dimensions alone do not identify a compatible configuration. The configuration specifies display pins and board EN polarity; other screen-signal polarities belong to the driver.
 
-### AESL / Hema AESL-4.2 (replacement SSD1683 panel) — asel42-ssd1683.toml
+Validation checks the App signature, native formats, CRC, layout, capacity and configuration. Format/CRC checks for Recovery, the loader and GUI do not authenticate their publisher. Passing offline validation does not establish that a connected device can be flashed safely.
 
-- PCB marking: **No visible marking**.
-- Panel: 400×300, black/white/red.
-- Configuration: `tools/configs/asel42-ssd1683.toml`. Same 4.2-inch board with a replacement HINK-E042A13-FPC-A0 / SSD1683 400×300 panel; actual complete flashing is not enabled in the current portable tools.
+`flash.ps1 -DryRun` provides complete-flashing preflight with the same required `-Firmware` and `-Config` parameters. Its defaults are 500000 Hz SWD and 256-byte SRAM blocks; actual programming remains unavailable here. Firmware must be supplied explicitly and is never automatically selected.
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Firmware ".\full\InkTag-da14585_aesl-full-v0.2.0.34462-e3c0352c6f9c.bin" -Config ".\tools\configs\asel42-ssd1683.toml" -RetryDetect
-```
+## Help, logs and licensing
 
-## Data handling and verification
+Entry points accept `-Help`. Probe supports `-DryRun` without opening a debugger. Normal output shows stages and elapsed time; `-Verbose` expands details. Failures retain their records without automatically restarting the operation.
 
-Complete flashing resets device settings, passwords, device-side Find data, user fonts, old image state and crash records. Images may be invalidated rather than securely erased; unsupported external Flash is retained. This tool does not delete host Apple sessions, Find identities or location history.
-
-Required factory identity, Bluetooth address and calibration are preserved according to the tool rules. This controller is Free-only and cannot activate Pro.
-
-Enter `y` only after reading the confirmation. Success requires all mandatory readback and verification steps; 100% in one phase is not completion. On error, check wiring, target, firmware and configuration before starting another write.
-
-## Probe, backup and help
-
-`probe.ps1` detects a device without firmware. Where included, `backup.ps1` separately saves factory contents. Both are in the same tools subdirectory used above. Check their help and output locations first; do not probe during timing or power measurements.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Help
-```
-
-Tools contain no signing keys, vendor SDK, firmware source or user backups. Keep the whole directory and supplied LICENSE, NOTICE and dependency/font/icon notices; do not copy only one script.
+Keep `tools/`, `dependencies/`, `licenses/` and the manifests together. `tool-manifest.json` records file sizes and SHA256 hashes. See the directory's `LICENSE` and `licenses/`; third-party terms remain unchanged. No keys, device backups or user data are included.

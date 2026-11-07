@@ -5,7 +5,9 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import hashlib
 import json
+import os
 import re
 import struct
 import sys
@@ -54,6 +56,7 @@ MAX_OBJECT_ATTEMPTS = 3
 class DfuPackage:
     init_packet: bytes
     firmware: bytes
+    verification: dict
 
 
 class DfuResponseTimeout(TimeoutError):
@@ -75,9 +78,9 @@ def load_package(path: Path) -> DfuPackage:
             raise ValueError("Package must not contain a SoftDevice or bootloader")
         packet = archive.read(application['dat_file'])
         firmware = archive.read(application['bin_file'])
-        from inktag_cli.signed_preflight import verify_nordic
-        verify_nordic(firmware, packet)
-        return DfuPackage(init_packet=packet, firmware=firmware)
+        from inktag_cli.signed_preflight import inspect_nordic
+        verification = inspect_nordic(firmware, packet)
+        return DfuPackage(init_packet=packet, firmware=firmware, verification=verification)
 
 
 def crc32(data: bytes) -> int:
@@ -305,7 +308,8 @@ async def wait_for_application(
         elapsed = time.monotonic() - started
         print(f"\nApplication BLE OK: {candidate_name or '(unnamed)'} [{candidate.address}] after {elapsed:.1f}s")
         print(f"ATTESTED|app_bytes={size}|crc32=0x{checksum:08X}")
-        return {"applicationName": candidate_name, "appBytes": size, "checksum": checksum}
+        return {"applicationName": candidate_name, "applicationAddress": candidate.address,
+                "appBytes": size, "checksum": checksum}
 
     print()
     raise RuntimeError(
@@ -325,8 +329,11 @@ class SecureDfu:
     def _notification(self, _sender, data: bytearray) -> None:
         self.responses.put_nowait(bytes(data))
 
-    async def start(self) -> None:
+    async def start(self, verification: dict | None = None) -> None:
         await self.client.start_notify(DFU_CONTROL_UUID, self._notification)
+        if verification is not None and not verification['publisherVerified']:
+            from inktag_cli.signed_preflight import require_recovery_signature
+            require_recovery_signature(verification, 'nordic', await self.request(0x00))
         # Retain the four-packet receipt window; use its first native ACK
         # before reading MTU limits, without introducing a negotiation sleep.
         await self.request(OP_SET_PRN, struct.pack("<H", self.prn))
@@ -504,7 +511,8 @@ async def resume_recovery_transport(client: BleakClient, timeout: float = 10.0) 
     dfu = SecureDfu(client)
     await client.start_notify(DFU_CONTROL_UUID, dfu._notification)
     try:
-        if await dfu.request(0x00, timeout=timeout) != b"\x81":
+        from inktag_cli.signed_preflight import recovery_safe_resume
+        if not recovery_safe_resume('nordic', await dfu.request(0x00, timeout=timeout)):
             raise RuntimeError("Installed Nordic Recovery does not support guarded safe resume")
         while not dfu.responses.empty(): dfu.responses.get_nowait()
         try:
@@ -517,6 +525,68 @@ async def resume_recovery_transport(client: BleakClient, timeout: float = 10.0) 
             raise RuntimeError("Nordic exit result unknown; malformed acknowledgment, do not replay")
     finally:
         await dfu.stop()
+
+
+def decode_recovery_version(payload: bytes) -> dict:
+    """Decode the standard FW_VERSION bootloader record, not DFU settings."""
+    if len(payload) != 13:
+        raise RuntimeError(f"Malformed Nordic Recovery version response ({len(payload)} bytes)")
+    kind, version, address, size = struct.unpack("<BIII", payload)
+    if kind != 2 or version >> 16 == 0 or size == 0 or address + size > 0x100000000:
+        raise RuntimeError("Nordic Recovery did not provide a valid bootloader software version")
+    return {"recoveryVersion": f"{version >> 16}.{(version >> 8) & 255}.{version & 255}",
+            "recoveryVersionSource": "device",
+            "nativeFirmwareVersion": version, "recoveryAddress": address,
+            "recoveryBytes": size}
+
+
+def decode_recovery_version_reply(reply: bytes) -> dict:
+    """Only the exact legacy UNSUPPORTED reply supplies the 1.0.0 default."""
+    from inktag_cli.recovery_version import legacy_recovery_version
+    if reply == b"\x60\x0b\x02":
+        return legacy_recovery_version()
+    if len(reply) < 3 or reply[:3] != b"\x60\x0b\x01":
+        raise RuntimeError("Nordic Recovery version query returned an invalid or rejected reply")
+    return decode_recovery_version(reply[3:])
+
+
+async def read_recovery_status(
+    name: str | None, address: str | None, scan_timeout: float, connect_timeout: float,
+) -> dict:
+    """Query FW_VERSION only; do not set PRN, select objects or resume App."""
+    if not name and not address:
+        raise ValueError("provide a Nordic Recovery --ble-name or --ble-address")
+    if name and RECOVERY_NAME_PATTERN.fullmatch(name) is None:
+        raise ValueError("select an exact Nordic Recovery name ending in _OTA")
+    device, advertised = await discover_device(
+        name, address, scan_timeout, bootloader=True, require_unique=True, return_name=True)
+    async with connected_client(device, connect_timeout, fresh_services=True) as client:
+        observed = bytes(await asyncio.wait_for(
+            client.read_gatt_char(GAP_NAME_UUID), 8.0)).decode("ascii", errors="strict")
+        if (RECOVERY_NAME_PATTERN.fullmatch(observed) is None or observed != advertised
+                or (name and observed.casefold() != name.casefold())):
+            raise RuntimeError("Selected device did not prove the expected Nordic Recovery name")
+        service = client.services.get_service(DFU_SERVICE_UUID)
+        channels = {c.uuid.lower() for c in service.characteristics} if service else set()
+        if not {DFU_CONTROL_UUID, DFU_PACKET_UUID} <= channels:
+            raise RuntimeError("Selected device does not expose the Nordic Recovery channels")
+        dfu = SecureDfu(client)
+        await client.start_notify(DFU_CONTROL_UUID, dfu._notification)
+        try:
+            async with asyncio.timeout(8.0):
+                # Keep the query isolated from all existing transfer/control paths.
+                await client.write_gatt_char(DFU_CONTROL_UUID, b"\x0b\x00", response=True)
+                while True:
+                    reply = await dfu.responses.get()
+                    if len(reply) >= 2 and reply[0] == OP_RESPONSE and reply[1] != 0x0B:
+                        continue
+                    version = decode_recovery_version_reply(reply)
+                    break
+        finally:
+            await dfu.stop()
+    return {"action": "recovery-status", "readOnly": True, "platform": "nordic",
+            "role": "recovery", "recoveryName": observed, "address": device.address,
+            "applicationVerified": False, **version}
 
 
 async def resume_safe_application(name: str | None, address: str | None,
@@ -640,9 +710,12 @@ async def run(args) -> None:
         if DFU_CONTROL_UUID not in uuids or DFU_PACKET_UUID not in uuids:
             raise RuntimeError("Selected device does not expose Nordic Secure DFU control and packet characteristics")
         dfu = SecureDfu(client, packet_size=packet_size_limit)
-        await dfu.start()
         try:
-            print("Sending signed init packet...")
+            if package.verification['publisherVerified']:
+                await dfu.start()
+            else:
+                await dfu.start(package.verification)
+            print("Sending init packet..." if not package.verification['publisherVerified'] else "Sending signed init packet...")
             await dfu.send_command(package.init_packet)
             firmware_state = await dfu.prepare_firmware(package.firmware)
             print("Sending application...")
@@ -660,7 +733,7 @@ async def run(args) -> None:
         print("OTA complete. The device is validating and restarting the application.")
     if not args.skip_reconnect_check and (application_address or application_name):
         try:
-            await wait_for_application(
+            attestation = await wait_for_application(
                 application_name, application_address, args.reconnect_timeout, args.connect_timeout,
                 package.firmware, getattr(args, "password_data_dir", None),
             )
@@ -668,6 +741,15 @@ async def run(args) -> None:
             if final_ack_unknown is not None:
                 exc.add_note(str(final_ack_unknown))
             raise
+        # Private per-invocation IPC, never parsed from human progress output.
+        # Only the successfully attested App supplies this address; Recovery
+        # address arithmetic and a second name-only discovery are unnecessary.
+        if result_path := os.environ.get("INKTAG_OTA_RESULT_PATH"):
+            Path(result_path).write_text(json.dumps({
+                "schemaVersion": 1, "transport": "nordic", "applicationVerified": True,
+                **attestation,
+                "appSha256": hashlib.sha256(package.firmware).hexdigest(),
+            }), encoding="utf-8")
     elif not args.skip_reconnect_check:
         print("Application reconnect check skipped: OTA was started directly in Bootloader mode.")
 

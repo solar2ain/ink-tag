@@ -46,7 +46,7 @@
       "aux": [26, 30, 255], "rail": 24,
       "default_pins": [4, 16, 25, 5, 7, 6, 24, 255, 255, 255, 255, 255],
       "default_active_low": 20,
-      "screen": {"ic": "SSD1683", "recipe": 1, "color": "BWR", "rotation": 0, "mirror_x": false, "mirror_y": false, "native_ui_scale": 0, "width": 400, "height": 300, "visible_x": 0, "visible_y": 0, "visible_width": 400, "visible_height": 300}
+      "screen": {"ic": "SSD1619", "recipe": 0, "color": "BWR", "rotation": 0, "mirror_x": false, "mirror_y": false, "native_ui_scale": 0, "width": 400, "height": 300, "visible_x": 0, "visible_y": 0, "visible_width": 400, "visible_height": 300}
     }
   }
 }

@@ -46,6 +46,7 @@ DEFAULT_NAME_PREFIX = "IKT_TL_"
 LEGACY_NAME_PREFIX = "InkTag_TL_"
 OTA_CHARACTERISTIC = "00010203-0405-0607-0809-0a0b0c0d2b12"
 OTA_SERVICE = "00010203-0405-0607-0809-0a0b0c0d1912"
+RECOVERY_VERSION_UUID = "00010203-0405-0607-0809-0a0b0c0d2b15"
 GAP_DEVICE_NAME = "00002a00-0000-1000-8000-00805f9b34fb"
 APP_LIMIT = TLSR_APP_LIMIT
 FLASH_SECTOR_BLOCKS = 0x1000 // 16
@@ -727,9 +728,18 @@ async def read_recovery_status(
             raise RuntimeError("selected device did not expose the fixed TLSR Recovery service")
         status = decode_recovery_status(bytes(await asyncio.wait_for(
             client.read_gatt_char(ota), 8.0)))
+        from inktag_cli.recovery_version import decode_ikrv, legacy_recovery_version
+        revision = characteristic(client, RECOVERY_VERSION_UUID)
+        if revision is None:
+            version = legacy_recovery_version()
+        else:
+            if str(revision.service_uuid).lower() != OTA_SERVICE:
+                raise RuntimeError("Recovery version characteristic has the wrong service")
+            version = decode_ikrv(bytes(await asyncio.wait_for(
+                client.read_gatt_char(revision), 8.0)))
     return {"action": "recovery-status", "readOnly": True, "platform": "telink",
             "role": "recovery", "recoveryName": observed_name, "address": device.address,
-            "applicationVerified": False, "status": status}
+            "applicationVerified": False, "status": status, **version}
 
 
 async def enter_recovery(device, connect_timeout: float, password_data_dir: Path | None = None) -> str:

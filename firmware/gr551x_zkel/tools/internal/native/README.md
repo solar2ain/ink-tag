@@ -1,79 +1,37 @@
-# InkTag gr551x_zkel 完整烧录说明
+# InkTag GR 独立工具包
 
-中文 | [English](README.en.md)
+这是不含固件的 **tools-only 明文目录**。适用目标、工具版本、依赖及文件哈希见
+`inktag-goodix-tools.json`。保留完整目录结构；无需 Git、固件源码、SDK、编译器
+或已安装的 InkTag CLI。
 
-工具版本 **0.2.0.0**。适用于 Windows x64、Windows PowerShell **5.1**（也支持 PowerShell 7）。工具与固件独立提供，不需要安装 InkTag CLI。
+完整目录说明、配置选择和完整刷机步骤统一见[刷机文档](../../docs/zh-CN/flash.md)。
+独立下载目录也可查阅[在线刷机文档](https://github.com/solar2ain/ink-tag/blob/main/docs/zh-CN/flash.md)。
+本目录中的操作参数可通过 `tools/setup.ps1`、`check.ps1`、`probe.ps1`、
+`backup.ps1`、`flash.ps1` 的 `-h` 或 `--help` 查看。
 
-## 开始前
+## 离线依赖
 
-1. 保留完整工具目录，在**本 README 所在目录**打开终端。下方每个代码块都是可单独复制的一行命令，不使用 `&`。
-2. 下载对应主控的 **完整固件**，保留文件原名，放在本目录的**上一级目录**。不要将 OTA 包交给完整烧录工具。
-3. 核对设备型号、主板丝印与实际屏幕，再选择下方配置。同一型号可能存在不同主板；同一主板也可能换装不同屏幕。
-4. 接好稳定电源、共地和烧录线。保持默认确认和完整回读；首次烧录不要跳过回读。
+支持 Windows x64、CPython 3.12 x64、Windows PowerShell 5.1 和 PowerShell 7。
+包内提供锁定的 Python wheels；setup 在包内建立隔离环境，不修改系统 Python。
+setup/check 不启动设备操作，也不安装 USB 驱动或修改全局执行策略。
 
-本版示例使用的完整固件文件：`InkTag-gr551x_zkel-full-v0.2.0.0-354a7910f2c0.zip`。如果移动或重命名文件，只需替换 `-Firmware` 路径；工具不会绑定、自动搜索或下载这一版固件。
+原生程序不随包再分发。请自行从官方取得并接受许可：
 
-除必需的 `-Firmware`、`-Config` 外，烧录命令默认只加 `-RetryDetect`。它只重试最初的设备检测，不会重放擦写或结果未知的操作。速度、超时和确认方式均使用工具默认值。
+- [SEGGER J-Link 7.88j](https://www.segger.com/downloads/jlink/)。
+- [Goodix GProgrammer console 2.0.3.0](https://www.goodix.com/en/software_tool/gprogrammer_ble)，
+  保留其配套 JLinkARM.dll 6.18c 与 loader/config 文件。
 
-## 准备工具
+所需版本、精确哈希和 setup 参数见 `tools/internal/dependencies-windows-x64.lock.json`
+及 setup 帮助。其他同名程序或版本不会自动获得兼容资格。驱动按厂商说明手动安装。
 
-安装 Python 3.12 x64、官方 SEGGER J-Link 7.88j 和 Goodix GProgrammer console 2.0.3.0，保留原配 loader 与 DLL。下面两处软件路径需按实际安装目录调整；依赖版本与哈希要求见 `tools/internal/dependencies-windows-x64.lock.json`。
+## 使用边界
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\setup.ps1" -Offline -JLinkHome "C:\Program Files\SEGGER\JLink_V788j" -GProgrammerHome "C:\Goodix\GProgrammer"
-```
+probe/backup 不需要固件。flash 必须显式传入实际 PCB/屏幕对应的 `-Config`
+和外部兼容签名完整固件包 `-Firmware`；本包不会默认选择、下载或绑定一版固件。
+缺少必要参数时，即使带 `-Yes` 也会在设备访问前拒绝。固件的签名、目标、容量、
+布局和 App/Recovery 配对检查继续执行；具体清理与保留范围见统一刷机文档和运行提示。
 
+DryRun 和离线验收不代表实板成功。Full 使用现有受保护后端，工具更新不新增其他
+板型或原厂恢复资格；`restore.ps1` 保留关闭保护。未知写入结果应先检查，不能重复执行。
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\check.ps1"
-```
-
-## 按设备和主板选择配置
-
-### ZKC42VM — ZK_EL_GR42V_V1.2.toml
-
-- 主板丝印：**ZK_EL_GR42V_V1.2**。
-- 屏幕：400×300，黑白红。
-- 配置：`tools/configs/ZK_EL_GR42V_V1.2.toml`。不带 NFC 的装配。
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Firmware "..\InkTag-gr551x_zkel-full-v0.2.0.0-354a7910f2c0.zip" -Config ".\tools\configs\ZK_EL_GR42V_V1.2.toml" -RetryDetect
-```
-
-### ZKC42V-N — ZK_EL_GR42V_V1.2_w_NFC.toml
-
-- 主板丝印：**ZK_EL_GR42V_V1.2**。
-- 屏幕：400×300，黑白红。
-- 配置：`tools/configs/ZK_EL_GR42V_V1.2_w_NFC.toml`。带 NFC 的装配；丝印相同，请同时核对 NFC 芯片是否安装。
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Firmware "..\InkTag-gr551x_zkel-full-v0.2.0.0-354a7910f2c0.zip" -Config ".\tools\configs\ZK_EL_GR42V_V1.2_w_NFC.toml" -RetryDetect
-```
-
-### ZKC42VM（早期版） — zkc42vm_eailier_version.toml
-
-- 主板丝印：**完整丝印未记录**。
-- 屏幕：400×300，黑白红。
-- 配置：`tools/configs/zkc42vm_eailier_version.toml`。GR5515 早期主板；安装前核对主控和接线，不用于同型号的新主板。
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Firmware "..\InkTag-gr551x_zkel-full-v0.2.0.0-354a7910f2c0.zip" -Config ".\tools\configs\zkc42vm_eailier_version.toml" -RetryDetect
-```
-
-## 烧录后的数据与检查
-
-完整烧录会重置设备设置、密码、设备端 Find 信息、用户字库、旧图片状态与崩溃记录。旧图片可能只是失效，并非安全擦除；无法清理的独立外置 Flash 保留。主机上的 Apple 会话、Find 身份资料和轨迹不由本工具删除。
-
-主板必需的出厂身份、蓝牙地址及校准按工具规则保留。只保留本次同机读取且验证有效的原有 Pro 记录，不从其他设备或旧备份复制授权。原厂或无有效授权的设备初始化为 Free。
-
-看到确认提示后再输入 `y`。最终成功以全部要求的回读与验证通过为准；单个阶段达到 100% 不代表完成。遇到错误先检查接线、目标、固件和配置，不盲目重复擦写。
-
-## 探测、备份和帮助
-
-`probe.ps1` 用于探测，不需要固件；已有 `backup.ps1` 时可单独保存原厂内容。它们位于上面的同一工具子目录。先查看入口帮助和输出位置，不在走时或功耗测试期间探测。
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Help
-```
-
-工具不包含密钥、厂商 SDK、固件源码或用户备份。保留整个目录及随附 LICENSE、NOTICE、字体／图标及依赖许可文件；不要只复制单个脚本。
+第三方组件保留原许可与版权；详见 `LICENSE`、`THIRD_PARTY_NOTICES.md` 及各依赖文件。

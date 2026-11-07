@@ -17,6 +17,8 @@ from rich.table import Table
 from .generated_commands_v2 import CapabilityExtensionV2
 from .image_encoding import CONTENT_TYPE_IDS, canvas_size_for_screen, encode_image
 from .image_processing import (
+    DEFAULT_IMAGE_CONTRAST,
+    DEFAULT_IMAGE_STRENGTH,
     IMAGE_ALGORITHMS,
     ImageProcessOptions,
     compose_image,
@@ -83,8 +85,8 @@ def image_process(
     color: Annotated[str, typer.Option(help="Color ID or BW/BWR/BWRY/GRAY4/SIX/SEVEN.")] = "BWR",
     algorithm: Annotated[str, typer.Option(help="Algorithm name or number from `image algorithms`.")] = "auto",
     preset: Annotated[str, typer.Option(help="balanced, dynamic, vivid, soft, grayscale, restore or posterScan.")] = "balanced",
-    strength: Annotated[float, typer.Option(min=0.0, max=5.0)] = 1.0,
-    contrast: Annotated[float, typer.Option(min=0.5, max=2.0)] = 1.0,
+    strength: Annotated[float, typer.Option(min=0.0, max=5.0)] = DEFAULT_IMAGE_STRENGTH,
+    contrast: Annotated[float, typer.Option(min=0.5, max=2.0)] = DEFAULT_IMAGE_CONTRAST,
     heavy_ink: Annotated[bool, typer.Option("--heavy-ink", help="Strengthen dark and saturated regions.")] = False,
     fit: Annotated[str, typer.Option(help="crop or stretch.")] = "crop",
     rotate: Annotated[str, typer.Option(help="auto, 0, 90, 180 or 270.")] = "auto",
@@ -135,8 +137,8 @@ def image_upload(
     source: Annotated[Path, typer.Argument(exists=True, dir_okay=False, readable=True)],
     algorithm: Annotated[str, typer.Option(help="Algorithm name or number from `image algorithms`.")] = "auto",
     preset: Annotated[str, typer.Option(help="balanced, dynamic, vivid, soft, grayscale, restore or posterScan.")] = "balanced",
-    strength: Annotated[float, typer.Option(min=0.0, max=5.0)] = 1.0,
-    contrast: Annotated[float, typer.Option(min=0.5, max=2.0)] = 1.0,
+    strength: Annotated[float, typer.Option(min=0.0, max=5.0)] = DEFAULT_IMAGE_STRENGTH,
+    contrast: Annotated[float, typer.Option(min=0.5, max=2.0)] = DEFAULT_IMAGE_CONTRAST,
     heavy_ink: Annotated[bool, typer.Option("--heavy-ink", help="Strengthen dark and saturated regions.")] = False,
     fit: Annotated[str, typer.Option(help="crop or stretch.")] = "crop",
     rotate: Annotated[str, typer.Option(help="auto, 0, 90, 180 or 270.")] = "auto",

@@ -270,13 +270,21 @@ class Transport:
 async def discover(name: str | None, address: str | None, timeout: float,
                    include_role: bool = False,
                    allow_legacy_recovery: bool = False, *,
-                   expected_recovery: bool = False):
+                   expected_recovery: bool = False,
+                   return_name: bool = False):
     expected_address = address.upper() if address else None
     deadline = time.monotonic() + timeout
     candidates = {}
     visible_inktags = {}
     observations = {}
+    live_names = {}
     initial_live_scan = True
+
+    def observe_live_name(peer, advertisement):
+        # Only the readonly status path requests this raw callback. A merged
+        # inventory or BLEDevice.name may contain the OS's cached App name.
+        if advertisement.local_name:
+            live_names[str(peer.address).upper()] = str(advertisement.local_name)
 
     # A single Windows discovery pass can omit a peripheral that is between
     # advertising events. Keep the BLEDevice from a live advertisement, since
@@ -284,7 +292,7 @@ async def discover(name: str | None, address: str | None, timeout: float,
     while time.monotonic() < deadline:
         remaining = deadline - time.monotonic()
         collected_names = {}
-        if expected_address and sys.platform == "win32" and timeout >= 8.0:
+        if (expected_address or return_name) and sys.platform == "win32" and timeout >= 8.0:
             # Use the ordinary CLI's live exact-address path first. An App
             # candidate need not wait for the UUID-bearing scan response.
             # Incomplete Recovery evidence gets the remaining full window.
@@ -292,18 +300,31 @@ async def discover(name: str | None, address: str | None, timeout: float,
             full_window = expected_recovery or not initial_live_scan
             def role_ready(peer, advertisement, live_name):
                 services = {str(value).lower() for value in advertisement.service_uuids or []}
+                if return_name:
+                    live_name = live_names.get(str(peer.address).upper(), "")
                 return (str(peer.address).upper() == expected_address and
                         (advertisement_matches_role(live_name, expected_recovery,
                             services, stable_id4_from_address(address) or
                             stable_id4_from_name(name or ''), allow_legacy_recovery) or
                          (not expected_recovery and live_application_candidate(
                              peer, advertisement, expected_address, services))))
-            matches = await _collect_scan_matches(
-                remaining, address=address, wait_for_full_timeout=full_window,
-                **({'stop_when': role_ready} if full_window else {}))
+            if return_name:
+                # The shared inventory wrapper intentionally forwards its raw
+                # sink only for inventory scans. Use its same bounded raw
+                # collector here, without changing any default OTA discovery.
+                from inktag_cli.transport import _collect_scan_matches_once
+                matches = await _collect_scan_matches_once(
+                    remaining, address=address, wait_for_full_timeout=True,
+                    advertisement_sink=observe_live_name,
+                    **({'stop_when': role_ready} if expected_address else {}))
+            else:
+                matches = await _collect_scan_matches(
+                    remaining, address=address, wait_for_full_timeout=full_window,
+                    **({'stop_when': role_ready} if full_window else {}))
             initial_live_scan = False
             devices = {str(d.address): (d, a) for d, a, _ in matches}
-            collected_names = {str(d.address).upper(): n for d, _, n in matches}
+            collected_names = (live_names if return_name else
+                               {str(d.address).upper(): n for d, _, n in matches})
             if full_window:
                 deadline = time.monotonic()
         else:
@@ -311,7 +332,13 @@ async def discover(name: str | None, address: str | None, timeout: float,
                 timeout=min(4.0, max(1.0, remaining)), return_adv=True
             )
         for device, advertisement in devices.values():
-            advertised_name = collected_names.get(device.address.upper()) or advertisement.local_name or device.name or ""
+            if return_name:
+                if sys.platform == "win32" and timeout >= 8.0:
+                    advertised_name = collected_names.get(device.address.upper(), "")
+                else:
+                    advertised_name = advertisement.local_name or ""
+            else:
+                advertised_name = collected_names.get(device.address.upper()) or advertisement.local_name or device.name or ""
             device_address = device.address.upper()
             services = {value.lower() for value in advertisement.service_uuids or []}
             previous_name, previous_services = observations.get(device_address, ("", set()))
@@ -344,6 +371,8 @@ async def discover(name: str | None, address: str | None, timeout: float,
                                          (is_application or app_candidate)))):
                     suffix = " (App GATT verification required)" if app_candidate else ""
                     print(f"Found: {advertised_name or '(unnamed)'} [{device.address}]{suffix}")
+                    if return_name:
+                        return device, advertised_name
                     if include_role:
                         return device, is_recovery
                     return device
@@ -382,6 +411,8 @@ async def discover(name: str | None, address: str | None, timeout: float,
         )
     device, advertised_name = next(iter(candidates.values()))
     print(f"Found: {advertised_name or '(unnamed)'} [{device.address}]")
+    if return_name:
+        return device, advertised_name
     if include_role:
         _, services = observations.get(device.address.upper(), (advertised_name, set()))
         # Name-only safe-resume is accepted only when both the dedicated
@@ -688,6 +719,72 @@ def fixed_recovery_profile(record: bytes) -> dict:
     if len(profiles) != 1:
         raise RuntimeError("OM requires a known fixed Recovery profile")
     return profiles[0]
+
+
+async def read_recovery_status(name: str | None, address: str | None,
+                               scan_timeout: float, connect_timeout: float) -> dict:
+    """Read an identified fixed Recovery, without opening the DFU transport."""
+    from inktag_cli.recovery_version import (
+        legacy_recovery_version, reported_recovery_version,
+    )
+    from inktag_cli.transport import release_bleak_client
+
+    peer, advertised_name = await discover(
+        name, address, scan_timeout, expected_recovery=True, return_name=True)
+    expected_id4 = (stable_id4_from_address(address or peer.address) or
+                    stable_id4_from_name(name or ""))
+    if not advertisement_matches_role(advertised_name, True, [SERVICE_UUID], expected_id4):
+        raise RuntimeError("OM Recovery advertisement does not match the selected device")
+    client = BleakClient(peer, **ble_client_options(connect_timeout, fresh_services=True))
+    failure = None
+    try:
+        await asyncio.wait_for(client.connect(), connect_timeout)
+        report_ble_connection(peer)
+        service = client.services.get_service(SERVICE_UUID)
+        if service is None:
+            raise RuntimeError("OM fixed Recovery service is missing")
+        channels = {str(c.uuid).lower(): c for c in service.characteristics}
+        if not {CONTROL_UUID, DATA_UUID, RECOVERY_PROFILE_UUID} <= channels.keys():
+            raise RuntimeError("OM fixed Recovery channels are missing")
+        record = bytes(await asyncio.wait_for(
+            client.read_gatt_char(channels[RECOVERY_PROFILE_UUID]), connect_timeout))
+        profile = fixed_recovery_profile(record)
+        actual_name = advertised_name
+        identity_source = "advertisement+profile"
+        # WinRT may hide Generic Access, including 2A00. Its confirmed absence
+        # is not a failed read, nor evidence that the software field is absent.
+        gap = client.services.get_characteristic("00002a00-0000-1000-8000-00805f9b34fb")
+        if gap is not None:
+            actual_name = bytes(await asyncio.wait_for(
+                client.read_gatt_char(gap), connect_timeout)).decode("ascii")
+            if (not advertisement_matches_role(actual_name, True, [SERVICE_UUID], expected_id4)
+                    or stable_id4_from_name(actual_name) != stable_id4_from_name(advertised_name)):
+                raise RuntimeError("OM Recovery identity does not match the selected device")
+            identity_source = "gap+advertisement+profile"
+        software = channels.get("00002a28-0000-1000-8000-00805f9b34fb")
+        if software is None:
+            version = legacy_recovery_version()
+        else:
+            raw = bytes(await asyncio.wait_for(
+                client.read_gatt_char(software), connect_timeout))
+            text = raw.decode("ascii")
+            if not re.fullmatch(r"[1-9][0-9]*\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)", text):
+                raise RuntimeError("Malformed OM Recovery software revision")
+            version = reported_recovery_version(text)
+        return dict(ok=True, readOnly=True, platform="onmicro", role="recovery",
+                    name=actual_name, address=peer.address, profileVerified=True,
+                    applicationVerified=False, recoveryProfileHex=record.hex(),
+                    recoveryIdentitySource=identity_source,
+                    board=profile["board"], **version)
+    except BaseException as error:
+        failure = error
+        raise
+    finally:
+        try:
+            await release_bleak_client(client)
+        except BaseException:
+            if failure is None:
+                raise
 
 
 async def verify_entered_recovery(address: str, board: str, timeout: float,

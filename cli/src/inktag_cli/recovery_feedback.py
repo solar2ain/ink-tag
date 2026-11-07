@@ -62,7 +62,9 @@ def recovery_phase(stage):
     status = _current.get()
     if status is not None:
         messages = {'request': 'Requesting return to application',
-                    'waiting-app': 'Waiting for application', 'app-ready': 'Application ready'}
+                    'waiting-app': 'Waiting for application', 'app-ready': 'Application ready',
+                    'verifying-app': 'Verifying returned application',
+                    'syncing-clock': 'Synchronizing application clock'}
         try: status.emit(stage, messages[stage])
         except Exception: pass  # A display failure must never replay control.
 
@@ -109,6 +111,8 @@ def recovery_summary(result, elapsed):
         summary['buildTarget'] = display_build_target(result['board'])
     if 'applicationVerified' in result:
         summary['applicationVerified'] = result['applicationVerified']
+    if 'clockSynced' in result:
+        summary['clockSynced'] = result['clockSynced']
     if result.get('notificationCleanupError'):
         summary['notificationCleanupError'] = result['notificationCleanupError']
     return summary

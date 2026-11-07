@@ -19,7 +19,7 @@ def scriptless_document(title: str, body: str, language: str = 'zh-CN') -> str:
     return ('<!doctype html><html lang="'+html.escape(language, quote=True)+'"><head><meta charset="utf-8">'+
             csp_meta()+'<title>'+html.escape(title)+'</title></head><body>'+new_window_links(body)+'</body></html>\n')
 
-GUIDES = ('cli', 'devices', 'faq', 'find', 'flash', 'flashing', 'getting-started', 'github-pages',
+GUIDES = ('cli', 'devices', 'faq', 'find', 'flash', 'getting-started', 'github-pages',
           'host-pages', 'ota', 'pro', 'projects', 'releases', 'supported-devices', 'tested-screens', 'updates', 'webui')
 DOCUMENT_IMAGES = {
     'docs/assets/devices/supported-devices.webp': 'manual/assets/devices/supported-devices.webp',
@@ -58,6 +58,13 @@ def document_map() -> dict[str, str]:
     return mapping
 
 
+def manual_web_paths() -> frozenset[str]:
+    """Only named user pages/images; historical HTML is never implicitly public."""
+    return frozenset((*document_map().values(), *DOCUMENT_IMAGES.values(),
+        'manual/style.css', 'manual/index.html',
+        'manual/zh-CN/index.html', 'manual/en/index.html'))
+
+
 def confined(root: Path, path: Path) -> Path:
     resolved = path.resolve()
     if not resolved.is_relative_to(root.resolve()) or path.is_symlink():
@@ -84,6 +91,10 @@ def rewrite_reference(repo: Path, source: Path, target: Path, reference: str) ->
         output = repo/'webui'/DOCUMENT_IMAGES[relative]
     elif relative == 'cli/LICENSE':
         output = repo/'webui/licenses/CLI-PolyForm-Noncommercial-1.0.0.txt'
+    elif relative == 'webui-standalone/InkTag-WebUI.html':
+        # Bundled manuals open their own app entry. Standalone packaging maps
+        # index.html to InkTag-WebUI.html without linking outside the bundle.
+        output = repo/'webui/index.html'
     elif relative.startswith('webui/'):
         output = original
     elif relative == 'cli/licenses/EPDOPTIMIZE-LICENSE.txt':
@@ -195,6 +206,10 @@ def user_web_files(repo: Path, *, include_update_feeds: bool = True) -> dict[str
         name = path.relative_to(site).as_posix()
         if not include_update_feeds and name in DOWNLOAD_EXCLUDED_WEB_PATHS: continue
         if name.startswith(('manual/', 'licenses/')): continue
+        if (path.suffix.lower() == '.md' or
+                any(part.lower() in {'docs', 'research', 'archive', 'archives', 'internal', '.release-local'}
+                    for part in path.relative_to(site).parts)):
+            raise ValueError('Non-runtime document cannot be packaged: '+name)
         if path.is_symlink(): raise ValueError('Links cannot be packaged')
         result[name] = path.read_bytes()
     result.update(notice_bytes(repo))

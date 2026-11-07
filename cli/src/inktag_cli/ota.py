@@ -5,9 +5,12 @@ import json
 import struct
 import subprocess
 import sys
+import tempfile
+import re
 import zipfile
 import zlib
 from dataclasses import asdict, dataclass
+from contextlib import nullcontext
 from pathlib import Path
 from typing import Any
 
@@ -90,8 +93,8 @@ def _inspect_dialog(path: Path) -> OtaPackageInfo:
     actual_crc = zlib.crc32(image[64:]) & 0xFFFFFFFF
     if actual_crc != expected_crc:
         raise ValueError("DA14585 pQ CRC32 verification failed")
-    from .signed_preflight import verify_dialog
-    verified = verify_dialog(image)
+    from .signed_preflight import inspect_dialog
+    verified = inspect_dialog(image)
     version = image[12:28].split(b"\0", 1)[0].decode("ascii", errors="replace") or None
     return OtaPackageInfo(
         transport="dialog",
@@ -345,8 +348,8 @@ def _inspect_nordic(path: Path, archive: zipfile.ZipFile, manifest: dict[str, An
     init_packet = _read_member(archive, str(application["dat_file"]))
     if not init_packet or not firmware:
         raise ValueError("Nordic package contains an empty init packet or application")
-    from .signed_preflight import verify_nordic
-    verified = verify_nordic(firmware, init_packet)
+    from .signed_preflight import inspect_nordic
+    verified = inspect_nordic(firmware, init_packet)
     return OtaPackageInfo(
         transport="nordic",
         path=path,
@@ -433,11 +436,43 @@ def run_update(command: list[str], *, capture_output: bool = False,
     if password_input is not None:
         # Only a mode flag is passed. The secret goes through a pipe.
         environment['INKTAG_PASSWORD_STDIN'] = '1'
-    return subprocess.run(
-        command,
-        check=False,
-        capture_output=capture_output,
-        text=capture_output or password_input is not None,
-        **({'input': password_input + '\n'} if password_input is not None else {}),
-        **({'env': {**os.environ, **environment}} if environment else {}),
-    )
+    nordic = len(command) > 1 and Path(command[1]).name == DRIVER_FILES['nordic']
+    with tempfile.TemporaryDirectory(prefix="inktag-ota-result-") if nordic else nullcontext(None) as temporary:
+        if nordic:
+            result_path = Path(temporary) / "application.json"
+            environment['INKTAG_OTA_RESULT_PATH'] = str(result_path)
+        result = subprocess.run(
+            command,
+            check=False,
+            capture_output=capture_output,
+            text=capture_output or password_input is not None,
+            **({'input': password_input + '\n'} if password_input is not None else {}),
+            **({'env': {**os.environ, **environment}} if environment else {}),
+        )
+        if nordic:
+            result.application_attestation = None
+            if result.returncode == 0 and result_path.is_file() and result_path.stat().st_size <= 4096:
+                try:
+                    result.application_attestation = json.loads(result_path.read_text(encoding='utf-8'))
+                except (ValueError, OSError):
+                    pass  # Missing/malformed IPC cannot authorize post-OTA mutation.
+        return result
+
+
+def nordic_attested_application(info: OtaPackageInfo, result: subprocess.CompletedProcess) -> tuple[str, str | None]:
+    """Return only the current subprocess's verified App, bound to these bytes."""
+    value = getattr(result, 'application_attestation', None)
+    if (result.returncode != 0 or not isinstance(value, dict) or
+            value.get('schemaVersion') != 1 or value.get('transport') != 'nordic' or
+            value.get('applicationVerified') is not True or
+            value.get('appBytes') != info.application_bytes or value.get('appSha256') != info.sha256):
+        raise ValueError('新应用已验身，但缺少匹配的应用连接地址；请单独连接设备校时，不要重复 OTA')
+    address = value.get('applicationAddress')
+    name = value.get('applicationName')
+    if (not isinstance(address, str) or not re.fullmatch(
+            r'(?:[0-9A-Fa-f]{2}(?::[0-9A-Fa-f]{2}){5}|[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12})', address) or
+            not isinstance(name, str) or len(name.encode('utf-8')) > 248 or
+            any(ord(c) < 32 for c in name) or
+            re.fullmatch(r'(?:IKT|InkTag)_NRF_[0-9A-Fa-f]{4}_OTA', name, re.IGNORECASE)):
+        raise ValueError('新应用连接地址无效；请单独连接设备校时，不要重复 OTA')
+    return address, name or None

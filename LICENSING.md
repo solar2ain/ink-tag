@@ -4,11 +4,11 @@
 
 InkTag 自有 CLI 源代码采用 [PolyForm Noncommercial 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0)，完整正文见 [cli/LICENSE](cli/LICENSE)。第三方组件保留各自的版权与许可，见[第三方声明](THIRD_PARTY_NOTICES.md)。
 
-当前 CLI 含有编译后的渲染组件，其完整对应源码及重新编译所需资料尚未提供。因此，当前文件不能作为完整的 CLI 对应源码包使用，也暂不作为正式公开发行包提供。源码及组件说明见 [CLI 源码与组件](release-materials.md)。
+当前 CLI 含有编译后的渲染组件，其完整对应源码及重新编译所需资料尚未提供。因此，当前文件不能作为完整的 CLI 对应源码包使用。源码及组件说明见 [CLI 源码与组件](release-materials.md)。
 
 InkTag-owned CLI source is licensed under [PolyForm Noncommercial 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0); see [cli/LICENSE](cli/LICENSE). Third-party components retain their own licenses and copyright notices.
 
-The CLI currently includes a compiled renderer whose complete Corresponding Source and rebuild materials are not yet supplied. The current files therefore do not constitute a complete CLI Corresponding Source package and are not yet offered as a formal public release. See [CLI source and components](release-materials.md).
+The CLI currently includes a compiled renderer whose complete Corresponding Source and rebuild materials are not yet supplied. The current files therefore do not constitute a complete CLI Corresponding Source package. See [CLI source and components](release-materials.md).
 
 ## WebUI 与固件 / WebUI and firmware
 

@@ -2,8 +2,8 @@ format_version = 1
 board_marking = "zkc42vm_eailier_version"
 
 [screen]
-ic = "SSD1683"
-recipe = 1
+ic = "SSD1619"
+recipe = 0
 color = "BWR"
 rotation = 0
 mirror_x = false

@@ -1,166 +1,111 @@
-# InkTag tlsr8359_hsel complete-flashing guide
+# TLSR8359 plaintext tools-only programmer
 
-[中文](README.md) | English
+Deliver the complete plaintext directory `release/tools/tlsr8359_hsel/`; no outer
+ZIP is required. This tools version is `0.2.1.0`; source hashes and
+build IDs are separate. This directory includes, downloads and implicitly selects **no firmware**. Probe
+and backup need no firmware. Flash requires an explicitly selected external
+signed `app-full.zip` and PCB configuration; missing arguments fail before
+hardware access. Historical combined archives remain evidence, not recommended
+new tools deliveries.
 
-**Tools 0.2.0.8** for Windows x64 and Windows PowerShell **5.1** (also PowerShell 7). Tools and firmware are separate; InkTag CLI is not required.
+Use Python 3.11+, Windows PowerShell and the CH340 driver. Keep power/SWS/common
+ground stable. Run `firmware/ports/telink/tlsr8359/tools/setup.ps1` to install the
+independently pinned host dependencies and perform an offline check. The same
+directory contains probe.ps1, backup.ps1, flash.ps1 and configs/. Every entry
+supports `-Help` and offline `-DryRun`. Command examples are in README.md; replace
+the example port/configuration with the actual device and use your external
+firmware path. No BLE workflow is invoked.
 
-## Before starting
+No InkTag CLI installation is required. Default links, QR/NFC data and package
+verification use fixed pure-format modules inside
+`tools/hardware/inktag_programmer_formats/`, never an installed CLI. Version
+0.2.0.4 supplies the default-data modules and QR dependency omitted in 0.2.0.3.
+Extracted-tools validation now exercises actual complete-image preparation;
+DryRun alone cannot qualify that phase. Missing default-data dependencies fail
+before serial access.
+Version0.2.0.5 also removes residual checkout-only CLI search-path injections
+from delivered code while retaining source provenance. Default data, prepared
+image bytes and programmer behavior are unchanged.
+Version0.2.0.6 checks the frozen modules into the programmer source closure.
+Both source and exported entries import them directly, without reading the
+CLI source tree. CLI upgrades do not change programmer formats. Updating the
+snapshot requires explicit regeneration from a fixed source commit and review
+of the recorded source/runtime hashes.
+Version0.2.0.7 allows a missing/damaged old Factory selector when independent
+installed identity/configuration envelopes locate the existing Factory map.
+Rebuild optional configuration from the selected preset; preserve valid BLE
+identity/type, using only established legacy/verified hardware-UID defaults
+when optional address records are absent/invalid, with a visible warning.
+Two conflicting valid addresses still stop. Opaque stock bytes occupying
+indispensable relocation/configuration/shadow destinations stop with exact
+addresses and the preservation reason. They are never erased as optional data.
+This is host-only: App/Recovery bytes are unchanged; no new hardware claim.
+Version0.2.0.8 synchronizes the accepted HSEL3 preset to90degrees+native-X
+mirror, matching WebUI/CLI defaults. The fixed0.2.0.7 delivery is unchanged.
+Firmware remains an explicit external input; no MCU build or new signature.
 
-1. Keep the complete tools directory and open a terminal **in the directory containing this README**. Each code block below is one independently copyable command; no `&` prefix is used.
-2. Download the matching **complete firmware**, keep its original filename and place it in the **parent directory** of this tools directory. Do not pass an OTA package to the complete-flashing tool.
-3. Match the product, PCB marking and actual panel before selecting a configuration. A product can have different boards, and a board can use different panels.
-4. Connect stable power, ground and programming wires. Keep the default confirmation and complete readback, especially for the first flash.
+Version0.2.1.0 exports the current maintained tool closure. Select the actual
+HSEL4Q_04_20M_33 screen using `HSEL4Q_04_20M_33-SSD1683.toml` (SSD1683, BWR)
+or `HSEL4Q_04_20M_33-JD79668.toml` (JD79668AA, BWRY). The YW2427 and
+unsuffixed entries are retired. `screen.ic` selects the controller; there is
+no BoardNote input.
 
-Complete-firmware filename used below: `InkTag-tlsr8359_hsel-full-v0.2.0.0-d4366a076b61.zip`. If you move or rename it, change only the `-Firmware` path. The tool does not bind to, search for or download this firmware version.
+The current SWS handling first preserves a registered link with confirmed
+same-unit UID/JEDEC. Only a strictly identified, debug-stopped48MHz capture
+can use the existing24MHz programming-clock path with readback checks.
+Normal firmware startup remains48MHz. This does not qualify48MHz/921600 as
+reliable Full programming, or permit copying another PCB's timing parameters.
+Offline exported-directory validation adds no board/panel/hardware qualification;
+old tool snapshots and firmware bytes remain unchanged.
 
-Apart from required `-Firmware` and `-Config`, flashing commands add only `-RetryDetect`. It retries initial detection, never programming or an operation with an unknown result. Speed, timeout and confirmation retain their defaults.
+Complete flashing asks y/N. Preserve only an existing valid, same-device native
+Pro token/sequence and original identity, BLE address/type, calibration and
+required boot data. No issuer, replacement token or post-flash BLE activation
+is used. Clear password/QR control credentials, device Find state, settings/name,
+fonts, main-Flash slots/slideshow/interaction state and old diagnostic history.
+Host Find/Apple libraries and tracking history are never touched.
 
-**TLSR exception:** complete flashing requires an explicit port. Replace `-Port COM3` below with the programmer port shown in Device Manager. Keep other defaults. Use CH340/SWS wiring, not J-Link SWD wiring.
+An additional fresh8-KiB native Settings capture is required. Before erase the
+actual writer rechecks Factory/Settings against that capture and checks UID
+again. Seed only the exact verified token in new Settings; erase old generations.
+Clean absence/tombstone or wholly erased pages remain normal Free/stock cases.
+Old development layouts, unknown non-FF user data and invalid, foreign or
+incompatible authorization do not by themselves prevent complete flashing.
+Unrestorable authorization is cleared and initializes Free; Pro then requires
+normal activation. The existing y/N warning explains this impact, with the
+actual disposition printed after preparation and before writing. Unknown data
+is never described as proven empty. Match the native cold reader's selected
+committed page; never revive a deleted token from an older page. An unrelated
+damaged inactive page does not discard valid current Pro. Rebuild installed
+host-owned pin/screen configuration slots from the explicitly selected config.
+Failed/short physical reads, changed UID, uncertain necessary Factory identity
+or calibration, invalid package signature/pairing and actual capacity mismatches
+still refuse before erase. Never supply an old archive or external token as
+this automatic preservation source. Native captures contain private
+authorization data and stay in this operation's local evidence directory.
 
-## Prepare the tools
+TLSR currently has no qualified persistent crash/reset-history or retained-RAM
+mailbox backend. Old Settings history is omitted and the existing final
+whole-chip reset is requested. No bulk SRAM/unknown-register clearing or observed
+boot claim is added. Separate NFC EEPROM is not erased. Only independently
+qualified Nebular420 high image storage on the same Flash is cleared; other
+unqualified high addresses remain untouched and are not claimed erased.
 
-Install Python **3.11 or newer** and the CH340 driver, then install and check the dependencies:
+Keep complete readback
+for the first flash. A later explicit `-SkipReadbackVerify` is NOT VERIFIED.
+Publisher signature, MCU/layout/capacity, internal App/Recovery pairing and
+identity/calibration/native-Pro-authority protections remain. Critical new
+Settings readback is never skipped. Do not borrow another unit's data.
+SWS activation can reset/halt the target. Long operations stream terminal and
+log progress; callers must not buffer until exit or remove completed-stage lines.
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\ports\telink\tlsr8359\tools\setup.ps1"
-```
+No Python runtime, driver, SDK/compiler, signer or full BLE CLI is included.
+Linux/macOS shell entries support offline planning only; native programming is
+not qualified. Run `python firmware/ports/telink/tlsr8359/tools/check.py` for
+offline integrity/dependency checks; `--content-only` skips dependency imports.
+Third-party terms are preserved in THIRD_PARTY_NOTICES.md. This is an internal
+validation delivery, not all-board or public-release approval.
 
-## Select the product and PCB configuration
-
-### Hanshow Nowa-154R-N — HS_EL5101_5M_66_05.toml
-
-- PCB marking: **HS_EL5101_5M_66_05**.
-- Panel: 152×152, black/white/red.
-- Configuration: `firmware/ports/telink/tlsr8359/tools/configs/HS_EL5101_5M_66_05.toml`. Original 152×152 three-colour panel; not for 200×200 boards.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\ports\telink\tlsr8359\tools\flash.ps1" -Firmware "..\InkTag-tlsr8359_hsel-full-v0.2.0.0-d4366a076b61.zip" -Config ".\firmware\ports\telink\tlsr8359\tools\configs\HS_EL5101_5M_66_05.toml" -RetryDetect -Port COM3
-```
-
-### Hanshow Stellar-S3TN@ (check the product label) — HS_EL5101_5M_60_04.toml
-
-- PCB marking: **HS_EL5101_5M_60_04**.
-- Panel: 200×200, black/white/red.
-- Configuration: `firmware/ports/telink/tlsr8359/tools/configs/HS_EL5101_5M_60_04.toml`. P154030 200×200 three-colour assembly; E0154A07-A1 panel compatibility is not confirmed. Verify the product name on its label.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\ports\telink\tlsr8359\tools\flash.ps1" -Firmware "..\InkTag-tlsr8359_hsel-full-v0.2.0.0-d4366a076b61.zip" -Config ".\firmware\ports\telink\tlsr8359\tools\configs\HS_EL5101_5M_60_04.toml" -RetryDetect -Port COM3
-```
-
-### Hanshow Nowa-213R-N — HS_EL5102_1M_67_33.toml
-
-- PCB marking: **HS_EL5102_1M_67_33**.
-- Panel: 128×250, black/white/red.
-- Configuration: `firmware/ports/telink/tlsr8359/tools/configs/HS_EL5102_1M_67_33.toml`. Original 2.13-inch three-colour panel.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\ports\telink\tlsr8359\tools\flash.ps1" -Firmware "..\InkTag-tlsr8359_hsel-full-v0.2.0.0-d4366a076b61.zip" -Config ".\firmware\ports\telink\tlsr8359\tools\configs\HS_EL5102_1M_67_33.toml" -RetryDetect -Port COM3
-```
-
-### Hanshow Nebular-213R-N — HSEL4Q_02_13M_30.toml
-
-- PCB marking: **HSEL4Q_02_13M_30**.
-- Panel: 128×250, black/white/red/yellow.
-- Configuration: `firmware/ports/telink/tlsr8359/tools/configs/HSEL4Q_02_13M_30.toml`. Original 2.13-inch four-colour panel.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\ports\telink\tlsr8359\tools\flash.ps1" -Firmware "..\InkTag-tlsr8359_hsel-full-v0.2.0.0-d4366a076b61.zip" -Config ".\firmware\ports\telink\tlsr8359\tools\configs\HSEL4Q_02_13M_30.toml" -RetryDetect -Port COM3
-```
-
-### Hanshow Nebular-420R-N — HSEL4Q_04_20M_33.toml
-
-- PCB marking: **HSEL4Q_04_20M_33**.
-- Panel: 400×300, black/white/red/yellow.
-- Configuration: `firmware/ports/telink/tlsr8359/tools/configs/HSEL4Q_04_20M_33.toml`. JD79668AA four-colour assembly.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\ports\telink\tlsr8359\tools\flash.ps1" -Firmware "..\InkTag-tlsr8359_hsel-full-v0.2.0.0-d4366a076b61.zip" -Config ".\firmware\ports\telink\tlsr8359\tools\configs\HSEL4Q_04_20M_33.toml" -RetryDetect -Port COM3
-```
-
-### Hanshow Nebular-420R-N — HSEL4Q_04_20M_33-SSD1683.toml
-
-- PCB marking: **HSEL4Q_04_20M_33**.
-- Panel: 400×300, black/white/red.
-- Configuration: `firmware/ports/telink/tlsr8359/tools/configs/HSEL4Q_04_20M_33-SSD1683.toml`. SSD1683 three-colour assembly, separate from the four-colour configuration.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\ports\telink\tlsr8359\tools\flash.ps1" -Firmware "..\InkTag-tlsr8359_hsel-full-v0.2.0.0-d4366a076b61.zip" -Config ".\firmware\ports\telink\tlsr8359\tools\configs\HSEL4Q_04_20M_33-SSD1683.toml" -RetryDetect -Port COM3
-```
-
-### Hanshow Nebular-420R-N — HSEL4Q_04_20M_33-YW2427.toml
-
-- PCB marking: **HSEL4Q_04_20M_33**.
-- Panel: 400×300, black/white/red.
-- Configuration: `firmware/ports/telink/tlsr8359/tools/configs/HSEL4Q_04_20M_33-YW2427.toml`. YW2427 batch with an SSD1683 three-colour panel.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\ports\telink\tlsr8359\tools\flash.ps1" -Firmware "..\InkTag-tlsr8359_hsel-full-v0.2.0.0-d4366a076b61.zip" -Config ".\firmware\ports\telink\tlsr8359\tools\configs\HSEL4Q_04_20M_33-YW2427.toml" -RetryDetect -Port COM3
-```
-
-### Hanshow StellarPro-154R-N (early version) — HSEL5_01_54M_00.toml
-
-- PCB marking: **HSEL5_01_54M_00**.
-- Panel: 200×200, black/white/red.
-- Configuration: `firmware/ports/telink/tlsr8359/tools/configs/HSEL5_01_54M_00.toml`. Early version with a removable JD79653A 200×200 three-colour panel.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\ports\telink\tlsr8359\tools\flash.ps1" -Firmware "..\InkTag-tlsr8359_hsel-full-v0.2.0.0-d4366a076b61.zip" -Config ".\firmware\ports\telink\tlsr8359\tools\configs\HSEL5_01_54M_00.toml" -RetryDetect -Port COM3
-```
-
-### Hanshow StellarPro-154R-N (later version) — HSEL5_01_54M_02.toml
-
-- PCB marking: **HSEL5_01_54M_02**.
-- Panel: 200×200, black/white/red.
-- Configuration: `firmware/ports/telink/tlsr8359/tools/configs/HSEL5_01_54M_02.toml`. Later YW2116 fixed-panel version; not interchangeable with the _00 configuration.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\ports\telink\tlsr8359\tools\flash.ps1" -Firmware "..\InkTag-tlsr8359_hsel-full-v0.2.0.0-d4366a076b61.zip" -Config ".\firmware\ports\telink\tlsr8359\tools\configs\HSEL5_01_54M_02.toml" -RetryDetect -Port COM3
-```
-
-### Hanshow StellarPro-154Q-N — HSEL5Q_01_54M_00.toml
-
-- PCB marking: **HSEL5Q_01_54M_00**.
-- Panel: 200×200, black/white/red/yellow.
-- Configuration: `firmware/ports/telink/tlsr8359/tools/configs/HSEL5Q_01_54M_00.toml`. 200×200 four-colour panel; the complete image and colour output remain unconfirmed. Installation is not currently recommended.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\ports\telink\tlsr8359\tools\flash.ps1" -Firmware "..\InkTag-tlsr8359_hsel-full-v0.2.0.0-d4366a076b61.zip" -Config ".\firmware\ports\telink\tlsr8359\tools\configs\HSEL5Q_01_54M_00.toml" -RetryDetect -Port COM3
-```
-
-### Hanshow NebularPro-154Q-N — HSEL4Q_01_54M_31.toml
-
-- PCB marking: **HSEL4Q_01_54M_31**.
-- Panel: 200×200, black/white/red/yellow.
-- Configuration: `firmware/ports/telink/tlsr8359/tools/configs/HSEL4Q_01_54M_31.toml`. 200×200 four-colour panel; complete-flashing validation remains incomplete.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\ports\telink\tlsr8359\tools\flash.ps1" -Firmware "..\InkTag-tlsr8359_hsel-full-v0.2.0.0-d4366a076b61.zip" -Config ".\firmware\ports\telink\tlsr8359\tools\configs\HSEL4Q_01_54M_31.toml" -RetryDetect -Port COM3
-```
-
-### Hanshow PolarisPro-260Q-N — HSEL3_02_66M_36.toml
-
-- PCB marking: **HSEL3_02_66M_36**.
-- Panel: 152×296, black/white/red/yellow.
-- Configuration: `firmware/ports/telink/tlsr8359/tools/configs/HSEL3_02_66M_36.toml`. 2.66-inch 152×296 four-colour panel; NFC and standby current remain unconfirmed.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\ports\telink\tlsr8359\tools\flash.ps1" -Firmware "..\InkTag-tlsr8359_hsel-full-v0.2.0.0-d4366a076b61.zip" -Config ".\firmware\ports\telink\tlsr8359\tools\configs\HSEL3_02_66M_36.toml" -RetryDetect -Port COM3
-```
-
-## Data handling and verification
-
-Complete flashing resets device settings, passwords, device-side Find data, user fonts, old image state and crash records. Images may be invalidated rather than securely erased; unsupported external Flash is retained. This tool does not delete host Apple sessions, Find identities or location history.
-
-Required factory identity, Bluetooth address and calibration are preserved according to the tool rules. Only an existing valid Pro record read from the same device in this operation is retained, never from another device or an old backup. Factory devices and devices without valid authorization initialize as Free.
-
-Enter `y` only after reading the confirmation. Success requires all mandatory readback and verification steps; 100% in one phase is not completion. On error, check wiring, target, firmware and configuration before starting another write.
-
-## Probe, backup and help
-
-`probe.ps1` detects a device without firmware. Where included, `backup.ps1` separately saves factory contents. Both are in the same tools subdirectory used above. Check their help and output locations first; do not probe during timing or power measurements.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\ports\telink\tlsr8359\tools\flash.ps1" -Help
-```
-
-Tools contain no signing keys, vendor SDK, firmware source or user backups. Keep the whole directory and supplied LICENSE, NOTICE and dependency/font/icon notices; do not copy only one script.
+Maintain documentation first under the source repository's
+`release/versions/<version>/`, then copy one way to distribution after review.
+Unchanged MCU bytes require no rebuild or new signature.

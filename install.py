@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import shlex
 import subprocess
+import tempfile
 import sys
 from pathlib import Path
 
@@ -14,6 +15,27 @@ ROOT = next((parent for parent in (HERE, *HERE.parents)
              if (parent / "cli/src/inktag_cli/local_server.py").is_file()), HERE)
 sys.path.insert(0, str(ROOT / "cli/src"))
 from inktag_cli.local_server import default_data_directory
+
+
+def check_data_directory(data: Path) -> None:
+    """Check the chosen profile before installing or starting anything."""
+    try:
+        data.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryFile(dir=data, prefix=".inktag-setup-write-check-"):
+            pass
+    except OSError as error:
+        permission_hint = (
+            "Windows denied access. Re-run the installer using an administrator account "
+            "with access to this folder (right-click PowerShell and choose Run as administrator). "
+            if sys.platform == "win32" and isinstance(error, PermissionError) else ""
+        )
+        raise RuntimeError(
+            f"Cannot create or write the InkTag data directory: {data}. "
+            f"{permission_hint}"
+            "Check this folder's permissions, or choose an absolute writable folder with --data-dir. "
+            "Existing data was not deleted or moved; a different folder uses a separate profile. "
+            f"System error: {error}"
+        ) from error
 
 
 def main(argv=None) -> int:
@@ -33,7 +55,9 @@ def main(argv=None) -> int:
     for relative in ("cli/pyproject.toml", "tools/findmy/bootstrap.py", "tools/findmy/query_webui.py"):
         if not (ROOT / relative).is_file():
             parser.error("Incomplete InkTag checkout or ZIP: missing " + relative)
-    data = (args.data_dir or default_data_directory()).resolve()
+    data = (args.data_dir or default_data_directory()).absolute()
+    check_data_directory(data)
+    data = data.resolve()
     cli_root = ROOT / "cli"
     cli_python = cli_root / ".venv" / ("Scripts/python.exe" if sys.platform == "win32" else "bin/python")
     if args.no_install:
@@ -52,7 +76,12 @@ def main(argv=None) -> int:
     if args.no_install:
         command.append("--no-install")
     print("Preparing local dependencies. No Apple account login, device connection or firmware write.", flush=True)
-    print("Windows: first setup downloads a verified Apple image (~292 MB); full 7-Zip is required. macOS uses system AOSKit.", flush=True)
+    if sys.platform == "win32":
+        print("Windows Find setup: full 7-Zip (7z.exe) extracts a verified Apple image (~292 MB); iTunes is not installed.", flush=True)
+        print("If 7-Zip is missing, install the Windows .exe from https://www.7-zip.org/download.html in C:/Program Files/7-Zip; approve the administrator prompt, then rerun this installer.", flush=True)
+        print("If access is denied, use an administrator account with access to your InkTag folder and choose Run as administrator in PowerShell. Normal use of your own writable data folder does not require elevation.", flush=True)
+    elif sys.platform == "darwin":
+        print("macOS uses system AOSKit; 7-Zip and the Windows Apple image are not required.", flush=True)
     subprocess.run(command, check=True)
     print(f"Ready. Persistent data: {data}", flush=True)
     if args.prepare_only:
@@ -78,5 +107,5 @@ def main(argv=None) -> int:
 if __name__ == "__main__":
     try:
         raise SystemExit(main())
-    except (OSError, subprocess.CalledProcessError) as error:
-        raise SystemExit(f"InkTag setup failed ({type(error).__name__}). Check the step above; existing data was not cleared.")
+    except (OSError, RuntimeError, subprocess.CalledProcessError) as error:
+        raise SystemExit(f"InkTag setup failed ({type(error).__name__}): {error}. Check the step above; existing data was not cleared.")

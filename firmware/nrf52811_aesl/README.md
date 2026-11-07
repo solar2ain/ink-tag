@@ -1,74 +1,69 @@
-# InkTag nrf52811_aesl 完整烧录说明
-
-统一目录：`ota/`、`full/`、`tools/`。配置位于 `tools/configs/`，下列命令在本主板目录运行。平台原生后端保存在 `tools/internal/native/`，不直接修改；工具仍需显式传入固件。
-
+# InkTag nRF52811 Windows 工具
 
 中文 | [English](README.en.md)
 
-工具版本 **0.2.0.4**。适用于 Windows x64、Windows PowerShell **5.1**（也支持 PowerShell 7）。工具与固件独立提供，不需要安装 InkTag CLI。
+适用于 nRF52811 EL022HWRL 主板（CAL_VER06）。工具包提供探测、可选备份、完整烧录和便携 Python 运行环境，不包含固件，不自动下载或选择固件。请另行下载适配的完整固件；日常应用升级使用 OTA 固件。
 
-## 开始前
+## 准备
 
-1. 保留完整工具目录，在**本 README 所在目录**打开终端。下方每个代码块都是可单独复制的一行命令，不使用 `&`。
-2. 下载对应主控的 **完整固件**，保留文件原名，放在本目录的 **full/** 目录。不要将 OTA 包交给完整烧录工具。
-3. 核对设备型号、主板丝印与实际屏幕，再选择下方配置。同一型号可能存在不同主板；同一主板也可能换装不同屏幕。
-4. 接好稳定电源、共地和烧录线。保持默认确认和完整回读；首次烧录不要跳过回读。
+1. 将工具包解压到本地目录，例如 `C:\InkTag\tools\nrf52811_aesl`。
+2. 将完整固件放在工具包目录之外，例如 `C:\InkTag\firmware\InkTag-nrf52811_aesl-v0.2.0.0-full.zip`。
+3. 安装 J-Link 7.88j 和 USB 驱动，连接 VTref、GND、SWDIO、SWCLK，并为主板供电。无需安装 Python、WSL、Nordic SDK 或 Arm 编译器。只接一只探针时无需指定编号。
 
-本版示例使用的完整固件文件：`InkTag-nrf52811_aesl-full-v0.2.0.0-b6fb6ecc78cd.zip`。如果移动或重命名文件，只需替换 `-Firmware` 路径；工具不会绑定、自动搜索或下载这一版固件。
+![EL022HWRL 烧录接点](images/el022h2-swd.jpg)
 
-除必需的 `-Firmware`、`-Config` 外，烧录命令默认只加 `-RetryDetect`。它只重试最初的设备检测，不会重放擦写或结果未知的操作。速度、超时和确认方式均使用工具默认值。
+以下命令在工具包解压目录运行。
 
-## 准备工具
+## 探测与备份
 
-安装官方 J-Link **7.88j** 与 USB 驱动；便携 Python 和所需依赖已随目录提供，无需 SDK、编译器或系统 Python。只连接一只探针时使用默认选择；连接多只时需额外指定 `-JLinkSerial`，避免选错。
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\setup.ps1"
-```
-
+探测不需要固件：
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\check.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/probe.ps1 -Chip nrf52811
 ```
 
-## 按设备和主板选择配置
-
-### AESL／盒马 EL022H2 — EL022HWRL.toml
-
-- 主板丝印：**EL022HWRL（CAL_VER06）**。
-- 屏幕：128×250，黑白红。
-- 配置：`tools/configs/EL022HWRL.toml`。原装 2.13 寸三色屏。
+需要保存原厂内容时，可另行备份内部 Flash、FICR 和 UICR；此备份不包含外置图片 Flash：
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Firmware ".\full\InkTag-nrf52811_aesl-full-v0.2.0.0-b6fb6ecc78cd.zip" -Config ".\tools\configs\EL022HWRL.toml" -RetryDetect
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/backup.ps1 -Chip nrf52811 -Board EL022HWRL
 ```
 
-### AESL／盒马 EL022H2（换装华为 A0 屏） — EL022HWRL-A0.toml
+## 完整烧录
 
-- 主板丝印：**EL022HWRL（CAL_VER06）**。
-- 屏幕：768×552，黑白红黄。
-- 配置：`tools/configs/EL022HWRL-A0.toml`。换装 768×552 四色 A0 屏，不用于原装小屏。
+先校验外部完整固件和配置，不访问探针：
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Firmware ".\full\InkTag-nrf52811_aesl-full-v0.2.0.0-b6fb6ecc78cd.zip" -Config ".\tools\configs\EL022HWRL-A0.toml" -RetryDetect
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/flash.ps1 -Firmware "C:\InkTag\firmware\InkTag-nrf52811_aesl-v0.2.0.0-full.zip" -Config tools/configs/EL022HWRL.toml -DryRun
 ```
 
-## 烧录后的数据与检查
-
-完整烧录会重置设备设置、密码、设备端 Find 信息、用户字库、旧图片状态与崩溃记录。旧图片可能只是失效，并非安全擦除；无法清理的独立外置 Flash 保留。主机上的 Apple 会话、Find 身份资料和轨迹不由本工具删除。
-
-主板必需的出厂身份、蓝牙地址及校准按工具规则保留。本主控仅提供 Free 功能，不支持激活 Pro。
-
-看到确认提示后再输入 `y`。最终成功以全部要求的回读与验证通过为准；单个阶段达到 100% 不代表完成。遇到错误先检查接线、目标、固件和配置，不盲目重复擦写。
-
-正常蓝牙名为 `IKT_NRF_XXXX`，Recovery 名称带 `_OTA`。可用 WebUI 校时并确认页面。
-
-## 探测、备份和帮助
-
-`probe.ps1` 用于探测，不需要固件；已有 `backup.ps1` 时可单独保存原厂内容。它们位于上面的同一工具子目录。先查看入口帮助和输出位置，不在走时或功耗测试期间探测。
+执行完整烧录：
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Help
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/flash.ps1 -Firmware "C:\InkTag\firmware\InkTag-nrf52811_aesl-v0.2.0.0-full.zip" -Config tools/configs/EL022HWRL.toml
 ```
 
-工具不包含密钥、厂商 SDK、固件源码或用户备份。保留整个目录及随附 LICENSE、NOTICE、字体／图标及依赖许可文件；不要只复制单个脚本。
+阅读清理范围后输入 `y`。完整烧录写入 MCU 固件、出厂默认配置和配套 GUI 资源，清除普通设置、持久化 health/崩溃记录、保留 RAM 中的旧崩溃邮箱及旧 reset/启动请求状态，并使旧图片失效。图片像素不会逐块安全擦除，外置 Flash 的保留区域保持。芯片身份、BLE 地址及地址类型、出厂校准、FICR、UICR 和已验证的启动元数据保持。工具不强制备份，不自动校时，不通过蓝牙配置设备。只有全部独立回读及清理验证通过后才执行最终启动；这次启动产生的新复位原因不属于旧历史。
+
+原屏使用 `tools/configs/EL022HWRL.toml`；A0 屏使用 `tools/configs/EL022HWRL-A0.toml`。定制接线时，将配置复制到工具包之外修改，并用 `-Config` 指向副本。同一个预编译固件可使用不同配置；工具继续检查签名、主控、布局、容量、App/Recovery 配对和引脚约束。请保持原始工具包完整，不在其中保存固件、修改脚本或写入输出文件。
+
+## 离线检查与更新
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/check.ps1
+```
+
+`tools/setup.ps1` 可从包内锁定依赖恢复便携环境，不联网、不修改系统安全设置。SEGGER 软件和驱动需单独安装，不随包分发。工具版本独立于固件版本。
+
+完整固件包含配套的 SoftDevice、Recovery、应用和 GUI 资源。OTA 固件仅更新应用；通过 [InkTag WebUI](https://solar2ain.github.io/ink-tag/) 或共享 CLI 使用，不交给 `flash.ps1`。已有合格固件可通过 OTA 接入引脚配置，应用保留有效设置；Recovery 是否需要更新由具体固件说明确定。
+
+普通蓝牙名称为 `IKT_NRF_XXXX`，Recovery 名称加 `_OTA`。烧录后可在 WebUI 校时、选择页面和调整设置。
+
+## 日志和参数
+
+探测和烧录日志默认位于 `%TEMP%\InkTag-flashing`，可选备份位于 `%LOCALAPPDATA%\InkTag\backup-archive`。用 `-OutputDir` 自定义位置时，选择工具包目录之外的路径。真实 SWD 探测可能暂停并恢复 CPU，不推断主板型号。
+
+完整烧录默认只检测一次。需要等待接线完成时，可添加 `-RetryDetect -DetectTimeoutSeconds 120`；它只重复最初尚未读出身份的只读探测，不重试捕获、擦写或回读。部分读取、错误身份、未知结果和后续失败都会停止并保留日志。进度100%仅表示当前阶段完成，最终成功以全部回读结果为准。
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/flash.ps1 -Help
+```

@@ -45,11 +45,13 @@ from inktag_cli.goodix_package import (
     Package,
     layout_profile,
     load_package,
+    parse_recovery_version,
 )
 from inktag_cli.transport import InkTagV2StatusError
 
 
 SERVICE_UUID = "a6ed0401-d344-460a-8075-b9e8ec90d71b"
+GAP_SERVICE_UUID = "00001800-0000-1000-8000-00805f9b34fb"
 TX_UUID = "a6ed0402-d344-460a-8075-b9e8ec90d71b"
 RX_UUID = "a6ed0403-d344-460a-8075-b9e8ec90d71b"
 CTRL_UUID = "a6ed0404-d344-460a-8075-b9e8ec90d71b"
@@ -140,6 +142,7 @@ def describe_ota_rejection(
 def make_bleak_client(
     device, timeout: float, *, uncached_services: bool = False,
     include_product_services: bool = False,
+    include_gap_service: bool = False,
 ) -> BleakClient:
     options = {"timeout": timeout}
     if sys.platform == "win32" and uncached_services:
@@ -156,6 +159,8 @@ def make_bleak_client(
         options["services"] = {SERVICE_UUID}
         if include_product_services:
             options["services"].add(APPLICATION_SERVICE_UUID)
+        if include_gap_service:
+            options["services"].add(GAP_SERVICE_UUID)
     return BleakClient(device, **options)
 
 
@@ -166,6 +171,7 @@ async def retrying_bleak_client(
     *,
     uncached_services: bool = False,
     include_product_services: bool = False,
+    include_gap_service: bool = False,
     attempts: int = 3,
 ):
     from inktag_cli.transport import release_bleak_client
@@ -175,6 +181,7 @@ async def retrying_bleak_client(
         client = make_bleak_client(
             device, timeout, uncached_services=uncached_services,
             include_product_services=include_product_services,
+            include_gap_service=include_gap_service,
         )
         try:
             await client.connect()
@@ -242,6 +249,7 @@ class GoodixOtas:
         self.packet_size = packet_size
         self.responses: asyncio.Queue[tuple[int, bytes]] = asyncio.Queue()
         self.parser = FrameParser()
+        self.recovery_version = None
 
     def notification(self, _sender, data: bytearray) -> None:
         for response in self.parser.feed(bytes(data)):
@@ -380,7 +388,6 @@ async def discover_recovery(
 async def wait_for_safe_resumed_application(
     address: str, recovery_name: str, timeout: float
 ):
-    expected_name = recovery_name.removesuffix("_OTA")
     deadline = time.monotonic() + timeout
     while time.monotonic() < deadline:
         discovered = await BleakScanner.discover(
@@ -397,10 +404,8 @@ async def wait_for_safe_resumed_application(
                 str(value).lower()
                 for value in (getattr(advertisement, "service_uuids", None) or ())
             }
-            identity_matches = (
-                device.address.casefold() == address.casefold()
-                or advertised_name.casefold() == expected_name.casefold()
-            )
+            # A matching display name is not the same physical device.
+            identity_matches = device.address.casefold() == address.casefold()
             if (identity_matches and not advertised_name.casefold().endswith("_ota")
                     and APPLICATION_SERVICE_UUID.lower() in services):
                 return device, advertised_name
@@ -772,6 +777,7 @@ async def query_otas_target(
     info = await otas.request(CMD_GET_INFO)
     if len(info) < 18 or info[0] != ACK_SUCCESS or info[17] != 2:
         raise RuntimeError("target does not report Goodix OTAS v2")
+    otas.recovery_version = parse_recovery_version(info)
     target = await otas.request(CMD_DFU_FW_INFO_GET)
     if len(target) < 54 or target[0] != ACK_SUCCESS:
         raise RuntimeError("target rejected DFU firmware-info query")
@@ -794,6 +800,44 @@ async def query_otas_target(
                 "target is not on the board-qualified Goodix layout; install the chip-qualified Full image first"
             )
     return struct.unpack_from("<I", target, 1)[0], target[5] == 1
+
+
+async def read_recovery_status(
+    name: str | None, address: str | None, scan_timeout: float, connect_timeout: float,
+) -> dict:
+    """Read actual OTAS Recovery identity; never switches mode or resumes App."""
+    from inktag_cli.recovery_version import decode_ikrv, legacy_recovery_version
+    grammar = r"(?:IKT|InkTag)_GR_[0-9A-Fa-f]{4}_OTA"
+    if not name and not address:
+        raise ValueError("provide a Goodix Recovery --ble-name or --ble-address")
+    if name and re.fullmatch(grammar, name) is None:
+        raise ValueError("select an exact Goodix Recovery name ending in _OTA")
+    device, advertised = await discover(name, address, scan_timeout)
+    if (re.fullmatch(grammar, advertised) is None or (name and advertised != name)
+            or (address and str(device.address).casefold() != address.casefold())):
+        raise RuntimeError("Selected device did not advertise the expected Goodix Recovery")
+    async with retrying_bleak_client(
+        device, connect_timeout, uncached_services=True, include_gap_service=True,
+    ) as client:
+        observed = bytes(await asyncio.wait_for(client.read_gatt_char(
+            "00002a00-0000-1000-8000-00805f9b34fb"), 8.0)).decode("ascii", errors="strict")
+        if observed != advertised:
+            raise RuntimeError("Connected Goodix Recovery name differs from the selected identity")
+        otas = GoodixOtas(client, 240)
+        await otas.open()
+        try:
+            info = await otas.request(CMD_GET_INFO)
+            if len(info) not in (20, 28) or info[0] != ACK_SUCCESS or info[17] != 2:
+                raise RuntimeError("Malformed Goodix Recovery software information")
+            target = await otas.request(CMD_DFU_FW_INFO_GET)
+            if len(target) < 54 or target[0] != ACK_SUCCESS or target[5] != 0:
+                raise RuntimeError("Goodix OTAS target is not running Recovery")
+            version = decode_ikrv(info[20:]) if len(info) == 28 else legacy_recovery_version()
+        finally:
+            await otas.close()
+    return {"action": "recovery-status", "readOnly": True, "platform": "goodix",
+            "role": "recovery", "recoveryName": observed, "address": str(device.address),
+            "applicationVerified": False, **version}
 
 
 async def enter_verified_recovery(
@@ -846,13 +890,17 @@ async def enter_verified_recovery(
         ) from error
 
     if not is_application:
-        return {
+        result = {
             "platform": "goodix",
             "role": "recovery",
             "address": resolved_address,
             "recoveryName": advertised_name,
             "modeSetSent": False,
         }
+        if getattr(otas, 'recovery_version', None):
+            result['recoveryVersion'] = otas.recovery_version['version']
+            result['recoveryEpoch'] = otas.recovery_version['epoch']
+        return result
 
     # Goodix commits its Recovery request after the OTAS connection closes.
     await asyncio.sleep(MODE_SETTLE_SECONDS)
@@ -879,13 +927,17 @@ async def enter_verified_recovery(
                 raise RuntimeError(
                     "candidate still reports the running application role"
                 )
-            return {
+            result = {
                 "platform": "goodix",
                 "role": "recovery",
                 "address": resolved_address,
                 "recoveryName": recovery_name,
                 "modeSetSent": True,
             }
+            if getattr(otas, 'recovery_version', None):
+                result['recoveryVersion'] = otas.recovery_version['version']
+                result['recoveryEpoch'] = otas.recovery_version['epoch']
+            return result
         except Exception as error:
             last_error = error
             if time.monotonic() < deadline:

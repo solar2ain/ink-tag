@@ -154,6 +154,15 @@ def _ghost_clean_hard_timeout(cycles: int) -> float:
     return min(_GHOST_CLEAN_MAX_TIMEOUT, 60.0 + cycles * 3 * 60.0)
 
 
+class ApplicationBootstrapError(InkTagError):
+    """Transient GATT connect/discovery failure before App protocol or AUTH.
+
+    Missing/wrong services and identity/password/protocol refusals are not
+    this type. A caller may retry only an exact-device read-only connection,
+    within its existing deadline; never replay a control or clock write.
+    """
+
+
 class _IncompleteServiceDiscovery(RuntimeError):
     pass
 
@@ -568,15 +577,16 @@ async def select_device(
     return candidates[0][0], candidates[0][1]
 
 
-async def release_bleak_client(client: Any) -> None:
-    """Release a Bleak client and the WinRT physical link it owns.
+def release_bleak_connection_lease(client: Any) -> None:
+    """Drop this client's native keep-alive without starting an async action.
 
     Bleak 3.0 closes its GATT session without first clearing
     ``GattSession.maintain_connection``.  On Windows that can leave the radio
     link alive after the Python client exits, suppressing advertisements and
     delaying the next OTA-attestation or time-sync connection.  Other
-    backends do not expose this private session and simply take the normal
-    public disconnect path.
+    backends do not expose this private session. Keeping this synchronous also
+    permits deadline-bound callers to drop the lease if native cancellation
+    itself finishes after their asynchronous cleanup budget has expired.
     """
     backend = getattr(client, "_backend", None)
     session = getattr(backend, "_session", None)
@@ -585,6 +595,11 @@ async def release_bleak_client(client: Any) -> None:
             session.maintain_connection = False
         except (AttributeError, OSError, RuntimeError):
             pass
+
+
+async def release_bleak_client(client: Any) -> None:
+    """Release the owned keep-alive, then use the normal public disconnect."""
+    release_bleak_connection_lease(client)
     await client.disconnect()
 
 
@@ -945,7 +960,7 @@ class InkTagClient(DevicePasswordSession):
                         "Windows BLE address lookup" if address_lookup_missed
                         else f"GATT {mode} {attempt_stage}"
                     )
-                    raise InkTagError(
+                    raise ApplicationBootstrapError(
                         f"{failure_phase} failed for {self.snapshot.address}; "
                         f"requested={INKTAG_SERVICE_UUID}: {type(error).__name__}: {error}"
                     ) from error
@@ -1917,6 +1932,43 @@ class InkTagClient(DevicePasswordSession):
         await self._refresh_v2_status()
         return self.snapshot
 
+    async def _wait_for_time_write_ready(self, timeout: float = 90.0) -> None:
+        """Wait using reads only; never queue or replay a SET_TIME behind drawing."""
+        session, cancelled = self._client, self._resource_read_cancel
+        deadline = time.monotonic() + timeout
+
+        def remaining() -> float:
+            if self._client is not session or cancelled.is_set():
+                raise InkTagError("Connection changed before clock sync; SET_TIME was not sent")
+            budget = deadline - time.monotonic()
+            if budget <= 0:
+                raise InkTagError("Device did not become ready for clock sync; SET_TIME was not sent")
+            return budget
+
+        announced = False
+        while True:
+            budget = min(3.0, remaining())
+            try:
+                status = await asyncio.wait_for(
+                    self.request_v2(CommandV2.GET_STATUS, timeout=budget), budget,
+                )
+            except (InkTagV2TimeoutError, TimeoutError):
+                status = None  # Retrying a read cannot repeat a clock mutation.
+            except InkTagV2StatusError as error:
+                if error.opcode != int(CommandV2.GET_STATUS) or error.status != int(StatusV2.BUSY):
+                    raise
+                status = None
+            remaining()
+            if status is not None:
+                if len(status) < 16 or status[0] != 1:
+                    raise InkTagError("Invalid clock-sync readiness status; SET_TIME was not sent")
+                if (status[2] & 0x11) == 0:
+                    return
+            if not announced and self.phase_sink:
+                self.phase_sink("Waiting for screen work before sampling the current time")
+            announced = True
+            await asyncio.sleep(min(0.25, remaining()))
+
     async def sync_time(self, mode: int | None = None, *,
                         compensation_ppm: int | None = None,
                         offset_seconds: float = 0.0,
@@ -1928,10 +1980,15 @@ class InkTagClient(DevicePasswordSession):
         self.time_sync_reference = None
         # The optional rate is read back first, then UTC is sampled/sent once.
         # Omission preserves device rate and works on pre-compensation firmware.
+        if compensation_ppm is not None:
+            await self._wait_for_time_write_ready()
         rate = (await self.set_clock_rate(compensation_ppm)
                 if compensation_ppm is not None else None)
         try:
             reference = await network_time() if network else None
+            await self._wait_for_time_write_ready()
+            # Sample only after every readiness wait. A queued stale timestamp
+            # is not a successful current-time synchronization.
             current = (datetime.fromtimestamp(reference.now(), timezone.utc).astimezone()
                        if reference else datetime.now().astimezone() + timedelta(seconds=offset_seconds))
             offset = current.utcoffset()

@@ -9,14 +9,14 @@
     },
     {
       "path": "firmware/gr551x_zkel/README.en.md",
-      "bytes": 5193,
-      "sha256": "b44d720c2c389ea28c1d3724790d76a2112ba2c09766ace82334151f36f6cf42",
+      "bytes": 2860,
+      "sha256": "e865502a3b10e60f35765b721efa7e908d18fffbd7361344f61534ce450fa71d",
       "category": "runtime"
     },
     {
       "path": "firmware/gr551x_zkel/README.md",
-      "bytes": 4867,
-      "sha256": "9d97df9e3a1dcb231e2838d9fc4bce9a9bb21ca5b4aaf9771aec3a38f2504d1d",
+      "bytes": 2514,
+      "sha256": "5ddf2665ebe57389d7dd4460d38d9b58f3b727774b6763214eed9aa9685033e8",
       "category": "runtime"
     },
     {
@@ -44,6 +44,12 @@
       "category": "runtime"
     },
     {
+      "path": "firmware/gr551x_zkel/tools/configs/ZK_EL_GR42V_V1.2_w_NFC-SSD1683.toml",
+      "bytes": 548,
+      "sha256": "7072fba9e93a6107669888ef41b6ad2a6600a620aa5c5a47975de7af78e34c0b",
+      "category": "runtime"
+    },
+    {
       "path": "firmware/gr551x_zkel/tools/configs/ZK_EL_GR42V_V1.2_w_NFC.toml",
       "bytes": 547,
       "sha256": "a867a4795378ca7fe21425c41ee49be665c3e471cd39825ade49da9042970221",
@@ -52,7 +58,7 @@
     {
       "path": "firmware/gr551x_zkel/tools/configs/zkc42vm_eailier_version.toml",
       "bytes": 525,
-      "sha256": "ce7bf12952ec07429ba123ee2d53dc32d2d240d41f93b918fe7ebeffcedf54c9",
+      "sha256": "97118652a4d5b350dbd89708fe7a06cb5c2c11e964697ab51153ec43ed6d3459",
       "category": "runtime"
     },
     {
@@ -69,14 +75,14 @@
     },
     {
       "path": "firmware/gr551x_zkel/tools/internal/layout.json",
-      "bytes": 636,
-      "sha256": "4476f870222baa3871d48f53f16e7e53f10a5e23c451b5b886f09d7db824594c",
+      "bytes": 776,
+      "sha256": "ec0f09a2c801306f4efb4446996822375d0d4476076dc3462e3e0e52248a747d",
       "category": "runtime"
     },
     {
       "path": "firmware/gr551x_zkel/tools/internal/native/inktag-goodix-tools.json",
-      "bytes": 15094,
-      "sha256": "b9fbffd7b4b94472ce4d56a42e64488146bc4704e75c75e4d31c80ed75796d38",
+      "bytes": 14924,
+      "sha256": "8d2c805b3cfb91d70dce7e2dd9fedc65dc37c54ed5305ba23d209acb58963dee",
       "category": "runtime"
     },
     {
@@ -87,14 +93,14 @@
     },
     {
       "path": "firmware/gr551x_zkel/tools/internal/native/README.en.md",
-      "bytes": 4990,
-      "sha256": "6a8fd00e3b88a1bebc170a16149e28e85a081a414f0215f97fe55408664e2b13",
+      "bytes": 2572,
+      "sha256": "f6c32570536a5f61e084476cb2b2a4f57a17eb105a8a168aa04e47573a26a3a2",
       "category": "runtime"
     },
     {
       "path": "firmware/gr551x_zkel/tools/internal/native/README.md",
-      "bytes": 4689,
-      "sha256": "e988805656f243162cb5662d8ff0b6a57dd42b2db9ab6506703010df6d898dd4",
+      "bytes": 2245,
+      "sha256": "708e9238a9f5edb8cbe75797a3f3c6a3dfddccc5edb3bfbdd57a6f04800e52ce",
       "category": "runtime"
     },
     {
@@ -122,6 +128,12 @@
       "category": "runtime"
     },
     {
+      "path": "firmware/gr551x_zkel/tools/internal/native/tools/configs/ZK_EL_GR42V_V1.2_w_NFC-SSD1683.toml",
+      "bytes": 548,
+      "sha256": "7072fba9e93a6107669888ef41b6ad2a6600a620aa5c5a47975de7af78e34c0b",
+      "category": "runtime"
+    },
+    {
       "path": "firmware/gr551x_zkel/tools/internal/native/tools/configs/ZK_EL_GR42V_V1.2_w_NFC.toml",
       "bytes": 547,
       "sha256": "a867a4795378ca7fe21425c41ee49be665c3e471cd39825ade49da9042970221",
@@ -130,7 +142,7 @@
     {
       "path": "firmware/gr551x_zkel/tools/internal/native/tools/configs/zkc42vm_eailier_version.toml",
       "bytes": 525,
-      "sha256": "ce7bf12952ec07429ba123ee2d53dc32d2d240d41f93b918fe7ebeffcedf54c9",
+      "sha256": "97118652a4d5b350dbd89708fe7a06cb5c2c11e964697ab51153ec43ed6d3459",
       "category": "runtime"
     },
     {
@@ -159,20 +171,20 @@
     },
     {
       "path": "firmware/gr551x_zkel/tools/internal/native/tools/internal/runtime/cli/LICENSING.md",
-      "bytes": 1414,
-      "sha256": "ca2922e2db3cadda35caafe90f926b27e06eb08d73e3e54cbf7b9d0a613ee14b",
+      "bytes": 1345,
+      "sha256": "0987256ddd54c4ccc58a0cefbda4ca2f77a66ff29807166e2ebe084675bd29aa",
       "category": "runtime"
     },
     {
       "path": "firmware/gr551x_zkel/tools/internal/native/tools/internal/runtime/cli/THIRD_PARTY_NOTICES.md",
-      "bytes": 1482,
-      "sha256": "952f22ea4fef7ad65659b0f025093f88f34ea08a348e0dac97439b226b4bbd81",
+      "bytes": 2712,
+      "sha256": "4858693c4aac63b75fa55ec4c417f4589355792b348277ddbc330524fb6ca067",
       "category": "runtime"
     },
     {
       "path": "firmware/gr551x_zkel/tools/internal/native/tools/internal/runtime/firmware/boards/goodix-pin-backends.json",
       "bytes": 4055,
-      "sha256": "71971b17c489b569fbd5ad3613349baa2a691020a54050ece27e1cb381697234",
+      "sha256": "837a274dc9ef0bb36eaa4801cbd7ca893e8dcce6e188603ff43661e62e30ae6e",
       "category": "runtime"
     },
     {
@@ -195,8 +207,8 @@
     },
     {
       "path": "firmware/gr551x_zkel/tools/internal/native/tools/internal/runtime/firmware/ports/goodix/common/tools/internal/goodix-configured-full.ps1",
-      "bytes": 5456,
-      "sha256": "08d4bedd4bdd8986a2aa49a88596e47c69c49690d6b0e3658ed727b88a0fedf5",
+      "bytes": 5517,
+      "sha256": "d53b26cf6ac3919bd8afd2cd09f2bc7021209bdec6da3b478125a19fc117af15",
       "category": "runtime"
     },
     {
@@ -345,8 +357,8 @@
     },
     {
       "path": "firmware/gr551x_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/goodix_factory_init.py",
-      "bytes": 23135,
-      "sha256": "bd6026a5e204ebf2fefc46f3f4c1071420e5614865a8ad4e4b6321a501c46e45",
+      "bytes": 22716,
+      "sha256": "88fda11eb6d313bf13069d1ceb441dcb8ced6808a5919910e11195171ccf84bd",
       "category": "runtime"
     },
     {
@@ -363,8 +375,8 @@
     },
     {
       "path": "firmware/gr551x_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/goodix_offline/__init__.py",
-      "bytes": 87,
-      "sha256": "3ad5d174131a578d58357e2e2c9ff85ff5321243b12983342fe1c478557630b5",
+      "bytes": 86,
+      "sha256": "22b3b83efe116a1b887671d8eaa062e316bca384b9087b3600f0e81a9a84a449",
       "category": "runtime"
     },
     {
@@ -447,8 +459,8 @@
     },
     {
       "path": "firmware/gr551x_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/goodix_pin_config.py",
-      "bytes": 12120,
-      "sha256": "a04c45cc54facc4e387e7da9c77c08f69ea139244ace5dbf29ce3f78ede4e7ed",
+      "bytes": 11882,
+      "sha256": "d02b763613efc31d56d587709a8b8e9de4dc7d2c783d93326266ff544b5ca48e",
       "category": "runtime"
     },
     {
@@ -459,14 +471,14 @@
     },
     {
       "path": "firmware/gr551x_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/goodix_release_full.py",
-      "bytes": 13954,
-      "sha256": "03ad8ae02ce22f7bd856e149c2eb7cd712fb2d70d455145a173c14f3fb4bb30f",
+      "bytes": 13696,
+      "sha256": "956f2e647701a8b0ed3147bee6940d35b916758ddced0110f3567992447da902",
       "category": "runtime"
     },
     {
       "path": "firmware/gr551x_zkel/tools/internal/native/tools/internal/runtime/tools/hardware/goodix_release_seed.py",
-      "bytes": 3407,
-      "sha256": "28d788fabf7bf635ec97c696a7534e013824f51553436dce42e6888814da5226",
+      "bytes": 3332,
+      "sha256": "476e14e9b26ce3192e1c40423c86bbde3b66e7c50041f827ae59fbfdc14be7d2",
       "category": "runtime"
     },
     {
@@ -501,8 +513,8 @@
     },
     {
       "path": "firmware/gr551x_zkel/tools/internal/native/tools/internal/standalone-runtime.py",
-      "bytes": 9720,
-      "sha256": "311c58616ab20275965c64387449af8a6986483b3c030d713ef3ccbdab5d30d4",
+      "bytes": 9538,
+      "sha256": "4e6a4576d0cdfedee04a4409cf765a2a7a5ff10551da0e490f10d0149c6be8bc",
       "category": "runtime"
     },
     {

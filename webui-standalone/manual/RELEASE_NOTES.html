@@ -1,25 +1,101 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="inktag-020">InkTag 0.2.0</h1>
-<p>首版发布。</p>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="inktag-021">InkTag 0.2.1</h1>
+<p>新增部分 4.2 寸屏幕的 Pro 时钟局刷适配，改进 Find 标签管理，并修复日历显示、设备更新和本地客户端使用中的问题。</p>
 <p><a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag-manual/">图文使用手册</a> · <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag/">打开 WebUI</a> · <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/docs/zh-CN/webui.md">使用本地客户端</a></p>
-<h2 id="选择下载内容">选择下载内容</h2>
+<h2 id="新增功能feature">新增功能（Feature）</h2>
 <ul>
-<li><strong>在线使用</strong>：直接打开 WebUI。电脑使用 Chrome／Edge，iPhone／iPad 推荐 Bluefy，Android 使用 Chrome。</li>
-<li><strong>本地客户端</strong>：CLI ZIP 包含本地 WebUI 和 Find 后台，需要 Python 3.11 或更新版本。完整解压后安装 CLI，再启动本地 WebUI，步骤见包内 README。</li>
-<li><strong>离线网页</strong>：完整解压 standalone ZIP，打开 <code>InkTag-WebUI.html</code>，保留旁边的资源目录。</li>
-<li><strong>自行托管</strong>：选择静态 WebUI ZIP。</li>
-<li><strong>已安装 InkTag</strong>：选择与实际主控、主板匹配的 OTA 包，通过 WebUI 或 CLI 升级。</li>
-<li><strong>首次安装或有线恢复</strong>：选择完整固件，阅读对应工具目录的中英文 README，并显式传入固件文件。</li>
+<li><strong>4.2 寸 Pro 时钟局刷</strong>：新增 SSD1683、SSD1619／SSD1619A、UC8276 的 400×300 黑白红屏幕适配，平台与设备范围如下。</li>
 </ul>
-<p>烧录工具以明文目录独立提供，不包含或自动选择固件。DA14585 的公开便携工具目前只支持探测和离线预检，实际完整烧录尚未开放。请按各目录说明确认可用操作与依赖，不要仅按屏幕尺寸选择固件。</p>
-<p>下载后核对 <code>SHA256SUMS.txt</code>。客户端更新不会自动刷写设备；传输完成后仍需等待设备回连与验身。使用前请阅读<a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/LICENSING.md">许可说明</a>和各组件声明，尚未齐备的来源／对应源码信息仍在说明中列明。</p>
-<h2 id="english">English</h2>
-<p>Initial release.</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag-manual/">Illustrated manual</a> · <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag/">Open WebUI</a> · <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/docs/en/webui.md">Local client guide</a></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>平台</th>
+<th>主板／设备</th>
+<th>适配屏幕</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Goodix GR5513／GR5515</td>
+<td>ZKEL 标准版主板，使用 <code>gr551x_zkel</code> 固件；对应 ZKC42V／ZKC42VM 的兼容配置</td>
+<td>SSD1683、SSD1619／SSD1619A、UC8276，4.2 寸 400×300 黑白红</td>
+</tr>
+<tr>
+<td>Telink TLSR8359</td>
+<td>汉朔 HSEL 主板，使用 <code>tlsr8359_hsel</code> 固件；包括匹配 SSD1683 配置的 Nebular-420R-N 三色装配及兼容换屏主板</td>
+<td>SSD1683、SSD1619／SSD1619A、UC8276，4.2 寸 400×300 黑白红</td>
+</tr>
+<tr>
+<td>Nordic nRF52832</td>
+<td>PriceETag 主板，使用 <code>nrf52832_priceetag</code> 固件并改接兼容屏幕</td>
+<td>SSD1683、SSD1619／SSD1619A、UC8276，4.2 寸 400×300 黑白红</td>
+</tr>
+</tbody>
+</table></div>
+<p>需要激活 Pro，并匹配屏幕接线和配置；这项功能仅用于时钟数字区域。不同屏幕的残影和显示效果可能不同，具体实测搭配见<a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/docs/zh-CN/tested-screens.md">已实测屏幕</a>。本次新增的 4.2 寸局刷不适用于 OM6626、GR5331、GR5513 内置图片版、nRF52811 或 DA14585。</p>
 <ul>
-<li>The CLI ZIP includes local WebUI and the Find backend; Python 3.11 or newer is required. Follow its README to install the CLI and start local WebUI.</li>
-<li>For offline browser use, extract the standalone ZIP and open <code>InkTag-WebUI.html</code>, keeping its resources alongside it. A separate static WebUI ZIP is available for hosting.</li>
-<li>Existing InkTag installations use an OTA package matching the actual controller and board. First installation or wired recovery requires complete firmware and the matching programmer/configuration.</li>
-<li>Programmer tools are plaintext directories, independent of firmware downloads. DA14585 portable tools currently support probing and offline validation only; actual complete flashing is not enabled. Follow each bilingual README for available operations and dependencies.</li>
+<li><strong>Find 标签管理</strong>：点击已登记标签即可切换当前标签并查看最新位置；导出增加全选、清空选择，默认不选中。单台标签或不含轨迹的资料支持复制为字符串。</li>
+<li><strong>设备测试</strong>：按设备能力提供时间设置、日期偏移和电池电压测试。</li>
+<li><strong>自编译固件更新</strong>：nRF52811、DA14585 开源版支持未签名 App OTA，需先安装允许未签名更新的开源 Recovery；已有签名的固件仍需通过签名验证，官方固件的验证方式保持不变。</li>
 </ul>
-<p>Use Chrome/Edge on desktop, Bluefy on iPhone/iPad, and Chrome on Android. Verify downloads with <code>SHA256SUMS.txt</code>. Client updates do not automatically flash devices, and transfer completion is not final App attestation. Read the licensing and component notices, including the remaining provenance/Corresponding Source limitations.</p></main></body></html>
+<h2 id="问题修复bug-fix">问题修复（Bug Fix）</h2>
+<ul>
+<li><strong>节气日期</strong>：更新节气日期数据，改善日历中的节气显示。</li>
+<li><strong>日历显示</strong>：改善方屏、2.66 寸和 4.2 寸屏幕的排版，修复部分文字截断、内容拥挤和六行月份显示不协调的问题。</li>
+<li><strong>Find 地图与身份管理</strong>：修复部分环境下单点地图不显示、最新位置与所选标签不同步的问题；完善身份删除与私钥备份提醒。</li>
+<li><strong>OTA 与恢复模式</strong>：改善设备更新后的重连、状态显示和自动校时；CLI 退出恢复模式统一默认等待上限为 90 秒。</li>
+<li><strong>本地客户端安装与启动</strong>：完善 Windows 的 7-Zip 依赖及数据目录访问权限提示，修复后台启动日志中文乱码。</li>
+</ul>
+<blockquote>
+<p>更新时请选择匹配主控与主板的 OTA 固件，保持供电并等待设备返回。App OTA 不会替换 Recovery；nRF52811、DA14585 的独立显示资源也需要配套有线更新。首次安装及有线恢复请阅读对应主板的烧录说明。</p>
+</blockquote>
+<hr />
+<p>English</p>
+<p>Adds Pro clock partial-refresh support for selected 4.2-inch displays, improves Find tag management, and fixes calendar, device-update and local-client issues.</p>
+<h2 id="feature">Feature</h2>
+<ul>
+<li><strong>Pro clock partial refresh on 4.2-inch displays</strong>: adds support for 400×300 black/white/red panels using SSD1683, SSD1619/SSD1619A or UC8276 on the following platforms.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Boards/devices</th>
+<th>Adapted displays</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Goodix GR5513/GR5515</td>
+<td>Standard ZKEL boards using <code>gr551x_zkel</code>, with compatible ZKC42V/ZKC42VM configurations</td>
+<td>SSD1683, SSD1619/SSD1619A, UC8276; 4.2-inch, 400×300, black/white/red</td>
+</tr>
+<tr>
+<td>Telink TLSR8359</td>
+<td>Hanshow HSEL boards using <code>tlsr8359_hsel</code>, including the three-color Nebular-420R-N with its matching SSD1683 profile and compatible replacement-screen boards</td>
+<td>SSD1683, SSD1619/SSD1619A, UC8276; 4.2-inch, 400×300, black/white/red</td>
+</tr>
+<tr>
+<td>Nordic nRF52832</td>
+<td>PriceETag boards using <code>nrf52832_priceetag</code>, rewired for a compatible display</td>
+<td>SSD1683, SSD1619/SSD1619A, UC8276; 4.2-inch, 400×300, black/white/red</td>
+</tr>
+</tbody>
+</table></div>
+<p>Pro activation and matching wiring/configuration are required. This feature updates the clock digits only. Ghosting and visual quality vary by panel; see <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/docs/en/tested-screens.md">tested displays</a> for tested combinations. This new 4.2-inch support does not apply to OM6626, GR5331, the GR5513 internal-image build, nRF52811 or DA14585.</p>
+<ul>
+<li><strong>Find tag management</strong>: select a registered tag by clicking its row to view its latest location. Export adds select-all and clear-selection controls, with nothing selected by default. A single tag or an export without tracks can be copied as text.</li>
+<li><strong>Device tests</strong>: time-setting, date-offset and battery-voltage tests are available according to device capabilities.</li>
+<li><strong>Self-built firmware updates</strong>: open-source nRF52811 and DA14585 builds support unsigned App OTA with an installed open-source Recovery that permits it. Signed images still require a valid signature; official firmware verification is unchanged.</li>
+</ul>
+<h2 id="bug-fix">Bug Fix</h2>
+<ul>
+<li><strong>Solar-term dates</strong>: update solar-term date data used by the calendar.</li>
+<li><strong>Calendar display</strong>: improve square, 2.66-inch and 4.2-inch layouts, addressing clipped text, crowded content and uneven six-row month layouts.</li>
+<li><strong>Find maps and identity management</strong>: fix missing single-point maps and latest-location panels showing the wrong tag; improve identity-deletion and private-key backup guidance.</li>
+<li><strong>OTA and Recovery</strong>: improve reconnection, status information and clock synchronization after updates. CLI Recovery exit now has a consistent 90-second default wait limit.</li>
+<li><strong>Local-client setup and startup</strong>: improve Windows guidance for 7-Zip and data-directory permissions, and fix garbled Chinese in background-startup logs.</li>
+</ul>
+<blockquote>
+<p>Select the OTA firmware matching your controller and board, keep power connected and wait for the application to return. App OTA does not replace Recovery; the separate display resources on nRF52811 and DA14585 also require a matching wired update. Follow the board's flashing guide for first installation or wired recovery.</p>
+</blockquote></main></body></html>

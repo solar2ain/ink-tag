@@ -46,13 +46,13 @@
   },
   {
     "path": "README.en.md",
-    "bytes": 4300,
-    "sha256": "1d0e4a2eab667db6003c631bc25dc1cdc31038e51ba30f7e4a99dc1924b673b7"
+    "bytes": 4828,
+    "sha256": "06cb2359ee6cfd32dc4293e93ae8293e7679f62bf182fc5f7b476b8ea7786c25"
   },
   {
     "path": "README.md",
-    "bytes": 3918,
-    "sha256": "9dd0dd3d3450bef39cbaa4fe66a786d5b3daff592486ab8457c0f6acc1a64ec7"
+    "bytes": 4857,
+    "sha256": "40fc9612aeeb496f1ede7c32ac027a736bfeeb7e96cb21c79c6183e67f12f6ac"
   },
   {
     "path": "THIRD_PARTY_NOTICES.md",
@@ -126,18 +126,18 @@
   },
   {
     "path": "tools/internal/offline/tools/hardware/nordic_full_bundle.py",
-    "bytes": 15310,
-    "sha256": "1e5a5c69f8b93079ddb4f9fcc9f316149b4e25ba212fc1782a29fb6016206d4b"
+    "bytes": 16320,
+    "sha256": "e0bc0b724201ec8bc8ddddcecfda887c914e1848db972d504a35592541bf9107"
   },
   {
     "path": "tools/internal/offline/tools/hardware/nordic_full_cleanup.py",
-    "bytes": 2057,
-    "sha256": "027b83a0b551194a7e3ba7c6b13da57c5caca76acf6f0d341bb1901c6f5aac96"
+    "bytes": 2017,
+    "sha256": "df60f89d853c2095465c4ff29b51265ae7dd1e368bda73b135a87e52bfb5a732"
   },
   {
     "path": "tools/internal/offline/tools/hardware/nordic_full_config.py",
-    "bytes": 8590,
-    "sha256": "b08257f6936e422e8109b6e1c6dd209453eb2d8bffa4736ebaf4ee363bea4121"
+    "bytes": 8430,
+    "sha256": "924a449bc39844b0dce186e3219ce1c90a825f26006d5d3be73e9f93372e12d1"
   },
   {
     "path": "tools/internal/offline/tools/hardware/nordic_full_retention.py",
@@ -146,8 +146,8 @@
   },
   {
     "path": "tools/internal/offline/tools/hardware/nordic_tool_format/__init__.py",
-    "bytes": 87,
-    "sha256": "f4f14f0517d1c86cfe7672dc5557baec18a53e91c2870e626ada687fc032325f"
+    "bytes": 86,
+    "sha256": "52cca2466e74b6a5648fea5320af3928281b5898067d9512f88b0d6544e1c81f"
   },
   {
     "path": "tools/internal/offline/tools/hardware/nordic_tool_format/device_link.py",
@@ -161,13 +161,13 @@
   },
   {
     "path": "tools/internal/offline/tools/hardware/nordic_tool_format/factory.py",
-    "bytes": 6665,
-    "sha256": "dcd76917c5be34b03916c6a6a8c2bf88f98e57cd8b3aaeb2f6e3ec09eade1f8b"
+    "bytes": 6511,
+    "sha256": "9fe70c99e39f634d79153ee15e1756243e0ffc281f5a5073362d338ee74f4bc5"
   },
   {
     "path": "tools/internal/offline/tools/hardware/nordic_tool_format/font_package.py",
-    "bytes": 6902,
-    "sha256": "a6968d529a3ce11b0ca8ded2fb8e085d450674534a802693f153ced8ef1c8b00"
+    "bytes": 6769,
+    "sha256": "a0872eafc5fb50420b6172506dffab8fb42152dc81c5323ca88edbee40a400a6"
   },
   {
     "path": "tools/internal/offline/tools/hardware/nordic_tool_format/provenance.json",
@@ -176,13 +176,13 @@
   },
   {
     "path": "tools/internal/offline/tools/hardware/nordic_tool_format/screen.py",
-    "bytes": 3711,
-    "sha256": "18a55452291e0d493ee8b6078aaecdd6c8c5fbb16f09a8d3792fa71c1aa21555"
+    "bytes": 3622,
+    "sha256": "0af9172c9b3c21bf99bb65f13ef9a2f68b556acd4c8906c959de92b26197c074"
   },
   {
     "path": "tools/internal/offline/tools/hardware/nordic_tool_format/screen_registry.py",
-    "bytes": 7200,
-    "sha256": "729f2fd9226ced5058045b5ebacc0ac74ba4015e3f2a6153c172e64175860ca1"
+    "bytes": 7115,
+    "sha256": "2178507919965aaa42004698cb433c9837698de67d94be8bbfbf9dea734db0cd"
   },
   {
     "path": "tools/internal/offline/tools/jlink-tools.ps1",
@@ -201,8 +201,8 @@
   },
   {
     "path": "tools/internal/offline/tools/sdk/nordic-full-settings.py",
-    "bytes": 26838,
-    "sha256": "f5ced0b10c3507bad6ee731b1cf45b9c9197509bd70bc4a909a9a0e03887f061"
+    "bytes": 26348,
+    "sha256": "bbc9543d698cc17136ef1e51ff9b95dbc3774e909a509279ae7319f6a6cb4c48"
   },
   {
     "path": "tools/internal/offline/tools/sdk/nrf52832-tail-layout.py",

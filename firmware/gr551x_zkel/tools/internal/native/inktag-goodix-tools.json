@@ -4,8 +4,8 @@
   "firmwareIncluded": false,
   "chip": "gr551x",
   "firmwareFamily": "gr551x_zkc42v",
-  "buildId": "20261029-native-capacity-db4e9b1f4",
-  "sourceCommit": "db4e9b1f4d609e10fec924393e41a695f863269d",
+  "buildId": "20261106-gr021-tools-03e73b3314",
+  "sourceCommit": "03e73b331469ce952892027ba01484eac51dfa04",
   "runtime": "tools/internal/runtime",
   "files": {
     "LICENSE": {
@@ -13,12 +13,12 @@
       "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809"
     },
     "README.en.md": {
-      "bytes": 4990,
-      "sha256": "6a8fd00e3b88a1bebc170a16149e28e85a081a414f0215f97fe55408664e2b13"
+      "bytes": 2572,
+      "sha256": "f6c32570536a5f61e084476cb2b2a4f57a17eb105a8a168aa04e47573a26a3a2"
     },
     "README.md": {
-      "bytes": 4689,
-      "sha256": "e988805656f243162cb5662d8ff0b6a57dd42b2db9ab6506703010df6d898dd4"
+      "bytes": 2245,
+      "sha256": "708e9238a9f5edb8cbe75797a3f3c6a3dfddccc5edb3bfbdd57a6f04800e52ce"
     },
     "THIRD_PARTY_NOTICES.md": {
       "bytes": 1531,
@@ -36,13 +36,17 @@
       "bytes": 516,
       "sha256": "f12fe89e316f3b77b056e9d02fbe4139bcab80d26a879c994022e45679996d9b"
     },
+    "tools/configs/ZK_EL_GR42V_V1.2_w_NFC-SSD1683.toml": {
+      "bytes": 548,
+      "sha256": "7072fba9e93a6107669888ef41b6ad2a6600a620aa5c5a47975de7af78e34c0b"
+    },
     "tools/configs/ZK_EL_GR42V_V1.2_w_NFC.toml": {
       "bytes": 547,
       "sha256": "a867a4795378ca7fe21425c41ee49be665c3e471cd39825ade49da9042970221"
     },
     "tools/configs/zkc42vm_eailier_version.toml": {
       "bytes": 525,
-      "sha256": "ce7bf12952ec07429ba123ee2d53dc32d2d240d41f93b918fe7ebeffcedf54c9"
+      "sha256": "97118652a4d5b350dbd89708fe7a06cb5c2c11e964697ab51153ec43ed6d3459"
     },
     "tools/flash.ps1": {
       "bytes": 1648,
@@ -65,12 +69,12 @@
       "sha256": "ca2922e2db3cadda35caafe90f926b27e06eb08d73e3e54cbf7b9d0a613ee14b"
     },
     "tools/internal/runtime/cli/THIRD_PARTY_NOTICES.md": {
-      "bytes": 1482,
-      "sha256": "952f22ea4fef7ad65659b0f025093f88f34ea08a348e0dac97439b226b4bbd81"
+      "bytes": 2712,
+      "sha256": "4858693c4aac63b75fa55ec4c417f4589355792b348277ddbc330524fb6ca067"
     },
     "tools/internal/runtime/firmware/boards/goodix-pin-backends.json": {
       "bytes": 4055,
-      "sha256": "71971b17c489b569fbd5ad3613349baa2a691020a54050ece27e1cb381697234"
+      "sha256": "837a274dc9ef0bb36eaa4801cbd7ca893e8dcce6e188603ff43661e62e30ae6e"
     },
     "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/flash-goodix-gprogrammer.ps1": {
       "bytes": 33479,
@@ -85,8 +89,8 @@
       "sha256": "5572ef6dc8ac929dc6d71612864624d74c345244573fca82419581e6a9455303"
     },
     "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/goodix-configured-full.ps1": {
-      "bytes": 5456,
-      "sha256": "08d4bedd4bdd8986a2aa49a88596e47c69c49690d6b0e3658ed727b88a0fedf5"
+      "bytes": 5517,
+      "sha256": "d53b26cf6ac3919bd8afd2cd09f2bc7021209bdec6da3b478125a19fc117af15"
     },
     "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/goodix-native-output.ps1": {
       "bytes": 363,
@@ -185,8 +189,8 @@
       "sha256": "ccbe8105b2552116313c8fa515bb01ada4fb873e0da7cefe92cbe25a6206a631"
     },
     "tools/internal/runtime/tools/hardware/goodix_factory_init.py": {
-      "bytes": 23135,
-      "sha256": "bd6026a5e204ebf2fefc46f3f4c1071420e5614865a8ad4e4b6321a501c46e45"
+      "bytes": 22716,
+      "sha256": "88fda11eb6d313bf13069d1ceb441dcb8ced6808a5919910e11195171ccf84bd"
     },
     "tools/internal/runtime/tools/hardware/goodix_full_reset.py": {
       "bytes": 1815,
@@ -197,8 +201,8 @@
       "sha256": "a7bfc7ae3586a296adc657cffaa20027ec4e8d4f9802af173505f95f4244b8ac"
     },
     "tools/internal/runtime/tools/hardware/goodix_offline/__init__.py": {
-      "bytes": 87,
-      "sha256": "3ad5d174131a578d58357e2e2c9ff85ff5321243b12983342fe1c478557630b5"
+      "bytes": 86,
+      "sha256": "22b3b83efe116a1b887671d8eaa062e316bca384b9087b3600f0e81a9a84a449"
     },
     "tools/internal/runtime/tools/hardware/goodix_offline/aux_io.py": {
       "bytes": 3801,
@@ -253,20 +257,20 @@
       "sha256": "45c578c4fc00cd3f820873c25e8b451e5aafee4523832a71fff5d0d93d535976"
     },
     "tools/internal/runtime/tools/hardware/goodix_pin_config.py": {
-      "bytes": 12120,
-      "sha256": "a04c45cc54facc4e387e7da9c77c08f69ea139244ace5dbf29ce3f78ede4e7ed"
+      "bytes": 11882,
+      "sha256": "d02b763613efc31d56d587709a8b8e9de4dc7d2c783d93326266ff544b5ca48e"
     },
     "tools/internal/runtime/tools/hardware/goodix_portable_executor.py": {
       "bytes": 29188,
       "sha256": "28cd4727a19ff392e622c77d174afe26e0f6a3cafd168f5c5f98d2248d5dc420"
     },
     "tools/internal/runtime/tools/hardware/goodix_release_full.py": {
-      "bytes": 13954,
-      "sha256": "03ad8ae02ce22f7bd856e149c2eb7cd712fb2d70d455145a173c14f3fb4bb30f"
+      "bytes": 13696,
+      "sha256": "956f2e647701a8b0ed3147bee6940d35b916758ddced0110f3567992447da902"
     },
     "tools/internal/runtime/tools/hardware/goodix_release_seed.py": {
-      "bytes": 3407,
-      "sha256": "28d788fabf7bf635ec97c696a7534e013824f51553436dce42e6888814da5226"
+      "bytes": 3332,
+      "sha256": "476e14e9b26ce3192e1c40423c86bbde3b66e7c50041f827ae59fbfdc14be7d2"
     },
     "tools/internal/runtime/tools/hardware/goodix_tool_log.py": {
       "bytes": 8816,
@@ -289,8 +293,8 @@
       "sha256": "4193161ffc7de8d9f3aa615016b24440522f5357983b440ac43ccf72865181a0"
     },
     "tools/internal/standalone-runtime.py": {
-      "bytes": 9720,
-      "sha256": "311c58616ab20275965c64387449af8a6986483b3c030d713ef3ccbdab5d30d4"
+      "bytes": 9538,
+      "sha256": "4e6a4576d0cdfedee04a4409cf765a2a7a5ff10551da0e490f10d0149c6be8bc"
     },
     "tools/internal/wheels/cffi-2.1.1-cp312-cp312-win_amd64.whl": {
       "bytes": 185919,
@@ -331,6 +335,6 @@
   },
   "buildTarget": "gr551x_zkel",
   "brand": "zkel",
-  "toolsVersion": "0.2.0.0",
+  "toolsVersion": "0.2.1.0",
   "format": "plaintext-directory"
 }

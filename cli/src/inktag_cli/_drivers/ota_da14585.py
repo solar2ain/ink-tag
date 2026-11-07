@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 from inktag_cli.generated_release_v1 import encode_request_flags
+from inktag_cli.generated_commands_v2 import PROTOCOL_V2_VERSION
+from inktag_cli.protocol import VERSION_UUID as APP_VERSION_UUID
 
 import argparse
 import asyncio
@@ -42,6 +44,9 @@ PATCH_DATA_UUID = "457871e8-d516-4ca1-9116-57d0b17b9cb2"
 STATUS_UUID = "5f78df94-798c-46f5-990a-b3eb6a065c88"
 VERSION_UUID = "64b4e8b5-0de5-401b-a21d-acc8db3b913a"
 PD_SIZE_UUID = "42c3dfdd-77be-4d9c-8454-8f875267fb3b"
+GAP_DEVICE_NAME_UUID = "00002a00-0000-1000-8000-00805f9b34fb"
+DIS_SERVICE_UUID = "0000180a-0000-1000-8000-00805f9b34fb"
+FIRMWARE_REVISION_UUID = "00002a26-0000-1000-8000-00805f9b34fb"
 
 SUOTA_IMAGE_SPI_FLASH = 0x13
 SUOTA_SERVICE_EXIT = 0xFF
@@ -138,8 +143,8 @@ def recovery_advertisement_matches(
 
 def load_image(path: Path) -> tuple[bytes, str, int, int]:
     image = path.read_bytes()
-    from inktag_cli.signed_preflight import verify_dialog
-    verify_dialog(image)
+    from inktag_cli.signed_preflight import inspect_dialog
+    inspect_dialog(image)
     if len(image) < 64 or len(image) > MAX_IMAGE_SIZE:
         raise ValueError(f"SUOTA image size is outside 64..{MAX_IMAGE_SIZE} bytes")
     if image[:2] != b"pQ" or image[2] != 0xAA:
@@ -193,6 +198,61 @@ async def discover(name: str | None, address: str | None, timeout: float, requir
     return device, advertised_name
 
 
+async def read_recovery_status(
+    name: str | None, address: str | None, scan_timeout: float, connect_timeout: float,
+) -> dict:
+    """Read the existing Recovery DIS revision; never writes or enables CCC."""
+    grammar = r"(?:IKT|InkTag)_DA_[0-9A-Fa-f]{4}_OTA"
+    if not name and not address:
+        raise ValueError("provide an exact DA Recovery name or address")
+    if name and re.fullmatch(grammar, name) is None:
+        raise ValueError("DA status requires an exact Recovery name, not a prefix or App")
+    device, advertised = await discover(name, address, scan_timeout, True)
+    if (re.fullmatch(grammar, advertised) is None or (name and advertised != name)
+            or (address and device.address.casefold() != address.casefold())):
+        raise RuntimeError("selected device did not advertise the expected DA Recovery identity")
+    options = {"timeout": connect_timeout}
+    if sys.platform == "win32":
+        options["winrt"] = {"use_cached_services": False}
+    client = BleakClient(device, **options)
+    try:
+        await asyncio.wait_for(client.connect(), connect_timeout)
+        report_ble_connection(device)
+        services = client.services
+        revision = services.get_characteristic(FIRMWARE_REVISION_UUID)
+        proof = services.get_characteristic(VERSION_UUID)
+        if (services.get_service(SERVICE_UUID) is None or proof is None
+                or str(proof.service_uuid).lower() != SERVICE_UUID
+                or (revision is not None and str(revision.service_uuid).lower() != DIS_SERVICE_UUID)):
+            raise RuntimeError("selected device lacks the fixed DA Recovery SUOTA/DIS profile")
+        observed = bytes(await asyncio.wait_for(
+            client.read_gatt_char(GAP_DEVICE_NAME_UUID), 8.0)).decode("ascii", errors="strict")
+        if observed != advertised:
+            raise RuntimeError("connected DA Recovery name differs from the selected identity")
+        capability = bytes(await asyncio.wait_for(client.read_gatt_char(proof), 8.0))
+        from inktag_cli.signed_preflight import recovery_safe_resume, recovery_signature_policy
+        if not recovery_safe_resume('dialog', capability):
+            raise RuntimeError("selected DA Recovery has an unexpected SUOTA capability")
+        from inktag_cli.recovery_version import legacy_recovery_version, reported_recovery_version
+        if revision is None:
+            version_info = legacy_recovery_version()
+        else:
+            version = bytes(await asyncio.wait_for(
+                client.read_gatt_char(revision), 8.0)).decode("ascii", errors="strict")
+            if version == "v_6.0.24.1464":  # Original fixed SDK string, not Recovery software.
+                version_info = legacy_recovery_version()
+            elif re.fullmatch(r"(?:0|[1-9]\d*)\.\d+\.\d+", version) is None or any(
+                    int(part) > 255 for part in version.split(".")):
+                raise RuntimeError("installed DA Recovery does not report a semantic firmware revision")
+            else:
+                version_info = reported_recovery_version(version)
+        return {"action": "recovery-status", "readOnly": True, "platform": "dialog",
+                "role": "recovery", "recoveryName": observed, "address": device.address,
+                **version_info, "signaturePolicy": recovery_signature_policy('dialog', capability), "applicationVerified": False}
+    finally:
+        await release_client(client)
+
+
 class SuotaTransport:
     def __init__(self, client: BleakClient) -> None:
         self.client = client
@@ -241,7 +301,8 @@ async def resume_recovery_transport(client: BleakClient, timeout: float = 10.0) 
     from inktag_cli.ota_rejection import describe_ota_rejection
 
     proof = bytes(await client.read_gatt_char(VERSION_UUID))
-    if proof != b"\x0dIK\x01\x01":
+    from inktag_cli.signed_preflight import recovery_safe_resume
+    if not recovery_safe_resume('dialog', proof):
         raise RuntimeError("installed DA Recovery does not support guarded safe resume")
     replies: asyncio.Queue[bytes] = asyncio.Queue()
     def on_status(_sender, data):
@@ -322,7 +383,7 @@ async def reconnect(
     expected_size: int | None,
     expected_crc: int | None,
 ) -> dict:
-    from inktag_cli.transport import release_bleak_client
+    from inktag_cli.transport import release_bleak_client, release_bleak_connection_lease
 
     started = time.monotonic()
     deadline = started + timeout
@@ -409,6 +470,13 @@ async def reconnect(
                     raise RuntimeError(
                         "upgraded application reconnected without the InkTag service"
                     )
+                # An old role's cached GATT table is not evidence of the
+                # current peer. Prove the live App before notifications or V2.
+                version = bytes(await bounded("app-version", lambda: client.read_gatt_char(
+                    APP_VERSION_UUID,
+                    **({"use_cached": False} if sys.platform == "win32" else {})), 5.0))
+                if len(version) < 4 or version[0] != PROTOCOL_V2_VERSION:
+                    raise RuntimeError("reconnected peer did not prove the live InkTag App protocol")
                 replies: asyncio.Queue[bytes] = asyncio.Queue()
 
                 def on_reply(_sender, data: bytearray) -> None:
@@ -450,6 +518,11 @@ async def reconnect(
                 last_error = exc
                 phase(last_stage, f"rejected={type(exc).__name__}: {exc}")
             finally:
+                # wait_for waits for native cancellation. WinRT can return
+                # after the total deadline, leaving no time to even enter the
+                # asynchronous release helper. Drop the owned keep-alive now;
+                # do not start a new connection or extend the work deadline.
+                release_bleak_connection_lease(client)
                 try:
                     await bounded("app-release", lambda: release_bleak_client(client), 5.0, cleanup=True)
                 except (AssertionError, BleakError, OSError, RuntimeError, TimeoutError) as exc:
@@ -553,6 +626,8 @@ async def enter_recovery(
 
 async def transfer(args) -> None:
     payload, version, expected_size, expected_crc = load_image(args.image)
+    from inktag_cli.signed_preflight import inspect_dialog, require_recovery_signature
+    verification = inspect_dialog(payload[:-1])
     image_length = len(payload) - 1
     device, advertised_name = await discover(args.name, args.address, args.scan_timeout)
     address = getattr(device, "address", args.address)
@@ -567,6 +642,10 @@ async def transfer(args) -> None:
         service_uuids = {str(service.uuid).lower() for service in client.services}
         if SERVICE_UUID not in service_uuids:
             raise RuntimeError("DA14585 SUOTA service FEF5 is missing")
+        if not verification['publisherVerified']:
+            # Read the policy on this exact Recovery link, before starting SPI writes.
+            proof = bytes(await asyncio.wait_for(client.read_gatt_char(VERSION_UUID), 8.0))
+            require_recovery_signature(verification, 'dialog', proof)
         transport = SuotaTransport(client)
         await transport.open()
         session_started = False

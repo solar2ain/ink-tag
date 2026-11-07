@@ -101,6 +101,7 @@ SAFE_ERROR_NAMES = {
     "UnhandledProtocolError": "Apple 的非公开接口返回了不兼容响应。",
 }
 SESSION_EXPIRED_MESSAGE = "Apple 查询会话已失效，请重新登录查询账号。设备 Find 身份和本机历史记录无需重建。"
+VERIFICATION_CODE_REJECTED_MESSAGE = "验证码错误，双重认证（2FA）未通过，请重新输入。若验证码已过期，请重新获取。"
 APPLE_REPORTS_HOST = "gateway.icloud.com"
 SYNTHETIC_PROXY_NETWORK = ipaddress.ip_network("198.18.0.0/15")
 APPLE_DOH_RESOLVERS = (
@@ -698,6 +699,8 @@ def _safe_error(error: Exception) -> str:
             detail,
         )
         if match:
+            if match.group(1) == "REQUIRE_2FA":
+                return VERIFICATION_CODE_REJECTED_MESSAGE
             return f"Apple 已处理验证码，但账号状态仍为 {match.group(1)}，未完成登录。"
         match = re.fullmatch(
             r"com\.apple\.mobileme login failed with status ([0-9]+): (.*)",
@@ -1560,11 +1563,19 @@ class QuerySession:
             try:
                 async with asyncio.timeout(90):
                     state = await method.submit(code)
+            except UnhandledProtocolError as error:
+                # Only a rejected *submission*, not requesting a code, rate
+                # limiting or transport failure, is described as a bad code.
+                if re.fullmatch(r"SMS 2FA request failed: (400|401)", str(error)):
+                    raise ValueError(VERIFICATION_CODE_REJECTED_MESSAGE) from None
+                raise
             except TimeoutError:
                 await self._close_account()
                 raise
+            if state == LoginState.REQUIRE_2FA:
+                raise ValueError(VERIFICATION_CODE_REJECTED_MESSAGE)
             if state != LoginState.LOGGED_IN:
-                raise RuntimeError(f"Unexpected 2FA state: {state.name}")
+                raise RuntimeError("验证码验证后仍未完成登录，请重新登录后再试。")
             self._drop_password(self.account)
             self.second_factors = []
             self.requested_second_factor_index = None

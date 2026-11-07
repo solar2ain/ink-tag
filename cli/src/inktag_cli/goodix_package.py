@@ -28,6 +28,20 @@ IMAGE_INFO_STRUCT_SIZE = 40
 IMAGE_TRAILER_SIZE = 48
 SIGNATURE_EXTENSION_SIZE = 856
 SIGNED_TRAILER_SIZE = IMAGE_TRAILER_SIZE + SIGNATURE_EXTENSION_SIZE
+
+
+def parse_recovery_version(info: bytes) -> dict | None:
+    """Optional identity; old native replies do not report a software version.
+
+    This metadata never raises the minimum Recovery required for App OTA.
+    Existing ROM/SDK/OTAS fields keep their native offsets and meanings.
+    """
+    if len(info) < 28 or info[20:24] != b"IKRV":
+        return None
+    major, minor, patch, epoch = info[24:28]
+    if major == 0 or epoch != major:
+        raise ValueError("Invalid Goodix Recovery version/epoch identity")
+    return {"version": f"{major}.{minor}.{patch}", "epoch": epoch}
 SIGNATURE_PATTERN = 0xDEADBEEF
 SIGNED_FIRMWARE_TYPE = 0x10
 RSA_PUBLIC_KEY_OFFSET = 128

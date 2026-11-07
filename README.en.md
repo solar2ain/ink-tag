@@ -14,12 +14,6 @@ Some supported devices in use. See [supported devices](docs/en/supported-devices
 
 ## Quick start
 
-After downloading or cloning this repository, you can open
-`webui-standalone/InkTag-WebUI.html` directly in a compatible browser, without
-starting a local server or deploying a website. Keep the accompanying `assets/`
-and other resources. Bluetooth requires browser permission; Find location
-queries still require the local client.
-
 ### 1. Prepare a device and browser
 
 Use a device already running compatible InkTag firmware, with stable power and Bluetooth enabled on your computer or phone. Use Chrome or Edge on desktop. On iPhone/iPad, use [Bluefy](https://apps.apple.com/app/id1492822055). On Android, prefer Chrome. Open the site in that browser rather than an embedded WeChat/in-app window, and grant Bluetooth permission.
@@ -28,7 +22,9 @@ Stock devices need an appropriate first installation. Read [complete flashing](d
 
 ### 2. Open the WebUI and connect
 
-Open [InkTag WebUI](https://solar2ain.github.io/ink-tag/), click Connect, and select your device in the browser's Bluetooth chooser. Factory names look like `IKT_TL_1234`; a name ending in `_OTA` identifies Recovery mode.
+Open [InkTag WebUI](https://solar2ain.github.io/ink-tag/) or the local [standalone HTML page](webui-standalone/InkTag-WebUI.html) in a compatible browser, click Connect, and select your device in the browser's Bluetooth chooser. Factory names look like `IKT_TL_1234`; a name ending in `_OTA` identifies Recovery mode.
+
+The standalone page needs no local server or website deployment. Download or clone the repository and keep the HTML and accompanying resources in `webui-standalone/` together. Find location queries still require the local client.
 
 In Settings, check the controller, firmware version and screen configuration. Confirm the actual size, colours and orientation. If Bluetooth is unavailable or the device cannot be found, see [connection help](docs/en/faq.md) or try desktop Chrome/Edge.
 
@@ -53,11 +49,11 @@ See the [illustrated manual](https://solar2ain.github.io/ink-tag-manual/) and [g
 InkTag offers a free edition (Free) that already meets most everyday needs. Pro adds advanced and experimental features for users who enjoy tinkering and exploring. Availability depends on the capabilities of the connected device.
 
 > [!NOTE]
-> **Free firmware and donations**
+> **Usage notes**
 >
 > InkTag firmware is free to use. The project provides no purchase links. If you bought a device or related service from a merchant, contact that seller for purchase-related problems.
 >
-> A Pro activation code is provided after donating to support the project. Most Pro features are experimental and stability is not guaranteed. Please consider this carefully before activating Pro.
+> Sponsoring this project provides a Pro activation code. Most Pro features are experimental; please consider this carefully before activating Pro.
 
 | Feature | 🆓 Free | ✨ Pro |
 | --- | --- | --- |
@@ -121,7 +117,15 @@ sh install_inktag.sh
 
 This installs the CLI into `cli/.venv` and automatically installs the **local Find query service dependencies** in a separate `find/runtime/.venv` under the per-user data directory. It then starts local WebUI and Find in the background (`webui start`); closing the terminal does not stop them. Setup prints copyable start, stop, status and log commands. New macOS installations store data and logs in `~/.inktag/`; an existing legacy directory is retained to preserve sessions and tags. System Python is unchanged; installation does not log into Apple, connect devices or clear existing data.
 
-First setup requires internet access. Windows also requires full 7-Zip and downloads an Apple authentication image of about 292 MB on first setup. macOS uses native system authentication without that image. Location queries on Linux are not yet qualified.
+First setup requires internet access. macOS uses native system authentication and does not need 7-Zip or the Apple image below. Location queries on Linux are not yet qualified.
+
+**Windows prerequisites:**
+
+Install the [full version of 7-Zip](https://www.7-zip.org/download.html) first (usually x64, using the default installation folder), then run the installation command above. First-time Find setup downloads and extracts about 292 MB of authentication components, so internet access is required.
+
+Approve the administrator prompt when installing 7-Zip. If InkTag setup reports **Access denied** or `WinError 5`, use an administrator account with access to the indicated data folder and rerun PowerShell **as administrator**. Do not delete existing data.
+
+Normal InkTag use with your own writable data folder does not require administrator privileges.
 
 To install without starting, run `powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1 --prepare-only` on Windows or `sh install_inktag.sh --prepare-only` on macOS/Linux. After installation, choose either method below; command arguments are the same.
 
@@ -218,7 +222,7 @@ E-paper has limited native colours and flashes during full updates. Low temperat
 
 ## Acknowledgements
 
-Thanks to [EPD-nRF5](https://github.com/tsl0922/EPD-nRF5), [ATC_TLSR_Paper](https://github.com/atc1441/ATC_TLSR_Paper), [epdoptimize](https://github.com/paperlesspaper/epdoptimize), [U8g2 for Adafruit GFX](https://github.com/olikraus/U8g2_for_Adafruit_GFX), WenQuanYi, [FindMy.py](https://github.com/malmeloo/FindMy.py), [os-findmy-e](https://github.com/sacca97/os-findmy-e), Leafer, React, Lucide, the controller tooling ecosystem, and everyone contributing hardware, tests and feedback. See [third-party notices](THIRD_PARTY_NOTICES.md).
+Thanks to [ATC_TLSR_Paper](https://github.com/atc1441/ATC_TLSR_Paper), [epdoptimize](https://github.com/paperlesspaper/epdoptimize), [U8g2 for Adafruit GFX](https://github.com/olikraus/U8g2_for_Adafruit_GFX), WenQuanYi, [FindMy.py](https://github.com/malmeloo/FindMy.py), [os-findmy-e](https://github.com/sacca97/os-findmy-e), Leafer, React, Lucide, the controller tooling ecosystem, and everyone contributing hardware, tests and feedback. See [third-party notices](THIRD_PARTY_NOTICES.md).
 
 ## License
 

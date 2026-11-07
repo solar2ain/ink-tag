@@ -26,7 +26,15 @@ sh install_inktag.sh
 
 脚本会把 CLI 安装到 `cli/.venv`，并自动安装**本地 Find 查询服务的依赖**；Find 环境单独位于用户数据目录的 `find/runtime/.venv`。安装完成后以后台模式启动本地 WebUI 和 Find 查询服务（`webui start`）；关闭终端不会停止服务。安装完成时会显示可直接复制的启动、停止、状态和日志命令。macOS 新安装的数据和日志位于 `~/.inktag/`；已有旧目录时继续使用原目录，避免丢失会话或标签信息。不会修改系统 Python，也不会自动登录 Apple、连接设备或清除已有数据。
 
-首次安装需要联网。Windows 还需预先安装完整版 7-Zip，首次会下载约 292 MB 的 Apple 认证组件镜像；macOS 使用系统原生认证组件，无需该镜像。Linux 的位置查询仍未完成资格验证。
+首次安装需要联网。macOS 使用系统原生认证组件，无需 7-Zip 或下面的 Apple 镜像。Linux 的位置查询仍未完成资格验证。
+
+**Windows 安装准备：**
+
+1. 从 [7-Zip 官网](https://www.7-zip.org/download.html)下载适合系统的 Windows `.exe` 安装程序（通常为 x64；ARM 电脑选择 ARM64），安装完整版，保留默认目录 `C:\Program Files\7-Zip`。不要只下载 `7zr.exe`。
+2. 安装 7-Zip 时按 Windows 提示授予管理员权限；没有权限时，请使用管理员账户完成安装。InkTag 首次准备 Find 查询服务时，会用其中的 `7z.exe` 解压约 292 MB、经过校验的 Apple 认证组件镜像，不会安装 iTunes。组件已完整缓存后无需再次解压。
+3. 然后运行上面的 InkTag 安装命令。若出现“拒绝访问”或 `WinError 5`，使用有权访问该数据目录的管理员账户，右键 PowerShell，选择“以管理员身份运行”，再进入 InkTag 目录重新执行安装命令。请核对报错中的账户和路径；不要删除原有数据目录。切换账户或使用新的 `--data-dir` 会使用另一份资料。
+
+正常使用本人可写的数据目录时，无需一直以管理员身份运行 InkTag。
 
 只安装、不启动：Windows 运行 `powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1 --prepare-only`；macOS／Linux 运行 `sh install_inktag.sh --prepare-only`。后续使用 `cli/inktag.ps1`／`cli/inktag.sh`，无需手动激活环境，例如：
 

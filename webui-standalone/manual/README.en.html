@@ -7,16 +7,12 @@
 <p><img alt="A selection of InkTag devices with different controllers, sizes and screen palettes" src="assets/devices/supported-devices.webp" /></p>
 <p>Some supported devices in use. See <a target="_blank" rel="noopener noreferrer" href="en/supported-devices.html">supported devices</a> and <a target="_blank" rel="noopener noreferrer" href="en/tested-screens.html">tested panels</a> for board markings and exact panel configurations.</p>
 <h2 id="quick-start">Quick start</h2>
-<p>After downloading or cloning this repository, you can open
-<code>webui-standalone/InkTag-WebUI.html</code> directly in a compatible browser, without
-starting a local server or deploying a website. Keep the accompanying <code>assets/</code>
-and other resources. Bluetooth requires browser permission; Find location
-queries still require the local client.</p>
 <h3 id="1-prepare-a-device-and-browser">1. Prepare a device and browser</h3>
 <p>Use a device already running compatible InkTag firmware, with stable power and Bluetooth enabled on your computer or phone. Use Chrome or Edge on desktop. On iPhone/iPad, use <a target="_blank" rel="noopener noreferrer" href="https://apps.apple.com/app/id1492822055">Bluefy</a>. On Android, prefer Chrome. Open the site in that browser rather than an embedded WeChat/in-app window, and grant Bluetooth permission.</p>
 <p>Stock devices need an appropriate first installation. Read <a target="_blank" rel="noopener noreferrer" href="en/flash.html">complete flashing</a> and identify the controller and board first. Choose the firmware, board configuration and tools for your exact device, install them, then connect to InkTag. Available files are listed in the <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/releases">Release attachments</a>.</p>
 <h3 id="2-open-the-webui-and-connect">2. Open the WebUI and connect</h3>
-<p>Open <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag/">InkTag WebUI</a>, click Connect, and select your device in the browser's Bluetooth chooser. Factory names look like <code>IKT_TL_1234</code>; a name ending in <code>_OTA</code> identifies Recovery mode.</p>
+<p>Open <a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag/">InkTag WebUI</a> or the local <a target="_blank" rel="noopener noreferrer" href="../InkTag-WebUI.html">standalone HTML page</a> in a compatible browser, click Connect, and select your device in the browser's Bluetooth chooser. Factory names look like <code>IKT_TL_1234</code>; a name ending in <code>_OTA</code> identifies Recovery mode.</p>
+<p>The standalone page needs no local server or website deployment. Download or clone the repository and keep the HTML and accompanying resources in <code>webui-standalone/</code> together. Find location queries still require the local client.</p>
 <p>In Settings, check the controller, firmware version and screen configuration. Confirm the actual size, colours and orientation. If Bluetooth is unavailable or the device cannot be found, see <a target="_blank" rel="noopener noreferrer" href="en/faq.html">connection help</a> or try desktop Chrome/Edge.</p>
 <h3 id="3-send-your-first-picture">3. Send your first picture</h3>
 <p>Open Images, import a photo, and adjust cropping, orientation and dithering. Check the preview, choose Send to device, select Display once, and confirm.</p>
@@ -33,9 +29,9 @@ queries still require the local client.</p>
 <p>InkTag offers a free edition (Free) that already meets most everyday needs. Pro adds advanced and experimental features for users who enjoy tinkering and exploring. Availability depends on the capabilities of the connected device.</p>
 <blockquote>
 <p>[!NOTE]
-<strong>Free firmware and donations</strong></p>
+<strong>Usage notes</strong></p>
 <p>InkTag firmware is free to use. The project provides no purchase links. If you bought a device or related service from a merchant, contact that seller for purchase-related problems.</p>
-<p>A Pro activation code is provided after donating to support the project. Most Pro features are experimental and stability is not guaranteed. Please consider this carefully before activating Pro.</p>
+<p>Sponsoring this project provides a Pro activation code. Most Pro features are experimental; please consider this carefully before activating Pro.</p>
 </blockquote>
 <div class="table-wrap"><table>
 <thead>
@@ -171,7 +167,11 @@ queries still require the local client.</p>
 <pre><code class="language-sh">sh install_inktag.sh
 </code></pre>
 <p>This installs the CLI into <code>cli/.venv</code> and automatically installs the <strong>local Find query service dependencies</strong> in a separate <code>find/runtime/.venv</code> under the per-user data directory. It then starts local WebUI and Find in the background (<code>webui start</code>); closing the terminal does not stop them. Setup prints copyable start, stop, status and log commands. New macOS installations store data and logs in <code>~/.inktag/</code>; an existing legacy directory is retained to preserve sessions and tags. System Python is unchanged; installation does not log into Apple, connect devices or clear existing data.</p>
-<p>First setup requires internet access. Windows also requires full 7-Zip and downloads an Apple authentication image of about 292 MB on first setup. macOS uses native system authentication without that image. Location queries on Linux are not yet qualified.</p>
+<p>First setup requires internet access. macOS uses native system authentication and does not need 7-Zip or the Apple image below. Location queries on Linux are not yet qualified.</p>
+<p><strong>Windows prerequisites:</strong></p>
+<p>Install the <a target="_blank" rel="noopener noreferrer" href="https://www.7-zip.org/download.html">full version of 7-Zip</a> first (usually x64, using the default installation folder), then run the installation command above. First-time Find setup downloads and extracts about 292 MB of authentication components, so internet access is required.</p>
+<p>Approve the administrator prompt when installing 7-Zip. If InkTag setup reports <strong>Access denied</strong> or <code>WinError 5</code>, use an administrator account with access to the indicated data folder and rerun PowerShell <strong>as administrator</strong>. Do not delete existing data.</p>
+<p>Normal InkTag use with your own writable data folder does not require administrator privileges.</p>
 <p>To install without starting, run <code>powershell -NoProfile -ExecutionPolicy Bypass -File .\install_inktag.ps1 --prepare-only</code> on Windows or <code>sh install_inktag.sh --prepare-only</code> on macOS/Linux. After installation, choose either method below; command arguments are the same.</p>
 <h4 id="method-1-run-the-client-script-without-activation">Method 1: run the client script without activation</h4>
 <p>Run from the repository or complete CLI package root. The script uses Python in <code>cli/.venv</code>; no global PATH entry is required.</p>
@@ -223,7 +223,7 @@ inktag-cli device --ble-name IKT_TL_1234 display slideshow stop
 <h2 id="help-and-privacy">Help and privacy</h2>
 <p>E-paper has limited native colours and flashes during full updates. Low temperatures may slow refresh. For connection/display/login issues, see <a target="_blank" rel="noopener noreferrer" href="en/faq.html">FAQ</a>. Report problems through <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/issues">GitHub Issues</a>, including client version, controller, steps, error and redacted logs. Do not share passwords, activation codes, Find keys, sessions or location history; read <a target="_blank" rel="noopener noreferrer" href="SECURITY.html">security/privacy</a>.</p>
 <h2 id="acknowledgements">Acknowledgements</h2>
-<p>Thanks to <a target="_blank" rel="noopener noreferrer" href="https://github.com/tsl0922/EPD-nRF5">EPD-nRF5</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/atc1441/ATC_TLSR_Paper">ATC_TLSR_Paper</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/paperlesspaper/epdoptimize">epdoptimize</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/olikraus/U8g2_for_Adafruit_GFX">U8g2 for Adafruit GFX</a>, WenQuanYi, <a target="_blank" rel="noopener noreferrer" href="https://github.com/malmeloo/FindMy.py">FindMy.py</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/sacca97/os-findmy-e">os-findmy-e</a>, Leafer, React, Lucide, the controller tooling ecosystem, and everyone contributing hardware, tests and feedback. See <a target="_blank" rel="noopener noreferrer" href="THIRD_PARTY_NOTICES.html">third-party notices</a>.</p>
+<p>Thanks to <a target="_blank" rel="noopener noreferrer" href="https://github.com/atc1441/ATC_TLSR_Paper">ATC_TLSR_Paper</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/paperlesspaper/epdoptimize">epdoptimize</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/olikraus/U8g2_for_Adafruit_GFX">U8g2 for Adafruit GFX</a>, WenQuanYi, <a target="_blank" rel="noopener noreferrer" href="https://github.com/malmeloo/FindMy.py">FindMy.py</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/sacca97/os-findmy-e">os-findmy-e</a>, Leafer, React, Lucide, the controller tooling ecosystem, and everyone contributing hardware, tests and feedback. See <a target="_blank" rel="noopener noreferrer" href="THIRD_PARTY_NOTICES.html">third-party notices</a>.</p>
 <h2 id="license">License</h2>
 <p>InkTag-owned firmware, compiled WebUI and CLI use <a target="_blank" rel="noopener noreferrer" href="https://polyformproject.org/licenses/noncommercial/1.0.0">PolyForm Noncommercial 1.0.0</a> for purposes permitted by its noncommercial terms. Third-party works retain their original terms. See <a target="_blank" rel="noopener noreferrer" href="LICENSING.html">licensing scope</a> for details and component information.</p>
 <p>User documentation © InkTag contributors. All rights reserved.</p></main></body></html>

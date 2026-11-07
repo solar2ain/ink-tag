@@ -18,6 +18,10 @@
       "original": "tools/configs/ZK_EL_GR42V_V1.2.toml"
     },
     {
+      "name": "ZK_EL_GR42V_V1.2_w_NFC-SSD1683.toml",
+      "original": "tools/configs/ZK_EL_GR42V_V1.2_w_NFC-SSD1683.toml"
+    },
+    {
       "name": "ZK_EL_GR42V_V1.2_w_NFC.toml",
       "original": "tools/configs/ZK_EL_GR42V_V1.2_w_NFC.toml"
     }

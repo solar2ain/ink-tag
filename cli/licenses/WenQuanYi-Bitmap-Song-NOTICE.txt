@@ -1,0 +1,62 @@
+WenQuanYi Bitmap Song — font attribution and license
+文泉驿点阵宋体 — 字体版权与许可
+
+The existing Chinese glyph-supplementation catalog contains two Bold faces:
+WQY9: 12-pixel / 9-point Bold; WQY12: 16-pixel / 12-point Bold.
+Font family: WenQuanYi Bitmap Song; foundry: WenQuanYi;
+font metadata version: 000.990 (WenQuanYi release 0.9.9).
+Each catalog face contains 27,535 codepoints, from U+3000 through U+9FA5.
+These are font data, not a new font family or a grant for InkTag-owned code.
+
+原有中文补字目录含 WQY9 与 WQY12 两套粗体，每套 27,535 个字形。
+字体许可独立于 WebUI、U8g2 代码及其他组件的许可。
+
+Upstream copyright/license notice (verbatim from the 0.9.9 README):
+    Copyright: © 2004-2007, The WenQuanYi Project 
+               Board of Trustees and Qianqian Fang
+    License  : GPL v2.0 (with font embedding exception **)
+
+The complete GNU GPL version 2 text accompanies this notice in GPL-2.0.txt.
+
+Upstream font-embedding exception (verbatim):
+** GPL v2.0 license with font embedding exception:
+
+As a special exception, if you create a document which uses this
+font, and embed this font or unaltered portions of this font into 
+the document, this font does not by itself cause the resulting 
+document to be covered by the GNU General Public License. This 
+exception does not however invalidate any other reasons why the 
+document might be covered by the GNU General Public License. If you 
+modify this font, you may extend this exception to your version of 
+the font, but you are not obligated to do so. If you do not wish to 
+do so, delete this exception statement from your version.
+
+The exception above concerns embedding the font or unaltered portions into a
+document. It is not a blanket license or linking exemption for the WebUI,
+compiled renderer, U8g2 code, or other components. It does not resolve other
+reasons why a work may be covered by the GPL.
+上述例外不等于 WebUI 或编译渲染器的链接豁免，也不替代其他组件的许可。
+
+Public font sources for the distributed glyph metrics and pixels:
+The catalog glyphs correspond to these Bold BDF files in Debian's patched
+xfonts-wqy 0.9.9-7 source package. This identifies the actual public font data;
+it does not claim that a pristine upstream 0.9.9 orig archive has identical
+font bytes or glyphs. Debian's package version and its font patches are part
+of the source identification.
+WQY9: https://sources.debian.org/data/main/x/xfonts-wqy/0.9.9-7/wenquanyi_9ptb.bdf
+SHA256: 95ff649d23afa5759dade5970cf214050d0ad965d64bb4efa992695d0c13d810
+
+WQY12: https://sources.debian.org/data/main/x/xfonts-wqy/0.9.9-7/wenquanyi_12ptb.bdf
+SHA256: 0a886940e63e944d77623e4bf4f0cf402c7d2716bdcb0cb019452693a42cfd94
+
+Package/source directory:
+https://sources.debian.org/src/xfonts-wqy/0.9.9-7/
+Original copyright and exception text:
+https://sources.debian.org/src/xfonts-wqy/0.9.9-7/README
+Original GPLv2 text:
+https://sources.debian.org/src/xfonts-wqy/0.9.9-7/COPYING
+
+U8g2's font-group reference also identifies the WQY font license separately:
+https://github.com/olikraus/u8g2/wiki/fntgrpwqy
+U8g2-LICENSE.txt contains the upstream U8g2 LICENSE. Its BSD code license
+does not replace the WQY font's GPLv2 terms and font-embedding exception.

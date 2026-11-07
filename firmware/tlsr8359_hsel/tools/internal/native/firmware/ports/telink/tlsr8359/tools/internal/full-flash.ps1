@@ -77,6 +77,11 @@ try {
     $phase='uid'
     Write-InkTagTerminalMessage 'Please wait: three read-only Flash UID/JEDEC samples; no percentage yet, no Flash erase/program.'
     $uidOptions=@($resolvedTool,'--port',$Port,'--baud',"$ReadBaud",'--activation-ms',"$ActivationMs",'--clock-mhz',"$ClockMHz",'--reset-pulse-ms',"$ResetPulseMs",'--samples','3','--uid-output',$uidFile)
+    if ($Board -eq 'hs_nebular420') {
+        # Capture at921600, preserve a usable registered460800 stock link;
+        # only a confirmed48M conflict reaches strict halted SDK24M selection.
+        $uidOptions=@($resolvedTool,'--port',$Port,'--baud','921600','--activation-ms',"$ActivationMs",'--clock-mhz','0','--reset-pulse-ms',"$ResetPulseMs",'--samples','3','--uid-output',$uidFile,'--halted-program-clock24','--hold-cpu')
+    }
     if ($registeredJedec) { $uidOptions+=@('--expected-jedec',$registeredJedec) }
     if ($RetryDetect) { $uidOptions+=@('--retry-detect','--detect-timeout',"$DetectTimeoutSeconds") }
     # This separate native entry does not inherit the read/write helper's
@@ -93,6 +98,7 @@ try {
     $uid=Get-Content -LiteralPath $uidFile -Raw | ConvertFrom-Json
     $observedJedec=[string]$uid.jedec
     $readOptions=@{Port=$Port;Baud=$ReadBaud;ActivationMs=$ActivationMs;ResetPulseMs=$ResetPulseMs;ClockMHz=$ClockMHz;ToolPath=$resolvedTool;Python=$pythonExe;ExpectedFlashJedec=$observedJedec;ReadUnitUid=[string]$uid.uidHex;NoManualReset=$true}
+    if ($uid.cpuHeld) { $readOptions.ActivationMs=0 } # Preserve the confirmed stopped programming state; no RESET pulse between phases.
     if ($ShowCommand) { $readOptions.ShowCommand=$true }
     $phase='bounded-evidence'
     Write-InkTagTerminalStage 'READ CURRENT 4-KiB FACTORY'

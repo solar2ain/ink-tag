@@ -52,6 +52,95 @@ def load_backend(path: Path) -> ModuleType:
     return module
 
 
+def select_halted_program_clock24(backend, serial_port, expected_uid, expected_jedec,
+                                 read_uid, confirmed_uid, read_jedec):
+    """SDK clock_init selection on a confirmed, debug-stopped exact unit only.
+
+    8258 clock.h/register_8258.h: SYS_CLK_48M_Crystal=0x20,
+    SYS_CLK_24M_Crystal=0x42, reg_clk_sel=0x66. Keep existing DCDC/analog state.
+    A final whole-chip reset lets the unchanged firmware select its normal48M.
+    No Flash write/unlock, reset, OTP, PLL setup or running-clock change here.
+    """
+    if (len(expected_uid) != 16 or expected_uid in (bytes(16), b'\xff'*16) or
+            len(expected_jedec) != 3 or expected_jedec in (bytes(3), b'\xff'*3)):
+        raise ValueError('Programming clock requires exact UID/JEDEC')
+    if confirmed_uid([read_uid(backend, serial_port) for _ in range(3)]) != expected_uid:
+        raise ValueError('Programming clock unit mismatch; no clock write')
+    if [read_jedec(backend, serial_port) for _ in range(3)] != [expected_jedec] * 3:
+        raise ValueError('Programming clock Flash mismatch; no clock write')
+    before = [backend.sws_read_data(serial_port, 0x66, 1) for _ in range(3)]
+    stopped = [backend.sws_read_data(serial_port, 0x602, 1) for _ in range(3)]
+    if before not in ([[0x20]] * 3, [[0x42]] * 3) or stopped != [[5]] * 3:
+        raise ValueError('Unqualified clock/debug-stop state; no clock write')
+    divider = round(24_000_000 * 2 / serial_port.baudrate)
+    if not 1 <= divider <= 127:
+        raise ValueError('Programming clock response divider is unrepresentable')
+    if before[0] == [0x20]:
+        if not backend.rd_sws_wr_addr_usbcom(serial_port, 0x66, bytearray([0x42])):
+            raise ValueError('Halted clock write transport failed; keep CPU stopped')
+    if before[0] == [0x20] or backend.sws_read_data(serial_port, 0xb2, 1) != [divider]:
+        if not backend.rd_sws_wr_addr_usbcom(serial_port, 0xb2, bytearray([divider])):
+            raise ValueError('Halted clock divider transport failed; keep CPU stopped')
+    for _ in range(3):
+        if (backend.sws_read_data(serial_port, 0x66, 1) != [0x42] or
+                backend.sws_read_data(serial_port, 0xb2, 1) != [divider] or
+                backend.sws_read_data(serial_port, 0x602, 1) != [5]):
+            raise ValueError('Halted clock readback failed; no Flash write/reset')
+    if confirmed_uid([read_uid(backend, serial_port) for _ in range(3)]) != expected_uid:
+        raise ValueError('Unit differs after clock selection; no Flash write/reset')
+    if [read_jedec(backend, serial_port) for _ in range(3)] != [expected_jedec] * 3:
+        raise ValueError('Flash differs after clock selection; no Flash write/reset')
+    return dict(register='0x66', before=before[0][0], after=0x42,
+                cpuHalted=True, uartBaud=serial_port.baudrate, divider=divider,
+                runtimeFirmwareClockUnchanged=True, flashWrites=0)
+
+
+def prepare_halted_programming_link(backend, serial_port, expected_uid, expected_jedec,
+                                    read_uid, confirmed_uid, read_jedec):
+    """Preserve an already usable registered24M/460800 link before retiming.
+
+    Stock does not need a recognized clock-selector encoding when the existing
+    registered operation timing already reads its exact UID/JEDEC. Only a
+    restored, identified48M capture may reach the strict SDK clock selector.
+    """
+    if (len(expected_uid) != 16 or expected_uid in (bytes(16),b'\xff'*16) or
+            len(expected_jedec) != 3 or expected_jedec in (bytes(3),b'\xff'*3)):
+        raise ValueError('Programming link needs exact UID/JEDEC')
+    def same_unit():
+        if (confirmed_uid([read_uid(backend,serial_port) for _ in range(3)]) != expected_uid or
+                [read_jedec(backend,serial_port) for _ in range(3)] != [expected_jedec]*3):
+            raise ValueError('Programming link identity changed; no clock/Flash write')
+    same_unit()
+    capture_baud=serial_port.baudrate
+    prior=[backend.sws_read_data(serial_port,0xb2,1) for _ in range(3)]
+    if not prior[0] or len(prior[0])!=1 or not 1<=prior[0][0]<=127 or prior!=[prior[0]]*3:
+        raise ValueError('Capture divider is not confirmed; no clock/Flash write')
+    def link(baud,divider):
+        if not 1<=divider<=127:raise ValueError('Unrepresentable programming divider')
+        flush=getattr(serial_port,'flush',None)
+        if flush:flush()
+        serial_port.baudrate=baud;serial_port.reset_input_buffer()
+        if not backend.rd_sws_wr_addr_usbcom(serial_port,0xb2,bytearray([divider])):
+            raise ValueError('Programming-link transport incomplete; keep CPU held')
+        if [backend.sws_read_data(serial_port,0xb2,1) for _ in range(3)] != [[divider]]*3:
+            return False
+        same_unit();return True
+    if link(460800,104):
+        return dict(mode='existing-registered-link',clockChanged=False,cpuHalted=True,
+                    uartBaud=460800,divider=104,flashWrites=0)
+    if not link(capture_baud,prior[0][0]):
+        raise ValueError('Capture link could not be restored; no clock/Flash write')
+    nominal=capture_baud*prior[0][0]/2
+    if not 47_000_000<=nominal<=49_000_000:
+        raise ValueError('Registered link unavailable, capture is not48M; no clock write')
+    selected=select_halted_program_clock24(backend,serial_port,expected_uid,expected_jedec,
+                                         read_uid,confirmed_uid,read_jedec)
+    if not link(460800,104):
+        raise ValueError('Selected24M operation link not confirmed; no Flash write/reset')
+    return dict(selected,mode='halted-clock24',clockChanged=selected['before']!=0x42,
+                uartBaud=460800,divider=104,captureBaud=capture_baud)
+
+
 def install_windows_serial_partial_write(backend: ModuleType) -> None:
     """Complete valid partial overlapped writes from Windows CH340 drivers."""
 

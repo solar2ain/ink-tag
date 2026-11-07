@@ -540,6 +540,9 @@ def start_webui_background(
         )
         popen_options["creationflags"] = creationflags
     child_environment = os.environ.copy()
+    # The detached child's output is a file, not the Windows console. Match
+    # the UTF-8 log reader even when the parent uses a legacy code page.
+    child_environment['PYTHONIOENCODING'] = 'utf-8'
     # Windows venv launchers can create a second Python PID. Bind the actual
     # registering process to this exact launch, rather than trusting any PID.
     launch_nonce = secrets.token_hex(32)

@@ -142,6 +142,17 @@ def fields(data):
     return result
 
 
+BOOT_PROOF_MAGIC = 0x50424631
+
+
+def ota_dat(ota_data):
+    files = read_archive(ota_data)
+    packet = files[json.loads(files['manifest.json'])['manifest']['application']['dat_file']]
+    if not 0 < len(packet) <= 512:
+        raise ValueError('Nordic signed DAT exceeds native Settings capacity')
+    return packet
+
+
 def signed_app(ota_data):
     files = read_archive(ota_data)
     manifest = json.loads(files['manifest.json'])
@@ -151,7 +162,7 @@ def signed_app(ota_data):
     item = root['application']; bn, dn = item['bin_file'], item['dat_file']
     if bn == dn or not bn.endswith('.bin') or not dn.endswith('.dat') or set(files) != {'manifest.json', bn, dn}:
         raise ValueError('Unknown Nordic OTA members')
-    app, packet = files[bn], fields(files[dn])
+    app, packet = files[bn], fields(ota_dat(ota_data))
     if set(packet) != {2}:
         raise ValueError('Signed Nordic init required')
     signed = fields(packet[2])
@@ -201,12 +212,22 @@ def verify_components(full_data, ota_data):
     app, signed_version = signed_app(ota_data)
     if app != image[0x26000:0x26000 + size] or version != signed_version:
         raise ValueError('Full and signed OTA App/version mismatch')
+    page = image[full['DFU_SETTINGS']:full['DFU_SETTINGS']+812]
+    proof_size, proof_magic = struct.unpack_from('<II', page, 678)
+    boot_proof = proof_magic == BOOT_PROOF_MAGIC
+    if boot_proof:
+        dat = ota_dat(ota_data)
+        if (proof_size != len(dat) or page[92:92+proof_size] != dat or
+                page[92+proof_size:604] != b'\xff'*(512-proof_size) or
+                page[56:92] != bytes(36)):
+            raise ValueError('Full retained boot proof differs from signed OTA DAT')
     return memory, dict(app_bytes=size, app_crc32=f'{crc:08X}', app_sha256=sha(app),
         application_limit=163840, application_headroom=163840-size,
         recovery_bytes=recovery_bytes, recovery_limit=24576,
         recovery_headroom=24576-recovery_bytes,
         compatibility_epoch=version >> 16,
-        signature_verified=True, recovery_source_authenticated=False,
+        signature_verified=True, boot_proof_initialized=boot_proof,
+        recovery_source_authenticated=False,
         recovery_trust='Full member hash integrity only; no independent Recovery signature',
         production_qualified=False)
 
@@ -246,6 +267,8 @@ def create_bundle(full_path, ota_path, output, *, development_validation=False, 
     full = runpy.run_path(str(ROOT/'tools/sdk/nordic-full-settings.py'))
     image = bytes(memory.get(a,255) for a in range(full['FLASH_BYTES']))
     if normal_build_inputs is not None:
+        if not review['boot_proof_initialized']:
+            raise ValueError('Normal Full production requires retained signed boot proof')
         n = len((ROOT/'_build/nordic/nrf52832_priceetag/bootloader/InkTag-nrf52832_priceetag-bootloader.bin').read_bytes())
         if not 0 < n <= 24576 or image[full['RECOVERY']+n:full['MBR_PARAMS']] != b'\xff' * (24576-n):
             raise ValueError('Normal Full Recovery extent disagrees with its actual linked output')

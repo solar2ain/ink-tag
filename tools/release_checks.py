@@ -144,7 +144,7 @@ def check_cli_archive(repo: Path, path: Path) -> list[str]:
         matches=[p for p in contents if (p==cli_root+'/'+name if path.suffix=='.zip' and cli_root else p.endswith(suffix))]
         if len(matches)!=1 or contents[matches[0]]!=data:
             problems.append('CLI artifact missing/mismatched license: '+name)
-    for asset in ('fontRoles.js','nativePreview.js','nativePreviewWasm.js','hostScene.js'):
+    for asset in ('fontRoles.js','nativePreview.js','nativePreviewWasm.js','hostScene.js','template-agent-quota.json'):
         matching=[data for name,data in contents.items() if name.endswith('inktag_cli/_assets/'+asset)]
         if len(matching)!=1 or matching[0]!=(repo/'cli/src/inktag_cli/_assets'/asset).read_bytes():
             problems.append('Missing/changed normal CLI resource: '+asset)
