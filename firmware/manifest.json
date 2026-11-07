@@ -146,8 +146,8 @@
       ],
       "publication": {
         "target": {
-          "boardId": "gr5331_zkc21v",
-          "family": "gr5331_zkc21v",
+          "boardId": "gr5331_zkel",
+          "family": "gr5331_zkel",
           "protocolVersion": 16,
           "layout": "layout-v1",
           "compatibilityEpoch": 1
@@ -210,8 +210,8 @@
       ],
       "publication": {
         "target": {
-          "boardId": "gr551x_zkc42v",
-          "family": "gr551x_zkc42v",
+          "boardId": "gr551x_zkel",
+          "family": "gr551x_zkel",
           "protocolVersion": 16,
           "layout": "layout-v1",
           "compatibilityEpoch": 1

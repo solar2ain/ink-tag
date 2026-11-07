@@ -188,8 +188,8 @@
     },
     {
       "target": {
-        "boardId": "gr5331_zkc21v",
-        "family": "gr5331_zkc21v",
+        "boardId": "gr5331_zkel",
+        "family": "gr5331_zkel",
         "protocolVersion": 16,
         "layout": "layout-v1",
         "compatibilityEpoch": 1
@@ -239,61 +239,6 @@
         }
       ],
       "releaseTag": "v0.2.1-20261107.1",
-      "channel": "stable"
-    },
-    {
-      "target": {
-        "boardId": "gr5331_zkel",
-        "family": "gr5331_zkel",
-        "protocolVersion": 16,
-        "layout": "layout-v1",
-        "compatibilityEpoch": 1
-      },
-      "version": "0.2.0.0",
-      "releaseVersion": 200,
-      "signaturePolicy": {
-        "algorithm": "ecdsa-p256-sha256",
-        "packageBoard": "gr5331_zkc21v",
-        "keyPolicy": "fixed-production-public-key",
-        "keyId": "inktag-gr5331-ota-v1",
-        "authenticates": "application",
-        "bootChainAuthenticatedByThisCheck": false,
-        "proAntiCloneVerifiedByThisCheck": false
-      },
-      "pairing": {
-        "otaSha256": "82319f08902eaf2b1e0aaa11d1a4f2f8ccc0eb123a8270b034ff35580a82b19e",
-        "fullSha256": "a0823973d5feec17875096e8f7fead83e2c3ec6a5e68788e2ad07723c4e37c67",
-        "embeddedOtaSha256": "82319f08902eaf2b1e0aaa11d1a4f2f8ccc0eb123a8270b034ff35580a82b19e"
-      },
-      "buildTarget": "gr5331_zkel",
-      "buildId": "sha256:82319f08902eaf2b1e0aaa11d1a4f2f8ccc0eb123a8270b034ff35580a82b19e",
-      "buildNumber": 0,
-      "candidateOnly": false,
-      "releaseReady": true,
-      "published": true,
-      "programmerInventory": {
-        "toolsVersion": "0.2.0.0",
-        "inventory": "releases/tool-manifests/gr5331_zkel.json",
-        "bytes": 23662,
-        "sha256": "c66779de683881f68fecddc5389c9c4d5dd8395da38a0ae459e70fa592274b0d"
-      },
-      "artifacts": [
-        {
-          "type": "ota",
-          "name": "InkTag-gr5331_zkel-ota-v0.2.0.0-90cb6f7651dd.zip",
-          "bytes": 244246,
-          "sha256": "82319f08902eaf2b1e0aaa11d1a4f2f8ccc0eb123a8270b034ff35580a82b19e",
-          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-gr5331_zkel-ota-v0.2.0.0-90cb6f7651dd.zip"
-        },
-        {
-          "type": "full",
-          "name": "InkTag-gr5331_zkel-full-v0.2.0.0-90cb6f7651dd.zip",
-          "bytes": 361693,
-          "sha256": "a0823973d5feec17875096e8f7fead83e2c3ec6a5e68788e2ad07723c4e37c67",
-          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-gr5331_zkel-full-v0.2.0.0-90cb6f7651dd.zip"
-        }
-      ],
-      "releaseTag": "v0.2.0-20261031.2",
       "channel": "stable"
     },
     {
@@ -353,8 +298,8 @@
     },
     {
       "target": {
-        "boardId": "gr551x_zkc42v",
-        "family": "gr551x_zkc42v",
+        "boardId": "gr551x_zkel",
+        "family": "gr551x_zkel",
         "protocolVersion": 16,
         "layout": "layout-v1",
         "compatibilityEpoch": 1
@@ -404,61 +349,6 @@
         }
       ],
       "releaseTag": "v0.2.1-20261107.1",
-      "channel": "stable"
-    },
-    {
-      "target": {
-        "boardId": "gr551x_zkel",
-        "family": "gr551x_zkel",
-        "protocolVersion": 16,
-        "layout": "layout-v1",
-        "compatibilityEpoch": 1
-      },
-      "version": "0.2.0.0",
-      "releaseVersion": 200,
-      "signaturePolicy": {
-        "algorithm": "rsa-2048-pss-sha256",
-        "packageBoard": "gr551x_zkc42v",
-        "keyPolicy": "fixed-production-public-key",
-        "keyId": "inktag-gr551x-ota-v1",
-        "authenticates": "application",
-        "bootChainAuthenticatedByThisCheck": false,
-        "proAntiCloneVerifiedByThisCheck": false
-      },
-      "pairing": {
-        "otaSha256": "e979f12cbbd753a1d6411a28296c601b0445b1230b9b5c996764f616bdbcda79",
-        "fullSha256": "86dd6e885f6102b12650c7de6fff8efd0de7d5f69542d31089e84a1f294cf07f",
-        "embeddedOtaSha256": "e979f12cbbd753a1d6411a28296c601b0445b1230b9b5c996764f616bdbcda79"
-      },
-      "buildTarget": "gr551x_zkel",
-      "buildId": "sha256:e979f12cbbd753a1d6411a28296c601b0445b1230b9b5c996764f616bdbcda79",
-      "buildNumber": 0,
-      "candidateOnly": false,
-      "releaseReady": true,
-      "published": true,
-      "programmerInventory": {
-        "toolsVersion": "0.2.0.0",
-        "inventory": "releases/tool-manifests/gr551x_zkel.json",
-        "bytes": 24596,
-        "sha256": "6b3a7482addcd60cae105cc6a2a005f80cc3933fbc7c0fca679942663a15ecee"
-      },
-      "artifacts": [
-        {
-          "type": "ota",
-          "name": "InkTag-gr551x_zkel-ota-v0.2.0.0-a4dbb44633f2.zip",
-          "bytes": 267150,
-          "sha256": "e979f12cbbd753a1d6411a28296c601b0445b1230b9b5c996764f616bdbcda79",
-          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-gr551x_zkel-ota-v0.2.0.0-a4dbb44633f2.zip"
-        },
-        {
-          "type": "full",
-          "name": "InkTag-gr551x_zkel-full-v0.2.0.0-a4dbb44633f2.zip",
-          "bytes": 392597,
-          "sha256": "86dd6e885f6102b12650c7de6fff8efd0de7d5f69542d31089e84a1f294cf07f",
-          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-gr551x_zkel-full-v0.2.0.0-a4dbb44633f2.zip"
-        }
-      ],
-      "releaseTag": "v0.2.0-20261031.2",
       "channel": "stable"
     },
     {

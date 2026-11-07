@@ -2,6 +2,25 @@
 from pathlib import Path
 import hashlib, json, zipfile, struct, sys
 
+# Device discovery uses executable wire identities. Signed package targets are
+# a separate, fixed namespace; neither is inferred from product/display names.
+EXECUTABLE_IDENTITIES = {
+    'gr5331_zkel': ('gr5331_zkel', 'gr5331_zkc21v', 'layout-v1'),
+    'gr551x_zkel': ('gr551x_zkel', 'gr551x_zkc42v', 'layout-v1'),
+    'gr551x_zkel_internal': ('gr5513_zkel_internal', 'gr5513_zkel_internal', 'layout-v1'),
+    'om6626_zkel': ('om6626_zkcxxb', 'om6626_zkcxxb', 'layout-v1'),
+    'tlsr8359_hsel': ('tlsr8359_hanshow', 'tlsr8359_hanshow', 'layout-v1'),
+    'nrf52832_priceetag': ('nrf52832_priceetag', 'nrf52832_priceetag', 'N3V1'),
+    'nrf52811_aesl': ('aesl22_nrf', 'aesl22_nrf', 'N1V1'),
+    'da14585_aesl': ('da14585_aesl', 'da14585_aesl', 'DAV1'),
+}
+
+def executable_target(build_target):
+    if build_target not in EXECUTABLE_IDENTITIES:
+        raise ValueError('Unknown executable firmware target')
+    wire, _, layout = EXECUTABLE_IDENTITIES[build_target]
+    return dict(boardId=wire, family=wire, protocolVersion=16, layout=layout, compatibilityEpoch=1)
+
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def artifacts(release):
@@ -25,6 +44,9 @@ def firmware_binding(repo, record, release, manifest):
     for item in selected:
         target=item['buildTarget'];board=boards.get(target);tool=tools.get(target)
         if target in result or not board or not tool:raise ValueError('Unknown/duplicate firmware target or missing tools')
+        if (item['target'] != executable_target(target) or
+            item['signaturePolicy'].get('packageBoard') != EXECUTABLE_IDENTITIES[target][1]):
+            raise ValueError('Device wire identity and signed package target must match their separate contracts')
         fields=('target','version','releaseVersion','signaturePolicy','pairing')
         if any(item[k]!=board['publication'][k] for k in fields):raise ValueError('Firmware scope differs from native manifest')
         expected={k:tool[k] for k in ('toolsVersion','inventory','bytes','sha256')}
