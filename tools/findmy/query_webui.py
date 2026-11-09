@@ -2580,7 +2580,7 @@ def create_app(session: QuerySession, port: int = DEFAULT_PORT, *, parent: Paren
             "form-action 'self'; img-src 'self' data: https://tile.openstreetmap.org; object-src 'none'; "
             "script-src 'self'; style-src 'self'; connect-src 'self'; "
             "frame-src https://api.map.baidu.com https://map.baidu.com "
-            "https://uri.amap.com https://ditu.amap.com "
+            "https://uri.amap.com https://ditu.amap.com https://www.amap.com https://m.amap.com "
             "https://www.openstreetmap.org"
         )
         return response

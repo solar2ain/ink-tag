@@ -153,7 +153,7 @@ def image_upload(
     preview: Annotated[Path | None, typer.Option(help="Also save the exact processed device preview as PNG.")] = None,
     refresh_timeout: Annotated[float, typer.Option(min=10.0, max=300.0, help="Physical refresh timeout in seconds.")] = 120.0,
     expected_size: Annotated[str | None, typer.Option("--expect-size", help="Fail before upload if the device's visible canvas differs.")] = None,
-    wire_encoding: Annotated[str, typer.Option(help="Transfer encoding: auto (capability and savings), none (raw), or packbits-rle (requires device support; no raw fallback).")] = "auto",
+    wire_encoding: Annotated[str, typer.Option(help="Transfer encoding: auto (device capabilities and savings), none (raw), lzo1x or packbits-rle (explicit codecs require device support; no raw fallback).")] = "auto",
 ) -> None:
     options = _options(context)
     try:

@@ -31,6 +31,7 @@ from .packbits import (
     subsequent_segment_starts,
 )
 from .protocol import encode_image_name, encode_screen_config
+from .lzo1x import build_lzo1x_blocks
 from .transport import InkTagError
 
 if TYPE_CHECKING:
@@ -42,8 +43,8 @@ ProgressCallback = Callable[[str, int, int, str], None]
 
 def normalize_wire_encoding(value: str) -> str:
     normalized = value.strip().lower()
-    if normalized not in {"auto", "none", "packbits-rle"}:
-        raise ValueError("wire encoding must be auto, none or packbits-rle")
+    if normalized not in {"auto", "none", "packbits-rle", "lzo1x"}:
+        raise ValueError("wire encoding must be auto, none, packbits-rle or lzo1x")
     return normalized
 
 
@@ -117,6 +118,9 @@ async def _upload_encoded_image_v2(
     ):
         raise InkTagError("Device does not advertise per-image reading orientation")
     rle_supported = client.supports_capability(CapabilityV2.TRANSFER_PACKBITS_RLE)
+    lzo_supported = client.supports_capability_extension(CapabilityExtensionV2.TRANSFER_LZO1X_2000)
+    if wire_encoding == 'lzo1x' and not lzo_supported:
+        raise InkTagError('Device does not advertise LZO1X image transfer support')
     if wire_encoding == "packbits-rle" and not rle_supported:
         raise InkTagError("Device does not advertise PackBits RLE image transfer support")
     if content_type not in CONTENT_TYPE_IDS:
@@ -151,18 +155,19 @@ async def _upload_encoded_image_v2(
         if replace_slot is not None:
             begin[39 + len(safe_name)] = replace_slot
 
+    codec = ('lzo1x' if lzo_supported and wire_encoding in ('auto','lzo1x') else 'packbits-rle')
+
     def compression_plan(chunk_size: int) -> list[tuple[PackBitsBlock, str]]:
         blocks: list[tuple[PackBitsBlock, str]] = []
         decoded_offset = 0
         for transfer in encoded.transfers:
+            encoded_blocks = (build_lzo1x_blocks(transfer.data, decoded_offset=decoded_offset,
+                              encoded_limit=chunk_size-2) if codec == 'lzo1x' else
+                              build_packbits_blocks(transfer.data, decoded_offset=decoded_offset,
+                              decoded_limit=0xFFFF, encoded_limit=chunk_size-2))
             blocks.extend(
                 (block, transfer.step)
-                for block in build_packbits_blocks(
-                    transfer.data,
-                    decoded_offset=decoded_offset,
-                    decoded_limit=0xFFFF,
-                    encoded_limit=chunk_size - 2,
-                )
+                for block in encoded_blocks
             )
             decoded_offset += len(transfer.data)
         return blocks
@@ -174,16 +179,20 @@ async def _upload_encoded_image_v2(
     segment_starts = subsequent_segment_starts(segment_lengths)
     negotiated_chunk = max(20, client._v2_write_payload)
     compressed_blocks = compression_plan(negotiated_chunk)
+    if (wire_encoding == 'auto' and codec == 'lzo1x' and rle_supported and
+        not packbits_is_worthwhile([b for b,_ in compressed_blocks],segment_lengths,negotiated_chunk)):
+        codec = 'packbits-rle'
+        compressed_blocks = compression_plan(negotiated_chunk)
     use_packbits = (
-        wire_encoding != "none" and rle_supported
-        and (wire_encoding == "packbits-rle" or packbits_is_worthwhile(
+        wire_encoding != "none" and (lzo_supported if codec == 'lzo1x' else rle_supported)
+        and (wire_encoding in ("packbits-rle",'lzo1x') or packbits_is_worthwhile(
             [block for block, _step in compressed_blocks],
             segment_lengths,
             negotiated_chunk,
         ))
     )
     if use_packbits:
-        begin[3] |= int(TransferDescriptorFlagV2.PACKBITS_RLE)
+        begin[3] |= int(TransferDescriptorFlagV2.LZO1X if codec == 'lzo1x' else TransferDescriptorFlagV2.PACKBITS_RLE)
 
     transaction = client._next_v2_transaction()
     transfer_active = False
@@ -223,7 +232,7 @@ async def _upload_encoded_image_v2(
                 )
                 transfer_active = False
                 use_packbits = False
-                begin[3] &= ~int(TransferDescriptorFlagV2.PACKBITS_RLE)
+                begin[3] &= ~int(TransferDescriptorFlagV2.PACKBITS_RLE | TransferDescriptorFlagV2.LZO1X)
                 transaction = client._next_v2_transaction()
                 begin_reply = await client.request_v2(
                     CommandV2.TRANSFER_BEGIN,
@@ -346,7 +355,7 @@ async def _upload_encoded_image_v2(
             chunks_sent=completed_chunks,
             transfer_seconds=transfer_seconds,
             refresh_reply=refresh_reply,
-            wire_encoding="packbits-rle" if use_packbits else "raw",
+            wire_encoding=codec if use_packbits else "raw",
             encoded_bytes=(sum(len(block.encoded) for block, _ in compressed_blocks)
                            if use_packbits else encoded.total_bytes),
             transfer_write_bytes_no_retries=(

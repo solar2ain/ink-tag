@@ -172,7 +172,7 @@ def _write_service_state(data_dir: Path | None, state: dict[str, Any]) -> None:
             previous_pid = int(previous.get('pid', 0))
         except (TypeError, ValueError):
             previous_pid = 0
-        if previous_pid != state.get('pid') and _pid_is_running(previous_pid):
+        if previous_pid != state.get('pid') and _recorded_process_is_running(previous_pid, previous):
             raise ValueError('Another InkTag WebUI owns this data directory; stop it before starting HTTP/HTTPS again')
         temporary = None
         try:
@@ -186,9 +186,11 @@ def _write_service_state(data_dir: Path | None, state: dict[str, Any]) -> None:
                 temporary.unlink(missing_ok=True)
 
 
-def _remove_service_state(data_dir: Path | None, pid: int) -> bool:
+def _remove_service_state(data_dir: Path | None, pid: int, *,
+                          expected_state: dict[str, Any] | None = None) -> bool:
     with _service_state_guard(data_dir):
-        if (_read_service_state(data_dir) or {}).get('pid') != pid:
+        current = _read_service_state(data_dir) or {}
+        if current.get('pid') != pid or (expected_state is not None and current != expected_state):
             return False
         webui_service_paths(data_dir)['state'].unlink(missing_ok=True)
         return True
@@ -244,6 +246,19 @@ def _process_identity(pid: int) -> str | None:
         return 'posix:' + hashlib.sha256(value.encode('utf8')).hexdigest() if result.returncode == 0 and value and len(value) <= 32768 else None
     except (OSError, ValueError, subprocess.SubprocessError):
         return None
+
+
+def _recorded_process_is_running(pid: int, state: dict[str, Any]) -> bool:
+    """A live recycled PID is not the registered service. Unknown stays protected."""
+    if not _pid_is_running(pid):
+        return False
+    expected = state.get('processIdentity')
+    if isinstance(expected, str) and expected:
+        actual = _process_identity(pid)
+        if actual is not None and actual != expected:
+            return False
+    # Missing legacy metadata or denied process access does not prove staleness.
+    return True
 
 
 def _origin_is_ready(origin: str, *, timeout: float = 0.5, tls_cert: Path | None = None,
@@ -319,7 +334,7 @@ def webui_background_status(data_dir: Path | None = None, *, include_find: bool 
     except (TypeError, ValueError):
         pid = 0
     origin = str(state.get("origin") or "")
-    process_running = _pid_is_running(pid)
+    process_running = _recorded_process_is_running(pid, state)
     tls_cert = Path(str(state["tlsCert"])) if state.get("tlsCert") else None
     ready = (process_running and bool(origin) and state.get('starting') is not True
              and _origin_is_ready(origin, tls_cert=tls_cert,
@@ -628,9 +643,13 @@ def stop_webui_background(data_dir: Path | None = None, *, timeout: float = 10.0
         pid = int(state.get("pid", 0))
     except (TypeError, ValueError):
         pid = 0
-    if not _pid_is_running(pid):
-        _remove_service_state(data_dir, pid)
-        return {**state, "running": False, "stopped": False, "log": str(paths["log"])}
+    if not _recorded_process_is_running(pid, state):
+        # Delete only the exact obsolete registration, never its reused PID or
+        # a replacement registration written while this command was checking.
+        _remove_service_state(data_dir, pid, expected_state=state)
+        public_state = {key: value for key, value in state.items()
+                        if key not in {'launchProof', 'processIdentity'}}
+        return {**public_state, "running": False, "stopped": False, "log": str(paths["log"])}
     expected_identity = state.get('processIdentity')
     if expected_identity is not None or require_process_identity:
         if not isinstance(expected_identity, str) or _process_identity(pid) != expected_identity:

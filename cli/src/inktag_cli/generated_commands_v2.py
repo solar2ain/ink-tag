@@ -122,11 +122,13 @@ class RequestFlagV2(IntEnum):
 class TransferDescriptorFlagV2(IntEnum):
     READING_ROTATION_90 = 0x04
     READING_ROTATION_180 = 0x08
+    LZO1X = 0x40
     PACKBITS_RLE = 0x80
 
 class CapabilityExtensionV2(IntEnum):
     IMAGE_READING_ORIENTATION = 0x01
     PANEL_GPIO_SNAPSHOT = 0x02
+    TRANSFER_LZO1X_2000 = 0x04
 
 class CapabilityV2(IntEnum):
     TIME = 0x01

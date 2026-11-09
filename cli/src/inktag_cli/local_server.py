@@ -36,7 +36,7 @@ WEBUI_CSP = (
     "default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; script-src-attr 'none'; "
     "style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tile.openstreetmap.org; "
     "font-src 'self' data:; connect-src 'self' data: blob: https://api.open-meteo.com "
-    "https://solar2ain.github.io/ink-tag/updates/; object-src 'none'; frame-src https://api.map.baidu.com https://map.baidu.com https://uri.amap.com https://ditu.amap.com https://www.openstreetmap.org; "
+    "https://solar2ain.github.io/ink-tag/updates/; object-src 'none'; frame-src https://api.map.baidu.com https://map.baidu.com https://uri.amap.com https://ditu.amap.com https://www.amap.com https://m.amap.com https://www.openstreetmap.org; "
     "worker-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
 )
 JSON_LIMIT = 2 * 1024 * 1024
@@ -1102,12 +1102,11 @@ def run_local_server(
     resolved_find_data = (find_data_dir or resolved_data / "find").resolve()
     candidates = (repo_root / "webui/dist/static", repo_root / "webui", repo_root / "public")
     resolved_web = (web_root or next((path for path in candidates if (path / "index.html").is_file()), candidates[0])).resolve()
-    # Pair assets before opening data, Find, TLS or sockets. Restarting Python
-    # does not compile JS; an old frontend must not tell users to reflash a
-    # perfectly current device because it expects a different protocol byte.
+    # Run the existing packaged frontend; newer development source is not a
+    # startup dependency. Source freshness remains a release/export check.
+    # Validate compiled assets and protocol before opening data/Find/sockets.
     from .webui_build import inspect_webui_build
-    source_repo = repo_root if resolved_web == (repo_root / 'webui/dist/static').resolve() else None
-    web_build = inspect_webui_build(resolved_web, repo_root=source_repo)
+    web_build = inspect_webui_build(resolved_web)
     print(f"WebUI: {resolved_web} ({web_build['buildId'] or 'v1'})")
     managed: ManagedFindService | None = None
     resolved_find = normalize_find_service(find_service) if find_service else None
