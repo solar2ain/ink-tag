@@ -36,7 +36,7 @@ WEBUI_CSP = (
     "default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; script-src-attr 'none'; "
     "style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tile.openstreetmap.org; "
     "font-src 'self' data:; connect-src 'self' data: blob: https://api.open-meteo.com "
-    "https://solar2ain.github.io/ink-tag/updates/; object-src 'none'; frame-src https://api.map.baidu.com https://map.baidu.com https://uri.amap.com https://ditu.amap.com https://www.amap.com https://m.amap.com https://www.openstreetmap.org; "
+    "https://solar2ain.github.io/ink-tag/updates/ https://raw.githubusercontent.com/solar2ain/ink-tag/; object-src 'none'; frame-src https://api.map.baidu.com https://map.baidu.com https://uri.amap.com https://ditu.amap.com https://www.amap.com https://m.amap.com https://www.openstreetmap.org; "
     "worker-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
 )
 JSON_LIMIT = 2 * 1024 * 1024
