@@ -1,0 +1,8 @@
+{
+  "key_id": "inktag-tlsr8359-ota-prod-v1",
+  "algorithm": "ecdsa-p256-sha256",
+  "trust_profile": "production",
+  "public_key": "044b93d68917777890ca4c6345b33b7b0558764daa531d35ec493d60c9fbfb3d8d3df418e5145ac996bd2aeb260393fe172b42df5e458d4f500bc028a5d1a063db",
+  "public_key_hash": "f34e6d37e3d2b88454d01d149446dcc5",
+  "public_key_hash_size": 16
+}

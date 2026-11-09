@@ -14,7 +14,7 @@ import zipfile
 
 from tlsr_full_flash_config import ROOT, PCB_BACKENDS, read_board_config
 from tlsr_factory_config import layout as factory_layout, pin_record, screen_record, aux_record, AUX_CAPABILITY, PIN_CONFIG_CAPABILITY
-from tlsr_full_flash_address import typed_pair
+from tlsr_full_flash_address import typed_pair, AUTO_CAPABILITY, INIT_MARKER
 import tlsr_full_flash_format as package
 
 from inktag_programmer_formats.ota import inspect_package
@@ -107,6 +107,7 @@ def verify_bundle(path: Path) -> tuple[dict, bytes]:
     from tlsr_trusted_entry_profile import check_pair
     check_pair(transfer[:-96], data['recovery.bin'], manifest['layout'], data.get('stage0.bin'))
     manifest['typed_addresses']=typed_pair(transfer,data['recovery.bin'])
+    manifest['automatic_addresses'] = all(AUTO_CAPABILITY in role for role in (transfer, data['recovery.bin']))
     if len(transfer) > package.APPLICATION_SIZE:
         raise ValueError('Full ZIP signed App exceeds safe payload limit')
     neutral = bytearray(b'\xff' * 524288)
@@ -153,6 +154,8 @@ def configure(base_directory: Path, config_path: Path) -> tuple[bytes, dict]:
     # Request the common one-shot device-information page after startup LEDs. App consumes
     # this byte only after the comparison; later boots follow saved policy.
     image[0x7F10C] = 0xA5
+    if manifest['automatic_addresses']:
+        image[INIT_MARKER] = 0  # Already provisioned by normal Full/explicit MAC.
     factory=factory_layout()
     at=factory['PIN_FACTORY_ADDRESS']
     image[at:at+32]=pin_record(config['board_id'],bytes.fromhex(config['pin_wire_hex']))
@@ -171,6 +174,7 @@ def configure(base_directory: Path, config_path: Path) -> tuple[bytes, dict]:
         "compatibility_epoch": manifest['compatibility_epoch'],
         "peripheral_backend_ids": manifest.get('peripheral_backend_ids', []),
         "typed_addresses": manifest.get('typed_addresses', False),
+        "automatic_addresses": manifest['automatic_addresses'],
         "layout": manifest['layout'],
         "application_start": manifest['application_start'],
         "base_package_sha256": manifest.get('verified_package_sha256'),

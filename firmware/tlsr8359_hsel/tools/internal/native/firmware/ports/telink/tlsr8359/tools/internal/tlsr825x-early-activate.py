@@ -1500,10 +1500,17 @@ def main() -> None:
     backend_path = Path(sys.argv[1]).resolve()
     if not backend_path.is_file():
         raise SystemExit(f"TLSR825x backend not found: {backend_path}")
-    unit_args,read_unit_uid=extract_read_unit_uid(sys.argv[2:])
+    bin_args,bin_request=list(sys.argv[2:]),None
+    if '--inktag-bin-receipt' in bin_args:
+        sys.path.insert(0,str(Path(__file__).resolve().parents[6]/'tools/hardware'))
+        from tlsr_bin_flash import extract_request
+        bin_args,bin_request=extract_request(bin_args)
+    unit_args,read_unit_uid=extract_read_unit_uid(bin_args)
     plan_args,full_plan=extract_full_write_plan(unit_args)
     requested_args, skip_readback = extract_skip_readback(plan_args)
     full_args, post_verify = extract_post_write_verify(requested_args,sparse=full_plan is not None)
+    if bin_request is not None and (full_plan is not None or read_unit_uid is not None or skip_readback):
+        raise SystemExit('Bin mode is separate from preserving Full; use optional post-write verification only')
     if full_plan is not None and post_verify is None:
         raise SystemExit('Bound Full plan requires the same-session post-write operation')
     reset_args, reset_pulse_ms = extract_reset_pulse(full_args)
@@ -1522,7 +1529,7 @@ def main() -> None:
     # byte and could turn a responding target into an incomplete PC result.
     # Destructive/native operations remain unchanged; no Flash write retry.
     probe_command = not any(operation in backend_args for operation in ("rf", "wf", "we", "es", "ea"))
-    if "rf" in backend_args or probe_command or post_verify:
+    if "rf" in backend_args or probe_command or post_verify or bin_request:
         install_exact_sws_frames(backend)
     clock_hz = 0
     for clock_option in ("-c", "--clk"):
@@ -1541,7 +1548,14 @@ def main() -> None:
         single_pass_read, verify_stride,
         establish_read_bus_idle="rf" in backend_args or bool(post_verify),
     )
-    if post_verify:
+    if bin_request:
+        from tlsr_bin_flash import install as install_bin
+        source,image,receipt,_=bin_request
+        if expected_flash_jedec is None or verify_file or single_pass_read or verify_stride != 1:
+            raise SystemExit('Bin writing requires supported JEDEC and optional complete readback')
+        install_bin(backend,source,receipt,image,expected_flash_jedec,
+                    output=post_verify[0] if post_verify else None,progress=_FlashWriteProgress)
+    elif post_verify:
         if expected_flash_jedec is None or verify_file or single_pass_read or verify_stride != 1:
             raise SystemExit('Full same-session verification requires exact JEDEC and complete readback.')
         if full_plan is None:

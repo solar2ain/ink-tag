@@ -4,7 +4,9 @@
     "setup": "firmware/ports/telink/tlsr8359/tools/setup.ps1",
     "probe": "firmware/ports/telink/tlsr8359/tools/probe.ps1",
     "backup": "firmware/ports/telink/tlsr8359/tools/backup.ps1",
-    "flash": "firmware/ports/telink/tlsr8359/tools/flash.ps1"
+    "flash": "firmware/ports/telink/tlsr8359/tools/flash.ps1",
+    "generate-bin": "firmware/ports/telink/tlsr8359/tools/generate-bin.ps1",
+    "flash-bin": "firmware/ports/telink/tlsr8359/tools/flash-bin.ps1"
   },
   "configs": [
     {

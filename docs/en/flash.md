@@ -83,6 +83,32 @@ Copy the actual flashing line from the selected directory's README. It supplies 
 
 Complete flashing clears MCU-side settings/data. Necessary factory identity, BLE address, calibration and valid same-device Pro are retained according to each tool's instructions. Separate external picture Flash without an erase backend is retained. Some portable writing entries are not yet available: an offline preflight is not proof that writing is enabled.
 
+## TLSR: offline bin generation and direct writing
+
+Download the complete checkout and retain `firmware/tlsr8359_hsel/tools/`, including `internal/`; do not move a single script into the root. Run its `setup.ps1` to install Python dependencies. InkTag CLI is not required.
+
+Run these commands from the **ink-tag checkout root**. They use the published **0.2.1** package and `HSEL5_01_54M_02` preset. Generation is offline. Each invocation assigns a new Static Random MAC and produces a **512-KiB (524288-byte)** bin plus companion JSON for one device. Existing outputs are refused; do not reuse this explicit-address bin on multiple devices.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\tlsr8359_hsel\tools\generate-bin.ps1" -Firmware ".\firmware\tlsr8359_hsel\full\InkTag-tlsr8359_hsel-full-v0.2.1.0-306bd2ed0f10.zip" -Config ".\firmware\tlsr8359_hsel\tools\configs\HSEL5_01_54M_02.toml" -Mac ("C2"+[guid]::NewGuid().ToString("N").Substring(0,10)) -AddressType StaticRandom -Output ".\HSEL5_01_54M_02-0.2.1.bin"
+```
+
+0.2.1 requires an explicit MAC. Replace the `-Mac` expression with a fixed address if needed. Explicit addresses default to Public; static-random addresses require `-AddressType StaticRandom` and two high bits set in the first byte. Omitting MAC is allowed only when both packaged App and Recovery advertise automatic provisioning; older packages are refused before hardware access. Updating tools does not replace released App/Recovery bytes or signatures.
+
+**This bin initializes Free**, replacing lower-512-KiB factory data, calibration, Pro, passwords, settings, fonts and images; calibration uses SDK defaults. For same-device identity/calibration and valid Pro preservation, retain the original `flash.ps1 -Firmware ... -Config ... -Port ...` workflow and its default readback.
+
+In BDT, load the entire bin at **Flash address `0x00000`**, then verify. Erase/write only `0x00000–0x7FFFF`. On qualified 1-MiB boards, upper image slots remain untouched; avoid chip erase. Existing valid upper images can remain occupied. Select the configuration matching the actual hardware.
+
+CH340/SWS can also write the generated bin. Replace `COM13` with the actual port. This 48-MHz example uses the protected stopped-24-MHz programming link and complete readback, then resets into the firmware's normal startup frequency:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\tlsr8359_hsel\tools\flash-bin.ps1" -Bin ".\HSEL5_01_54M_02-0.2.1.bin" -Port COM13 -PrepareClock24 -Verify
+```
+
+`flash-bin.ps1` accepts the bin alone: no ZIP, configuration or companion JSON. It validates signatures/records locally and writes the supplied lower-512-KiB bytes unchanged. Normal mode does not read old MAC, UID, Factory or Settings and preserves no old data. Optional `-PrepareClock24` repair reads the target UID/JEDEC to validate the link, without reading old firmware. Confirmation defaults to y/N; `-Yes` skips the prompt.
+
+**Without `-Verify`, the default writes without readback**, reporting `BIN-WRITTEN-NOT-VERIFIED`; a complete match reports `BIN-READBACK-MATCHED`. Baud defaults to the bin board registration (460800 here); divider and Flash checks remain. `-RetryDetect` retries initial detection only. Short echoes, decode failures or serial errors during programming stop immediately without automatic rewrite or reset/run. `-DryRun` validates local input without hardware. Offline checks do not qualify additional boards, displays, RF operation or BDT hardware.
+
 ## If startup or connection fails
 
 Check the battery, power, wiring, actual controller and tool versions. Stop on unknown hardware, abnormal supply or readback failure; retain errors/backups rather than repeatedly erasing. If InkTag Recovery remains reachable, use a matching trusted OTA package.

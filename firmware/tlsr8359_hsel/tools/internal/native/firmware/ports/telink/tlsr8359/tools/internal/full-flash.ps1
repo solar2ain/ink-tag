@@ -150,7 +150,15 @@ try {
     if ($transport.status -ne $expectedStatus -or !$transport.recoveryStateVerified -or $transport.preparedSha256 -ne $preparation.prepared_sha256 -or $transport.planSha256 -ne $preparation.write_plan_sha256 -or $transport.writtenBytes -ne $preparation.written_bytes) { throw 'Transport receipt is incomplete/mismatched; installation not confirmed.' }
     if ($transport.readbackOrder -ne 'linear-address' -or $transport.writtenSha256 -ne $preparation.prepared_sha256) { throw 'Complete-image write receipt mismatch.' }
     if (!$transport.wholeChipResetRequested) { throw 'Native final reset was not requested; startup/retained-runtime cleanup remains unconfirmed.' }
-    if (!$SkipReadbackVerify -and ((Get-Item -LiteralPath $readback).Length -ne $transport.writtenBytes -or (Get-FileHash -LiteralPath $readback).Hash -ne $transport.writtenSha256 -or $transport.readbackSha256 -ne $transport.writtenSha256)) { throw 'Complete-image readback receipt mismatch.' }
+    if (!$SkipReadbackVerify) {
+        # PS5 can load the Utility module's script functions in an earlier
+        # child scope. Hash directly instead of depending on Get-FileHash
+        # remaining visible through the public router and nested entries.
+        $stream=[IO.File]::OpenRead($readback); $sha=[Security.Cryptography.SHA256]::Create()
+        try { $readbackHash=[BitConverter]::ToString($sha.ComputeHash($stream)).Replace('-','') }
+        finally { $stream.Dispose(); $sha.Dispose() }
+        if ((Get-Item -LiteralPath $readback).Length -ne $transport.writtenBytes -or $readbackHash -ne $transport.writtenSha256 -or $transport.readbackSha256 -ne $transport.writtenSha256) { throw 'Complete-image readback receipt mismatch.' }
+    }
     $names=Get-TlsrExpectedBluetoothNames -MacAddress $identity
     $appName=[string]$preparation.application_name_hint
     if (!$appName) { throw 'Prepared Settings have no valid application-name hint.' }

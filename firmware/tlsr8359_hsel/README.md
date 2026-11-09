@@ -4,7 +4,7 @@
 
 
 工具以完整明文目录 `release/tools/tlsr8359_hsel/` 交付，不要求外层 ZIP。
-本次工具版本为 `0.2.1.0`；源码 hash 和 buildId 分开记录。
+本次工具版本为 `0.2.1.2`；源码 hash 和 buildId 分开记录。
 本目录不包含、不下载、不默认选择固件，也不绑定某个固件版本。
 probe、backup 无需固件；flash 必须显式传入外部兼容、已签名的
 `app-full.zip` 和主板配置，缺少参数在访问硬件前拒绝。
@@ -45,6 +45,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\setup.ps1"
 烧录时钟路径。它不改变固件正常启动的 48MHz 默认，不把 48MHz／921600 说成可靠
 完整烧录资格。不要自行套用其他主板的时钟或波特率。导出目录的离线检查不增加
 板型、屏幕或现场烧录资格；既有工具快照及固件字节保持原样。
+
+版本 `0.2.1.1` 修正已登记的 1 MiB HSEL4Q_04_20M_33 版型：完整烧录经本机
+UID、匹配的 Flash JEDEC 和完整 1 MiB 清理计划验证后，启用已清空的高地址
+512 KiB 图库。其他 512 KiB 板型保持原范围；禁止只写低区却启用未清理的高区。
+400×300 BWR 通常可提供 20 个 Pro 图槽，Free 仍按原策略限制。App-only OTA
+不会更改已安装的 Factory 基础区标志，已有设备需使用修复后的完整烧录工具。
 
 三个入口及主板配置都在 `firmware/ports/telink/tlsr8359/tools/`。
 以下端口和配置为示例，须按实际设备选择；工具不扫描 BLE。
@@ -93,3 +99,5 @@ Linux/macOS `.sh` 入口仅支持离线计划，未取得实际烧录资格。
 
 维护规则：先在主库 `release/versions/<version>/` 更新文档，审核后单向复制到
 发行库；本目录不授权发布。MCU 固件字节未改变，不要求重编译或重签名。
+
+版本 `0.2.1.2` 新增 `generate-bin.ps1` 和 `flash-bin.ps1`，原 `flash.ps1` 保留。离线生成需完整固件 ZIP 与配置；0.2.1 必须显式指定 MAC。直接 bin 写入默认不回读，可加 `-Verify`；可选 `-PrepareClock24` 复用停机时钟准备。完整工具和内部依赖需一起下载。仓库根目录可复制命令见[烧录说明](https://github.com/solar2ain/ink-tag/blob/main/docs/zh-CN/flash.md)。

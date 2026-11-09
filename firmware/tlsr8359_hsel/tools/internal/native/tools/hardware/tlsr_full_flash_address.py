@@ -6,6 +6,9 @@ from ble_factory_address import decode,derive,encode,validate
 ADDRESS=0x7f160
 BYTES=16
 CAPABILITY=b'INKTAG-TL-ADDR1R\0'
+AUTO_CAPABILITY=b'INKTAG-TL-AUTO1\0'
+INIT_MARKER=0x7F10D
+INIT_PENDING=0xA5
 
 def selector(record: bytes, *, unconfigured: bool = False):
     """Current checksummed ITB1, including the required-typed flag."""

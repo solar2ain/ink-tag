@@ -22,7 +22,8 @@ def source_family(factory: bytes, target: int) -> str:
 
 
 def configured_factory(template: bytes, current: bytes, target: int, uid: bytes,
-                       *, source: str, calibration: bytes | None, clear_all: bool):
+                       *, source: str, calibration: bytes | None, clear_all: bool,
+                       automatic_addresses: bool = False):
     result=bytearray(current)
     if source=='stock':
         if calibration is None or len(calibration)!=8192:
@@ -58,6 +59,8 @@ def configured_factory(template: bytes, current: bytes, target: int, uid: bytes,
             raise ValueError(f'Stock bytes occupy the configuration relocation slot at 0x{0x7F000+at:05X}; no established preservation path')
         result[at:at+size]=template[0x7F000+at:0x7F000+at+size]
     result[0x100:0x10d]=template[0x7F100:0x7F10d]
+    if automatic_addresses:
+        result[0x10d]=0
     result[0x160:0x170]=bytes.fromhex(identity['typed_record_hex'])
     return bytes(result),identity
 
@@ -89,7 +92,8 @@ def prepare(base: Path, config: Path, factory_file: Path,
         raise ValueError('Fresh three-sample read-only UID evidence required')
     calibration=read_exact(calibration_file,8192) if calibration_file else None
     current_factory,identity=configured_factory(template,factory,review['board_id'],bytes.fromhex(uid_hex),
-        source=source,calibration=calibration,clear_all=True)
+        source=source,calibration=calibration,clear_all=True,
+        automatic_addresses=review['automatic_addresses'])
     if expected_mac and identity['address']!=expected_mac.upper():
         raise ValueError('Fresh selected immutable identity differs from ExpectedMac')
     activation, retention = authority(settings, bytes.fromhex(uid_hex), source)
@@ -125,7 +129,9 @@ def prepare(base: Path, config: Path, factory_file: Path,
         externalRetained='NFC EEPROM is not accessed by this programmer; no external erasure claim',
         recovery_epoch=review['compatibility_epoch'],recovery_state='both pages initialized from selected firmware; old pages not read',
         current_factory_sha256=sha(factory),uid_receipt_sha256=sha(uid_receipt.read_bytes()),
-        upper_flash_touched=high,hardware_started=False)
+        upper_flash_touched=high,
+        upper_image_store_enabled=high and not review['base_image_store_only'],
+        hardware_started=False)
     plan_file=output.with_suffix('.plan.json');report_file=output.with_suffix('.json')
     if any(p.exists() for p in (output,plan_file,report_file)):
         raise ValueError('Full preparation evidence exists; no overwrite')

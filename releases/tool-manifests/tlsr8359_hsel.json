@@ -9,14 +9,14 @@
     },
     {
       "path": "firmware/tlsr8359_hsel/README.en.md",
-      "bytes": 7543,
-      "sha256": "6adea2cb9db7fe18b9cc55e4ced02e010a02d6ba75dbbf154b418a50bfbfc419",
+      "bytes": 8629,
+      "sha256": "f9181adbacc3f6f01e995444df0e0f0958329554b40c01139f93c31ba8582e0f",
       "category": "runtime"
     },
     {
       "path": "firmware/tlsr8359_hsel/README.md",
-      "bytes": 7554,
-      "sha256": "323420d2894d864b8655d6cd1d1f9e07d437360308f69ebf3c623df8b2863794",
+      "bytes": 8479,
+      "sha256": "c5134c6fd6a7c684990dbf43b594faeeaf0964fdf60dee505c08aaa2e10e0236",
       "category": "runtime"
     },
     {
@@ -98,9 +98,21 @@
       "category": "runtime"
     },
     {
+      "path": "firmware/tlsr8359_hsel/tools/flash-bin.ps1",
+      "bytes": 152,
+      "sha256": "cefbacf35b8e53e14e25979633d3ecc085e679ffe32a7fe52c64e4fc1f3315d9",
+      "category": "runtime"
+    },
+    {
       "path": "firmware/tlsr8359_hsel/tools/flash.ps1",
       "bytes": 148,
       "sha256": "6c05d644b88820737af4ed4b38a57a7f7289c9405c792bd8036a86af36cf5edf",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/tlsr8359_hsel/tools/generate-bin.ps1",
+      "bytes": 155,
+      "sha256": "69d23f090ca0a819bb83e2b6493d8ba7254168ca9bef9662f0cf31c36e10c74b",
       "category": "runtime"
     },
     {
@@ -111,8 +123,8 @@
     },
     {
       "path": "firmware/tlsr8359_hsel/tools/internal/layout.json",
-      "bytes": 1939,
-      "sha256": "862d075f1162a3d36538a729831351032dd129b3ebba7f035628a3518d5e648d",
+      "bytes": 2089,
+      "sha256": "c44f73971605867f76ad24d36dd9bb2c39ef6e77d8fd75d36a461c874a660c63",
       "category": "runtime"
     },
     {
@@ -143,6 +155,12 @@
       "path": "firmware/tlsr8359_hsel/tools/internal/native/firmware/boards/boards.json",
       "bytes": 95701,
       "sha256": "68dcd465dde461fe85d4d66265f2d849279dbf503dfb6fd221454219b86dd6db",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/tlsr8359_hsel/tools/internal/native/firmware/ports/telink/tlsr8359/ota-production-public.json",
+      "bytes": 360,
+      "sha256": "e83622e1f2e29a9c84a32b17c8a980424887151babf9af2b191bd95f26ee9c39",
       "category": "runtime"
     },
     {
@@ -230,6 +248,12 @@
       "category": "runtime"
     },
     {
+      "path": "firmware/tlsr8359_hsel/tools/internal/native/firmware/ports/telink/tlsr8359/tools/flash-bin.ps1",
+      "bytes": 9889,
+      "sha256": "382d94c5257e5d7906804492507c2528a7e8ffdaece288b3fd7d713b02743e42",
+      "category": "runtime"
+    },
+    {
       "path": "firmware/tlsr8359_hsel/tools/internal/native/firmware/ports/telink/tlsr8359/tools/flash.ps1",
       "bytes": 7809,
       "sha256": "befe65d4960da5aeec15c44086f01e753be7e641fe575a253d96195c4afa615f",
@@ -239,6 +263,12 @@
       "path": "firmware/tlsr8359_hsel/tools/internal/native/firmware/ports/telink/tlsr8359/tools/flash.sh",
       "bytes": 303,
       "sha256": "369289891ef99e6186c235589cf0ba1e1b5b2dfd0aa98d29ef7911fdc4d51846",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/tlsr8359_hsel/tools/internal/native/firmware/ports/telink/tlsr8359/tools/generate-bin.ps1",
+      "bytes": 3656,
+      "sha256": "9f4b6d9fcfc6d74c4408073f21b8ec49b597e51e915509b39852b5cdb7bfd15a",
       "category": "runtime"
     },
     {
@@ -255,8 +285,8 @@
     },
     {
       "path": "firmware/tlsr8359_hsel/tools/internal/native/firmware/ports/telink/tlsr8359/tools/internal/full-flash.ps1",
-      "bytes": 18287,
-      "sha256": "b7d585f1e651871e0f878c77a56a85386066f18fa08970b868d67fe7cf030d70",
+      "bytes": 18749,
+      "sha256": "297a94bbdab56284ed7faad0e0641928b3f4a27497a51a305a5dd2cc12746324",
       "category": "runtime"
     },
     {
@@ -279,8 +309,8 @@
     },
     {
       "path": "firmware/tlsr8359_hsel/tools/internal/native/firmware/ports/telink/tlsr8359/tools/internal/tlsr825x-early-activate.py",
-      "bytes": 75259,
-      "sha256": "d0ab92014b15674ac18a40c4068e366879fca37e7fdd0d49a63da02f8791350e",
+      "bytes": 76261,
+      "sha256": "4c0e5b85e2b9dace5b4baf213e374df95a990cc5c38f70a013e189519266677c",
       "category": "runtime"
     },
     {
@@ -333,14 +363,14 @@
     },
     {
       "path": "firmware/tlsr8359_hsel/tools/internal/native/README.en.md",
-      "bytes": 7277,
-      "sha256": "a9a8ef8fdd08f59d288f5c194320ff1403857e2a87f5143ff62fcb53a8fcde95",
+      "bytes": 8363,
+      "sha256": "c99dfb65d2e6b8d6c109dcf771be322656dacf419ea099e57db6927e0138d414",
       "category": "runtime"
     },
     {
       "path": "firmware/tlsr8359_hsel/tools/internal/native/README.md",
-      "bytes": 7445,
-      "sha256": "fbe402839d260379dfbc7f13264463dac328593a757368563505fc3196145d57",
+      "bytes": 8370,
+      "sha256": "38a84fe368b136f95e230ed188b608b6a3ff7ea279f0dfa36fcfca6c3a3c3930",
       "category": "runtime"
     },
     {
@@ -506,6 +536,12 @@
       "category": "runtime"
     },
     {
+      "path": "firmware/tlsr8359_hsel/tools/internal/native/tools/hardware/tlsr_bin_flash.py",
+      "bytes": 16446,
+      "sha256": "cf20768ba1c6a58b3d3a415d3ebc3ccf51e739c3e521eab77e9b5dfd4fd4318b",
+      "category": "runtime"
+    },
+    {
       "path": "firmware/tlsr8359_hsel/tools/internal/native/tools/hardware/tlsr_factory_config.py",
       "bytes": 2686,
       "sha256": "87fc93ad83a753a2f287fb03c4ba98f2fa2cfc18bb94fb53c67ac66f21857a64",
@@ -519,8 +555,8 @@
     },
     {
       "path": "firmware/tlsr8359_hsel/tools/internal/native/tools/hardware/tlsr_full_flash_address.py",
-      "bytes": 10464,
-      "sha256": "b433cd3ffcefd563b3807096a8e674d03491cd5585094263458be3fd0c3b96c2",
+      "bytes": 10539,
+      "sha256": "ebd1c93dd49484828d32b4b811f719825655639adfa45c70c86701fb8649c395",
       "category": "runtime"
     },
     {
@@ -531,14 +567,14 @@
     },
     {
       "path": "firmware/tlsr8359_hsel/tools/internal/native/tools/hardware/tlsr_full_flash_base.py",
-      "bytes": 11633,
-      "sha256": "1d3396ce7e779fa83747e5156aa4ae37e34b1cf1d66c1453f8eb0fc8580acbfb",
+      "bytes": 11962,
+      "sha256": "874b6a685440e41786ee44b29983d0f0157840cec01a98e140863c7acfb7b53b",
       "category": "runtime"
     },
     {
       "path": "firmware/tlsr8359_hsel/tools/internal/native/tools/hardware/tlsr_full_flash_config.py",
-      "bytes": 21946,
-      "sha256": "cf8895243d7be0e5b3227a13d32bcf06d8d6b92b01f522b4ba0a4c4f8241ca9a",
+      "bytes": 22098,
+      "sha256": "4eb1b4ab70263892ce5ec3e0754aa340fbf7c3530a90ae8e4291e0d2c6247b01",
       "category": "runtime"
     },
     {
@@ -573,8 +609,8 @@
     },
     {
       "path": "firmware/tlsr8359_hsel/tools/internal/native/tools/hardware/tlsr_full_flash_state.py",
-      "bytes": 9665,
-      "sha256": "302db95498dfe44e4f9a772b9b97e6c14d201f62c0b464a6e6317b3e355cee06",
+      "bytes": 9943,
+      "sha256": "0724b5cd4034302bfc0504dbdafa3e3b5d0b08420afc2f769dd3b09a662b7304",
       "category": "runtime"
     },
     {
@@ -585,14 +621,20 @@
     },
     {
       "path": "firmware/tlsr8359_hsel/tools/internal/native/tools/hardware/tlsr_full_flash_v1.py",
-      "bytes": 9872,
-      "sha256": "08bf4440e246397cf95bcc30906ee40c8a924adf5d024eaf0202b1cf84c878f4",
+      "bytes": 10130,
+      "sha256": "636bd4f2edb57ae5dda7ed2f9d847a42ef440eec68771b3591486171ef5fa22a",
       "category": "runtime"
     },
     {
       "path": "firmware/tlsr8359_hsel/tools/internal/native/tools/hardware/tlsr_full_flash_write_plan.py",
-      "bytes": 7919,
-      "sha256": "edf342fc0e1acb2db2f8d77433d6710b8bc554cc661703ae730f6b133dea13c3",
+      "bytes": 8178,
+      "sha256": "46b935544bda29d2b560c29c4cc93bcd7dbce0900b4860cbb444d85254f6391c",
+      "category": "runtime"
+    },
+    {
+      "path": "firmware/tlsr8359_hsel/tools/internal/native/tools/hardware/tlsr_generate_bin.py",
+      "bytes": 6240,
+      "sha256": "b519b4774ea65a0384f8928358e667dca258d540c0b3724ab77585a79bfcf9b7",
       "category": "runtime"
     },
     {
@@ -615,8 +657,8 @@
     },
     {
       "path": "firmware/tlsr8359_hsel/tools/internal/native/tools-manifest.json",
-      "bytes": 21928,
-      "sha256": "d30613b6eddfcea01011ab33867781b16214f338b8486ab973a81276c029ffbb",
+      "bytes": 22371,
+      "sha256": "0d45beeccb817019441516105f657f8d511499ac2102deb4f9fa7906a7cc072f",
       "category": "runtime"
     },
     {

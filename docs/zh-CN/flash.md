@@ -83,6 +83,32 @@ powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Help
 
 完整烧录会清理主控侧用户设置和数据；必要的出厂身份、BLE 地址、校准及同机有效 Pro 按主控说明保留。没有擦除后端的独立外置图片 Flash 会保留。当前某些便携写入入口尚未开放，不能把离线预检成功当作已经可以写入；以每个目录的说明为准。
 
+## TLSR：离线生成 bin 和直接烧录
+
+下载仓库的完整目录，保持 `firmware/tlsr8359_hsel/tools/` 及其 `internal/` 依赖完整；不用把单个脚本放到根目录。先运行该工具目录的 `setup.ps1` 安装 Python 依赖，无需安装 InkTag CLI。
+
+下面两行在 **ink-tag 仓库根目录**执行，使用已发布的 **0.2.1** 固件和 `HSEL5_01_54M_02` 配置。第一行不连接设备，每次生成一个新的 Static Random MAC，输出给一台设备使用的 **512 KiB（524288 字节）** bin 和同名 JSON；已存在的输出不会覆盖。同一 bin 不要给多台设备通刷。
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\tlsr8359_hsel\tools\generate-bin.ps1" -Firmware ".\firmware\tlsr8359_hsel\full\InkTag-tlsr8359_hsel-full-v0.2.1.0-306bd2ed0f10.zip" -Config ".\firmware\tlsr8359_hsel\tools\configs\HSEL5_01_54M_02.toml" -Mac ("C2"+[guid]::NewGuid().ToString("N").Substring(0,10)) -AddressType StaticRandom -Output ".\HSEL5_01_54M_02-0.2.1.bin"
+```
+
+0.2.1 固件必须传入 MAC；也可以把 `-Mac` 后的表达式换成自己的固定地址。手动地址默认 Public，自选静态随机地址须加 `-AddressType StaticRandom` 且首字节最高两位为 11。只有包内 App、Recovery 都声明支持自动 MAC 时才允许省略 MAC 生成通用 bin；旧包会在访问硬件前拒绝。工具更新不会替换已发布的 App、Recovery 或签名。
+
+**此 bin 将设备初始化为 Free**，替换低 512 KiB 的原厂资料、校准、Pro、密码、设置、字体及图片；校准采用 SDK 默认值。需要保留同机身份、校准及有效 Pro 时，继续使用原来的 `flash.ps1 -Firmware ... -Config ... -Port ...`，该入口默认回读，流程保持不变。
+
+BDT 从 **Flash 地址 `0x00000`** 写入整个 bin，并做写后校验。只擦写 `0x00000–0x7FFFF`；对于已确认的 1 MiB 主板，高地址图槽不清空，不使用整片擦除。高地址已有有效图片可能继续占用图槽；配置仍须匹配实际硬件。
+
+也可使用 CH340/SWS 直接写入刚生成的 bin。把 `COM13` 换成实际端口；以下 48 MHz 设备示例使用受保护的停机 24 MHz 编程链路并全量回读，结束后复位回固件正常启动频率：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\firmware\tlsr8359_hsel\tools\flash-bin.ps1" -Bin ".\HSEL5_01_54M_02-0.2.1.bin" -Port COM13 -PrepareClock24 -Verify
+```
+
+`flash-bin.ps1` 只接收 bin，不需要 ZIP、配置或旁边的 JSON。先在本机检查签名和记录，再原样写入低 512 KiB；常规路径不读取旧 MAC、UID、Factory、Settings，不保留旧资料。`-PrepareClock24` 是可选修复模式，会读取本机 UID/JEDEC 并检查链路，不读取旧固件内容。默认先询问 y/N，`-Yes` 可略过询问。
+
+**不加 `-Verify` 默认只写不回读**，结果为 `BIN-WRITTEN-NOT-VERIFIED`；全量回读匹配后才是 `BIN-READBACK-MATCHED`。默认速率取 bin 板型登记值（此板为 460800），仍检查 SWS 分频和 Flash 型号。`-RetryDetect` 只重试初次检测；写入中短回显、解码或串口错误立即失败，不自动重写、不复位运行。`-DryRun` 仅检查本地输入，不连接设备。工具检查不替代各板型、屏幕、射频和 BDT 的实机验证。
+
 ## 连接或启动失败
 
 检查电池、供电、线序、实际主控及工具版本。不能识别、供电异常或读回失败时停止，保留错误和备份，不反复全擦。若 InkTag Recovery 仍可连接，可使用匹配且可信的 OTA 包恢复。

@@ -76,7 +76,7 @@ def load_bound_plan(path: Path, image: bytes) -> dict:
             review['base_package_sha256'] != plan['base_package_sha256'] or
             review['configuration_sha256'] != plan['configuration_sha256']):
         raise ValueError('Full plan differs from the accepted signed firmware/config pair')
-    for start,length in ((0x7F100,13),(0x7F110,80)):
+    for start,length in ((0x7F100,14 if review['automatic_addresses'] else 13),(0x7F110,80)):
         if image[start:start+length] != template[start:start+length]:
             raise ValueError('Full Factory defaults differ from explicit Config')
     from tlsr_full_flash_state import defaults, encode_settings
@@ -95,6 +95,9 @@ def load_bound_plan(path: Path, image: bytes) -> dict:
     observed=plan.get('observed_jedec')
     if observed not in FLASH_BYTES or FLASH_BYTES[observed] < plan['capacity']:
         raise ValueError('Full span exceeds the observed supported Flash part')
+    if (review['board_id'] == 2 and not review['base_image_store_only'] and
+            plan['capacity'] != 2 * BASE_BYTES):
+        raise ValueError('Enabled upper image storage requires a complete 1-MiB clear plan')
     if plan['capacity'] > BASE_BYTES and not (
             plan['clear_all'] and review['board_id']==2 and registry.get('physicalFlashSizeBytes')==1048576 and
             registry['firstFlash']['flashJedecId'].upper()==observed):

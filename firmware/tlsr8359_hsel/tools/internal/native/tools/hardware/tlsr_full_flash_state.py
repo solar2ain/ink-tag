@@ -138,14 +138,14 @@ def check_dependencies() -> dict:
     return dict(defaultFormatsAvailable=True, deviceAccess=False)
 
 
-def defaults(mac: bytes, screen: bytes, pins: bytes, aux: bytes, board_id: int) -> tuple[dict[int, bytes], dict]:
+def defaults(mac: bytes | None, screen: bytes, pins: bytes, aux: bytes, board_id: int) -> tuple[dict[int, bytes], dict]:
     from tlsr_full_flash_config import validate_aux_wire
-    if len(mac) != 6:
+    if mac is not None and len(mac) != 6:
         raise ValueError('Exact selected address required')
     validate_aux_wire(aux, pins, board_id)
-    name = f'IKT_TL_{mac[1]:02X}{mac[0]:02X}'
-    label = f'InkTag {mac[1]:02X}{mac[0]:02X}'
-    managed,links=managed_records(name)
+    name = f'IKT_TL_{mac[1]:02X}{mac[0]:02X}' if mac is not None else ''
+    label = f'InkTag {mac[1]:02X}{mac[0]:02X}' if mac is not None else ''
+    managed,links=managed_records(name) if mac is not None else ({},dict(applicationName=None,managedLink=None))
     body = b'SP\1\x11' + screen + bytes(3)
     device = bytearray(64)
     device[:7] = bytes((1, 1, 0, 10, 0, 9, 0))
@@ -155,6 +155,8 @@ def defaults(mac: bytes, screen: bytes, pins: bytes, aux: bytes, board_id: int) 
     records = {3: body + struct.pack('<I', fnv(body)), 4: b'\1\1\xff\0\0',
         6: bytes((1, len(name), len(label))) + name.encode().ljust(19, b'\0') + label.encode().ljust(24, b'\0'),
         7: bytes(device), 11: b'\1\1',29:b'\1\0\1',**managed}
+    if mac is None:
+        del records[6]  # Existing firmware derives names from its saved MAC.
     for rid, data in records.items():
         validate_record(rid, data)
     return records, dict(deviceLabel=label,**links)
@@ -181,7 +183,7 @@ def initialize_full_state(seed: dict[int,bytes], epoch: int, *, confirmed: bool,
             (FLOOR+PAGE,b'\xff'*PAGE,'recovery-state-clear'),
             (SETTINGS,encode_settings(1,records),'settings-generation'),
             (SETTINGS+PAGE,b'\xff'*PAGE,'settings-clear')]
-    identity=records[6];name=identity[3:3+identity[1]].decode('utf-8')
+    identity=records.get(6);name=identity[3:3+identity[1]].decode('utf-8') if identity else None
     return dict(writes=writes,epoch=epoch,
         application_name_hint=name,
         semantic_signature_authority='unchanged device validators, not host restoration')

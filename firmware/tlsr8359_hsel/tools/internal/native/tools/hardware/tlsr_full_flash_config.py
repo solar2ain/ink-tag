@@ -142,7 +142,10 @@ def workflow_bindings() -> dict[str, str]:
         'tlsr_full_flash_format','tlsr_full_flash_state',
         'tlsr_full_flash_write_plan','tlsr_full_flash_transport',
         'ble_factory_address','tlsr_full_flash_address','tlsr_trusted_entry_profile')]
-    paths += ['tools/hardware/flash-workflow.py',
+    paths += ['firmware/ports/telink/tlsr8359/tools/generate-bin.ps1',
+              'firmware/ports/telink/tlsr8359/tools/flash-bin.ps1',
+              'firmware/ports/telink/tlsr8359/ota-production-public.json',
+              'tools/hardware/tlsr_generate_bin.py', 'tools/hardware/tlsr_bin_flash.py', 'tools/hardware/flash-workflow.py',
               'tools/hardware/tlsr-terminal-entry.py', 'tools/sdk/make-tlsr-full-flash.py',
               'tools/hardware/board_config.py', 'tools/hardware/tlsr_flash_jedec.py',
               'cli/src/inktag_cli/protocol.py',
@@ -339,7 +342,10 @@ def validate_board_config(data: dict) -> dict:
             "aux_wire_hex":aux.hex().upper(), "aux_explicit":bool({'buttons','buzzer'} & set(gpio)),
             "runtime_gpio_override": True, "generic_delivered": False,
             "no_panel_bringup": no_panel,
-            "base_image_store_only": board == "hs_nebular420"}
+            # Current Full v1 admits Nebular420 only with a fresh registered
+            # 1-MiB JEDEC proof and a complete upper-extent clear plan. Keep
+            # that cleared space available to the existing runtime allocator.
+            "base_image_store_only": False}
 
 
 def read_board_config(path: str | Path) -> dict:

@@ -4,7 +4,7 @@ Shared layout: `ota/`, `full/`, `tools/`; configurations are in `tools/configs/`
 
 
 Deliver the complete plaintext directory `release/tools/tlsr8359_hsel/`; no outer
-ZIP is required. This tools version is `0.2.1.0`; source hashes and
+ZIP is required. This tools version is `0.2.1.2`; source hashes and
 build IDs are separate. This directory includes, downloads and implicitly selects **no firmware**. Probe
 and backup need no firmware. Flash requires an explicitly selected external
 signed `app-full.zip` and PCB configuration; missing arguments fail before
@@ -61,6 +61,14 @@ reliable Full programming, or permit copying another PCB's timing parameters.
 Offline exported-directory validation adds no board/panel/hardware qualification;
 old tool snapshots and firmware bytes remain unchanged.
 
+Version0.2.1.1 fixes the registered1-MiB HSEL4Q_04_20M_33 variant. Full
+flashing enables the cleared upper512-KiB image extent only after exact-unit
+UID, matching JEDEC and complete1-MiB clear-plan checks. Other512-KiB boards
+retain their bounds. A low-only write cannot enable an uncleared upper extent.
+A400x300 BWR profile normally provides20 Pro slots; the Free limit is unchanged.
+App-only OTA preserves an installed base-only Factory flag; existing devices
+need the corrected complete-flashing tools to replace that flag.
+
 Complete flashing asks y/N. Preserve only an existing valid, same-device native
 Pro token/sequence and original identity, BLE address/type, calibration and
 required boot data. No issuer, replacement token or post-flash BLE activation
@@ -112,3 +120,5 @@ validation delivery, not all-board or public-release approval.
 Maintain documentation first under the source repository's
 `release/versions/<version>/`, then copy one way to distribution after review.
 Unchanged MCU bytes require no rebuild or new signature.
+
+Tools `0.2.1.2` add `generate-bin.ps1` and `flash-bin.ps1` while retaining `flash.ps1`. Generation requires an explicit complete ZIP and configuration; 0.2.1 requires an explicit MAC. Direct bin writes default to no readback; add `-Verify` for comparison and optional `-PrepareClock24` for protected stopped-clock preparation. Download the complete tools and internal dependencies together. See the [flashing guide](https://github.com/solar2ain/ink-tag/blob/main/docs/en/flash.md#tlsr-offline-bin-generation-and-direct-writing) for checkout-root commands.
