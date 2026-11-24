@@ -4,10 +4,10 @@ Turn a shelf label into a calendar, small clock, personal anti-loss tag or reusa
 
 | Project | Main parts | Features |
 | --- | --- | --- |
-| 4.2-inch calendar or photo album | 4.2-inch label, printed enclosure | Free: built-in calendar, photos and stored-image slideshow |
-| Magnetic mini clock | ZKC21V with a supported panel | Free for an ordinary clock; Pro and a compatible panel for partial refresh |
-| PhotoTag-style tag | Nebular/Stellar 154Q, or an early replaceable-panel Stellar 154R + E6 | Pro for Find and E6 control; experimental |
-| Instant-photo-style frame | Huawei 3.98-inch four-colour panel + ZKC21V/ZKC21B | Free can send static photos |
+| 4.2-inch calendar or photo album | 4.2-inch label, printed enclosure | BASIC: built-in calendar, photos and stored-image slideshow |
+| Magnetic mini clock | ZKC21V with a supported panel | BASIC for an ordinary clock; PRO and a compatible panel for partial refresh |
+| PhotoTag-style tag | Nebular/Stellar 154Q, or an early replaceable-panel Stellar 154R + E6 | PRO for Find and E6 control; experimental |
+| Instant-photo-style frame | Huawei 3.98-inch four-colour panel + ZKC21V/ZKC21B | BASIC can send static photos |
 
 ## Project 1: a 4.2-inch calendar or photo album
 
@@ -23,7 +23,7 @@ Fit a new enclosure and stand the label on a desk or attach it magnetically. The
 - An enclosure matching the board/panel, and magnets if desired.
 - A compatible battery, charger and supply circuit for a rechargeable conversion.
 
-Use the [slim 4.2-inch enclosure model on MakerWorld](https://makerworld.com.cn/zh/models/3018140-4-2cun-mo-shui-ping-jie-qian-chao-bo-wai-ke-tp4056#profileId-3546023). It offers a 9mm version with a stand and a 7mm version without, with space for a TP4056 board. Check actual board, battery and cable clearance. The model page also has [front](../assets/projects/calendar-front.webp) and [back](../assets/projects/calendar-back.webp) references.
+Use the [slim 4.2-inch enclosure model on MakerWorld](https://makerworld.com.cn/zh/models/3018140-4-2cun-mo-shui-ping-jie-qian-chao-bo-wai-ke-tp4056#profileId-3546023). It offers a 9mm version with a stand and a 7mm version without, with space for a TP4056 board. Check actual board, battery and cable clearance. The model page also shows the front and back of the enclosure.
 
 ### Set it up
 
@@ -40,7 +40,7 @@ Use a ZKC21V as a small clock for the fridge, desk or bedside.
 
 ![A ZKC21V clock displayed among fridge magnets](../assets/projects/mini-clock.webp)
 
-Set the time in WebUI and choose the built-in clock. The pictured build uses partial refresh: it requires Pro and a panel configuration that actually supports it. Different ZKC21V boards/panels do not necessarily share that ability. An ordinary clock is available in Free.
+Set the time in WebUI and choose the built-in clock. The pictured build uses partial refresh: it requires PRO and a panel configuration that actually supports it. Different ZKC21V boards/panels do not necessarily share that ability. An ordinary clock is available in BASIC.
 
 Partial-refresh clocks still perform a daily full refresh/background change, and frequent refresh uses more power. See [tested panels](tested-screens.md).
 
@@ -52,17 +52,17 @@ Show a photo, name or contact information and enable experimental Apple Find My 
 
 ### Choose a device
 
-- **Nebular-154Q-N or Stellar-154Q-N:** a four-colour black/white/red/yellow photo tag. Some labels include Pro in the product name; still identify the actual board.
+- **Nebular-154Q-N or Stellar-154Q-N:** a four-colour black/white/red/yellow photo tag. Some labels include PRO in the product name; still identify the actual board.
 - **Early replaceable-panel Stellar-154R-N:** fit an **E6 1.54-inch six-colour panel** for a six-colour PhotoTag. The later fixed-panel revision cannot use this conversion; check supported configurations such as `HSEL5_01_54M_00`.
 - **Nebular-213R-N:** its small board can be used without the display. Connect a suitable battery and fit it inside a bag, enclosure or other personal item as an anti-loss tag.
 
-E6 control needs Pro. On ordinary label boards, follow the [panel instructions](tested-screens.md#e6-six-colour-screens) to insulate cable pin16 and leave it floating; otherwise the panel may heat up and draw excessive power. Disconnect power before work and do not apply this wiring to different cables.
+E6 control needs PRO. On ordinary label boards, follow the [panel instructions](tested-screens.md#e6-six-colour-screens) to insulate cable pin16 and leave it floating; otherwise the panel may heat up and draw excessive power. Disconnect power before work and do not apply this wiring to different cables.
 
 ### Set it up
 
 1. Match firmware, configuration and panel using [supported devices](supported-devices.md) and [tested panels](tested-screens.md). Check cable/pin compatibility before a panel swap.
 2. Import a photo, preview and adjust dithering, or add a name, phone number or QR code on the canvas, then send it.
-3. Activate Pro on a supported board and enable broadcasts on Find.
+3. Activate PRO on a supported board and enable broadcasts on Find.
 4. Save the device information, import it into a local client and enable recording as described in [Find and tag migration](find.md). The hosted and standalone versions do not include the query backend.
 
 Nearby participating Apple Find My devices relay reports. **This is not real-time GPS and updates are not guaranteed.** It is experimental, not Apple certification or full PhotoTag compatibility, and is intended to help find personal belongings.

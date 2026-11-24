@@ -1,0 +1,4 @@
+# Independent key-free base App entry. Keep native integrity/admission and
+# ordinary AUTH. No private Pro source discovery or fallback.
+override INKTAG_BUILD_PRO := 0
+include firmware/ports/nordic/nrf52832/Makefile

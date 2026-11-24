@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "templates": [
+    {"id":"weather-date-card","kind":"date-card","name":"日期牌","summary":"大字日期、星期农历与天气预报 · 主机动态","accent":"#b32025","width":400,"height":300,"preview":["18","星期日","农历九月初九"],"layoutData":"weather-date-card"},
+    {"id":"weather-paper","kind":"weather","name":"报纸天气站","summary":"大字天气、24小时气温柱与湿度曲线 · 主机动态","accent":"#191919","width":400,"height":300,"preview":["22°","湿度 68%","24小时温湿度"],"layoutData":"weather-paper"},
+    {
+      "id": "calendar-native",
+      "kind": "calendar",
+      "name": "预置日历模板",
+      "summary": "独立文字控件与日历网格",
+      "accent": "#d44735",
+      "width": 400,
+      "height": 300,
+      "preview": [
+        "2026 / 09",
+        "25",
+        "星期五"
+      ],
+      "nativeAction": "calendar",
+      "deviceGuiPreset": "layout-v1-calendar"
+    },
+    {
+      "id": "clock-native",
+      "kind": "clock",
+      "name": "预置时钟模板",
+      "summary": "独立文字控件与七段时钟",
+      "accent": "#157466",
+      "width": 400,
+      "height": 300,
+      "preview": [
+        "14:28",
+        "9月25日",
+        "24℃"
+      ],
+      "nativeAction": "clock",
+      "deviceGuiPreset": "layout-v1-clock"
+    },
+    {
+      "id": "schedule-week",
+      "kind": "schedule",
+      "name": "一周课表",
+      "summary": "可编辑课程、时间与星期",
+      "accent": "#2c61a5",
+      "width": 400,
+      "height": 300,
+      "preview": [
+        "课程表",
+        "数学 英语",
+        "三年二班"
+      ],
+      "layoutData": "schedule"
+    },
+    {
+      "id": "todo-today",
+      "kind": "todo",
+      "name": "今日待办",
+      "summary": "勾选事项、优先级与备注",
+      "accent": "#df9b24",
+      "width": 128,
+      "height": 250,
+      "preview": [
+        "今日待办",
+        "固件测试",
+        "项目评审"
+      ],
+      "layoutData": "todo"
+    },
+    {
+      "id": "todo-focus",
+      "kind": "todo",
+      "name": "专注清单",
+      "summary": "三件要事与自由笔记",
+      "accent": "#d44735",
+      "width": 400,
+      "height": 300,
+      "preview": [
+        "今日专注",
+        "三件要事",
+        "随手记"
+      ],
+      "layoutData": "focus"
+    },
+    {
+      "id": "business-minimal",
+      "kind": "business",
+      "name": "极简名片",
+      "summary": "身份、联系方式与二维码",
+      "accent": "#111714",
+      "width": 400,
+      "height": 300,
+      "preview": [
+        "LIN MO",
+        "产品设计",
+        "inktag.dev"
+      ],
+      "layoutData": "business"
+    },
+    {
+      "id": "wifi-guest",
+      "kind": "wifi",
+      "name": "访客 Wi-Fi",
+      "summary": "网络信息与扫码连接",
+      "accent": "#157466",
+      "width": 128,
+      "height": 250,
+      "preview": [
+        "GUEST WIFI",
+        "INKTAG-STUDIO",
+        "扫码连接"
+      ],
+      "layoutData": "wifi"
+    },
+    {
+      "id": "photo-caption",
+      "kind": "photo",
+      "name": "图片与题注",
+      "summary": "独立图片区域与可编辑题注",
+      "accent": "#d44735",
+      "width": 400,
+      "height": 300,
+      "preview": [
+        "PHOTO",
+        "A quiet afternoon",
+        "2026.09"
+      ],
+      "layoutData": "photo"
+    },
+    {
+      "id": "photo-diptych",
+      "kind": "photo",
+      "name": "双图故事",
+      "summary": "两张图片与独立题注",
+      "accent": "#157466",
+      "width": 400,
+      "height": 300,
+      "preview": [
+        "两段时光",
+        "图片1",
+        "图片2"
+      ],
+      "layoutData": "diptych"
+    },
+    {
+      "id": "photo-grid",
+      "kind": "photo",
+      "name": "四格相册",
+      "summary": "四个可分别替换的图片区域",
+      "accent": "#111714",
+      "width": 400,
+      "height": 300,
+      "preview": [
+        "生活切片",
+        "四格相册",
+        "2026"
+      ],
+      "layoutData": "grid"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "clock": [
+    {"utc":1791436800,"timezoneMinutes":480,"weekStart":1,"beforeMs":1791436798900,"afterMs":1791436799100,"rttMs":200,"offset":1,"uncertainty":1.1},
+    {"utc":1791436800,"timezoneMinutes":-300,"weekStart":1,"beforeMs":1791436800900,"afterMs":1791436801100,"rttMs":200,"offset":-1,"uncertainty":1.1},
+    {"utc":1791436800,"timezoneMinutes":0,"weekStart":0,"beforeMs":1791436800000,"afterMs":1791436801000,"rttMs":100,"offset":null,"uncertainty":1.05},
+    {"utc":0,"timezoneMinutes":0,"weekStart":0,"beforeMs":1791436800000,"afterMs":1791436800000,"rttMs":0,"offset":null,"uncertainty":1}
+  ],
+  "status": [
+    {"board":"aesl22_nrf","payloadHex":"01000c0000000017b80b000000000000","voltage":3,"temperature":23,"mcuTemperature":23,"panelTemperature":null},
+    {"board":"om6626_zkc21b","payloadHex":"01000c0000000017b80b000000000000495454010388019001","voltage":3,"temperature":23,"mcuTemperature":24.5,"panelTemperature":25},
+    {"board":"gr5331_zkc21v","payloadHex":"01000c0000000017b80b000000000000495454010288ff9001","voltage":3,"temperature":23,"mcuTemperature":null,"panelTemperature":null},
+    {"board":"tlsr8359_nowa154r","payloadHex":"0100040000000000b80b000000000000495454010000000000","voltage":3,"temperature":null,"mcuTemperature":null,"panelTemperature":null},
+    {"board":"da14585_aesl29","payloadHex":"01000c0000000017dc05000000000000","voltage":1.5,"temperature":23,"mcuTemperature":null,"panelTemperature":null},
+    {"board":"gr551x_zkc42vm","payloadHex":"01000c00000000177117000000000000","voltage":null,"temperature":23,"mcuTemperature":null,"panelTemperature":null}
+  ]
+}

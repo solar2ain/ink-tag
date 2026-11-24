@@ -1,0 +1,924 @@
+{
+  "schemaVersion": 1,
+  "protocolVersion": 16,
+  "status": "frozen",
+  "pinConfigPolicy": {
+    "version": 1,
+    "capability": "PIN_CONFIG",
+    "qualification": "PENDING_TLSR_PILOT",
+    "getRequestHex": "02",
+    "setRequest": "02,01,completePinBlock16",
+    "removeOverrideRequestHex": "0200",
+    "getAndAckResponse": "01,flags,editableRoleMaskLE16,defaultPinBlock16,effectivePinBlock16",
+    "responseBytes": 36,
+    "editableRoles": "bits0..11SamePinOrder;ReservedBitsZero;NotADeclarationOfImplementedAuxActions",
+    "readOnly": "PIN_CONFIG permits a complete valid applied snapshot; editableRoleMask0 means read-only and forbids every SET including defaults and identical candidates. Unknown or unapplied sources remain unavailable; never infer pins from board names",
+    "flags": "bit0OverridePresent,bit1DefaultValid,bit2RecipeBusyDerived;otherBitsZero",
+    "reportFlags": [
+      { "id": 1, "name": "OVERRIDE_PRESENT" },
+      { "id": 2, "name": "DEFAULT_VALID" },
+      { "id": 4, "name": "RECIPE_BUSY_DERIVED" }
+    ],
+    "recipeBusyDerived": "ReadOnlySemanticMarker;BUSYPolarityFromExactControllerRecipe;NoManualOverride;DoesNotQualifyENHighOrBoardInversion;NoStorageOrWireLengthChange",
+    "absentDefault": "sixteenZeroBytes;notADecodablePinBlock",
+    "pinBlock": "version1,reserved0,ENAndLEDOnlyActiveLowLE16,MOSI,CLOCK,CS,DC,RESET,BUSY,ENABLE,RED,GREEN,BLUE,reservedFF,reservedFF",
+    "mutation": "FreeHardwareConfig;ExistingPasswordAUTH;WholeCandidateValidate;BusyRefuseWithoutCancel;CommitThenIdleApply",
+    "unknownAck": "Unconfirmed;SameIdentityReadbackOnly;NeverReplay",
+    "defaultOwnership": "FullOrQualifiedCompiledDefault;NotWritableByBLE",
+    "backendAuthority": "PackageMuxProtectedPinsAndCompleteExistingAuxConflictValidationMandatory"
+  },
+  "auxIoThreeButtonPolicy": {
+    "qualification": "TLSR_PILOT_NOT_FANNED_OUT",
+    "getRequestHex": "03",
+    "responseAndSetBytes": 12,
+    "wire": "01,gpio1,flags1,gpio2,flags2,gpio3,flags3,reserved0,reserved1,reserved2,reservedLE16",
+    "buttonFlags": "bit0ActiveLow,bits1..2PullNoneUpDown;otherBitsZero",
+    "disabledSlot": "GPIO255,flags0;fixedThreeSlotsNeverCompact",
+    "defaultButton": "ExactBoardBuiltInButtonUsesSlot1;NotAnAdditionalFourthButton",
+    "newButtonDefaults": "ActiveLow,PullUp;AllAbsentExceptQualifiedBoardDefault",
+    "reservedTail": "Opaque five-byte storage; preserve on button updates; never drive outputs",
+    "clientNegotiation": "GETKind03Only;Exact12ByteVersion1;NoEmptyGetOrEightByteFallback",
+    "write": "ExactlyOneSET;WholeCandidateCrossRouteValidate;AUTH;IdleOnly;PersistThenApply;UnknownOutcomeNoReplay",
+    "uart": "NoUserTXDRXDRoles;ExistingPinBlockTailRemains255AndReservedNoReallocation",
+    "gestureBehavior": "ReuseExistingCommonButtonStatePerConfiguredSlotAndExistingBindings;NoNewActionOrTierSemantics"
+  },
+  "lifecyclePolicy": {
+    "capability": "LIFECYCLE_V2",
+    "retiredSystemAction": 3,
+    "clearUserData": "IMAGES_AND_IMAGE_METADATA_ONLY",
+    "resetSettings": "ORDINARY_SETTINGS_AND_PASSWORD_PRESERVE_IMAGES_PRO_FIND_FACTORY",
+    "resetSettingsProofPurpose": 2,
+    "resetSettingsProofDataHex": "494b542d52455345542d53455454494e47532d76310e0105",
+    "resetSettingsProofSha256": "b3c19dde69da6152490e42efa9d479ee7f9f07daeef071e6aedf0673e1b24655",
+    "passwordCommitOrder": "AFTER_ORDINARY_SETTINGS_SUCCESS_NEVER_OFF_ON_UNKNOWN",
+    "partialOrdinarySettingsOnFailure": "ALLOWED_PASSWORD_MUST_REMAIN_ON"
+  },
+  "advertisingConfigPolicy": {
+    "version": 1,
+    "qualification": "GR_PILOT",
+    "getRequestBytes": 0,
+    "setAndResponseBytes": 4,
+    "wire": "version1,mode0AlwaysOr1Delayed,timeoutSecondsLE16",
+    "minimumTimeoutSeconds": 1,
+    "maximumTimeoutSeconds": 65535,
+    "defaultMode": 0,
+    "defaultTimeoutSeconds": 120,
+    "discovery": "EXACT_GET_SUCCESS;UNSUPPORTED_MEANS_UNAVAILABLE;NO_NEW_CAPABILITY_BIT",
+    "getAuthorization": "READ_ONLY_WITHOUT_PRO_ACTIVATION",
+    "setAuthorization": "EXISTING_AUTH_AND_PRO_AND_SETTINGS_TRANSACTION_GATES",
+    "persistence": "ORDINARY_DEVICE_SETTINGS;COMMIT_BEFORE_SUCCESS_ECHO",
+    "countdown": "BOOT_AND_DISCONNECT_OPEN_WINDOW;CONNECTED_NEVER_FORCIBLY_DISCONNECTED",
+    "wake": "EXISTING_PHYSICAL_BUTTON_AND_NFC_ACTIVITY;BACKGROUND_DISPLAY_DOES_NOT_REOPEN",
+    "scope": "INKTAG_CONNECTABLE_ADVERTISING_ONLY;PRESERVE_FIND_MY_AND_BACKGROUND_TASKS",
+    "unknownWriteOutcome": "READ_BACK_SAME_DEVICE_BEFORE_RETRY;NEVER_AUTOMATICALLY_REPEAT_SET"
+  },
+  "clockRatePolicy": {
+    "version": 1,
+    "qualification": "PENDING_TLSR_PILOT",
+    "section": "CLOCK_RATE",
+    "getRequestBytes": 1,
+    "setRequestBytes": 4,
+    "setRequest": "section7,version1,ppmSignedInt16LE",
+    "responseBytes": 6,
+    "response": "section7,version1,currentPpmSignedInt16LE,bootDefaultPpmSignedInt16LE",
+    "minimumPpm": -4000,
+    "maximumPpm": 4000,
+    "positiveMeaning": "SPEED_UP_UTC",
+    "fallbackPpm": 0,
+    "bootDefaultSource": "QUALIFIED_EXACT_BOARD_FACTORY_CONFIGURATION",
+    "persistence": "VOLATILE_OVERRIDE_UNTIL_BOOT_DEFAULT_RELOAD",
+    "setTimePreservesPpm": true,
+    "setResponse": "CURRENT_AND_BOOT_DEFAULT_SNAPSHOT",
+    "tier": "InkTag",
+    "passwordGate": "EXISTING_AUTH",
+    "rawMonotonicClocks": "UNCHANGED"
+  },
+  "devicePasswordPolicy": {
+    "version": 1,
+    "qualification": "PENDING_TLSR_PILOT",
+    "capability": "DEVICE_PASSWORD",
+    "defaultEnabled": false,
+    "tier": "PRO",
+    "passwordReadCommand": false,
+    "passwordChangeRequiresOldPassword": true,
+    "passwordDisableRequiresOldPassword": true,
+    "qrCredentialCannotReplaceOldPassword": true,
+    "passwordChangeAuthorization": "INDEPENDENT_W_FRESH_SINGLE_USE_CANDIDATE_SHA256_GRANT",
+    "passwordAlphabet": "ASCII_ALPHANUMERIC_CASE_SENSITIVE",
+    "minimumLength": 4,
+    "defaultLength": 8,
+    "maximumLength": 16,
+    "credential": "SHA256(ASCII(IKT-DEVICE-PASSWORD-KEY-v1)||immutableDeviceId8||passwordAscii)",
+    "changeKey": "SHA256(ASCII(IKT-DEVICE-PASSWORD-CHANGE-v1)||immutableDeviceId8||passwordAscii)",
+    "proof": "HMAC-SHA256(key32,ASCII(IKT-DEVICE-PASSWORD-PROOF-v1)||immutableDeviceId8||revisionLe32||nonce16||purpose1||candidateDigestIfChanging32)[0:16]",
+    "proofKey": "AUTH_V_CHANGE_OR_DISABLE_W",
+    "challengeRequestBytes": 1,
+    "statusResponseBytes": 12,
+    "challengeResponseBytes": 22,
+    "challengeLifetimeMs": 30000,
+    "qrCredential": "URL_FRAGMENT_AUTH_HEX64_NOT_PLAINTEXT_PASSWORD",
+    "qrRead": "AUTHENTICATED_CONNECTION_ONLY",
+    "nfcCredential": "FORBIDDEN",
+    "transferObject": "DEVICE_PASSWORD_BUNDLE",
+    "maximumBundleBytes": 480,
+    "maximumSettingsRecordBytes": 420,
+    "bundleVersion": 2,
+    "bundleHeaderBytes": 73,
+    "authRequestBytes": 18,
+    "changeRequestBytes": 50,
+    "bootCooldownMs": 5000,
+    "settingsRecord": "EXISTING_DEVICE_INFO_QR_5_ATOMIC_NEW_SCHEMA",
+    "recoveryEntry": "AUTHENTICATED_APP",
+    "recoveryTransfer": "SIGNED_COMPATIBLE_IMAGE_WITHOUT_PASSWORD_PRESERVING_SETTINGS",
+    "legacyOwnerProof": "TRANSITION_ONLY_DO_NOT_REMOVE_BEFORE_PILOT_QUALIFICATION"
+  },
+  "nfcChannelSnapshotPolicy": {
+    "operation": "NFC_CHANNEL_SNAPSHOT",
+    "request": ["operation"],
+    "variants": [
+      { "version": 1, "transport": "FM11_TYPE4", "payloadBytes": 34 },
+      {
+        "version": 1,
+        "transportKind": 2,
+        "transport": "TYPE2_HOST_BLOCK0_RAW",
+        "payloadBytes": 21,
+        "wire": ["version", "transportKind", "i2cAddress", "block", "rawLength", "raw16"],
+        "i2cAddress": 85,
+        "block": 0,
+        "rawLength": 16,
+        "readOnly": true,
+        "semanticDecoding": "NONE_UNQUALIFIED_HOST_MAP",
+        "arbitraryAddressOrRegisterRequest": false
+      },
+      {
+        "version": 1,
+        "transport": "FM11_TYPE4_CACHED_CONTACT",
+        "payloadBytes": 37,
+        "prefixBytes": 34,
+        "prefix": "FM11_TYPE4_UNCHANGED",
+        "cachedTail": ["manufacturer", "subtype", "contactFormat"],
+        "contactFormat": { "0": "unknown", "1": "native00", "2": "native55" },
+        "additionalHardwareRead": false,
+        "rfQualification": false,
+        "arbitraryAddressOrRegisterRequest": false,
+        "boardGate": "EXACT_DETECT_CONTACT_FORMAT_ONLY"
+      },
+      {
+        "version": 1,
+        "transportKind": 4,
+        "transport": "HS_CONTACT_TRACE",
+        "payloadBytes": 51,
+        "i2cAddress": 87,
+        "selectors": [34, 51, 68, 85],
+        "readOnly": true,
+        "semanticDecoding": "SIGNATURE_UNQUALIFIED_HOST_MAP",
+        "additionalHardwareRead": false,
+        "rfQualification": false,
+        "arbitraryAddressOrRegisterRequest": false
+      }
+    ],
+    "unsupportedFirmware": "UNSUPPORTED",
+    "readFailure": "NON_OK_TEST_RESULT_NO_FABRICATED_RAW",
+    "bulkTransferCapability": false
+  },
+  "requestHeader": ["opcode", "transactionId", "flags"],
+  "responseHeader": ["opcode", "transactionId", "status"],
+  "healthPowerPolicy": {
+    "version": 1,
+    "warningMv": 2400,
+    "criticalMv": 2000,
+    "displayMinMv": 0,
+    "flashMinMv": 2400,
+    "otaMinMv": 2600,
+    "recoveryHysteresisMv": 150,
+    "displayMinZeroMeaning": "NO_VOLTAGE_GATE",
+    "invalidVoltageMeaning": "FAIL_CLOSED_OPERATIONS_READ_ONLY_AVAILABLE"
+  },
+  "displaySettingsPolicy": {
+    "version": 1,
+    "wire": ["section", "version", "weekStart", "flags", "countdownTargetDayLe32", "countdownNameLength", "countdownNameUtf8"],
+    "flags": [
+      { "id": 1, "name": "BOOT_REFRESH" },
+      { "id": 16, "name": "BRAND_HIDDEN", "requires": "PRO" }
+    ],
+    "weekStartValues": [0, 1],
+    "countdown": {
+      "targetDayMeaning": "LOCAL_CIVIL_DAYS_SINCE_1970_01_01",
+      "disabledEncoding": { "countdownTargetDayLe32": 0, "countdownNameLength": 0 },
+      "maximumNameBytes": 12,
+      "maximumNameUnicodeCodePoints": 4,
+      "sharedByNativeModes": ["CALENDAR", "CLOCK"],
+      "deviceMustRejectMissingGlyphs": true
+    },
+    "writeThenRefresh": "SET_SETTINGS_THEN_NORMAL_CALENDAR_ACTION",
+    "freeBrandMeaning": "ALWAYS_VISIBLE_DEVICE_ENFORCED",
+    "invalidActivationMeaning": "ALWAYS_VISIBLE_FREE_MARK"
+  },
+  "ghostCleanPolicy": {
+    "version": 1,
+    "minimumCycles": 1,
+    "defaultCycles": 5,
+    "maximumCycles": 10,
+    "sequence": "WHITE_BLACK_WHITE",
+    "terminalColor": "WHITE",
+    "cancellableThrough": "CANCEL"
+  },
+  "transferCompressionPolicy": {
+    "version": 1,
+    "newFirmwareDefault": "DISABLED_20261110; reserved capability/descriptor IDs remain; shared clients retain historical RLE",
+    "firmwareCompileSwitch": "INKTAG_TRANSFER_PACKBITS_ENABLED=0; source retained for constrained base ports using explicit value1; normal new main-platform images omit its transfer references/linkage",
+    "disabledImageCodecStatus": "UNSUPPORTED_AFTER_STRUCTURAL_VALIDATION_BEFORE_SIDE_EFFECTS",
+    "capability": "TRANSFER_PACKBITS_RLE",
+    "descriptorBlackMaskBit": "PACKBITS_RLE",
+    "objects": ["DIRECT_FRAME", "STORED_IMAGE"],
+    "selectionThresholdPercent": 95,
+    "scope": "BLE_WIRE_ONLY",
+    "blockMode": "SEGMENT_TOKEN_STREAM_PACKED_AT_TOKEN_BOUNDARIES",
+    "compressedWritePayload": ["decodedOffsetLe32", "decodedLengthLe16", "packBitsBlock"],
+    "encodingScope": "ENCODE_COMPLETE_SEGMENT_BEFORE_PACKETIZATION",
+    "packetization": "GREEDY_COMPLETE_TOKENS_WITHIN_NEGOTIATED_ENCODED_PAYLOAD",
+    "decodedLengthMeaning": "SUM_OF_COMPLETE_TOKEN_OUTPUT_MAY_EXCEED_RAW_WRITE_CHUNK",
+    "decoderValidation": "VALIDATE_COMPLETE_BLOCK_AND_EXACT_DECODED_LENGTH_BEFORE_SIDE_EFFECTS_THEN_STREAM_TOKENS",
+    "maximumDecoderScratchBytes": 130,
+    "flowControl": "ONE_ACKNOWLEDGED_V2_WRITE_PER_ENCODED_BLOCK",
+    "unacknowledgedWindow": "NOT_PART_OF_VERSION_1_REQUIRES_SEPARATE_READY_BACKPRESSURE_RESUME_CONTRACT",
+    "repeatControl": "BIT7_SET_COUNT_LOW7_PLUS_3_THEN_VALUE",
+    "literalControl": "BIT7_CLEAR_COUNT_PLUS_1_THEN_BYTES",
+    "offsetAckStatusCrcAndSegments": "DECODED_BYTES",
+    "persistedImageFormat": "UNCHANGED_RAW_DEVICE_FRAME"
+  },
+  "transferLzo1xPolicy": {
+    "version": 1,
+    "rolloutDecision": "2026-11-10 new GR/OM/TLSR/nRF52832 firmware uses LZO and raw, base/Pro; DA14585/nRF52811 switch only after same-profile native App/Recovery no-growth proof, otherwise retain existing codec pending decision",
+    "pilot": "TLSR_ACEE",
+    "capabilityExtension": "TRANSFER_LZO1X_2000",
+    "descriptorBlackMaskBit": "LZO1X",
+    "objects": ["DIRECT_FRAME", "STORED_IMAGE"],
+    "maximumDecodedBlockBytes": 2000,
+    "compressedWritePayload": ["decodedOffsetLe32", "decodedLengthLe16", "completeLzo1xStream"],
+    "encodedBlockLimit": "NEGOTIATED_WRITE_DATA_BYTES_MINUS_TWO",
+    "validation": "EXACT_STREAM_END_AND_DECODED_LENGTH_BEFORE_SINK_SIDE_EFFECTS",
+    "selection": "PREFER_LZO_WHEN_ADVERTISED_AND_WORTHWHILE_OTHERWISE_SUPPORTED_RLE_OR_RAW",
+    "mixedCompressionFlags": "REJECT",
+    "otherPorts": "NOT_ADVERTISED_AND_REJECTED_UNTIL_INDEPENDENTLY_IMPLEMENTED_AND_QUALIFIED",
+    "persistedImageFormat": "UNCHANGED_RAW_DEVICE_FRAME"
+  },
+  "imageReadingOrientationPolicy": {
+    "version": 1,
+    "pilot": "TLSR8359",
+    "capabilityExtension": "IMAGE_READING_ORIENTATION",
+    "capabilitiesExtension": "GET_CAPABILITIES bytes24..27 little-endian uint32; absent before28 bytes means zero; bytes17..23 keep their existing settings meaning",
+    "descriptor": "DIRECT_FRAME and STORED_IMAGE byte3 bits2..3 encode clockwise quarter turns from upright reading canvas to unchanged logical screen; bits0..1 retain segment black mask, bit6=LZO1X and bit7=reserved PACKBITS_RLE; bits4..5 must be zero and the two codec bits cannot be combined",
+    "storage": "Existing96-byte IKI1 header black_mask byte12 retains bits0..3; strip both wire-only compression bits6/7; no new field, stride, partition, boot write or migration",
+    "overlay": "Device-enforced badge in reading-frame bottom-right, composed before existing profile rotation/mirrors; base cannot choose position/hide; Pro suppression still needs device entitlement",
+    "qualification": "Advertise only after direct, stored, replacement, cold reopen, slideshow and failure/cancel cleanup consume the same metadata; other ports remain zero",
+    "fallback": "Unadvertised devices receive original flags only and retain fixed screen-oriented badge; never silently send orientation bits to them"
+  },
+  "guiAssetPolicy": {
+    "version": 1,
+    "nativeFontContract": "gui-font-native-v3.json",
+    "packageMagic": "ITFA",
+    "packageSchema": 1,
+    "maximumPackageBytes": 16384,
+    "bankCount": 2,
+    "commitOrder": "PAYLOAD_THEN_INACTIVE_BANK_HEADER_LAST",
+    "requiredFontFaces": [
+      { "id": 0, "name": "WQY9_TEXT" },
+      { "id": 1, "name": "WQY12_TEXT" },
+      { "id": 2, "name": "HELV14_NUMERIC" },
+      { "id": 3, "name": "HELV18_NUMERIC" }
+    ],
+    "calendarTables": "APPLICATION_LINKED",
+    "defaultQr": "APPLICATION_LINKED_FALLBACK",
+    "annualHolidaySchedule": "SETTINGS_JOURNAL"
+  },
+  "imageNamePolicy": {
+    "version": 1,
+    "qualification": "NRF52811_PILOT_VERIFIED_OTHER_PORTS_PENDING",
+    "rename": "RETIRED_NAMES_SET_DURING_UPLOAD_ONLY",
+    "typeUpdate": "RETIRED_TYPES_SET_DURING_UPLOAD_ONLY",
+    "capability": "IMAGE_METADATA",
+    "wire": "TRANSFER_BEGIN_STORED_IMAGE_NAME_AND_TYPE",
+    "retiredMutationCommand": "SET_IMAGE_METADATA_0x1E_RESERVED_NO_CLIENT_ENTRY",
+    "minimumNonemptyNameBytes": 1,
+    "maximumNameBytes": 35,
+    "emptyNameMeaning": "SAVE_UNNAMED_IMAGE",
+    "matching": "TRIMMED_EXACT_UTF8_ASCII_CASE_INSENSITIVE",
+    "reservedVocabulary": "FIXED_NFC_COMMANDS_AND_SLOT_NUMBER_FORMS",
+    "duplicateMeaning": "REJECT",
+    "listMeaning": "LIST_RESOURCES_RETURNS_CURRENT_EFFECTIVE_IMAGE_NAME_ONLY",
+    "nfcMeaning": "UNIQUE_CURRENT_IMAGE_NAME_MAPS_TO_SHOW_RESOURCE_AMBIGUITY_REFUSES",
+    "storageMeaning": "IMAGE_OWNED_METADATA_NO_SLOT_ALIAS_INHERITANCE",
+    "replaceMeaning": "NEW_IMAGE_NAME_NEVER_INHERITS_OLD_SLOT_NAME",
+    "deleteMeaning": "IMAGE_AND_NAME_REMOVED_TOGETHER_NO_RENUMBER",
+    "capacityMeaning": "BACKEND_VERIFIED_IMAGE_CAPACITY_INTERRUPTED_IN_PLACE_REPLACEMENT_MAY_LOSE_TARGET",
+    "nfcEepromWrite": "FORBIDDEN"
+  },
+  "fixedImageSlots": {
+    "referenceCommit": "d3186c0c629f77328fe973c562006dc1d285295f",
+    "resourceInfoPrefixBytes": 32,
+    "fixedSlotCountOffset": 32,
+    "fixedSlotCountEncoding": "UINT16_LE",
+    "resourceInfoBytes": 34,
+    "resourceListDonePrefixBytes": 2,
+    "occupiedBitmap": "COMPLETE_PHYSICAL_OCCUPANCY_LSB_ID0_CEIL_COUNT_DIV8_BYTES_UNUSED_BITS_ZERO",
+    "occupiedBitmapMissing": "EMPTY_OCCUPANCY_UNKNOWN_NO_EXPLICIT_EMPTY_TARGET",
+    "maximumSlotCount": 255,
+    "automaticTargetId": 255,
+    "missingOrZeroCount": "NO_FIXED_CAPACITY_OR_EXPLICIT_EMPTY_TARGET_CLAIM",
+    "nonzeroCount": "EXACT_CURRENT_SCREEN_CAPACITY_AND_EXPLICIT_EMPTY_TARGET_SUPPORTED",
+    "capacity": "MIN_SUM_FLOOR_PER_PHYSICAL_FLASH_255",
+    "targetWire": "EXISTING_TRANSFER_BEGIN_OPTIONAL_TARGET_ID",
+    "displayNumber": "WIRE_ID_PLUS_ONE_NO_HOLE_COMPACTION"
+  },
+  "ownerAuthorizationPolicy": {
+    "version": 1,
+    "status": "HISTORICAL_ONLY_NOT_LIFECYCLE_V2",
+    "lifecycleReplacement": "lifecyclePolicy",
+    "capability": "OWNER_AUTHORIZATION",
+    "challengeCommand": "GET_OWNER_CHALLENGE",
+    "authorizeCommand": "AUTHORIZE_OWNER_ACTION",
+    "credentialMethods": [
+      { "id": 1, "name": "INSTALLED_PRO_CODE" },
+      { "id": 2, "name": "CURRENT_FIND_K" }
+    ],
+    "challengeResponse": ["version", "randomNonce16"],
+    "authorizeRequest": ["version", "method", "actionHash32", "tag16"],
+    "actionHash": "SHA256(opcodeByte||flagsByte||payloadLengthLe16||exactPayload)",
+    "maximumProtectedPayloadBytes": 192,
+    "proKey": "SHA256(ASCII(IKT-OWNER-PRO-v1)||verifiedInstalledToken96)",
+    "findKey": "SHA256(ASCII(IKT-OWNER-FIND-v1)||currentFindK16)",
+    "tag": "HMAC-SHA256(derivedKey,ASCII(IKT-OWNER-ACTION-v1)||immutableDeviceId8||randomNonce16||actionHash32)[0:16]",
+    "challengeLifetimeMs": 30000,
+    "grantLifetimeMs": 5000,
+    "grantMeaning": "ONE_USE_SAME_CONNECTION_EXACT_NEXT_PROTECTED_ACTION",
+    "failedProofMeaning": "CONSUME_CHALLENGE_NO_GRANT_NO_MUTATION",
+    "disconnectMeaning": "CLEAR_CHALLENGE_AND_GRANT",
+    "protectedActions": [
+      "SYSTEM_ACTION:CLEAR_USER_DATA",
+      "SYSTEM_ACTION:RESET_SETTINGS",
+      "SET_FIND_CONFIG:DISABLE",
+      "FIND_ACTION:CLEAR_CONFIG",
+      "FIND_OWNER_REPLACEMENT"
+    ]
+  },
+  "findKeyringPolicy": {
+    "wireVersion": 1,
+    "scheduleVersion": 1,
+    "periodSeconds": 1800,
+    "minimumKeys": 20,
+    "defaultKeys": 40,
+    "maximumKeys": 100,
+    "maximumKeysPerChunk": 8,
+    "maximumChunks": 13,
+    "invalidTimeUsesFallbackKey": true,
+    "commitOrder": "CHUNKS_THEN_MANIFEST_LAST"
+  },
+  "otaRejectExtension": {
+    "version": 1,
+    "magic": [73, 75],
+    "wireSize": 15,
+    "fieldOffsets": {
+      "ack": 0,
+      "magic": 1,
+      "version": 3,
+      "reason": 4,
+      "stage": 5,
+      "flags": 6,
+      "detail": 7,
+      "sampledMv": 11,
+      "thresholdMv": 13
+    },
+    "reasons": [
+      { "id": 0, "name": "UNSPECIFIED" },
+      { "id": 1, "name": "POWER_SAMPLE_INVALID" },
+      { "id": 2, "name": "VOLTAGE_BELOW_MIN" },
+      { "id": 3, "name": "IMAGE_INFO_INVALID" },
+      { "id": 4, "name": "ADDRESS_OR_LAYOUT_MISMATCH" },
+      { "id": 5, "name": "ERASE_FAILED" },
+      { "id": 6, "name": "WRITE_FAILED" },
+      { "id": 7, "name": "CHECKSUM_OR_SIGNATURE_FAILED" },
+      { "id": 8, "name": "INTERNAL" }
+    ],
+    "stages": [
+      { "id": 0, "name": "UNKNOWN" },
+      { "id": 1, "name": "MODE_SWITCH" },
+      { "id": 2, "name": "PROGRAM_START" },
+      { "id": 3, "name": "ERASE" },
+      { "id": 4, "name": "PROGRAM_WRITE" },
+      { "id": 5, "name": "PROGRAM_END" },
+      { "id": 6, "name": "IMAGE_VERIFY" },
+      { "id": 7, "name": "SIGNATURE_VERIFY" },
+      { "id": 8, "name": "METADATA_COMMIT" },
+      { "id": 9, "name": "BOOT_CONFIRM" }
+    ],
+    "flags": [
+      { "id": 1, "name": "SAMPLED_MV_VALID" },
+      { "id": 2, "name": "THRESHOLD_MV_VALID" },
+      { "id": 4, "name": "DETAIL_IS_ADDRESS" },
+      { "id": 8, "name": "DETAIL_IS_OFFSET" }
+    ]
+  },
+  "commands": [
+    { "id": 1, "name": "HELLO", "group": "core" },
+    { "id": 2, "name": "GET_CAPABILITIES", "group": "core" },
+    { "id": 3, "name": "GET_DEVICE_INFO", "group": "core" },
+    { "id": 4, "name": "GET_STATUS", "group": "core" },
+    { "id": 5, "name": "GET_TIME", "group": "core" },
+    { "id": 6, "name": "SET_TIME", "group": "core" },
+    { "id": 7, "name": "GET_SCREEN_PROFILE", "group": "core" },
+    { "id": 8, "name": "SET_SCREEN_PROFILE", "group": "core" },
+    { "id": 9, "name": "SET_DISPLAY_MODE", "group": "core" },
+    { "id": 10, "name": "DISPLAY_ACTION", "group": "core" },
+    { "id": 11, "name": "CANCEL", "group": "core" },
+    { "id": 12, "name": "GET_SETTINGS", "group": "core" },
+    { "id": 13, "name": "SET_SETTINGS", "group": "core" },
+    { "id": 14, "name": "SYSTEM_ACTION", "group": "core" },
+    { "id": 15, "name": "GET_HEALTH", "group": "core" },
+
+    { "id": 16, "name": "TRANSFER_BEGIN", "group": "transfer" },
+    { "id": 17, "name": "TRANSFER_WRITE", "group": "transfer" },
+    { "id": 18, "name": "TRANSFER_COMMIT", "group": "transfer" },
+    { "id": 19, "name": "TRANSFER_ABORT", "group": "transfer" },
+    { "id": 20, "name": "GET_TRANSFER_STATUS", "group": "transfer" },
+    { "id": 21, "name": "GET_GUI_ASSET_INFO", "group": "transfer" },
+
+    { "id": 24, "name": "GET_RESOURCE_INFO", "group": "resource" },
+    { "id": 25, "name": "LIST_RESOURCES", "group": "resource" },
+    { "id": 26, "name": "READ_RESOURCE", "group": "resource" },
+    { "id": 27, "name": "DELETE_RESOURCE", "group": "resource" },
+    { "id": 28, "name": "CLEAR_RESOURCES", "group": "resource" },
+    { "id": 29, "name": "SET_RESOURCE_ALIAS", "group": "retired", "status": "SYMBOL_ONLY_PENDING_PORT_REMOVAL" },
+    { "id": 30, "name": "SET_IMAGE_METADATA", "group": "resource" },
+
+    { "id": 32, "name": "GET_INPUT_CONFIG", "group": "input-io" },
+    { "id": 33, "name": "SET_INPUT_CONFIG", "group": "input-io" },
+    { "id": 34, "name": "GET_IO_CONFIG", "group": "input-io" },
+    { "id": 35, "name": "SET_IO_CONFIG", "group": "input-io" },
+    { "id": 36, "name": "GET_INDICATOR_CONFIG", "group": "input-io" },
+    { "id": 37, "name": "SET_INDICATOR_CONFIG", "group": "input-io" },
+
+    { "id": 40, "name": "GET_NFC_CAPABILITIES", "group": "nfc" },
+    { "id": 41, "name": "GET_NFC_STATUS", "group": "nfc" },
+    { "id": 42, "name": "GET_NFC_NDEF", "group": "nfc" },
+    { "id": 43, "name": "SET_NFC_NDEF", "group": "nfc" },
+
+    { "id": 48, "name": "GET_LAYOUT_CAPABILITIES", "group": "layout" },
+    { "id": 49, "name": "VALIDATE_LAYOUT", "group": "layout" },
+    { "id": 50, "name": "ACTIVATE_LAYOUT", "group": "layout" },
+    { "id": 51, "name": "GET_LAYOUT_STATUS", "group": "layout" },
+
+    { "id": 64, "name": "GET_ACTIVATION_STATUS", "group": "security" },
+    { "id": 65, "name": "SET_ACTIVATION_CODE", "group": "security" },
+    { "id": 66, "name": "GET_SECURITY_INFO", "group": "security" },
+    { "id": 67, "name": "GET_ACTIVATION_REQUEST", "group": "security" },
+    { "id": 68, "name": "GET_OWNER_CHALLENGE", "group": "security" },
+    { "id": 69, "name": "AUTHORIZE_OWNER_ACTION", "group": "security" },
+    { "id": 70, "name": "GET_DEVICE_PASSWORD_STATUS", "group": "security" },
+    { "id": 71, "name": "GET_DEVICE_PASSWORD_CHALLENGE", "group": "security" },
+    { "id": 72, "name": "AUTHORIZE_DEVICE_PASSWORD", "group": "security" },
+    { "id": 73, "name": "SHOW_PASSWORD_DEVICE_INFO", "group": "security" },
+
+    { "id": 80, "name": "GET_FIND_CAPABILITIES", "group": "find" },
+    { "id": 81, "name": "GET_FIND_CONFIG", "group": "find" },
+    { "id": 82, "name": "SET_FIND_CONFIG", "group": "find" },
+    { "id": 83, "name": "FIND_ACTION", "group": "find" },
+    { "id": 84, "name": "GET_FIND_OWNER_STATUS", "group": "find" },
+    { "id": 85, "name": "BEGIN_FIND_OWNER_ROTATION", "group": "find" },
+    { "id": 86, "name": "STAGE_FIND_OWNER_ROTATION", "group": "find" },
+    { "id": 87, "name": "COMMIT_FIND_OWNER_ROTATION", "group": "find" },
+    { "id": 88, "name": "ABORT_FIND_OWNER_ROTATION", "group": "find" },
+
+    { "id": 96, "name": "GET_ADVERTISING_CONFIG", "group": "advertising" },
+    { "id": 97, "name": "SET_ADVERTISING_CONFIG", "group": "advertising" },
+
+    { "id": 112, "name": "LIST_TESTS", "group": "debug-test" },
+    { "id": 113, "name": "RUN_TEST", "group": "debug-test" },
+    { "id": 114, "name": "GET_TEST_STATUS", "group": "debug-test" },
+    { "id": 115, "name": "OPEN_DEBUG_SESSION", "group": "debug-test" },
+    { "id": 116, "name": "DEBUG_EXECUTE", "group": "debug-test" },
+    { "id": 117, "name": "DEBUG_READ", "group": "debug-test" },
+    { "id": 118, "name": "CLOSE_DEBUG_SESSION", "group": "debug-test" },
+    { "id": 119, "name": "ABORT_DEBUG_OPERATION", "group": "debug-test" }
+  ],
+  "reservedCommandRanges": [
+    { "start": 22, "end": 23, "purpose": "transfer expansion" },
+    { "start": 31, "end": 31, "purpose": "resource expansion" },
+    { "start": 38, "end": 39, "purpose": "input and IO expansion" },
+    { "start": 44, "end": 47, "purpose": "NFC expansion" },
+    { "start": 52, "end": 63, "purpose": "native layout and widget protocol" },
+    { "start": 74, "end": 79, "purpose": "activation, signing and security" },
+    { "start": 89, "end": 95, "purpose": "find and loss prevention" },
+    { "start": 98, "end": 111, "purpose": "future product features" },
+    { "start": 120, "end": 127, "purpose": "debug and test expansion" },
+    { "start": 128, "end": 223, "purpose": "future protocol commands" },
+    { "start": 240, "end": 255, "purpose": "protocol control and future use" }
+  ],
+  "events": [
+    { "id": 224, "name": "READY" },
+    { "id": 225, "name": "PROGRESS" },
+    { "id": 226, "name": "COMPLETE" },
+    { "id": 227, "name": "STATUS_CHANGED" },
+    { "id": 228, "name": "LOG" },
+    { "id": 229, "name": "INPUT" },
+    { "id": 230, "name": "ERROR" },
+    { "id": 231, "name": "RESOURCE_CHANGED" },
+    { "id": 232, "name": "DEVICE_CHANGED" }
+  ],
+  "reservedEventRanges": [
+    { "start": 233, "end": 239, "purpose": "future asynchronous events" }
+  ],
+  "statuses": [
+    { "id": 0, "name": "OK" },
+    { "id": 1, "name": "UNKNOWN_COMMAND" },
+    { "id": 2, "name": "UNSUPPORTED" },
+    { "id": 3, "name": "INVALID_REQUEST" },
+    { "id": 4, "name": "INVALID_STATE" },
+    { "id": 5, "name": "BUSY" },
+    { "id": 6, "name": "TIMEOUT" },
+    { "id": 7, "name": "NOT_FOUND" },
+    { "id": 8, "name": "NO_SPACE" },
+    { "id": 9, "name": "CHECKSUM_ERROR" },
+    { "id": 10, "name": "INCOMPATIBLE" },
+    { "id": 11, "name": "IO_ERROR" },
+    { "id": 12, "name": "PERSISTENCE_ERROR" },
+    { "id": 13, "name": "DENIED" },
+    { "id": 14, "name": "LOCKED" },
+    { "id": 15, "name": "CANCELLED" },
+    { "id": 16, "name": "INTERNAL_ERROR" },
+    { "id": 17, "name": "RETRY_REQUIRED" },
+    { "id": 18, "name": "LOW_POWER" }
+  ],
+  "valueSets": [
+    {
+      "name": "RequestFlag",
+      "cType": "inktag_request_flag_v2_t",
+      "cPrefix": "INKTAG_REQUEST_FLAG_",
+      "entries": [
+        { "id": 0, "name": "NONE" },
+        { "id": 1, "name": "CONFIRM" },
+        { "id": 2, "name": "FORCE" }
+      ]
+    },
+    {
+      "name": "TransferDescriptorFlag",
+      "cType": "inktag_transfer_descriptor_flag_v2_t",
+      "cPrefix": "INKTAG_TRANSFER_DESCRIPTOR_FLAG_",
+      "entries": [
+        { "id": 4, "name": "READING_ROTATION_90" },
+        { "id": 8, "name": "READING_ROTATION_180" },
+        { "id": 64, "name": "LZO1X" },
+        { "id": 128, "name": "PACKBITS_RLE" }
+      ]
+    },
+    {
+      "name": "CapabilityExtension",
+      "cType": "inktag_capability_extension_v1_t",
+      "cPrefix": "INKTAG_CAPABILITY_EXTENSION_",
+      "entries": [
+        { "id": 1, "name": "IMAGE_READING_ORIENTATION" },
+        { "id": 2, "name": "PANEL_GPIO_SNAPSHOT" },
+        { "id": 4, "name": "TRANSFER_LZO1X_2000" }
+      ]
+    },
+    {
+      "name": "Capability",
+      "cType": "inktag_capability_v2_t",
+      "cPrefix": "INKTAG_CAPABILITY_",
+      "entries": [
+        { "id": 1, "name": "TIME" },
+        { "id": 2, "name": "SCREEN_PROFILE" },
+        { "id": 4, "name": "DIRECT_TRANSFER" },
+        { "id": 8, "name": "RESOURCES" },
+        { "id": 16, "name": "SLIDESHOW" },
+        { "id": 32, "name": "DEVICE_NAME" },
+        { "id": 64, "name": "DEVICE_LABEL" },
+        { "id": 128, "name": "TELEMETRY" },
+        { "id": 256, "name": "INPUT" },
+        { "id": 512, "name": "IO" },
+        { "id": 1024, "name": "INDICATOR" },
+        { "id": 2048, "name": "NFC" },
+        { "id": 4096, "name": "LAYOUT" },
+        { "id": 8192, "name": "ACTIVATION" },
+        { "id": 16384, "name": "FIND" },
+        { "id": 32768, "name": "TEST" },
+        { "id": 65536, "name": "DEBUG" },
+        { "id": 131072, "name": "OTA_RECOVERY" },
+        { "id": 262144, "name": "LIFECYCLE" },
+        { "id": 524288, "name": "EXPERIMENTAL_TIMED_SLEEP" },
+        { "id": 1048576, "name": "HEALTH" },
+        { "id": 2097152, "name": "EXPERIMENTAL_FIND" },
+        { "id": 4194304, "name": "DEVICE_INFO_QR" },
+        { "id": 8388608, "name": "GUI_ASSET_UPDATE" },
+        { "id": 16777216, "name": "TRANSFER_PACKBITS_RLE" },
+        { "id": 33554432, "name": "RESOURCE_ALIAS", "status": "RETIRED_NO_NEW_CLIENT_USE" },
+        { "id": 67108864, "name": "OWNER_AUTHORIZATION" },
+        { "id": 134217728, "name": "DEVICE_PASSWORD" },
+        { "id": 268435456, "name": "IMAGE_METADATA" },
+        { "id": 536870912, "name": "LIFECYCLE_V2" },
+          { "id": 1073741824, "name": "PIN_CONFIG" },
+          { "id": 2147483648, "name": "CLOCK_PARTIAL_REFRESH" }
+      ]
+    },
+    {
+      "name": "ActivationState",
+      "cType": "inktag_activation_state_v2_t",
+      "cPrefix": "INKTAG_ACTIVATION_STATE_",
+      "entries": [
+        { "id": 0, "name": "UNAVAILABLE" },
+        { "id": 1, "name": "DEFAULT" },
+        { "id": 2, "name": "PRO" },
+        { "id": 3, "name": "INVALID" }
+      ]
+    },
+    {
+      "name": "ActivationResult",
+      "cType": "inktag_activation_result_v2_t",
+      "cPrefix": "INKTAG_ACTIVATION_RESULT_",
+      "entries": [
+        { "id": 0, "name": "OK" },
+        { "id": 1, "name": "BAD_LENGTH" },
+        { "id": 2, "name": "BAD_FORMAT" },
+        { "id": 3, "name": "KEY_UNAVAILABLE" },
+        { "id": 4, "name": "WRONG_CODE" },
+        { "id": 5, "name": "STORAGE_FAILURE" },
+        { "id": 6, "name": "IDENTITY_UNAVAILABLE" },
+        { "id": 7, "name": "INTERNAL_ERROR" },
+        { "id": 8, "name": "NO_SESSION" },
+        { "id": 9, "name": "WRONG_DEVICE" },
+        { "id": 10, "name": "WRONG_PRODUCT" },
+        { "id": 11, "name": "CHALLENGE_MISMATCH" },
+        { "id": 12, "name": "UNSUPPORTED_FEATURE" },
+        { "id": 13, "name": "SECURITY_EPOCH_TOO_OLD" },
+        { "id": 14, "name": "STALE_SEQUENCE" },
+        { "id": 15, "name": "BAD_SIGNATURE" }
+      ]
+    },
+    {
+      "name": "ActivationScheme",
+      "cType": "inktag_activation_scheme_v1_t",
+      "cPrefix": "INKTAG_ACTIVATION_SCHEME_",
+      "entries": [
+        { "id": 0, "name": "NONE" },
+        { "id": 1, "name": "ECDSA_P256_IKAC1_V1" }
+      ]
+    },
+    {
+      "name": "DisplayMode",
+      "cType": "inktag_display_mode_v2_t",
+      "cPrefix": "INKTAG_DISPLAY_MODE_",
+      "entries": [
+        { "id": 0, "name": "DEVICE_INFO" },
+        { "id": 1, "name": "CALENDAR" },
+        { "id": 2, "name": "CLOCK" },
+        { "id": 3, "name": "CLEAR" },
+        { "id": 4, "name": "DIRECT_IMAGE" },
+        { "id": 5, "name": "RESOURCE" },
+        { "id": 6, "name": "SLIDESHOW" }
+      ]
+    },
+    {
+      "name": "DisplayAction",
+      "cType": "inktag_display_action_v2_t",
+      "cPrefix": "INKTAG_DISPLAY_ACTION_",
+      "entries": [
+        { "id": 1, "name": "REFRESH" },
+        { "id": 2, "name": "NEXT" },
+        { "id": 3, "name": "PAUSE" },
+        { "id": 4, "name": "RESUME" },
+        { "id": 5, "name": "GHOST_CLEAN" },
+        { "id": 6, "name": "SLEEP" }
+      ]
+    },
+    {
+      "name": "SettingsSection",
+      "cType": "inktag_settings_section_v2_t",
+      "cPrefix": "INKTAG_SETTINGS_SECTION_",
+      "entries": [
+        { "id": 1, "name": "IDENTITY" },
+        { "id": 2, "name": "DISPLAY" },
+        { "id": 3, "name": "INPUT" },
+        { "id": 4, "name": "IO" },
+        { "id": 5, "name": "INDICATOR" },
+        { "id": 6, "name": "NFC" },
+        { "id": 7, "name": "CLOCK_RATE" }
+      ]
+    },
+    {
+      "name": "SystemAction",
+      "cType": "inktag_system_action_v2_t",
+      "cPrefix": "INKTAG_SYSTEM_ACTION_",
+      "entries": [
+        { "id": 1, "name": "RESET" },
+        { "id": 2, "name": "SLEEP" },
+        { "id": 3, "name": "FACTORY_RESET" },
+        { "id": 4, "name": "OTA_RECOVERY" },
+        { "id": 5, "name": "RESET_SETTINGS" },
+        { "id": 6, "name": "CLEAR_USER_DATA" }
+      ]
+    },
+    {
+      "name": "SleepWakeFlag",
+      "cType": "inktag_sleep_wake_flag_v2_t",
+      "cPrefix": "INKTAG_SLEEP_WAKE_",
+      "entries": [
+        { "id": 1, "name": "TIMER" },
+        { "id": 2, "name": "BUTTON" }
+      ]
+    },
+    {
+      "name": "NfcCapability",
+      "cType": "inktag_nfc_capability_v2_t",
+      "cPrefix": "INKTAG_NFC_CAPABILITY_",
+      "entries": [
+        { "id": 1, "name": "PRESENT" },
+        { "id": 2, "name": "FIELD_DETECT" },
+        { "id": 4, "name": "WAKE" },
+        { "id": 8, "name": "UID" },
+        { "id": 16, "name": "NDEF_READ" },
+        { "id": 32, "name": "NDEF_WRITE" },
+        { "id": 64, "name": "COMMAND" },
+        { "id": 128, "name": "PASSIVE_RF" }
+      ]
+    },
+    {
+      "name": "NfcDiagnostic",
+      "cType": "inktag_nfc_diagnostic_v2_t",
+      "cPrefix": "INKTAG_NFC_DIAGNOSTIC_",
+      "entries": [
+        { "id": 1, "name": "FIELD_ACTIVE" },
+        { "id": 2, "name": "IRQ_LATCHED" },
+        { "id": 4, "name": "LOW_SAMPLED" },
+        { "id": 8, "name": "SESSION_TRACKING" },
+        { "id": 16, "name": "SESSION_CONSUMED" },
+        { "id": 32, "name": "RETENTION_REARMED" },
+        { "id": 64, "name": "FIELD_CONFIRMED" },
+        { "id": 128, "name": "CONTACT_PARKED" }
+      ]
+    },
+    {
+      "name": "NfcCommand",
+      "cType": "inktag_nfc_command_v1_t",
+      "cPrefix": "INKTAG_NFC_COMMAND_",
+      "entries": [
+        { "id": 1, "name": "PING" },
+        { "id": 2, "name": "DEVICE_INFO" },
+        { "id": 3, "name": "CALENDAR" },
+        { "id": 4, "name": "CLOCK" },
+        { "id": 5, "name": "NEXT_IMAGE" },
+        { "id": 6, "name": "PREVIOUS_IMAGE" },
+        { "id": 7, "name": "SHOW_SLOT" },
+        { "id": 8, "name": "PAUSE" },
+        { "id": 9, "name": "OPEN_BLE_TRANSFER" },
+        { "id": 10, "name": "SLIDESHOW" },
+        { "id": 11, "name": "CLEAR" },
+        { "id": 12, "name": "SET_TIME" }
+      ]
+    },
+    {
+      "name": "NfcCommandResult",
+      "cType": "inktag_nfc_command_result_v1_t",
+      "cPrefix": "INKTAG_NFC_COMMAND_RESULT_",
+      "entries": [
+        { "id": 0, "name": "NONE" },
+        { "id": 1, "name": "ACCEPTED" },
+        { "id": 2, "name": "CONSUMED" },
+        { "id": 3, "name": "MALFORMED" },
+        { "id": 4, "name": "CHECKSUM_ERROR" },
+        { "id": 5, "name": "STALE_SEQUENCE" },
+        { "id": 6, "name": "UNSUPPORTED" },
+        { "id": 7, "name": "DENIED" },
+        { "id": 8, "name": "BUSY" }
+      ]
+    },
+    {
+      "name": "FindCapability",
+      "cType": "inktag_find_capability_v1_t",
+      "cPrefix": "INKTAG_FIND_CAPABILITY_",
+      "entries": [
+        { "id": 2, "name": "TIME_MULTIPLEX" },
+        { "id": 4, "name": "PERSISTENT_CONFIG" },
+        { "id": 8, "name": "PAUSES_WHILE_CONNECTED" },
+        { "id": 16, "name": "EXPERIMENTAL" },
+        { "id": 32, "name": "OWNER_ROTATION" },
+        { "id": 64, "name": "UTC_SLOT_ROTATION" },
+        { "id": 128, "name": "INVALID_TIME_FALLBACK" },
+        { "id": 256, "name": "PUBLIC_ONLY_P224_V2" },
+        { "id": 512, "name": "PUBLIC_ONLY_OWNER_REPLACEMENT" },
+        { "id": 1024, "name": "PUBLIC_ONLY_OWNER_UNREGISTER" }
+      ]
+    },
+    {
+      "name": "FindMode",
+      "cType": "inktag_find_mode_v1_t",
+      "cPrefix": "INKTAG_FIND_MODE_",
+      "entries": [
+        { "id": 1, "name": "TIME_DERIVED" }
+      ]
+    },
+    {
+      "name": "FindAction",
+      "cType": "inktag_find_action_v1_t",
+      "cPrefix": "INKTAG_FIND_ACTION_",
+      "entries": [
+        { "id": 1, "name": "CLEAR_CONFIG" },
+        { "id": 2, "name": "UNREGISTER_OWNER" }
+      ]
+    },
+    {
+      "name": "TransferObject",
+      "cType": "inktag_transfer_object_v2_t",
+      "cPrefix": "INKTAG_TRANSFER_OBJECT_",
+      "entries": [
+        { "id": 1, "name": "DIRECT_FRAME" },
+        { "id": 2, "name": "STORED_IMAGE" },
+        { "id": 3, "name": "DEVICE_INFO_QR" },
+        { "id": 4, "name": "NFC_DATA" },
+        { "id": 5, "name": "NATIVE_LAYOUT" },
+        { "id": 6, "name": "GUI_ASSET_PACKAGE" },
+        { "id": 7, "name": "DEVICE_PASSWORD_BUNDLE" }
+      ]
+    },
+    {
+      "name": "ResourceType",
+      "cType": "inktag_resource_type_v2_t",
+      "cPrefix": "INKTAG_RESOURCE_TYPE_",
+      "entries": [
+        { "id": 0, "name": "IMAGE" },
+        { "id": 1, "name": "SCHEDULE" },
+        { "id": 2, "name": "WIFI" },
+        { "id": 3, "name": "TODO" },
+        { "id": 4, "name": "BUSINESS_CARD" },
+        { "id": 5, "name": "PAGE" },
+        { "id": 6, "name": "NATIVE_LAYOUT" }
+      ]
+    },
+    {
+      "name": "ResourceClearScope",
+      "cType": "inktag_resource_clear_scope_v2_t",
+      "cPrefix": "INKTAG_RESOURCE_CLEAR_",
+      "entries": [
+        { "id": 0, "name": "ALL" },
+        { "id": 1, "name": "INCOMPATIBLE" }
+      ]
+    },
+    {
+      "name": "BusyPhase",
+      "cType": "inktag_busy_phase_v2_t",
+      "cPrefix": "INKTAG_BUSY_PHASE_",
+      "entries": [
+        { "id": 0, "name": "IDLE" },
+        { "id": 1, "name": "TRANSFER" },
+        { "id": 2, "name": "DISPLAY" },
+        { "id": 3, "name": "STORAGE" },
+        { "id": 4, "name": "OTA" }
+      ]
+    }
+  ],
+  "testOperations": [
+    { "id": 1, "name": "LED_CHANNEL" },
+    { "id": 2, "name": "LED_SCAN" },
+    { "id": 3, "name": "RESERVED_03" },
+    { "id": 4, "name": "INPUT_SIMULATE" },
+    { "id": 5, "name": "DEVICE_LOCATE" },
+    { "id": 16, "name": "DISPLAY_PATTERN" },
+    { "id": 17, "name": "DISPLAY_COLOR_PLANES" },
+    { "id": 18, "name": "DISPLAY_BUSY_TIMING" },
+    { "id": 32, "name": "ADC_READ" },
+    { "id": 33, "name": "GPIO_READ" },
+    { "id": 34, "name": "NFC_CHANNEL_SNAPSHOT" },
+    { "id": 48, "name": "TIME_SHIFT" },
+    { "id": 49, "name": "TIME_SET" }
+  ],
+  "panelGpioSnapshotPolicy": {
+    "version": 1,
+    "pilot": "TLSR8359",
+    "debugOperation": "PANEL_GPIO_SNAPSHOT",
+    "capabilityExtension": "PANEL_GPIO_SNAPSHOT",
+    "command": "DEBUG_READ",
+    "requestBytes": 6,
+    "responseBytes": 101,
+    "roleCount": 7,
+    "roleBytes": 11,
+    "maximumCaptureMs": 5,
+    "scope": "FIXED_ROLE_LIVE_REGISTERS_NO_PANEL_SESSION_NO_ADC",
+    "qualification": "OBSERVATION_ONLY_BUILD_AND_REVIEWED_NONMUTATING_BACKEND",
+    "unsupportedFields": "EXPLICIT_UNKNOWN_NOT_CONFIGURED_DEFAULTS"
+  },
+  "debugOperations": [
+    { "id": 1, "name": "GPIO_CONFIGURE" },
+    { "id": 2, "name": "GPIO_WRITE" },
+    { "id": 3, "name": "GPIO_PULSE" },
+    { "id": 16, "name": "SPI_CONFIGURE" },
+    { "id": 17, "name": "SPI_WRITE" },
+    { "id": 18, "name": "SPI_READ" },
+    { "id": 32, "name": "PANEL_RESET" },
+    { "id": 33, "name": "PANEL_COMMAND" },
+    { "id": 34, "name": "PANEL_DATA" },
+    { "id": 35, "name": "PANEL_READ" },
+    { "id": 36, "name": "PANEL_WAIT_BUSY" },
+    { "id": 37, "name": "PANEL_POWER" },
+    { "id": 48, "name": "PANEL_DIAGNOSTIC" },
+    { "id": 49, "name": "PANEL_GPIO_SNAPSHOT" }
+  ]
+}

@@ -139,6 +139,7 @@ def check_cli_archive(repo: Path, path: Path) -> list[str]:
     projects=[n for n in contents if n.endswith('/pyproject.toml') and (n.count('/')==1 or n.count('/')==2 and n.split('/')[1]=='cli')]
     cli_root=projects[0].rsplit('/',1)[0] if len(projects)==1 else None
     required=cli_license_files(repo)
+    license_expression=tomllib.loads((repo/'cli/pyproject.toml').read_text('utf-8'))['project']['license']
     for name,data in required.items():
         suffix=('/licenses/'+name if path.suffix=='.whl' else '/'+name)
         matches=[p for p in contents if (p==cli_root+'/'+name if path.suffix=='.zip' and cli_root else p.endswith(suffix))]
@@ -150,7 +151,7 @@ def check_cli_archive(repo: Path, path: Path) -> list[str]:
             problems.append('Missing/changed normal CLI resource: '+asset)
     if path.suffix=='.zip':
         pyprojects=[data for name,data in contents.items() if (name.count('/')==1 or name.count('/')==2 and name.split('/')[1]=='cli') and name.endswith('/pyproject.toml')]
-        if len(pyprojects)!=1 or tomllib.loads(pyprojects[0].decode())['project'].get('license')!='PolyForm-Noncommercial-1.0.0':
+        if len(pyprojects)!=1 or tomllib.loads(pyprojects[0].decode())['project'].get('license')!=license_expression:
             problems.append('Source ZIP license metadata mismatch')
     metadata=[v for n,v in contents.items() if n.endswith('/METADATA') or n.count('/')==1 and n.endswith('/PKG-INFO')]
     if path.suffix=='.whl' or path.name.endswith('.tar.gz'):
@@ -158,7 +159,7 @@ def check_cli_archive(repo: Path, path: Path) -> list[str]:
             problems.append('CLI artifact metadata missing/ambiguous')
         else:
             value=email.message_from_bytes(metadata[0])
-            if value.get('License-Expression')!='PolyForm-Noncommercial-1.0.0': problems.append('CLI License-Expression mismatch')
+            if value.get('License-Expression')!=license_expression: problems.append('CLI License-Expression mismatch')
             if set(value.get_all('License-File',[]))!=set(required): problems.append('CLI License-File metadata incomplete')
     return problems
 
@@ -173,6 +174,7 @@ def public_readiness(repo: Path) -> list[str]:
     problems.extend(material_errors)
     # A reviewed materials receipt must bind every runtime byte, not only metadata.
     expected=value.get('runtimeHashes',{})
-    actual={p.relative_to(repo).as_posix():sha(p.read_bytes()) for root in ('cli/src','webui/assets') for p in (repo/root).rglob('*') if p.is_file() and '__pycache__' not in p.parts}
+    web_assets = 'webui/dist/static/assets' if value.get('edition') == 'basic' else 'webui/assets'
+    actual={p.relative_to(repo).as_posix():sha(p.read_bytes()) for root in ('cli/src',web_assets) for p in (repo/root).rglob('*') if p.is_file() and '__pycache__' not in p.parts}
     if expected!=actual: problems.append('Reviewed runtime hashes are missing or stale')
     return problems

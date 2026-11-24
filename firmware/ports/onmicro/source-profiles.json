@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "profileMacro": "INKTAG_BUILD_PRO",
+  "providers": {
+    "inktag_om_activation.c": {
+      "base": "inktag_om_activation.c"
+    },
+    "inktag_om_findmy.c": {
+      "base": "inktag_om_findmy.c"
+    },
+    "inktag_om_p224_uecc.c": {
+      "base": null
+    },
+    "inktag_om_p224_uecc.h": {
+      "base": "inktag_om_p224_uecc.h"
+    },
+    "inktag_om_nfc.c": {
+      "base": "inktag_om_nfc.c"
+    },
+    "inktag_om_nfc.h": {
+      "base": "inktag_om_nfc.h"
+    },
+    "inktag_om_nfc_field.h": {
+      "base": "inktag_om_nfc_field.h"
+    },
+    "inktag_om_nfc_gt.inc": {
+      "base": null
+    },
+    "inktag_om_nfc_boot_url.inc": {
+      "base": null
+    },
+    "inktag_om_nfc_binding.inc": {
+      "base": null
+    },
+    "inktag_om_nfc_event.inc": {
+      "base": null
+    },
+    "inktag_om_nfc_stream.inc": {
+      "base": null
+    },
+    "inktag_om_nfc_image.inc": {
+      "base": null
+    },
+    "inktag_om_device_settings.c": {
+      "base": "inktag_om_device_settings.c"
+    },
+    "inktag_om_qr_store.c": {
+      "base": "inktag_om_qr_store.c"
+    },
+    "EPD_config_onmicro.c": {
+      "base": "EPD_config_onmicro.c"
+    },
+    "inktag_om_pin_layout.c": {
+      "base": "inktag_om_pin_layout.c"
+    },
+    "inktag_om_boot.c": {
+      "base": "inktag_om_boot.c"
+    },
+    "inktag_om_swap.c": {
+      "base": "inktag_om_swap.c"
+    },
+    "inktag_om_build_config.h": {
+      "base": "inktag_om_build_config.h"
+    },
+    "inktag_om_gui_assets.c": {
+      "base": "inktag_om_gui_assets.c"
+    },
+    "inktag_om_protocol_v2.inc": {
+      "base": "inktag_om_protocol_v2.inc"
+    },
+    "inktag_om_app.c": {
+      "base": "inktag_om_app.c"
+    },
+    "inktag_om_brand.c": {
+      "base": "inktag_om_brand.c"
+    }
+  },
+  "privateAssets": [],
+  "recoverySourceProfile": "base",
+  "recoveryEditionPolicy": "CRC-only Common Recovery; keyless Basic build"
+}

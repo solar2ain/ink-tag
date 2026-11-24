@@ -1,0 +1,30 @@
+# Local SDKs, build results and environments
+.local/
+.sdk/
+.venv/
+.pytest_cache/
+__pycache__/
+_build/
+*.pyc
+*.axf
+*.o
+*.bin
+*.img
+*.hex
+
+# Signing secrets, agent instructions and device captures
+.secrets/
+.env
+.env.*
+.codex/
+.claude/
+[Aa][Gg][Ee][Nn][Tt].[Mm][Dd]
+[Aa][Gg][Ee][Nn][Tt][Ss]*.[Mm][Dd]
+CLAUDE.md
+GEMINI.md
+.github/copilot-instructions.md
+backups/
+factory_backups/
+device_backups/
+device-backups/
+device_captures/

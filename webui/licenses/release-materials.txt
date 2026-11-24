@@ -1,13 +1,9 @@
-# CLI 源码与组件 / CLI source and components
+# 源码与发行材料 / Source and release materials
 
-CLI 包含 Python 源代码、JavaScript 组件和编译后的图形渲染组件。InkTag 自有 CLI 源码采用 [PolyForm Noncommercial 1.0.0](cli/LICENSE)，第三方组件保留原许可。
+InkTag 0.2.2 提供基础版固件源码、WebUI 源码和 Python CLI 源码。InkTag 自有源码使用 [AGPL v3](LICENSE)，第三方组件和字体遵循各自许可。使用平台构建工具时，请按原厂说明自行获取 SDK 和工具链。
 
-当前包可以查看 Python 源码，但尚未提供渲染组件的完整对应源码、字体输入资料及重新编译说明。它不是完整的对应源码包；需要修改或重新编译这些组件时，请等待项目提供相应下载及说明。WebUI 源码不在本期提供范围内。
+请参考[基础版编译说明](docs/build-firmware.md)和[有线烧录说明](docs/zh-CN/flash.md)。高级版固件的获取方式见[高级版指南](docs/zh-CN/pro.md#获取高级版固件)。完整授权边界和第三方声明见[许可说明](LICENSING.md)及[第三方声明](THIRD_PARTY_NOTICES.md)。
 
-完整许可边界见[许可说明](LICENSING.md)，现有组件与许可正文见[第三方声明](THIRD_PARTY_NOTICES.md)。
+InkTag 0.2.2 includes BASIC firmware, WebUI and Python CLI source. InkTag-owned source follows [AGPL v3](LICENSE). Third-party components and fonts retain their own terms. Obtain vendor SDKs and toolchains separately under the vendor terms.
 
-The CLI contains Python source, JavaScript components and a compiled graphics renderer. InkTag-owned CLI source uses [PolyForm Noncommercial 1.0.0](cli/LICENSE); third-party components retain their own licenses.
-
-You can inspect the Python source in the current package, but complete renderer Corresponding Source, font inputs and rebuild instructions are not yet provided. This is not a complete Corresponding Source package. If you need to modify or rebuild those components, wait for the relevant downloads and instructions. WebUI source is not included in this release.
-
-See [licensing](LICENSING.md) and [third-party notices](THIRD_PARTY_NOTICES.md) for the applicable terms and supplied license texts.
+See the [BASIC build guide](docs/build-firmware.en.md), [wired flashing guide](docs/en/flash.md), [PRO firmware guide](docs/en/pro.md#get-pro-firmware), [licensing](LICENSING.md) and [third-party notices](THIRD_PARTY_NOTICES.md).

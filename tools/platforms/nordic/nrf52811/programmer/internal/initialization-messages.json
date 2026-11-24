@@ -1,0 +1,62 @@
+{
+  "en": {
+    "tutorial": [
+      "InkTag nRF52811 complete flashing",
+      "Install SEGGER J-Link 7.88j. Connect SWDIO, SWCLK and GND; power the board at 2.7-3.6 V. Follow the board wiring guide.",
+      "Choose a Full ZIP (App, Recovery, S112 and GUI), then the board marking. OTA ZIPs and standalone Apps are not Full images.",
+      "After Full and board validation, confirm complete flashing first (default No). Only then will the tool wait for a USB probe and target, verify identity and write. Ordinary settings and image indexes will be reset.",
+      "While waiting, press Q or Esc to cancel. Other menus accept an empty answer to cancel. Errors remain visible until you press a key."
+    ],
+    "selectFirmware": "Select a supplied Full firmware:",
+    "firmwareNumber": "Firmware number (empty cancels)",
+    "invalidFirmware": "Invalid firmware number; select a listed Full ZIP.",
+    "skippedFirmware": "Not an acceptable Full ZIP:",
+    "browseFirmware": "No acceptable Full ZIP beside the tools. Choose a Full ZIP in the file dialog.",
+    "dialogTitle": "Choose InkTag nRF52811 Full ZIP",
+    "noBoards": "No supplied supported board configurations in native-configs. Restore the complete tools directory.",
+    "selectBoard": "Select the board marking and supplied panel configuration:",
+    "boardNumber": "Board configuration number (empty cancels)",
+    "invalidBoard": "Invalid board number; select a listed board configuration.",
+    "waitingProbe": "Waiting for J-Link USB probe; connect it now. Q/Esc cancels.",
+    "waitingTarget": "Waiting for powered nRF52811 target on SWD; check wiring. Q/Esc cancels.",
+    "confirm": "Proceed with complete flashing? [y/N]",
+    "cancelled": "Cancelled; no programming was started.",
+    "failed": "Flashing stopped:",
+    "board": "Board: ",
+    "firmware": "Firmware: ",
+    "preservation": "Preservation: attempt usable original information; missing records use defaults.",
+    "scope": "Full initialization clears ordinary settings, QR/labels, health/crash records and old image heads.",
+    "warning": "Image pixels are not securely erased. FICR/UICR and external reserved sectors are skipped.",
+    "firmwareHash": "Firmware SHA256: "
+  },
+  "zh": {
+    "tutorial": [
+      "InkTag nRF52811 完整刷机",
+      "先安装 SEGGER J-Link 7.88j。按主板接线图连接 SWDIO、SWCLK、GND，并给主板提供 2.7–3.6 V 电源。",
+      "先选包含 App、Recovery、S112 和 GUI 的 Full ZIP，再选主板丝印；OTA 包或单独 App 不能用于完整刷机。",
+      "校验完整固件和主板后，先确认是否完整刷机（默认否）；同意后才等待 USB 探针及目标设备，校验身份并写入。普通设置和图片索引将重建。",
+      "等待时按 Q 或 Esc 取消；其他选择留空可取消。结束或报错后，按任意键关闭窗口。"
+    ],
+    "selectFirmware": "请选择随附的完整固件：",
+    "firmwareNumber": "固件编号（留空取消）",
+    "invalidFirmware": "固件编号无效，请选择列表中的 Full ZIP。",
+    "skippedFirmware": "不是可接受的完整固件：",
+    "browseFirmware": "工具旁没有可用的 Full ZIP，请在文件选择框中选择完整固件。",
+    "dialogTitle": "选择 InkTag nRF52811 完整固件 Full ZIP",
+    "noBoards": "native-configs 中没有随附的可用主板配置，请恢复完整工具目录。",
+    "selectBoard": "请选择主板丝印及随附屏幕配置：",
+    "boardNumber": "主板配置编号（留空取消）",
+    "invalidBoard": "主板编号无效，请选择列表中的配置。",
+    "waitingProbe": "正在等待 J-Link USB 探针，请接入探针；按 Q 或 Esc 取消。",
+    "waitingTarget": "正在等待已供电的 nRF52811 设备，请检查 SWD 接线；按 Q 或 Esc 取消。",
+    "confirm": "是否继续完整刷机？[y/N]",
+    "cancelled": "已取消，未开始烧写。",
+    "failed": "刷机已停止：",
+    "board": "主板：",
+    "firmware": "固件：",
+    "preservation": "保全范围：尝试保留可用的原信息；缺失记录使用默认值。",
+    "scope": "完整初始化会重建普通设置、二维码/备注、健康/崩溃记录和旧图片索引。",
+    "warning": "图片像素不会被安全擦除；写入跳过 FICR/UICR 及外置保留区。",
+    "firmwareHash": "固件 SHA256："
+  }
+}

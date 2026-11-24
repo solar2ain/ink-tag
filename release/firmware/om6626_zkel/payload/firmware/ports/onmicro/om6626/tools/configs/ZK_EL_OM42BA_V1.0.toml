@@ -1,0 +1,40 @@
+# Offline review candidate; no hardware qualification or execution permit.
+format_version = 1
+baseline = "inktag-release-v1"
+board_marking = "ZK_EL_OM42BA_V1.0"
+
+[screen]
+ic = "JD79668AA"
+recipe = 2
+color = "BWRY"
+rotation = 180
+mirror_x = true
+mirror_y = false
+native_ui_scale = 0
+width = 400
+height = 300
+visible_x = 0
+visible_y = 0
+visible_width = 400
+visible_height = 300
+
+[gpio.display]
+mosi = "GPIO21"
+clock = "GPIO15"
+cs = "GPIO22"
+dc = "GPIO20"
+reset = "GPIO16"
+busy = "GPIO3"
+enable = "GPIO7"
+enable_active_low = false
+
+[gpio.led]
+red = "GPIO4"
+green = "GPIO18"
+blue = "GPIO17"
+active_low = ["red", "green", "blue"]
+
+[gpio.aux]
+txd = "disabled"
+rxd = "disabled"
+active_low = []

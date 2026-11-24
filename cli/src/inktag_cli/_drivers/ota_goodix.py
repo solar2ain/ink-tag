@@ -778,6 +778,9 @@ async def query_otas_target(
     if len(info) < 18 or info[0] != ACK_SUCCESS or info[17] != 2:
         raise RuntimeError("target does not report Goodix OTAS v2")
     otas.recovery_version = parse_recovery_version(info)
+    if package is not None and package.firmware_type == 0:
+        if not otas.recovery_version or otas.recovery_version.get('signaturePolicy') != 'crc-only':
+            raise RuntimeError('This Recovery requires a publisher-signed App; unsigned image was not sent')
     target = await otas.request(CMD_DFU_FW_INFO_GET)
     if len(target) < 54 or target[0] != ACK_SUCCESS:
         raise RuntimeError("target rejected DFU firmware-info query")
@@ -827,12 +830,12 @@ async def read_recovery_status(
         await otas.open()
         try:
             info = await otas.request(CMD_GET_INFO)
-            if len(info) not in (20, 28) or info[0] != ACK_SUCCESS or info[17] != 2:
+            if len(info) not in (20, 28, 34) or info[0] != ACK_SUCCESS or info[17] != 2:
                 raise RuntimeError("Malformed Goodix Recovery software information")
             target = await otas.request(CMD_DFU_FW_INFO_GET)
             if len(target) < 54 or target[0] != ACK_SUCCESS or target[5] != 0:
                 raise RuntimeError("Goodix OTAS target is not running Recovery")
-            version = decode_ikrv(info[20:]) if len(info) == 28 else legacy_recovery_version()
+            version = decode_ikrv(info[20:]) if len(info) in (28, 34) else legacy_recovery_version()
         finally:
             await otas.close()
     return {"action": "recovery-status", "readOnly": True, "platform": "goodix",

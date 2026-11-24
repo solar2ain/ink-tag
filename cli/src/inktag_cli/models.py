@@ -59,7 +59,7 @@ class SettingsCapabilities:
         return bool(self.features & 0x10)
 
     @property
-    def custom_buzzer_gpio(self) -> bool:
+    def reserved_io(self) -> bool:
         return bool(self.features & 0x20)
 
     @property
@@ -82,7 +82,7 @@ class SettingsCapabilities:
             "deviceInfoQr": self.device_info_qr,
             "deviceInfoLayoutMask": self.device_info_layout_mask,
             "customButtonGpio": self.custom_button_gpio,
-            "customBuzzerGpio": self.custom_buzzer_gpio,
+            "reservedIo": self.reserved_io,
             "statusLedSettings": self.status_led_settings,
         }
 
@@ -145,7 +145,7 @@ class ActivationStatus:
     def to_dict(self) -> dict[str, Any]:
         return {
             "state": self.state,
-            "edition": "advanced" if self.active else "free",
+            "edition": "advanced" if self.active else "base",
             "activationId": self.activation_id,
             "scheme": self.scheme,
             "lastResult": self.result_name,

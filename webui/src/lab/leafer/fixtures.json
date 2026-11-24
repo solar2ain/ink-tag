@@ -1,0 +1,22 @@
+[
+  {"version":1,"width":400,"height":300,"widgets":[
+    {"id":"title","name":"标题","x":16,"y":12,"width":368,"height":34,"style":{"fontSize":22,"color":"#b32025","bold":true},"cells":[[{"text":"一周课程表"}]]},
+    {"id":"schedule","name":"课程表","x":16,"y":56,"width":368,"height":216,"style":{"fontSize":14,"color":"#191919","bold":false},"cells":[
+      [{"text":"节次"},{"text":"周一"},{"text":"周二"},{"text":"周三"},{"text":"周四"},{"text":"周五"}],
+      [{"text":"1"},{"text":"语文"},{"text":"数学"},{"text":"英语"},{"text":"语文"},{"text":"数学"}],
+      [{"text":"2"},{"text":"数学"},{"text":"英语"},{"text":"语文"},{"text":"科学"},{"text":"英语"}],
+      [{"text":"3"},{"text":"美术"},{"text":"体育"},{"text":"音乐"},{"text":"数学"},{"text":"语文"}],
+      [{"text":"4"},{"text":"科学"},{"text":"语文"},{"text":"数学"},{"text":"美术"},{"text":"体育"}],
+      [{"text":"5"},{"text":"自习"},{"text":"音乐"},{"text":"体育"},{"text":"英语"},{"text":"班会"}]
+    ]}
+  ]},
+  {"version":1,"width":212,"height":104,"widgets":[
+    {"id":"schedule","name":"紧凑课程表","x":4,"y":4,"width":204,"height":80,"style":{"fontSize":9,"color":"#191919","bold":false},"cells":[
+      [{"text":"节次"},{"text":"周一"},{"text":"周二"},{"text":"周三"},{"text":"周四"},{"text":"周五"}],
+      [{"text":"1"},{"text":"语文"},{"text":"数学"},{"text":"英语"},{"text":"语文"},{"text":"数学"}],
+      [{"text":"2"},{"text":"数学"},{"text":"英语"},{"text":"语文"},{"text":"科学"},{"text":"英语"}],
+      [{"text":"3"},{"text":"美术"},{"text":"体育"},{"text":"音乐"},{"text":"数学"},{"text":"语文"}],
+      [{"text":"4"},{"text":"科学"},{"text":"语文"},{"text":"数学"},{"text":"美术"},{"text":"体育"}]
+    ]}
+  ]}
+]

@@ -95,7 +95,7 @@ inktag-cli host status weather.toml
 
 Without `--send`, only local PNGs are written. `--once` evaluates due jobs once;
 otherwise the runner stays in the foreground, stopped with Ctrl+C. Delivery uses
-the normal shared authentication/image transport and the Pro policy. Missing
+the normal shared authentication/image transport and the PRO policy. Missing
 saved credentials fail rather than prompting in the background. Identity, canvas
 or palette mismatches refuse delivery without modifying device settings/slots.
 Physical delivery still requires qualification on the actual target.

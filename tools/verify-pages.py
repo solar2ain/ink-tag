@@ -16,6 +16,10 @@ ALLOWED_SUFFIXES = {
     ".html", ".js", ".css", ".json", ".txt", ".wasm", ".png", ".jpg",
     ".jpeg", ".gif", ".webp", ".avif", ".svg", ".ico", ".woff", ".woff2", ".ttf",
 }
+FONT_SOURCE_DOWNLOADS = {
+    "assets/generate-creation-fonts.py",
+    "assets/wenquanyi-bitmap-song-source.tar.gz",
+}
 INSTRUCTIONS = {"agent.md", "agents.md", "claude.md", "gemini.md", "copilot-instructions.md"}
 SECRET_MARKERS = (
     re.compile(rb"-----BEGIN (?:RSA |EC |OPENSSH |ENCRYPTED )?PRIVATE KEY-----"),
@@ -39,7 +43,12 @@ def validate(site: Path) -> list[str]:
             continue
         if not path.is_file():
             continue
-        if path.name.lower() in INSTRUCTIONS or (path.suffix.lower() not in ALLOWED_SUFFIXES and path.name != ".nojekyll"):
+        allowed = (
+            path.suffix.lower() in ALLOWED_SUFFIXES
+            or path.name == ".nojekyll"
+            or relative.as_posix() in FONT_SOURCE_DOWNLOADS
+        )
+        if path.name.lower() in INSTRUCTIONS or not allowed:
             errors.append(f"Not a compiled static asset: {relative}")
             continue
         data = path.read_bytes()

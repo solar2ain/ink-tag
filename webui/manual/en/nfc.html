@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../index.html">InkTag WebUI</a></nav><main><h1 id="control-a-tag-and-send-images-with-phone-nfc">Control a tag and send images with phone NFC</h1>
+<p><a target="_blank" rel="noopener noreferrer" href="../zh-CN/nfc.html">简体中文</a></p>
+<p>Connect the tag in WebUI, check NFC in device interactions, and confirm that the tag has the matching PRO firmware and an active PRO license. Link reading, text commands and image transfer depend on the board and firmware.</p>
+<h2 id="open-the-device-link">Open the device link</h2>
+<p>Unlock the phone, enable NFC, and hold its NFC antenna against the tag. Open the detected device link in a browser that supports Web Bluetooth. Select the tag when the browser asks for Bluetooth permission.</p>
+<h2 id="send-a-text-command">Send a text command</h2>
+<p>Use NFC Tools or another writer that supports NDEF text. Add one text record, enter one command, and touch the phone to the tag when prompted to write.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>calendar</code></td>
+<td>Show the built-in calendar</td>
+</tr>
+<tr>
+<td><code>clock</code></td>
+<td>Show the built-in clock</td>
+</tr>
+<tr>
+<td><code>device</code></td>
+<td>Show device information</td>
+</tr>
+<tr>
+<td><code>slot-3</code></td>
+<td>Show the image stored in slot 3</td>
+</tr>
+<tr>
+<td><code>Sunset</code></td>
+<td>Show a saved image by name. Name the image in WebUI, then write that name as the text record. Requires firmware with image-name support</td>
+</tr>
+<tr>
+<td><code>time#&lt;current UTC Unix seconds&gt;</code></td>
+<td>Set the clock on supported firmware while keeping the device's time zone and page</td>
+</tr>
+</tbody>
+</table></div>
+<p>Enter the saved image name by itself, without a command prefix. Watch the tag for completion. The phone's write confirmation can arrive while the display is still refreshing. For clock sync, D3-Pro InkTag can send the phone's current time.</p>
+<h2 id="send-an-image-from-android">Send an image from Android</h2>
+<ol>
+<li>Get <strong>D3-Pro InkTag</strong> from the <strong>InkTag QQ group 418446983</strong> and check the group's notes for the version that matches your firmware. <a target="_blank" rel="noopener noreferrer" href="pro.html#get-pro-firmware">Group access</a></li>
+<li>Select the tag's display size and color mode, choose an image, and preview the crop and orientation.</li>
+<li>Start NFC transfer and hold the phone antenna against the tag until the app reports that the transfer has finished. Check the actual display configuration in WebUI if the app reports a size or color mismatch.</li>
+<li>Wait for the tag to refresh. If the connection is unstable, try removing a thick or metal phone case and realigning the antenna.</li>
+</ol>
+<p>See <a target="_blank" rel="noopener noreferrer" href="supported-devices.html">supported devices</a> for board details. You can also send pictures over Bluetooth from <a target="_blank" rel="noopener noreferrer" href="webui.html">WebUI</a>.</p>
+<h2 id="measured-transfer-times">Measured transfer times</h2>
+<p>Type 2 and Type 4 are NFC Forum tag types. They describe how a phone or reader communicates with the tag.</p>
+<ul>
+<li><strong>NFC Forum Type 2 Tag</strong> uses NFC-A for reading and writing. <a target="_blank" rel="noopener noreferrer" href="https://nfc-forum.org/build/specifications/type-2-tag-specification/">NFC Forum Type 2 specification</a></li>
+<li><strong>NFC Forum Type 4 Tag</strong> communicates using the ISO Data Exchange Protocol (ISO-DEP). <a target="_blank" rel="noopener noreferrer" href="https://nfc-forum.org/build/specifications/type-4-tag-specification/">NFC Forum Type 4 specification</a></li>
+</ul>
+<p>Hanshow TLSR8359 tags typically use Type 4. ZKONG tags with Goodix or OnMicro controllers typically use Type 2. These measurements show compressed image bytes and the time from the first image data to the last acknowledgement. Tag detection, setup, and screen refresh take additional time.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Tested device</th>
+<th>PN532/PCR532 reader</th>
+<th>Android phone with D3-Pro InkTag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hanshow TLSR8359, Type 4, 4.2-inch</td>
+<td>About 4.6 kB in <strong>1.6 s</strong></td>
+<td>About 7.4 kB in <strong>2.5–2.8 s</strong></td>
+</tr>
+<tr>
+<td>Hanshow Nebular-213R, Type 4, 2.13-inch</td>
+<td>About 4.6 kB in <strong>3.9 s</strong></td>
+<td>Timing pending for this board</td>
+</tr>
+<tr>
+<td>ZKONG Goodix, Type 2, 4.2-inch</td>
+<td>About 4.6 kB in <strong>8.9–9.0 s</strong></td>
+<td>The same 4.6 kB image took <strong>19.7–23.4 s</strong>. One 29.2 kB photo took <strong>126 s</strong></td>
+</tr>
+<tr>
+<td>ZKONG OnMicro, Type 2, 4.2-inch</td>
+<td>About 2.2 kB in <strong>5.0 s</strong></td>
+<td>About 14.3 kB in <strong>71.7 s</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>ZKONG Type 2 image transfer is slow. Use it for simple images that compress well on small screens. For other images, use Bluetooth.</strong></p>
+<p>Complex images usually compress less and take longer to send even on the same screen. Once the app confirms that the tag accepted the refresh, you can move the phone away and wait for the display to update. The original iOS D3-Pro also transferred images successfully to the tested 4.2-inch Type 4 tag. The table lists only the timed Android runs.</p>
+<h2 id="use-a-computer-and-nfc-reader">Use a computer and NFC reader</h2>
+<p>The repository and full CLI ZIP include the PN532/PCR532 tool. It supports compatible Type 2 and Type 4 InkTag PRO tags, including link reading, text commands, time sync, and image transfer. <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/tools/nfc/README.en.md">PN532/PCR532 setup and commands</a></p></main></body></html>

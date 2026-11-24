@@ -1,10 +1,12 @@
 # Find queries and data migration
 
-Find is experimental and requires a compatible device with Pro activated. Reports depend on nearby devices receiving and uploading broadcasts; real-time locations are not guaranteed.
+Find is experimental and requires a compatible device with PRO activated. Reports depend on nearby devices receiving and uploading broadcasts; real-time locations are not guaranteed.
 
 ## Enable Find
 
-After connecting, **Find status** explains whether broadcasting can be enabled. Compatible Free devices are prompted to activate Pro; enabled devices show that broadcasting is on. Unsupported devices, unread status and firmware that needs updating have separate messages.
+After connecting, **Find status** explains whether broadcasting can be enabled. Compatible BASIC devices are prompted to activate PRO; enabled devices show that broadcasting is on. Unsupported devices, unread status and firmware that needs updating have separate messages.
+
+Connect a tag that supports Find, then select **Read again** to the left of **Export** in the **Find broadcast** card to reload the tag's Find status.
 
 Online, static and standalone editions can enroll devices and enable or disable broadcasting over Bluetooth. They cannot sign in to Apple or query locations; queries require the local WebUI.
 

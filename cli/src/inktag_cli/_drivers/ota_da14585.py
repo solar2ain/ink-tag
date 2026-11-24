@@ -239,6 +239,8 @@ async def read_recovery_status(
         else:
             version = bytes(await asyncio.wait_for(
                 client.read_gatt_char(revision), 8.0)).decode("ascii", errors="strict")
+            if version == "1.0.1.0":  # Early DA 0.2.2 used a fourth, zero field.
+                version = "1.0.1"
             if version == "v_6.0.24.1464":  # Original fixed SDK string, not Recovery software.
                 version_info = legacy_recovery_version()
             elif re.fullmatch(r"(?:0|[1-9]\d*)\.\d+\.\d+", version) is None or any(

@@ -1,0 +1,20 @@
+{
+  "16f0bfa9-nordic_dfu.js.txt": {
+    "sourceCommit": "16f0bfa944c5062c421ee450717afd2786678552",
+    "sourcePath": "webui/src/ota-drivers/nordic_dfu.js",
+    "bytes": 33366,
+    "sha256": "0e01a51349276207df61fcedbdf8daee9c0e35af52e63671190467f1ee0df1bf"
+  },
+  "16f0bfa9-telink_ota.js.txt": {
+    "sourceCommit": "16f0bfa944c5062c421ee450717afd2786678552",
+    "sourcePath": "webui/src/ota-drivers/telink_ota.js",
+    "bytes": 33316,
+    "sha256": "1d7b4a3ef0b79fdfac54c94c27c9162de059faaae27c432b4cea62b259894818"
+  },
+  "044bf511-telink_ota.js.txt": {
+    "sourceCommit": "044bf5110d0d979987635945b8887e833a3d0962",
+    "sourcePath": "webui/src/ota-drivers/telink_ota.js",
+    "bytes": 29143,
+    "sha256": "528c97a0ec9ac4cb4a2012265061b2eed5bdb45898c7164a01744d4fb9978422"
+  }
+}

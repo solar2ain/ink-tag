@@ -1,0 +1,21 @@
+ENTRY(__start)
+SECTIONS {
+  . = 0;
+  .vectors : { KEEP(*(.vectors)) }
+  __native_load_lma__ = ALIGN(.,16);
+  . = 0xf000;
+  .native_load : AT(__native_load_lma__) {
+    __native_load_start__ = .;
+    KEEP(*(.native_entry))
+    *(.text*) *(.rodata*)
+    . = ALIGN(4);
+    __native_load_end__ = .;
+  }
+  __stage0_bin_size__ = __native_load_lma__ + SIZEOF(.native_load);
+  __stage0_load_size__ = ALIGN(__stage0_bin_size__,16);
+  __stage0_load_div16__ = __stage0_load_size__ / 16;
+  ASSERT(__stage0_load_size__ + 4 <= 0x1000,"stage0 exceeds one sector")
+  ASSERT(__native_load_end__ <= 0xf200,"native loader overlaps temporary instruction-cache tag")
+  .unexpected : { *(.data*) *(.bss*) *(COMMON) }
+  ASSERT(SIZEOF(.unexpected)==0,"stage0 may not depend on static mutable data")
+}

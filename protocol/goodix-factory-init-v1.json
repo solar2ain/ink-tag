@@ -1,0 +1,30 @@
+{
+  "schema": "inktag-goodix-factory-init-v1",
+  "status": "offline-review-only",
+  "purpose": "InkTag factory-init",
+  "member": "factory-init.ikfi",
+  "prefix": "LE <4sHHII>: IKFI, version1, reserved0, metadataBytes, helperBytes",
+  "signedMessage": "ASCII InkTag factory-init followed by NUL, then complete prefix, canonical ASCII JSON metadata and helper bytes",
+  "maximumMetadataBytes": 4096,
+  "ramAbi": 1,
+  "operationProfile": "goodix-first-off-v1",
+  "operations": ["read-immutable-identity", "initialize-and-readback-first-off"],
+  "trust": "Same exact Goodix family trust pin and crypto primitive as ordinary signed App validation; independent purpose-separated signature, not App signature reuse",
+  "signatureEncoding": "Goodix family encoding: RSA2048-PSS-SHA256 salt32 little-endian signature, or P256-SHA256 raw big-endian r32+s32",
+  "baseMembers": ["base.json", "app-ota.zip", "recovery.bin", "factory-init.ikfi"],
+  "familyBase": {
+    "schema": "inktag-gr-full-family-v1",
+    "family": "GR551x",
+    "chips": ["GR5513", "GR5515"],
+    "members": ["base.json", "app-ota.zip", "recovery.bin", "factory-init-GR5513.ikfi", "factory-init-GR5515.ikfi"],
+    "selection": "One shared App/Recovery; verify both exact-part envelopes, then select only the exact PCB MCU. No family alias supplies a capacity/package ID or relaxes actual-chip admission."
+  },
+  "noPhysicalExecution": true,
+  "notes": [
+    "Authenticates exact raw and signed App payload plus Recovery, helper and target/layout/compatibility/RAM mapping.",
+    "Editable PCB configuration must not replace any executable bytes, entry, RAM addresses or NVDS operations.",
+    "Private generation retains App ELF/PT_LOAD, SDK object, source/toolchain and helper ELF proof; the portable verifier does not require SDK or ELF.",
+    "Signature and memory validation do not independently prove ARM instruction semantics: the signed operation profile requires private-source review.",
+    "The old physical runner remains unchanged. Build-only manifests and this envelope do not enable portable execution. Private production signing is separate and does not qualify a device writer."
+  ]
+}

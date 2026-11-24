@@ -65,6 +65,21 @@ def test_client_only_authorization_cannot_be_reused_for_firmware(candidate):
 def test_new_firmware_scope_binds_exact_pair_and_tools(candidate):
     add_firmware(candidate,True);assert guard.validate(candidate)
 
+
+@pytest.mark.parametrize('change', ['native-as-wire', 'other-wire', 'package'])
+def test_matching_manifests_cannot_confuse_wire_and_signed_targets(candidate,change):
+    add_firmware(candidate,True)
+    record=load(candidate/'releases/record.json');item=record['releases'][0]['firmware'][0]
+    manifest=load(candidate/'firmware/manifest.json')
+    if change=='package':item['signaturePolicy']['packageBoard']='gr551x_zkc42v'
+    else:
+        wrong='gr5331_zkc21v' if change=='native-as-wire' else 'gr551x_zkel'
+        item['target'].update(boardId=wrong,family=wrong)
+    for key in ('target','signaturePolicy'):
+        manifest['boards'][0]['publication'][key]=item[key]
+    with pytest.raises(ValueError,match='separate contracts'):
+        guard.firmware_binding(candidate,record,record['releases'][0],manifest)
+
 @pytest.mark.parametrize('change',['tool','ota','full','target','policy'])
 def test_firmware_scope_rejects_changed_bytes_or_context(candidate,change):
     add_firmware(candidate,True)

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "scope": "CRC-only Recovery App integrity metadata; not a publisher signature",
+  "bytes": 40,
+  "endian": "little",
+  "fields": [
+    {"offset": 0, "bytes": 4, "name": "magic", "hex": "494b4349"},
+    {"offset": 4, "bytes": 1, "name": "schema", "value": 1},
+    {"offset": 5, "bytes": 1, "name": "descriptorBytes", "value": 40},
+    {"offset": 6, "bytes": 2, "name": "flags", "value": 0},
+    {"offset": 8, "bytes": 4, "name": "bodyBytes"},
+    {"offset": 12, "bytes": 4, "name": "bodyCrc32"},
+    {"offset": 16, "bytes": 4, "name": "nativeBoardContext"},
+    {"offset": 20, "bytes": 4, "name": "nativeLayoutContext"},
+    {"offset": 24, "bytes": 4, "name": "compatibilityEpoch", "value": 1},
+    {"offset": 28, "bytes": 4, "name": "nativeReleaseVersion"},
+    {"offset": 32, "bytes": 4, "name": "reserved", "value": 0},
+    {"offset": 36, "bytes": 4, "name": "descriptorCrc32", "covers": "bytes[0:36]"}
+  ],
+  "crc32": {"polynomialReflectedHex": "edb88320", "initialHex": "ffffffff", "finalXorHex": "ffffffff"},
+  "nativeUse": [
+    "Use the existing native length/CRC/boot-validation record if it already binds the complete App; do not add this descriptor redundantly",
+    "Where an equivalent complete-App CRC record does not exist, append IKCI immediately after the exact App body and before the existing native publisher-signature wrapper",
+    "Signed Pro signs body plus IKCI using the existing native wrapper/key/context, so older signature-checking Recovery can still accept the new Pro App",
+    "Unsigned Free appends IKCI without a signing step; retain the platform native image/container header where required",
+    "bodyBytes excludes IKCI and all outer signature/native transport trailers; bodyCrc32 covers exactly that body",
+    "nativeBoardContext/nativeLayoutContext reuse existing exact platform signing or image contexts; record mappings explicitly without product-name guessing",
+    "Cold boot/resume must locate metadata using native bounds/lengths; any bounded locator must require bodyBytes equal the descriptor offset from the App base and independently verify both CRCs",
+    "Reject truncated, overflowing, wrong-context, wrong-epoch, unsupported flags/reserved/schema or ambiguous descriptors; never treat a recomputed CRC compared with itself as stored integrity proof",
+    "No new partition, unknown-layout fallback, persistent boot seed or Pro App handshake is introduced",
+    "Measure the 40-byte package metadata separately from linked App code and Recovery cost"
+  ]
+}

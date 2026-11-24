@@ -22,8 +22,6 @@ class NfcCommandRecord:
 _NO_PAYLOAD = {
     int(NfcCommandV2.PING),
     int(NfcCommandV2.DEVICE_INFO),
-    int(NfcCommandV2.CALENDAR),
-    int(NfcCommandV2.CLOCK),
     int(NfcCommandV2.NEXT_IMAGE),
     int(NfcCommandV2.PREVIOUS_IMAGE),
     int(NfcCommandV2.PAUSE),
@@ -34,9 +32,12 @@ _NO_PAYLOAD = {
 
 
 def _payload_valid(opcode: int, payload: bytes) -> bool:
+    if opcode in (int(NfcCommandV2.CALENDAR), int(NfcCommandV2.CLOCK)):
+        return len(payload) in (0, 4)
     if opcode in _NO_PAYLOAD:
         return not payload
-    return opcode == int(NfcCommandV2.SHOW_SLOT) and len(payload) == 1
+    return ((opcode == int(NfcCommandV2.SHOW_SLOT) and len(payload) == 1)
+            or (opcode == int(NfcCommandV2.SET_TIME) and len(payload) == 4))
 
 
 def sequence_is_newer(candidate: int, previous: int) -> bool:

@@ -1,0 +1,4 @@
+#ifndef TEST_DIALOG_SDK_CONFIG_H
+#define TEST_DIALOG_SDK_CONFIG_H
+#define FDS_ENABLED 0
+#endif

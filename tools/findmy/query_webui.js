@@ -1,1 +1,1104 @@
-(function(){let e=``,t=``,n=null,r=`osm`,i={baidu:``,amap:``,osm:``},a={baidu:``,amap:``,osm:``},o=[],s=60,c=``,l=`plot`,u=[],d={baidu:``,amap:``,osm:``},f=null,p=e=>document.getElementById(e),m=p(`login-panel`),h=p(`two-factor-panel`),g=p(`query-panel`),_=p(`message`),v=p(`map-modal`),y=p(`track-modal`),b=p(`page-confirm-modal`),x=null;function S(e){for(let t of document.querySelectorAll(`button:not(#close-map):not(#close-track), input, select`))e?(t.dataset.disabledBeforeBusy=String(t.disabled),t.disabled=!0):`disabledBeforeBusy`in t.dataset&&(t.disabled=t.dataset.disabledBeforeBusy===`true`,delete t.dataset.disabledBeforeBusy);document.body.dataset.busy=e?`true`:`false`}function C(e,t=`info`){_.textContent=e,_.dataset.kind=t}function w(e,t){`disabledBeforeBusy`in e.dataset&&(e.dataset.disabledBeforeBusy=String(t)),e.disabled=t||document.body.dataset.busy===`true`}function T(e=null){b.hidden=!0,x?.(e),x=null,v.hidden&&y.hidden&&document.body.style.removeProperty(`overflow`)}function E({title:e,message:t,confirmLabel:n=`确认`,danger:r=!1,inputLabel:i=``,inputValue:a=``}){x?.(null),p(`page-confirm-title`).textContent=e,p(`page-confirm-message`).textContent=t,p(`accept-page-confirm`).textContent=n,p(`page-confirm-form`).dataset.danger=String(r);let o=p(`page-confirm-input-label`),s=p(`page-confirm-input`);return o.hidden=!i,p(`page-confirm-input-caption`).textContent=i,s.required=!!i,s.value=a,b.hidden=!1,document.body.style.overflow=`hidden`,queueMicrotask(()=>(i?s:p(`accept-page-confirm`)).focus()),new Promise(e=>{x=e})}p(`page-confirm-form`).addEventListener(`submit`,e=>{e.preventDefault();let t=p(`page-confirm-input`);T(p(`page-confirm-input-label`).hidden?!0:t.value.trim())}),p(`cancel-page-confirm`).addEventListener(`click`,()=>T()),p(`close-page-confirm`).addEventListener(`click`,()=>T()),b.addEventListener(`mousedown`,e=>{e.target===b&&T()});function D(e){let t=new Date(e).getTime();if(!Number.isFinite(t))return`--`;let n=Date.now()-t,r=n<0,i=Math.max(0,Math.round(Math.abs(n)/6e4));if(i<1)return r?`不到 1 分钟后`:`不到 1 分钟前`;let a=Math.floor(i/1440),o=Math.floor(i%1440/60),s=i%60,c=[];return a&&c.push(`${a} 天`),o&&c.push(`${o} 小时`),s&&!a&&c.push(`${s} 分钟`),`${c.join(` `)}${r?`后`:`前`}`}function O(e){l=e===`list`?`list`:`plot`,p(`track-plot`).hidden=l!==`plot`,p(`track-list`).hidden=l!==`list`,p(`track-map-config`).hidden=l!==`plot`,p(`show-track-plot`).setAttribute(`aria-pressed`,String(l===`plot`)),p(`show-track-list`).setAttribute(`aria-pressed`,String(l===`list`))}function k(e){u=e;let t=p(`track-plot`);if(!e.length){let e=document.createElement(`p`);e.className=`track-empty`,e.textContent=`最近 24 小时还没有轨迹点。`,t.replaceChildren(e);return}if(r===`osm`||!d[r].trim()){if(te(e,t),r!==`osm`){let e=document.createElement(`p`);e.className=`track-map-fallback`,e.textContent=`未填写 ${A(r)}，已自动使用 OSMap。`,t.append(e)}return}let n=document.createElement(`p`);n.className=`track-empty`,n.textContent=`点击“绘制轨迹”，通过 ${z(r)} 显示最近 24 小时的历史点。`,t.replaceChildren(n)}function A(e){return e===`baidu`?`百度地图 AK`:e===`amap`?`高德地图 Key`:``}function ee(e,t){let n=Math.max(-85.05112878,Math.min(85.05112878,Number(e)))*Math.PI/180;return{x:(Number(t)+180)/360,y:(1-Math.log(Math.tan(n)+1/Math.cos(n))/Math.PI)/2}}function te(e,t){f?.disconnect();let n=document.createElement(`div`);n.className=`track-map-frame`;let r=document.createElement(`div`);r.className=`osm-track-map`,n.append(r),t.replaceChildren(n);let i=()=>{let t=r.clientWidth,n=r.clientHeight;if(!t||!n||!e.length)return;let i=e.map(e=>ee(e.latitude,e.longitude)),a=Math.min(...i.map(e=>e.x)),o=Math.max(...i.map(e=>e.x)),s=Math.min(...i.map(e=>e.y)),c=Math.max(...i.map(e=>e.y)),l=Math.max(o-a,1/(1<<19)),u=Math.max(c-s,1/(1<<19)),d=Math.floor(Math.log2(Math.min(Math.max(256,t-68)/(l*256),Math.max(256,n-68)/(u*256)))),f=Math.max(2,Math.min(19,Number.isFinite(d)?d:19)),p=1<<f,m=256*p,h=(a+o)/2*m,g=(s+c)/2*m,_=h-t/2,v=g-n/2,y=[];for(let e=Math.max(0,Math.floor(v/256));e<=Math.min(p-1,Math.floor((v+n)/256));e+=1)for(let n=Math.floor(_/256);n<=Math.floor((_+t)/256);n+=1){let t=document.createElement(`img`);t.src=`https://tile.openstreetmap.org/${f}/${(n%p+p)%p}/${e}.png`,t.alt=``,t.draggable=!1,t.referrerPolicy=`strict-origin-when-cross-origin`,t.style.left=`${n*256-_}px`,t.style.top=`${e*256-v}px`,y.push(t)}let b=document.createElement(`canvas`);b.setAttribute(`aria-label`,`OpenStreetMap 最近 24 小时轨迹`);let x=window.devicePixelRatio||1;b.width=Math.round(t*x),b.height=Math.round(n*x);let S=b.getContext(`2d`);S.setTransform(x,0,0,x,0,0);let C=i.map(e=>({x:e.x*m-_,y:e.y*m-v}));S.lineCap=`round`,S.lineJoin=`round`,S.strokeStyle=`rgba(255,255,255,.94)`,S.lineWidth=9,S.beginPath(),C.forEach((e,t)=>t?S.lineTo(e.x,e.y):S.moveTo(e.x,e.y)),S.stroke(),S.strokeStyle=`#087f5b`,S.lineWidth=5,S.beginPath(),C.forEach((e,t)=>t?S.lineTo(e.x,e.y):S.moveTo(e.x,e.y)),S.stroke();for(let e of C)S.beginPath(),S.arc(e.x,e.y,2.5,0,Math.PI*2),S.fillStyle=`#087f5b`,S.fill();let w=(e,t,n)=>{S.beginPath(),S.arc(e.x,e.y,7,0,Math.PI*2),S.fillStyle=t,S.fill(),S.lineWidth=2,S.strokeStyle=`#fff`,S.stroke(),S.fillStyle=`#fff`,S.font=`bold 8px sans-serif`,S.textAlign=`center`,S.textBaseline=`middle`,S.fillText(n,e.x,e.y+.5)};w(C[0],`#17201c`,`A`),C.length>1&&w(C[C.length-1],`#bd4138`,`Z`);let T=document.createElement(`a`);T.className=`osm-attribution`,T.href=`https://www.openstreetmap.org/copyright`,T.target=`_blank`,T.rel=`noreferrer`,T.textContent=`© OpenStreetMap contributors`,r.replaceChildren(...y,b,T)};requestAnimationFrame(i),f=new ResizeObserver(i),f.observe(r)}function j(e){r=e;for(let t of document.querySelectorAll(`[data-track-map-provider]`))t.setAttribute(`aria-pressed`,String(t.dataset.trackMapProvider===e));p(`track-map-key-caption`).textContent=A(e),p(`track-map-key`).value=d[e],p(`track-map-key-label`).hidden=e===`osm`,p(`draw-track-map`).hidden=e===`osm`||!d[e].trim(),p(`show-track-plot`).disabled=!1,p(`show-track-list`).disabled=!1,k(u),M(u)}async function ne(){let e=d[r].trim();if(k(u),r===`osm`||!e||!u.length||!c)return;let t=p(`track-plot`),n=document.createElement(`p`);n.className=`track-empty`,n.textContent=`正在通过 ${z(r)} 绘制最近 24 小时轨迹…`,t.replaceChildren(n),S(!0);try{let n=await Z(`/api/tracking/map`,{fingerprint:c,provider:r,apiKey:e}),i=document.createElement(`div`);i.className=`track-map-frame`;let a=document.createElement(`img`);a.src=n.imageDataUrl,a.alt=`${z(r)}地图中的最近 24 小时轨迹`,i.append(a),t.replaceChildren(i)}catch(e){let n=document.createElement(`p`);n.className=`track-map-error`,n.textContent=e.message,t.replaceChildren(n)}finally{S(!1)}}function M(e){let t=p(`track-list`);if(!e.length){let e=document.createElement(`p`);e.textContent=`最近 24 小时还没有轨迹点。`,t.replaceChildren(e);return}t.replaceChildren(...e.map(e=>{let t=document.createElement(`article`),n=document.createElement(`div`),r=document.createElement(`strong`);r.textContent=new Date(e.timestamp).toLocaleString();let i=document.createElement(`span`);i.textContent=`${Number(e.latitude).toFixed(7)}, ${Number(e.longitude).toFixed(7)} · 精度约 ${e.horizontalAccuracy} m`;let a=document.createElement(`button`);return a.type=`button`,a.className=`secondary`,a.textContent=`查看位置`,a.addEventListener(`click`,()=>{U(e),W()}),n.append(r,i),t.append(n,a),t}))}function N(e){return String(e||``).trim().replace(/^(?:IKT_|InkTag_)/i,``)}function P(e){return String(e.findNote||``).trim()||String(e.deviceName||``).trim()||N(e.bluetoothName)||`Find ${e.keyFingerprint.slice(0,4).toUpperCase()}`}function re(e){return e.find(e=>String(e.findNote||``).trim())?.findNote.trim()||e.find(e=>String(e.deviceName||``).trim())?.deviceName.trim()||N(e.find(e=>String(e.bluetoothName||``).trim())?.bluetoothName)||`未命名设备`}function ie(){let e=o.find(e=>e.selected);return e?String(e.deviceName||``).trim()||N(e.bluetoothName)||String(e.findNote||``).trim()||`Find ${e.keyFingerprint.slice(0,4).toUpperCase()}`:`未命名 InkTag`}function F(e,t){let n=[],r=e=>{let r=String(e||``).trim();!r||r.localeCompare(t,void 0,{sensitivity:`accent`})===0||n.some(e=>e.localeCompare(r,void 0,{sensitivity:`accent`})===0)||n.push(r)};r(e.find(e=>String(e.deviceName||``).trim())?.deviceName);let i=N(e.find(e=>String(e.bluetoothName||``).trim())?.bluetoothName);return i&&i.localeCompare(t,void 0,{sensitivity:`accent`})!==0&&r(`[${i}]`),n}function I(e){let t=new Map;for(let n of e){let e=n.deviceId||`key:${n.keyFingerprint}`,r=t.get(e)||{id:e,identities:[],selected:!1};r.identities.push(n),r.selected||=n.selected===!0,t.set(e,r)}return[...t.values()].map(e=>({...e,identities:e.identities.sort((e,t)=>Date.parse(t.createdAt)-Date.parse(e.createdAt))})).sort((e,t)=>Number(t.selected)-Number(e.selected)||Date.parse(t.identities[0].createdAt)-Date.parse(e.identities[0].createdAt))}function L(e,t){let n=document.createElement(`article`);n.className=`identity-item`,n.dataset.selected=String(e.selected===!0);let r=document.createElement(`div`);r.className=`identity-main`;let i=document.createElement(`strong`),a=String(e.findNote||``).trim();i.textContent=a&&a.localeCompare(t,void 0,{sensitivity:`accent`})!==0?a:e.selected?`当前查询身份`:`Find 身份 ${e.keyFingerprint.slice(0,4).toUpperCase()}`;let o=document.createElement(`span`);o.textContent=`${e.address} · `;let s=document.createElement(`code`);s.textContent=e.keyFingerprint,o.append(s),r.append(i,o);let c=document.createElement(`div`);c.className=`identity-meta`;let l=document.createElement(`span`);l.textContent=`查询 ${e.lastQueriedAt?new Date(e.lastQueriedAt).toLocaleString():`尚未查询`}`,c.append(l);let u=document.createElement(`span`);u.textContent=`最新记录 ${e.lastReportAt?new Date(e.lastReportAt).toLocaleString():`尚无记录`}`,c.append(u);let d=document.createElement(`span`);d.textContent=e.trackingEnabled?`轨迹记录中 · ${e.trackPointCount} 点`:`轨迹 ${e.trackPointCount} 点`,c.append(d);let f=document.createElement(`span`);if(f.textContent=e.derivationVersion===2?`Find v2 · 每 ${Math.round(Number(e.periodSeconds)/60)} 分钟轮换`:`旧版 · 仅本地历史`,c.append(f),e.lastAutoError){let t=document.createElement(`span`);t.className=`error-text`,t.textContent=e.lastAutoError,c.append(t)}let p=document.createElement(`div`);p.className=`button-row`;let m=document.createElement(`button`);m.type=`button`,m.className=e.selected?`primary`:`secondary`,m.dataset.action=`select-identity`,m.dataset.fingerprint=e.keyFingerprint,m.disabled=e.selected===!0||e.derivationVersion!==2,m.textContent=e.selected?`当前查询设备`:`选择查询`;let h=document.createElement(`button`);h.type=`button`,h.className=`quiet-button`,h.dataset.action=`edit-find-note`,h.dataset.fingerprint=e.keyFingerprint,h.textContent=`修改备注`;let g=document.createElement(`button`);g.type=`button`,g.className=`quiet-button danger-text`,g.dataset.action=`delete-identity`,g.dataset.fingerprint=e.keyFingerprint,g.title=`删除本机身份和对应轨迹`,g.textContent=`删除`;let _=document.createElement(`button`);_.type=`button`,_.className=`secondary`,_.dataset.action=`toggle-tracking`,_.dataset.fingerprint=e.keyFingerprint,_.textContent=e.trackingEnabled?`停止记录`:`定期记录`,_.disabled=e.derivationVersion!==2;let v=document.createElement(`button`);v.type=`button`,v.className=`quiet-button`,v.dataset.action=`view-tracking`,v.dataset.fingerprint=e.keyFingerprint,v.textContent=`轨迹${e.trackPointCount?` ${e.trackPointCount}`:``}`,p.append(m,_,v,h,g);let y=document.createElement(`form`);y.className=`identity-note-editor`,y.dataset.fingerprint=e.keyFingerprint,y.hidden=!0;let b=document.createElement(`label`);b.textContent=`Find 备注`;let x=document.createElement(`input`);x.name=`findNote`,x.maxLength=64,x.required=!0,x.value=e.findNote;let S=document.createElement(`button`);S.type=`submit`,S.className=`primary`,S.textContent=`保存`;let C=document.createElement(`button`);C.type=`button`,C.className=`quiet-button`,C.dataset.action=`cancel-edit-note`,C.dataset.fingerprint=e.keyFingerprint,C.textContent=`取消`,b.append(x),y.append(b,S,C);let w=document.createElement(`div`);w.className=`identity-delete-confirm`,w.hidden=!0;let T=document.createElement(`span`);T.textContent=`删除本机派生种子和 ${e.trackPointCount} 个轨迹点？不会修改标签中的种子。`;let E=document.createElement(`button`);E.type=`button`,E.className=`secondary`,E.dataset.action=`cancel-delete-identity`,E.dataset.fingerprint=e.keyFingerprint,E.textContent=`取消`;let D=document.createElement(`button`);return D.type=`button`,D.className=`danger-text`,D.dataset.action=`confirm-delete-identity`,D.dataset.fingerprint=e.keyFingerprint,D.textContent=`确认删除`,w.append(T,E,D),n.append(r,c,p,y,w),n}function R(e,t){let n=new URL(e);for(let[e,r]of Object.entries(t))n.searchParams.set(e,r);return n.toString().replace(/\+/g,`%20`)}function z(e){return e===`baidu`?`百度`:e===`amap`?`高德`:`OSMap`}function B(){n=null,i={baidu:``,amap:``,osm:``},a={baidu:``,amap:``,osm:``},p(`embedded-map`).removeAttribute(`src`),p(`enlarged-map`).removeAttribute(`src`),p(`map-card`).hidden=!0,G()}function V(e,t){e.removeAttribute(`src`),requestAnimationFrame(()=>{e.src=t})}function H(e,t=!1){let n=i[e];if(!n)return;r=e;let o=p(`embedded-map`);if((t||o.src!==n)&&V(o,n),o.title=`${z(e)}地图中的 Find 报告位置`,!v.hidden){let r=p(`enlarged-map`);(t||r.src!==n)&&V(r,n),r.title=`${z(e)}地图中的放大 Find 报告位置`}for(let t of[`show-baidu-map`,`modal-baidu-map`])p(t).setAttribute(`aria-pressed`,String(e===`baidu`));for(let t of[`show-amap-map`,`modal-amap-map`])p(t).setAttribute(`aria-pressed`,String(e===`amap`));for(let t of[`show-osm-map`,`modal-osm-map`])p(t).setAttribute(`aria-pressed`,String(e===`osm`));p(`map-info-card`).hidden=!1,p(`modal-map-info-card`).hidden=!1;for(let t of[`open-map-provider`,`open-modal-map-provider`])p(t).href=a[e]||n,p(t).textContent=`在${z(e)}打开`}function U(e){let t=Number(e.latitude).toFixed(7),o=Number(e.longitude).toFixed(7),s=Number(e.horizontalAccuracy),c=new Date(e.timestamp).toLocaleString(),l=Number.isFinite(s)?`水平精度约 ${s} 米`:`水平精度未知`,u=p(`device-address`).textContent||`--`,d=ie(),f=Number.isFinite(s)?`${d} · 约 ${s} m`:`${d} 位置`;n={address:u,reportTime:c,accuracyText:l,coordinates:`${t}, ${o}`},p(`map-coordinates`).textContent=n.coordinates,p(`map-explanation`).textContent=Number.isFinite(s)?`中心点是报告坐标；实际位置存在约 ${s} 米的水平不确定范围，不能据此认定具体门牌或房间。`:`中心点是报告坐标；本条报告没有提供可用的水平精度。`,i.baidu=R(`https://api.map.baidu.com/marker`,{location:`${t},${o}`,title:d,content:`GPS坐标：${t},${o}`,output:`html`,coord_type:`wgs84`,zoom:`18`,src:`webapp.InkTag.Find`}),i.amap=R(`https://uri.amap.com/marker`,{position:`${o},${t}`,name:d,src:`InkTag`,coordinate:`wgs84`,callnative:`0`}),i.osm=R(`https://www.openstreetmap.org/export/embed.html`,{bbox:`${(Number(o)-.005).toFixed(7)},${(Number(t)-.003).toFixed(7)},${(Number(o)+.005).toFixed(7)},${(Number(t)+.003).toFixed(7)}`,layer:`mapnik`,marker:`${t},${o}`}),a.baidu=i.baidu,a.amap=i.amap,a.osm=`https://www.openstreetmap.org/?mlat=${encodeURIComponent(t)}&mlon=${encodeURIComponent(o)}#map=18/${t}/${o}`,p(`modal-map-address`).textContent=u,p(`modal-map-time`).textContent=c,p(`modal-map-coordinates`).textContent=n.coordinates,p(`modal-map-meta`).textContent=`${c} · ${l}`,p(`modal-map-accuracy`).textContent=l,p(`map-info-title`).textContent=f,p(`modal-map-info-title`).textContent=f,p(`map-info-detail`).textContent=`${u} · ${c} · ${l}`,p(`modal-map-info-detail`).textContent=`${u} · ${c} · ${l}`,p(`map-card`).hidden=!1,H(r)}function W(){!n||!i[r]||(v.hidden=!1,document.body.style.overflow=`hidden`,H(r),p(`close-map`).focus())}function G(){v&&(v.hidden=!0,document.body.style.removeProperty(`overflow`))}function K(){y.hidden=!0,c=``,document.body.style.removeProperty(`overflow`)}function q(){return o.find(e=>e.keyFingerprint===c)||null}function J(){let e=q();e&&(p(`track-dialog-title`).textContent=P(e),p(`track-interval`).value=String(s),p(`toggle-track`).textContent=e.trackingEnabled?`停止定期记录`:`启用定期记录`,p(`toggle-track`).className=e.trackingEnabled?`secondary`:`primary`,p(`toggle-track`).disabled=e.derivationVersion!==2,p(`track-interval`).disabled=e.derivationVersion!==2)}async function Y(e){let t=await Z(`/api/tracking/history`,{fingerprint:e,limit:250,hours:24}),n=o.find(t=>t.keyFingerprint===e);p(`track-dialog-meta`).textContent=`${t.total} 个位置点 · 最近 ${t.windowHours||24} 小时 · 本机保留 ${t.retentionDays||90} 天`,k(t.points),M(t.points),n&&J()}async function X(e){c=e.keyFingerprint,y.hidden=!1,document.body.style.overflow=`hidden`,O(`plot`),j(r),J(),p(`track-plot`).textContent=`正在读取历史轨迹…`,p(`track-list`).textContent=`正在读取轨迹…`,await Y(e.keyFingerprint),p(`close-track`).focus()}async function Z(t,n){let r=n===void 0?{cache:`no-store`,credentials:`same-origin`}:{method:`POST`,cache:`no-store`,credentials:`same-origin`,headers:{"Content-Type":`application/json`,"X-InkTag-CSRF":e},body:JSON.stringify(n)},i=await fetch(t,r),a=await i.json();if(!i.ok||a.ok===!1)throw Error(a.error||`请求失败（HTTP ${i.status}）`);return a}function Q(t){t.loggedIn&&(p(`password`).value=``),e=t.csrfToken||e,p(`device-address`).textContent=t.address||`--`,p(`key-fingerprint`).textContent=t.keyFingerprint||`--`,p(`apple-account-username`).textContent=t.appleAccountUsername||`--`,t.appleAccountUsername&&!p(`email`).value&&(p(`email`).value=t.appleAccountUsername),m.hidden=t.loggedIn||t.needs2fa,h.hidden=!t.needs2fa,g.hidden=!t.loggedIn,p(`session-state`).textContent=t.loggedIn?t.queryReady?t.sessionRestored?`已加载查询会话`:`已取得查询权限`:`账号已验证 · 未取得查询权限`:t.needs2fa?`账号已验证 · 等待 2FA`:`未登录`,o=Array.isArray(t.identities)?t.identities:[],p(`query-warning`).hidden=!t.queryError,p(`query-warning`).textContent=t.queryError||``;let n=t.queryReady&&o.some(e=>e.selected&&e.derivationVersion===2);if(w(p(`update-track`),!n),w(p(`query-report`),!n),s=Number(t.trackingIntervalMinutes)||s,p(`identity-list`).replaceChildren(...I(o).map((e,n)=>{let r=document.createElement(`details`);r.className=`identity-device-group`,r.open=e.selected||n===0;let i=document.createElement(`summary`),a=document.createElement(`strong`),o=re(e.identities);a.textContent=o;let s=document.createElement(`span`);s.textContent=`${e.identities.length} 个 Find 身份${F(e.identities,o).map(e=>` · ${e}`).join(``)}`,i.append(a,s);let c=document.createElement(`div`);c.className=`identity-device-entries`;let l=document.createElement(`div`);l.className=`identity-device-actions`;let u=document.createElement(`button`);return u.type=`button`,u.className=`secondary identity-device-query-all`,u.dataset.action=`query-derived-window`,u.dataset.fingerprint=e.identities[0].keyFingerprint,u.textContent=`查询近期报告`,u.disabled=!t.queryReady||e.identities[0].derivationVersion!==2,l.append(u),c.append(l),c.append(...e.identities.map(e=>L(e,o))),r.append(i,c),r})),t.needs2fa){p(`two-factor-warning`).hidden=!t.secondFactorWarning,p(`two-factor-warning`).textContent=t.secondFactorWarning||``;let e=p(`two-factor-method`),n=e.value;e.replaceChildren(...t.methods.map(e=>{let t=document.createElement(`option`);return t.value=String(e.index),t.textContent=e.label,t}));let r=t.activeMethodIndex===null||t.activeMethodIndex===void 0?n:String(t.activeMethodIndex);[...e.options].some(e=>e.value===r)&&(e.value=r)}y.hidden||J()}p(`login-form`).addEventListener(`submit`,async e=>{e.preventDefault(),S(!0),C(`正在建立本地 Anisette 会话并登录…`);let t=p(`password`),n={email:p(`email`).value.trim(),password:t.value,consent:p(`consent`).checked};try{let e=await Z(`/api/login`,n);n.password=``,Q(e),C(e.queryError||(e.needs2fa?`账号密码验证通过，请继续完成双重认证。`:`已取得 Find 查询权限。`),e.queryError?`error`:`success`)}catch(e){n.password=``,C(e.message,`error`)}finally{S(!1)}}),p(`request-code`).addEventListener(`click`,async()=>{let e=p(`two-factor-method`),t=Number(e.value),n=e.selectedOptions[0]?.textContent||`所选方式`;S(!0),C(`正在通过“${n}”请求验证码…`);try{Q(await Z(`/api/2fa/request`,{index:t})),C(`验证码已通过“${n}”请求，请在对应设备上查看。`,`success`)}catch(e){C(`账号密码已验证；“${n}”发送验证码失败：${e.message}`,`error`)}finally{S(!1)}}),p(`code-form`).addEventListener(`submit`,async e=>{e.preventDefault();let t=p(`two-factor-method`),n=Number(t.value),r=t.selectedOptions[0]?.textContent||`所选方式`;S(!0),C(`正在按“${r}”验证…`);let i=p(`code`),a=i.value.trim();i.value=``;try{let e=await Z(`/api/2fa/submit`,{index:n,code:a});Q(e),C(e.queryError||`双重认证完成，已取得 Find 查询权限。`,e.queryReady?`success`:`error`)}catch(e){try{Q(await Z(`/api/status`))}catch{}C(`账号密码已验证；“${r}”提交验证码失败：${e.message}`,`error`)}finally{S(!1)}}),p(`query-report`).addEventListener(`click`,async()=>{S(!0),C(`正在查询并在本机解密最新报告…`);try{let e=await Z(`/api/query`,{}),n=p(`report`);if(n.hidden=!e.found,!e.found){t=``,B(),C(`尚未查到这把 Find 广播密钥的报告。可让 iPhone 继续靠近一段时间后重试。`);return}t=`${e.latitude}, ${e.longitude}`,p(`report-time`).textContent=new Date(e.timestamp).toLocaleString(),p(`report-age`).textContent=D(e.timestamp),p(`report-latitude`).textContent=Number(e.latitude).toFixed(7),p(`report-longitude`).textContent=Number(e.longitude).toFixed(7),p(`report-accuracy`).textContent=`${e.horizontalAccuracy} m`,p(`report-detail`).textContent=`${e.confidence} / 0x${Number(e.status).toString(16).padStart(2,`0`)}`,U(e),C(`已查询并解密最新报告。`,`success`)}catch(e){C(e.message,`error`)}finally{try{Q(await Z(`/api/status`))}catch{}S(!1)}}),p(`update-track`).addEventListener(`click`,async()=>{let e=o.find(e=>e.selected);if(!e)return;S(!0),C(`正在查询最新位置，并与本机历史轨迹去重合并…`);let t=``;try{(await Z(`/api/query`,{fingerprint:e.keyFingerprint,saveHistory:!0})).found||(t=`本次没有查到新的位置报告。`)}catch(e){t=`最新位置查询失败：${e.message}`}try{await X(e),C(t?`${t} 已打开本机保存的历史轨迹。`:`最新位置已去重写入，并与本机历史轨迹一起显示。`,t?`error`:`success`)}catch(e){K(),C(t||e.message,`error`)}finally{try{Q(await Z(`/api/status`))}catch{}S(!1)}});for(let[e,t]of[[`show-baidu-map`,`baidu`],[`modal-baidu-map`,`baidu`],[`show-amap-map`,`amap`],[`modal-amap-map`,`amap`],[`show-osm-map`,`osm`],[`modal-osm-map`,`osm`]])p(e).addEventListener(`click`,()=>H(t,!0));for(let e of document.querySelectorAll(`[data-track-map-provider]`))e.addEventListener(`click`,()=>j(e.dataset.trackMapProvider));p(`track-map-key`).addEventListener(`input`,e=>{d[r]=e.target.value,p(`draw-track-map`).hidden=!e.target.value.trim(),k(u),M(u)}),p(`draw-track-map`).addEventListener(`click`,()=>{ne()}),p(`reload-map`).addEventListener(`click`,()=>H(r,!0)),p(`reload-modal-map`).addEventListener(`click`,()=>H(r,!0)),p(`open-map`).addEventListener(`click`,W),p(`close-map`).addEventListener(`click`,G),v.addEventListener(`mousedown`,e=>{e.target===v&&G()}),p(`close-track`).addEventListener(`click`,K),y.addEventListener(`mousedown`,e=>{e.target===y&&K()}),document.addEventListener(`keydown`,e=>{if(e.key===`Escape`){if(!b.hidden){T();return}v.hidden||G(),y.hidden||K()}}),p(`copy-coordinates`).addEventListener(`click`,async()=>{if(t)try{await navigator.clipboard.writeText(t),C(`坐标已复制。`,`success`)}catch{C(`浏览器未允许复制，请手动复制页面中的坐标。`,`error`)}}),p(`identity-list`).addEventListener(`submit`,async e=>{let t=e.target.closest?.(`form.identity-note-editor`);if(!t)return;e.preventDefault();let n=t.dataset.fingerprint,r=o.find(e=>e.keyFingerprint===n),i=t.elements.findNote.value.trim();if(!(!r||!i)){if(i===r.findNote){t.hidden=!0;return}S(!0);try{Q(await Z(`/api/identity/update`,{fingerprint:n,findNote:i})),C(`Find 备注已更新为“${i}”。`,`success`)}catch(e){C(e.message,`error`)}finally{S(!1)}}}),p(`identity-list`).addEventListener(`click`,async e=>{if(!(e.target instanceof Element))return;let n=e.target.closest(`button[data-action]`);if(!n)return;let r=n.dataset.fingerprint,i=o.find(e=>e.keyFingerprint===r);if(i){if(n.dataset.action===`query-derived-window`){let e=P(i);S(!0),C(`正在查询“${e}”的近期位置，查询范围较大，预计需要约半分钟，请勿关闭页面。`);try{let e=await Z(`/api/query`,{fingerprint:r,saveHistory:!0,queryWindow:`recent`});Q(await Z(`/api/status`)),C(e.found?`查询完成：派生 ${e.derivedSlotCount} 个时间片，新增 ${Number(e.savedPointCount||0)} 个去重轨迹点。`:`查询完成：派生 ${e.derivedSlotCount} 个时间片，暂未返回位置报告。`,e.found?`success`:void 0)}catch(e){C(e.message,`error`)}finally{S(!1)}return}if(n.dataset.action===`edit-find-note`){let e=n.closest(`.identity-item`)?.querySelector(`.identity-note-editor`);if(!e)return;e.hidden=!1,e.elements.findNote.focus(),e.elements.findNote.select();return}if(n.dataset.action===`cancel-edit-note`){let e=n.closest(`.identity-note-editor`);e&&(e.hidden=!0);return}if(n.dataset.action===`delete-identity`){let e=n.closest(`.identity-item`)?.querySelector(`.identity-delete-confirm`);e&&(e.hidden=!1);return}if(n.dataset.action===`cancel-delete-identity`){let e=n.closest(`.identity-delete-confirm`);e&&(e.hidden=!0);return}if(n.dataset.action===`confirm-delete-identity`){S(!0);try{let e=i.selected,n=await Z(`/api/identity/delete`,{fingerprint:r,confirm:!0});Q(n),p(`report`).hidden=!0,t=``,B(),C(e&&n.identities.length>0?`本机身份及轨迹已删除，并已选择另一个保留身份。`:`本机身份及轨迹已删除。`,`success`)}catch(e){C(e.message,`error`)}finally{S(!1)}return}if(n.dataset.action===`view-tracking`){S(!0);try{await X(i)}catch(e){K(),C(e.message,`error`)}finally{S(!1)}return}if(n.dataset.action===`toggle-tracking`){let e=!i.trackingEnabled;if(e&&!await E({title:`启用定期轨迹记录`,message:`将为“${P(i)}”启用本机轨迹记录。\n\n服务运行且 Apple 会话有效时，每 ${s} 分钟查询一次；坐标保存在本机 SQLite 数据库中。`,confirmLabel:`启用记录`}))return;S(!0);try{Q(await Z(`/api/tracking/configure`,{fingerprint:r,enabled:e,intervalMinutes:s})),C(e?`已启用轨迹记录，每 ${s} 分钟查询一次。`:`已停止定期查询；已有轨迹仍保留在本机。`,`success`)}catch(e){C(e.message,`error`)}finally{S(!1)}return}S(!0);try{Q(await Z(`/api/identity/select`,{fingerprint:r})),p(`report`).hidden=!0,t=``,B(),C(`已选择“${i.findNote||i.deviceName||i.bluetoothName||r}”，现在可以查询该标签。`,`success`)}catch(e){C(e.message,`error`)}finally{S(!1)}}}),p(`toggle-track`).addEventListener(`click`,async()=>{let e=q();if(!e)return;let t=!e.trackingEnabled;if(!(t&&!await E({title:`启用定期轨迹记录`,message:`将为“${P(e)}”启用本机轨迹记录。\n\n坐标保存在本机 SQLite 数据库中。`,confirmLabel:`启用记录`}))){S(!0);try{Q(await Z(`/api/tracking/configure`,{fingerprint:e.keyFingerprint,enabled:t,intervalMinutes:s})),await Y(e.keyFingerprint)}catch(e){C(e.message,`error`)}finally{S(!1)}}}),p(`show-track-plot`).addEventListener(`click`,()=>O(`plot`)),p(`show-track-list`).addEventListener(`click`,()=>O(`list`)),p(`track-interval`).addEventListener(`change`,async e=>{let t=q();if(!t)return;let n=Number(e.target.value);S(!0);try{Q(await Z(`/api/tracking/configure`,{fingerprint:t.keyFingerprint,enabled:t.trackingEnabled,intervalMinutes:n})),C(`所有已启用身份的定期查询间隔已改为 ${n} 分钟。`,`success`)}catch(e){C(e.message,`error`)}finally{S(!1)}}),p(`clear-track`).addEventListener(`click`,async()=>{let e=q();if(!(!e||!await E({title:`清除历史轨迹`,message:`将清除“${P(e)}”保存在本机的全部轨迹点。此操作无法撤销。`,confirmLabel:`清除轨迹`,danger:!0}))){S(!0);try{Q(await Z(`/api/tracking/clear`,{fingerprint:e.keyFingerprint,confirm:!0})),await Y(e.keyFingerprint),C(`本机轨迹记录已清除。`,`success`)}catch(e){C(e.message,`error`)}finally{S(!1)}}});async function $(e){S(!0);try{Q(await Z(`/api/logout`,{})),p(`report`).hidden=!0,t=``,B(),C(e,`success`)}catch(e){C(e.message,`error`)}finally{S(!1)}}p(`logout`).addEventListener(`click`,()=>void $(`本机保存的 Apple 会话已清除；账号名仍保存在本机，密码从不保存。`)),p(`restart-login`).addEventListener(`click`,()=>void $(`已清除当前登录流程，可以更换账号。`)),Z(`/api/status`).then(e=>{Q(e),e.sessionError?C(e.sessionError,`error`):e.loggedIn?C(e.queryError||(e.sessionRestored?`已加载保存的 Apple 会话，查询时将验证是否仍有效。`:`已取得 Find 查询权限。`),e.queryError?`error`:`info`):e.needs2fa&&C(`账号密码验证通过，请继续完成双重认证。`,`success`)}).catch(e=>C(e.message,`error`))})();
+let csrfToken = ''
+let latestCoordinates = ''
+let latestReport = null
+let activeMapProvider = 'osm'
+let mapUrls = { baidu: '', amap: '', osm: '' }
+let mapOpenUrls = { baidu: '', amap: '', osm: '' }
+let identities = []
+let trackingIntervalMinutes = 60
+let trackFingerprint = ''
+let trackView = 'plot'
+let trackPoints = []
+let trackMapKeys = { baidu: '', amap: '', osm: '' }
+let trackMapResizeObserver = null
+
+const byId = (id) => document.getElementById(id)
+const loginPanel = byId('login-panel')
+const twoFactorPanel = byId('two-factor-panel')
+const queryPanel = byId('query-panel')
+const message = byId('message')
+const mapModal = byId('map-modal')
+const trackModal = byId('track-modal')
+const pageConfirmModal = byId('page-confirm-modal')
+let pageConfirmResolver = null
+
+function setBusy(busy) {
+  for (const element of document.querySelectorAll('button:not(#close-map):not(#close-track), input, select')) {
+    if (busy) {
+      element.dataset.disabledBeforeBusy = String(element.disabled)
+      element.disabled = true
+    } else if ('disabledBeforeBusy' in element.dataset) {
+      element.disabled = element.dataset.disabledBeforeBusy === 'true'
+      delete element.dataset.disabledBeforeBusy
+    }
+  }
+  document.body.dataset.busy = busy ? 'true' : 'false'
+}
+
+function showMessage(text, kind = 'info') {
+  message.textContent = text
+  message.dataset.kind = kind
+}
+
+function setQueryDisabled(element, disabled) {
+  // A response received while busy must replace, not restore, stale availability.
+  if ('disabledBeforeBusy' in element.dataset) element.dataset.disabledBeforeBusy = String(disabled)
+  element.disabled = disabled || document.body.dataset.busy === 'true'
+}
+
+function closePageConfirm(value = null) {
+  pageConfirmModal.hidden = true
+  pageConfirmResolver?.(value)
+  pageConfirmResolver = null
+  if (mapModal.hidden && trackModal.hidden) document.body.style.removeProperty('overflow')
+}
+
+function openPageConfirm({ title, message: detail, confirmLabel = '确认', danger = false, inputLabel = '', inputValue = '' }) {
+  pageConfirmResolver?.(null)
+  byId('page-confirm-title').textContent = title
+  byId('page-confirm-message').textContent = detail
+  byId('accept-page-confirm').textContent = confirmLabel
+  byId('page-confirm-form').dataset.danger = String(danger)
+  const label = byId('page-confirm-input-label')
+  const input = byId('page-confirm-input')
+  label.hidden = !inputLabel
+  byId('page-confirm-input-caption').textContent = inputLabel
+  input.required = Boolean(inputLabel)
+  input.value = inputValue
+  pageConfirmModal.hidden = false
+  document.body.style.overflow = 'hidden'
+  queueMicrotask(() => (inputLabel ? input : byId('accept-page-confirm')).focus())
+  return new Promise((resolve) => { pageConfirmResolver = resolve })
+}
+
+byId('page-confirm-form').addEventListener('submit', (event) => {
+  event.preventDefault()
+  const input = byId('page-confirm-input')
+  closePageConfirm(byId('page-confirm-input-label').hidden ? true : input.value.trim())
+})
+byId('cancel-page-confirm').addEventListener('click', () => closePageConfirm())
+byId('close-page-confirm').addEventListener('click', () => closePageConfirm())
+pageConfirmModal.addEventListener('mousedown', (event) => { if (event.target === pageConfirmModal) closePageConfirm() })
+
+function formatAge(timestamp) {
+  const reportTime = new Date(timestamp).getTime()
+  if (!Number.isFinite(reportTime)) return '--'
+  const deltaMs = Date.now() - reportTime
+  const future = deltaMs < 0
+  const totalMinutes = Math.max(0, Math.round(Math.abs(deltaMs) / 60000))
+  if (totalMinutes < 1) return future ? '不到 1 分钟后' : '不到 1 分钟前'
+  const days = Math.floor(totalMinutes / 1440)
+  const hours = Math.floor((totalMinutes % 1440) / 60)
+  const minutes = totalMinutes % 60
+  const parts = []
+  if (days) parts.push(`${days} 天`)
+  if (hours) parts.push(`${hours} 小时`)
+  if (minutes && !days) parts.push(`${minutes} 分钟`)
+  return `${parts.join(' ')}${future ? '后' : '前'}`
+}
+
+function setTrackView(view) {
+  trackView = view === 'list' ? 'list' : 'plot'
+  byId('track-plot').hidden = trackView !== 'plot'
+  byId('track-list').hidden = trackView !== 'list'
+  byId('track-map-config').hidden = trackView !== 'plot'
+  byId('show-track-plot').setAttribute('aria-pressed', String(trackView === 'plot'))
+  byId('show-track-list').setAttribute('aria-pressed', String(trackView === 'list'))
+}
+
+function renderTrackPlot(points) {
+  trackPoints = points
+  const shell = byId('track-plot')
+  if (!points.length) {
+    const empty = document.createElement('p')
+    empty.className = 'track-empty'
+    empty.textContent = '最近 24 小时还没有轨迹点。'
+    shell.replaceChildren(empty)
+    return
+  }
+  if (activeMapProvider === 'osm' || !trackMapKeys[activeMapProvider].trim()) {
+    renderOsmTrack(points, shell)
+    if (activeMapProvider !== 'osm') {
+      const fallback = document.createElement('p')
+      fallback.className = 'track-map-fallback'
+      fallback.textContent = `未填写 ${trackMapKeyLabel(activeMapProvider)}，已自动使用 OSMap。`
+      shell.append(fallback)
+    }
+    return
+  }
+  const empty = document.createElement('p')
+  empty.className = 'track-empty'
+  empty.textContent = `点击“绘制轨迹”，通过 ${mapProviderName(activeMapProvider)} 显示最近 24 小时的历史点。`
+  shell.replaceChildren(empty)
+}
+
+function trackMapKeyLabel(provider) {
+  return provider === 'baidu' ? '百度地图 AK' : provider === 'amap' ? '高德地图 Key' : ''
+}
+
+function normalizedOsmWorld(latitude, longitude) {
+  const boundedLatitude = Math.max(-85.05112878, Math.min(85.05112878, Number(latitude)))
+  const radians = boundedLatitude * Math.PI / 180
+  return {
+    x: (Number(longitude) + 180) / 360,
+    y: (1 - Math.log(Math.tan(radians) + (1 / Math.cos(radians))) / Math.PI) / 2,
+  }
+}
+
+function renderOsmTrack(points, shell) {
+  trackMapResizeObserver?.disconnect()
+  const frame = document.createElement('div')
+  frame.className = 'track-map-frame'
+  const map = document.createElement('div')
+  map.className = 'osm-track-map'
+  frame.append(map)
+  shell.replaceChildren(frame)
+  const render = () => {
+    const width = map.clientWidth
+    const height = map.clientHeight
+    if (!width || !height || !points.length) return
+    const tileSize = 256
+    const padding = 34
+    const normalized = points.map((point) => normalizedOsmWorld(point.latitude, point.longitude))
+    const minX = Math.min(...normalized.map((point) => point.x))
+    const maxX = Math.max(...normalized.map((point) => point.x))
+    const minY = Math.min(...normalized.map((point) => point.y))
+    const maxY = Math.max(...normalized.map((point) => point.y))
+    const xSpan = Math.max(maxX - minX, 1 / (1 << 19))
+    const ySpan = Math.max(maxY - minY, 1 / (1 << 19))
+    const fitted = Math.floor(Math.log2(Math.min(
+      Math.max(tileSize, width - padding * 2) / (xSpan * tileSize),
+      Math.max(tileSize, height - padding * 2) / (ySpan * tileSize),
+    )))
+    const zoom = Math.max(2, Math.min(19, Number.isFinite(fitted) ? fitted : 19))
+    const tileCount = 1 << zoom
+    const scale = tileSize * tileCount
+    const centerX = (minX + maxX) / 2 * scale
+    const centerY = (minY + maxY) / 2 * scale
+    const originX = centerX - width / 2
+    const originY = centerY - height / 2
+    const elements = []
+    for (let y = Math.max(0, Math.floor(originY / tileSize)); y <= Math.min(tileCount - 1, Math.floor((originY + height) / tileSize)); y += 1) {
+      for (let x = Math.floor(originX / tileSize); x <= Math.floor((originX + width) / tileSize); x += 1) {
+        const image = document.createElement('img')
+        const wrappedX = ((x % tileCount) + tileCount) % tileCount
+        image.src = `https://tile.openstreetmap.org/${zoom}/${wrappedX}/${y}.png`
+        image.alt = ''
+        image.draggable = false
+        image.referrerPolicy = 'strict-origin-when-cross-origin'
+        image.style.left = `${x * tileSize - originX}px`
+        image.style.top = `${y * tileSize - originY}px`
+        elements.push(image)
+      }
+    }
+    const canvas = document.createElement('canvas')
+    canvas.setAttribute('aria-label', 'OpenStreetMap 最近 24 小时轨迹')
+    const ratio = window.devicePixelRatio || 1
+    canvas.width = Math.round(width * ratio)
+    canvas.height = Math.round(height * ratio)
+    const context = canvas.getContext('2d')
+    context.setTransform(ratio, 0, 0, ratio, 0, 0)
+    const projected = normalized.map((point) => ({ x: point.x * scale - originX, y: point.y * scale - originY }))
+    context.lineCap = 'round'
+    context.lineJoin = 'round'
+    context.strokeStyle = 'rgba(255,255,255,.94)'
+    context.lineWidth = 9
+    context.beginPath()
+    projected.forEach((point, index) => index ? context.lineTo(point.x, point.y) : context.moveTo(point.x, point.y))
+    context.stroke()
+    context.strokeStyle = '#087f5b'
+    context.lineWidth = 5
+    context.beginPath()
+    projected.forEach((point, index) => index ? context.lineTo(point.x, point.y) : context.moveTo(point.x, point.y))
+    context.stroke()
+    for (const point of projected) {
+      context.beginPath()
+      context.arc(point.x, point.y, 2.5, 0, Math.PI * 2)
+      context.fillStyle = '#087f5b'
+      context.fill()
+    }
+    const drawMarker = (point, fill, label) => {
+      context.beginPath()
+      context.arc(point.x, point.y, 7, 0, Math.PI * 2)
+      context.fillStyle = fill
+      context.fill()
+      context.lineWidth = 2
+      context.strokeStyle = '#fff'
+      context.stroke()
+      context.fillStyle = '#fff'
+      context.font = 'bold 8px sans-serif'
+      context.textAlign = 'center'
+      context.textBaseline = 'middle'
+      context.fillText(label, point.x, point.y + 0.5)
+    }
+    drawMarker(projected[0], '#17201c', 'A')
+    if (projected.length > 1) drawMarker(projected[projected.length - 1], '#bd4138', 'Z')
+    const attribution = document.createElement('a')
+    attribution.className = 'osm-attribution'
+    attribution.href = 'https://www.openstreetmap.org/copyright'
+    attribution.target = '_blank'
+    attribution.rel = 'noreferrer'
+    attribution.textContent = '© OpenStreetMap contributors'
+    map.replaceChildren(...elements, canvas, attribution)
+  }
+  requestAnimationFrame(render)
+  trackMapResizeObserver = new ResizeObserver(render)
+  trackMapResizeObserver.observe(map)
+}
+
+function setTrackMapProvider(provider) {
+  activeMapProvider = provider
+  for (const button of document.querySelectorAll('[data-track-map-provider]')) {
+    button.setAttribute('aria-pressed', String(button.dataset.trackMapProvider === provider))
+  }
+  byId('track-map-key-caption').textContent = trackMapKeyLabel(provider)
+  byId('track-map-key').value = trackMapKeys[provider]
+  byId('track-map-key-label').hidden = provider === 'osm'
+  byId('draw-track-map').hidden = provider === 'osm' || !trackMapKeys[provider].trim()
+  byId('show-track-plot').disabled = false
+  byId('show-track-list').disabled = false
+  renderTrackPlot(trackPoints)
+  renderTrackList(trackPoints)
+}
+
+async function drawTrackMap() {
+  const apiKey = trackMapKeys[activeMapProvider].trim()
+  renderTrackPlot(trackPoints)
+  if (activeMapProvider === 'osm' || !apiKey || !trackPoints.length || !trackFingerprint) return
+  const shell = byId('track-plot')
+  const loading = document.createElement('p')
+  loading.className = 'track-empty'
+  loading.textContent = `正在通过 ${mapProviderName(activeMapProvider)} 绘制最近 24 小时轨迹…`
+  shell.replaceChildren(loading)
+  setBusy(true)
+  try {
+    const result = await api('/api/tracking/map', { fingerprint: trackFingerprint, provider: activeMapProvider, apiKey })
+    const frame = document.createElement('div')
+    frame.className = 'track-map-frame'
+    const image = document.createElement('img')
+    image.src = result.imageDataUrl
+    image.alt = `${mapProviderName(activeMapProvider)}地图中的最近 24 小时轨迹`
+    frame.append(image)
+    shell.replaceChildren(frame)
+  } catch (error) {
+    const failure = document.createElement('p')
+    failure.className = 'track-map-error'
+    failure.textContent = error.message
+    shell.replaceChildren(failure)
+  } finally {
+    setBusy(false)
+  }
+}
+
+function renderTrackList(points) {
+  const list = byId('track-list')
+  if (!points.length) {
+    const empty = document.createElement('p')
+    empty.textContent = '最近 24 小时还没有轨迹点。'
+    list.replaceChildren(empty)
+    return
+  }
+  list.replaceChildren(...points.map((point) => {
+    const row = document.createElement('article')
+    const copy = document.createElement('div')
+    const time = document.createElement('strong')
+    time.textContent = new Date(point.timestamp).toLocaleString()
+    const coordinates = document.createElement('span')
+    coordinates.textContent = `${Number(point.latitude).toFixed(7)}, ${Number(point.longitude).toFixed(7)} · 精度约 ${point.horizontalAccuracy} m`
+    const view = document.createElement('button')
+    view.type = 'button'
+    view.className = 'secondary'
+    view.textContent = '查看位置'
+    view.addEventListener('click', () => {
+      updateMap(point)
+      openMap()
+    })
+    copy.append(time, coordinates)
+    row.append(copy, view)
+    return row
+  }))
+}
+
+function compactBluetoothName(value) {
+  return String(value || '').trim().replace(/^(?:IKT_|InkTag_)/i, '')
+}
+
+function identityName(identity) {
+  return String(identity.findNote || '').trim()
+    || String(identity.deviceName || '').trim()
+    || compactBluetoothName(identity.bluetoothName)
+    || `Find ${identity.keyFingerprint.slice(0, 4).toUpperCase()}`
+}
+
+function deviceName(items) {
+  return items.find((identity) => String(identity.findNote || '').trim())?.findNote.trim()
+    || items.find((identity) => String(identity.deviceName || '').trim())?.deviceName.trim()
+    || compactBluetoothName(items.find((identity) => String(identity.bluetoothName || '').trim())?.bluetoothName)
+    || '未命名设备'
+}
+
+function selectedDeviceName() {
+  const identity = identities.find((item) => item.selected)
+  if (!identity) return '未命名 InkTag'
+  return String(identity.deviceName || '').trim()
+    || compactBluetoothName(identity.bluetoothName)
+    || String(identity.findNote || '').trim()
+    || `Find ${identity.keyFingerprint.slice(0, 4).toUpperCase()}`
+}
+
+function distinctDeviceNames(items, heading) {
+  const values = []
+  const add = (value) => {
+    const text = String(value || '').trim()
+    if (!text || text.localeCompare(heading, undefined, { sensitivity: 'accent' }) === 0) return
+    if (!values.some((entry) => entry.localeCompare(text, undefined, { sensitivity: 'accent' }) === 0)) values.push(text)
+  }
+  add(items.find((identity) => String(identity.deviceName || '').trim())?.deviceName)
+  const bluetoothName = compactBluetoothName(items.find((identity) => String(identity.bluetoothName || '').trim())?.bluetoothName)
+  if (bluetoothName && bluetoothName.localeCompare(heading, undefined, { sensitivity: 'accent' }) !== 0) add(`[${bluetoothName}]`)
+  return values
+}
+
+function groupIdentities(items) {
+  const groups = new Map()
+  for (const identity of items) {
+    const id = identity.deviceId || `key:${identity.keyFingerprint}`
+    const group = groups.get(id) || { id, identities: [], selected: false }
+    group.identities.push(identity)
+    group.selected ||= identity.selected === true
+    groups.set(id, group)
+  }
+  return [...groups.values()]
+    .map((group) => ({ ...group, identities: group.identities.sort((left, right) => Date.parse(right.createdAt) - Date.parse(left.createdAt)) }))
+    .sort((left, right) => Number(right.selected) - Number(left.selected) || Date.parse(right.identities[0].createdAt) - Date.parse(left.identities[0].createdAt))
+}
+
+function renderIdentityItem(identity, heading) {
+  const item = document.createElement('article')
+  item.className = 'identity-item'
+  item.dataset.selected = String(identity.selected === true)
+  const main = document.createElement('div')
+  main.className = 'identity-main'
+  const label = document.createElement('strong')
+  const note = String(identity.findNote || '').trim()
+  label.textContent = note && note.localeCompare(heading, undefined, { sensitivity: 'accent' }) !== 0
+    ? note
+    : identity.selected ? '当前查询身份' : `Find 身份 ${identity.keyFingerprint.slice(0, 4).toUpperCase()}`
+  const address = document.createElement('span')
+  address.textContent = `${identity.address} · `
+  const fingerprint = document.createElement('code')
+  fingerprint.textContent = identity.keyFingerprint
+  address.append(fingerprint)
+  main.append(label, address)
+  const meta = document.createElement('div')
+  meta.className = 'identity-meta'
+  const queried = document.createElement('span')
+  queried.textContent = `查询 ${identity.lastQueriedAt ? new Date(identity.lastQueriedAt).toLocaleString() : '尚未查询'}`
+  meta.append(queried)
+  const recorded = document.createElement('span')
+  recorded.textContent = `最新记录 ${identity.lastReportAt ? new Date(identity.lastReportAt).toLocaleString() : '尚无记录'}`
+  meta.append(recorded)
+  const tracking = document.createElement('span')
+  tracking.textContent = identity.trackingEnabled ? `轨迹记录中 · ${identity.trackPointCount} 点` : `轨迹 ${identity.trackPointCount} 点`
+  meta.append(tracking)
+  const derivation = document.createElement('span')
+  derivation.textContent = identity.derivationVersion === 2
+    ? `Find v2 · 每 ${Math.round(Number(identity.periodSeconds) / 60)} 分钟轮换`
+    : '旧版 · 仅本地历史'
+  meta.append(derivation)
+  if (identity.lastAutoError) {
+    const error = document.createElement('span')
+    error.className = 'error-text'
+    error.textContent = identity.lastAutoError
+    meta.append(error)
+  }
+  const actions = document.createElement('div')
+  actions.className = 'button-row'
+  const select = document.createElement('button')
+  select.type = 'button'
+  select.className = identity.selected ? 'primary' : 'secondary'
+  select.dataset.action = 'select-identity'
+  select.dataset.fingerprint = identity.keyFingerprint
+  select.disabled = identity.selected === true || identity.derivationVersion !== 2
+  select.textContent = identity.selected ? '当前查询设备' : '选择查询'
+  const rename = document.createElement('button')
+  rename.type = 'button'
+  rename.className = 'quiet-button'
+  rename.dataset.action = 'edit-find-note'
+  rename.dataset.fingerprint = identity.keyFingerprint
+  rename.textContent = '修改备注'
+  const remove = document.createElement('button')
+  remove.type = 'button'
+  remove.className = 'quiet-button danger-text'
+  remove.dataset.action = 'delete-identity'
+  remove.dataset.fingerprint = identity.keyFingerprint
+  remove.title = '删除本机身份和对应轨迹'
+  remove.textContent = '删除'
+  const toggleTrack = document.createElement('button')
+  toggleTrack.type = 'button'
+  toggleTrack.className = 'secondary'
+  toggleTrack.dataset.action = 'toggle-tracking'
+  toggleTrack.dataset.fingerprint = identity.keyFingerprint
+  toggleTrack.textContent = identity.trackingEnabled ? '停止记录' : '定期记录'
+  toggleTrack.disabled = identity.derivationVersion !== 2
+  const history = document.createElement('button')
+  history.type = 'button'
+  history.className = 'quiet-button'
+  history.dataset.action = 'view-tracking'
+  history.dataset.fingerprint = identity.keyFingerprint
+  history.textContent = `轨迹${identity.trackPointCount ? ` ${identity.trackPointCount}` : ''}`
+  actions.append(select, toggleTrack, history, rename, remove)
+  const editor = document.createElement('form')
+  editor.className = 'identity-note-editor'
+  editor.dataset.fingerprint = identity.keyFingerprint
+  editor.hidden = true
+  const editorLabel = document.createElement('label')
+  editorLabel.textContent = 'Find 备注'
+  const editorInput = document.createElement('input')
+  editorInput.name = 'findNote'
+  editorInput.maxLength = 64
+  editorInput.required = true
+  editorInput.value = identity.findNote
+  const save = document.createElement('button')
+  save.type = 'submit'
+  save.className = 'primary'
+  save.textContent = '保存'
+  const cancel = document.createElement('button')
+  cancel.type = 'button'
+  cancel.className = 'quiet-button'
+  cancel.dataset.action = 'cancel-edit-note'
+  cancel.dataset.fingerprint = identity.keyFingerprint
+  cancel.textContent = '取消'
+  editorLabel.append(editorInput)
+  editor.append(editorLabel, save, cancel)
+  const deleteConfirm = document.createElement('div')
+  deleteConfirm.className = 'identity-delete-confirm'
+  deleteConfirm.hidden = true
+  const deleteCopy = document.createElement('span')
+  deleteCopy.textContent = `删除本机派生种子和 ${identity.trackPointCount} 个轨迹点？不会修改标签中的种子。`
+  const keep = document.createElement('button')
+  keep.type = 'button'
+  keep.className = 'secondary'
+  keep.dataset.action = 'cancel-delete-identity'
+  keep.dataset.fingerprint = identity.keyFingerprint
+  keep.textContent = '取消'
+  const confirmDelete = document.createElement('button')
+  confirmDelete.type = 'button'
+  confirmDelete.className = 'danger-text'
+  confirmDelete.dataset.action = 'confirm-delete-identity'
+  confirmDelete.dataset.fingerprint = identity.keyFingerprint
+  confirmDelete.textContent = '确认删除'
+  deleteConfirm.append(deleteCopy, keep, confirmDelete)
+  item.append(main, meta, actions, editor, deleteConfirm)
+  return item
+}
+
+function mapUrl(base, params) {
+  const url = new URL(base)
+  for (const [name, value] of Object.entries(params)) url.searchParams.set(name, value)
+  return url.toString().replace(/\+/g, '%20')
+}
+
+function mapProviderName(provider) {
+  return provider === 'baidu' ? '百度' : provider === 'amap' ? '高德' : 'OSMap'
+}
+
+function clearMap() {
+  latestReport = null
+  mapUrls = { baidu: '', amap: '', osm: '' }
+  mapOpenUrls = { baidu: '', amap: '', osm: '' }
+  byId('embedded-map').removeAttribute('src')
+  byId('enlarged-map').removeAttribute('src')
+  byId('map-card').hidden = true
+  closeMap()
+}
+
+function reloadMapFrame(frame, url) {
+  frame.removeAttribute('src')
+  requestAnimationFrame(() => { frame.src = url })
+}
+
+function setMapProvider(provider, forceReload = false) {
+  const url = mapUrls[provider]
+  if (!url) return
+  activeMapProvider = provider
+  const preview = byId('embedded-map')
+  if (forceReload || preview.src !== url) reloadMapFrame(preview, url)
+  preview.title = `${mapProviderName(provider)}地图中的 Find 报告位置`
+  if (!mapModal.hidden) {
+    const enlarged = byId('enlarged-map')
+    if (forceReload || enlarged.src !== url) reloadMapFrame(enlarged, url)
+    enlarged.title = `${mapProviderName(provider)}地图中的放大 Find 报告位置`
+  }
+  for (const id of ['show-baidu-map', 'modal-baidu-map']) byId(id).setAttribute('aria-pressed', String(provider === 'baidu'))
+  for (const id of ['show-amap-map', 'modal-amap-map']) byId(id).setAttribute('aria-pressed', String(provider === 'amap'))
+  for (const id of ['show-osm-map', 'modal-osm-map']) byId(id).setAttribute('aria-pressed', String(provider === 'osm'))
+  byId('map-info-card').hidden = false
+  byId('modal-map-info-card').hidden = false
+  for (const id of ['open-map-provider', 'open-modal-map-provider']) {
+    byId(id).href = mapOpenUrls[provider] || url
+    byId(id).textContent = `在${mapProviderName(provider)}打开`
+  }
+}
+
+function updateMap(payload) {
+  const latitude = Number(payload.latitude).toFixed(7)
+  const longitude = Number(payload.longitude).toFixed(7)
+  const accuracy = Number(payload.horizontalAccuracy)
+  const reportTime = new Date(payload.timestamp).toLocaleString()
+  const accuracyText = Number.isFinite(accuracy) ? `水平精度约 ${accuracy} 米` : '水平精度未知'
+  const address = byId('device-address').textContent || '--'
+  const mapDeviceName = selectedDeviceName()
+  const markerTitle = Number.isFinite(accuracy) ? `${mapDeviceName} · 约 ${accuracy} m` : `${mapDeviceName} 位置`
+  latestReport = { address, reportTime, accuracyText, coordinates: `${latitude}, ${longitude}` }
+  byId('map-coordinates').textContent = latestReport.coordinates
+  byId('map-explanation').textContent = Number.isFinite(accuracy)
+    ? `中心点是报告坐标；实际位置存在约 ${accuracy} 米的水平不确定范围，不能据此认定具体门牌或房间。`
+    : '中心点是报告坐标；本条报告没有提供可用的水平精度。'
+  mapUrls.baidu = mapUrl('https://api.map.baidu.com/marker', {
+    location: `${latitude},${longitude}`,
+    title: mapDeviceName,
+    content: `GPS坐标：${latitude},${longitude}`,
+    output: 'html',
+    coord_type: 'wgs84',
+    zoom: '18',
+    src: 'webapp.InkTag.Find',
+  })
+  mapUrls.amap = mapUrl('https://uri.amap.com/marker', {
+    position: `${longitude},${latitude}`,
+    name: mapDeviceName,
+    src: 'InkTag',
+    coordinate: 'wgs84',
+    callnative: '0',
+  })
+  mapUrls.osm = mapUrl('https://www.openstreetmap.org/export/embed.html', {
+    bbox: `${(Number(longitude) - 0.005).toFixed(7)},${(Number(latitude) - 0.003).toFixed(7)},${(Number(longitude) + 0.005).toFixed(7)},${(Number(latitude) + 0.003).toFixed(7)}`,
+    layer: 'mapnik',
+    marker: `${latitude},${longitude}`,
+  })
+  mapOpenUrls.baidu = mapUrls.baidu
+  mapOpenUrls.amap = mapUrls.amap
+  mapOpenUrls.osm = `https://www.openstreetmap.org/?mlat=${encodeURIComponent(latitude)}&mlon=${encodeURIComponent(longitude)}#map=18/${latitude}/${longitude}`
+  byId('modal-map-address').textContent = address
+  byId('modal-map-time').textContent = reportTime
+  byId('modal-map-coordinates').textContent = latestReport.coordinates
+  byId('modal-map-meta').textContent = `${reportTime} · ${accuracyText}`
+  byId('modal-map-accuracy').textContent = accuracyText
+  byId('map-info-title').textContent = markerTitle
+  byId('modal-map-info-title').textContent = markerTitle
+  byId('map-info-detail').textContent = `${address} · ${reportTime} · ${accuracyText}`
+  byId('modal-map-info-detail').textContent = `${address} · ${reportTime} · ${accuracyText}`
+  byId('map-card').hidden = false
+  setMapProvider(activeMapProvider)
+}
+
+function openMap() {
+  if (!latestReport || !mapUrls[activeMapProvider]) return
+  mapModal.hidden = false
+  document.body.style.overflow = 'hidden'
+  setMapProvider(activeMapProvider)
+  byId('close-map').focus()
+}
+
+function closeMap() {
+  if (!mapModal) return
+  mapModal.hidden = true
+  document.body.style.removeProperty('overflow')
+}
+
+function closeTrack() {
+  trackModal.hidden = true
+  trackFingerprint = ''
+  document.body.style.removeProperty('overflow')
+}
+
+function activeTrackIdentity() {
+  return identities.find((identity) => identity.keyFingerprint === trackFingerprint) || null
+}
+
+function updateTrackControls() {
+  const identity = activeTrackIdentity()
+  if (!identity) return
+  byId('track-dialog-title').textContent = identityName(identity)
+  byId('track-interval').value = String(trackingIntervalMinutes)
+  byId('toggle-track').textContent = identity.trackingEnabled ? '停止定期记录' : '启用定期记录'
+  byId('toggle-track').className = identity.trackingEnabled ? 'secondary' : 'primary'
+  byId('toggle-track').disabled = identity.derivationVersion !== 2
+  byId('track-interval').disabled = identity.derivationVersion !== 2
+}
+
+async function loadTrackHistory(fingerprint) {
+  const payload = await api('/api/tracking/history', { fingerprint, limit: 250, hours: 24 })
+  const identity = identities.find((item) => item.keyFingerprint === fingerprint)
+  byId('track-dialog-meta').textContent = `${payload.total} 个位置点 · 最近 ${payload.windowHours || 24} 小时 · 本机保留 ${payload.retentionDays || 90} 天`
+  renderTrackPlot(payload.points)
+  renderTrackList(payload.points)
+  if (identity) updateTrackControls()
+}
+
+async function openTrack(identity) {
+  trackFingerprint = identity.keyFingerprint
+  trackModal.hidden = false
+  document.body.style.overflow = 'hidden'
+  setTrackView('plot')
+  setTrackMapProvider(activeMapProvider)
+  updateTrackControls()
+  byId('track-plot').textContent = '正在读取历史轨迹…'
+  byId('track-list').textContent = '正在读取轨迹…'
+  await loadTrackHistory(identity.keyFingerprint)
+  byId('close-track').focus()
+}
+
+async function api(path, body) {
+  const options = body === undefined
+    ? { cache: 'no-store', credentials: 'same-origin' }
+    : {
+        method: 'POST',
+        cache: 'no-store',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json', 'X-InkTag-CSRF': csrfToken },
+        body: JSON.stringify(body),
+      }
+  const response = await fetch(path, options)
+  const payload = await response.json()
+  if (!response.ok || payload.ok === false) throw new Error(payload.error || `请求失败（HTTP ${response.status}）`)
+  return payload
+}
+
+function updateState(payload) {
+  if (payload.loggedIn) byId('password').value = ''
+  csrfToken = payload.csrfToken || csrfToken
+  byId('device-address').textContent = payload.address || '--'
+  byId('key-fingerprint').textContent = payload.keyFingerprint || '--'
+  byId('apple-account-username').textContent = payload.appleAccountUsername || '--'
+  if (payload.appleAccountUsername && !byId('email').value) byId('email').value = payload.appleAccountUsername
+  loginPanel.hidden = payload.loggedIn || payload.needs2fa
+  twoFactorPanel.hidden = !payload.needs2fa
+  queryPanel.hidden = !payload.loggedIn
+  byId('session-state').textContent = payload.loggedIn
+    ? !payload.queryReady ? '账号已验证 · 未取得查询权限' : payload.sessionRestored ? '已加载查询会话' : '已取得查询权限'
+    : payload.needs2fa ? '账号已验证 · 等待 2FA' : '未登录'
+  identities = Array.isArray(payload.identities) ? payload.identities : []
+  byId('query-warning').hidden = !payload.queryError
+  byId('query-warning').textContent = payload.queryError || ''
+  const querySupported = payload.queryReady && identities.some((identity) => identity.selected && identity.derivationVersion === 2)
+  setQueryDisabled(byId('update-track'), !querySupported)
+  setQueryDisabled(byId('query-report'), !querySupported)
+  trackingIntervalMinutes = Number(payload.trackingIntervalMinutes) || trackingIntervalMinutes
+  const list = byId('identity-list')
+  list.replaceChildren(...groupIdentities(identities).map((group, index) => {
+    const device = document.createElement('details')
+    device.className = 'identity-device-group'
+    device.open = group.selected || index === 0
+    const summary = document.createElement('summary')
+    const title = document.createElement('strong')
+    const heading = deviceName(group.identities)
+    title.textContent = heading
+    const meta = document.createElement('span')
+    meta.textContent = `${group.identities.length} 个 Find 身份${distinctDeviceNames(group.identities, heading).map((value) => ` · ${value}`).join('')}`
+    summary.append(title, meta)
+    const entries = document.createElement('div')
+    entries.className = 'identity-device-entries'
+    const deviceActions = document.createElement('div')
+    deviceActions.className = 'identity-device-actions'
+    const queryWindow = document.createElement('button')
+    queryWindow.type = 'button'
+    queryWindow.className = 'secondary identity-device-query-all'
+    queryWindow.dataset.action = 'query-derived-window'
+    queryWindow.dataset.fingerprint = group.identities[0].keyFingerprint
+    queryWindow.textContent = '查询近期报告'
+    queryWindow.disabled = !payload.queryReady || group.identities[0].derivationVersion !== 2
+    deviceActions.append(queryWindow)
+    entries.append(deviceActions)
+    entries.append(...group.identities.map((identity) => renderIdentityItem(identity, heading)))
+    device.append(summary, entries)
+    return device
+  }))
+  if (payload.needs2fa) {
+    byId('two-factor-warning').hidden = !payload.secondFactorWarning
+    byId('two-factor-warning').textContent = payload.secondFactorWarning || ''
+    const select = byId('two-factor-method')
+    const previousValue = select.value
+    select.replaceChildren(...payload.methods.map((method) => {
+      const option = document.createElement('option')
+      option.value = String(method.index)
+      option.textContent = method.label
+      return option
+    }))
+    const preferredValue = payload.activeMethodIndex === null || payload.activeMethodIndex === undefined
+      ? previousValue
+      : String(payload.activeMethodIndex)
+    if ([...select.options].some((option) => option.value === preferredValue)) select.value = preferredValue
+  }
+  if (!trackModal.hidden) updateTrackControls()
+}
+
+byId('login-form').addEventListener('submit', async (event) => {
+  event.preventDefault()
+  setBusy(true)
+  showMessage('正在建立本地 Anisette 会话并登录…')
+  const passwordInput = byId('password')
+  const body = { email: byId('email').value.trim(), password: passwordInput.value, consent: byId('consent').checked }
+  try {
+    const payload = await api('/api/login', body)
+    body.password = ''
+    updateState(payload)
+    showMessage(payload.queryError || (payload.needs2fa ? '账号密码验证通过，请继续完成双重认证。' : '已取得 Find 查询权限。'), payload.queryError ? 'error' : 'success')
+  } catch (error) {
+    body.password = ''
+    showMessage(error.message, 'error')
+  } finally {
+    setBusy(false)
+  }
+})
+
+byId('request-code').addEventListener('click', async () => {
+  const select = byId('two-factor-method')
+  const index = Number(select.value)
+  const methodLabel = select.selectedOptions[0]?.textContent || '所选方式'
+  setBusy(true)
+  showMessage(`正在通过“${methodLabel}”请求验证码…`)
+  try {
+    const payload = await api('/api/2fa/request', { index })
+    updateState(payload)
+    showMessage(`验证码已通过“${methodLabel}”请求，请在对应设备上查看。`, 'success')
+  } catch (error) {
+    showMessage(`账号密码已验证；“${methodLabel}”发送验证码失败：${error.message}`, 'error')
+  } finally {
+    setBusy(false)
+  }
+})
+
+byId('code-form').addEventListener('submit', async (event) => {
+  event.preventDefault()
+  const select = byId('two-factor-method')
+  const index = Number(select.value)
+  const methodLabel = select.selectedOptions[0]?.textContent || '所选方式'
+  setBusy(true)
+  showMessage(`正在按“${methodLabel}”验证…`)
+  const codeInput = byId('code')
+  const code = codeInput.value.trim()
+  codeInput.value = ''
+  try {
+    const payload = await api('/api/2fa/submit', { index, code })
+    updateState(payload)
+    showMessage(payload.queryError || '双重认证完成，已取得 Find 查询权限。', payload.queryReady ? 'success' : 'error')
+  } catch (error) {
+    try { updateState(await api('/api/status')) } catch { /* Keep the original operation error. */ }
+    showMessage(`账号密码已验证；“${methodLabel}”提交验证码失败：${error.message}`, 'error')
+  } finally {
+    setBusy(false)
+  }
+})
+
+byId('query-report').addEventListener('click', async () => {
+  setBusy(true)
+  showMessage('正在查询并在本机解密最新报告…')
+  try {
+    const payload = await api('/api/query', {})
+    const report = byId('report')
+    report.hidden = !payload.found
+    if (!payload.found) {
+      latestCoordinates = ''
+      clearMap()
+      showMessage('尚未查到这把 Find 广播密钥的报告。可让 iPhone 继续靠近一段时间后重试。')
+      return
+    }
+    latestCoordinates = `${payload.latitude}, ${payload.longitude}`
+    byId('report-time').textContent = new Date(payload.timestamp).toLocaleString()
+    byId('report-age').textContent = formatAge(payload.timestamp)
+    byId('report-latitude').textContent = Number(payload.latitude).toFixed(7)
+    byId('report-longitude').textContent = Number(payload.longitude).toFixed(7)
+    byId('report-accuracy').textContent = `${payload.horizontalAccuracy} m`
+    byId('report-detail').textContent = `${payload.confidence} / 0x${Number(payload.status).toString(16).padStart(2, '0')}`
+    updateMap(payload)
+    showMessage('已查询并解密最新报告。', 'success')
+  } catch (error) {
+    showMessage(error.message, 'error')
+  } finally {
+    try { updateState(await api('/api/status')) } catch (_error) { /* Keep the query result visible. */ }
+    setBusy(false)
+  }
+})
+
+byId('update-track').addEventListener('click', async () => {
+  const identity = identities.find((item) => item.selected)
+  if (!identity) return
+  setBusy(true)
+  showMessage('正在查询最新位置，并与本机历史轨迹去重合并…')
+  let queryError = ''
+  try {
+    const result = await api('/api/query', { fingerprint: identity.keyFingerprint, saveHistory: true })
+    if (!result.found) queryError = '本次没有查到新的位置报告。'
+  } catch (error) {
+    queryError = `最新位置查询失败：${error.message}`
+  }
+  try {
+    await openTrack(identity)
+    showMessage(queryError ? `${queryError} 已打开本机保存的历史轨迹。` : '最新位置已去重写入，并与本机历史轨迹一起显示。', queryError ? 'error' : 'success')
+  } catch (error) {
+    closeTrack()
+    showMessage(queryError || error.message, 'error')
+  } finally {
+    try { updateState(await api('/api/status')) } catch (_error) { /* The history view remains usable. */ }
+    setBusy(false)
+  }
+})
+
+for (const [id, provider] of [['show-baidu-map', 'baidu'], ['modal-baidu-map', 'baidu'], ['show-amap-map', 'amap'], ['modal-amap-map', 'amap'], ['show-osm-map', 'osm'], ['modal-osm-map', 'osm']]) {
+  byId(id).addEventListener('click', () => setMapProvider(provider, true))
+}
+for (const button of document.querySelectorAll('[data-track-map-provider]')) {
+  button.addEventListener('click', () => setTrackMapProvider(button.dataset.trackMapProvider))
+}
+byId('track-map-key').addEventListener('input', (event) => {
+  trackMapKeys[activeMapProvider] = event.target.value
+  byId('draw-track-map').hidden = !event.target.value.trim()
+  renderTrackPlot(trackPoints)
+  renderTrackList(trackPoints)
+})
+byId('draw-track-map').addEventListener('click', () => { void drawTrackMap() })
+byId('reload-map').addEventListener('click', () => setMapProvider(activeMapProvider, true))
+byId('reload-modal-map').addEventListener('click', () => setMapProvider(activeMapProvider, true))
+byId('open-map').addEventListener('click', openMap)
+byId('close-map').addEventListener('click', closeMap)
+mapModal.addEventListener('mousedown', (event) => { if (event.target === mapModal) closeMap() })
+byId('close-track').addEventListener('click', closeTrack)
+trackModal.addEventListener('mousedown', (event) => { if (event.target === trackModal) closeTrack() })
+document.addEventListener('keydown', (event) => {
+  if (event.key !== 'Escape') return
+  if (!pageConfirmModal.hidden) {
+    closePageConfirm()
+    return
+  }
+  if (!mapModal.hidden) closeMap()
+  if (!trackModal.hidden) closeTrack()
+})
+
+byId('copy-coordinates').addEventListener('click', async () => {
+  if (!latestCoordinates) return
+  try {
+    await navigator.clipboard.writeText(latestCoordinates)
+    showMessage('坐标已复制。', 'success')
+  } catch (_error) {
+    showMessage('浏览器未允许复制，请手动复制页面中的坐标。', 'error')
+  }
+})
+
+byId('identity-list').addEventListener('submit', async (event) => {
+  const form = event.target.closest?.('form.identity-note-editor')
+  if (!form) return
+  event.preventDefault()
+  const fingerprint = form.dataset.fingerprint
+  const identity = identities.find((item) => item.keyFingerprint === fingerprint)
+  const findNote = form.elements.findNote.value.trim()
+  if (!identity || !findNote) return
+  if (findNote === identity.findNote) {
+    form.hidden = true
+    return
+  }
+  setBusy(true)
+  try {
+    updateState(await api('/api/identity/update', { fingerprint, findNote }))
+    showMessage(`Find 备注已更新为“${findNote}”。`, 'success')
+  } catch (error) {
+    showMessage(error.message, 'error')
+  } finally {
+    setBusy(false)
+  }
+})
+
+byId('identity-list').addEventListener('click', async (event) => {
+  if (!(event.target instanceof Element)) return
+  const button = event.target.closest('button[data-action]')
+  if (!button) return
+  const fingerprint = button.dataset.fingerprint
+  const identity = identities.find((item) => item.keyFingerprint === fingerprint)
+  if (!identity) return
+  if (button.dataset.action === 'query-derived-window') {
+    const label = identityName(identity)
+    setBusy(true)
+    showMessage(`正在查询“${label}”的近期位置，查询范围较大，预计需要约半分钟，请勿关闭页面。`)
+    try {
+      const result = await api('/api/query', { fingerprint, saveHistory: true, queryWindow: 'recent' })
+      updateState(await api('/api/status'))
+      showMessage(result.found
+        ? `查询完成：派生 ${result.derivedSlotCount} 个时间片，新增 ${Number(result.savedPointCount || 0)} 个去重轨迹点。`
+        : `查询完成：派生 ${result.derivedSlotCount} 个时间片，暂未返回位置报告。`, result.found ? 'success' : undefined)
+    } catch (error) {
+      showMessage(error.message, 'error')
+    } finally {
+      setBusy(false)
+    }
+    return
+  }
+  if (button.dataset.action === 'edit-find-note') {
+    const item = button.closest('.identity-item')
+    const editor = item?.querySelector('.identity-note-editor')
+    if (!editor) return
+    editor.hidden = false
+    editor.elements.findNote.focus()
+    editor.elements.findNote.select()
+    return
+  }
+  if (button.dataset.action === 'cancel-edit-note') {
+    const editor = button.closest('.identity-note-editor')
+    if (editor) editor.hidden = true
+    return
+  }
+  if (button.dataset.action === 'delete-identity') {
+    const confirmation = button.closest('.identity-item')?.querySelector('.identity-delete-confirm')
+    if (confirmation) confirmation.hidden = false
+    return
+  }
+  if (button.dataset.action === 'cancel-delete-identity') {
+    const confirmation = button.closest('.identity-delete-confirm')
+    if (confirmation) confirmation.hidden = true
+    return
+  }
+  if (button.dataset.action === 'confirm-delete-identity') {
+    setBusy(true)
+    try {
+      const wasSelected = identity.selected
+      const payload = await api('/api/identity/delete', { fingerprint, confirm: true })
+      updateState(payload)
+      byId('report').hidden = true
+      latestCoordinates = ''
+      clearMap()
+      showMessage(wasSelected && payload.identities.length > 0 ? '本机身份及轨迹已删除，并已选择另一个保留身份。' : '本机身份及轨迹已删除。', 'success')
+    } catch (error) {
+      showMessage(error.message, 'error')
+    } finally {
+      setBusy(false)
+    }
+    return
+  }
+  if (button.dataset.action === 'view-tracking') {
+    setBusy(true)
+    try {
+      await openTrack(identity)
+    } catch (error) {
+      closeTrack()
+      showMessage(error.message, 'error')
+    } finally {
+      setBusy(false)
+    }
+    return
+  }
+  if (button.dataset.action === 'toggle-tracking') {
+    const enabled = !identity.trackingEnabled
+    if (enabled && !await openPageConfirm({
+      title: '启用定期轨迹记录',
+      message: `将为“${identityName(identity)}”启用本机轨迹记录。\n\n服务运行且 Apple 会话有效时，每 ${trackingIntervalMinutes} 分钟查询一次；坐标保存在本机 SQLite 数据库中。`,
+      confirmLabel: '启用记录',
+    })) return
+    setBusy(true)
+    try {
+      const payload = await api('/api/tracking/configure', { fingerprint, enabled, intervalMinutes: trackingIntervalMinutes })
+      updateState(payload)
+      showMessage(enabled ? `已启用轨迹记录，每 ${trackingIntervalMinutes} 分钟查询一次。` : '已停止定期查询；已有轨迹仍保留在本机。', 'success')
+    } catch (error) {
+      showMessage(error.message, 'error')
+    } finally {
+      setBusy(false)
+    }
+    return
+  }
+  setBusy(true)
+  try {
+    const payload = await api('/api/identity/select', { fingerprint })
+    updateState(payload)
+    byId('report').hidden = true
+    latestCoordinates = ''
+    clearMap()
+    showMessage(`已选择“${identity.findNote || identity.deviceName || identity.bluetoothName || fingerprint}”，现在可以查询该标签。`, 'success')
+  } catch (error) {
+    showMessage(error.message, 'error')
+  } finally {
+    setBusy(false)
+  }
+})
+
+byId('toggle-track').addEventListener('click', async () => {
+  const identity = activeTrackIdentity()
+  if (!identity) return
+  const enabled = !identity.trackingEnabled
+  if (enabled && !await openPageConfirm({
+    title: '启用定期轨迹记录',
+    message: `将为“${identityName(identity)}”启用本机轨迹记录。\n\n坐标保存在本机 SQLite 数据库中。`,
+    confirmLabel: '启用记录',
+  })) return
+  setBusy(true)
+  try {
+    updateState(await api('/api/tracking/configure', { fingerprint: identity.keyFingerprint, enabled, intervalMinutes: trackingIntervalMinutes }))
+    await loadTrackHistory(identity.keyFingerprint)
+  } catch (error) {
+    showMessage(error.message, 'error')
+  } finally {
+    setBusy(false)
+  }
+})
+
+byId('show-track-plot').addEventListener('click', () => setTrackView('plot'))
+byId('show-track-list').addEventListener('click', () => setTrackView('list'))
+
+byId('track-interval').addEventListener('change', async (event) => {
+  const identity = activeTrackIdentity()
+  if (!identity) return
+  const intervalMinutes = Number(event.target.value)
+  setBusy(true)
+  try {
+    updateState(await api('/api/tracking/configure', { fingerprint: identity.keyFingerprint, enabled: identity.trackingEnabled, intervalMinutes }))
+    showMessage(`所有已启用身份的定期查询间隔已改为 ${intervalMinutes} 分钟。`, 'success')
+  } catch (error) {
+    showMessage(error.message, 'error')
+  } finally {
+    setBusy(false)
+  }
+})
+
+byId('clear-track').addEventListener('click', async () => {
+  const identity = activeTrackIdentity()
+  if (!identity || !await openPageConfirm({
+    title: '清除历史轨迹',
+    message: `将清除“${identityName(identity)}”保存在本机的全部轨迹点。此操作无法撤销。`,
+    confirmLabel: '清除轨迹',
+    danger: true,
+  })) return
+  setBusy(true)
+  try {
+    updateState(await api('/api/tracking/clear', { fingerprint: identity.keyFingerprint, confirm: true }))
+    await loadTrackHistory(identity.keyFingerprint)
+    showMessage('本机轨迹记录已清除。', 'success')
+  } catch (error) {
+    showMessage(error.message, 'error')
+  } finally {
+    setBusy(false)
+  }
+})
+
+async function logout(messageText) {
+  setBusy(true)
+  try {
+    const payload = await api('/api/logout', {})
+    updateState(payload)
+    byId('report').hidden = true
+    latestCoordinates = ''
+    clearMap()
+    showMessage(messageText, 'success')
+  } catch (error) {
+    showMessage(error.message, 'error')
+  } finally {
+    setBusy(false)
+  }
+}
+
+byId('logout').addEventListener('click', () => void logout('本机保存的 Apple 会话已清除；账号名仍保存在本机，密码从不保存。'))
+byId('restart-login').addEventListener('click', () => void logout('已清除当前登录流程，可以更换账号。'))
+
+api('/api/status').then((payload) => {
+  updateState(payload)
+  if (payload.sessionError) showMessage(payload.sessionError, 'error')
+  else if (payload.loggedIn) showMessage(payload.queryError || (payload.sessionRestored ? '已加载保存的 Apple 会话，查询时将验证是否仍有效。' : '已取得 Find 查询权限。'), payload.queryError ? 'error' : 'info')
+  else if (payload.needs2fa) showMessage('账号密码验证通过，请继续完成双重认证。', 'success')
+}).catch((error) => showMessage(error.message, 'error'))

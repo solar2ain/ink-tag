@@ -21,11 +21,15 @@ from release_checks import public_readiness, verify_material_delivery, download_
 
 
 FORBIDDEN_PARTS = {".sdk", ".tools", ".vendor", "_build", "backups", "factory-backups", "factory_backups"}
-LOCAL_ONLY_ROOTS = {".git", ".release-assets", ".release-local", ".audit-local"}
+LOCAL_ONLY_ROOTS = {".git", ".release-assets", ".release-local", ".audit-local", ".local"}
 AGENT_INSTRUCTIONS = {"agents.md", "agent.md", "claude.md", "gemini.md", ".cursorrules", "copilot-instructions.md"}
 DEVELOPMENT_MODULES = {"_diagnostics.py", "panel_diagnostic.py", "clock_diagnostic.py", "input_simulation.py"}
 DEVELOPMENT_FLAGS = (b"--test-bad-signature", b"--interrupt-after-percent")
 FIRMWARE_SUFFIXES = {".bin", ".hex", ".img", ".uf2", ".zip"}
+BASIC_TOOL_ASSETS = {
+    'tools/platforms/nordic/nrf52811/programmer/assets/full-writer.bin':
+        'd3e34c2be735e84c484198b95c9b10c92798a20c1abacfbb8af3e3a26b854acf',
+}
 FORBIDDEN_SUFFIXES = {
     ".a",
     ".axf",
@@ -99,6 +103,9 @@ def public_programmer_files(repo):
     if not path.is_file(): return {}, []
     try:
         manifest = json.loads(path.read_text('utf8'))
+        if manifest.get('edition') == 'basic':
+            from basic_release import native_inventory
+            return {name: 'dependency' for name in native_inventory(repo)}, []
         if not manifest.get('programmerTools'): return {}, []
         spec = importlib.util.spec_from_file_location('public_programmer_inventory', Path(__file__).with_name('firmware_inventory.py'))
         module = importlib.util.module_from_spec(spec)
@@ -115,6 +122,8 @@ def public_programmer_files(repo):
 
 def validate_public_tree(repo: Path, include_untracked: bool = False) -> list[str]:
     tool_files, failures = public_programmer_files(repo)
+    manifest_path = repo / 'firmware/manifest.json'
+    basic = manifest_path.is_file() and json.loads(manifest_path.read_text('utf-8')).get('edition') == 'basic'
     paths = set(repository_files(repo, include_untracked=include_untracked))
     # Instruction files may themselves be Git-ignored. Do not let that bypass
     # publication review; local recovery/evidence and installed runtimes stay local.
@@ -125,6 +134,7 @@ def validate_public_tree(repo: Path, include_untracked: bool = False) -> list[st
         if not path.is_file():
             continue
         relative = path.relative_to(repo)
+        name = relative.as_posix()
         is_tool = relative.as_posix() in tool_files
         if relative.parts[0] in LOCAL_ONLY_ROOTS:
             continue
@@ -132,13 +142,19 @@ def validate_public_tree(repo: Path, include_untracked: bool = False) -> list[st
             failures.append(f"agent instruction file is not public release content: {relative}")
         # Firmware/downloads live only in the separately verified manifest-bound
         # asset directory, never as an unlisted payload in the public source tree.
-        if path.suffix.lower() in FIRMWARE_SUFFIXES and not is_tool:
+        fixture = basic and name.startswith(('tests/fixtures/base-ota/', 'tests/fixtures/signed-ota/'))
+        tool_asset = basic and name in BASIC_TOOL_ASSETS and digest(path) == BASIC_TOOL_ASSETS[name]
+        if path.suffix.lower() in FIRMWARE_SUFFIXES and not (is_tool or fixture or tool_asset):
             failures.append(f"unlisted firmware/archive in public tree: {relative}")
         lowered_parts = {part.lower() for part in relative.parts}
         if lowered_parts & FORBIDDEN_PARTS and not is_tool:
             failures.append(f"forbidden path: {relative}")
-        if path.suffix.lower() in FORBIDDEN_SUFFIXES and not (is_tool and tool_files[relative.as_posix()] == 'dependency'):
+        basic_source = basic and public_basic_source(name)
+        if path.suffix.lower() in FORBIDDEN_SUFFIXES and not (basic_source or is_tool and tool_files[name] == 'dependency'):
             failures.append(f"forbidden source/private file: {relative}")
+        if basic and (any(part == 'common_pro' for part in relative.parts) or
+                      (path.suffix.lower() in {'.c', '.h', '.inc'} and re.search(r'_pro(?:_|\.)', path.name))):
+            failures.append(f"private edition source: {relative}")
         data = path.read_bytes()
         failures.extend(public_cli_failures(relative.as_posix(), data))
         for pattern in SECRET_PATTERNS:
@@ -150,6 +166,14 @@ def validate_public_tree(repo: Path, include_untracked: bool = False) -> list[st
         if private_windows_path in lowered or private_posix_path in lowered:
             failures.append(f"private source path leaked: {relative}")
     return failures
+
+
+def public_basic_source(name: str) -> bool:
+    if name == 'tools/platforms/nordic/nrf52811/programmer/internal/external-full-writer.c':
+        return True
+    return (Path(name).suffix.lower() in {'.c', '.cpp', '.h', '.hpp', '.inc'} and
+            name.startswith(('firmware/boards/', 'firmware/common/', 'firmware/ports/',
+                             'tools/emulator/')))
 
 
 def validate_manifest(repo: Path) -> tuple[dict, list[str]]:
@@ -270,6 +294,14 @@ def validate_manifest(repo: Path) -> tuple[dict, list[str]]:
                     failures.append('Missing target programmer directory: ' + str(board.get('boardId')))
     elif flash_tools:
         failures.append("flashTools is present without published firmware")
+    if manifest.get('edition') == 'basic':
+        from publication_scope import firmware_binding
+        try:
+            record = json.loads((repo/'releases/record.json').read_text('utf-8'))
+            release, = [r for r in record['releases'] if r['releaseTag'] == release_tag]
+            firmware_binding(repo, record, release, manifest)
+        except (ValueError, OSError, KeyError) as error:
+            failures.append(f'BASIC record validation: {error}')
     return manifest, failures
 
 
@@ -295,6 +327,8 @@ def validate_assets(manifest: dict, assets: Path, repo: Path | None = None) -> l
             failures.append('Invalid CLI distribution identity')
             continue
         expected[item['name']] = item['sha256']
+    source_names = {item['name'] for item in manifest.get('sourceMaterials', [])}
+    expected.update({item['name']: item['sha256'] for item in manifest.get('sourceMaterials', [])})
     if (assets/'RELEASE_NOTES.md').is_file():
         expected['RELEASE_NOTES.md'] = digest(assets/'RELEASE_NOTES.md')
     manifest_name = f"InkTag-v{manifest.get('version')}-manifest.json"
@@ -321,8 +355,11 @@ def validate_assets(manifest: dict, assets: Path, repo: Path | None = None) -> l
                         if (relative.name.lower() in AGENT_INSTRUCTIONS or relative.is_absolute() or
                                 '..' in relative.parts or '\\' in member.filename or ':' in member.filename or
                                 {part.lower() for part in relative.parts} & FORBIDDEN_PARTS or
-                                relative.suffix.lower() in FORBIDDEN_SUFFIXES or
-                                (relative.suffix.lower() in FIRMWARE_SUFFIXES and name not in firmware_names)):
+                                (relative.suffix.lower() in FORBIDDEN_SUFFIXES and
+                                 not (name in source_names and manifest.get('edition') == 'basic' and
+                                      public_basic_source('/'.join(relative.parts[1:])))) or
+                                (relative.suffix.lower() in FIRMWARE_SUFFIXES and name not in firmware_names and
+                                 not (name in source_names and '/tests/fixtures/' in member.filename))):
                             failures.append(f"forbidden release archive member: {name}: {member.filename}")
                         if not member.is_dir():
                             data = archive.read(member)
@@ -332,7 +369,8 @@ def validate_assets(manifest: dict, assets: Path, repo: Path | None = None) -> l
             except zipfile.BadZipFile:
                 failures.append(f"invalid release ZIP: {name}")
         descriptions = ([a for b in manifest.get('boards', []) for a in b.get('artifacts', [])] +
-            [manifest.get(k) for k in ('cli','web','webStandalone','webResources','localServer','flashTools')] + manifest.get('cliDistributions', []))
+            [manifest.get(k) for k in ('cli','web','webStandalone','webResources','localServer','flashTools')] +
+            manifest.get('cliDistributions', []) + manifest.get('sourceMaterials', []))
         description = next((a for a in descriptions if a and a.get('name') == name), None)
         if description and path.is_file() and path.stat().st_size != description.get('bytes'):
             failures.append('release asset size mismatch: ' + name)

@@ -95,8 +95,8 @@ Reopen the tutorial under Settings → Client settings → About. Different host
 
 | Feature | Conditions and behavior |
 | --- | --- |
-| Tap to connect (Free) | A qualified NFC tag exposes its existing console link to the phone. First Bluetooth use still requires browser permission. Reading a link does not execute a device action. |
-| NFC page switching (Pro) | Page changes and supported short commands require Pro, reported hardware support and the existing password protection. NFC image transfer is not yet available. |
+| Tap to connect (PRO) | A qualified NFC tag exposes its existing console link to the phone. First Bluetooth use still requires browser permission. Reading a link does not execute a device action. |
+| NFC page switching (PRO) | Page changes and supported short commands require PRO, reported hardware support and the existing password protection. NFC image transfer is not yet available. |
 | Buttons and buzzer | Unavailable extensions are marked not implemented and cannot be written. Qualified onboard buttons remain available according to actual device capabilities. |
 
 ## Connect and use
@@ -107,7 +107,7 @@ The introduction appears on first use and can be reopened under Settings → Cli
 
 Check the panel configuration before sending content. Wait for display completion, not just transfer completion. Read any image-clear confirmation before changing an incompatible panel profile. Password management uses device operations; changing or deleting a password requires fresh verification of the old password.
 
-Settings → Device settings → Activation serves Pro-capable devices. See [Pro features and activation](pro.md) for the Apple Find My tracker, more slots, NFC interaction and activation steps.
+Settings → Device settings → Activation serves Pro-capable devices. See [PRO features and activation](pro.md) for the Apple Find My tracker, more slots, NFC interaction and activation steps.
 
 ## First picture and stored images
 
@@ -129,9 +129,11 @@ The static edition can enroll tags and save encrypted migration material. The lo
 
 ## NFC usage
 
+See the [NFC guide](nfc.md) for text commands, image transfers, and where to get D3-Pro InkTag.
+
 For devices with NFC, Settings → Interaction shows instructions only. There is no mode selector, save action or NFC off switch.
 
-Read the tag with a phone to open its device link; the first Bluetooth connection still needs browser permission. Phone commands require Pro and supporting firmware: in NFC Tools choose Write → Add a record → Text, enter a supported command, and touch the tag. Examples include `NEXT`, `CALENDAR`, and `CLOCK`. The interface lists only commands advertised by the device. An existing image name may be used where supported.
+Read the tag with a phone to open its device link; the first Bluetooth connection still needs browser permission. Phone commands require PRO and supporting firmware: in NFC Tools choose Write → Add a record → Text, enter a supported command, and touch the tag. Examples include `NEXT`, `CALENDAR`, and `CLOCK`. The interface lists only commands advertised by the device. An existing image name may be used where supported.
 
 An ordinary touch is not a separate page-switching mode. NFC image transfer is not available yet.
 

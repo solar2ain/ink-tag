@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../index.html">InkTag WebUI</a></nav><main><h1 id="构建-inktag-webui">构建 InkTag WebUI</h1>
+<p><a target="_blank" rel="noopener noreferrer" href="build-webui.en.html">English</a></p>
+<p>本页介绍如何在电脑上预览 WebUI 和生成网页产物。直接打开仓库的 <a target="_blank" rel="noopener noreferrer" href="../index.html">standalone HTML</a> 或使用<a target="_blank" rel="noopener noreferrer" href="https://solar2ain.github.io/ink-tag/">在线 WebUI</a> 时，可以跳过以下构建步骤。</p>
+<h2 id="启动开发预览">启动开发预览</h2>
+<p>准备 Git、Node.js 24 和 npm，从仓库根目录进入 <code>webui/</code>。用下面的命令启动开发页面：</p>
+<pre><code class="language-sh">cd webui
+npm ci
+npm run dev -- --host 127.0.0.1
+</code></pre>
+<p>在本机 Chrome 或 Edge 打开终端给出的地址，默认是 <code>http://127.0.0.1:5173/</code>。按 Ctrl+C 结束。此方式适合改页面、预览以及通过蓝牙管理设备。Find 查询需要 <a target="_blank" rel="noopener noreferrer" href="zh-CN/webui.html#安装与访问">CLI 本地服务</a>。</p>
+<h2 id="生成静态站和离线版">生成静态站和离线版</h2>
+<p>在已执行过 <code>npm ci</code> 的 <code>webui/</code> 目录运行：</p>
+<pre><code class="language-sh">npm run build
+</code></pre>
+<p>构建会更新 <code>webui/dist/static/</code> 和 <code>webui/dist/standalone/</code>。仓库随源码提供这两份产物。静态版供 CLI 本地服务和 HTTPS 静态站使用。离线版可直接打开 <code>webui/dist/standalone/InkTag-WebUI.html</code>，请保留旁边的 <code>assets/</code>，供字体等资源按需加载。安装和运行发布版无需 Node.js。</p>
+<p>重编后回到仓库根目录，重新运行客户端安装脚本即可启动新版 WebUI。</p>
+<ul>
+<li>Windows 运行 <code>install_inktag.cmd</code>。</li>
+<li>macOS／Linux 运行 <code>sh install_inktag.sh</code>。</li>
+</ul>
+<p>如果只改了网页，可用<a target="_blank" rel="noopener noreferrer" href="cli/README.html">客户端脚本</a>运行 <code>webui restart --repo .</code>；已激活 CLI 虚拟环境时，直接运行 <code>inktag-cli webui restart --repo .</code>。要继续使用 HTTPS，请附上 <code>--enable-tls</code> 或原来的证书参数。</p>
+<h2 id="重建内置页面预览">重建内置页面预览</h2>
+<p>普通 WebUI 构建会校验并使用仓库随附的预览 WASM。修改共用日历或时钟渲染后，在已激活 <a target="_blank" rel="noopener noreferrer" href="https://emscripten.org/docs/getting_started/downloads.html">Emscripten SDK</a> 4.0.18 的 Linux、macOS 或 WSL 环境中，从仓库根目录运行以下命令，再重建 WebUI。</p>
+<pre><code class="language-sh">python3 tools/emulator/build-native-font-preview.py --emcc emcc
+</code></pre>
+<p><code>cli/src/inktag_cli/_assets/nativePreview.inputs.json</code> 列出对应的 C 源码、构建命令和校验和。WebUI 和 CLI 使用同一份预览产物。</p>
+<h2 id="相关构建与安装">相关构建与安装</h2>
+<ul>
+<li>CLI 需要 Python 3.11 或更新版本。只开发 CLI 时，可在自己的虚拟环境中从根目录运行 <code>python -m pip install -e ./cli</code>。使用 Find 或本地 WebUI 时，按<a target="_blank" rel="noopener noreferrer" href="cli/README.html">客户端安装指南</a>准备完整环境。</li>
+<li>固件构建按主控选择对应的 SDK 和工具链，在仓库根目录运行 <code>make</code>，按 <code>BUILD_TARGET</code> 选择平台。每个目标的参数、输出位置和版型见<a target="_blank" rel="noopener noreferrer" href="build-firmware.html">固件构建指南</a>。使用预编译固件时按<a target="_blank" rel="noopener noreferrer" href="zh-CN/flash.html">烧录指南</a>选正确的 App OTA 或 Full。</li>
+</ul></main></body></html>

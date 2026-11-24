@@ -2,7 +2,7 @@
 
 中文 | [English](../en/releases.md)
 
-从项目的 [GitHub Releases](https://github.com/solar2ain/ink-tag/releases) 下载所需文件并阅读该版本说明。尚未列出附件时，表示暂不可下载。本版提供 WebUI、Python CLI、使用手册、已适配主板的 OTA 与完整固件，以及独立的明文烧录工具。烧录工具位于仓库的 `firmware/<主控_主板>/`；执行烧录时必须另行提供匹配的完整固件。
+从项目的 [GitHub Releases](https://github.com/solar2ain/ink-tag/releases) 下载所需文件并阅读该版本说明。尚未列出附件时，表示暂不可下载。本版提供 WebUI、Python CLI、使用手册、已适配主板的 OTA 与完整固件，以及独立的明文烧录工具。烧录工具位于仓库的 `release/firmware/<主控_主板>/`；执行烧录时必须另行提供匹配的完整固件。
 
 WebUI、CLI 和设备固件的版本可以不同，不必一起升级。离线 ZIP 可直接打开，静态 ZIP 适合自行托管，CLI 本地版用于本机部署；CLI 安装见[CLI 使用说明](cli.md)。
 

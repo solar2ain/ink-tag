@@ -1,0 +1,31 @@
+{
+    "files":  [
+                  {
+                      "path":  "source-full.zip",
+                      "sha256":  "eb641de9058494205cbb98b599e54d4eebac9d1d2277170b3846fc3e496745c4",
+                      "bytes":  444051
+                  },
+                  {
+                      "path":  "board.toml",
+                      "sha256":  "3c0215157a3f1758fba335fd014a20b10b8cac4c14db8497130dfb28bbbce3ed",
+                      "bytes":  738
+                  },
+                  {
+                      "path":  "main-flash.hex",
+                      "sha256":  "2b462b99f435e1a5f30fad1dd5a175f4229ad67f77bdbe54d21b105e43462a1a",
+                      "bytes":  1474709
+                  },
+                  {
+                      "path":  "addresses.json",
+                      "sha256":  "c6a964b40abd6c0a55cd5d8db52ec2c65405f2969e8d16b3051da005a2bac1e6",
+                      "bytes":  1262
+                  }
+              ],
+    "initializationMode":  "clean",
+    "sourceProfile":  "base",
+    "buildTarget":  "nrf52832_priceetag",
+    "layout":  "N3V1",
+    "mainFlashSha256":  "370a82afd123e4023911558f3cbd7f5ee9a8d1ea3154e9d3eb722a0f4488984c",
+    "schemaVersion":  2,
+    "configurationFile":  "board.toml"
+}

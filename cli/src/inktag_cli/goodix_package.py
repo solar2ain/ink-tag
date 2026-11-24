@@ -36,12 +36,19 @@ def parse_recovery_version(info: bytes) -> dict | None:
     This metadata never raises the minimum Recovery required for App OTA.
     Existing ROM/SDK/OTAS fields keep their native offsets and meanings.
     """
-    if len(info) < 28 or info[20:24] != b"IKRV":
+    if len(info) <= 20:
         return None
+    if len(info) not in (28, 34) or info[20:24] != b'IKRV':
+        raise ValueError('Malformed Goodix Recovery software identity')
     major, minor, patch, epoch = info[24:28]
     if major == 0 or epoch != major:
         raise ValueError("Invalid Goodix Recovery version/epoch identity")
-    return {"version": f"{major}.{minor}.{patch}", "epoch": epoch}
+    result = {"version": f"{major}.{minor}.{patch}", "epoch": epoch}
+    if len(info) != 28:
+        if len(info) != 34 or info[28:33] != b'IKSP\x01' or info[33] not in (0, 1, 2):
+            raise ValueError('Malformed Goodix Recovery policy identity')
+        result['signaturePolicy'] = ('optional', 'required', 'crc-only')[info[33]]
+    return result
 SIGNATURE_PATTERN = 0xDEADBEEF
 SIGNED_FIRMWARE_TYPE = 0x10
 RSA_PUBLIC_KEY_OFFSET = 128
@@ -159,6 +166,9 @@ def load_package(path: Path) -> Package:
         raise ValueError("Goodix OTA compatibilityEpoch is out of range")
     if bytes((protocol, *release_parts)) not in firmware[:app_size]:
         raise ValueError("Goodix signed application does not contain the declared GATT release")
+    if (manifest.get('signature') or {}).get('required') is False:
+        image_info = verify_base_payload(manifest, firmware)
+        return Package(path, manifest, firmware, image_info, 0)
     firmware_type = 0
     expected_trailer_size = SIGNED_TRAILER_SIZE
     signature = manifest.get("signature")
@@ -255,3 +265,32 @@ def load_package(path: Path) -> Package:
             except (InvalidSignature, ValueError) as error:
                 raise ValueError("Goodix OTA ECDSA P-256 signature verification failed") from error
     return Package(path, manifest, firmware, image_info, firmware_type)
+
+
+def verify_base_payload(manifest: dict, firmware: bytes) -> bytes:
+    profile = layout_profile(manifest)
+    if (manifest.get('sourceProfile') != 'base' or
+            manifest.get('signature') != dict(required=False, algorithm='none', policy='crc-only')):
+        raise ValueError('Invalid Goodix unsigned InkTag package policy')
+    app = manifest['application']; size = app.get('size'); board=manifest['board']
+    if (type(size) is not int or size <= 40 or size+48 != len(firmware) or
+            len(firmware) > profile['slot_size'] or app.get('transfer_size') != len(firmware) or
+            hashlib.sha256(firmware).hexdigest() != app.get('sha256')):
+        raise ValueError('Goodix unsigned InkTag length/hash mismatch')
+    if __package__:
+        from .app_integrity import inspect_payload
+    else:
+        inspect_payload=runpy.run_path(str(Path(__file__).with_name('app_integrity.py')))['inspect_payload']
+    context = 2 if board == 'gr5331_zkc21v' else 0
+    inspect_payload(firmware[:size],body_bytes=size-40,board=context,layout=profile['layout_marker'],
+                    epoch=manifest['compatibilityEpoch'],release=manifest['releaseVersion'])
+    comments={'gr5331_zkc21v':b'inktag5331','gr551x_zkc42v':b'inktag551x','gr5513_zkel_internal':b'inktag5513i'}
+    checksum=sum(firmware[:size])&0xffffffff
+    expected=struct.pack('<HH6I12sII',IMAGE_INFO_PATTERN,manifest['compatibilityEpoch'],size,checksum,
+        profile['active_address'],profile['active_address'],3,0x744,comments[board],profile['layout_marker'],
+        profile['layout_marker']^0xffffffff)
+    if firmware[size:] != expected or app.get('checksum') != checksum:
+        raise ValueError('Goodix unsigned InkTag native image-info mismatch')
+    if app.get('linked_size') != size-40 or app.get('linked_sha256') != hashlib.sha256(firmware[:size-40]).hexdigest():
+        raise ValueError('Goodix unsigned InkTag linked-body binding mismatch')
+    return expected

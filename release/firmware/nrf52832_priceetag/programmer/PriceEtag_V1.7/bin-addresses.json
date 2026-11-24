@@ -1,0 +1,8 @@
+{
+  "board": "PriceEtag V1.7",
+  "space": "internal-flash",
+  "loadAddress": 0,
+  "bytes": 524288,
+  "pairedHex": "main-flash.hex",
+  "sha256": "370a82afd123e4023911558f3cbd7f5ee9a8d1ea3154e9d3eb722a0f4488984c"
+}

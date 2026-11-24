@@ -1,0 +1,575 @@
+{
+  "schemaVersion": 1,
+  "sourceSha256": "037b7c99bda22c742e359e8ba55044de307edf80739bfdb1cd383f5215e1af20",
+  "rules": {
+    "52:1": {
+      "colors": [
+        2
+      ],
+      "align": 8,
+      "max": [
+        200,
+        200
+      ],
+      "fixed_sizes": [
+        [
+          200,
+          200
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 0,
+      "driver": 52,
+      "recipe": 1,
+      "name": "JD79653A"
+    },
+    "63:2": {
+      "colors": [
+        3
+      ],
+      "align": 4,
+      "max": [
+        200,
+        200
+      ],
+      "fixed_sizes": [
+        [
+          200,
+          200
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 3,
+      "driver": 63,
+      "recipe": 2,
+      "name": "JD79XXX"
+    },
+    "63:3": {
+      "colors": [
+        3
+      ],
+      "align": 4,
+      "max": [
+        152,
+        296
+      ],
+      "fixed_sizes": [
+        [
+          152,
+          296
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 3,
+      "driver": 63,
+      "recipe": 3,
+      "name": "JD79XXX"
+    },
+    "63:4": {
+      "colors": [
+        3
+      ],
+      "align": 4,
+      "max": [
+        200,
+        200
+      ],
+      "fixed_sizes": [
+        [
+          200,
+          200
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 3,
+      "driver": 63,
+      "recipe": 4,
+      "name": "JD79XXX"
+    },
+    "16:0": {
+      "colors": [
+        1,
+        2
+      ],
+      "align": 8,
+      "max": [
+        800,
+        600
+      ],
+      "fixed_sizes": [],
+      "color_fixed_sizes": {},
+      "transfer_format": 0,
+      "driver": 16,
+      "recipe": 0,
+      "name": "UC8XXX"
+    },
+    "16:1": {
+      "colors": [
+        2
+      ],
+      "align": 8,
+      "max": [
+        128,
+        250
+      ],
+      "fixed_sizes": [
+        [
+          128,
+          250
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 0,
+      "driver": 16,
+      "recipe": 1,
+      "name": "UC8XXX"
+    },
+    "19:0": {
+      "colors": [
+        1,
+        2
+      ],
+      "align": 8,
+      "max": [
+        800,
+        600
+      ],
+      "fixed_sizes": [],
+      "color_fixed_sizes": {},
+      "transfer_format": 0,
+      "driver": 19,
+      "recipe": 0,
+      "name": "UC8176"
+    },
+    "19:1": {
+      "colors": [
+        2
+      ],
+      "align": 8,
+      "max": [
+        400,
+        300
+      ],
+      "fixed_sizes": [
+        [
+          400,
+          300
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 0,
+      "driver": 19,
+      "recipe": 1,
+      "name": "UC8176"
+    },
+    "20:0": {
+      "colors": [
+        1,
+        2
+      ],
+      "align": 8,
+      "max": [
+        960,
+        680
+      ],
+      "fixed_sizes": [],
+      "color_fixed_sizes": {},
+      "transfer_format": 0,
+      "driver": 20,
+      "recipe": 0,
+      "name": "UC8179"
+    },
+    "21:0": {
+      "colors": [
+        1,
+        2
+      ],
+      "align": 8,
+      "max": [
+        800,
+        600
+      ],
+      "fixed_sizes": [],
+      "color_fixed_sizes": {},
+      "transfer_format": 0,
+      "driver": 21,
+      "recipe": 0,
+      "name": "UC8276"
+    },
+    "21:1": {
+      "colors": [
+        2
+      ],
+      "align": 8,
+      "max": [
+        400,
+        300
+      ],
+      "fixed_sizes": [
+        [
+          400,
+          300
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 0,
+      "driver": 21,
+      "recipe": 1,
+      "name": "UC8276"
+    },
+    "32:0": {
+      "colors": [
+        1,
+        2
+      ],
+      "align": 8,
+      "max": [
+        400,
+        300
+      ],
+      "fixed_sizes": [],
+      "color_fixed_sizes": {},
+      "transfer_format": 0,
+      "driver": 32,
+      "recipe": 0,
+      "name": "SSD1619"
+    },
+    "32:1": {
+      "colors": [
+        2
+      ],
+      "align": 8,
+      "max": [
+        128,
+        250
+      ],
+      "fixed_sizes": [
+        [
+          128,
+          250
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 0,
+      "driver": 32,
+      "recipe": 1,
+      "name": "SSD1619"
+    },
+    "34:0": {
+      "colors": [
+        1,
+        2
+      ],
+      "align": 8,
+      "max": [
+        960,
+        680
+      ],
+      "fixed_sizes": [],
+      "color_fixed_sizes": {
+        "4": [
+          [
+            800,
+            480
+          ]
+        ]
+      },
+      "transfer_format": 0,
+      "driver": 34,
+      "recipe": 0,
+      "name": "SSD1677"
+    },
+    "35:0": {
+      "colors": [
+        1,
+        2
+      ],
+      "align": 8,
+      "max": [
+        128,
+        250
+      ],
+      "fixed_sizes": [
+        [
+          128,
+          250
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 0,
+      "driver": 35,
+      "recipe": 0,
+      "name": "SSD1680"
+    },
+    "35:1": {
+      "colors": [
+        1,
+        2
+      ],
+      "align": 8,
+      "max": [
+        128,
+        250
+      ],
+      "fixed_sizes": [
+        [
+          128,
+          250
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 0,
+      "driver": 35,
+      "recipe": 1,
+      "name": "SSD1680"
+    },
+    "36:0": {
+      "colors": [
+        1,
+        2
+      ],
+      "align": 8,
+      "max": [
+        400,
+        300
+      ],
+      "fixed_sizes": [],
+      "color_fixed_sizes": {},
+      "transfer_format": 0,
+      "driver": 36,
+      "recipe": 0,
+      "name": "SSD1683"
+    },
+    "36:1": {
+      "colors": [
+        1,
+        2
+      ],
+      "align": 8,
+      "max": [
+        400,
+        300
+      ],
+      "fixed_sizes": [],
+      "color_fixed_sizes": {},
+      "transfer_format": 0,
+      "driver": 36,
+      "recipe": 1,
+      "name": "SSD1683"
+    },
+    "48:0": {
+      "colors": [
+        3
+      ],
+      "align": 4,
+      "max": [
+        400,
+        300
+      ],
+      "fixed_sizes": [],
+      "color_fixed_sizes": {},
+      "transfer_format": 3,
+      "driver": 48,
+      "recipe": 0,
+      "name": "JD79661"
+    },
+    "48:1": {
+      "colors": [
+        3
+      ],
+      "align": 4,
+      "max": [
+        128,
+        250
+      ],
+      "fixed_sizes": [
+        [
+          128,
+          250
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 3,
+      "driver": 48,
+      "recipe": 1,
+      "name": "JD79661"
+    },
+    "49:0": {
+      "colors": [
+        3
+      ],
+      "align": 4,
+      "max": [
+        800,
+        600
+      ],
+      "fixed_sizes": [],
+      "color_fixed_sizes": {},
+      "transfer_format": 3,
+      "driver": 49,
+      "recipe": 0,
+      "name": "JD79665AA"
+    },
+    "49:1": {
+      "colors": [
+        3
+      ],
+      "align": 4,
+      "max": [
+        768,
+        552
+      ],
+      "fixed_sizes": [
+        [
+          768,
+          552
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 3,
+      "driver": 49,
+      "recipe": 1,
+      "name": "JD79665AA"
+    },
+    "49:2": {
+      "colors": [
+        3
+      ],
+      "align": 4,
+      "max": [
+        768,
+        552
+      ],
+      "fixed_sizes": [
+        [
+          768,
+          552
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 3,
+      "driver": 49,
+      "recipe": 2,
+      "name": "JD79665AA"
+    },
+    "51:0": {
+      "colors": [
+        2,
+        3
+      ],
+      "align": 4,
+      "max": [
+        400,
+        300
+      ],
+      "fixed_sizes": [],
+      "color_fixed_sizes": {},
+      "transfer_format": 3,
+      "driver": 51,
+      "recipe": 0,
+      "name": "JD79668AA"
+    },
+    "51:1": {
+      "colors": [
+        3
+      ],
+      "align": 4,
+      "max": [
+        400,
+        300
+      ],
+      "fixed_sizes": [
+        [
+          400,
+          300
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 3,
+      "driver": 51,
+      "recipe": 1,
+      "name": "JD79668AA"
+    },
+    "51:2": {
+      "colors": [
+        3
+      ],
+      "align": 4,
+      "max": [
+        400,
+        300
+      ],
+      "fixed_sizes": [
+        [
+          400,
+          300
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 3,
+      "driver": 51,
+      "recipe": 2,
+      "name": "JD79668AA"
+    },
+    "63:0": {
+      "colors": [
+        2,
+        3
+      ],
+      "align": 4,
+      "max": [
+        800,
+        600
+      ],
+      "fixed_sizes": [],
+      "color_fixed_sizes": {},
+      "transfer_format": 3,
+      "driver": 63,
+      "recipe": 0,
+      "name": "JD79XXX"
+    },
+    "63:1": {
+      "colors": [
+        2,
+        3
+      ],
+      "align": 4,
+      "max": [
+        128,
+        250
+      ],
+      "fixed_sizes": [
+        [
+          128,
+          250
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 3,
+      "driver": 63,
+      "recipe": 1,
+      "name": "JD79XXX"
+    },
+    "63:5": {
+      "colors": [
+        3
+      ],
+      "align": 4,
+      "max": [
+        176,
+        480
+      ],
+      "fixed_sizes": [
+        [
+          176,
+          480
+        ]
+      ],
+      "color_fixed_sizes": {},
+      "transfer_format": 3,
+      "driver": 63,
+      "recipe": 5,
+      "name": "JD79XXX"
+    }
+  }
+}

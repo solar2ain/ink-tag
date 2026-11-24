@@ -8,7 +8,7 @@ This page lists screens with physical InkTag test results. Use it to choose a sc
 
 ## Reading the partial-refresh column
 
-- **Clock partial refresh** means updating the clock-digit region on the listed supported board/panel/profile combination. It requires activated Pro and does not provide arbitrary image-region updates.
+- **Clock partial refresh** means updating the clock-digit region on the listed supported board/panel/profile combination. It requires activated PRO and does not provide arbitrary image-region updates.
 - **Not offered** means current InkTag does not offer partial refresh for that combination. It does not establish a theoretical controller limitation.
 - **Not verified** means existing tests do not establish working partial refresh.
 - **Available, visual result not fully checked** means the clock function exists but the exact board/panel's image and ghosting have not been completely checked.
@@ -19,11 +19,11 @@ The partial-refresh clock still performs a daily full refresh and changes its ba
 
 | Panel / product | Size and resolution | Colours | Driver profile | Physically tested use | Partial refresh |
 | --- | --- | --- | --- | --- | --- |
-| GR5331 ZKC21V original | 2.13 inch, 128×250 | Black/white/red | SSD1680, ZKC21V | Calendar, clock and images; clock-region updates visually confirmed | Clock partial refresh, Pro required; some samples retain faint grey ghosting |
-| Small GR5513 ZKC21V, MF213M0001 / MOFANG M001-4 | 2.13 inch, 128×250 | Black/white/red | SSD1680, ZKC21V | Minute updates, recovery after midnight full refresh, images, fonts and slideshow tested | Clock function available with Pro; visual result not fully checked |
+| GR5331 ZKC21V original | 2.13 inch, 128×250 | Black/white/red | SSD1680, ZKC21V | Calendar, clock and images; clock-region updates visually confirmed | Clock partial refresh, PRO required; some samples retain faint grey ghosting |
+| Small GR5513 ZKC21V, MF213M0001 / MOFANG M001-4 | 2.13 inch, 128×250 | Black/white/red | SSD1680, ZKC21V | Minute updates, recovery after midnight full refresh, images, fonts and slideshow tested | Clock function available with PRO; visual result not fully checked |
 | OM ZKC21V-N original | 2.13 inch, 128×250 | Black/white/red | SSD1680 driver, ZKC21V | Readable calendar and device page; complete display edges and stored-image display still need confirmation | Not offered |
-| ZKC42V, HE042AD7A2 / HINK-E042A48-A1 | 4.2 inch, 400×300 | Black/white/red | UC8276, ZKC42V | Clear, calendar, clock and device page on GR5513; minute partial updates tested | Clock partial refresh, Pro required; ghosting remains and complete visual quality is not verified |
-| 4.2-inch three-colour panel, SSD1619A configuration | 4.2 inch, 400×300 | Black/white/red | SSD1619A | Calendar, clock and consecutive minute updates tested on GR5513 | Clock partial refresh, Pro required; complete visual quality is not verified |
+| ZKC42V, HE042AD7A2 / HINK-E042A48-A1 | 4.2 inch, 400×300 | Black/white/red | UC8276, ZKC42V | Clear, calendar, clock and device page on GR5513; minute partial updates tested | Clock partial refresh, PRO required; ghosting remains and complete visual quality is not verified |
+| 4.2-inch three-colour panel, SSD1619A configuration | 4.2 inch, 400×300 | Black/white/red | SSD1619A | Calendar, clock and consecutive minute updates tested on GR5513 | Clock partial refresh, PRO required; complete visual quality is not verified |
 | ZKC42VM, HE042A55 / HINK-E042A13-FPC-A0 | 4.2 inch, 400×300 | Black/white/red | SSD1683, ZKC42VM | Original-panel full refresh | Not offered |
 | ZKC21B, HINK-E0213A349 | 2.13 inch, 128×250 | Black/white/red/yellow | JD79661 driver, ZKC21B | Clear, calendar, clock and image tests on OM6626; top-edge display still needs complete confirmation | Not offered |
 | ZKC42B original | 4.2 inch, 400×300 | Black/white/red/yellow | JD79668AA driver, ZKC42B | Images and stored-image display on OM6626, with calendar Chinese text, dates and digits visually confirmed | Not offered |
@@ -60,12 +60,12 @@ Choose the separate A0 or A1 profile. Related GR5515 replacements currently have
 
 ## E6 six-colour screens
 
-None of these profiles offers clock partial refresh. Physical control requires Pro; six-colour conversion and offline preview remain free.
+None of these profiles offers clock partial refresh. Physical control requires PRO; six-colour conversion and offline preview remain free.
 
 | Panel / identifying mark | Size and resolution | Driver profile | Physically tested use and limits | Partial refresh |
 | --- | --- | --- | --- | --- |
 | Osprey HT0154A10 / HINK-T0154A10-A1 | 1.54 inch, 240×240 | IST7513, HT0154A10 | TLSR8359: image transfer, calendar and panel temperature reported working | Not offered |
-| Osprey HT0169A06 / HINK-T0169A06-A0 | 1.69 inch, 400×400, circular visible area | IST7601, HT0169A06 | TLSR8359: Pro clear, calendar and direct image uploads tested, with panel temperature readings; Free screen control is refused. Overall visual result, ghosting and long-term power still need confirmation | Not offered |
+| Osprey HT0169A06 / HINK-T0169A06-A0 | 1.69 inch, 400×400, circular visible area | IST7601, HT0169A06 | TLSR8359: PRO clear, calendar and direct image uploads tested, with panel temperature readings; BASIC screen control is refused. Overall visual result, ghosting and long-term power still need confirmation | Not offered |
 | Osprey HT037A02 / HINK-T037A02-A1 | 3.7 inch, 720×480 | IST7601 / JD7601, HT037A02 | Display reported working; orientation and calendar had earlier issues, and cold-start/standby consumption still needs confirmation | Not offered |
 | H364F067-2601A | Approximately 3.64 inch, 760×568 | JD79665CA, H364F067 E6 | TLSR8359: calendar, device page, image transfer and stored-image playback tested; visible edges, complete colour result and power still need confirmation | Not offered |
 
@@ -92,7 +92,7 @@ None of these profiles offers clock partial refresh. Physical control requires P
 
 - Results apply to the listed board/panel combinations, not every production batch or replacement board.
 - Follow the connected device's actual partial-refresh support. Changing the panel, orientation, wiring or fonts may invalidate it.
-- Physical E6 six-colour control requires Pro. Offline image conversion and preview do not.
+- Physical E6 six-colour control requires PRO. Offline image conversion and preview do not.
 - Power off before changing screens and check the connector and supply. Stop if a panel heats up, draws unusual current or fails to refresh.
 
 See [WebUI](webui.md) for profile and image controls, and [supported devices](supported-devices.md) for boards and installation packages.

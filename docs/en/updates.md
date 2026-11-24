@@ -11,7 +11,7 @@ View the version and check for updates under Settings → Client settings → Ab
 3. Hosted WebUI: reopen the page for the deployed version. Standalone HTML: download and open the new file. Local service: stop the old service, update as described in [WebUI](webui.md), then restart using the same data directory.
 4. CLI: update in its existing isolated environment using the [CLI guide](cli.md), then check `inktag --version`.
 
-Device firmware is provided for exact controllers and boards, including nRF52832, nRF52811 and DA14585. Connect to view available OTA packages, or download a matching file and follow [wireless updates](ota.md); never substitute another MCU or board's file. Checksums check file integrity, not publisher signatures.
+Device firmware is provided for exact controllers and boards, including nRF52832, nRF52811 and DA14585. WebUI checks for updates after connecting. Under Firmware update, choose “Load online firmware” to download and validate the matching OTA package, then review its details and click “Start OTA”. There is no need to save and import the file first. You can cancel the download or select a local file as described in [wireless updates](ota.md). Never substitute another MCU or board's file. Checksums check file integrity, not publisher signatures.
 
 Automatic matching requires complete compatibility information from the device. If matching is unavailable, select a local OTA package for your device from Releases; normal package validation and manual updates remain available. See the [changelog](../../CHANGELOG.md) for version changes.
 

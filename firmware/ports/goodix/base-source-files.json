@@ -1,0 +1,1415 @@
+{
+  "schemaVersion": 1,
+  "profile": "base",
+  "purpose": "Exact GR base source/build/programmer closure; root reviews and projects, not publication authority",
+  "files": [
+    {
+      "source": "firmware/boards/README.md",
+      "destination": "firmware/boards/README.md"
+    },
+    {
+      "source": "firmware/boards/boards.json",
+      "destination": "firmware/boards/boards.json"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/goodix-pin-backends.json",
+      "destination": "firmware/ports/goodix/common/src/goodix-pin-backends.json"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/goodix_pin_backend_facts.h",
+      "destination": "firmware/ports/goodix/common/src/goodix_pin_backend_facts.h"
+    },
+    {
+      "source": "firmware/boards/gr5331_zkel.h",
+      "destination": "firmware/boards/gr5331_zkel.h"
+    },
+    {
+      "source": "firmware/boards/gr551x_zkel.h",
+      "destination": "firmware/boards/gr551x_zkel.h"
+    },
+    {
+      "source": "firmware/boards/nrf52832_priceetag.h",
+      "destination": "firmware/boards/nrf52832_priceetag.h"
+    },
+    {
+      "source": "firmware/boards/om6626_zkel.h",
+      "destination": "firmware/boards/om6626_zkel.h"
+    },
+    {
+      "source": "firmware/boards/tlsr8359_hsel.h",
+      "destination": "firmware/boards/tlsr8359_hsel.h"
+    },
+    {
+      "source": "firmware/common/README.md",
+      "destination": "firmware/common/README.md"
+    },
+    {
+      "source": "firmware/common/ble/inktag_ble_address.c",
+      "destination": "firmware/common/ble/inktag_ble_address.c"
+    },
+    {
+      "source": "firmware/common/ble/inktag_ble_address.h",
+      "destination": "firmware/common/ble/inktag_ble_address.h"
+    },
+    {
+      "source": "firmware/common/ble/inktag_ble_address_record.c",
+      "destination": "firmware/common/ble/inktag_ble_address_record.c"
+    },
+    {
+      "source": "firmware/common/ble/inktag_ble_address_uid.c",
+      "destination": "firmware/common/ble/inktag_ble_address_uid.c"
+    },
+    {
+      "source": "firmware/common/ble/inktag_ble_address_uid_compact.c",
+      "destination": "firmware/common/ble/inktag_ble_address_uid_compact.c"
+    },
+    {
+      "source": "firmware/common/ble/inktag_ble_identity.c",
+      "destination": "firmware/common/ble/inktag_ble_identity.c"
+    },
+    {
+      "source": "firmware/common/ble/inktag_ble_identity.h",
+      "destination": "firmware/common/ble/inktag_ble_identity.h"
+    },
+    {
+      "source": "firmware/common/ble/inktag_ble_power.h",
+      "destination": "firmware/common/ble/inktag_ble_power.h"
+    },
+    {
+      "source": "firmware/common/ble/inktag_device_display_name.h",
+      "destination": "firmware/common/ble/inktag_device_display_name.h"
+    },
+    {
+      "source": "firmware/common/ble/inktag_findmy.h",
+      "destination": "firmware/common/ble/inktag_findmy.h"
+    },
+    {
+      "source": "firmware/common/ble/inktag_findmy_keyring.h",
+      "destination": "firmware/common/ble/inktag_findmy_keyring.h"
+    },
+    {
+      "source": "firmware/common/ble/inktag_findmy_owner.h",
+      "destination": "firmware/common/ble/inktag_findmy_owner.h"
+    },
+    {
+      "source": "firmware/common/ble/inktag_findmy_p224.h",
+      "destination": "firmware/common/ble/inktag_findmy_p224.h"
+    },
+    {
+      "source": "firmware/common/ble/inktag_findmy_public.h",
+      "destination": "firmware/common/ble/inktag_findmy_public.h"
+    },
+    {
+      "source": "firmware/common/ble/test-vectors/inktag_findmy_p224_v1.json",
+      "destination": "firmware/common/ble/test-vectors/inktag_findmy_p224_v1.json"
+    },
+    {
+      "source": "firmware/common/epd/inktag_busy_defaults.inc",
+      "destination": "firmware/common/epd/inktag_busy_defaults.inc"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_clean.h",
+      "destination": "firmware/common/epd/inktag_epd_clean.h"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_commands.c",
+      "destination": "firmware/common/epd/inktag_epd_commands.c"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_config.c",
+      "destination": "firmware/common/epd/inktag_epd_config.c"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_config.h",
+      "destination": "firmware/common/epd/inktag_epd_config.h"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_driver.c",
+      "destination": "firmware/common/epd/inktag_epd_driver.c"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_driver.h",
+      "destination": "firmware/common/epd/inktag_epd_driver.h"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_jd.c",
+      "destination": "firmware/common/epd/inktag_epd_jd.c"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_jd_shared.inc",
+      "destination": "firmware/common/epd/inktag_epd_jd_shared.inc"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_runtime.c",
+      "destination": "firmware/common/epd/inktag_epd_runtime.c"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_screen.c",
+      "destination": "firmware/common/epd/inktag_epd_screen.c"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_screen.h",
+      "destination": "firmware/common/epd/inktag_epd_screen.h"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_service.h",
+      "destination": "firmware/common/epd/inktag_epd_service.h"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_ssd.c",
+      "destination": "firmware/common/epd/inktag_epd_ssd.c"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_temperature.h",
+      "destination": "firmware/common/epd/inktag_epd_temperature.h"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_uc.c",
+      "destination": "firmware/common/epd/inktag_epd_uc.c"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_wait_policy.h",
+      "destination": "firmware/common/epd/inktag_epd_wait_policy.h"
+    },
+    {
+      "source": "firmware/common/epd/inktag_epd_window.h",
+      "destination": "firmware/common/epd/inktag_epd_window.h"
+    },
+    {
+      "source": "firmware/common/epd/inktag_page_cycle.c",
+      "destination": "firmware/common/epd/inktag_page_cycle.c"
+    },
+    {
+      "source": "firmware/common/epd/inktag_page_cycle.h",
+      "destination": "firmware/common/epd/inktag_page_cycle.h"
+    },
+    {
+      "source": "firmware/common/epd/inktag_panel_diagnostic.c",
+      "destination": "firmware/common/epd/inktag_panel_diagnostic.c"
+    },
+    {
+      "source": "firmware/common/epd/inktag_panel_diagnostic.h",
+      "destination": "firmware/common/epd/inktag_panel_diagnostic.h"
+    },
+    {
+      "source": "firmware/common/epd/inktag_panel_gpio_snapshot.c",
+      "destination": "firmware/common/epd/inktag_panel_gpio_snapshot.c"
+    },
+    {
+      "source": "firmware/common/epd/inktag_panel_gpio_snapshot.h",
+      "destination": "firmware/common/epd/inktag_panel_gpio_snapshot.h"
+    },
+    {
+      "source": "firmware/common/epd/inktag_protocol_v2.h",
+      "destination": "firmware/common/epd/inktag_protocol_v2.h"
+    },
+    {
+      "source": "firmware/common/epd/inktag_screen_busy.h",
+      "destination": "firmware/common/epd/inktag_screen_busy.h"
+    },
+    {
+      "source": "firmware/common/epd/inktag_version.h",
+      "destination": "firmware/common/epd/inktag_version.h"
+    },
+    {
+      "source": "firmware/common/gui/Adafruit_GFX.c",
+      "destination": "firmware/common/gui/Adafruit_GFX.c"
+    },
+    {
+      "source": "firmware/common/gui/Adafruit_GFX.h",
+      "destination": "firmware/common/gui/Adafruit_GFX.h"
+    },
+    {
+      "source": "firmware/common/gui/inktag_calendar.c",
+      "destination": "firmware/common/gui/inktag_calendar.c"
+    },
+    {
+      "source": "firmware/common/gui/inktag_calendar.h",
+      "destination": "firmware/common/gui/inktag_calendar.h"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui.c",
+      "destination": "firmware/common/gui/inktag_gui.c"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui.h",
+      "destination": "firmware/common/gui/inktag_gui.h"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui_asset_package.c",
+      "destination": "firmware/common/gui/inktag_gui_asset_package.c"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui_asset_package.h",
+      "destination": "firmware/common/gui/inktag_gui_asset_package.h"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui_assets.h",
+      "destination": "firmware/common/gui/inktag_gui_assets.h"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui_calendar.inc",
+      "destination": "firmware/common/gui/inktag_gui_calendar.inc"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui_default.inc",
+      "destination": "firmware/common/gui/inktag_gui_default.inc"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui_device_qr.h",
+      "destination": "firmware/common/gui/inktag_gui_device_qr.h"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui_device_qr_asset.c",
+      "destination": "firmware/common/gui/inktag_gui_device_qr_asset.c"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui_edition_badge.inc",
+      "destination": "firmware/common/gui/inktag_gui_edition_badge.inc"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui_edition_name.inc",
+      "destination": "firmware/common/gui/inktag_gui_edition_name.inc"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui_fixed_layout.h",
+      "destination": "firmware/common/gui/inktag_gui_fixed_layout.h"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui_font_cache.h",
+      "destination": "firmware/common/gui/inktag_gui_font_cache.h"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui_font_roles.h",
+      "destination": "firmware/common/gui/inktag_gui_font_roles.h"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui_fonts.c",
+      "destination": "firmware/common/gui/inktag_gui_fonts.c"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui_fonts.h",
+      "destination": "firmware/common/gui/inktag_gui_fonts.h"
+    },
+    {
+      "source": "firmware/common/gui/inktag_gui_large_digits.h",
+      "destination": "firmware/common/gui/inktag_gui_large_digits.h"
+    },
+    {
+      "source": "firmware/common/gui/inktag_solar_terms.inc",
+      "destination": "firmware/common/gui/inktag_solar_terms.inc"
+    },
+    {
+      "source": "firmware/common/gui/licenses/lunar-calendar-MIT.txt",
+      "destination": "firmware/common/gui/licenses/lunar-calendar-MIT.txt"
+    },
+    {
+      "source": "firmware/common/gui/u8g2_font.c",
+      "destination": "firmware/common/gui/u8g2_font.c"
+    },
+    {
+      "source": "firmware/common/gui/u8g2_font.h",
+      "destination": "firmware/common/gui/u8g2_font.h"
+    },
+    {
+      "source": "firmware/common/health/inktag_health_store_retry.h",
+      "destination": "firmware/common/health/inktag_health_store_retry.h"
+    },
+    {
+      "source": "firmware/common/health/inktag_soak_telemetry.c",
+      "destination": "firmware/common/health/inktag_soak_telemetry.c"
+    },
+    {
+      "source": "firmware/common/health/inktag_soak_telemetry.h",
+      "destination": "firmware/common/health/inktag_soak_telemetry.h"
+    },
+    {
+      "source": "firmware/common/input/inktag_input.c",
+      "destination": "firmware/common/input/inktag_input.c"
+    },
+    {
+      "source": "firmware/common/input/inktag_input.h",
+      "destination": "firmware/common/input/inktag_input.h"
+    },
+    {
+      "source": "firmware/common/lifecycle/inktag_lifecycle.c",
+      "destination": "firmware/common/lifecycle/inktag_lifecycle.c"
+    },
+    {
+      "source": "firmware/common/lifecycle/inktag_lifecycle.h",
+      "destination": "firmware/common/lifecycle/inktag_lifecycle.h"
+    },
+    {
+      "source": "firmware/common/lifecycle/inktag_lifecycle_pending.c",
+      "destination": "firmware/common/lifecycle/inktag_lifecycle_pending.c"
+    },
+    {
+      "source": "firmware/common/lifecycle/inktag_lifecycle_pending.h",
+      "destination": "firmware/common/lifecycle/inktag_lifecycle_pending.h"
+    },
+    {
+      "source": "firmware/common/ota/inktag_ota_reject.h",
+      "destination": "firmware/common/ota/inktag_ota_reject.h"
+    },
+    {
+      "source": "firmware/common/ota/inktag_recovery.c",
+      "destination": "firmware/common/ota/inktag_recovery.c"
+    },
+    {
+      "source": "firmware/common/ota/inktag_recovery.h",
+      "destination": "firmware/common/ota/inktag_recovery.h"
+    },
+    {
+      "source": "firmware/common/ota/inktag_recovery_integrity_policy.h",
+      "destination": "firmware/common/ota/inktag_recovery_integrity_policy.h"
+    },
+    {
+      "source": "firmware/common/ota/inktag_recovery_version.h",
+      "destination": "firmware/common/ota/inktag_recovery_version.h"
+    },
+    {
+      "source": "firmware/common/ota/inktag_swap.c",
+      "destination": "firmware/common/ota/inktag_swap.c"
+    },
+    {
+      "source": "firmware/common/ota/inktag_swap.h",
+      "destination": "firmware/common/ota/inktag_swap.h"
+    },
+    {
+      "source": "firmware/common/platform/README.md",
+      "destination": "firmware/common/platform/README.md"
+    },
+    {
+      "source": "firmware/common/platform/inktag_elapsed_clock.c",
+      "destination": "firmware/common/platform/inktag_elapsed_clock.c"
+    },
+    {
+      "source": "firmware/common/platform/inktag_elapsed_clock.h",
+      "destination": "firmware/common/platform/inktag_elapsed_clock.h"
+    },
+    {
+      "source": "firmware/common/platform/inktag_timebase.h",
+      "destination": "firmware/common/platform/inktag_timebase.h"
+    },
+    {
+      "source": "firmware/common/power/inktag_power.c",
+      "destination": "firmware/common/power/inktag_power.c"
+    },
+    {
+      "source": "firmware/common/power/inktag_power.h",
+      "destination": "firmware/common/power/inktag_power.h"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_aux_io.c",
+      "destination": "firmware/common/protocol/inktag_aux_io.c"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_aux_io.h",
+      "destination": "firmware/common/protocol/inktag_aux_io.h"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_cooperative_snapshot.h",
+      "destination": "firmware/common/protocol/inktag_cooperative_snapshot.h"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_display_settings.c",
+      "destination": "firmware/common/protocol/inktag_display_settings.c"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_display_settings.h",
+      "destination": "firmware/common/protocol/inktag_display_settings.h"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_image_upload_v5.c",
+      "destination": "firmware/common/protocol/inktag_image_upload_v5.c"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_image_upload_v5.h",
+      "destination": "firmware/common/protocol/inktag_image_upload_v5.h"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_lzo1x.c",
+      "destination": "firmware/common/protocol/inktag_lzo1x.c"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_lzo1x.h",
+      "destination": "firmware/common/protocol/inktag_lzo1x.h"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_packbits.c",
+      "destination": "firmware/common/protocol/inktag_packbits.c"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_packbits.h",
+      "destination": "firmware/common/protocol/inktag_packbits.h"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_pin_config.c",
+      "destination": "firmware/common/protocol/inktag_pin_config.c"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_pin_config.h",
+      "destination": "firmware/common/protocol/inktag_pin_config.h"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_protocol_core.c",
+      "destination": "firmware/common/protocol/inktag_protocol_core.c"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_protocol_core.h",
+      "destination": "firmware/common/protocol/inktag_protocol_core.h"
+    },
+    {
+      "source": "firmware/common/protocol/inktag_release_v1.h",
+      "destination": "firmware/common/protocol/inktag_release_v1.h"
+    },
+    {
+      "source": "firmware/common/security/inktag_access.c",
+      "destination": "firmware/common/security/inktag_access.c"
+    },
+    {
+      "source": "firmware/common/security/inktag_access.h",
+      "destination": "firmware/common/security/inktag_access.h"
+    },
+    {
+      "source": "firmware/common/security/inktag_activation.c",
+      "destination": "firmware/common/security/inktag_activation.c"
+    },
+    {
+      "source": "firmware/common/security/inktag_activation.h",
+      "destination": "firmware/common/security/inktag_activation.h"
+    },
+    {
+      "source": "firmware/common/security/inktag_brand_overlay.c",
+      "destination": "firmware/common/security/inktag_brand_overlay.c"
+    },
+    {
+      "source": "firmware/common/security/inktag_brand_overlay.h",
+      "destination": "firmware/common/security/inktag_brand_overlay.h"
+    },
+    {
+      "source": "firmware/common/security/inktag_code_guard.c",
+      "destination": "firmware/common/security/inktag_code_guard.c"
+    },
+    {
+      "source": "firmware/common/security/inktag_code_guard.h",
+      "destination": "firmware/common/security/inktag_code_guard.h"
+    },
+    {
+      "source": "firmware/common/security/inktag_device_identity.inc",
+      "destination": "firmware/common/security/inktag_device_identity.inc"
+    },
+    {
+      "source": "firmware/common/security/inktag_device_password.c",
+      "destination": "firmware/common/security/inktag_device_password.c"
+    },
+    {
+      "source": "firmware/common/security/inktag_device_password.h",
+      "destination": "firmware/common/security/inktag_device_password.h"
+    },
+    {
+      "source": "firmware/common/security/inktag_device_password_store.c",
+      "destination": "firmware/common/security/inktag_device_password_store.c"
+    },
+    {
+      "source": "firmware/common/security/inktag_device_password_store.h",
+      "destination": "firmware/common/security/inktag_device_password_store.h"
+    },
+    {
+      "source": "firmware/common/security/inktag_firmware_signature.h",
+      "destination": "firmware/common/security/inktag_firmware_signature.h"
+    },
+    {
+      "source": "firmware/common/security/inktag_image_quota.c",
+      "destination": "firmware/common/security/inktag_image_quota.c"
+    },
+    {
+      "source": "firmware/common/security/inktag_image_quota.h",
+      "destination": "firmware/common/security/inktag_image_quota.h"
+    },
+    {
+      "source": "firmware/common/security/inktag_sha256.c",
+      "destination": "firmware/common/security/inktag_sha256.c"
+    },
+    {
+      "source": "firmware/common/security/inktag_sha256.h",
+      "destination": "firmware/common/security/inktag_sha256.h"
+    },
+    {
+      "source": "firmware/common/status/inktag_status.c",
+      "destination": "firmware/common/status/inktag_status.c"
+    },
+    {
+      "source": "firmware/common/status/inktag_status.h",
+      "destination": "firmware/common/status/inktag_status.h"
+    },
+    {
+      "source": "firmware/common/status/inktag_temperature_wire.h",
+      "destination": "firmware/common/status/inktag_temperature_wire.h"
+    },
+    {
+      "source": "firmware/common/storage/inktag_board_record.h",
+      "destination": "firmware/common/storage/inktag_board_record.h"
+    },
+    {
+      "source": "firmware/common/storage/inktag_findmy_keyring_store.h",
+      "destination": "firmware/common/storage/inktag_findmy_keyring_store.h"
+    },
+    {
+      "source": "firmware/common/storage/inktag_findmy_public_store.h",
+      "destination": "firmware/common/storage/inktag_findmy_public_store.h"
+    },
+    {
+      "source": "firmware/common/storage/inktag_image_fixed_store.h",
+      "destination": "firmware/common/storage/inktag_image_fixed_store.h"
+    },
+    {
+      "source": "firmware/common/storage/inktag_image_fixed_store.inc",
+      "destination": "firmware/common/storage/inktag_image_fixed_store.inc"
+    },
+    {
+      "source": "firmware/common/storage/inktag_image_index.c",
+      "destination": "firmware/common/storage/inktag_image_index.c"
+    },
+    {
+      "source": "firmware/common/storage/inktag_image_index.h",
+      "destination": "firmware/common/storage/inktag_image_index.h"
+    },
+    {
+      "source": "firmware/common/storage/inktag_image_scan.c",
+      "destination": "firmware/common/storage/inktag_image_scan.c"
+    },
+    {
+      "source": "firmware/common/storage/inktag_image_scan.h",
+      "destination": "firmware/common/storage/inktag_image_scan.h"
+    },
+    {
+      "source": "firmware/common/storage/inktag_public_cache_retirement.c",
+      "destination": "firmware/common/storage/inktag_public_cache_retirement.c"
+    },
+    {
+      "source": "firmware/common/storage/inktag_public_cache_retirement.h",
+      "destination": "firmware/common/storage/inktag_public_cache_retirement.h"
+    },
+    {
+      "source": "firmware/common/storage/inktag_resource_name.c",
+      "destination": "firmware/common/storage/inktag_resource_name.c"
+    },
+    {
+      "source": "firmware/common/storage/inktag_resource_name.h",
+      "destination": "firmware/common/storage/inktag_resource_name.h"
+    },
+    {
+      "source": "firmware/common/storage/inktag_settings_journal.c",
+      "destination": "firmware/common/storage/inktag_settings_journal.c"
+    },
+    {
+      "source": "firmware/common/storage/inktag_settings_journal.h",
+      "destination": "firmware/common/storage/inktag_settings_journal.h"
+    },
+    {
+      "source": "firmware/common/storage/inktag_settings_records.c",
+      "destination": "firmware/common/storage/inktag_settings_records.c"
+    },
+    {
+      "source": "firmware/common/storage/inktag_settings_records.h",
+      "destination": "firmware/common/storage/inktag_settings_records.h"
+    },
+    {
+      "source": "firmware/common/storage/inktag_spi_nor_sfdp.h",
+      "destination": "firmware/common/storage/inktag_spi_nor_sfdp.h"
+    },
+    {
+      "source": "firmware/common/time/inktag_clock_rate.c",
+      "destination": "firmware/common/time/inktag_clock_rate.c"
+    },
+    {
+      "source": "firmware/common/time/inktag_clock_rate.h",
+      "destination": "firmware/common/time/inktag_clock_rate.h"
+    },
+    {
+      "source": "firmware/common/time/inktag_monotonic_clock.c",
+      "destination": "firmware/common/time/inktag_monotonic_clock.c"
+    },
+    {
+      "source": "firmware/common/time/inktag_monotonic_clock.h",
+      "destination": "firmware/common/time/inktag_monotonic_clock.h"
+    },
+    {
+      "source": "firmware/common/time/inktag_time_checkpoint.h",
+      "destination": "firmware/common/time/inktag_time_checkpoint.h"
+    },
+    {
+      "source": "firmware/common/time/inktag_wall_clock.c",
+      "destination": "firmware/common/time/inktag_wall_clock.c"
+    },
+    {
+      "source": "firmware/common/time/inktag_wall_clock.h",
+      "destination": "firmware/common/time/inktag_wall_clock.h"
+    },
+    {
+      "source": "firmware/factory/device-info-qr.json",
+      "destination": "firmware/factory/device-info-qr.json"
+    },
+    {
+      "source": "firmware/factory/native-font-template.json",
+      "destination": "firmware/factory/native-font-template.json"
+    },
+    {
+      "source": "LICENSE",
+      "destination": "firmware/ports/goodix/LICENSE"
+    },
+    {
+      "source": "firmware/ports/goodix/README.base.md",
+      "destination": "firmware/ports/goodix/README.base.md"
+    },
+    {
+      "source": "firmware/ports/goodix/base-sdk-dependencies.json",
+      "destination": "firmware/ports/goodix/base-sdk-dependencies.json"
+    },
+    {
+      "source": "firmware/ports/goodix/base-source-files.json",
+      "destination": "firmware/ports/goodix/base-source-files.json"
+    },
+    {
+      "source": "release/tool-docs/gr/CLEAN_FLASHING.md",
+      "destination": "firmware/ports/goodix/clean-flashing.md"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/epd_driver_goodix.c",
+      "destination": "firmware/ports/goodix/common/src/epd_driver_goodix.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_activation.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_activation.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_activation.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_activation.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_adc.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_adc.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_adc_poll.inc",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_adc_poll.inc"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_app.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_app.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_app.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_app.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_app_integrity.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_app_integrity.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_app_integrity.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_app_integrity.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_aux_io.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_aux_io.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_aux_io.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_aux_io.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_ble_address.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_ble_address.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_ble_address.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_ble_address.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_board_identity.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_board_identity.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_board_identity.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_board_identity.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_cooperative.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_cooperative.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_device_info_qr.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_device_info_qr.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_device_info_qr.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_device_info_qr.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_dfu_diagnostics.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_dfu_diagnostics.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_dfu_diagnostics.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_dfu_diagnostics.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_dfu_resume.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_dfu_resume.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_external_flash.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_external_flash.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_external_flash.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_external_flash.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_factory_seed.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_factory_seed.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_features.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_features.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_flash_layout.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_flash_layout.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_gui_assets.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_gui_assets.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_gui_assets.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_gui_assets.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_health.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_health.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_health.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_health.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_image_io.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_image_io.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_image_io.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_image_io.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_image_store.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_image_store.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_image_store.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_image_store.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_nvds_guard.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_nvds_guard.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_nvds_guard.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_nvds_guard.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_ota_policy.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_ota_policy.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_panel_diagnostic.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_panel_diagnostic.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_panel_diagnostic.inc",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_panel_diagnostic.inc"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_pin_config.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_pin_config.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_pin_config.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_pin_config.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_pin_gpio.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_pin_gpio.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_pin_recovery.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_pin_recovery.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_pin_recovery.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_pin_recovery.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_pin_recovery_runtime.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_pin_recovery_runtime.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_pin_recovery_runtime.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_pin_recovery_runtime.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_pin_routes.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_pin_routes.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_pin_routes.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_pin_routes.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_pin_storage.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_pin_storage.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_pin_storage.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_pin_storage.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_protocol_v2.inc",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_protocol_v2.inc"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_recovery_hash.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_recovery_hash.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_recovery_power.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_recovery_power.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_screen.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_screen.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_screen.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_screen.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_security_random.inc",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_security_random.inc"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_service.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_service.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_service.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_service.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_settings_map.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_settings_map.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_settings_map.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_settings_map.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_settings_store.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_settings_store.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_settings_store.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_settings_store.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_swap.c",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_swap.c"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/inktag_gr_swap.h",
+      "destination": "firmware/ports/goodix/common/src/inktag_gr_swap.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/sdk_config.h",
+      "destination": "firmware/ports/goodix/common/src/sdk_config.h"
+    },
+    {
+      "source": "firmware/ports/goodix/common/src/user_app.h",
+      "destination": "firmware/ports/goodix/common/src/user_app.h"
+    },
+    {
+      "source": "tools/platforms/goodix/common/programmer/internal/flash-goodix-gprogrammer.ps1",
+      "destination": "tools/platforms/goodix/common/programmer/internal/flash-goodix-gprogrammer.ps1"
+    },
+    {
+      "source": "tools/platforms/goodix/common/programmer/internal/goodix-backup-archive.ps1",
+      "destination": "tools/platforms/goodix/common/programmer/internal/goodix-backup-archive.ps1"
+    },
+    {
+      "source": "tools/platforms/goodix/common/programmer/internal/goodix-capture-window.ps1",
+      "destination": "tools/platforms/goodix/common/programmer/internal/goodix-capture-window.ps1"
+    },
+    {
+      "source": "tools/platforms/goodix/common/programmer/internal/goodix-native-output.ps1",
+      "destination": "tools/platforms/goodix/common/programmer/internal/goodix-native-output.ps1"
+    },
+    {
+      "source": "tools/platforms/goodix/common/programmer/internal/goodix-stock-entry.ps1",
+      "destination": "tools/platforms/goodix/common/programmer/internal/goodix-stock-entry.ps1"
+    },
+    {
+      "source": "tools/platforms/goodix/common/programmer/internal/goodix-vendor-read.ps1",
+      "destination": "tools/platforms/goodix/common/programmer/internal/goodix-vendor-read.ps1"
+    },
+    {
+      "source": "tools/platforms/goodix/common/programmer/internal/goodix-xip-read.ps1",
+      "destination": "tools/platforms/goodix/common/programmer/internal/goodix-xip-read.ps1"
+    },
+    {
+      "source": "tools/platforms/goodix/common/programmer/internal/gr533x-package.ps1",
+      "destination": "tools/platforms/goodix/common/programmer/internal/gr533x-package.ps1"
+    },
+    {
+      "source": "firmware/ports/goodix/gr5331/Makefile.base",
+      "destination": "firmware/ports/goodix/gr5331/Makefile"
+    },
+    {
+      "source": "firmware/ports/goodix/gr5331/Makefile.base",
+      "destination": "firmware/ports/goodix/gr5331/Makefile.base"
+    },
+    {
+      "source": "tools/platforms/goodix/gr5331/programmer/configs/ZK_EL_GR5331_2.13_V1.1.toml",
+      "destination": "tools/platforms/goodix/gr5331/programmer/configs/ZK_EL_GR5331_2.13_V1.1.toml"
+    },
+    {
+      "source": "tools/platforms/goodix/gr5331/programmer/flash-bin.bat",
+      "destination": "tools/platforms/goodix/gr5331/programmer/flash-bin.bat"
+    },
+    {
+      "source": "tools/platforms/goodix/gr5331/programmer/flash-zh.bat",
+      "destination": "tools/platforms/goodix/gr5331/programmer/flash-zh.bat"
+    },
+    {
+      "source": "tools/platforms/goodix/gr5331/programmer/flash.bat",
+      "destination": "tools/platforms/goodix/gr5331/programmer/flash.bat"
+    },
+    {
+      "source": "tools/platforms/goodix/gr5331/programmer/generate-bin.bat",
+      "destination": "tools/platforms/goodix/gr5331/programmer/generate-bin.bat"
+    },
+    {
+      "source": "firmware/ports/goodix/gr551x/Makefile.base",
+      "destination": "firmware/ports/goodix/gr551x/Makefile"
+    },
+    {
+      "source": "firmware/ports/goodix/gr551x/Makefile.base",
+      "destination": "firmware/ports/goodix/gr551x/Makefile.base"
+    },
+    {
+      "source": "tools/platforms/goodix/gr551x/programmer/configs/ZK_EL_GR42V_V1.2.toml",
+      "destination": "tools/platforms/goodix/gr551x/programmer/configs/ZK_EL_GR42V_V1.2.toml"
+    },
+    {
+      "source": "tools/platforms/goodix/gr551x/programmer/configs/ZK_EL_GR42V_V1.2_w_NFC-SSD1683.toml",
+      "destination": "tools/platforms/goodix/gr551x/programmer/configs/ZK_EL_GR42V_V1.2_w_NFC-SSD1683.toml"
+    },
+    {
+      "source": "tools/platforms/goodix/gr551x/programmer/configs/ZK_EL_GR42V_V1.2_w_NFC.toml",
+      "destination": "tools/platforms/goodix/gr551x/programmer/configs/ZK_EL_GR42V_V1.2_w_NFC.toml"
+    },
+    {
+      "source": "tools/platforms/goodix/gr551x/programmer/configs/ZK_EL_GR_2.13_V1.2.toml",
+      "destination": "tools/platforms/goodix/gr551x/programmer/configs/ZK_EL_GR_2.13_V1.2.toml"
+    },
+    {
+      "source": "tools/platforms/goodix/gr551x/programmer/configs/zkc42vm_eailier_version.toml",
+      "destination": "tools/platforms/goodix/gr551x/programmer/configs/zkc42vm_eailier_version.toml"
+    },
+    {
+      "source": "tools/platforms/goodix/gr551x/programmer/flash-bin.bat",
+      "destination": "tools/platforms/goodix/gr551x/programmer/flash-bin.bat"
+    },
+    {
+      "source": "tools/platforms/goodix/gr551x/programmer/flash-zh.bat",
+      "destination": "tools/platforms/goodix/gr551x/programmer/flash-zh.bat"
+    },
+    {
+      "source": "tools/platforms/goodix/gr551x/programmer/flash.bat",
+      "destination": "tools/platforms/goodix/gr551x/programmer/flash.bat"
+    },
+    {
+      "source": "tools/platforms/goodix/gr551x/programmer/generate-bin.bat",
+      "destination": "tools/platforms/goodix/gr551x/programmer/generate-bin.bat"
+    },
+    {
+      "source": "tools/platforms/goodix/gr551x/programmer/internal/gr551x-package.ps1",
+      "destination": "tools/platforms/goodix/gr551x/programmer/internal/gr551x-package.ps1"
+    },
+    {
+      "source": "firmware/ports/goodix/source-profiles.json",
+      "destination": "firmware/ports/goodix/source-profiles.json"
+    },
+    {
+      "source": "firmware/source-profiles.json",
+      "destination": "firmware/source-profiles.json"
+    },
+    {
+      "source": "protocol/app-integrity-descriptor-v1.json",
+      "destination": "protocol/app-integrity-descriptor-v1.json"
+    },
+    {
+      "source": "protocol/recovery-verification-policy-v1.json",
+      "destination": "protocol/recovery-verification-policy-v1.json"
+    },
+    {
+      "source": "tools/flash-log.ps1",
+      "destination": "tools/flash-log.ps1"
+    },
+    {
+      "source": "tools/hardware/activation-preservation.ps1",
+      "destination": "tools/hardware/activation-preservation.ps1"
+    },
+    {
+      "source": "tools/hardware/ble_factory_address.py",
+      "destination": "tools/hardware/ble_factory_address.py"
+    },
+    {
+      "source": "tools/hardware/board_config.py",
+      "destination": "tools/hardware/board_config.py"
+    },
+    {
+      "source": "tools/hardware/flash-goodix-base.py",
+      "destination": "tools/hardware/flash-goodix-base.py"
+    },
+    {
+      "source": "tools/hardware/flash-workflow.py",
+      "destination": "tools/hardware/flash-workflow.py"
+    },
+    {
+      "source": "tools/hardware/goodix-clean-bytes.cs",
+      "destination": "tools/hardware/goodix-clean-bytes.cs"
+    },
+    {
+      "source": "tools/hardware/goodix-clean-flash.ps1",
+      "destination": "tools/hardware/goodix-clean-flash.ps1"
+    },
+    {
+      "source": "tools/hardware/goodix-clean-format.ps1",
+      "destination": "tools/hardware/goodix-clean-format.ps1"
+    },
+    {
+      "source": "tools/hardware/goodix-clean-guide.ps1",
+      "destination": "tools/hardware/goodix-clean-guide.ps1"
+    },
+    {
+      "source": "tools/hardware/goodix-clean-programmer.ps1",
+      "destination": "tools/hardware/goodix-clean-programmer.ps1"
+    },
+    {
+      "source": "tools/hardware/goodix-clean-screen-rules.json",
+      "destination": "tools/hardware/goodix-clean-screen-rules.json"
+    },
+    {
+      "source": "tools/hardware/goodix_base_programmer.py",
+      "destination": "tools/hardware/goodix_base_programmer.py"
+    },
+    {
+      "source": "tools/hardware/goodix_full_reset.py",
+      "destination": "tools/hardware/goodix_full_reset.py"
+    },
+    {
+      "source": "tools/hardware/goodix_host_nvds.py",
+      "destination": "tools/hardware/goodix_host_nvds.py"
+    },
+    {
+      "source": "tools/hardware/goodix_offline/__init__.py",
+      "destination": "tools/hardware/goodix_offline/__init__.py"
+    },
+    {
+      "source": "tools/hardware/goodix_offline/generated_busy_defaults.py",
+      "destination": "tools/hardware/goodix_offline/generated_busy_defaults.py"
+    },
+    {
+      "source": "tools/hardware/goodix_offline/generated_commands_v2.py",
+      "destination": "tools/hardware/goodix_offline/generated_commands_v2.py"
+    },
+    {
+      "source": "tools/hardware/goodix_offline/generated_release_v1.py",
+      "destination": "tools/hardware/goodix_offline/generated_release_v1.py"
+    },
+    {
+      "source": "tools/hardware/goodix_offline/models.py",
+      "destination": "tools/hardware/goodix_offline/models.py"
+    },
+    {
+      "source": "tools/hardware/goodix_offline/pin_config.py",
+      "destination": "tools/hardware/goodix_offline/pin_config.py"
+    },
+    {
+      "source": "tools/hardware/goodix_offline/protocol.py",
+      "destination": "tools/hardware/goodix_offline/protocol.py"
+    },
+    {
+      "source": "tools/hardware/goodix_pin_config.py",
+      "destination": "tools/hardware/goodix_pin_config.py"
+    },
+    {
+      "source": "tools/hardware/goodix_tool_log.py",
+      "destination": "tools/hardware/goodix_tool_log.py"
+    },
+    {
+      "source": "tools/jlink-tools.ps1",
+      "destination": "tools/jlink-tools.ps1"
+    },
+    {
+      "source": "tools/powershell-cli.ps1",
+      "destination": "tools/powershell-cli.ps1"
+    },
+    {
+      "source": "tools/sdk/build-goodix-base.py",
+      "destination": "tools/sdk/build-goodix-base.py"
+    },
+    {
+      "source": "tools/sdk/compact-goodix-diagnostics.py",
+      "destination": "tools/sdk/compact-goodix-diagnostics.py"
+    },
+    {
+      "source": "tools/sdk/goodix-base-native.mk",
+      "destination": "tools/sdk/goodix-base-native.mk"
+    },
+    {
+      "source": "tools/sdk/goodix_app_integrity.py",
+      "destination": "tools/sdk/goodix_app_integrity.py"
+    },
+    {
+      "source": "tools/sdk/goodix_base_elf.py",
+      "destination": "tools/sdk/goodix_base_elf.py"
+    },
+    {
+      "source": "tools/sdk/goodix_base_full.py",
+      "destination": "tools/sdk/goodix_base_full.py"
+    },
+    {
+      "source": "tools/sdk/goodix_common_recovery.py",
+      "destination": "tools/sdk/goodix_common_recovery.py"
+    },
+    {
+      "source": "tools/sdk/goodix_crc_recovery.py",
+      "destination": "tools/sdk/goodix_crc_recovery.py"
+    },
+    {
+      "source": "tools/sdk/goodix_diagnostic_literals.py",
+      "destination": "tools/sdk/goodix_diagnostic_literals.py"
+    },
+    {
+      "source": "tools/sdk/goodix_native_package.py",
+      "destination": "tools/sdk/goodix_native_package.py"
+    },
+    {
+      "source": "tools/sdk/goodix_nvds_guard.py",
+      "destination": "tools/sdk/goodix_nvds_guard.py"
+    },
+    {
+      "source": "tools/sdk/goodix_pin_runtime.py",
+      "destination": "tools/sdk/goodix_pin_runtime.py"
+    },
+    {
+      "source": "tools/sdk/goodix_recovery_version.py",
+      "destination": "tools/sdk/goodix_recovery_version.py"
+    },
+    {
+      "source": "tools/sdk/goodix_resume_transport.py",
+      "destination": "tools/sdk/goodix_resume_transport.py"
+    },
+    {
+      "source": "tools/sdk/inktag_source_profiles.py",
+      "destination": "tools/sdk/inktag_source_profiles.py"
+    },
+    {
+      "source": "tools/sdk/materialize-goodix-gr5331-bootloader.py",
+      "destination": "tools/sdk/materialize-goodix-gr5331-bootloader.py"
+    },
+    {
+      "source": "tools/sdk/materialize-goodix-gr551x-bootloader.py",
+      "destination": "tools/sdk/materialize-goodix-gr551x-bootloader.py"
+    },
+    {
+      "source": "tools/sdk/materialize-goodix-port.py",
+      "destination": "tools/sdk/materialize-goodix-port.py"
+    },
+    {
+      "source": "tools/sdk/prepare-goodix-base-full.py",
+      "destination": "tools/sdk/prepare-goodix-base-full.py"
+    },
+    {
+      "source": "tools/stock-backup.ps1",
+      "destination": "tools/stock-backup.ps1"
+    },
+    {
+      "source": "tools/version/read-version.py",
+      "destination": "tools/version/read-version.py"
+    },
+    {
+      "source": "tools/version/sync-version.py",
+      "destination": "tools/version/sync-version.py"
+    },
+    {
+      "source": "version.json",
+      "destination": "version.json"
+    }
+  ],
+  "privateToolsExcluded": [
+    "tools/sdk/goodix_boot_hardening.py",
+    "tools/sdk/goodix_code_elf.py",
+    "tools/sdk/goodix_code_guards.py",
+    "tools/sdk/seal-goodix-code.py"
+  ],
+  "privatePlatformPathsExcluded": [
+    "firmware/ports/goodix/common/src/inktag_gr_activation_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_activation_protocol_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_app_state_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_aux_io_backend_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_ble_name_apply_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_ble_name_boot_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_ble_name_report_1_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_ble_name_report_2_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_ble_name_settings_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_brand_hidden_apply_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_brand_hidden_request_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_brand_hidden_settings_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_clock_400x300_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_clock_partial_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_aux_routes_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_aux_storage_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_get_aux_io_config_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_get_input_config_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_input_busy_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_input_dispatch_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_input_poll_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_input_simulation_begin_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_input_simulation_busy_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_input_simulation_cancel_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_input_simulation_service_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_locate_available_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_locate_inventory_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_locate_start_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_locate_stop_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_run_test_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_set_aux_io_config_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_custom_set_input_config_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_access_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_address_capture_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_address_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_advertising_init_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_advertising_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_advertising_state_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_config_protocol_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_event_adv_start_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_event_adv_stop_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_event_connect_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_event_connect_telemetry_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_event_disconnect_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_event_start_ready_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_event_start_retry_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_identity_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_init_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_mux_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_owner_protocol_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_owner_state_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_poll_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_public_store_pro.c",
+    "firmware/ports/goodix/common/src/inktag_gr_find_public_store_pro.h",
+    "firmware/ports/goodix/common/src/inktag_gr_find_restart_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_state_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_telemetry_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_time_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_find_types_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_findmy_pro.c",
+    "firmware/ports/goodix/common/src/inktag_gr_findmy_pro.h",
+    "firmware/ports/goodix/common/src/inktag_gr_font_protocol_abort_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_font_protocol_admit_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_font_protocol_append_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_font_protocol_available_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_font_protocol_begin_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_font_protocol_commit_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_font_render_admission_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_font_storage_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_font_transaction_state_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_font_transaction_type_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_font_transfer_predicates_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_font_update_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_input_actions_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_10_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_11_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_12_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_13_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_14_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_15_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_16_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_1_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_2_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_3_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_4_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_5_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_6_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_7_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_8_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_bulk_9_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_app_packaged_1_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_command_abort_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_command_binding_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_command_commit_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_command_report_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_commands_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_image_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_init_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_pro.c",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_pro.h",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_protocol_bulk_1_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_protocol_bulk_2_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_protocol_capability_1_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_protocol_packaged_1_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_simulation_busy_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_startup_uri_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_state_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_stream_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_temperature_1_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_temperature_2_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_worker_1_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_worker_2_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_worker_3_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_worker_4_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_nfc_worker_5_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_p224_public_pro.c",
+    "firmware/ports/goodix/common/src/inktag_gr_p224_public_pro.h",
+    "firmware/ports/goodix/common/src/inktag_gr_password_bundle_begin_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_password_bundle_commit_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_password_protocol_begin_1_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_password_protocol_begin_2_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_password_protocol_commit_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_password_show_protocol_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_process_nfc_command_action_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_process_nfc_input_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_process_nfc_slideshow_command_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_simulation_cancel_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_simulation_clear_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_simulation_complete_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_simulation_dispatch_busy_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_simulation_include_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_simulation_pin_busy_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_simulation_revocation_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_simulation_rx_busy_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_simulation_rx_cancel_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_simulation_state_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_simulation_temperature_busy_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_startup_measure.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_v2_get_nfc_ndef_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_v2_send_nfc_capabilities_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_v2_send_nfc_channel_snapshot_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_v2_send_nfc_status_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_v2_set_nfc_ndef_pro.inc",
+    "firmware/ports/goodix/common/src/inktag_gr_work_admission_pro.inc"
+  ]
+}

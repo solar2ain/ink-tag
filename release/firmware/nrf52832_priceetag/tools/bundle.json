@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "toolsVersion": "0.2.0.9",
+  "chip": "nrf52832",
+  "buildTarget": "nrf52832_priceetag",
+  "brand": "priceetag",
+  "firmwareFamily": "nrf52832_priceetag",
+  "kind": "tools-only",
+  "executionProfile": "native-jlink",
+  "firmware": null,
+  "firmwareVersion": null,
+  "layout": null,
+  "firmwareSelection": "external-required",
+  "fullWriterQualified": false,
+  "pythonRequired": false,
+  "recommendedEntry": "tools/flash.bat"
+}

@@ -2,6 +2,25 @@
 from pathlib import Path
 import hashlib, json, zipfile, struct, sys
 
+# Device discovery uses executable wire identities. Signed package targets are
+# a separate, fixed namespace; neither is inferred from product/display names.
+EXECUTABLE_IDENTITIES = {
+    'gr5331_zkel': ('gr5331_zkel', 'gr5331_zkc21v', 'layout-v1'),
+    'gr551x_zkel': ('gr551x_zkel', 'gr551x_zkc42v', 'layout-v1'),
+    'gr551x_zkel_internal': ('gr5513_zkel_internal', 'gr5513_zkel_internal', 'layout-v1'),
+    'om6626_zkel': ('om6626_zkcxxb', 'om6626_zkcxxb', 'layout-v1'),
+    'tlsr8359_hsel': ('tlsr8359_hanshow', 'tlsr8359_hanshow', 'layout-v1'),
+    'nrf52832_priceetag': ('nrf52832_priceetag', 'nrf52832_priceetag', 'N3V1'),
+    'nrf52811_aesl': ('aesl22_nrf', 'aesl22_nrf', 'N1V1'),
+    'da14585_aesl': ('da14585_aesl', 'da14585_aesl', 'DAV1'),
+}
+
+def executable_target(build_target):
+    if build_target not in EXECUTABLE_IDENTITIES:
+        raise ValueError('Unknown executable firmware target')
+    wire, _, layout = EXECUTABLE_IDENTITIES[build_target]
+    return dict(boardId=wire, family=wire, protocolVersion=16, layout=layout, compatibilityEpoch=1)
+
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def artifacts(release):
@@ -25,7 +44,14 @@ def firmware_binding(repo, record, release, manifest):
     for item in selected:
         target=item['buildTarget'];board=boards.get(target);tool=tools.get(target)
         if target in result or not board or not tool:raise ValueError('Unknown/duplicate firmware target or missing tools')
+        if (item['target'] != executable_target(target) or
+            item['signaturePolicy'].get('packageBoard') != EXECUTABLE_IDENTITIES[target][1]):
+            raise ValueError('Device wire identity and signed package target must match their separate contracts')
         fields=('target','version','releaseVersion','signaturePolicy','pairing')
+        if manifest.get('edition') == 'basic':
+            from basic_release import basic_policy
+            if item.get('edition') != 'basic' or item['signaturePolicy'] != basic_policy(target):
+                raise ValueError('BASIC publication requires the exact unsigned package policy')
         if any(item[k]!=board['publication'][k] for k in fields):raise ValueError('Firmware scope differs from native manifest')
         expected={k:tool[k] for k in ('toolsVersion','inventory','bytes','sha256')}
         if item['programmerInventory']!=expected:raise ValueError('Firmware programmer inventory differs')
@@ -36,12 +62,26 @@ def firmware_binding(repo, record, release, manifest):
         actual={(a['type'],a['name']):(a['bytes'],a['sha256']) for a in item['artifacts']}
         if native!=actual or {a['type'] for a in item['artifacts']}!={'ota','full'} or len(item['artifacts'])!=2:
             raise ValueError('OTA/complete firmware pair differs')
+        if manifest.get('edition') == 'basic':
+            ota, = (a for a in item['artifacts'] if a['type']=='ota')
+            path, = (a['repositoryPath'] for a in board['artifacts'] if a['type']=='ota')
+            if ota.get('repositoryPath') != path:
+                raise ValueError('Browser OTA file differs from the approved attachment')
         result[target]={k:item[k] for k in ('target','version','releaseVersion','buildId','signaturePolicy','pairing','programmerInventory','artifacts')}
+        if 'edition' in item:
+            result[target]['edition']=item['edition']
     if set(result)!=set(boards):raise ValueError('Approved firmware selection must exactly match the manifest')
     # Existing inventories bind every tool file; reject a changed backend even
     # when the high-level inventory row was left untouched.
-    from firmware_inventory import programmer_files
-    _,errors=programmer_files(repo,manifest,require_assets=False)
+    if manifest.get('edition') == 'basic':
+        from basic_release import native_inventory
+        paths=native_inventory(repo)
+        if any(paths.get(a.get('repositoryPath')) != a['sha256'] for b in boards.values() for a in b['artifacts']):
+            raise ValueError('Firmware missing from the verified distribution inventory')
+        errors=[]
+    else:
+        from firmware_inventory import programmer_files
+        _,errors=programmer_files(repo,manifest,require_assets=False)
     if errors:raise ValueError('; '.join(errors))
     return result
 
@@ -53,6 +93,12 @@ def verify_firmware_bytes(repo, release, assets):
         refs={a['type']:a for a in item['artifacts']};ota=assets/refs['ota']['name'];full=assets/refs['full']['name']
         for path,ref in ((ota,refs['ota']),(full,refs['full'])):
             if path.stat().st_size!=ref['bytes'] or sha(path)!=ref['sha256']:raise ValueError('Firmware bytes changed')
+        if item.get('edition') == 'basic':
+            from basic_release import inspect_basic_pair
+            actual=inspect_basic_pair(repo,item['buildTarget'],ota,full)
+            if any(item[key]!=actual[key] for key in actual):
+                raise ValueError('BASIC firmware bytes differ from the target, version or pairing in the record')
+            continue
         info=inspect_package(ota)
         if info.board!=item['signaturePolicy']['packageBoard']:raise ValueError('Signed firmware family differs from approved target')
         release_version=int(info.details.get('releaseVersion',info.version))

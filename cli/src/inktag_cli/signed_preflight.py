@@ -23,7 +23,7 @@ def _signature(key, signature, message, *, little=False, low_s=False):
     except InvalidSignature as error: raise ValueError('OTA publisher signature verification failed') from error
 
 def inspect_dialog(image: bytes) -> dict:
-    """Inspect signed or explicitly unsigned Free images; does not admit OTA."""
+    """Inspect signed or explicitly unsigned base images; does not admit OTA."""
     if not 160<len(image)<=64+0x17600 or image[:4]!=b'pQ\xaa\xff':
         raise ValueError('Wrong DA14585 native image/size')
     size,crc=struct.unpack_from('<II',image,4);payload=image[64:]
@@ -80,7 +80,7 @@ def _fields(data: bytes) -> dict:
     return result
 
 def inspect_nordic(firmware: bytes, dat: bytes) -> dict:
-    """An unsigned Packet.command is parseable only for the Free HW52 target."""
+    """Inspect native bytes; unsigned write admission requires live Recovery policy."""
     try:
         packet=_fields(dat)
         signed = None
@@ -97,7 +97,6 @@ def inspect_nordic(firmware: bytes, dat: bytes) -> dict:
         profiles={52:('aesl22_nrf','N1V1',69632,b'\xa6\x02'),56:('nrf52832_priceetag','N3V1',163840,b'\x81\x02')}
         if hw not in profiles:raise ValueError('Unsupported Nordic HW/layout')
         board,layout,limit,sd=profiles[hw];encoded=init[1]
-        if signed is None and hw!=52:raise ValueError('Unsigned Nordic images are restricted to nRF52811')
         if (set(init)-set(range(1,11)) or init.get(4,0)!=0 or init.get(5,0) or init.get(6,0) or init.get(9,0)
             or not 8<=len(firmware)<=limit or init[7]!=len(firmware) or init[3]!=sd
             or digest!={1:3,2:hashlib.sha256(firmware).digest()[::-1]}
@@ -123,23 +122,28 @@ def recovery_signature_policy(transport: str, payload: bytes) -> str:
     """Exact live Recovery replies only. Old, unknown or malformed stays required."""
     if transport == 'nordic' and payload == b'\xc1':
         return 'optional'
+    if transport == 'nordic' and payload == b'\xe1':
+        return 'crc-only'
     if transport == 'dialog' and payload == b'\x0dIK\x01\x01SP\x01\x00':
         return 'optional'
+    if transport == 'dialog' and payload == b'\x0dIK\x01\x01SP\x01\x02':
+        return 'crc-only'
     return 'required'
 
 
 def recovery_safe_resume(transport: str, payload: bytes) -> bool:
     if transport == 'nordic':
-        return payload in (b'\x81', b'\xc1')
+        return payload in (b'\x81', b'\xc1', b'\xe1')
     if transport == 'dialog':
-        return payload in (b'\x0dIK\x01\x01', b'\x0dIK\x01\x01SP\x01\x00', b'\x0dIK\x01\x01SP\x01\x01')
+        return payload in (b'\x0dIK\x01\x01', b'\x0dIK\x01\x01SP\x01\x00', b'\x0dIK\x01\x01SP\x01\x01', b'\x0dIK\x01\x01SP\x01\x02')
     return False
 
 
 def require_recovery_signature(verified: dict, transport: str, payload: bytes) -> None:
     if verified.get('publisherVerified') is True:
         return
-    expected = {'nordic': 'aesl22_nrf', 'dialog': 'da14585_aesl'}.get(transport)
-    if (not expected or verified.get('board') != expected or verified.get('signatureStatus') != 'unsigned'
-            or recovery_signature_policy(transport, payload) != 'optional'):
+    expected = {'nordic': {'aesl22_nrf', 'nrf52832_priceetag'}, 'dialog': {'da14585_aesl'}}.get(transport, set())
+    policy = recovery_signature_policy(transport, payload)
+    allowed = policy == 'crc-only' or (policy == 'optional' and verified.get('board') in {'aesl22_nrf', 'da14585_aesl'})
+    if (verified.get('board') not in expected or verified.get('signatureStatus') != 'unsigned' or not allowed):
         raise ValueError('This Recovery requires a publisher-signed App; the unsigned image was not sent')

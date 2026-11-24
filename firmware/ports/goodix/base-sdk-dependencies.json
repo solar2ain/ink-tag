@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "distribution": "external user-supplied Goodix SDK; vendor files are not part of this source export",
+  "compiler": "Arm GNU Toolchain 15.2.Rel1 arm-none-eabi (Linux, Windows through WSL)",
+  "archivePath": "platform/soc/linker/gcc/libble_sdk.a",
+  "sha256": {
+    "gr5331": "c0d6655832fc8eef95dffb8ee90926ef4365f305c2dd3aed6137f05abed63575",
+    "gr551x": "f12c3f5229edc48db98e5fcb20d74da8f50a1d924f2d40350a6a31f615b4692d"
+  }
+}

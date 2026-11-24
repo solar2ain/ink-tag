@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "scheduleVersion": 1,
+  "periodSeconds": 1800,
+  "minimumKeys": 20,
+  "defaultKeys": 40,
+  "maximumKeys": 100,
+  "algorithm": "splitmix64-fisher-yates-cycle-v1",
+  "cases": [
+    {
+      "name": "minimum-first-slot",
+      "scheduleSaltHex": "0123456789ABCDEF",
+      "keyCount": 20,
+      "unixSeconds": 0,
+      "expectedKeyIndex": 18
+    },
+    {
+      "name": "minimum-cycle-zero-last-slot",
+      "scheduleSaltHex": "0123456789ABCDEF",
+      "keyCount": 20,
+      "unixSeconds": 34200,
+      "expectedKeyIndex": 6
+    },
+    {
+      "name": "minimum-cycle-one-first-slot",
+      "scheduleSaltHex": "0123456789ABCDEF",
+      "keyCount": 20,
+      "unixSeconds": 36000,
+      "expectedKeyIndex": 5
+    },
+    {
+      "name": "minimum-cycle-one-second-slot",
+      "scheduleSaltHex": "0123456789ABCDEF",
+      "keyCount": 20,
+      "unixSeconds": 37800,
+      "expectedKeyIndex": 3
+    },
+    {
+      "name": "default-realistic-timestamp",
+      "scheduleSaltHex": "0F1E2D3C4B5A6978",
+      "keyCount": 40,
+      "unixSeconds": 1789099200,
+      "expectedKeyIndex": 30
+    },
+    {
+      "name": "maximum-cycle-zero-last-slot",
+      "scheduleSaltHex": "DEADBEEFCAFEBABE",
+      "keyCount": 100,
+      "unixSeconds": 178200,
+      "expectedKeyIndex": 32
+    },
+    {
+      "name": "maximum-cycle-one-first-slot",
+      "scheduleSaltHex": "DEADBEEFCAFEBABE",
+      "keyCount": 100,
+      "unixSeconds": 180000,
+      "expectedKeyIndex": 93
+    },
+    {
+      "name": "maximum-cycle-one-second-slot",
+      "scheduleSaltHex": "DEADBEEFCAFEBABE",
+      "keyCount": 100,
+      "unixSeconds": 181800,
+      "expectedKeyIndex": 32
+    }
+  ],
+  "invalidTime": {
+    "expectedKeyIndex": 255,
+    "meaning": "dedicated fallback public key outside the normal pool"
+  },
+  "queryWindow": {
+    "scheduleSaltHex": "0F1E2D3C4B5A6978",
+    "keyCount": 40,
+    "startUnixSeconds": 1789092000,
+    "endUnixSeconds": 1789102800,
+    "expectedUniqueKeyIndices": [19, 14, 23, 11, 30, 16, 38]
+  }
+}

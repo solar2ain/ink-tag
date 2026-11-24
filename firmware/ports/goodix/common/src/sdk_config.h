@@ -1,0 +1,4 @@
+#ifndef INKTAG_GOODIX_SDK_CONFIG_H
+#define INKTAG_GOODIX_SDK_CONFIG_H
+#define FDS_ENABLED 0
+#endif

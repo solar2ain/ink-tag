@@ -172,7 +172,7 @@ def _write_service_state(data_dir: Path | None, state: dict[str, Any]) -> None:
             previous_pid = int(previous.get('pid', 0))
         except (TypeError, ValueError):
             previous_pid = 0
-        if previous_pid != state.get('pid') and _pid_is_running(previous_pid):
+        if previous_pid != state.get('pid') and _recorded_process_is_running(previous_pid, previous):
             raise ValueError('Another InkTag WebUI owns this data directory; stop it before starting HTTP/HTTPS again')
         temporary = None
         try:
@@ -186,9 +186,11 @@ def _write_service_state(data_dir: Path | None, state: dict[str, Any]) -> None:
                 temporary.unlink(missing_ok=True)
 
 
-def _remove_service_state(data_dir: Path | None, pid: int) -> bool:
+def _remove_service_state(data_dir: Path | None, pid: int, *,
+                          expected_state: dict[str, Any] | None = None) -> bool:
     with _service_state_guard(data_dir):
-        if (_read_service_state(data_dir) or {}).get('pid') != pid:
+        current = _read_service_state(data_dir) or {}
+        if current.get('pid') != pid or (expected_state is not None and current != expected_state):
             return False
         webui_service_paths(data_dir)['state'].unlink(missing_ok=True)
         return True
@@ -198,14 +200,23 @@ def _pid_is_running(pid: int) -> bool:
     if pid <= 0:
         return False
     if os.name == "nt":
-        process_query_limited_information = 0x1000
+        from ctypes import wintypes
         kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)  # type: ignore[attr-defined]
-        handle = kernel32.OpenProcess(
-            process_query_limited_information, False, pid
-        )
+        kernel32.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
+        kernel32.OpenProcess.restype = wintypes.HANDLE
+        kernel32.WaitForSingleObject.argtypes = [wintypes.HANDLE, wintypes.DWORD]
+        kernel32.WaitForSingleObject.restype = wintypes.DWORD
+        kernel32.CloseHandle.argtypes = [wintypes.HANDLE]
+        kernel32.CloseHandle.restype = wintypes.BOOL
+        handle = kernel32.OpenProcess(0x00100000, False, pid)  # SYNCHRONIZE
         if handle:
-            kernel32.CloseHandle(handle)
-            return True
+            try:
+                # An exited process object can still be opened while another
+                # handle retains it. A signaled process has actually exited.
+                # Unknown/failed queries stay protected rather than stale.
+                return kernel32.WaitForSingleObject(handle, 0) != 0
+            finally:
+                kernel32.CloseHandle(handle)
         return ctypes.get_last_error() == 5  # Access denied still proves that the PID exists.
     try:
         os.kill(pid, 0)
@@ -244,6 +255,58 @@ def _process_identity(pid: int) -> str | None:
         return 'posix:' + hashlib.sha256(value.encode('utf8')).hexdigest() if result.returncode == 0 and value and len(value) <= 32768 else None
     except (OSError, ValueError, subprocess.SubprocessError):
         return None
+
+
+def _recorded_process_is_running(pid: int, state: dict[str, Any]) -> bool:
+    """A live recycled PID is not the registered service. Unknown stays protected."""
+    if not _pid_is_running(pid):
+        return False
+    expected = state.get('processIdentity')
+    if isinstance(expected, str) and expected:
+        actual = _process_identity(pid)
+        if actual is not None and actual != expected:
+            return False
+    # Missing legacy metadata or denied process access does not prove staleness.
+    return True
+
+
+def _terminate_verified_windows_process(pid: int, expected_identity: str | None, timeout: float) -> None:
+    """Fallback for taskkill tree lookup failures; verify and stop one handle."""
+    from ctypes import wintypes
+    if not isinstance(expected_identity, str) or not expected_identity.startswith('win:'):
+        raise OSError('Cannot verify the existing service process identity; no fallback termination was attempted.')
+    kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+    kernel.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
+    kernel.OpenProcess.restype = wintypes.HANDLE
+    kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+    kernel.GetProcessTimes.argtypes = [wintypes.HANDLE, *([ctypes.POINTER(wintypes.FILETIME)] * 4)]
+    kernel.GetProcessTimes.restype = wintypes.BOOL
+    kernel.TerminateProcess.argtypes = [wintypes.HANDLE, wintypes.UINT]
+    kernel.TerminateProcess.restype = wintypes.BOOL
+    kernel.WaitForSingleObject.argtypes = [wintypes.HANDLE, wintypes.DWORD]
+    kernel.WaitForSingleObject.restype = wintypes.DWORD
+    handle = kernel.OpenProcess(0x00101001, False, pid)  # SYNCHRONIZE | QUERY_LIMITED | TERMINATE
+    if not handle:
+        raise ctypes.WinError(ctypes.get_last_error())
+    try:
+        if kernel.WaitForSingleObject(handle, 0) == 0:
+            return
+        fields = [wintypes.FILETIME() for _ in range(4)]
+        if not kernel.GetProcessTimes(handle, *(ctypes.byref(field) for field in fields)):
+            raise OSError('Cannot verify the existing service process identity; no fallback termination was attempted.')
+        actual = 'win:' + str((fields[0].dwHighDateTime << 32) | fields[0].dwLowDateTime)
+        if actual != expected_identity:
+            raise OSError('The service PID was reused; no fallback termination was attempted.')
+        if not kernel.TerminateProcess(handle, 1):
+            error_code = ctypes.get_last_error()
+            # Exiting between the zero-time probe and termination is harmless.
+            if kernel.WaitForSingleObject(handle, 0) == 0:
+                return
+            raise ctypes.WinError(error_code)
+        if kernel.WaitForSingleObject(handle, max(0, min(int(timeout * 1000), 0xFFFFFFFE))) != 0:
+            raise OSError('InkTag WebUI termination was requested but its exit could not be confirmed; service registration was retained.')
+    finally:
+        kernel.CloseHandle(handle)
 
 
 def _origin_is_ready(origin: str, *, timeout: float = 0.5, tls_cert: Path | None = None,
@@ -319,7 +382,7 @@ def webui_background_status(data_dir: Path | None = None, *, include_find: bool 
     except (TypeError, ValueError):
         pid = 0
     origin = str(state.get("origin") or "")
-    process_running = _pid_is_running(pid)
+    process_running = _recorded_process_is_running(pid, state)
     tls_cert = Path(str(state["tlsCert"])) if state.get("tlsCert") else None
     ready = (process_running and bool(origin) and state.get('starting') is not True
              and _origin_is_ready(origin, tls_cert=tls_cert,
@@ -628,13 +691,18 @@ def stop_webui_background(data_dir: Path | None = None, *, timeout: float = 10.0
         pid = int(state.get("pid", 0))
     except (TypeError, ValueError):
         pid = 0
-    if not _pid_is_running(pid):
-        _remove_service_state(data_dir, pid)
-        return {**state, "running": False, "stopped": False, "log": str(paths["log"])}
+    if not _recorded_process_is_running(pid, state):
+        # Delete only the exact obsolete registration, never its reused PID or
+        # a replacement registration written while this command was checking.
+        _remove_service_state(data_dir, pid, expected_state=state)
+        public_state = {key: value for key, value in state.items()
+                        if key not in {'launchProof', 'processIdentity'}}
+        return {**public_state, "running": False, "stopped": False, "log": str(paths["log"])}
     expected_identity = state.get('processIdentity')
     if expected_identity is not None or require_process_identity:
         if not isinstance(expected_identity, str) or _process_identity(pid) != expected_identity:
             raise OSError('Cannot verify the existing service process identity. Stop its original terminal/service once, then retry installation; no process was terminated.')
+    recorded_state = state
     state = {key: value for key, value in state.items() if key not in {'launchProof', 'processIdentity'}}
     terminated = False
     if os.name == "nt":
@@ -645,9 +713,14 @@ def stop_webui_background(data_dir: Path | None = None, *, timeout: float = 10.0
             check=False,
         )
         if result.returncode != 0 and _pid_is_running(pid):
-            detail = (result.stderr or result.stdout).strip()
-            raise OSError(f"cannot stop InkTag WebUI process {pid}: {detail}")
-        terminated = result.returncode == 0
+            try:
+                _terminate_verified_windows_process(pid, expected_identity, timeout)
+            except OSError as error:
+                detail = (result.stderr or result.stdout).strip()
+                raise OSError(f"cannot stop InkTag WebUI process {pid}: {detail}; {error}") from error
+            terminated = True
+        else:
+            terminated = result.returncode == 0
     else:
         def signal_owned_process(signum: int) -> None:
             try:
@@ -669,7 +742,7 @@ def stop_webui_background(data_dir: Path | None = None, *, timeout: float = 10.0
         deadline = time.monotonic() + timeout
         while _pid_is_running(pid) and time.monotonic() < deadline:
             time.sleep(0.1)
-    _remove_service_state(data_dir, pid)
+    _remove_service_state(data_dir, pid, expected_state=recorded_state)
     return {**state, "running": False, "stopped": True, "log": str(paths["log"])}
 
 

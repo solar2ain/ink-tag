@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../index.html">InkTag WebUI</a></nav><main><h1 id="build-inktag-basic-firmware">Build InkTag BASIC firmware</h1>
+<p>Shared firmware lives in <code>firmware/common/</code>. Each controller lives under <code>firmware/ports/&lt;vendor&gt;/&lt;controller&gt;/</code>. The constrained nRF52811 and DA14585 ports retain their verified adaptations in <code>compat/</code> and native build helpers in <code>build-support/</code>. Programmer sources live under <code>tools/platforms/&lt;vendor&gt;/&lt;controller&gt;/programmer/</code>; ready-to-use tools are under <code>release/firmware/</code>.</p>
+<p><a target="_blank" rel="noopener noreferrer" href="build-firmware.html">简体中文</a></p>
+<p>Run the commands from the complete <code>ink-tag</code> source checkout. Prepare Git, Python 3, GNU Make, and the SDK and compiler for your target. The <code>make</code> examples use Linux or WSL. For DA14585, follow its Windows instructions. Substitute your own paths below. <code>TOOLCHAIN_ROOT</code> is the toolchain directory containing <code>bin/</code>. Use separate output directories for different targets. If you have the nRF52811 source archive, go directly to <a target="_blank" rel="noopener noreferrer" href="#nordic-nrf52811">nRF52811</a>.</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/build-parameters.json">Exact release build parameters</a> · <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/tree/main/release/firmware">Preconverted firmware and board presets</a></p>
+<p>The release record preserves the commands used for the packaged artifacts. To build the current checkout, follow the steps for your controller below.</p>
+<h2 id="goodix-gr5331-and-gr5513gr5515">Goodix GR5331 and GR5513/GR5515</h2>
+<p>Use <a target="_blank" rel="noopener noreferrer" href="https://gitee.com/goodix-ble/GR533x.SDK">GR533x SDK</a> <code>v1.0.7_patch_1</code> or <a target="_blank" rel="noopener noreferrer" href="https://gitee.com/goodix-ble/GR551x.SDK">GR551x SDK</a> <code>v2.1.1</code> with Arm GNU Toolchain 15.2.Rel1. For the standard GR551x target:</p>
+<pre><code class="language-sh">make BUILD_TARGET=gr551x_zkel \
+  SDK_ROOT=/path/to/GR551x.SDK \
+  TOOLCHAIN_ROOT=/path/to/arm-gnu-toolchain-15.2.rel1 \
+  OUTPUT=.local/builds/gr551x-zkel JOBS=4
+</code></pre>
+<p>Use <code>gr551x_zkel_internal</code> and a separate output directory for the Internal board. Use <code>gr5331_zkel</code> with the GR533x SDK for GR5331.</p>
+<h2 id="onmicro-om6626">OnMicro OM6626</h2>
+<p>Get the <a target="_blank" rel="noopener noreferrer" href="https://gitee.com/jtcom/OM6626">OM6626 SDK mirror on Gitee</a> and Arm GNU Embedded <strong>10.3-2021.10</strong>. The root Makefile expects the SDK in <code>.sdk/onmicro/OM6626.SDK/</code>:</p>
+<pre><code class="language-sh">git clone https://gitee.com/jtcom/OM6626.git .sdk/onmicro/OM6626.SDK
+
+make BUILD_TARGET=om6626_zkel \
+  TOOLCHAIN_ROOT=/path/to/gcc-arm-none-eabi-10.3-2021.10 \
+  OUTPUT=.local/builds/om6626-zkel JOBS=4
+</code></pre>
+<p>If Git download from Gitee prompts for authentication, use an account with access to the repository. You can also request the SDK using the <a target="_blank" rel="noopener noreferrer" href="https://bbs.onmicro.com.cn/OM6626/381.html">official OnMicro instructions</a> and place it in the same directory.</p>
+<p>The root command copies the built App and Recovery into <code>app/</code> and <code>recovery/</code>.</p>
+<h2 id="telink-tlsr8359">Telink TLSR8359</h2>
+<p>Prepare the Telink workspace from <a target="_blank" rel="noopener noreferrer" href="https://github.com/atc1441/ATC_TLSR_Paper">ATC_TLSR_Paper</a> and its TC32 toolchain. Point <code>SDK_ROOT</code> at the prepared <code>Firmware/</code> directory:</p>
+<pre><code class="language-sh">make BUILD_TARGET=tlsr8359_hsel \
+  SDK_ROOT=/path/to/ATC_TLSR_Paper/Firmware \
+  OUTPUT=.local/builds/tlsr8359-hsel JOBS=4
+</code></pre>
+<p>This entry compiles the native application. The <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/build-parameters.json">release build parameters</a> record native packaging and Recovery targets.</p>
+<h2 id="nordic-nrf52832">Nordic nRF52832</h2>
+<p>Use nRF5 SDK 17.1.0, S132, and Arm GNU for nRF52832. The root entry writes App and Recovery to separate <code>app/</code> and <code>recovery/</code> directories.</p>
+<pre><code class="language-sh">make BUILD_TARGET=nrf52832_priceetag \
+  SDK_ROOT=/path/to/nRF5_SDK_17.1.0_ddde560 \
+  TOOLCHAIN_ROOT=/path/to/arm-gnu-toolchain \
+  OUTPUT=.local/builds/nrf52832-priceetag JOBS=4
+</code></pre>
+<h2 id="nordic-nrf52811">Nordic nRF52811</h2>
+<p>Use <strong>nRF5 SDK 17.1.0, S112 7.3.0, and Arm GNU Toolchain 15.2.Rel1</strong>. Run from the source root:</p>
+<pre><code class="language-sh">make BUILD_TARGET=nrf52811_aesl \
+  SDK_ROOT=/path/to/nRF5_SDK_17.1.0_ddde560 \
+  TOOLCHAIN_ROOT=/path/to/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi \
+  OUTPUT=.local/builds/nrf52811-aesl JOBS=4
+</code></pre>
+<ul>
+<li>The App and font resource go into <code>firmware/crc-only/</code>, and Recovery into its <code>bootloader/</code> subdirectory, all under <code>OUTPUT</code>.</li>
+<li>For a complete flashing package, add the <code>full</code> target immediately after <code>make</code> and set <code>OUTPUT</code> to a location inside this checkout.</li>
+<li>App OTA requires a matching GUI resource already installed. For the first installation or to replace the GUI resource too, use the matching complete package. A complete flash rebuilds settings and invalidates the old images. Back up anything you need to keep.</li>
+<li>The port maintains its framebuffer, font cache, and storage adaptations. See <code>firmware/ports/nordic/nrf52811/BUILDING.md</code> for resource pairing and source archive instructions.</li>
+</ul>
+<h2 id="dialog-da14585">Dialog DA14585</h2>
+<p>On Windows, prepare DA145xx SDK 6.0.24.1464, Keil Arm Compiler 6.24, and PowerShell 7. From the source root:</p>
+<pre><code class="language-powershell">pwsh -NoProfile -File .\firmware\ports\dialog\da14585\build.ps1 -Board da14585_aesl -SdkRoot &quot;D:\InkTagSDK&quot; -Output &quot;.local\builds\da14585-aesl&quot;
+</code></pre>
+<p>Point <code>-SdkRoot</code> at the prepared SDK workspace containing <code>dialog/DA145xx_SDK/6.0.24.1464/</code>. See <code>firmware/ports/dialog/da14585/BUILDING.md</code> for SDK preparation, build outputs, and addresses. Set <code>-KeilRoot</code> if Keil is installed outside its default location.</p>
+<h2 id="use-the-built-firmware">Use the built firmware</h2>
+<p>BASIC builds need no signing key. OTA updates the App. For a first install, Recovery change, or paired GUI resource update, follow the <a target="_blank" rel="noopener noreferrer" href="en/flash.html">wired flashing guide</a> for your exact board. Several board and screen presets can share a single App.</p></main></body></html>

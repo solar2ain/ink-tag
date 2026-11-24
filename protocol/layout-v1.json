@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "status": "webui-prototype",
+  "magic": 827085897,
+  "magicText": "ITL1",
+  "headerSize": 20,
+  "widgetRecordSize": 28,
+  "maxLayoutBytes": 1024,
+  "maxDataBytes": 256,
+  "maxStringBytes": 96,
+  "maxWidgets": 16,
+  "documentKinds": [
+    { "id": 1, "name": "CALENDAR" },
+    { "id": 2, "name": "CLOCK" },
+    { "id": 3, "name": "AGENDA" },
+    { "id": 4, "name": "SCHEDULE" },
+    { "id": 5, "name": "DEVICE_INFO" }
+  ],
+  "sizeClasses": [
+    { "id": 0, "name": "COMPACT" },
+    { "id": 1, "name": "NORMAL" },
+    { "id": 2, "name": "LARGE" }
+  ],
+  "colors": [
+    { "id": 0, "name": "TRANSPARENT" },
+    { "id": 1, "name": "WHITE" },
+    { "id": 2, "name": "BLACK" },
+    { "id": 3, "name": "ACCENT" }
+  ],
+  "fonts": [
+    { "id": 0, "name": "WQY9_LUNAR", "webId": "wqy9-lunar" },
+    { "id": 1, "name": "WQY12_LUNAR", "webId": "wqy12-lunar" },
+    { "id": 2, "name": "HELV_BOLD_14_NUM", "webId": "helv-bold-14-num" },
+    { "id": 3, "name": "HELV_BOLD_18_NUM", "webId": "helv-bold-18-num" }
+  ],
+  "alignments": [
+    { "id": 0, "name": "LEFT" },
+    { "id": 1, "name": "CENTER" },
+    { "id": 2, "name": "RIGHT" }
+  ],
+  "verticalAlignments": [
+    { "id": 0, "name": "TOP" },
+    { "id": 1, "name": "MIDDLE" },
+    { "id": 2, "name": "BOTTOM" }
+  ],
+  "borders": [
+    { "id": 0, "name": "NONE" },
+    { "id": 1, "name": "SOLID" },
+    { "id": 2, "name": "DOTTED" }
+  ],
+  "appearances": [
+    { "id": 0, "name": "DEFAULT" },
+    { "id": 1, "name": "GRID" },
+    { "id": 2, "name": "MINIMAL" },
+    { "id": 3, "name": "BAND" },
+    { "id": 4, "name": "SEVEN_SEGMENT" },
+    { "id": 5, "name": "NUMBERED" },
+    { "id": 6, "name": "CHECKBOX" },
+    { "id": 7, "name": "BLOCK" },
+    { "id": 8, "name": "PILL" }
+  ],
+  "widgets": [
+    { "id": 1, "name": "CALENDAR", "webId": "calendar" },
+    { "id": 2, "name": "WEEKDAY_STRIP", "webId": "weekday-strip" },
+    { "id": 3, "name": "DIGITAL_CLOCK", "webId": "digital-clock" },
+    { "id": 4, "name": "ANALOG_CLOCK", "webId": "analog-clock" },
+    { "id": 5, "name": "DATE", "webId": "date" },
+    { "id": 6, "name": "YEAR", "webId": "year" },
+    { "id": 7, "name": "LUNAR", "webId": "lunar" },
+    { "id": 8, "name": "WEEK_NUMBER", "webId": "week-number" },
+    { "id": 9, "name": "COUNTDOWN", "webId": "countdown" },
+    { "id": 10, "name": "BATTERY", "webId": "battery" },
+    { "id": 11, "name": "VOLTAGE", "webId": "voltage" },
+    { "id": 12, "name": "TEMPERATURE", "webId": "temperature" },
+    { "id": 13, "name": "DEVICE_NAME", "webId": "device-name" },
+    { "id": 14, "name": "BLUETOOTH_NAME", "webId": "bluetooth-name" },
+    { "id": 15, "name": "DIVIDER", "webId": "divider" },
+    { "id": 16, "name": "IMAGE_PANEL", "webId": "image-panel" },
+    { "id": 17, "name": "CANVAS_REGION", "webId": "canvas-region" },
+    { "id": 18, "name": "TEXT", "webId": "text" },
+    { "id": 19, "name": "INKTAG_BRAND", "webId": "inktag-brand" },
+    { "id": 20, "name": "DEVICE_INFO_DETAILS", "webId": "device-info-details" },
+    { "id": 21, "name": "QR_CODE", "webId": "qr-code" },
+    { "id": 22, "name": "STATUS_BAR", "webId": "status-bar" },
+    { "id": 23, "name": "DATE_HEADER", "webId": "date-header" },
+    { "id": 24, "name": "CLOCK_FOOTER", "webId": "clock-footer" },
+    { "id": 25, "name": "BOARD_NAME", "webId": "board-name" },
+    { "id": 26, "name": "ACTIVATION_STATUS", "webId": "activation-status" },
+    { "id": 27, "name": "DEVICE_INFO_FOOTER", "webId": "device-info-footer" }
+  ]
+}

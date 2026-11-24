@@ -75,6 +75,7 @@ class ImageProcessOptions:
     contrast: float = DEFAULT_IMAGE_CONTRAST
     strength: float = DEFAULT_IMAGE_STRENGTH
     heavy_ink: bool = False
+    brightness: float = 0.0
 
     def validated(self) -> "ImageProcessOptions":
         algorithm = resolve_algorithm(self.algorithm)
@@ -82,6 +83,8 @@ class ImageProcessOptions:
             raise ValueError(f"unknown processing preset: {self.preset}")
         if not 0.5 <= self.contrast <= 2.0:
             raise ValueError("contrast must be between 0.5 and 2.0")
+        if not -100.0 <= self.brightness <= 100.0:
+            raise ValueError("brightness must be between -100 and 100")
         maximum = 5.0 if algorithm.direct_strength else 1.0
         if not 0.0 <= self.strength <= maximum:
             raise ValueError(
@@ -93,6 +96,7 @@ class ImageProcessOptions:
             contrast=float(self.contrast),
             strength=float(self.strength),
             heavy_ink=bool(self.heavy_ink),
+            brightness=float(self.brightness),
         )
 
 
@@ -202,6 +206,7 @@ def process_frame(
         "algorithm": validated.algorithm,
         "preset": validated.preset,
         "contrast": validated.contrast,
+        "brightness": validated.brightness,
         "strength": validated.strength,
         "heavyInk": validated.heavy_ink,
     }
@@ -427,6 +432,7 @@ async function inktagRunImageProcess(config) {
     image = epdExports.applyImageDataAdjustments(image, { palette: epdPalette, processingPreset: config.preset, adjustmentEngine: "js" }) || image;
   }
   adjustContrast(image, config.contrast);
+  adjustBrightness(image, config.brightness ?? 0);
   const white = palette.find(entry => entry.name === "white") || palette[palette.length - 1];
   inktagRestoreUncovered(image, coverage, [255,255,255]);
   const mode = inktagLegacyMode(config.color);

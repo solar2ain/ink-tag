@@ -93,6 +93,7 @@ def validate_record(record):
         targets=set();firmware_assets={}
         for item in release['firmware']:
             if not isinstance(item,dict) or any(type(item.get(k)) is not bool for k in ('candidateOnly','releaseReady','published')):raise UpdateError('Explicit firmware publication states are required')
+            if 'edition' in item and item['edition'] not in ('basic', 'pro'):raise UpdateError('Invalid firmware edition')
             firmware_version(item.get('version'));key=firmware_target(item)
             if key in targets:raise UpdateError('Duplicate exact firmware target')
             targets.add(key)
@@ -102,6 +103,13 @@ def validate_record(record):
             for value in item['artifacts']:
                 checked=asset(value,tag)
                 if checked['type'] not in {'ota','full'} or checked['name'] in seen or checked['name'] in entry_names:raise UpdateError('Invalid firmware artifact kind/duplication')
+                if 'repositoryPath' in value:
+                    build_target = item.get('buildTarget')
+                    path = value['repositoryPath']
+                    if (checked['type'] != 'ota' or not isinstance(build_target,str) or
+                        not re.fullmatch(r'[a-z0-9_]+',build_target) or not isinstance(path,str) or
+                        not re.fullmatch(r'release/firmware/'+re.escape(build_target)+r'/ota/[A-Za-z0-9][A-Za-z0-9._-]{0,175}\.(?:zip|img|bin)',path)):
+                        raise UpdateError('Invalid browser OTA repository path')
                 if checked['name'] in firmware_assets and firmware_assets[checked['name']]!=checked:raise UpdateError('Conflicting shared firmware artifact')
                 firmware_assets[checked['name']]=checked;entry_names.add(checked['name']);kinds.append(checked['type'])
             if kinds.count('ota')!=1 or 'full' not in kinds:raise UpdateError('Firmware requires OTA and complete images')
@@ -116,23 +124,32 @@ def generate(record,assets_root:Path):
         for release in record['releases']:
             if release['channel']!=channel or release['candidateOnly'] or not release['releaseReady'] or not release['published']:continue
             for key,item in release['components'].items():
-                # Verify actual, previously downloaded Release bytes before exposing a link.
-                verified_artifacts(item,release['releaseTag'],assets_root)
                 current=selected[key]
-                ordering=compare(item['version'],current['version']) if current else 1
+                # A component's numbering can be aligned with the project
+                # (WebUI 1.2.0 -> 0.2.1). The approved project release takes
+                # precedence; compare component versions/builds within it.
+                project=version(release['releaseTag'][1:])[0]
+                previous_project=version(current['releaseTag'][1:])[0] if current else None
+                ordering=((project>previous_project)-(project<previous_project)
+                          if current and project!=previous_project else
+                          compare(item['version'],current['version']) if current else 1)
                 if current and ordering==0 and item['buildNumber']==current['buildNumber'] and item['buildId']!=current['buildId']:raise UpdateError('Ambiguous same-version build ordering')
                 if ordering>0 or ordering==0 and item['buildNumber']>current['buildNumber']:
                     selected[key]={**deepcopy(item),'releaseTag':release['releaseTag'],'channel':channel,
                                    'candidateOnly':False,'releaseReady':True,'published':True}
             for item in release['firmware']:
                 if item['candidateOnly'] or not item['releaseReady'] or not item['published']:continue
-                verified_artifacts(item,release['releaseTag'],assets_root)
                 key=firmware_target(item);current=firmware.get(key)
                 order=(firmware_version(item['version']),item['releaseVersion'])
                 previous=(firmware_version(current['version']),current['releaseVersion']) if current else None
                 if previous==order and any(item[k]!=current[k] for k in ('buildId','artifacts')):raise UpdateError('Ambiguous firmware release identity')
                 if previous is None or order>previous:
                     firmware[key]={**deepcopy(item),'releaseTag':release['releaseTag'],'channel':channel}
+        # Superseded assets can be archived. Every link actually emitted still
+        # requires the exact bytes from its published Release.
+        for item in (*selected.values(), *firmware.values()):
+            if item is not None:
+                verified_artifacts(item,item['releaseTag'],assets_root)
         feeds[channel]={'schemaVersion':SCHEMA,'channel':channel,'candidateOnly':False,
                         'releaseReady':bool(firmware) or any(selected.values()),'components':selected,
                         'firmwareSelection':{'published':bool(firmware)},'firmware':[firmware[k] for k in sorted(firmware)]}

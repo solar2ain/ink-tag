@@ -1,0 +1,16 @@
+/* Shared editor shell; component-specific styles live with the current canvas. */
+.studio-template-note { margin: 8px 0 16px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.editor-page { container: editor / inline-size; }
+.editor-page .resizable-editor-panels { grid-template-columns: var(--editor-left) 6px minmax(0, 1fr) 6px var(--editor-right); }
+.editor-panel-resizer { position: relative; cursor: col-resize; touch-action: none; background: var(--surface-soft); z-index: 15; outline: none; }
+.editor-panel-resizer::after { content: ''; position: absolute; inset: 0 2px; background: var(--line); transition: background .15s; }
+.editor-panel-resizer:is(:hover, :focus-visible, :active)::after { background: var(--accent); }
+.editor-panel-resizer:focus-visible { box-shadow: inset 0 0 0 1px var(--accent); }
+.resizing-panels, .resizing-panels * { cursor: col-resize !important; user-select: none !important; }
+.editor-page button { white-space: nowrap; }
+.editor-page .property-panel { scrollbar-gutter: stable; }
+.template-preview-media { box-sizing: content-box; }
+.editor-page .native-reference-controls h2 { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; margin: 0 0 10px; }
+.editor-page .native-reference-controls h2 small { color: var(--muted); font-size: 10px; font-weight: 400; }
+.native-row-presets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
+html.mobile-layout .editor-panel-resizer { display: none; }

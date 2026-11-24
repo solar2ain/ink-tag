@@ -1,6 +1,6 @@
 # InkTag command-line client
 
-[中文](README.md) | English
+[中文](README.md)
 
 InkTag CLI connects to devices, sends images, manages displays and performs OTA updates. It also runs WebUI, Find queries and host weather jobs. Use `inktag-cli` or the equivalent `inktag` executable.
 
@@ -177,9 +177,9 @@ inktag-cli device -n B892 setting pins set --config pins.json --yes
 }
 ```
 
-GPIO 255 means disconnected. Use the `configuration` returned by `pins show` as the screen/LED format. BUSY/RESET behavior follows the screen driver; board EN and LED polarity remain configurable. TXD/RXD are not exposed. There are at most two user buttons, normally active-low; buzzer mode/pins replace a separate enable switch. Only device-reported editable settings can be changed.
+GPIO 255 means disconnected. Use the `configuration` returned by `pins show` as the screen/LED format. BUSY/RESET behavior follows the screen driver; board EN and LED polarity remain configurable. TXD/RXD are not exposed. There are at most two user buttons, normally active-low. Only device-reported editable settings can be changed.
 
-Screen/LED and button/buzzer writes are separate. A failure reports confirmed sections; read current configuration before deciding what to do next. `pins restore-screen-led-defaults` restores only screen/LED routing.
+Screen/LED and button writes are separate. A failure reports confirmed sections; read current configuration before deciding what to do next. `pins restore-screen-led-defaults` restores only screen/LED routing.
 
 ```sh
 inktag-cli device -n B892 setting button show
@@ -188,7 +188,7 @@ inktag-cli device -n B892 nfc usage
 inktag-cli device nfc commands calendar
 ```
 
-Both buttons share single/double/long-press actions. NFC has no mode selector or off switch. `device nfc usage` reads device instructions and advertised phone commands; `device nfc commands calendar` generates command text locally. On the phone, use NFC Tools: Write → Add a record → Text. Phone commands require Pro and supporting firmware; reading the device link does not execute a device action.
+Both buttons share single/double/long-press actions. NFC has no mode selector or off switch. `device nfc usage` reads device instructions and advertised phone commands; `device nfc commands calendar` generates command text locally. On the phone, use NFC Tools: Write → Add a record → Text. Phone commands require PRO and supporting firmware; reading the device link does not execute a device action.
 
 Use `setting font info / build / install` for fonts, `setting screen mark / calendar` for the InkTag mark and calendar preferences, and `setting buzzer test` for a short output test.
 
@@ -196,7 +196,7 @@ Use `setting font info / build / install` for fonts, `setting screen mark / cale
 
 Enter passwords through hidden prompts or `--password-stdin`, never command arguments. Successful authentication normally caches a reusable control credential. `--password-stdin` alone does not disable caching; `--no-credential-cache` prevents reading/writing reusable credentials on disk. Device authentication and throttling remain in effect.
 
-Use `setting password status / set / disable`. `setting reset-settings --yes` clears ordinary settings/password while preserving images, Pro, Find and factory identity; an enabled password still requires the original password. `setting clear-user-data --yes` clears user images/playback references while preserving settings, Pro, Find and factory identity. `device restart` only reboots.
+Use `setting password status / set / disable`. `setting reset-settings --yes` clears ordinary settings/password while preserving images, PRO, Find and factory identity; an enabled password still requires the original password. `setting clear-user-data --yes` clears user images/playback references while preserving settings, PRO, Find and factory identity. `device restart` only reboots.
 
 Clearing can use `--expected-device-id` to verify the intended device before acting. This verifies identity; it is not a selector. If a result is unconfirmed, reconnect and inspect state rather than repeating the clearing operation.
 
@@ -213,9 +213,11 @@ inktag-cli device -n B892 recovery enter
 inktag-cli device -n B892_OTA recovery exit
 ```
 
-OTA requires a matching signed package and verifies package integrity, publisher signature and the returned device identity/state. Recovery entry is separate from choosing an OTA package. Use `recovery exit` to return to App; it is the same as `recovery resume-app`. Complete flashing uses separate MCU programmer tools.
+OTA requires a package matching the board and actual Recovery policy, and verifies integrity and the returned device identity/state. Self-built basic applications may use unsigned packages where Recovery permits them; a present signature must verify. PRO releases remain signed for older Recovery compatibility. Recovery entry is separate from choosing an OTA package. Use `recovery exit` to return to App; it is the same as `recovery resume-app`. Complete flashing uses separate MCU programmer tools.
 
 A short BLE name also works, for example `device -n 43D2 recovery exit`. Select a full name or address if several devices match. Platforms share connection, return-request and application-ready stages; use `--verbose` for connection diagnostics. `--json` retains native result fields and writes progress events to stderr.
+
+`recovery exit` and `recovery resume-app` use a 90-second default return timeout on every platform. Override it with `--reconnect-wait SECONDS` (5–120), for example `recovery exit --reconnect-wait 120`. Successful return still requires application identity verification.
 
 ## WebUI, local logs and Find
 

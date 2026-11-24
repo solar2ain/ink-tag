@@ -41,7 +41,7 @@ def parse_status(payload: bytes) -> ActivationStatus:
         raise ValueError("device returned an invalid activation status")
     phases = {
         int(ActivationStateV2.UNAVAILABLE): "unavailable",
-        int(ActivationStateV2.FREE): "free",
+        int(ActivationStateV2.DEFAULT): "base",
         int(ActivationStateV2.PRO): "pro",
         int(ActivationStateV2.INVALID): "invalid",
     }

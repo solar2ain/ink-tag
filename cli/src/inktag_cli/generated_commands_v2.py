@@ -68,6 +68,8 @@ class CommandV2(IntEnum):
     STAGE_FIND_OWNER_ROTATION = 0x56
     COMMIT_FIND_OWNER_ROTATION = 0x57
     ABORT_FIND_OWNER_ROTATION = 0x58
+    GET_ADVERTISING_CONFIG = 0x60
+    SET_ADVERTISING_CONFIG = 0x61
     LIST_TESTS = 0x70
     RUN_TEST = 0x71
     GET_TEST_STATUS = 0x72
@@ -122,11 +124,13 @@ class RequestFlagV2(IntEnum):
 class TransferDescriptorFlagV2(IntEnum):
     READING_ROTATION_90 = 0x04
     READING_ROTATION_180 = 0x08
+    LZO1X = 0x40
     PACKBITS_RLE = 0x80
 
 class CapabilityExtensionV2(IntEnum):
     IMAGE_READING_ORIENTATION = 0x01
     PANEL_GPIO_SNAPSHOT = 0x02
+    TRANSFER_LZO1X_2000 = 0x04
 
 class CapabilityV2(IntEnum):
     TIME = 0x01
@@ -164,7 +168,7 @@ class CapabilityV2(IntEnum):
 
 class ActivationStateV2(IntEnum):
     UNAVAILABLE = 0x00
-    FREE = 0x01
+    DEFAULT = 0x01
     PRO = 0x02
     INVALID = 0x03
 
@@ -260,6 +264,7 @@ class NfcCommandV2(IntEnum):
     OPEN_BLE_TRANSFER = 0x09
     SLIDESHOW = 0x0A
     CLEAR = 0x0B
+    SET_TIME = 0x0C
 
 class NfcCommandResultV2(IntEnum):
     NONE = 0x00
@@ -282,12 +287,14 @@ class FindCapabilityV2(IntEnum):
     INVALID_TIME_FALLBACK = 0x80
     PUBLIC_ONLY_P224_V2 = 0x100
     PUBLIC_ONLY_OWNER_REPLACEMENT = 0x200
+    PUBLIC_ONLY_OWNER_UNREGISTER = 0x400
 
 class FindModeV2(IntEnum):
     TIME_DERIVED = 0x01
 
 class FindActionV2(IntEnum):
     CLEAR_CONFIG = 0x01
+    UNREGISTER_OWNER = 0x02
 
 class TransferObjectV2(IntEnum):
     DIRECT_FRAME = 0x01
@@ -356,7 +363,7 @@ class OtaRejectFlagV1(IntEnum):
 class TestOperationV2(IntEnum):
     LED_CHANNEL = 0x01
     LED_SCAN = 0x02
-    BUZZER = 0x03
+    RESERVED_03 = 0x03
     INPUT_SIMULATE = 0x04
     DEVICE_LOCATE = 0x05
     DISPLAY_PATTERN = 0x10

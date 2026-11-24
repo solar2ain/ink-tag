@@ -1,0 +1,112 @@
+#ifndef INKTAG_SETTINGS_RECORDS_H
+#define INKTAG_SETTINGS_RECORDS_H
+
+#include <stdbool.h>
+#include <stdint.h>
+
+/* Stable product record IDs. A vendor backend maps these IDs to NVDS/KV tags
+ * or raw-journal record IDs; it must not expose its private tag numbering to
+ * common code or persist one vendor's packed runtime struct as the schema. */
+typedef enum {
+    INKTAG_SETTINGS_RECORD_BOARD_PROFILE = 1,
+    INKTAG_SETTINGS_RECORD_TIME = 2,
+    INKTAG_SETTINGS_RECORD_SCREEN_PROFILE = 3,
+    INKTAG_SETTINGS_RECORD_DISPLAY_STATE = 4,
+    INKTAG_SETTINGS_RECORD_DEVICE_INFO_QR = 5,
+    INKTAG_SETTINGS_RECORD_DEVICE_IDENTITY = 6,
+    INKTAG_SETTINGS_RECORD_DEVICE_SETTINGS = 7,
+    INKTAG_SETTINGS_RECORD_ACTIVATION = 8,
+    INKTAG_SETTINGS_RECORD_RETIRED_FIND_SINGLE_KEY = 9,
+    INKTAG_SETTINGS_RECORD_HEALTH = 10,
+    INKTAG_SETTINGS_RECORD_INDICATOR = 11,
+    INKTAG_SETTINGS_RECORD_BOOT_DISPLAY = 12,
+    INKTAG_SETTINGS_RECORD_NFC_BINDING = 13,
+    INKTAG_SETTINGS_RECORD_NFC_ANTI_REPLAY = 14,
+    INKTAG_SETTINGS_RECORD_FIND_KEYRING_MANIFEST = 15,
+    INKTAG_SETTINGS_RECORD_FIND_KEYRING_CHUNK_0 = 16,
+    INKTAG_SETTINGS_RECORD_FIND_KEYRING_CHUNK_12 = 28,
+    INKTAG_SETTINGS_RECORD_FIND_CONFIG = 29,
+    INKTAG_SETTINGS_RECORD_IMAGE_INDEX = 30,
+    INKTAG_SETTINGS_RECORD_FIND_DERIVATION_SEED = 31,
+    INKTAG_SETTINGS_RECORD_OWNER_RESET_PENDING = 32,
+    INKTAG_SETTINGS_RECORD_MAX = 32,
+} inktag_settings_record_id_t;
+
+#define INKTAG_SETTINGS_RECORD_BIT(record_id) \
+    (UINT32_C(1) << ((uint16_t)(record_id) - 1u))
+
+/* Lifecycle membership is common product data as well as executable policy.
+ * Raw journals use these masks to make a whole reset one generation switch;
+ * vendor KV backends may apply the same stable IDs one record at a time. */
+#define INKTAG_SETTINGS_RESET_SETTINGS_MASK \
+    (INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_TIME) | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_SCREEN_PROFILE) | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_DEVICE_IDENTITY) | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_DEVICE_SETTINGS) | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_INDICATOR))
+#define INKTAG_SETTINGS_CLEAR_USER_DATA_MASK \
+    (INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_DISPLAY_STATE) | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_DEVICE_INFO_QR) | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_NFC_BINDING) | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_IMAGE_INDEX))
+#define INKTAG_SETTINGS_FACTORY_RESET_MASK \
+    (INKTAG_SETTINGS_RESET_SETTINGS_MASK | \
+     INKTAG_SETTINGS_CLEAR_USER_DATA_MASK)
+/* New two-action contract. Do not silently replace the legacy masks above:
+ * unadapted ports must not advertise LIFECYCLE_V2. Reset requires fresh W;
+ * KV ports clear ordinary settings first and commit a valid OFF record last.
+ * Removing QR ID5 is safe only where authoritative absence means OFF. */
+#define INKTAG_SETTINGS_CLEAR_IMAGES_MASK \
+    (INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_DISPLAY_STATE) | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_IMAGE_INDEX))
+#define INKTAG_SETTINGS_RESET_ORDINARY_V2_MASK \
+    (INKTAG_SETTINGS_RESET_SETTINGS_MASK | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_NFC_BINDING))
+#define INKTAG_SETTINGS_RESET_SETTINGS_V2_MASK \
+    (INKTAG_SETTINGS_RESET_ORDINARY_V2_MASK | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_DEVICE_INFO_QR))
+/* Do not substitute this for the legacy mask until the caller has consumed a
+ * fresh owner proof and durably committed OWNER_RESET_PENDING first. */
+#define INKTAG_SETTINGS_OWNER_FACTORY_RESET_MASK \
+    (INKTAG_SETTINGS_FACTORY_RESET_MASK | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_ACTIVATION) | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_RETIRED_FIND_SINGLE_KEY) | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_FIND_CONFIG) | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_FIND_DERIVATION_SEED) | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_BOOT_DISPLAY) | \
+     INKTAG_SETTINGS_RECORD_BIT(INKTAG_SETTINGS_RECORD_FIND_KEYRING_MANIFEST) | \
+     (UINT32_C(0x1fff) << \
+      (INKTAG_SETTINGS_RECORD_FIND_KEYRING_CHUNK_0 - 1u)))
+
+/* The existing Settings store protects the record itself with its CRC. The
+ * fixed eight-byte marker is 49 4B 54 52 53 54 31 A5 ("IKTRST1" + A5).
+ * A present but malformed marker must fail closed, not restore Pro/Find. */
+#define INKTAG_SETTINGS_OWNER_RESET_PENDING_SIZE 8u
+#define INKTAG_SETTINGS_OWNER_RESET_PENDING_MAGIC \
+    {0x49u, 0x4bu, 0x54u, 0x52u, 0x53u, 0x54u, 0x31u, 0xa5u}
+
+typedef enum {
+    INKTAG_SETTINGS_LIFECYCLE_USER = 1,
+    INKTAG_SETTINGS_LIFECYCLE_PROTECTED = 2,
+    INKTAG_SETTINGS_LIFECYCLE_HEALTH = 3,
+} inktag_settings_lifecycle_t;
+
+typedef enum {
+    INKTAG_SETTINGS_CLEAR_RESET_SETTINGS = 1,
+    INKTAG_SETTINGS_CLEAR_USER_DATA = 2,
+    INKTAG_SETTINGS_CLEAR_FACTORY_RESET = 3,
+    INKTAG_SETTINGS_CLEAR_OWNER_FACTORY_RESET = 4,
+} inktag_settings_clear_action_t;
+
+typedef enum {
+    INKTAG_SETTINGS_RESET_KEEP = 0,
+    INKTAG_SETTINGS_RESET_DELETE = 1,
+} inktag_settings_reset_disposition_t;
+
+bool inktag_settings_record_id_valid(uint16_t record_id);
+inktag_settings_lifecycle_t inktag_settings_record_lifecycle(
+    uint16_t record_id);
+inktag_settings_reset_disposition_t inktag_settings_record_disposition(
+    uint16_t record_id, inktag_settings_clear_action_t action);
+
+#endif

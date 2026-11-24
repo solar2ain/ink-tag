@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "sdkRoot": ".sdk",
+  "toolchains": {
+    "arm-gnu-nrf": {
+      "version": "15.2.Rel1",
+      "source": "https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads",
+      "path": ".tools/arm-gnu-toolchain/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi",
+      "platforms": [
+        "nrf"
+      ]
+    }
+  },
+  "hostTools": {
+    "jlink": {
+      "version": "7.88j",
+      "source": "https://www.segger.com/downloads/jlink/",
+      "path": "system installation or INKTAG_JLINK_HOME",
+      "acquisition": "manual-vendor-download",
+      "notes": "USB/SWD probe for device identification, complete firmware programming and optional backup."
+    },
+    "nrfutil": {
+      "version": "6.1.7",
+      "sha256": "FEE3AEED1843A4BFFC082747CEA60DC072929EB36E67D62C8A3FD7471E0DC92D",
+      "source": "https://www.nordicsemi.com/Products/Development-tools/nRF-Command-Line-Tools/Download",
+      "path": ".tools/nordic/bin/nrfutil.exe",
+      "acquisition": "manual-vendor-download"
+    }
+  },
+  "sdks": {
+    "nordic-nrf5-17.1.0": {
+      "chips": [
+        "nRF52811"
+      ],
+      "version": "17.1.0_ddde560",
+      "source": "https://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v17.x.x/nRF5_SDK_17.1.0_ddde560.zip",
+      "sha256": "5BFE38E744C39FD7F30E10077BA12DF306EF91F368894795D6A3E7A62DC68061",
+      "criticalFiles": {
+        "components/libraries/bootloader/dfu/nrf_dfu_validation.c": "50D03BF26E9778CA0031FFD34C354BB37BE48BD890AEFAF962DB5C1DE56D5F2F",
+        "components/softdevice/s112/hex/s112_nrf52_7.3.0_softdevice.hex": "92bcdc1aa51142ed212bb0dbcdf57093a1bad391f1cf5adca60effe14bdb7ec6"
+      },
+      "path": ".sdk/nordic/nRF5_SDK_17.1.0_ddde560",
+      "acquisition": "automatic",
+      "cryptoInputSnapshot": {
+        "components/libraries/sha256/sha256.c": "3141e7302ab23b3993b3eeb30f8c172718f86986ab7418b39333cadbfec11485",
+        "components/libraries/sha256/sha256.h": "dee4ae9b81e025dd8cbe18f80d1ef78e89e3d6829e9b6be03780593a2ec83e42"
+      },
+      "cryptoInputPolicy": "Hash-locked Nordic validation and SHA-256 integrity inputs; no ECC dependency."
+    }
+  }
+}

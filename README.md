@@ -18,7 +18,7 @@ InkTag 是一个跨平台的墨水屏价签蓝牙项目，可以让闲置的电�
 
 准备一台已安装兼容 InkTag 固件的设备，保持稳定供电，并打开电脑或手机的蓝牙。电脑推荐 Chrome 或 Edge；iPhone／iPad 推荐 [Bluefy](https://apps.apple.com/app/id1492822055)；Android 首选 Chrome。不要在微信等内置窗口中连接设备，请在上述浏览器中打开网页并允许蓝牙访问。
 
-设备仍是原厂固件时，请先阅读[完整烧录说明](docs/zh-CN/flash.md)，核对主控和主板。按准确设备选择固件、主板配置和配套工具；完成安装后再连接 InkTag。可下载文件以 [Releases 实际附件](https://github.com/solar2ain/ink-tag/releases)为准。
+设备仍是原厂固件时，请先阅读[完整烧录说明](docs/zh-CN/flash.md)，核对主控和主板。按准确设备选择固件、主板配置和配套工具；完成安装后再连接 InkTag。自行编译基础版请看[固件构建说明](docs/build-firmware.md)。可下载文件以 [Releases 实际附件](https://github.com/solar2ain/ink-tag/releases)为准。
 
 ### 2. 打开网页并连接
 
@@ -37,7 +37,7 @@ InkTag 是一个跨平台的墨水屏价签蓝牙项目，可以让闲置的电�
 ### 4. 试试日历、画板和轮播
 
 - 想显示日期或时间：在显示设置中选择内置日历或时钟。
-- 想自己排版：进入“创作”，选一个模板或空白画布，添加文字、图片和二维码，然后发送；不必先保存成页面。
+- 想自己排版：进入“创作”，选一个模板或空白画布，添加文字、图片和二维码，然后发送；不必先保存成页面。 小字排版可参考[墨水屏字体指南](docs/creation-fonts.md)。
 - 想轮换多张图片：发送时选择保存到图槽，再开启轮播。图槽已满时可选已有图槽覆盖。
 
 完成后可以断开蓝牙，设备会继续显示当前画面；支持的内置日历、时钟和图槽轮播按设备设置运行。
@@ -46,38 +46,44 @@ InkTag 是一个跨平台的墨水屏价签蓝牙项目，可以让闲置的电�
 
 ## 主要功能
 
-InkTag 提供免费版本（Free），已能够满足大部分日常使用需求。Pro 提供更多高级和实验功能，适合喜欢折腾、愿意探索的用户。所有功能均以设备实际提供的能力为准。
+InkTag基础版（BASIC）已能满足大部分日常使用需求（通常可充分使用外置 Flash，例如 ZKC42B 的 2 MiB 外置 Flash 可全部用于图槽）。高级版（PRO）提供更多高级和实验功能，适合喜欢探索的用户。实际功能以设备能力为准。
 
 > [!NOTE]
 > **使用提醒**
 >
 > InkTag 固件免费使用，项目未提供购买链接。若从商家购买设备或相关服务后遇到问题，请联系购买渠道的商家。
 >
-> 赞助支持本项目后可以获得 Pro 激活码。大部分 Pro 功能属于实验功能，请谨慎开通。
+> 高级版固件通过 [InkTag QQ 群 418446983](https://qun.qq.com/universal-share/share?ac=1&busi_data=eyJncm91cENvZGUiOiI0MTg0NDY5ODMiLCJ0b2tlbiI6ImRPVW00UnZxcWNKTU41M1JXZTQrRGpDeDRqTzI5UDkrTkdPb2U0Y1JGbE00MlcreFRuNnpkSU9QWkF3d01lTEEifQ%3D%3D&data=vETdxuw2M9SvyY0uJLAPuFrwhYCMPMCkYfiu-HzwB4-vWHpF2Jo9CtUXgTsNHzOrklunriznP8R1fytCHQWXpQ&svctype=4&tempid=h5_group_info) 获取。请先查看[高级版固件与加群说明](docs/zh-CN/pro.md#获取高级版固件)。大部分高级版功能属于实验功能，请谨慎开通。
 
-| 功能 | 🆓 Free | ✨ Pro |
+| 功能 | 🆓 基础版（BASIC） | ✨ 高级版（PRO） |
 | --- | --- | --- |
-| 图片、内置日历、时钟、设备信息与二维码 | 支持 | 支持 |
-| 图片裁剪、旋转、抖动、画板和设备效果预览 | 支持 | 支持 |
-| 图片存储与离线轮播 | 通常小屏最多 10 张、其他屏最多 4 张 | 使用全部可用图槽容量 |
-| 屏幕、方向、屏幕引脚和 LED 引脚配置 | 支持已适配硬件 | 相同 |
-| 状态灯、已适配的按键与蜂鸣器 | 按设备能力开放 | 相同 |
-| 蓝牙连接、设备诊断、OTA 和 Recovery | 支持 | 支持 |
-| NFC 碰一碰打开设备链接 | 有相应硬件时支持 | 支持 |
-| 主机页面与定制推送 | 可编辑、转换和离线预览 | 设备接收对应高级内容时需 Pro；自动推送需主机持续在线 |
-| NFC 手机命令切换界面或图槽 | — | 有相应硬件时支持 |
-| 高级屏幕控制 | — | 部分屏幕局刷与 E6 六色屏幕控制，需兼容硬件、正确接线及相应驱动 |
-| 用户字库、蓝牙改名与设备密码 | — | 支持相应能力的设备可用 |
-| 隐藏或调整 InkTag 标识 | — | 支持 |
-| 防丢器（苹果 Find My 网络） | — | 实验功能；在线版可登记与控制广播，位置查询需要本地服务 |
-| NFC 传图（待开发） | — | 规划中的 Pro 功能，尚不可用 |
-| 自定义动态设备布局（待开发） | — | 规划中的 Pro 功能，尚不可用 |
+| 图片、内置日历、时钟、设备信息与二维码 | ✅支持 | ✅支持 |
+| 图片裁剪、旋转、抖动、画板和设备效果预览 | ✅支持 | ✅支持 |
+| 图片存储与离线轮播 | ✅以设备可用容量为准 | ✅相同 |
+| 屏幕、方向、屏幕引脚和 LED 引脚配置 | ✅支持已适配硬件 | ✅相同 |
+| 状态灯、已适配的按键 | ✅按设备能力开放 | ✅相同 |
+| 蓝牙连接、设备诊断、OTA 和 Recovery | ✅支持 | ✅支持 |
+| NFC 碰一碰打开设备链接 | — | ✅有相应硬件时支持 |
+| 主机页面与定制推送 | ✅可编辑、转换和离线预览 | ✅设备接收对应高级内容时需 PRO；自动推送需主机持续在线 |
+| NFC 手机命令切换界面或图槽 | — | ✅有相应硬件时支持 |
+| 高级屏幕控制 | — | ✅部分屏幕局刷与 E6 六色屏幕控制，需兼容硬件、正确接线及相应驱动 |
+| 用户字库、蓝牙改名与设备密码 | — | ✅支持相应能力的设备可用 |
+| 隐藏或调整 InkTag 标识 | — | ✅支持 |
+| 防丢器（苹果 Find My 网络） | — | ✅实验功能；在线版可登记与控制广播，位置查询需要本地服务 |
+| NFC 传图 | — | ✅支持指定 NFC 硬件与兼容应用，见[高级版说明](docs/zh-CN/pro.md) |
+| 自定义动态设备布局（待开发） | — | 规划中的 PRO 功能，尚不可用 |
 
-“小屏”指可视区长边小于 300 像素。**DA14585 和 nRF52811 受固件尺寸限制，仅提供 Free 功能，无法激活 Pro；这两个主控的 Free 固件不限制图槽数量，不套用 10／4 张额度，可存图片数只受实际存储容量限制。** 各主控的可用空间与图片数量估算见[图片存储](docs/zh-CN/devices.md#图片存储)。
+**DA14585 和 nRF52811 只提供基础版（BASIC）。** 各主控的可用空间与图片数量估算见[图片存储](docs/zh-CN/devices.md#图片存储)。
 
-局刷时钟每天仍会全屏刷新并改变背景，频繁刷新也更耗电。E6 图片的离线转换和预览不受 Pro 限制。更多局刷方案、自定义设备动态布局、NFC 传图和关闭蓝牙广播等功能尚未提供。
+局刷时钟每天仍会全屏刷新并改变背景，频繁刷新也更耗电。E6 图片的离线转换和预览不受 PRO 限制。支持的高级版设备可延时关闭普通蓝牙广播。
 
-详细说明：[Free 与 Pro](docs/zh-CN/pro.md) · [画板与天气站](docs/zh-CN/host-pages.md) · [设备与屏幕](docs/zh-CN/devices.md)
+详细说明：[基础版与高级版](docs/zh-CN/pro.md) · [画板与天气站](docs/zh-CN/host-pages.md) · [设备与屏幕](docs/zh-CN/devices.md)
+
+## 低功耗与续航
+
+墨水屏刷新后会保留画面。多数实测板在广播间隙休眠时约 **2–3 µA**，每秒一次普通蓝牙广播时平均约 **30–40 µA**。开启 Find My 广播，估算再增加约 **15–20 µA**。
+
+以 **200 mAh** 可用容量、每天刷新一次的日历为例，保持普通蓝牙广播时约 **6.6–8.6 个月**，同时开启 Find My 时约 **4.4–5.9 个月**。时钟每分钟局刷 **2–3 秒**，刷新时 **5–10 mA**，保留普通蓝牙广播时，同一容量理论约可用 **15–43 天**。各场景的假设、实测样例和计算方式见[低功耗与续航](docs/zh-CN/power.md)。
 
 ## 支持的主控
 
@@ -90,6 +96,14 @@ InkTag 提供免费版本（Free），已能够满足大部分日常使用需求
 | Renesas（原 Dialog） | DA14585 |
 
 主板丝印、产品型号和使用限制见[已适配设备](docs/zh-CN/supported-devices.md)；屏幕型号、实测范围和局刷支持见[已实测屏幕](docs/zh-CN/tested-screens.md)。主控在支持列表中，不表示所有使用它的主板都可以直接安装。
+
+## 从源码构建
+
+本次提供 WebUI、CLI 和各适配主控的 BASIC 固件源码。
+
+- [构建固件](docs/build-firmware.md)，按主控准备 SDK 和工具链。也可直接查看 [OM6626 SDK 与编译步骤](docs/build-firmware.md#onmicro-om6626)或 [nRF52811 的编译和打包步骤](docs/build-firmware.md#nordic-nrf52811)。
+- [构建 WebUI](docs/build-webui.md)，准备 Node.js，启动本地开发预览或生成静态站和离线网页。
+- [安装和开发 CLI](cli/README.md)，使用 Python 环境。
 
 ## 选择适合你的使用方式
 
@@ -119,6 +133,8 @@ sh install_inktag.sh
 ```
 
 脚本会把 CLI 安装到 `cli/.venv`，并自动安装**本地 Find 查询服务的依赖**；Find 环境单独位于用户数据目录的 `find/runtime/.venv`。安装完成后以后台模式启动本地 WebUI 和 Find 查询服务（`webui start`）；关闭终端不会停止服务。安装完成时会显示可直接复制的启动、停止、状态和日志命令。macOS 新安装的数据和日志位于 `~/.inktag/`；已有旧目录时继续使用原目录，避免丢失会话或标签信息。不会修改系统 Python，也不会自动登录 Apple、连接设备或清除已有数据。
+
+仓库已包含编译好的 WebUI，安装时直接使用 `webui/dist/static/`，无需 Node.js。修改 WebUI 源码后，可按[构建 WebUI](docs/build-webui.md)重编并重新安装。
 
 首次安装需要联网。macOS 使用系统原生认证组件，无需 7-Zip 或下面的 Apple 镜像。Linux 的位置查询仍未完成资格验证。
 
@@ -223,9 +239,16 @@ inktag-cli webui start --repo . --enable-tls
 
 - 屏幕全刷时闪烁、低温时变慢通常是墨水屏工作特点；等待刷新结束，不连续重复操作。
 - 屏幕仅支持自身的有限颜色。照片需量化和抖动，不能获得 LCD 的连续色阶。
-- 没有蓝牙入口、读取失败或登录异常时，先查看[常见问题](docs/zh-CN/faq.md)，反馈时附客户端版本、主控和已脱敏日志。
-- 反馈问题可通过 [GitHub Issues](https://github.com/solar2ain/ink-tag/issues)提交，请同时说明操作步骤和实际错误提示。
+- 没有蓝牙入口、读取失败或登录异常时，先查看[常见问题](docs/zh-CN/faq.md)。
 - 不要公开设备密码、激活码、Find 私钥、账号会话或定位记录。使用前请阅读[安全与隐私](SECURITY.md)。
+
+## 反馈与贡献
+
+InkTag 涉及多种主控、主板和屏幕组合，现有测试还无法覆盖全部场景。欢迎补充实机测试、烧录教程和文档。
+
+遇到问题请附上主控、主板型号、固件和客户端版本，以及复现步骤和错误提示。附带日志前请先脱敏。 [提交 Issue](https://github.com/solar2ain/ink-tag/issues)
+
+欢迎提交修复、教程，或为不同尺寸的墨水屏贡献更美观、易读的模板页面。 [提交 PR](https://github.com/solar2ain/ink-tag/pulls)
 
 ## 致谢
 
@@ -238,8 +261,10 @@ inktag-cli webui start --repo . --enable-tls
 
 同时感谢 Leafer、React、Lucide、各主控工具生态和提供硬件、测试及反馈的朋友。适用的版权与许可见[第三方声明](THIRD_PARTY_NOTICES.md)。
 
+创作点阵字体感谢[缝合像素](https://github.com/TakWolf/fusion-pixel-font)、[Z 工坊像素黑体 CN](https://github.com/Astro-2539/ZLabs-Pixel-12px)、[目哉像素](https://github.com/DWNfonts/MuzaiPixel)、[寒蝉点阵体](https://github.com/Warren2060/ChillBitmap)和[文泉驿点阵宋体](https://sources.debian.org/src/xfonts-wqy/1.0.0~rc1-8/)的作者及贡献者。
+
 ## License
 
-InkTag 自有固件、编译版 WebUI 和 CLI 统一采用 [PolyForm Noncommercial 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0)，按许可允许的非商业用途使用。第三方内容保留各自许可。完整范围和组件说明见[许可范围](LICENSING.md)。
+InkTag 自有基础版固件、WebUI 和 CLI 源码采用 [GNU AGPL v3](LICENSE)。高级版固件和第三方内容各按随附许可使用。创作字体的许可正文和来源见[第三方声明](THIRD_PARTY_NOTICES.md#创作字体--creation-fonts)。
 
-用户文档 © InkTag contributors，保留所有权利。
+用户文档 © InkTag contributors，采用 [AGPL-3.0-only](LICENSE)。

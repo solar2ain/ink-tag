@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="低功耗与续航">低功耗与续航</h1>
+<p><a target="_blank" rel="noopener noreferrer" href="../en/power.html">English</a></p>
+<p>墨水屏在两次刷新之间会保留画面。日历、相框等很少刷新的用法，整机耗电主要来自待机和蓝牙广播。蓝牙连接、传图和频繁刷新会缩短续航。</p>
+<h2 id="实测与估算参考">实测与估算参考</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>状态</th>
+<th>整机电流参考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>广播间隙的休眠</td>
+<td>多数实测板约 2–3 µA。这个读数不含广播脉冲</td>
+</tr>
+<tr>
+<td>每秒一次普通 BLE 广播</td>
+<td>多数低功耗板约 30–40 µA 平均，含广播脉冲，设备未连接</td>
+</tr>
+<tr>
+<td>同时开启 Find My 广播</td>
+<td>估算在普通 BLE 广播的平均电流上增加约 15–20 µA</td>
+</tr>
+<tr>
+<td>时钟每分钟局刷</td>
+<td>单次约 2–3 秒，刷新时约 5–10 mA。整机平均按刷新时间与间隔估算</td>
+</tr>
+</tbody>
+</table></div>
+<p>几个已有记录的日历或静置测试如下。不同板型、屏幕和固件会影响读数。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>实测样例</th>
+<th>读数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Goodix GR5513／GR5515</td>
+<td>广播间隙约 3 µA，含普通广播平均分别约 35／37 µA</td>
+</tr>
+<tr>
+<td>OnMicro OM6626（ZKC42B）</td>
+<td>广播间隙约 3 µA，含普通广播平均约 31 µA</td>
+</tr>
+<tr>
+<td>Telink TLSR8359（配 JD79665AA）</td>
+<td>关闭普通广播时约 3 µA，打开普通广播时平均约 30 µA</td>
+</tr>
+</tbody>
+</table></div>
+<p>缺少具体读数时，可先用上面的参考范围估算。仅支持普通广播的设备，用普通广播一行计算。支持延时关播的高级版设备，普通广播关闭后仍可保持已开启的 Find My 广播。</p>
+<h2 id="日历和时钟能用多久">日历和时钟能用多久</h2>
+<p>以下以电池在设备工作电压范围内可提供 <strong>200 mAh</strong> 或 <strong>500 mAh</strong> 为例。日历假设每天刷新一次，示例刷新电流为 <strong>10 mA、15 秒</strong>，每天约用 <strong>0.042 mAh</strong>，折合全天平均约 <strong>1.7 µA</strong>。表内的日历续航已计入这次刷新。示例刷新参数可替换成自己屏幕的实测值。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>使用场景</th>
+<th align="right">估算整机平均电流</th>
+<th align="right">200 mAh</th>
+<th align="right">500 mAh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>日历，两种广播均关闭</td>
+<td align="right">3.7–4.7 µA</td>
+<td align="right">约 4.8–6.1 年</td>
+<td align="right">约 12–15 年</td>
+</tr>
+<tr>
+<td>日历，仅 Find My 广播</td>
+<td align="right">18.7–24.7 µA</td>
+<td align="right">约 11–15 个月</td>
+<td align="right">约 2.3–3.0 年</td>
+</tr>
+<tr>
+<td>日历，每秒一次普通 BLE 广播</td>
+<td align="right">31.7–41.7 µA</td>
+<td align="right">约 6.6–8.6 个月</td>
+<td align="right">约 16–22 个月</td>
+</tr>
+<tr>
+<td>日历，每秒普通广播并开启 Find My</td>
+<td align="right">46.7–61.7 µA</td>
+<td align="right">约 4.4–5.9 个月</td>
+<td align="right">约 11–15 个月</td>
+</tr>
+<tr>
+<td>时钟，每分钟局刷，普通蓝牙广播常开</td>
+<td align="right">约 196–538 µA</td>
+<td align="right">约 15–43 天</td>
+<td align="right">约 39–106 天</td>
+</tr>
+</tbody>
+</table></div>
+<p>多年数据是按容量和电流算得的理论上限。实际寿命还受电池自放电、环境温度、低压截止和刷新时的压降影响。时钟每分钟约有 2–3 秒以 5–10 mA 刷新，余下 57–58 秒按普通广播的 30–40 µA 计算。按 <code>(刷新电流 × 刷新秒数 + 待机平均电流 × 剩余秒数) ÷ 60</code> 得到约 196–538 µA。若设备还有定期全刷，其能耗应另计。</p>
+<p>自行计算时，用 <code>续航天数 = 可用容量（mAh）× 1000 ÷ 平均电流（µA）÷ 24</code>。若分开测量待机和刷新，按 <code>每日耗电（mAh）= 待机平均电流（mA）× 24 + 单次刷新额外耗电（mAh）× 每日刷新次数</code> 计算。测广播平均电流时应先断开设备连接和调试器，等屏幕刷新结束，取覆盖多个广播周期的平均值。</p></main></body></html>

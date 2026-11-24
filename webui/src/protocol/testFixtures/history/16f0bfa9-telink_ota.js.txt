@@ -1,0 +1,660 @@
+/* Telink TLSR8359 fixed-Recovery transport for InkTag. */
+(function (global) {
+    'use strict';
+
+    const SERVICE_UUID = '00010203-0405-0607-0809-0a0b0c0d1912';
+    const CHARACTERISTIC_UUID = '00010203-0405-0607-0809-0a0b0c0d2b12';
+    const APP_LIMIT = 0x3f000;
+    const STATUS_RECEIVING = 1;
+    const STATUS_COMPLETE = 2;
+    const FAST_PACKET_MAX_BLOCKS = 14;
+    const FAST_WINDOW_PACKETS = 2;
+    const SIGNATURE_MAGIC = 0x31534b49;
+    const SIGNATURE_VERSION = 1;
+    const SIGNATURE_ALGORITHM_ECDSA_P256 = 1;
+    const SIGNATURE_PREFIX_SIZE = 32;
+    const SIGNATURE_SIZE = 64;
+    const SIGNATURE_TRAILER_SIZE = SIGNATURE_PREFIX_SIZE + SIGNATURE_SIZE;
+    const BOARD_SIGNATURE = 0x53484c54;
+    const LAYOUT_SIGNATURE = 0x31564c54;
+    const VERIFIER_SIGNATURE = 0x314b4c54;
+    const SIGNED_BOARD = 'tlsr8359_hanshow';
+    const SIGNED_LAYOUT = 'layout-v1';
+    const TRUSTED_SIGNING_KEY = {
+        trustProfile: 'production',
+        algorithm: 'ecdsa-p256-sha256',
+        keyId: 'inktag-tlsr8359-ota-prod-v1',
+        publicKeyHash: 'f34e6d37e3d2b88454d01d149446dcc5'
+    };
+
+    function layoutProfile(layout) {
+        if (layout === SIGNED_LAYOUT) {
+            return { limit: APP_LIMIT, signature: LAYOUT_SIGNATURE };
+        }
+        throw new Error('not a supported TLSR8359 fixed-Recovery layout');
+    }
+
+    function signedImageContext(firmware) {
+        if (firmware.length < 128) throw new Error('TLSR8359 signed image is too short');
+        const view = new DataView(firmware.buffer, firmware.byteOffset, firmware.byteLength);
+        const appSize = view.getUint32(24, true) + 4;
+        if (appSize + 96 !== firmware.length) throw new Error('TLSR8359 signed image length mismatch');
+        return { epoch: view.getUint32(appSize + 12, true),
+            board: view.getUint32(appSize + 16, true), layout: view.getUint32(appSize + 20, true) };
+    }
+
+    function validateRecoveryContext(raw, firmware) {
+        if (raw.length !== 20 || raw[0] !== 0x49 || raw[1] !== 0x54 || raw[2] !== 0x43 || raw[3] !== 0x31) {
+            throw new Error('TLSR8359 Recovery compatibility response is invalid');
+        }
+        const view = new DataView(raw.buffer, raw.byteOffset, raw.byteLength);
+        const limit = view.getUint32(4, true), epoch = view.getUint32(8, true);
+        const expected = signedImageContext(firmware);
+        if (limit < 0x1000 || limit > 0x40000 || limit % 0x1000 || firmware.length > limit || epoch > 0xffff ||
+            epoch !== expected.epoch || expected.layout !== LAYOUT_SIGNATURE || view.getUint32(12, true) !== expected.layout ||
+            view.getUint32(16, true) !== expected.board) {
+            throw new Error('TLSR8359 Recovery is incompatible with the signed image; Full is required');
+        }
+    }
+
+    async function checkRecoveryCompatibility(service, firmware, step = async (_phase, operation) => operation()) {
+        let characteristic;
+        try {
+            characteristic = await step('读取兼容性通道', () => service.getCharacteristic('00010203-0405-0607-0809-0a0b0c0d2b13'));
+        } catch (error) {
+            if (!error || error.name !== 'NotFoundError') throw error;
+            throw new Error('Recovery lacks read-only compatibility information; Full is required');
+        }
+        if (!characteristic.properties.read) throw new Error('Recovery compatibility characteristic is not readable');
+        const value = await step('读取兼容性信息', () => characteristic.readValue());
+        validateRecoveryContext(new Uint8Array(value.buffer, value.byteOffset, value.byteLength), firmware);
+    }
+
+    function readStoredZip(buffer) {
+        const bytes = new Uint8Array(buffer);
+        const view = new DataView(buffer);
+        const decoder = new TextDecoder('utf-8');
+        const entries = new Map();
+        let offset = 0;
+        while (offset + 4 <= bytes.length && view.getUint32(offset, true) === 0x04034b50) {
+            if (offset + 30 > bytes.length) throw new Error('ZIP local header is truncated');
+            const flags = view.getUint16(offset + 6, true);
+            const method = view.getUint16(offset + 8, true);
+            const compressedSize = view.getUint32(offset + 18, true);
+            const nameLength = view.getUint16(offset + 26, true);
+            const extraLength = view.getUint16(offset + 28, true);
+            if (flags & 0x08) throw new Error('ZIP data descriptors are not supported');
+            if (method !== 0) throw new Error('TLSR8359 OTA package must use ZIP_STORED');
+            const nameStart = offset + 30;
+            const dataStart = nameStart + nameLength + extraLength;
+            const dataEnd = dataStart + compressedSize;
+            if (dataEnd > bytes.length) throw new Error('ZIP entry is truncated');
+            const name = decoder.decode(bytes.subarray(nameStart, nameStart + nameLength));
+            entries.set(name, bytes.slice(dataStart, dataEnd));
+            offset = dataEnd;
+        }
+        return entries;
+    }
+
+    function hex(bytes) {
+        return Array.from(bytes, value => value.toString(16).padStart(2, '0')).join('');
+    }
+
+    function crc16(bytes) {
+        let crc = 0xffff;
+        for (const value of bytes) {
+            let current = value;
+            for (let bit = 0; bit < 8; bit++) {
+                crc = (crc >>> 1) ^ (((crc ^ current) & 1) ? 0xa001 : 0);
+                current >>>= 1;
+            }
+        }
+        return crc & 0xffff;
+    }
+
+    function crc32(bytes) {
+        let crc = 0xffffffff;
+        for (const value of bytes) {
+            crc ^= value;
+            for (let bit = 0; bit < 8; bit++) {
+                crc = ((crc >>> 1) ^ ((crc & 1) ? 0xedb88320 : 0)) >>> 0;
+            }
+        }
+        return (~crc) >>> 0;
+    }
+
+    function dataPacket(index, payload) {
+        if (!payload.length || payload.length > FAST_PACKET_MAX_BLOCKS * 16 || payload.length % 16) {
+            throw new Error('TLSR8359 OTA payload must contain 1..14 complete blocks');
+        }
+        const packet = new Uint8Array(payload.length + 4);
+        const view = new DataView(packet.buffer);
+        view.setUint16(0, index, true);
+        packet.set(payload, 2);
+        view.setUint16(packet.length - 2, crc16(packet.subarray(0, packet.length - 2)), true);
+        return packet;
+    }
+
+    async function verifyPublisherSignature(firmware, manifest, applicationSize, profile) {
+        const signature = manifest.signature || {};
+        const trailer = new DataView(
+            firmware.buffer, firmware.byteOffset + applicationSize,
+            SIGNATURE_TRAILER_SIZE);
+        const publicKeyHex = String(signature.public_key || '').toLowerCase();
+        if (!/^[0-9a-f]{130}$/.test(publicKeyHex)) {
+            throw new Error('TLSR8359 OTA publisher public key is invalid');
+        }
+        const publicKey = Uint8Array.from(
+            publicKeyHex.match(/../g), value => parseInt(value, 16));
+        const publicKeyHash = new Uint8Array(
+            await crypto.subtle.digest('SHA-256', publicKey));
+        if (trailer.getUint32(0, true) !== SIGNATURE_MAGIC ||
+            trailer.getUint8(4) !== SIGNATURE_VERSION ||
+            trailer.getUint8(5) !== SIGNATURE_ALGORITHM_ECDSA_P256 ||
+            trailer.getUint16(6, true) !== SIGNATURE_TRAILER_SIZE ||
+            trailer.getUint32(8, true) !== applicationSize ||
+            trailer.getUint32(12, true) !== manifest.compatibilityEpoch ||
+            trailer.getUint32(16, true) !== BOARD_SIGNATURE ||
+            trailer.getUint32(20, true) !== profile.signature ||
+            trailer.getUint32(24, true) !== VERIFIER_SIGNATURE ||
+            trailer.getUint32(28, true) !== manifest.releaseVersion ||
+            signature.required !== true ||
+            signature.trust_profile !== TRUSTED_SIGNING_KEY.trustProfile ||
+            signature.algorithm !== TRUSTED_SIGNING_KEY.algorithm ||
+            signature.key_id !== TRUSTED_SIGNING_KEY.keyId ||
+            String(signature.public_key_hash || '').toLowerCase() !==
+                TRUSTED_SIGNING_KEY.publicKeyHash ||
+            signature.signed_context_size !== 16 ||
+            signature.signed_board !== SIGNED_BOARD ||
+            signature.signed_layout !== manifest.layout ||
+            signature.board_signature !== BOARD_SIGNATURE ||
+            signature.layout_signature !== profile.signature ||
+            signature.verifier_signature !== VERIFIER_SIGNATURE ||
+            signature.signed_prefix_size !== SIGNATURE_PREFIX_SIZE ||
+            signature.signed_trailer_size !== SIGNATURE_TRAILER_SIZE ||
+            publicKey[0] !== 0x04 ||
+            hex(publicKeyHash.slice(0, 16)) !== TRUSTED_SIGNING_KEY.publicKeyHash) {
+            throw new Error('TLSR8359 OTA publisher signature metadata is invalid');
+        }
+        const key = await crypto.subtle.importKey(
+            'raw', publicKey, { name: 'ECDSA', namedCurve: 'P-256' }, false,
+            ['verify']);
+        const valid = await crypto.subtle.verify(
+            { name: 'ECDSA', hash: 'SHA-256' }, key,
+            firmware.slice(firmware.length - SIGNATURE_SIZE),
+            firmware.slice(0, applicationSize + SIGNATURE_PREFIX_SIZE));
+        if (!valid) throw new Error('TLSR8359 OTA publisher signature verification failed');
+    }
+
+    async function parsePackage(file) {
+        const buffer = await file.arrayBuffer();
+        let firmware;
+        let manifest = null;
+        let profile;
+        if (buffer.byteLength >= 4 && new DataView(buffer).getUint32(0, true) === 0x04034b50) {
+            const entries = readStoredZip(buffer);
+            const manifestBytes = entries.get('manifest.json');
+            if (!manifestBytes) throw new Error('manifest.json is missing');
+            manifest = JSON.parse(new TextDecoder('utf-8').decode(manifestBytes));
+            profile = layoutProfile(manifest.layout);
+            if (manifest.format !== 'inktag-ota-v1' ||
+                manifest.transport !== 'telink-fixed-recovery-v2' ||
+                manifest.board !== SIGNED_BOARD) {
+                throw new Error('not an InkTag Hanshow TLSR8359 fixed-Recovery package');
+            }
+            const application = manifest.application || {};
+            firmware = entries.get(application.file);
+            if (!firmware) throw new Error('application payload is missing');
+            const digest = new Uint8Array(await crypto.subtle.digest('SHA-256', firmware));
+            if (hex(digest) !== String(application.sha256 || '').toLowerCase()) {
+                throw new Error('package SHA-256 verification failed');
+            }
+        } else throw new Error('TLSR8359 OTA requires a signed manifest-bearing ZIP package');
+        if (firmware.length < 32 + SIGNATURE_TRAILER_SIZE || firmware.length > profile.limit) {
+            throw new Error(`TLSR8359 应用大小 ${firmware.length} 超出单槽限制 ${profile.limit}`);
+        }
+        if (firmware[8] !== 0x4b || firmware[9] !== 0x4e ||
+            firmware[10] !== 0x4c || firmware[11] !== 0x54) {
+            throw new Error('固件缺少 Telink TLNK 启动标记');
+        }
+        const view = new DataView(firmware.buffer, firmware.byteOffset, firmware.byteLength);
+        const declaredSize = view.getUint32(24, true);
+        const applicationSize = declaredSize + 4;
+        if (!Number.isInteger(manifest.releaseVersion) ||
+            manifest.releaseVersion <= 0 || manifest.releaseVersion > 0xffffffff ||
+            !Number.isInteger(manifest.compatibilityEpoch) ||
+            manifest.compatibilityEpoch < 0 || manifest.compatibilityEpoch > 0xffff) {
+            throw new Error('TLSR8359 release version or compatibility epoch is invalid');
+        }
+        if (applicationSize + SIGNATURE_TRAILER_SIZE !== firmware.length) {
+            throw new Error('Telink 固件声明长度与文件长度不一致');
+        }
+        const expectedCrc = view.getUint32(declaredSize, false);
+        const actualCrc = crc32(firmware.subarray(0, declaredSize));
+        if (expectedCrc !== actualCrc) throw new Error('Telink 固件 CRC32 校验失败');
+        await verifyPublisherSignature(firmware, manifest, applicationSize, profile);
+        if (manifest) {
+            const application = manifest.application;
+            if (application.size !== applicationSize ||
+                application.transfer_size !== firmware.length ||
+                application.declared_size !== declaredSize ||
+                application.crc32 !== actualCrc ||
+                application.active_address !== 0) {
+                throw new Error('TLSR8359 application/Recovery layout does not match the manifest');
+            }
+        }
+        return { fileName: file.name, manifest, firmware, declaredSize, crc32: actualCrc };
+    }
+
+    const delay = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
+    const FLASH_SECTOR_BLOCKS = 0x1000 / 16;
+
+    function fastBlockLimit(status) {
+        if (status.length !== 14 || status[8] !== 0x49 || status[9] !== 0x54 ||
+            status[10] !== 1 || status[11] < 2 || status[11] > FAST_PACKET_MAX_BLOCKS) {
+            throw new Error('TLSR8359 Recovery 状态格式不是 release-v1，请先通过 SWS 完整烧录当前固件');
+        }
+        return Math.min(status[11], FAST_PACKET_MAX_BLOCKS);
+    }
+
+    function fastPacketEnd(start, total, blockLimit) {
+        if (start < 0 || start >= total || blockLimit < 2) {
+            throw new Error('TLSR8359 fast OTA packet arguments are outside the image');
+        }
+        const sectorEnd = (Math.floor(start / FLASH_SECTOR_BLOCKS) + 1) * FLASH_SECTOR_BLOCKS;
+        // The first acknowledged packet carries the complete 32-byte Telink
+        // header so Recovery can reject marker/size errors before first erase.
+        if (start === 0) return Math.min(start + 2, total);
+        if (start % FLASH_SECTOR_BLOCKS === 0) return Math.min(start + 1, total);
+        return Math.min(start + blockLimit, sectorEnd, total);
+    }
+
+    function fastPacketWindow(start, total, blockLimit, packetLimit = FAST_WINDOW_PACKETS) {
+        if (packetLimit < 1 || packetLimit > FAST_WINDOW_PACKETS) {
+            throw new Error('TLSR8359 OTA packet window limit is invalid');
+        }
+        const ranges = [];
+        let current = start;
+        for (let packet = 0; packet < packetLimit; packet++) {
+            const end = fastPacketEnd(current, total, blockLimit);
+            ranges.push([current, end]);
+            current = end;
+            if (current >= total || start % FLASH_SECTOR_BLOCKS === 0 ||
+                current % FLASH_SECTOR_BLOCKS === 0) break;
+        }
+        return ranges;
+    }
+
+    function packetRequiresDeliveryAck(index) {
+        return index % FLASH_SECTOR_BLOCKS === 0;
+    }
+
+    function characteristicSupportsWriteResponse(characteristic) {
+        return Boolean(characteristic && characteristic.properties &&
+            characteristic.properties.write);
+    }
+
+    function isTransientGattError(error) {
+        if (error && error.code === 'TLSR_RECOVERY_DISCOVERY_TIMEOUT') return false;
+        const name = String(error && error.name || '').toLowerCase();
+        const detail = String(error && error.message || error || '').toLowerCase();
+        return name === 'networkerror' || name === 'invalidstateerror' ||
+            name === 'aborterror' || detail.includes('gatt server is disconnected') ||
+            detail.includes('unreachable') || detail.includes('device disconnected') ||
+            detail.includes('未确认数据块');
+    }
+
+    const discoveryOwners = new Map();
+    const deviceKey = device => device.id || device;
+
+    // A new ordinary-client connection takes ownership of the same grant.
+    // A late old connect must neither continue OTA nor disconnect that new link.
+    function cancelRecoveryDiscovery(device) {
+        const key = deviceKey(device), old = discoveryOwners.get(key);
+        if (old) old.abandoned = true;
+        discoveryOwners.delete(key);
+    }
+
+    async function recoveryCharacteristic(device, onPhase = () => {}, timeoutMs = 45000) {
+        const deadline = Date.now() + timeoutMs;
+        cancelRecoveryDiscovery(device);
+        const key = deviceKey(device), owner = { abandoned: false, finished: false, pending: 0 };
+        discoveryOwners.set(key, owner);
+        const current = () => discoveryOwners.get(key) === owner && !owner.abandoned;
+        const disconnectOwned = () => {
+            if (discoveryOwners.get(key) === owner && device.gatt.connected) device.gatt.disconnect();
+        };
+        const finish = () => {
+            owner.finished = true;
+            if (!owner.pending && discoveryOwners.get(key) === owner) discoveryOwners.delete(key);
+        };
+        const timeoutFailure = phase => {
+            owner.abandoned = true;
+            disconnectOwned();
+            const error = new Error(`TLSR Recovery ${phase}超时；已停止本次流程，请确认设备状态，不要盲目重试`);
+            error.code = 'TLSR_RECOVERY_DISCOVERY_TIMEOUT';
+            onPhase(error.message);
+            return error;
+        };
+        const step = async (phase, operation) => {
+            if (!current()) throw new Error('TLSR Recovery 发现已取消；未继续本次传输');
+            onPhase(`TLSR Recovery：${phase}`);
+            const remaining = Math.min(phase === '建立 GATT 连接' ? 10000 : 5000, deadline - Date.now());
+            if (remaining <= 0) throw timeoutFailure(phase);
+            return new Promise((resolve, reject) => {
+                let expired = false;
+                const timer = setTimeout(() => {
+                    expired = true;
+                    reject(timeoutFailure(phase));
+                }, Math.max(1, remaining));
+                owner.pending++;
+                Promise.resolve().then(() => {
+                    if (!current()) throw new Error('TLSR Recovery 发现已取消；未继续本次传输');
+                    return operation();
+                }).then(value => {
+                    clearTimeout(timer);
+                    if (expired || !current()) {
+                        disconnectOwned();
+                        if (!expired) reject(new Error('TLSR Recovery 发现已取消；未继续本次传输'));
+                    } else resolve(value);
+                }, error => {
+                    clearTimeout(timer);
+                    if (expired || !current()) disconnectOwned();
+                    if (!expired) reject(error);
+                }).finally(() => {
+                    owner.pending--;
+                    if (owner.abandoned || owner.finished) finish();
+                });
+            });
+        };
+        let lastError;
+        let attempt = 0;
+        while (Date.now() < deadline) {
+            try {
+                onPhase(`TLSR Recovery 连接尝试 ${++attempt}`);
+                if (device.gatt.connected) device.gatt.disconnect();
+                await delay(Math.min(700, Math.max(0, deadline - Date.now())));
+                const server = await step('建立 GATT 连接', () => device.gatt.connect());
+                const service = await step('发现升级服务', () => server.getPrimaryService(SERVICE_UUID));
+                const characteristic = await step('发现数据通道', () => service.getCharacteristic(CHARACTERISTIC_UUID));
+                return { characteristic, step, finish };
+            } catch (error) {
+                lastError = error;
+                disconnectOwned();
+                if (owner.abandoned || error?.name === 'SecurityError' || error?.name === 'NotAllowedError') {
+                    finish();
+                    throw error;
+                }
+                await delay(Math.min(700, Math.max(0, deadline - Date.now())));
+            }
+        }
+        finish();
+        const error = new Error(`TLSR Recovery 发现等待超时；已停止本次流程：${String(lastError || '')}`);
+        error.code = 'TLSR_RECOVERY_DISCOVERY_TIMEOUT';
+        throw error;
+    }
+
+    async function writeWithoutResponse(characteristic, bytes) {
+        if (characteristic.writeValueWithoutResponse) {
+            return characteristic.writeValueWithoutResponse(bytes);
+        }
+        return characteristic.writeValue(bytes);
+    }
+
+    async function writeWithResponse(characteristic, bytes) {
+        if (characteristic.writeValueWithResponse) {
+            return characteristic.writeValueWithResponse(bytes);
+        }
+        return characteristic.writeValue(bytes);
+    }
+
+    async function readStatus(characteristic) {
+        const value = await characteristic.readValue();
+        const bytes = new Uint8Array(value.buffer, value.byteOffset, value.byteLength);
+        return bytes.slice();
+    }
+
+    function verifiedRecoveryStatus(raw) {
+        if (raw.length !== 14 || raw[8] !== 0x49 || raw[9] !== 0x54 ||
+            raw[10] !== 1 || raw[11] < 2 || raw[11] > FAST_PACKET_MAX_BLOCKS) {
+            throw new Error('TLSR8359 固定 Recovery 状态/版本无效；需要当前 v1 Recovery');
+        }
+        // A refusal is readable state, not proof of an unusable BLE link. This
+        // wire has no voltage value or sample-validity field; never invent one.
+        return { status: raw[0], raw };
+    }
+
+    async function queryRecovery(server) {
+        const service = await server.getPrimaryService(SERVICE_UUID);
+        const characteristic = await service.getCharacteristic(CHARACTERISTIC_UUID);
+        return verifiedRecoveryStatus(await readStatus(characteristic));
+    }
+
+    async function resumeApplication(server) {
+        const service = await server.getPrimaryService(SERVICE_UUID);
+        const characteristic = await service.getCharacteristic(CHARACTERISTIC_UUID);
+        verifiedRecoveryStatus(await readStatus(characteristic));
+        let reply;
+        try {
+            // Exactly one guarded request. Never reconnect/replay or fall back
+            // to reset. Recovery revalidates the complete signed App and power.
+            await writeWithResponse(characteristic, new Uint8Array([0x03, 0xff]));
+            const deadline = Date.now() + 15000;
+            do {
+                await delay(50);
+                reply = verifiedRecoveryStatus(await readStatus(characteristic));
+                if (reply.status !== STATUS_RECEIVING) break;
+            } while (Date.now() < deadline);
+        } catch (cause) {
+            const error = new Error(`退出 Recovery 结果未知；请只读确认设备角色，不要重复退出或复位：${String(cause)}`);
+            error.code = 'RECOVERY_RESULT_UNKNOWN';
+            throw error;
+        }
+        if (reply.status === 8) return;
+        if (reply.status === 9) {
+            throw new Error('SAFE_RESUME_APP 拒绝：LOW_POWER（电压不足或采样无效），Recovery 仍可连接；请检查供电后再处理');
+        }
+        if (reply.status === 10) {
+            throw new Error('无法安全返回原应用，原应用或更新状态不完整（UNSAFE_RESUME）；请重新选择与设备匹配的 OTA 应用文件，并完成 OTA 升级');
+        }
+        if (reply.status === STATUS_RECEIVING) {
+            const error = new Error('退出 Recovery 验证超时，结果未知；请只读确认设备角色，不要重复退出或复位');
+            error.code = 'RECOVERY_RESULT_UNKNOWN';
+            throw error;
+        }
+        throw new Error(`SAFE_RESUME_APP 拒绝：Recovery 状态 ${hex(reply.raw)}`);
+    }
+
+    function acknowledgedIndex(status) {
+        if (status.length < 3) {
+            throw new Error('TLSR8359 Recovery 版本过旧，请先使用受保护的首次烧录工具更新 Recovery');
+        }
+        return status[1] | (status[2] << 8);
+    }
+
+    async function transferDeviceOnce(device, pkg, onProgress, resume = false, options = {}) {
+        const discovery = await recoveryCharacteristic(device, options.onPhase);
+        const characteristic = discovery.characteristic;
+        try {
+        await checkRecoveryCompatibility(characteristic.service, pkg.firmware, discovery.step);
+        const useWriteResponse = characteristicSupportsWriteResponse(characteristic);
+        let useNotifications = Boolean(characteristic.properties &&
+            characteristic.properties.notify);
+        const notificationQueue = [];
+        let notificationWaiter = null;
+        const onStatus = event => {
+            const value = event.target.value;
+            const update = new Uint8Array(
+                value.buffer, value.byteOffset, value.byteLength,
+            ).slice();
+            if (notificationWaiter) notificationWaiter(update);
+            else notificationQueue.push(update);
+        };
+        const detachNotifications = () => {
+            characteristic.removeEventListener('characteristicvaluechanged', onStatus);
+            notificationQueue.length = 0;
+        };
+        const nextNotification = async timeoutMs => {
+            if (notificationQueue.length) return notificationQueue.shift();
+            return new Promise(resolve => {
+                let timer;
+                const deliver = value => {
+                    clearTimeout(timer);
+                    notificationWaiter = null;
+                    resolve(value);
+                };
+                notificationWaiter = deliver;
+                timer = setTimeout(() => {
+                    if (notificationWaiter === deliver) notificationWaiter = null;
+                    resolve(null);
+                }, timeoutMs);
+            });
+        };
+        const beginTransfer = async () => {
+            const begin = new Uint8Array([0x01, 0xff]);
+            if (useWriteResponse) await writeWithResponse(characteristic, begin);
+            else await writeWithoutResponse(characteristic, begin);
+            await delay(250);
+            const startedStatus = await readStatus(characteristic);
+            if (startedStatus[0] !== STATUS_RECEIVING || acknowledgedIndex(startedStatus) !== 0) {
+                throw new Error('TLSR8359 Recovery 拒绝开始传输');
+            }
+            return startedStatus;
+        };
+        const blocks = Math.ceil(pkg.firmware.length / 16);
+        let status = resume ? await discovery.step('读取升级状态', () => readStatus(characteristic)) : await beginTransfer();
+        if (resume && status[0] === STATUS_COMPLETE) {
+            if (device.gatt.connected) device.gatt.disconnect();
+            return;
+        }
+        if (resume && (status[0] !== STATUS_RECEIVING ||
+            acknowledgedIndex(status) > blocks)) {
+            status = await beginTransfer();
+        }
+        const fastBlocks = fastBlockLimit(status);
+        const started = performance.now();
+        // Web Bluetooth also dispatches characteristicvaluechanged for readValue().
+        // Observe the initial/BEGIN state before subscribing so its old IDLE or
+        // BEGIN snapshot cannot be consumed as a later data acknowledgement.
+        try {
+            if (useNotifications) {
+                characteristic.addEventListener('characteristicvaluechanged', onStatus);
+                await discovery.step('开启升级通知', () => characteristic.startNotifications());
+            }
+            for (let index = acknowledgedIndex(status); index < blocks;) {
+                // Web Bluetooth/WinRT may drop the second queued no-response
+                // write, even on a fresh transfer. Wait for each indexed packet
+                // to commit; keep large packets and sector boundaries unchanged.
+                const packetRanges = fastPacketWindow(
+                    index, blocks, fastBlocks, 1,
+                );
+                for (const [packetStart, packetEnd] of packetRanges) {
+                    const payload = new Uint8Array((packetEnd - packetStart) * 16).fill(0xff);
+                    payload.set(pkg.firmware.subarray(
+                        packetStart * 16,
+                        Math.min(packetEnd * 16, pkg.firmware.length),
+                    ));
+                    const packet = dataPacket(packetStart, payload);
+                    if (useWriteResponse && packetRequiresDeliveryAck(packetStart)) {
+                        await writeWithResponse(characteristic, packet);
+                    } else {
+                        await writeWithoutResponse(characteristic, packet);
+                    }
+                }
+                const batchEnd = packetRanges[packetRanges.length - 1][1];
+                const opensSector = packetRanges[0][0] % FLASH_SECTOR_BLOCKS === 0;
+                // A notification carries the exact committed index, including
+                // sector erase completion. Only read polling needs the fixed
+                // erase allowance after actual controller delivery.
+                if (opensSector && !useNotifications) await delay(300);
+                const deadline = performance.now() + 3000;
+                for (;;) {
+                    if (useNotifications) {
+                        status = await nextNotification(Math.max(0, deadline - performance.now()));
+                        if (!status) {
+                            useNotifications = false;
+                            detachNotifications();
+                            if (opensSector) await delay(300);
+                            status = await readStatus(characteristic);
+                        }
+                    } else status = await readStatus(characteristic);
+                    if (status[0] !== STATUS_RECEIVING) {
+                        throw new Error(`TLSR8359 Recovery 在数据块 ${index}..${batchEnd - 1} 拒绝传输（${hex(status)}）`);
+                    }
+                    const acknowledged = acknowledgedIndex(status);
+                    if (acknowledged === batchEnd) break;
+                    if (acknowledged > batchEnd) {
+                        throw new Error(`TLSR8359 Recovery 返回超前确认 ${acknowledged}，当前数据块结束于 ${batchEnd}（${hex(status)}）`);
+                    }
+                    if (performance.now() >= deadline) {
+                        throw new Error(`TLSR8359 Recovery 未确认数据块 ${index}..${batchEnd - 1}（${hex(status)}）`);
+                    }
+                    if (!useNotifications) await delay(5);
+                }
+                if (index === 0 || batchEnd % 64 === 0 || batchEnd === blocks) {
+                    onProgress(Math.min(batchEnd * 16, pkg.firmware.length), pkg.firmware.length, started);
+                }
+                index = batchEnd;
+            }
+            // The remaining phases use explicit reads, not queued notifications.
+            detachNotifications();
+            await delay(50);
+            status = await readStatus(characteristic);
+            if (status[0] !== STATUS_RECEIVING || acknowledgedIndex(status) !== blocks) {
+                throw new Error('TLSR8359 Recovery 在结束前拒绝传输');
+            }
+            const end = new Uint8Array(6);
+            const endView = new DataView(end.buffer);
+            const maximum = blocks - 1;
+            end.set([0x02, 0xff]);
+            endView.setUint16(2, maximum, true);
+            endView.setUint16(4, maximum ^ 0xffff, true);
+            if (useWriteResponse) await writeWithResponse(characteristic, end);
+            else await writeWithoutResponse(characteristic, end);
+            // Recovery hashes committed Flash in cooperative 64-byte slices, then
+            // performs one P-256 verification. RECEIVING remains the truthful
+            // status until both checks finish.
+            const validationDeadline = performance.now() + 10000;
+            for (;;) {
+                await delay(50);
+                status = await readStatus(characteristic);
+                if (status[0] === STATUS_COMPLETE) break;
+                if (status[0] !== STATUS_RECEIVING) {
+                    throw new Error(`TLSR8359 Recovery 拒绝固件，状态 ${hex(status)}`);
+                }
+                if (performance.now() >= validationDeadline) {
+                    throw new Error('TLSR8359 Recovery 固件验证超时');
+                }
+            }
+            if (device.gatt.connected) device.gatt.disconnect();
+        } finally {
+            detachNotifications();
+        }
+        } finally {
+            discovery.finish();
+        }
+    }
+
+    async function transferDevice(device, pkg, onProgress, options = {}) {
+        for (let attempt = 1; attempt <= 8; attempt++) {
+            try {
+                return await transferDeviceOnce(
+                    device, pkg, onProgress, true, options,
+                );
+            } catch (error) {
+                if (attempt === 8 || !isTransientGattError(error)) throw error;
+                if (device.gatt.connected) device.gatt.disconnect();
+                await delay(1000);
+            }
+        }
+    }
+
+    global.TelinkOta = {
+        validateRecoveryContext, checkRecoveryCompatibility,
+        queryRecovery, resumeApplication,
+        parsePackage, transferDevice, crc16, crc32, dataPacket,
+        fastBlockLimit, fastPacketEnd, fastPacketWindow, packetRequiresDeliveryAck,
+        characteristicSupportsWriteResponse,
+        isTransientGattError, acknowledgedIndex, cancelRecoveryDiscovery,
+    };
+})(window);

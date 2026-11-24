@@ -8,6 +8,7 @@ import secrets
 
 
 from .generated_release_v1 import FIND_PUBLIC_VERSION
+from .generated_commands_v2 import FindActionV2
 
 # Host identity-library derivation identifier, not a BLE/config format field.
 # Keep installed owner material and the existing cryptographic domain intact.
@@ -18,6 +19,7 @@ ORDER = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFF16A2E0B8F03E13DD29455C5C2A3D
 LABEL = b"InkTag/Find/public-only/v2"
 REPLACEMENT_LABEL = b"InkTag/Find/public-only/replace/v1\x00"
 REPLACEMENT_STAGE_BYTES = 113
+UNREGISTER_LABEL = b"InkTag/Find/public-only/unregister/v1"
 
 
 def _coefficient(key: bytes, slot: int, retry: int, role: bytes) -> int:
@@ -83,4 +85,14 @@ def replacement_stage(
     tag = hmac.digest(
         old_key, REPLACEMENT_LABEL + activation_id + payload, "sha256"
     )[:16]
+    return payload + tag
+
+
+def unregister_request(key: bytes, device_id: bytes, nonce: bytes, fingerprint: bytes) -> bytes:
+    if (len(key), len(device_id), len(nonce), len(fingerprint)) != (16, 8, 8, 16) or not all(
+        any(field) for field in (key, device_id, nonce, fingerprint)
+    ):
+        raise ValueError("invalid Find owner unregister fields")
+    payload = bytes((FindActionV2.UNREGISTER_OWNER,)) + nonce + fingerprint
+    tag = hmac.digest(key, UNREGISTER_LABEL + device_id + payload, "sha256")[:16]
     return payload + tag

@@ -1,0 +1,33 @@
+# PCB label corrected by the owner on 2026-10-23; filename is only a path slug.
+# The tool derives the native single-backend ID and product; not a numeric ID.
+format_version = 1
+board_marking = "PriceETag V1.7"
+[screen]
+ic = "SSD1675"
+recipe = 0
+color = "BW"
+rotation = 0
+mirror_x = false
+mirror_y = false
+native_ui_scale = 0
+width = 152
+height = 152
+visible_x = 0
+visible_y = 0
+visible_width = 152
+visible_height = 152
+[gpio.display]
+mosi = "P0.08"
+clock = "P0.09"
+cs = "P0.10"
+dc = "P0.11"
+reset = "P0.12"
+busy = "P0.13"
+enable = "NONE"
+# Controller/recipe owns CS/RESET/BUSY. Only fitted EN/LED polarity is editable.
+active_low = []
+[gpio.led]
+red = "NONE"
+green = "NONE"
+blue = "NONE"
+active_low = []

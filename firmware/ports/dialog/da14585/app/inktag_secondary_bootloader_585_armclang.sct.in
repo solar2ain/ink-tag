@@ -1,0 +1,40 @@
+#! armclang -E --target=arm-arm-none-eabi -mcpu=cortex-m0 -xc
+
+; InkTag DA14585 secondary-boot layout.
+;
+; The SDK6 default puts ER_2 at 0x07FD54C8. An application larger than
+; 0x154C8 bytes then overwrites the loader while FlashRead is still returning.
+; InkTag disables the unused UART downloader and SPI DMA in this loader and
+; places its bounded high-RAM body after the supported 0x17600-byte application.
+; A table-free CRC32 removes the SDK lookup table, allowing the loader body to
+; move up by 0xA00 bytes while retaining more than twice its measured stack.
+
+LR_PRE_ECC_PATCH 0x07FC0000 0xC0 {
+    ER_PRE_ECC_PATCH 0x07FC0000 0xC0 {
+        *.o (RESET, +FIRST)
+    }
+}
+
+LR_ECC_PATCH 0x07FC00C0 0x08 {
+    ER_ECC_PATCH 0x07FC00C0 EMPTY 0x08 {
+    }
+}
+
+; 0x07FC00C8 + 0x17538 = 0x07FD7600.
+LR_1 0x07FC00C8 0x17538 {
+    ER_1 +0 0x300 {
+        *(InRoot$$Sections)
+        *(startup_code_DA14xxx)
+        *(system_DA14xxx)
+    }
+
+    ; The accepted application ends exactly at ER_2. ER_2 has 0x800 bytes and
+    ; must end before the 0x200-byte loader stack. The build gate verifies
+    ; both the region and at least 128 bytes of static stack headroom.
+    ER_2 0x07FD7600 0x800 {
+        .ANY(+RO)
+        .ANY(+RW, +ZI)
+    }
+
+    ARM_LIB_STACK 0x07FD8000 EMPTY -0x200 {}
+}

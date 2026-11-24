@@ -100,7 +100,7 @@ def _text(draw: ImageDraw.ImageDraw, xy: tuple[int, int], text: str, font: Image
 
 
 def render_agent_quota(data: dict[str, Any], width: int, height: int) -> Image.Image:
-    """Render at the device's native pixels; the bottom-right Free mark is device-owned."""
+    """Render at the device's native pixels; the bottom-right base mark is device-owned."""
     if not 96 <= width <= 4096 or not 80 <= height <= 4096:
         raise ValueError("template canvas must be between 96x80 and 4096x4096")
     values = validate_agent_quota(data)

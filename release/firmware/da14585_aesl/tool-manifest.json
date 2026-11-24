@@ -1,0 +1,112 @@
+{
+  "format": "DA-programmer-tools-v1",
+  "kind": "tools-only",
+  "buildTarget": "da14585_aesl",
+  "toolsVersion": "0.2.0.19",
+  "source": "364bcfcfa7634f9980868e897f20c31247c1d500",
+  "firmwareIncluded": false,
+  "fullHelperBundled": false,
+  "physicalWriterQualified": false,
+  "files": {
+    "LICENSE": {
+      "bytes": 34523,
+      "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0"
+    },
+    "README.md": {
+      "bytes": 342,
+      "sha256": "5e89a3699b4e37ca19fb4e7b814f6935c6622d0add7cdb6babd2bbbd5bc32acc"
+    },
+    "tools/hardware/da14585-board-config.py": {
+      "bytes": 8286,
+      "sha256": "de2444d92ba74e328614db2f35a3f323e8668bb4e10af610753d346e39dc80b3"
+    },
+    "tools/hardware/da14585-clean-bin.py": {
+      "bytes": 16716,
+      "sha256": "d33bbf988b51492cf86a4fd00dfb18629e68f5aa8410770e9d14bf30bd8f50e7"
+    },
+    "tools/hardware/da14585-commander-backend.py": {
+      "bytes": 22303,
+      "sha256": "8c77d72d3b792802d172c024db5054bf5c5e0a432a74791fb538d022eaebab84"
+    },
+    "tools/hardware/da14585-commander-readback.py": {
+      "bytes": 7012,
+      "sha256": "b3eba06204d33fc3390b0f4c17641859bf4847fa15a8e15ba59623c6bccb4044"
+    },
+    "tools/hardware/da14585-commander-session.py": {
+      "bytes": 14465,
+      "sha256": "f2abd9a5969aef0a8252f6ba9538f2a3e7aad1e7552ce1937805f697fa80c1ca"
+    },
+    "tools/hardware/da14585-conpty.py": {
+      "bytes": 7528,
+      "sha256": "198f96e89b76c69727361074ca5528081bed7b94a119ad9ef724915ab81f4582"
+    },
+    "tools/hardware/da14585-dap-session.py": {
+      "bytes": 1360,
+      "sha256": "3c96a761be4eb76ac8d157c97986bb9efbc9f170d2e17486e0fcc735e19b22a7"
+    },
+    "tools/hardware/da14585-full-backend.py": {
+      "bytes": 35923,
+      "sha256": "f0062cc2803b492284f363b47de8858b7957860e7024bbe64d66119f1d9d1517"
+    },
+    "tools/hardware/da14585-full-state.py": {
+      "bytes": 9246,
+      "sha256": "e7a33fb25f652c87a12a326a2db58c0df3c0a40cc5b20b52978b74b0668c4660"
+    },
+    "tools/hardware/da14585-full-transaction.py": {
+      "bytes": 42514,
+      "sha256": "5b8a0891211e83f743cffe725a7536918286e3c8fafaa18d2e6cdc056ba9c169"
+    },
+    "tools/hardware/da14585-image-verify.py": {
+      "bytes": 13905,
+      "sha256": "c2e50ddde6d59272e0a207f153c0250230e8200b3c3fd88845ea48b8ee15400a"
+    },
+    "tools/programmer/README.md": {
+      "bytes": 7435,
+      "sha256": "396e828d62d8c2fb773b834cb07c34d29f8876c02816533192863e1e1d2c36a4"
+    },
+    "tools/programmer/configs/asel29.toml": {
+      "bytes": 597,
+      "sha256": "fcece5b344980e62384a69fe631361d6c4ee5fb79eab1ea2d86513d6b06e3b8e"
+    },
+    "tools/programmer/configs/asel42-ssd1683.toml": {
+      "bytes": 593,
+      "sha256": "3fe3af291b6577fe743a5a9d40001d035181a01721815f919c14710af831a6f0"
+    },
+    "tools/programmer/configs/asel42.toml": {
+      "bytes": 595,
+      "sha256": "d3876be4badf98565c7cfd1188b3e351db8c2ea00083febd644068ae3030616d"
+    },
+    "tools/programmer/flash-bin.bat": {
+      "bytes": 116,
+      "sha256": "b9a36779dfd21569f1cb93222044aca6c76164dba235ea0e538302bed2850c1c"
+    },
+    "tools/programmer/flash-launch.bat": {
+      "bytes": 649,
+      "sha256": "a67e97e3317d7246223c0785fd4d861eb19b1779bd8a0aa62d4748020374a884"
+    },
+    "tools/programmer/flash-zh.bat": {
+      "bytes": 273,
+      "sha256": "ca98c402b592bb246006ae9dc030af2f32ca1a029efdd3a757a541f548ef3157"
+    },
+    "tools/programmer/flash.bat": {
+      "bytes": 266,
+      "sha256": "49ea6c9c9abd13fee0d6baa13f5edb540e0d22b3381cf444a4122e75c6587158"
+    },
+    "tools/programmer/generate-bin.bat": {
+      "bytes": 115,
+      "sha256": "6d226693f791d5f413ffc2a1c206c57963207e3b8a65cd8e192bac05cb606056"
+    },
+    "tools/programmer/vendor-dependencies.json": {
+      "bytes": 1735,
+      "sha256": "97077f346be087c8e32546f806bd5fa005241891ad6fec90b4b8c71b9b3f390b"
+    }
+  },
+  "baseToolsVersion": "0.2.0.18",
+  "baseToolManifestSha256": "0120c34fac0f51b9fb60fb3836cb432440dff40ea485bfe7655250d3de121c1d",
+  "sourcePatches": [
+    {
+      "commit": "b9167f6ebf4531541d1033d718a21a142522ad74",
+      "path": "tools/hardware/da14585-image-verify.py"
+    }
+  ]
+}

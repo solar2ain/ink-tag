@@ -9,3 +9,7 @@ Targets: `gr5331_zkel`, `gr551x_zkel`, `gr551x_zkel_internal`, `om6626_zkel`, `t
 The repository includes collected firmware. GitHub Releases carries attachments with identical bytes. Check `manifest.json` for board identity, size and SHA256. A directory does not imply support for every board using that controller.
 
 Each target's bilingual README lists products, PCB markings, configurations and complete one-line flashing commands. See [complete flashing](../docs/en/flash.md) for the shared directory layout. Tools still require an explicit `-Firmware` argument and are not tied to a particular firmware version.
+
+## Source layout
+
+Board definitions live in `firmware/boards/`, shared firmware in `firmware/common/`, and MCU ports in `firmware/ports/`. The nRF52811 and DA14585 ports each have a `BUILDING.md` and keep their resource adaptations and native build helpers in `compat/` and `build-support/`. The main repository guides cover installation and use. [Firmware build guide](../docs/build-firmware.en.md)

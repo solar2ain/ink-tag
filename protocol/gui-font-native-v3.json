@@ -1,0 +1,44 @@
+{
+  "schema": "inktag-gui-native-font-contract-v3",
+  "status": "protocol-frozen-gr5331-pilot-reviewed-other-ports-qualification-pending",
+  "pilot": "GR551x-v6/GR5331-v4",
+  "legacy": "Historical user-font compatibility retired by user instruction on2026-10-15. Only ITFA3 and exact INFO tuple8/2/3 are supported. Embedded defaults remain in App; old adapter entrypoints are no-read rejection stubs, not loaders.",
+  "regionBytes": 32768,
+  "package": {
+    "schema": 3,
+    "headerBytes": 24,
+    "entryBytes": 16,
+    "faceIds": [[0, 1, 2, 3], [0, 1, 2, 3, 4, 5]],
+    "format": "All faces use existing U8g2 format1 including RLE and one-byte glyph record length",
+    "roles": ["small mixed text", "large mixed text", "small ordinary digits", "large ordinary digits", "optional small clock/calendar digits", "optional large clock/calendar digits"],
+    "ordering": "Small and large are semantic roles; no fixed pixel sizes or small-less-than-large condition",
+    "metrics": "Body glyph positions, dimensions and advances come from the source. Header bbox encloses all glyphs; ascent/paragraph ascent are bbox top and descents are bbox bottom. Signed U8g2 metrics and bounded records remain enforced.",
+    "largeDigits": "Exactly 0123456789:. Each glyph has x=y=0, full common height, width=advance. Digits share header width; colon width is positive and no greater. Header bbox origin zero. Whitespace is part of the fixed cell.",
+    "safety": "Complete sorted contiguous directory; package and face CRC; zero flags; explicit capacity and read bounds; valid lookup/RLE termination; no Flash format or partition change. Old transfer APIs reject before reads; native validation rejects schema1/2 at the header. ITDG and old container decoders are removed."
+  },
+  "info": {
+    "version": 3,
+    "bytes": 24,
+    "supportedSchemas": 8,
+    "roleVersion": 2,
+    "flags": 3,
+    "flagsMeaning": "bit0 fixed-region metrics; bit1 native-size U8g2 roles",
+    "compatibility": "Exact tuple8/2/3 and schema3 only. Clients reject20-byte INFO, tuple6/1/1, tuple14/2/3, old packages and unknown tuples before any transfer. Embedded status remains schema/gen/size/crc zero and bankFF. No legacy migration, erase or rewrite."
+  },
+  "render": {
+    "optIn": "INKTAG_GUI_NATIVE_FONT_ASSETS plus all existing role/atomic/read-failure options. Role-font builds require the native option. Rendering admits only embedded schema0 or user schema3. No legacy ITDG header decode, pixel scaler or raw bitmap user-font drawing exists.",
+    "nativeScaleQ8": 256,
+    "largeSelection": "Choose the tallest native role that fits the existing reserved field; never upscale/downscale. If neither fits, fail before output.",
+    "body": "No reference-cell refitting or firmware scaling. Inline admission and baseline placement use the glyph advances and bitmap extents actually present in the run, including bearings and descenders, not the mixed face maximum height. A fixed baseline hint is used only if the complete run fits unchanged. Real overflow still fails the frame.",
+    "compactRows": "Native lunar text may use the existing 18px footer's 16px inner band; the footer and surrounding regions do not grow. Intentional calendar-unit spacing remains unchanged and participates in width admission.",
+    "legacy": "Built-in rendering remains in App. Historical user packages are rejected and never converted or rewritten on boot.",
+    "lifecycle": "Freeze complete package for measure/draw/all pages; retain read-failure latch, abort/cleanup, font mutation busy refusal and existing security gates"
+  },
+  "host": {
+    "configVersion": 2,
+    "body": "Local font smallSize/largeSize are build-time selections, not device constants. Native U8g2 inputs already contain metrics.",
+    "digits": "Rasterize final-size fixed cells and choose U8g2 run widths on the host. Reject fonts that cannot fit existing bounded record format; never drop strokes to force compression.",
+    "oldReadabilityRepair": "Keep grayscale until weighted final-cell coverage, threshold last; legacy binary inputs also use area coverage. No device decoder change."
+  },
+  "qualification": "GR5331 final SDK and exact-device pilot reviewed against fixed owner8b55ea12/common ecf59ee3; prior g13 human optical acceptance and final g14 same-face normal OTA/readback/display results are distinct. TLSR/OM may adapt this frozen contract under the human-directed sequence, with their own size and exact-board gates. GR551x has build evidence only for this batch; power/power-cut and release acceptance remain separate. No new device authority."
+}

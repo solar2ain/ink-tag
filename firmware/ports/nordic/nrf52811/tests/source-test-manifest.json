@@ -1,0 +1,1033 @@
+{
+  "schemaVersion": 1,
+  "python": [
+    "tests/test_nrf_hourly_checkpoint.py",
+    "tests/test_nrf_epd_read_command.py",
+    "tests/test_nrf_common_backports.py",
+    "tests/test_nrf_auto_refresh_continuity.py",
+    "tests/test_nrf_app_confirmation.py",
+    "tests/test_nrf_lifecycle_v2.py",
+    "tests/test_inktag_text.py",
+    "tests/test_nrf_retired_factory.py",
+    "tests/test_nrf_health_diagnostics.py",
+    "tests/test_nrf_v2_transfer.py",
+    "tests/test_nrf_compact_epd_init.py",
+    "tests/test_nrf_rgb_led.py",
+    "tests/test_nrf_boot_indicator.py",
+    "tests/test_nrf_recovery_indicator.py",
+    "tests/test_nrf_recovery_flash_queue.py",
+    "tests/test_nrf_recovery_write_failure.py",
+    "tests/test_nrf_recovery_queue_irq.py",
+    "tests/test_nrf_gui_ram_tables.py",
+    "tests/test_nrf_gui_page_budget.py",
+    "tests/test_nrf_gui_asset_loader.py",
+    "tests/test_nrf_transfer_finish.py",
+    "tests/test_nrf_display_power.py",
+    "tests/test_nrf_fixed_slot_protocol.py",
+    "tests/test_nrf_device_label.py",
+    "tests/test_nrf_app_attestation.py",
+    "tests/test_nrf_display_mode_mapping.py",
+    "tests/test_nrf_status_priority.py",
+    "tests/test_nrf_gui_asset_info.py",
+    "tests/test_nrf_status_pulses.py",
+    "tests/test_nrf_compact_formatter.py",
+    "tests/test_nrf_compact_screen_catalog.py",
+    "tests/test_nrf_retired_image_edit.py",
+    "tests/test_nrf_health_store_retry.py",
+    "tests/test_power_best_effort.py",
+    "tests/test_nrf_clock_hhmm.py",
+    "tests/test_nrf_native_v1.py",
+    "tests/test_nrf_v1_queue.py",
+    "tests/test_nrf_fixed_gpio_projection.py",
+    "tests/test_nrf_busy_cancel.py",
+    "tests/test_nrf_ssd1619_deadline.py",
+    "tests/test_nrf_ssd1683_full_deadline.py",
+    "tests/test_nrf_trimmed_layouts.py",
+    "tests/test_nrf_trimmed_screen_admission.py",
+    "tests/test_nrf_battery_icon.py",
+    "tests/test_lunar_calendar_rewrite.py",
+    "tests/test_source_boundary.py",
+    "tests/test_solar_terms.py",
+    "tests/test_nrf_dfu_crc_policy.py",
+    "tests/test_nrf_build_entries.py",
+    "tests/test_nrf_source_full_build.py",
+    "tests/test_nrf_control_capabilities.py",
+    "tests/test_nrf_empty_replies.py",
+    "tests/test_nrf_time_pages.py",
+    "tests/test_nrf_stock_input.py",
+    "tests/test_nrf_notify_admission.py",
+    "tests/test_nrf_factory_gap_name.py",
+    "tests/test_nrf_aux_reserved.py",
+    "tests/test_nrf_unknown_boot.py",
+    "tests/test_nrf_clean_defaults.py"
+  ],
+  "hostC": [
+    {
+      "id": "test_epd_commands",
+      "sources": [
+        "tests/test_epd_commands.c",
+        "compat/common/epd/inktag_epd_commands.c"
+      ],
+      "defines": [],
+      "tags": [
+        "common",
+        "epd",
+        "compact-commands"
+      ]
+    },
+    {
+      "id": "test_inktag_packbits",
+      "sources": [
+        "tests/test_inktag_packbits.c",
+        "compat/common/protocol/inktag_packbits.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/protocol"
+      ],
+      "tags": [
+        "protocol",
+        "compression",
+        "platform-contract"
+      ]
+    },
+    {
+      "id": "test_inktag_ble_identity",
+      "sources": [
+        "tests/test_inktag_ble_identity.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/ble"
+      ],
+      "tags": [
+        "ble",
+        "identity",
+        "platform-contract"
+      ]
+    },
+    {
+      "id": "test_shared_header_helpers",
+      "sources": [
+        "tests/test_shared_header_helpers.c",
+        "compat/common/ble/inktag_ble_identity.c",
+        "compat/common/platform/inktag_elapsed_clock.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/ble",
+        "-Ifirmware/common/platform"
+      ],
+      "tags": [
+        "ble",
+        "identity",
+        "time",
+        "vendor-onmicro",
+        "platform-contract"
+      ]
+    },
+    {
+      "id": "test_inktag_elapsed_clock",
+      "sources": [
+        "tests/test_inktag_elapsed_clock.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/platform"
+      ],
+      "tags": [
+        "time",
+        "platform-contract"
+      ]
+    },
+    {
+      "id": "test_inktag_monotonic_clock",
+      "sources": [
+        "tests/test_inktag_monotonic_clock.c",
+        "compat/common/time/inktag_monotonic_clock.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/time"
+      ],
+      "tags": [
+        "time",
+        "platform-contract",
+        "nordic"
+      ]
+    },
+    {
+      "id": "test_iso_week",
+      "sources": [
+        "tests/test_iso_week.c",
+        "compat/common/gui/inktag_calendar.c"
+      ],
+      "defines": [],
+      "tags": [
+        "gui-layout",
+        "time"
+      ]
+    },
+    {
+      "id": "test_epd_temperature_decode",
+      "sources": [
+        "tests/test_epd_temperature_decode.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/epd"
+      ],
+      "tags": [
+        "epd",
+        "temperature"
+      ]
+    },
+    {
+      "id": "test_epd_screen",
+      "sources": [
+        "tests/test_epd_screen.c",
+        "compat/common/epd/inktag_epd_screen.c",
+        "compat/common/epd/inktag_epd_runtime.c"
+      ],
+      "defines": [
+        "-DINKTAG_DIALOG",
+        "-Ifirmware/common/epd",
+        "-Ifirmware/common/input"
+      ],
+      "tags": [
+        "epd",
+        "screen-profile"
+      ]
+    },
+    {
+      "id": "test_jd79xxx_recipe_matrix_dialog",
+      "sources": [
+        "tests/test_jd79xxx_recipe_matrix.c",
+        "compat/common/epd/inktag_epd_jd.c",
+        "compat/common/epd/inktag_epd_commands.c"
+      ],
+      "defines": [
+        "-DINKTAG_DIALOG",
+        "-Ifirmware/common/epd",
+        "-Ifirmware/common/input"
+      ],
+      "tags": [
+        "epd",
+        "existing-jd-recipes",
+        "dialog"
+      ]
+    },
+    {
+      "id": "test_jd79xxx_recipe_matrix_sync",
+      "sources": [
+        "tests/test_jd79xxx_recipe_matrix.c",
+        "compat/common/epd/inktag_epd_jd.c",
+        "compat/common/epd/inktag_epd_commands.c"
+      ],
+      "defines": [
+        "-DINKTAG_TELINK",
+        "-Ifirmware/common/epd",
+        "-Ifirmware/common/input"
+      ],
+      "tags": [
+        "epd",
+        "existing-jd-recipes",
+        "synchronous"
+      ]
+    },
+    {
+      "id": "test_jd79668_hanshow",
+      "sources": [
+        "tests/test_jd79668_hanshow.c",
+        "compat/common/epd/inktag_epd_jd.c",
+        "compat/common/epd/inktag_epd_commands.c"
+      ],
+      "defines": [
+        "-DINKTAG_DIALOG",
+        "-Ifirmware/common/epd",
+        "-Ifirmware/common/input"
+      ],
+      "tags": [
+        "epd",
+        "panel:hanshow-nebular"
+      ]
+    },
+    {
+      "id": "test_jd79665_huawei_a1",
+      "sources": [
+        "tests/test_jd79665_huawei_a1.c",
+        "compat/common/epd/inktag_epd_jd.c",
+        "compat/common/epd/inktag_epd_commands.c"
+      ],
+      "defines": [
+        "-DINKTAG_DIALOG",
+        "-Ifirmware/common/epd",
+        "-Ifirmware/common/input"
+      ],
+      "tags": [
+        "epd",
+        "panel:huawei-a1"
+      ]
+    },
+    {
+      "id": "test_epd_screen_core",
+      "sources": [
+        "tests/test_epd_screen_core.c",
+        "compat/common/epd/inktag_epd_screen.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/epd",
+        "-DINKTAG_EPD_ENABLE_UC8159=0",
+        "-DINKTAG_EPD_ENABLE_UC8179=0",
+        "-DINKTAG_EPD_ENABLE_SSD1675=0",
+        "-DINKTAG_EPD_ENABLE_SSD1677=0",
+        "-DINKTAG_EPD_ENABLE_SSD1683=0",
+        "-DINKTAG_EPD_ENABLE_JD79XXX=0"
+      ],
+      "tags": [
+        "epd",
+        "screen-profile"
+      ]
+    },
+    {
+      "id": "test_epd_screen_nrf52811",
+      "sources": [
+        "tests/test_epd_screen_nrf52811.c",
+        "compat/common/epd/inktag_epd_screen.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/epd",
+        "-DINKTAG_EPD_ENABLE_JD79665CA=0",
+        "-DINKTAG_EPD_ENABLE_UC8151=0",
+        "-DINKTAG_EPD_ENABLE_UC8159=0"
+      ],
+      "tags": [
+        "epd",
+        "screen-profile",
+        "nordic",
+        "nrf52811",
+        "retained-catalog"
+      ]
+    },
+    {
+      "id": "test_inktag_input",
+      "sources": [
+        "tests/test_inktag_input.c",
+        "compat/common/input/inktag_input.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/input"
+      ],
+      "tags": [
+        "input"
+      ]
+    },
+    {
+      "id": "test_inktag_page_cycle",
+      "sources": [
+        "tests/test_inktag_page_cycle.c",
+        "compat/common/epd/inktag_page_cycle.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/epd",
+        "-Ifirmware/common/input"
+      ],
+      "tags": [
+        "display-state",
+        "input",
+        "image-store"
+      ]
+    },
+    {
+      "id": "test_inktag_status",
+      "sources": [
+        "tests/test_inktag_status.c",
+        "compat/common/status/inktag_status.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/status"
+      ],
+      "tags": [
+        "status",
+        "health"
+      ]
+    },
+    {
+      "id": "test_inktag_power",
+      "sources": [
+        "tests/test_inktag_power.c",
+        "compat/common/power/inktag_power.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/power"
+      ],
+      "tags": [
+        "power",
+        "health"
+      ]
+    },
+    {
+      "id": "test_inktag_soak_telemetry",
+      "sources": [
+        "tests/test_inktag_soak_telemetry.c",
+        "compat/common/health/inktag_soak_telemetry.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/health",
+        "-DINKTAG_ENABLE_SOAK_TELEMETRY=1"
+      ],
+      "tags": [
+        "ble",
+        "find",
+        "health",
+        "soak"
+      ]
+    },
+    {
+      "id": "test_inktag_settings_records",
+      "sources": [
+        "tests/test_inktag_settings_records.c",
+        "compat/common/storage/inktag_settings_records.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/storage"
+      ],
+      "tags": [
+        "storage",
+        "persistence",
+        "platform-contract"
+      ]
+    },
+    {
+      "id": "test_lifecycle_pending_scope",
+      "sources": [
+        "tests/test_lifecycle_pending_scope.c",
+        "compat/common/lifecycle/inktag_lifecycle_pending.c",
+        "compat/common/storage/inktag_settings_records.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/lifecycle"
+      ],
+      "tags": [
+        "storage",
+        "lifecycle",
+        "platform-contract"
+      ]
+    },
+    {
+      "id": "test_inktag_wall_clock",
+      "sources": [
+        "tests/test_inktag_wall_clock.c",
+        "compat/common/time/inktag_wall_clock.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/time"
+      ],
+      "tags": [
+        "time",
+        "dialog",
+        "platform-contract"
+      ]
+    },
+    {
+      "id": "test_inktag_protocol_core",
+      "sources": [
+        "tests/test_inktag_protocol_core.c",
+        "compat/common/protocol/inktag_protocol_core.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/protocol",
+        "-Ifirmware/common/epd",
+        "-DINKTAG_PROTOCOL_BASE_ONLY_TARGET=1",
+        "-DNRF52811_XXAA"
+      ],
+      "tags": [
+        "common-protocol"
+      ]
+    },
+    {
+      "id": "test_inktag_lifecycle",
+      "sources": [
+        "tests/test_inktag_lifecycle.c",
+        "compat/common/lifecycle/inktag_lifecycle.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/lifecycle",
+        "-Ifirmware/common/epd"
+      ],
+      "tags": [
+        "lifecycle"
+      ]
+    },
+    {
+      "id": "test_inktag_brand_overlay",
+      "sources": [
+        "tests/test_inktag_brand_overlay.c",
+        "compat/common/security/inktag_brand_overlay.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/security",
+        "-Ifirmware/common/epd",
+        "-DINKTAG_PROTOCOL_BASE_ONLY_TARGET=1",
+        "-DNRF52811_XXAA"
+      ],
+      "tags": [
+        "access",
+        "display",
+        "product-policy",
+        "branding"
+      ]
+    },
+    {
+      "id": "test_inktag_settings_journal",
+      "sources": [
+        "tests/test_inktag_settings_journal.c",
+        "compat/common/storage/inktag_settings_journal.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/storage"
+      ],
+      "tags": [
+        "common-storage",
+        "dialog",
+        "persistence",
+        "power"
+      ]
+    },
+    {
+      "id": "test_gui_glyph_page_edges",
+      "sources": [
+        "tests/test_gui_glyph_page_edges.c",
+        "compat/common/gui/Adafruit_GFX.c",
+        "compat/common/gui/u8g2_font.c",
+        "compat/common/gui/inktag_gui_fonts.c"
+      ],
+      "defines": [
+        "-D__HEAP_SIZE=0"
+      ],
+      "tags": [
+        "gui-layout",
+        "page-boundary"
+      ]
+    },
+    {
+      "id": "test_gui_device_info",
+      "sources": [
+        "tests/test_gui_device_info.c",
+        "compat/common/gui/Adafruit_GFX.c",
+        "compat/common/gui/u8g2_font.c",
+        "compat/common/gui/inktag_gui_fonts.c",
+        "compat/common/gui/inktag_calendar.c"
+      ],
+      "defines": [
+        "-D__HEAP_SIZE=8192",
+        "-Ifirmware/common/protocol"
+      ],
+      "tags": [
+        "gui-layout"
+      ]
+    },
+    {
+      "id": "test_gui_small_screens",
+      "sources": [
+        "tests/test_gui_small_screens.c",
+        "compat/common/gui/Adafruit_GFX.c",
+        "compat/common/gui/u8g2_font.c",
+        "compat/common/gui/inktag_gui_fonts.c",
+        "compat/common/gui/inktag_gui.c",
+        "compat/common/gui/inktag_calendar.c"
+      ],
+      "defines": [
+        "-D__HEAP_SIZE=8192",
+        "-Ifirmware/common/protocol"
+      ],
+      "tags": [
+        "gui-layout"
+      ]
+    },
+    {
+      "id": "test_inktag_display_settings",
+      "sources": [
+        "tests/test_inktag_display_settings.c",
+        "compat/common/protocol/inktag_display_settings.c",
+        "compat/common/protocol/inktag_text.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/protocol",
+        "-Ifirmware/common/epd"
+      ],
+      "tags": [
+        "protocol-contract",
+        "settings"
+      ]
+    },
+    {
+      "id": "test_inktag_sha256",
+      "sources": [
+        "tests/test_inktag_sha256.c",
+        "compat/common/security/inktag_sha256.c"
+      ],
+      "defines": [
+        "-DINKTAG_SHA256_ENABLE_STREAMING=1",
+        "-Ifirmware/common/security"
+      ],
+      "tags": [
+        "security",
+        "ota"
+      ]
+    },
+    {
+      "id": "test_gui_full_frame",
+      "sources": [
+        "tests/test_gui_full_frame.c",
+        "compat/common/gui/Adafruit_GFX.c",
+        "compat/common/gui/u8g2_font.c",
+        "compat/common/gui/inktag_gui_fonts.c",
+        "compat/common/gui/inktag_gui.c",
+        "compat/common/gui/inktag_calendar.c"
+      ],
+      "defines": [
+        "-D__HEAP_SIZE=32768",
+        "-DINKTAG_GUI_RAW_VIEWPORT=1",
+        "-Ifirmware/common/protocol"
+      ],
+      "tags": [
+        "gui-layout",
+        "golden-frame"
+      ]
+    },
+    {
+      "id": "test_inktag_ota_reject",
+      "sources": [
+        "tests/test_inktag_ota_reject.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/ota"
+      ],
+      "tags": [
+        "ota",
+        "protocol-contract"
+      ]
+    },
+    {
+      "id": "test_ota_swap",
+      "sources": [
+        "tests/test_ota_swap.c",
+        "compat/common/ota/inktag_swap.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/ota"
+      ],
+      "tags": [
+        "ota:swap"
+      ]
+    },
+    {
+      "id": "test_ota_recovery",
+      "sources": [
+        "tests/test_ota_recovery.c",
+        "compat/common/ota/inktag_recovery.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/ota"
+      ],
+      "tags": [
+        "ota:single-slot"
+      ]
+    },
+    {
+      "id": "test_nrf_physical_image_store",
+      "sources": [
+        "tests/test_nrf_physical_image_store.c",
+        "compat/nordic/src/inktag_nrf_image_store.c",
+        "compat/common/protocol/inktag_protocol_core.c"
+      ],
+      "defines": [
+        "-Itests/mocks/nrf_external",
+        "-Ifirmware/ports/nordic/common/src",
+        "-Ifirmware/common/epd",
+        "-Ifirmware/common/ble",
+        "-Ifirmware/common/power",
+        "-Ifirmware/common/protocol",
+        "-DINKTAG_NRF_IMAGE_WRITE_BLOCK_SIZE=256",
+        "-DINKTAG_NRF_IMAGE_WRITE_BLOCK_COUNT=2",
+        "-Ifirmware/common/storage",
+        "-Ifirmware/common/input",
+        "-Ifirmware/common/security",
+        "-DINKTAG_NRF_LOGICAL_IMAGE_SLOTS=0",
+        "-DINKTAG_IMAGE_PHYSICAL_TEST=1"
+      ],
+      "tags": [
+        "vendor-nordic",
+        "nrf52811",
+        "image-store",
+        "external-flash",
+        "persistence",
+        "power",
+        "production-profile"
+      ]
+    },
+    {
+      "id": "test_nrf_config_stream",
+      "sources": [
+        "tests/test_nrf_config_stream.c",
+        "compat/nordic/src/inktag_nrf_pin_epoch.c",
+        "compat/common/protocol/inktag_protocol_core.c"
+      ],
+      "defines": [
+        "-Itests/mocks/nrf_external",
+        "-Ifirmware/ports/nordic/common/src",
+        "-Ifirmware/common/storage",
+        "-Ifirmware/common/protocol",
+        "-Ifirmware/common/epd"
+      ],
+      "tags": [
+        "vendor-nordic",
+        "nrf52811",
+        "settings",
+        "external-flash",
+        "persistence",
+        "power",
+        "streaming-experiment"
+      ]
+    },
+    {
+      "id": "test_nrf_simple_image_store",
+      "sources": [
+        "tests/test_nrf_simple_image_store.c",
+        "compat/nordic/src/inktag_nrf_image_store.c",
+        "compat/common/protocol/inktag_protocol_core.c",
+        "compat/common/protocol/inktag_resource_name.c",
+        "compat/common/protocol/inktag_text.c"
+      ],
+      "defines": [
+        "-Itests/mocks/nrf_external",
+        "-Ifirmware/ports/nordic/common/src",
+        "-Ifirmware/common/epd",
+        "-Ifirmware/common/ble",
+        "-Ifirmware/common/power",
+        "-Ifirmware/common/protocol",
+        "-DINKTAG_NRF_IMAGE_WRITE_BLOCK_SIZE=256",
+        "-DINKTAG_NRF_IMAGE_WRITE_BLOCK_COUNT=2",
+        "-Ifirmware/common/storage",
+        "-Ifirmware/common/input",
+        "-Ifirmware/common/security",
+        "-DINKTAG_NRF_LOGICAL_IMAGE_SLOTS=0",
+        "-DINKTAG_IMAGE_PHYSICAL_TEST=1",
+        "-DINKTAG_NRF_SIMPLE_IMAGE_METADATA=1",
+        "-DINKTAG_RESOURCE_NAME_MAX_BYTES=35u"
+      ],
+      "tags": [
+        "vendor-nordic",
+        "nrf52811",
+        "image-store",
+        "external-flash",
+        "persistence",
+        "power",
+        "production-profile",
+        "minimal-image-pilot"
+      ]
+    },
+    {
+      "id": "test_nrf_fixed_image_store",
+      "sources": [
+        "tests/test_nrf_fixed_image_store.c",
+        "compat/nordic/src/inktag_nrf_image_fixed.c",
+        "compat/common/protocol/inktag_protocol_core.c",
+        "compat/common/protocol/inktag_resource_name.c",
+        "compat/common/protocol/inktag_text.c"
+      ],
+      "defines": [
+        "-Itests/mocks/nrf_external",
+        "-Ifirmware/ports/nordic/common/src",
+        "-Ifirmware/common/epd",
+        "-Ifirmware/common/ble",
+        "-Ifirmware/common/power",
+        "-Ifirmware/common/protocol",
+        "-DINKTAG_NRF_IMAGE_WRITE_BLOCK_SIZE=256",
+        "-DINKTAG_NRF_IMAGE_WRITE_BLOCK_COUNT=2",
+        "-Ifirmware/common/storage",
+        "-Ifirmware/common/input",
+        "-Ifirmware/common/security",
+        "-DINKTAG_NRF_LOGICAL_IMAGE_SLOTS=0",
+        "-DINKTAG_IMAGE_PHYSICAL_TEST=1",
+        "-DINKTAG_NRF_SIMPLE_IMAGE_METADATA=1",
+        "-DINKTAG_RESOURCE_NAME_MAX_BYTES=35u",
+        "-DINKTAG_NRF_FIXED_IMAGE_SLOTS=1"
+      ],
+      "tags": [
+        "vendor-nordic",
+        "nrf52811",
+        "image-store",
+        "external-flash",
+        "persistence",
+        "power",
+        "production-profile",
+        "fixed-image-pilot"
+      ]
+    },
+    {
+      "id": "test_image_reading_orientation",
+      "sources": [
+        "tests/test_image_reading_orientation.c",
+        "compat/common/security/inktag_brand_overlay.c",
+        "compat/common/protocol/inktag_protocol_core.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/security",
+        "-Ifirmware/common/epd",
+        "-Ifirmware/common/protocol",
+        "-DINKTAG_PROTOCOL_BASE_ONLY_TARGET=1",
+        "-DNRF52811_XXAA"
+      ],
+      "tags": [
+        "display",
+        "branding",
+        "protocol",
+        "orientation"
+      ]
+    },
+    {
+      "id": "test_gui_base_target",
+      "sources": [
+        "tests/test_gui_base_target.c",
+        "compat/common/gui/Adafruit_GFX.c",
+        "compat/common/gui/u8g2_font.c",
+        "compat/common/gui/inktag_gui_fonts.c",
+        "compat/common/gui/inktag_calendar.c"
+      ],
+      "defines": [
+        "-D__HEAP_SIZE=8192",
+        "-Ifirmware/common/protocol",
+        "-DNRF52811_XXAA"
+      ],
+      "tags": [
+        "gui-layout",
+        "base-only"
+      ]
+    },
+    {
+      "id": "test_image_reading_orientation_base",
+      "sources": [
+        "tests/test_image_reading_orientation.c",
+        "compat/common/security/inktag_brand_overlay.c",
+        "compat/common/protocol/inktag_protocol_core.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/security",
+        "-Ifirmware/common/epd",
+        "-Ifirmware/common/protocol",
+        "-DNRF52811_XXAA",
+        "-DINKTAG_PROTOCOL_BASE_ONLY_TARGET=1"
+      ],
+      "tags": [
+        "display",
+        "branding",
+        "protocol",
+        "orientation"
+      ]
+    },
+    {
+      "id": "test_pin_config",
+      "sources": [
+        "tests/test_pin_config.c",
+        "compat/common/protocol/inktag_pin_config.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/protocol"
+      ],
+      "tags": [
+        "pins",
+        "shared-codec"
+      ]
+    },
+    {
+      "id": "test_nrf_ssd_supported",
+      "sources": [
+        "tests/test_nrf_ssd_supported.c",
+        "compat/common/epd/inktag_epd_ssd.c",
+        "compat/common/epd/inktag_epd_commands.c"
+      ],
+      "defines": [
+        "-DINKTAG_DIALOG",
+        "-DINKTAG_EXCLUDE_SSD1675_154=1",
+        "-DINKTAG_EPD_ENABLE_SSD1675=0",
+        "-DINKTAG_EPD_ENABLE_SSD1677=1",
+        "-DINKTAG_EPD_ENABLE_SSD1677_GRAY4=0",
+        "-Ifirmware/common/epd",
+        "-Ifirmware/common/input"
+      ],
+      "tags": [
+        "nrf52811",
+        "supported-ssd-traces"
+      ]
+    },
+    {
+      "id": "test_gui_calendar_metrics",
+      "sources": [
+        "tests/test_gui_calendar_metrics.c",
+        "compat/common/gui/Adafruit_GFX.c",
+        "compat/common/gui/u8g2_font.c",
+        "compat/common/gui/inktag_gui_fonts.c",
+        "compat/common/gui/inktag_calendar.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/protocol",
+        "-Ifirmware/common/epd",
+        "-Wl,--wrap=u8g2_DrawGlyph"
+      ],
+      "tags": [
+        "gui-layout",
+        "calendar-metrics",
+        "native-abi"
+      ]
+    },
+    {
+      "id": "test_gui_calendar_metrics_packed",
+      "sources": [
+        "tests/test_gui_calendar_metrics.c",
+        "compat/common/gui/Adafruit_GFX.c",
+        "compat/common/gui/u8g2_font.c",
+        "compat/common/gui/inktag_gui_fonts.c",
+        "compat/common/gui/inktag_calendar.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/protocol",
+        "-Ifirmware/common/epd",
+        "-Wl,--wrap=u8g2_DrawGlyph",
+        "-fshort-enums",
+        "-fpack-struct=1"
+      ],
+      "tags": [
+        "gui-layout",
+        "calendar-metrics",
+        "packed-abi"
+      ]
+    },
+    {
+      "id": "test_gui_compact_arithmetic",
+      "sources": [
+        "tests/test_gui_compact_arithmetic.c",
+        "compat/common/gui/Adafruit_GFX.c",
+        "compat/common/gui/u8g2_font.c",
+        "compat/common/gui/inktag_gui_fonts.c",
+        "compat/common/gui/inktag_calendar.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/protocol",
+        "-Ifirmware/common/epd"
+      ],
+      "tags": [
+        "gui-layout",
+        "advance-arithmetic",
+        "signed-pixel-edges"
+      ]
+    },
+    {
+      "id": "test_gui_canvas_init",
+      "sources": [
+        "tests/test_gui_canvas_init.c",
+        "compat/common/gui/Adafruit_GFX.c",
+        "compat/common/gui/u8g2_font.c",
+        "compat/common/gui/inktag_gui_fonts.c",
+        "compat/common/gui/inktag_calendar.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/protocol",
+        "-Ifirmware/common/epd",
+        "-Dmalloc=gui_test_malloc"
+      ],
+      "tags": [
+        "gui-layout",
+        "canvas-init",
+        "failure-state"
+      ]
+    },
+    {
+      "id": "test_gui_canvas_init_packed",
+      "sources": [
+        "tests/test_gui_canvas_init.c",
+        "compat/common/gui/Adafruit_GFX.c",
+        "compat/common/gui/u8g2_font.c",
+        "compat/common/gui/inktag_gui_fonts.c",
+        "compat/common/gui/inktag_calendar.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/protocol",
+        "-Ifirmware/common/epd",
+        "-Dmalloc=gui_test_malloc",
+        "-fshort-enums",
+        "-fpack-struct=1"
+      ],
+      "tags": [
+        "gui-layout",
+        "canvas-init",
+        "failure-state"
+      ]
+    },
+    {
+      "id": "test_gui_canvas_init_static",
+      "sources": [
+        "tests/test_gui_canvas_init.c",
+        "compat/common/gui/Adafruit_GFX.c",
+        "compat/common/gui/u8g2_font.c",
+        "compat/common/gui/inktag_gui_fonts.c",
+        "compat/common/gui/inktag_calendar.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/protocol",
+        "-Ifirmware/common/epd",
+        "-Dmalloc=gui_test_malloc",
+        "-DINKTAG_GUI_STATIC_BUFFER_ONLY=1"
+      ],
+      "tags": [
+        "gui-layout",
+        "canvas-init",
+        "failure-state"
+      ]
+    },
+    {
+      "id": "test_gui_canvas_init_static_packed",
+      "sources": [
+        "tests/test_gui_canvas_init.c",
+        "compat/common/gui/Adafruit_GFX.c",
+        "compat/common/gui/u8g2_font.c",
+        "compat/common/gui/inktag_gui_fonts.c",
+        "compat/common/gui/inktag_calendar.c"
+      ],
+      "defines": [
+        "-Ifirmware/common/protocol",
+        "-Ifirmware/common/epd",
+        "-Dmalloc=gui_test_malloc",
+        "-DINKTAG_GUI_STATIC_BUFFER_ONLY=1",
+        "-fshort-enums",
+        "-fpack-struct=1"
+      ],
+      "tags": [
+        "gui-layout",
+        "canvas-init",
+        "failure-state"
+      ]
+    },
+    {
+      "id": "test_rectangular_screens",
+      "sources": [
+        "tests/test_rectangular_screens.c",
+        "compat/common/epd/inktag_epd_screen.c",
+        "compat/common/gui/Adafruit_GFX.c",
+        "compat/common/gui/u8g2_font.c",
+        "compat/common/gui/inktag_gui_fonts.c",
+        "compat/common/gui/inktag_calendar.c"
+      ],
+      "defines": [
+        "-D__HEAP_SIZE=0",
+        "-DINKTAG_GUI_STATIC_BUFFER_ONLY",
+        "-Ifirmware/common/epd",
+        "-Ifirmware/common/protocol",
+        "-DINKTAG_GUI_RAW_VIEWPORT"
+      ],
+      "tags": [
+        "gui-layout",
+        "screen-admission",
+        "base-target"
+      ]
+    }
+  ],
+  "windowsPython": [
+    "tests/test_nrf_native_initialization.py"
+  ]
+}
