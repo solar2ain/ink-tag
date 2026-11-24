@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../index.html">InkTag WebUI</a></nav><main><h1 id="给墨水屏选字体">给墨水屏选字体</h1>
+<p><a target="_blank" rel="noopener noreferrer" href="creation-fonts.en.html">English</a></p>
+<p>打开 WebUI 的 <strong>创作</strong>，新建静态页面或打开一个静态模板。选中文字控件后，在文字工具栏换字体或字号，也可以只给选中的一段换样式。列表和表格的整体字体在 <strong>外观 → 字体</strong> 中设置。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字体</th>
+<th>建议字号</th>
+<th>适合用在</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="noopener noreferrer" href="https://github.com/Astro-2539/ZLabs-Pixel-12px">Z 工坊像素黑体 CN</a></td>
+<td>12 px，11×12 点阵设计</td>
+<td>大屏默认字体，例如 400×300。适合正文、课表和待办。采用大陆字形，作者公布支持 12,994 个汉字。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener noreferrer" href="https://github.com/TakWolf/fusion-pixel-font">缝合像素字体</a></td>
+<td>原生 8、10、12 px</td>
+<td>小屏默认使用简体中文比例版的 10 px 字形。8 px 适合超短标签，10 px 适合 212×104 的课表和 296×152 六行日历的农历小字，12 px 适合 400×300 的正文和日历小字。<a target="_blank" rel="noopener noreferrer" href="https://github.com/TakWolf/fusion-pixel-font/blob/master/LICENSE-OFL">SIL OFL 1.1</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener noreferrer" href="https://github.com/DWNfonts/MuzaiPixel">目哉像素</a></td>
+<td>8×12 px，原宽版</td>
+<td>窄屏列表和中英文混排。常见汉字占 8 px。已核对 GB2312 的 6,763 个汉字均有字形。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener noreferrer" href="https://github.com/Warren2060/ChillBitmap">寒蝉点阵体</a></td>
+<td>7 px 字形，8 px 字格</td>
+<td>简短的状态或菜单。复杂汉字建议上屏确认，读不清时可改用 12 px 黑体。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener noreferrer" href="https://sources.debian.org/src/xfonts-wqy/1.0.0~rc1-8/">文泉驿点阵宋体</a></td>
+<td>原生 12、13、14、15、16 px</td>
+<td>喜欢原机宋体风格时可以从 12 或 13 px 试起。</td>
+</tr>
+<tr>
+<td>马善政书法、楷体</td>
+<td>建议 32 px 起</td>
+<td>标题、贺签和短句。楷体使用系统可用字体。</td>
+</tr>
+</tbody>
+</table></div>
+<p>小字先用原生字号。需要放大时，可以选 24 px 或 36 px 等整数倍，WebUI 会逐点放大。文泉驿在 12–16 px 会直接使用对应的原生字形。检查细节时，点击画板上方的 <strong>1:1</strong> 查看原始大小。在设备效果预览中，<strong>适应窗口</strong> 会根据可用宽度和高度缩放，<strong>1:1</strong> 返回原始像素，使用加减按钮可以逐档调整。如果屏幕较窄，先缩短文字或扩大文字框。</p>
+<p>创作字体列表中可选缝合、Z 工坊、目哉、寒蝉和文泉驿。这些字体用于静态画布、PNG 导出及发送的图片。设备动态页面使用设备字库。缝合和 Z 工坊可以直接在 standalone HTML 中使用。离线使用其他字体时，把下载包里的 <code>assets/</code> 和 HTML 一起解压。</p></main></body></html>

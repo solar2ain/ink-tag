@@ -3,6 +3,7 @@ from pathlib import Path
 import hashlib
 import importlib.util
 import json
+import os
 import shutil
 import sys
 from types import SimpleNamespace
@@ -32,8 +33,12 @@ def test_curated_user_content_excludes_internal_records():
     assert set(name for name in files if name.startswith('licenses/') and name!='licenses/index.html')=={'licenses/'+name for name in NOTICE_FILES}
 
 
-def test_html_guides_all_local_href_src_resolve():
-    assert not validate_html_links(ROOT/'webui')
+def test_html_guides_all_local_href_src_resolve(tmp_path):
+    for name, body in user_web_files(ROOT).items():
+        path = tmp_path / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(body)
+    assert not validate_html_links(tmp_path)
     for path in (ROOT/'webui/manual').rglob('*.html'):
         text=path.read_text('utf-8')
         assert 'href="../../cli/' not in text
@@ -59,7 +64,7 @@ def test_missing_local_manual_fragment_is_rejected(tmp_path):
 
 def test_cli_document_and_license_link_rewriting():
     repo=ROOT.resolve();target=repo/'webui/manual/cli/README.html'
-    assert rewrite_reference(repo,repo/'cli/README.md',target,'LICENSE')=='../../licenses/CLI-PolyForm-Noncommercial-1.0.0.txt'
+    assert rewrite_reference(repo,repo/'cli/README.md',target,'LICENSE')=='../../licenses/AGPL-3.0.txt'
     assert rewrite_reference(repo,repo/'README.md',repo/'webui/manual/README.html','webui/licenses/MaShanZheng-OFL.txt')=='../licenses/MaShanZheng-OFL.txt'
     assert rewrite_reference(repo,repo/'README.md',repo/'webui/manual/README.html','cli/README.md#usage')=='cli/README.html#usage'
 
@@ -184,15 +189,32 @@ def test_standalone_bundle_has_readable_notices_without_internal_inventories():
         assert not any('BUNDLED-INVENTORY' in n or 'LEGAL_REVIEW_REQUIRED' in n for n in names)
 
 
-def test_final_artifacts_manuals_are_identical():
+def test_frozen_release_artifacts_have_identical_manuals_and_exact_manifest_bytes():
     manifest=json.loads((ROOT/'firmware/manifest.json').read_text('utf-8'))
     assets=ROOT/'.release-assets'/manifest['releaseTag']
+    # A later Git documentation update must not rewrite historical attachments.
+    for key in ('web','cli'):
+        body=(assets/manifest[key]['name']).read_bytes()
+        assert len(body)==manifest[key]['bytes']
+        assert digest(body)==manifest[key]['sha256']
     with zipfile.ZipFile(assets/manifest['web']['name']) as static,zipfile.ZipFile(assets/manifest['cli']['name']) as client:
-        for name in user_web_files(ROOT):
-            if not name.startswith('manual/'):continue
-            assert static.read('webui/'+name)==client.read('InkTag-client/webui/'+name)==(ROOT/'webui'/name).read_bytes()
+        static_manuals={name.removeprefix('webui/') for name in static.namelist() if name.startswith('webui/manual/') and not name.endswith('/')}
+        client_manuals={name.removeprefix('InkTag-client/webui/') for name in client.namelist() if name.startswith('InkTag-client/webui/manual/') and not name.endswith('/')}
+        assert static_manuals and static_manuals==client_manuals
+        for name in static_manuals:
+            assert static.read('webui/'+name)==client.read('InkTag-client/webui/'+name)
         assert manifest.get('localServer') is None and manifest.get('webResources') is None
         assert not any('BUNDLED-INVENTORY' in n or 'LEGAL_REVIEW_REQUIRED' in n for n in static.namelist()+client.namelist())
+
+
+def test_current_git_manuals_match_current_user_documents():
+    for name,expected in render_documents(ROOT).items():
+        assert (ROOT/'webui'/name).read_bytes()==expected, name
+        if name.endswith('.html'):
+            home=os.path.relpath(ROOT/'webui/index.html',(ROOT/'webui'/name).parent).replace('\\','/')
+            standalone_home=home.removesuffix('index.html')+'InkTag-WebUI.html'
+            expected=expected.replace(('href="'+home+'"').encode(),('href="'+standalone_home+'"').encode())
+        assert (ROOT/'webui-standalone'/name).read_bytes()==expected, name
 
 
 @pytest.mark.parametrize('name,expected,retired',[

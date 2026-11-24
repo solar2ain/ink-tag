@@ -42,7 +42,7 @@ class UserTyper(typer.Typer):
 class UserGroup(TyperGroup):
     def list_commands(self, context):
         order = {
-            'setting': ['show','ble-name','device-name','device-url','screen','pins','button','font','password','buzzer','reset-settings','clear-user-data'],
+            'setting': ['show','ble-name','device-name','device-url','screen','pins','button','font','password','reset-settings','clear-user-data'],
         }.get(self.name, [])
         return sorted(self.commands, key=lambda name: order.index(name) if name in order else len(order))
 

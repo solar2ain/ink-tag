@@ -1,0 +1,207 @@
+{
+  "version": "0.2.2",
+  "checkout": "2154379637dc0bb491132ad9d6bb341e564a8561",
+  "firmwareInputsCommit": "e1b8682852df513988482c38710d61a53fa05a41",
+  "targets": {
+    "gr5331_zkel": {
+      "toolchain": "ARM GNU 15.2.rel1 / arm-none-eabi-gcc 15.2.1",
+      "entry": "tools/sdk/build-goodix-base.py",
+      "arguments": [
+        "--build-target",
+        "gr5331_zkel",
+        "--sdk-root",
+        "<SDK_ROOT>",
+        "--toolchain-root",
+        "<TOOLCHAIN_ROOT>",
+        "--output",
+        "<OUTPUT>",
+        "--jobs",
+        "6"
+      ],
+      "nativeOptions": {
+        "PORT": "gr5331",
+        "BOARD": "gr5331_zkc21v",
+        "SOURCE_PROFILE": "base",
+        "PANEL_DIAGNOSTIC": 0,
+        "CLOCK_PARTIAL": 0,
+        "ACTIVATION_DATAFLOW": 0,
+        "BOOT_RESULT_DATAFLOW": 0,
+        "CODE_FINGERPRINTS": 0,
+        "SDK_LITERAL_FAULT_LOG": 1
+      }
+    },
+    "gr551x_zkel": {
+      "toolchain": "ARM GNU 15.2.rel1 / arm-none-eabi-gcc 15.2.1",
+      "entry": "tools/sdk/build-goodix-base.py",
+      "arguments": [
+        "--build-target",
+        "gr551x_zkel",
+        "--sdk-root",
+        "<SDK_ROOT>",
+        "--toolchain-root",
+        "<TOOLCHAIN_ROOT>",
+        "--output",
+        "<OUTPUT>",
+        "--jobs",
+        "6"
+      ],
+      "nativeOptions": {
+        "PORT": "gr551x",
+        "BOARD": "gr551x_zkc42vm",
+        "SOURCE_PROFILE": "base",
+        "PANEL_DIAGNOSTIC": 0,
+        "CLOCK_PARTIAL": 0,
+        "ACTIVATION_DATAFLOW": 0,
+        "BOOT_RESULT_DATAFLOW": 0,
+        "CODE_FINGERPRINTS": 0,
+        "SDK_LITERAL_FAULT_LOG": 0,
+        "INTERNAL_IMAGES": 0
+      }
+    },
+    "gr551x_zkel_internal": {
+      "toolchain": "ARM GNU 15.2.rel1 / arm-none-eabi-gcc 15.2.1",
+      "entry": "tools/sdk/build-goodix-base.py",
+      "arguments": [
+        "--build-target",
+        "gr551x_zkel_internal",
+        "--sdk-root",
+        "<SDK_ROOT>",
+        "--toolchain-root",
+        "<TOOLCHAIN_ROOT>",
+        "--output",
+        "<OUTPUT>",
+        "--jobs",
+        "6"
+      ],
+      "nativeOptions": {
+        "PORT": "gr551x",
+        "BOARD": "gr551x_zkc42vm",
+        "SOURCE_PROFILE": "base",
+        "PANEL_DIAGNOSTIC": 0,
+        "CLOCK_PARTIAL": 0,
+        "ACTIVATION_DATAFLOW": 0,
+        "BOOT_RESULT_DATAFLOW": 0,
+        "CODE_FINGERPRINTS": 0,
+        "SDK_LITERAL_FAULT_LOG": 1,
+        "INTERNAL_IMAGES": 1
+      }
+    },
+    "om6626_zkel": {
+      "toolchain": "arm-none-eabi-gcc (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)",
+      "entry": "firmware/ports/onmicro/om6626/Makefile.base",
+      "variables": {
+        "BOARD": "om6626_zkc",
+        "SDK_ROOT": ".sdk/onmicro/OM6626.SDK",
+        "TOOLCHAIN_PATH": "<TOOLCHAIN_ROOT>/bin"
+      },
+      "targets": [
+        "all",
+        "ota"
+      ],
+      "jobs": 6,
+      "firmwareInputsCommit": "34024a6927c0459be0c424b00dc39ac5917886b2",
+      "firmwarePortTree": "379c3165f7cc34d655b712fe677b447a916a3670"
+    },
+    "tlsr8359_hsel": {
+      "toolchain": "tc32-elf-gcc.exe (GCC) 4.5.1-tc32-1.3",
+      "entry": "firmware/ports/telink/tlsr8359/Makefile.base",
+      "command": [
+        "mingw32-make",
+        "-j5",
+        "-f",
+        "firmware/ports/telink/tlsr8359/Makefile.base",
+        "REPO_ROOT=.",
+        "TELINK_SDK=<SDK_ROOT>",
+        "HOST_PYTHON=python",
+        "TLSR_TRUSTED_ENTRY=1",
+        "TLSR_OTA_PRODUCTION_KEY=1",
+        "INKTAG_AUX_RESERVED_ENABLED=0",
+        "TLSR_CLOCK_PARTIAL=1",
+        "TLSR_CLOCK_SSD1683=1",
+        "TLSR_CLOCK_SSD1683_PILOT=0",
+        "TLSR_IMAGE_CODEC_PROFILE=2",
+        "BUILD_DIR=.local/build/base",
+        "TLSR_NFC_FMSC_PILOT=0",
+        "BASE_PACKAGE_OUTPUT=.local/package/base",
+        "package-base"
+      ],
+      "recoveryCommand": [
+        "mingw32-make",
+        "-j5",
+        "-f",
+        "firmware/ports/telink/tlsr8359/Makefile.base",
+        "REPO_ROOT=.",
+        "TELINK_SDK=<SDK_ROOT>",
+        "HOST_PYTHON=python",
+        "TLSR_TRUSTED_ENTRY=1",
+        "TLSR_OTA_PRODUCTION_KEY=1",
+        "INKTAG_AUX_RESERVED_ENABLED=0",
+        "TLSR_CLOCK_PARTIAL=1",
+        "TLSR_CLOCK_SSD1683=1",
+        "TLSR_CLOCK_SSD1683_PILOT=0",
+        "TLSR_IMAGE_CODEC_PROFILE=2",
+        "BUILD_DIR=.local/build/recovery",
+        "TLSR_NFC_FMSC_PILOT=0",
+        "recovery-only"
+      ]
+    },
+    "nrf52832_priceetag": {
+      "command": "make -j5 --output-sync=target -f firmware/ports/nordic/nrf52832/{,bootloader/}Makefile.base INKTAG_BUILD_PRO=0 INKTAG_AUX_RESERVED_ENABLED=0",
+      "sdk": "nRF5 SDK with S132",
+      "board": "PriceETag V1.7"
+    },
+    "nrf52811_aesl": {
+      "command": [
+        "make",
+        "-f",
+        "makefile.free",
+        "full",
+        "BUILD_TARGET=nrf52811_aesl",
+        "SDK_ROOT=<SDK_ROOT>",
+        "TOOLCHAIN_ROOT=<TOOLCHAIN_ROOT>",
+        "OUTPUT=.local/nrf11-basic-rebuild-20261123/native",
+        "JOBS=10"
+      ],
+      "toolchain": "Arm GNU 15.2.Rel1",
+      "sdk": "nRF5 SDK 17.1.0",
+      "softDevice": "S112 7.3.0",
+      "dependencyFlags": "-MD -MP"
+    },
+    "da14585_aesl": {
+      "entry": "firmware/ports/dialog/da14585/build.ps1",
+      "toolchain": "Keil Arm Compiler 6.24",
+      "sdk": "DA145xx SDK 6.0.24.1464",
+      "arguments": [
+        "-Board",
+        "da14585_aesl",
+        "-SdkRoot",
+        "<SDK_ROOT>",
+        "-Output",
+        "<OUTPUT>"
+      ],
+      "nativeOptions": {
+        "application": {
+          "target": "DA14585",
+          "cpu": "IROM(0x0,0x0) IRAM(0x0,0x0) CPUTYPE(\"Cortex-M0\") CLOCK(12000000) ESEL ELITTLE",
+          "cOptimizationSetting": "7",
+          "cGlobalMiscControls": "-mthumb -c -DINKTAG_DIALOG -DINKTAG_DA_SINGLE_APP_SLOT=1 -DINKTAG_DA_APPLICATION_MEMORY_MAP=1 -DINKTAG_EPD_JD79XXX_A0_STREAM_STATE_SYMBOL=inktag_da_gui_frame_buffer -DINKTAG_EPD_JD79XXX_A0_STREAM_STATE_BYTES=2304 -DINKTAG_EPD_JD79XXX_A0_STREAM_STATE_OFFSET=2108 -DINKTAG_PROTOCOL_FREE_ONLY_TARGET=1 -DINKTAG_GUI_EXTERNAL_FONT_ASSETS=1 -DINKTAG_GUI_ASSET_READ_FAILURE_AWARE=1 -DINKTAG_GUI_STATIC_BUFFER_ONLY -DINKTAG_GUI_RAW_VIEWPORT -DINKTAG_GUI_COOPERATIVE_YIELD -DINKTAG_GUI_COOPERATIVE_YIELD_PAGE_ONLY -DINKTAG_GUI_MAX_RUNTIME_HOLIDAYS=1 -DSTACK_SIZE=0x860 -DINKTAG_EPD_ENABLE_UC8XXX=1 -DINKTAG_EPD_ENABLE_UC8151=0 -DINKTAG_EPD_ENABLE_SSD1XXX=1 -DINKTAG_EPD_ENABLE_JD79XXX=1 -DINKTAG_EPD_ENABLE_SSD1675=0 -DINKTAG_EXCLUDE_SSD1675_154=1 -DINKTAG_EPD_ENABLE_JD79665CA=0 -DINKTAG_EPD_ENABLE_SSD1677_GRAY4=0 -DINKTAG_DEVICE_INFO_QR_STORAGE_ENABLED=0 -DINKTAG_NFC_RESOURCE_ALIAS_MAX_BYTES=35 -DINKTAG_TRANSFER_PACKBITS_ENABLED=1 -DINKTAG_TRANSFER_LZO1X_ENABLED=0 -include da1458x_config_basic.h -include da1458x_config_advanced.h -include user_config.h",
+          "scatter": "inktag_da14585.sct"
+        },
+        "recovery": {
+          "target": "DA14585",
+          "cpu": "IROM(0x0,0x0) IRAM(0x0,0x0) CPUTYPE(\"Cortex-M0\") CLOCK(12000000) ESEL ELITTLE",
+          "cOptimizationSetting": "7",
+          "cGlobalMiscControls": "-mthumb -c -DINKTAG_DA_SINGLE_APP_SLOT=1 -DINKTAG_DA_FIXED_RECOVERY=1 -include da1458x_config_basic.h -include da1458x_config_advanced.h -include user_config.h",
+          "scatter": "..\\..\\..\\..\\..\\sdk\\common_project_files\\scatterfiles\\DA14585_586_armclang.sct"
+        },
+        "bootloader": {
+          "target": "DA14585",
+          "cpu": "IROM(0x00000000,0x40000) IRAM(0x20000000,0x20000) CPUTYPE(\"Cortex-M0\") CLOCK(12000000) ESEL ELITTLE",
+          "cOptimizationSetting": "7",
+          "cGlobalMiscControls": "-mthumb -c -include da1458x_config_basic.h",
+          "scatter": ".\\startup\\inktag_secondary_bootloader_585_armclang.sct"
+        }
+      }
+    }
+  }
+}

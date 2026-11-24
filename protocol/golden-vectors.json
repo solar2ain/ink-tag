@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "protocolVersion": 16,
+  "transactionId": 90,
+  "devicePasswordVectors": {
+    "qualification": "COMMON_HOST_ONLY_PENDING_TLSR_PILOT",
+    "testPassword": "Test1234",
+    "deviceIdHex": "0123456789abcdef",
+    "vHex": "8a8b4a5c756384dbde8dfebb29190605a481d1b561ee8a11650c462cf5c348d3",
+    "wHex": "f8c1346b34188df9b4eb60e8ee784faae4a58af9ea31fe775299eba0ea84b834",
+    "authChallengeHex": "010000112233445566778899aabbccddeeff07000000",
+    "authRequestHex": "01003fb33f5b1eee30cb72c64782efb4cb8a",
+    "changeCandidate": "bundle-v2,enabled=1,modules=21,qrBytes=56,nextRevision=8,V/W=above,all-zero-public-test-matrix",
+    "changeRequestHex": "01012aa7dd039911f0d2a7b003c7ccd04db54abd84f9ead1898f9896c78a45cfca38da73ae828c5953e6b91ad36f7ea6c215"
+  },
+  "ownerAuthorizationVectors": {
+    "deviceIdHex": "0123456789abcdef",
+    "nonceHex": "00112233445566778899aabbccddeeff",
+    "findKHex": "0102030405060708090a0b0c0d0e0f10",
+    "targetRequestHex": "0e2e0103",
+    "actionHashHex": "0479e61fe14663df4b27373d467ba01bbac1f1991d41baca562a64cecdafb6e3",
+    "findAuthorizePayloadHex": "01020479e61fe14663df4b27373d467ba01bbac1f1991d41baca562a64cecdafb6e3edae8e05f81ed31efca54d1b0784d082"
+  },
+  "commandHeaders": {
+    "HELLO": "015a00",
+    "GET_CAPABILITIES": "025a00",
+    "GET_DEVICE_INFO": "035a00",
+    "GET_STATUS": "045a00",
+    "GET_TIME": "055a00",
+    "SET_TIME": "065a00",
+    "GET_SCREEN_PROFILE": "075a00",
+    "SET_SCREEN_PROFILE": "085a00",
+    "SET_DISPLAY_MODE": "095a00",
+    "DISPLAY_ACTION": "0a5a00",
+    "CANCEL": "0b5a00",
+    "GET_SETTINGS": "0c5a00",
+    "SET_SETTINGS": "0d5a00",
+    "SYSTEM_ACTION": "0e5a00",
+    "GET_HEALTH": "0f5a00",
+    "TRANSFER_BEGIN": "105a00",
+    "TRANSFER_WRITE": "115a00",
+    "TRANSFER_COMMIT": "125a00",
+    "TRANSFER_ABORT": "135a00",
+    "GET_TRANSFER_STATUS": "145a00",
+    "GET_GUI_ASSET_INFO": "155a00",
+    "GET_RESOURCE_INFO": "185a00",
+    "LIST_RESOURCES": "195a00",
+    "READ_RESOURCE": "1a5a00",
+    "DELETE_RESOURCE": "1b5a00",
+    "CLEAR_RESOURCES": "1c5a00",
+    "SET_RESOURCE_ALIAS": "1d5a00",
+    "SET_IMAGE_METADATA": "1e5a00",
+    "GET_INPUT_CONFIG": "205a00",
+    "SET_INPUT_CONFIG": "215a00",
+    "GET_IO_CONFIG": "225a00",
+    "SET_IO_CONFIG": "235a00",
+    "GET_INDICATOR_CONFIG": "245a00",
+    "SET_INDICATOR_CONFIG": "255a00",
+    "GET_NFC_CAPABILITIES": "285a00",
+    "GET_NFC_STATUS": "295a00",
+    "GET_NFC_NDEF": "2a5a00",
+    "SET_NFC_NDEF": "2b5a00",
+    "GET_LAYOUT_CAPABILITIES": "305a00",
+    "VALIDATE_LAYOUT": "315a00",
+    "ACTIVATE_LAYOUT": "325a00",
+    "GET_LAYOUT_STATUS": "335a00",
+    "GET_ACTIVATION_STATUS": "405a00",
+    "SET_ACTIVATION_CODE": "415a00",
+    "GET_SECURITY_INFO": "425a00",
+    "GET_ACTIVATION_REQUEST": "435a00",
+    "GET_OWNER_CHALLENGE": "445a00",
+    "AUTHORIZE_OWNER_ACTION": "455a00",
+    "GET_DEVICE_PASSWORD_STATUS": "465a00",
+    "GET_DEVICE_PASSWORD_CHALLENGE": "475a00",
+    "AUTHORIZE_DEVICE_PASSWORD": "485a00",
+    "SHOW_PASSWORD_DEVICE_INFO": "495a00",
+    "GET_FIND_CAPABILITIES": "505a00",
+    "GET_FIND_CONFIG": "515a00",
+    "SET_FIND_CONFIG": "525a00",
+    "FIND_ACTION": "535a00",
+    "GET_FIND_OWNER_STATUS": "545a00",
+    "BEGIN_FIND_OWNER_ROTATION": "555a00",
+    "STAGE_FIND_OWNER_ROTATION": "565a00",
+    "COMMIT_FIND_OWNER_ROTATION": "575a00",
+    "ABORT_FIND_OWNER_ROTATION": "585a00",
+    "GET_ADVERTISING_CONFIG": "605a00",
+    "SET_ADVERTISING_CONFIG": "615a00",
+    "LIST_TESTS": "705a00",
+    "RUN_TEST": "715a00",
+    "GET_TEST_STATUS": "725a00",
+    "OPEN_DEBUG_SESSION": "735a00",
+    "DEBUG_EXECUTE": "745a00",
+    "DEBUG_READ": "755a00",
+    "CLOSE_DEBUG_SESSION": "765a00",
+    "ABORT_DEBUG_OPERATION": "775a00"
+  },
+  "eventHeaders": {
+    "READY": "e00000015a",
+    "PROGRESS": "e10000015a",
+    "COMPLETE": "e20000015a",
+    "STATUS_CHANGED": "e30000015a",
+    "LOG": "e40000015a",
+    "INPUT": "e50000015a",
+    "ERROR": "e60000015a",
+    "RESOURCE_CHANGED": "e70000015a",
+    "DEVICE_CHANGED": "e80000015a"
+  },
+  "packets": [
+    {
+      "name": "hello-request", "kind": "request", "opcode": "HELLO",
+      "transactionId": 42, "flags": "NONE", "payloadHex": "", "packetHex": "012a00"
+    },
+    {
+      "name": "hello-response", "kind": "response", "opcode": "HELLO",
+      "transactionId": 42, "status": "OK", "payloadHex": "0110f700f000",
+      "packetHex": "012a000110f700f000"
+    },
+    {
+      "name": "set-time-request", "kind": "request", "opcode": "SET_TIME",
+      "transactionId": 43, "flags": "NONE", "payloadHex": "78563412e00101",
+      "packetHex": "062b0078563412e00101"
+    },
+    {
+      "name": "set-screen-profile-request", "kind": "request", "opcode": "SET_SCREEN_PROFILE",
+      "transactionId": 44, "flags": "NONE", "payloadHex": "011300020090012c010000000090012c01",
+      "packetHex": "082c00011300020090012c010000000090012c01"
+    },
+    {
+      "name": "calendar-request", "kind": "request", "opcode": "SET_DISPLAY_MODE",
+      "transactionId": 45, "flags": "NONE", "payloadHex": "01", "packetHex": "092d0001"
+    },
+    {
+      "name": "calendar-progress", "kind": "event", "event": "PROGRESS",
+      "status": "OK", "originOpcode": "SET_DISPLAY_MODE", "originTransactionId": 45,
+      "payloadHex": "0232", "packetHex": "e10000092d0232"
+    },
+    {
+      "name": "calendar-complete", "kind": "event", "event": "COMPLETE",
+      "status": "OK", "originOpcode": "SET_DISPLAY_MODE", "originTransactionId": 45,
+      "payloadHex": "", "packetHex": "e20000092d"
+    },
+    {
+      "name": "factory-reset-denied", "kind": "response", "opcode": "SYSTEM_ACTION",
+      "transactionId": 46, "status": "DENIED", "payloadHex": "", "packetHex": "0e2e0d"
+    },
+    {
+      "name": "factory-reset-confirm-request", "kind": "request", "opcode": "SYSTEM_ACTION",
+      "transactionId": 46, "flags": "CONFIRM", "payloadHex": "03", "packetHex": "0e2e0103"
+    },
+    {
+      "name": "settings-reset-confirm-request", "kind": "request", "opcode": "SYSTEM_ACTION",
+      "transactionId": 47, "flags": "CONFIRM", "payloadHex": "05", "packetHex": "0e2f0105"
+    },
+    {
+      "name": "clear-user-data-confirm-request", "kind": "request", "opcode": "SYSTEM_ACTION",
+      "transactionId": 48, "flags": "CONFIRM", "payloadHex": "06", "packetHex": "0e300106"
+    },
+    {
+      "name": "timed-sleep-60s-request", "kind": "request", "opcode": "SYSTEM_ACTION",
+      "transactionId": 49, "flags": "NONE", "payloadHex": "0201013c000000", "packetHex": "0e31000201013c000000"
+    },
+    {
+      "name": "resource-list-complete", "kind": "response", "opcode": "LIST_RESOURCES",
+      "transactionId": 90, "status": "OK", "payloadHex": "01ff", "packetHex": "195a0001ff"
+    },
+    {
+      "name": "transfer-write-request", "kind": "request", "opcode": "TRANSFER_WRITE",
+      "transactionId": 90, "flags": "NONE", "payloadHex": "00000000a55a",
+      "packetHex": "115a0000000000a55a"
+    },
+    {
+      "name": "direct-transfer-complete", "kind": "event", "event": "COMPLETE",
+      "status": "OK", "originOpcode": "TRANSFER_COMMIT", "originTransactionId": 90,
+      "payloadHex": "", "packetHex": "e20000125a"
+    }
+  ]
+}

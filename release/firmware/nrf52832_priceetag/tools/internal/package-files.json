@@ -1,0 +1,122 @@
+[
+  {
+    "path": "LICENSE",
+    "bytes": 4694,
+    "sha256": "75f5f2ae732cdc31adf8ad90a42ed4ed47476b3f27fcdf90de13e79d6788309d"
+  },
+  {
+    "path": "LICENSING.md",
+    "bytes": 1261,
+    "sha256": "70b6b926885201904c6ee3c48c31dfa58c83da63418756118c86feee2c7e6599"
+  },
+  {
+    "path": "README.en.md",
+    "bytes": 4266,
+    "sha256": "b0695508dc608e818c0e7634fa54be3ce3f7ceff0676c5c236bacda53c692202"
+  },
+  {
+    "path": "README.md",
+    "bytes": 3768,
+    "sha256": "9e37b209b05be9702335e6cbacc3941cc50392b35ad76b6ea795f932fe8b0276"
+  },
+  {
+    "path": "THIRD_PARTY_NOTICES.md",
+    "bytes": 279,
+    "sha256": "41e1365264198995cfe0c49241c5b9791a55d26abf2367b29dec03901f04ecdd"
+  },
+  {
+    "path": "tools/bundle.json",
+    "bytes": 469,
+    "sha256": "70a21f7af613b1c19719da778e7c22f632696292ddea6bd1082bcb52bb885a66"
+  },
+  {
+    "path": "tools/configs/PriceEtag_V1.7.toml",
+    "bytes": 738,
+    "sha256": "3c0215157a3f1758fba335fd014a20b10b8cac4c14db8497130dfb28bbbce3ed"
+  },
+  {
+    "path": "tools/dependencies.lock.json",
+    "bytes": 724,
+    "sha256": "e9485080af74b2f4414278f25cb4bcfb09946819ad4e1437d38b5cf49bf823a6"
+  },
+  {
+    "path": "tools/flash-hex.bat",
+    "bytes": 226,
+    "sha256": "668cde55cd404a95421d0ddafc9ad92f4fffa521fc0d7670f4e61e37ae4a87ea"
+  },
+  {
+    "path": "tools/flash-zh.bat",
+    "bytes": 725,
+    "sha256": "536e2a698e9c4e12b9176a8e3f85af3e16da8484af27f46b48bf7f26fb141d2d"
+  },
+  {
+    "path": "tools/flash.bat",
+    "bytes": 555,
+    "sha256": "a619b8fa23208fc1d86021229c94a13ab3c899e173045a60602cd152cc24fd1a"
+  },
+  {
+    "path": "tools/flash.ps1",
+    "bytes": 14148,
+    "sha256": "81b26f3841c3aa10c3ce0643f7611ba6ec6bd4bf406dc54c8d5b435a311ccb1a"
+  },
+  {
+    "path": "tools/generate-hex.bat",
+    "bytes": 225,
+    "sha256": "9e1c9f0673a424afa4616f3493cb349c6c8fa83576fe601743828144de9fec8c"
+  },
+  {
+    "path": "tools/initialization.ps1",
+    "bytes": 13810,
+    "sha256": "93b0602b93292b9ad293a6d01f8c67ed81e1ebdc36ccf4e6f6369b8f43737aca"
+  },
+  {
+    "path": "tools/internal/activation-preservation.ps1",
+    "bytes": 5115,
+    "sha256": "3af89fec09d30a67b70596fdaedbed5f0be2c0a650837748414eec526063029f"
+  },
+  {
+    "path": "tools/internal/invoke-nrf52832-swd.ps1",
+    "bytes": 44405,
+    "sha256": "be9b63e05a3f37f64cb932c25cf5b60a432f61506b9eaa7167378439af51e688"
+  },
+  {
+    "path": "tools/internal/native-image.ps1",
+    "bytes": 10174,
+    "sha256": "66ead121203f79c413926d75d3e8dae75b4805702974d9f3e60afc1847e4e3e0"
+  },
+  {
+    "path": "tools/internal/native-planner.ps1",
+    "bytes": 15737,
+    "sha256": "1969f27eb86f2682f97a96f08a4b5d55d54b368d058748461f0712de6113d855"
+  },
+  {
+    "path": "tools/internal/nordic-image.cs",
+    "bytes": 21648,
+    "sha256": "4de7e050661a7b59657730371ba3cc6b4793d148a26ce88179753e2ac62ec973"
+  },
+  {
+    "path": "tools/internal/nordic-screen-rules.json",
+    "bytes": 6701,
+    "sha256": "56c6735bf65706d7b7763467abd467dab0cbd14cfe6338c33e75c3c12f8dfc09"
+  },
+  {
+    "path": "tools/internal/offline/tools/jlink-tools.ps1",
+    "bytes": 4389,
+    "sha256": "ce6e5b060d335dddcdaad32ce85e3bc5a5240f48eeb56e1156b9a45d290132bf"
+  },
+  {
+    "path": "tools/internal/offline/tools/powershell-cli.ps1",
+    "bytes": 3106,
+    "sha256": "2a0651a4cdeff9bc46f3002fa2f6b30aeb0a207932831868c53312c557a570ce"
+  },
+  {
+    "path": "tools/internal/runtime.ps1",
+    "bytes": 5324,
+    "sha256": "a6fba7b18b464a6780d6a205a08a7c3c4fe41d75563c0c5eeeb5983b9be2d92f"
+  },
+  {
+    "path": "tools/internal/terminal-log.ps1",
+    "bytes": 15327,
+    "sha256": "81ecbab2714c57fc20244f90cc109b09ea66d882c376aea77f307e5c3d93c4c9"
+  }
+]

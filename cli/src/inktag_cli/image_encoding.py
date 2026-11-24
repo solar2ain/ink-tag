@@ -109,8 +109,30 @@ def transform_rgba(image: RgbaFrame, transform: int) -> RgbaFrame:
 
 
 def encode_image(image: RgbaFrame, screen: ScreenConfig) -> EncodedImage:
+    return encode_image_with_format(
+        image, screen, transfer_format_for(screen),
+        six_color=screen.driver in {0x40, 0x41},
+    )
+
+
+def encode_image_with_format(
+    image: RgbaFrame, screen: ScreenConfig, transfer_format: int, *, six_color: bool = False,
+    native_rows: bool = False,
+) -> EncodedImage:
+    """Encode an advertised native format without inventing a controller ID.
+
+    NFC D1 carries the native packing independently of the internal driver.
+    Existing screen-based callers retain their original format/palette choice.
+    """
     frame = _framed_image(image, screen)
-    transfer_format = transfer_format_for(screen)
+    if native_rows and transfer_format in (3, 5, 6):
+        alignment = 2 if transfer_format == 5 else 4
+        padded_width = (frame.width + alignment - 1) // alignment * alignment
+        if padded_width != frame.width:
+            padded = bytearray(b'\xff' * (padded_width * frame.height * 4))
+            for y in range(frame.height):
+                padded[y*padded_width*4:y*padded_width*4+frame.width*4] = frame.data[y*frame.width*4:(y+1)*frame.width*4]
+            frame = RgbaFrame(padded_width, frame.height, bytes(padded))
     if transfer_format == TRANSFER_MONO_1BPP:
         return EncodedImage(transfer_format, (ImageTransfer("bw", _mono(frame)),))
     if transfer_format == TRANSFER_DUAL_1BPP:
@@ -128,17 +150,19 @@ def encode_image(image: RgbaFrame, screen: ScreenConfig) -> EncodedImage:
             (ImageTransfer("gray-msb", ram1), ImageTransfer("gray-lsb", ram2)),
         )
     if transfer_format == TRANSFER_INDEXED_4BPP:
-        if screen.driver in {0x40, 0x41}:
+        if six_color:
             return EncodedImage(transfer_format, (ImageTransfer("bw", _osprey_e6(frame)),))
         if screen.color == 1:
             black = _mono(frame)
             accent = bytes((0xFF,)) * len(black)
         else:
             black, accent = _dual(frame, screen.color)
-        return EncodedImage(
-            transfer_format,
-            (ImageTransfer("bw", _indexed4_from_planes(black, accent)),),
-        )
+        packed = _indexed4_from_planes(black, accent)
+        if native_rows:
+            source_row = (frame.width + 7) // 8 * 4
+            target_row = (screen.width + 1) // 2
+            packed = b''.join(packed[y*source_row:y*source_row+target_row] for y in range(frame.height))
+        return EncodedImage(transfer_format, (ImageTransfer("bw", packed),))
     if transfer_format == TRANSFER_INDEXED_2X2BPP:
         area0, area6 = _lenmory_e6(frame)
         return EncodedImage(
@@ -384,6 +408,8 @@ def _dual(frame: RgbaFrame, color: int) -> tuple[bytes, bytes]:
             accent_distance = _distance(r, g, b, target)
             if accent_distance < _distance(r, g, b, (0, 0, 0)) and accent_distance < _distance(r, g, b, (255, 255, 255)):
                 accent[index] &= ~(1 << bit)
+                # Match native GFX: leave the black plane white under accent.
+                black[index] |= 1 << bit
             elif _luminance(r, g, b) >= 140:
                 black[index] |= 1 << bit
     return bytes(black), bytes(accent)

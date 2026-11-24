@@ -47,6 +47,28 @@ def settings_show(context: typer.Context):
     app._emit(options, app._run(options, operation()))
 
 
+def advertising_show(context: typer.Context):
+    """Read InkTag advertising settings; Find My advertising is unaffected."""
+    app = core(); options = app._context(context)
+    async def operation():
+        async with options.client(auto_sync_time=False) as client:
+            return await client.get_advertising_config()
+    app._emit(options, app._run(options, operation()))
+
+
+def advertising_set(context: typer.Context,
+                    mode: Annotated[str, typer.Argument(help='always or delayed (Pro).')],
+                    timeout: Annotated[int, typer.Option('--timeout', min=1, max=65535, help='Seconds after boot/disconnection; button or NFC activity reopens the window.')] = 120):
+    """Save InkTag advertising mode; connected sessions and Find My remain active."""
+    if mode not in ('always', 'delayed'):
+        raise typer.BadParameter('mode must be always or delayed')
+    app = core(); options = app._context(context)
+    async def operation():
+        async with options.client(auto_sync_time=False) as client:
+            return await client.set_advertising_config(mode, timeout)
+    app._emit(options, app._run(options, operation()))
+
+
 def _pins_view(report, aux):
     result = {}
     if report:
@@ -55,9 +77,7 @@ def _pins_view(report, aux):
                       led={'pins': {r: pins[r] for r in PUBLIC_PIN_ROLES[7:]},
                            'activeLow': {r: bool(low & (1 << PUBLIC_PIN_ROLES.index(r))) for r in PUBLIC_PIN_ROLES[7:]}})
     if aux:
-        result.update(buttons=aux['buttons'][:2], buzzer={
-            'mode': aux['buzzerMode'], 'gpioA': aux['buzzerGpioA'], 'gpioB': aux['buzzerGpioB'],
-            'frequencyHz': aux['buzzerFrequencyHz']})
+        result['buttons'] = aux['buttons'][:2]
     return result
 
 
@@ -69,8 +89,8 @@ async def _read_pins(client):
 
 def validate_pin_sections(values):
     """Validate file structure before any BLE connection or partial save."""
-    if not isinstance(values,dict) or not values or set(values)-{'screen','led','buttons','buzzer'}:
-        raise ValueError('Use screen, led, buttons and/or buzzer sections')
+    if not isinstance(values,dict) or not values or set(values)-{'screen','led','buttons'}:
+        raise ValueError('Use screen, led and/or buttons sections')
     disabled={'gpio':255,'activeLow':False,'pull':'none'}
     try:
         for section,roles in [('screen',PUBLIC_PIN_ROLES[:7]),('led',PUBLIC_PIN_ROLES[7:])]:
@@ -89,17 +109,13 @@ def validate_pin_sections(values):
         if not isinstance(buttons,list) or len(buttons)>2:
             raise ValueError('Configure at most two physical buttons')
         buttons=[*buttons,*[disabled.copy() for _ in range(3-len(buttons))]]
-        buzzer=values.get('buzzer',{'mode':'off','gpioA':255,'gpioB':255,'frequencyHz':0})
-        if set(buzzer)!={'mode','gpioA','gpioB','frequencyHz'}:
-            raise ValueError('Buzzer requires mode, gpioA, gpioB and frequencyHz')
-        encode_aux_configuration(dict(version=1,buttons=buttons,buzzerMode=buzzer['mode'],
-            buzzerGpioA=buzzer['gpioA'],buzzerGpioB=buzzer['gpioB'],buzzerFrequencyHz=buzzer['frequencyHz']))
+        encode_aux_configuration(dict(version=1, buttons=buttons, reserved=[0]*5))
     except (KeyError,TypeError,AttributeError) as error:
         raise ValueError('Invalid pin section; use the configuration returned by pins show') from error
 
 
 def pins_show(context: typer.Context):
-    """Show effective screen/LED pins, two buttons and buzzer configuration."""
+    """Show effective screen/LED pins and two buttons."""
     app = core(); options = app._context(context)
     async def operation():
         async with options.client(auto_sync_time=False) as client:
@@ -112,7 +128,7 @@ def pins_show(context: typer.Context):
 
 
 def pins_set(context: typer.Context,
-             config: Annotated[Path, typer.Option(exists=True, dir_okay=False, help='JSON sections: screen, led, buttons (up to two), buzzer. Omitted sections are preserved.')],
+             config: Annotated[Path, typer.Option(exists=True, dir_okay=False, help='JSON sections: screen, led, buttons (up to two). Omitted sections are preserved.')],
              yes: Annotated[bool, typer.Option('--yes', '-y')] = False):
     """Save checked GPIO configuration. Separate device writes are reported individually."""
     app = core(); options = app._context(context)
@@ -121,7 +137,7 @@ def pins_set(context: typer.Context,
         validate_pin_sections(values)
     except (ValueError, OSError) as error:
         raise typer.BadParameter(str(error), param_hint='--config') from error
-    app._require_confirmation(options, yes, 'Apply the checked screen, LED, button or buzzer pins?')
+    app._require_confirmation(options, yes, 'Apply the checked screen, LED or button pins?')
     async def operation():
         async with options.client() as client:
             report, aux = await _read_pins(client)
@@ -131,8 +147,6 @@ def pins_set(context: typer.Context,
             caps = client.snapshot.settings_capabilities
             if 'buttons' in values and not caps.custom_button_gpio:
                 raise ValueError('Button pins are read-only on this device')
-            if 'buzzer' in values and not caps.custom_buzzer_gpio:
-                raise ValueError('Buzzer pins are read-only on this device')
             view.update(values)
             routing = None
             if 'screen' in values or 'led' in values:
@@ -142,30 +156,26 @@ def pins_set(context: typer.Context,
                     low |= int(view['led'].get('activeLow', {}).get(role, False)) << index
                 routing = user_pin_configuration({'pins': pins, 'activeLow': low})
                 validate_pin_update(routing, report)
-            if 'buttons' in values or 'buzzer' in values:
+            if 'buttons' in values:
                 buttons = view['buttons']
                 if not isinstance(buttons, list) or len(buttons) > 2:
                     raise ValueError('Configure at most two physical buttons')
                 disabled = {'gpio': 255, 'activeLow': False, 'pull': 'none'}
                 buttons = [*buttons, *[disabled.copy() for _ in range(2-len(buttons))], aux['buttons'][2]]
-                buzzer = view['buzzer']
-                aux = dict(version=1, buttons=buttons, buzzerMode=buzzer['mode'],
-                           buzzerGpioA=buzzer['gpioA'], buzzerGpioB=buzzer['gpioB'],
-                           buzzerFrequencyHz=buzzer['frequencyHz'])
+                aux = {**aux, 'buttons': buttons}
                 encode_aux_configuration(aux)
             planned = routing or (report['effective'] if report else None)
             if planned and aux:
                 active = [p for p in planned['pins'].values() if p != 255]
                 active += [b['gpio'] for b in aux['buttons'] if b['gpio'] != 255]
-                active += [p for p in (aux['buzzerGpioA'], aux['buzzerGpioB']) if p != 255]
                 if len(active) != len(set(active)):
-                    raise ValueError('Screen, LED, button and buzzer GPIOs must not overlap')
+                    raise ValueError('Screen, LED and button GPIOs must not overlap')
             committed = []
             try:
                 if routing:
                     report = await client.set_pin_config(routing); committed.append('screen-led')
-                if 'buttons' in values or 'buzzer' in values:
-                    aux = await client.set_aux_configuration(aux); committed.append('buttons-buzzer')
+                if 'buttons' in values:
+                    aux = await client.set_aux_configuration(aux); committed.append('buttons')
             except Exception as error:
                 raise ValueError(f'Pin save failed or unconfirmed; confirmed sections: {committed}. Read current pins before retrying. {error}') from error
             return {'confirmedSections': committed, 'configuration': _pins_view(report, aux)}

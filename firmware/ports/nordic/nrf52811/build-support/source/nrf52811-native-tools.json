@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "toolsVersion": "0.2.2.5",
+  "files": [
+    "INITIALIZATION.en.md",
+    "INITIALIZATION.md",
+    "assets/full-writer.bin",
+    "assets/full-writer.json",
+    "flash-hex.bat",
+    "flash-zh.bat",
+    "flash.bat",
+    "generate-hex.bat",
+    "initialization.ps1",
+    "internal/external-full-writer.c",
+    "internal/external-full-writer.ld",
+    "internal/initialization-bytes.cs",
+    "internal/initialization-close-zh.txt",
+    "internal/initialization-dependencies.json",
+    "internal/initialization-format.ps1",
+    "internal/initialization-jlink.ps1",
+    "internal/initialization-messages.json",
+    "internal/initialization-screen-rules.json",
+    "internal/initialization-session.ps1",
+    "native-configs/EL022HWRL-A0.toml",
+    "native-configs/EL022HWRL.toml"
+  ]
+}

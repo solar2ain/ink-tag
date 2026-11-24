@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../index.html">InkTag WebUI</a></nav><main><h1 id="第三方组件与许可-third-party-components-and-licenses">第三方组件与许可 / Third-party components and licenses</h1>
+<p>PN532／PCR532 NFC 工具自带的读卡器依赖保留 GNU GPL v3，来源及修改见 <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/tools/nfc/provider/NOTICE.md">PN532 provider</a>。 The bundled PN532 provider retains GNU GPL v3. Its origin and modifications are listed in the provider notice.</p>
 <p>InkTag 使用下列第三方组件。它们保留各自版权和许可，不因 InkTag 的项目许可而改用另一种许可。适用范围见<a target="_blank" rel="noopener noreferrer" href="LICENSING.html">许可说明</a>。</p>
 <div class="table-wrap"><table>
 <thead>
@@ -24,6 +25,26 @@
 <td>React Router 7.18.2</td>
 <td>MIT</td>
 <td><a target="_blank" rel="noopener noreferrer" href="../licenses/react-router-7.18.2-LICENSE.txt">React Router</a></td>
+</tr>
+<tr>
+<td>qrcode 1.5.4</td>
+<td>MIT</td>
+<td><a target="_blank" rel="noopener noreferrer" href="../licenses/qrcode-1.5.4-LICENSE.txt">License</a></td>
+</tr>
+<tr>
+<td>zustand 5.0.15</td>
+<td>MIT</td>
+<td><a target="_blank" rel="noopener noreferrer" href="../licenses/zustand-5.0.15-LICENSE.txt">License</a></td>
+</tr>
+<tr>
+<td>dijkstrajs 1.0.3</td>
+<td>MIT</td>
+<td><a target="_blank" rel="noopener noreferrer" href="../licenses/dijkstrajs-1.0.3-LICENSE.txt">License</a></td>
+</tr>
+<tr>
+<td>scheduler 0.27.0</td>
+<td>MIT</td>
+<td><a target="_blank" rel="noopener noreferrer" href="../licenses/scheduler-0.27.0-LICENSE.txt">License</a></td>
 </tr>
 <tr>
 <td>Dexie 4.4.5</td>
@@ -60,4 +81,42 @@
 <p>CLI 的 Python 依赖及附带组件见 <a target="_blank" rel="noopener noreferrer" href="cli/THIRD_PARTY_NOTICES.html">CLI 第三方声明</a>。完整 CLI 包中 Find 查询组件的许可随包提供。</p>
 <p>部分插件、字体和图片的许可信息尚未齐备，本表不代表全部素材都已取得再分发许可。第三方许可原文保留其原有语言和内容。</p>
 <p>The components listed above retain their own copyright and licenses. InkTag project terms do not relicense them. See the linked license texts and <a target="_blank" rel="noopener noreferrer" href="cli/THIRD_PARTY_NOTICES.html">CLI third-party notices</a>. The complete CLI bundle also supplies the license for its Find query component.</p>
-<p>License information for some plugins, fonts and images is not yet complete; this list does not grant redistribution rights to every asset. Original third-party license texts are retained in their original form and language.</p></main></body></html>
+<p>License information for some plugins, fonts and images is not yet complete; this list does not grant redistribution rights to every asset. Original third-party license texts are retained in their original form and language.</p>
+<h2 id="创作字体-creation-fonts">创作字体 / Creation fonts</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字体 / Font</th>
+<th>许可 / License</th>
+<th>原文与声明 / License text and notices</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>缝合像素 / Fusion Pixel Font</td>
+<td>SIL OFL 1.1</td>
+<td><a target="_blank" rel="noopener noreferrer" href="../licenses/FusionPixel-NOTICES.txt">Fusion Pixel and upstream notices</a></td>
+</tr>
+<tr>
+<td>Z 工坊像素黑体 CN / Z Labs Pixel CN</td>
+<td>SIL OFL 1.1</td>
+<td><a target="_blank" rel="noopener noreferrer" href="../licenses/OFL-ZLabsPixel.txt">Z Labs Pixel CN</a></td>
+</tr>
+<tr>
+<td>目哉像素 / Muzai Pixel</td>
+<td>SIL OFL 1.1</td>
+<td><a target="_blank" rel="noopener noreferrer" href="../licenses/OFL-MuzaiPixel.txt">Muzai Pixel</a></td>
+</tr>
+<tr>
+<td>寒蝉点阵体 / Chill Bitmap 7x</td>
+<td>随附 SIL OFL 1.1 及字形来源声明 / SIL OFL 1.1 and accompanying notices</td>
+<td><a target="_blank" rel="noopener noreferrer" href="../licenses/OFL-ChillBitmap.txt">上游 OFL</a> · <a target="_blank" rel="noopener noreferrer" href="../licenses/ChillBitmap7x-LICENSE.txt">7x 发行声明</a></td>
+</tr>
+<tr>
+<td>文泉驿点阵宋体 / WenQuanYi Bitmap Song</td>
+<td>GPL-2.0，附字体嵌入例外 / GPL-2.0 with the upstream font embedding exception</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://sources.debian.org/copyright/license/xfonts-wqy/1.0.0~rc1-8/">许可与来源</a> · <a target="_blank" rel="noopener noreferrer" href="../assets/wenquanyi-bitmap-song-source.tar.gz">BDF 源文件与许可</a></td>
+</tr>
+</tbody>
+</table></div>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/webui/src/assets/fonts/README.md">字体版本、校验和与重建入口 / Versions, checksums and rebuilding</a></p></main></body></html>

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "toolsVersion": "0.2.2.1",
+  "runtime": "Windows PowerShell5.1 / .NET Framework; no Python",
+  "native": {
+    "name": "SEGGER J-Link Software and Documentation Pack",
+    "version": "7.88j",
+    "redistributed": false,
+    "officialUrl": "https://www.segger.com/downloads/jlink/",
+    "termsUrl": "https://www.segger.com/products/debug-probes/j-link/tools/terms-of-use/",
+    "files": [
+      {
+        "name": "JLink.exe",
+        "sha256": "405f4d0a239475e5529f6d09a130cf5bbfe53ac97eb25cec9e492c10df16c805"
+      },
+      {
+        "name": "JLinkARM.dll",
+        "sha256": "7d61c9cc53b6383837ccd01ad0732f7798e249fc0b2adeaad3b967c906794e9f"
+      }
+    ]
+  },
+  "sharedJLinkHelperSha256": "a4a9b53b296a0aa1ee59ba2a86262867b15d7ede7849ee3959c5d19c37c53875"
+}

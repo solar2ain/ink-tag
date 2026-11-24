@@ -1,0 +1,57 @@
+#ifndef INKTAG_TLSR_FLASH_LAYOUT_H
+#define INKTAG_TLSR_FLASH_LAYOUT_H
+
+/* layout-v1. Human-approved continuous 512-KiB layout.
+ * Full reinitialization is required; ordinary OTA cannot move stores.
+ * Keep literal values here so host packaging can read the same contract. */
+#define INKTAG_APPLICATION_START 0x00000u
+#define INKTAG_APPLICATION_REGION_SIZE 0x40000u
+/* B85 cpu_wakeup_init encodes firmware KiB in the upper six bits of
+ * 8-bit register 0x63e. 256 wraps to zero and breaks alternate-boot XIP.
+ * Keep the 256-KiB partition, but enforce the SDK's 252-KiB signed limit. */
+#define INKTAG_APPLICATION_SIZE 0x3F000u
+#define INKTAG_APPLICATION_MARKER 0x00008u
+#define INKTAG_RECOVERY_START 0x40000u
+#define INKTAG_RECOVERY_SIZE 0x11000u
+#define INKTAG_USER_FONT_START 0x51000u
+#define INKTAG_USER_FONT_SIZE 0x08000u
+#define INKTAG_SETTINGS_SECTOR 0x59000u
+#define INKTAG_SETTINGS_BACKUP_SECTOR 0x5A000u
+#define INKTAG_RECOVERY_STATE_A 0x5B000u
+#define INKTAG_RECOVERY_STATE_B 0x5C000u
+#define INKTAG_IMAGE_STORE_PRIMARY_START 0x5D000u
+#define INKTAG_IMAGE_STORE_PRIMARY_SIZE 0x22000u
+#define INKTAG_IMAGE_STORE_BASE_SIZE 0x22000u
+#define INKTAG_IMAGE_STORE_NEBULAR_HIGH_START 0x80000u
+#define INKTAG_IMAGE_STORE_NEBULAR_HIGH_SIZE 0x80000u
+#define INKTAG_IMAGE_STORE_NEBULAR_TOTAL_SIZE 0xA2000u
+
+/* Immutable Factory Store, never erased by App/Recovery or owner reset.
+ * MAC 8 bytes; crystal trim byte; optional SDK signature key 16 bytes.
+ * Factory peer history is backed up off-device: product is unbonded.
+ * ITBD is 12 bytes and its one-shot display flag is a one-way program. */
+#define INKTAG_FACTORY_PRESERVE_START 0x7F000u
+#define INKTAG_FACTORY_PRESERVE_END 0x80000u
+#define INKTAG_TELINK_MAC_SECTOR 0x7F000u
+#define INKTAG_TELINK_CAP_SECTOR 0x7F020u
+#define INKTAG_TELINK_SIGNKEY_ADDRESS 0x7F040u
+#define INKTAG_TELINK_TYPED_ADDRESS 0x7F160u
+#define INKTAG_TELINK_TYPED_ADDRESS_BYTES 16u
+#define INKTAG_BOARD_SELECTOR_ADDRESS 0x7F100u
+#define INKTAG_FIRST_DISPLAY_MARKER 0x7F10Cu
+#define INKTAG_FIRST_DISPLAY_REQUEST 0xA5u
+
+#if INKTAG_APPLICATION_START != 0u || \
+    INKTAG_APPLICATION_REGION_SIZE != INKTAG_RECOVERY_START || \
+    INKTAG_APPLICATION_SIZE != 0x3F000u || \
+    INKTAG_RECOVERY_START + INKTAG_RECOVERY_SIZE != INKTAG_USER_FONT_START || \
+    INKTAG_USER_FONT_START + INKTAG_USER_FONT_SIZE != INKTAG_SETTINGS_SECTOR || \
+    INKTAG_SETTINGS_SECTOR + 0x1000u != INKTAG_SETTINGS_BACKUP_SECTOR || \
+    INKTAG_SETTINGS_BACKUP_SECTOR + 0x1000u != INKTAG_RECOVERY_STATE_A || \
+    INKTAG_RECOVERY_STATE_A + 0x1000u != INKTAG_RECOVERY_STATE_B || \
+    INKTAG_RECOVERY_STATE_B + 0x1000u != INKTAG_IMAGE_STORE_PRIMARY_START || \
+    INKTAG_IMAGE_STORE_PRIMARY_START + INKTAG_IMAGE_STORE_PRIMARY_SIZE != INKTAG_FACTORY_PRESERVE_START
+#error TLSR layout ownership overlap or unintended image hole
+#endif
+
+#endif

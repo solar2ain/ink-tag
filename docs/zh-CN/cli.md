@@ -180,7 +180,7 @@ inktag-cli device -n B892 nfc usage
 inktag-cli device nfc commands calendar
 ```
 
-两个按键共用单击、双击、长按动作。NFC 无需选择模式或开关；`device nfc usage` 只读显示设备的使用说明及已声明的手机命令。用 `device nfc commands calendar` 在本地生成命令文本，再在手机 NFC Tools 中选择“写入 → 添加记录 → 文本”。手机写命令需要 Pro 和对应固件支持，读取设备链接不执行设备动作。
+两个按键共用单击、双击、长按动作。NFC 无需选择模式或开关；`device nfc usage` 只读显示设备的使用说明及已声明的手机命令。用 `device nfc commands calendar` 在本地生成命令文本，再在手机 NFC Tools 中选择“写入 → 添加记录 → 文本”。手机写命令需要 PRO 和对应固件支持，读取设备链接不执行设备动作。
 
 字体使用 `setting font info / build / install`。图标显示和日历偏好在 `setting screen mark / calendar`。短蜂鸣器测试使用 `setting buzzer test`。
 
@@ -188,7 +188,7 @@ inktag-cli device nfc commands calendar
 
 设备密码通过隐藏提示或 `--password-stdin` 输入，不把密码放在命令参数中。默认会保存可复用控制凭据；`--password-stdin` 不代表不缓存。`--no-credential-cache` 禁止读取和写入本机控制凭据，仍保留设备端密码验证与限速。
 
-`setting password status / set / disable` 管理设备密码。`setting reset-settings --yes` 清除普通设置和设备密码，保留图片、Pro、Find 和出厂身份；密码已启用时仍需原密码。`setting clear-user-data --yes` 清除用户图片与播放引用，保留设置、Pro、Find 和出厂身份。`device restart` 只重启。
+`setting password status / set / disable` 管理设备密码。`setting reset-settings --yes` 清除普通设置和设备密码，保留图片、PRO、Find 和出厂身份；密码已启用时仍需原密码。`setting clear-user-data --yes` 清除用户图片与播放引用，保留设置、PRO、Find 和出厂身份。`device restart` 只重启。
 
 清理命令可使用 `--expected-device-id` 核验预期设备身份；这是操作前核验，不是设备选择方式。结果未确认时先重连读取状态，不自动重复清理。
 

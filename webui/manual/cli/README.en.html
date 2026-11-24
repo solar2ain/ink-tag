@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../index.html">InkTag WebUI</a></nav><main><h1 id="inktag-command-line-client">InkTag command-line client</h1>
-<p><a target="_blank" rel="noopener noreferrer" href="README.html">中文</a> | English</p>
+<p><a target="_blank" rel="noopener noreferrer" href="README.html">中文</a></p>
 <p>InkTag CLI connects to devices, sends images, manages displays and performs OTA updates. It also runs WebUI, Find queries and host weather jobs. Use <code>inktag-cli</code> or the equivalent <code>inktag</code> executable.</p>
 <h2 id="quick-start">Quick start</h2>
 <p>Install Python 3.11 or newer, download/clone this repository or extract the complete CLI ZIP, and enter the root containing both <code>cli/</code> and <code>webui/</code>. Use the unified installer:</p>
@@ -157,18 +157,18 @@ inktag-cli device -n B892 setting pins set --config pins.json --yes
   ]
 }
 </code></pre>
-<p>GPIO 255 means disconnected. Use the <code>configuration</code> returned by <code>pins show</code> as the screen/LED format. BUSY/RESET behavior follows the screen driver; board EN and LED polarity remain configurable. TXD/RXD are not exposed. There are at most two user buttons, normally active-low; buzzer mode/pins replace a separate enable switch. Only device-reported editable settings can be changed.</p>
-<p>Screen/LED and button/buzzer writes are separate. A failure reports confirmed sections; read current configuration before deciding what to do next. <code>pins restore-screen-led-defaults</code> restores only screen/LED routing.</p>
+<p>GPIO 255 means disconnected. Use the <code>configuration</code> returned by <code>pins show</code> as the screen/LED format. BUSY/RESET behavior follows the screen driver; board EN and LED polarity remain configurable. TXD/RXD are not exposed. There are at most two user buttons, normally active-low. Only device-reported editable settings can be changed.</p>
+<p>Screen/LED and button writes are separate. A failure reports confirmed sections; read current configuration before deciding what to do next. <code>pins restore-screen-led-defaults</code> restores only screen/LED routing.</p>
 <pre><code class="language-sh">inktag-cli device -n B892 setting button show
 inktag-cli device -n B892 setting button set single next
 inktag-cli device -n B892 nfc usage
 inktag-cli device nfc commands calendar
 </code></pre>
-<p>Both buttons share single/double/long-press actions. NFC has no mode selector or off switch. <code>device nfc usage</code> reads device instructions and advertised phone commands; <code>device nfc commands calendar</code> generates command text locally. On the phone, use NFC Tools: Write → Add a record → Text. Phone commands require Pro and supporting firmware; reading the device link does not execute a device action.</p>
+<p>Both buttons share single/double/long-press actions. NFC has no mode selector or off switch. <code>device nfc usage</code> reads device instructions and advertised phone commands; <code>device nfc commands calendar</code> generates command text locally. On the phone, use NFC Tools: Write → Add a record → Text. Phone commands require PRO and supporting firmware; reading the device link does not execute a device action.</p>
 <p>Use <code>setting font info / build / install</code> for fonts, <code>setting screen mark / calendar</code> for the InkTag mark and calendar preferences, and <code>setting buzzer test</code> for a short output test.</p>
 <h2 id="passwords-and-clearing-data">Passwords and clearing data</h2>
 <p>Enter passwords through hidden prompts or <code>--password-stdin</code>, never command arguments. Successful authentication normally caches a reusable control credential. <code>--password-stdin</code> alone does not disable caching; <code>--no-credential-cache</code> prevents reading/writing reusable credentials on disk. Device authentication and throttling remain in effect.</p>
-<p>Use <code>setting password status / set / disable</code>. <code>setting reset-settings --yes</code> clears ordinary settings/password while preserving images, Pro, Find and factory identity; an enabled password still requires the original password. <code>setting clear-user-data --yes</code> clears user images/playback references while preserving settings, Pro, Find and factory identity. <code>device restart</code> only reboots.</p>
+<p>Use <code>setting password status / set / disable</code>. <code>setting reset-settings --yes</code> clears ordinary settings/password while preserving images, PRO, Find and factory identity; an enabled password still requires the original password. <code>setting clear-user-data --yes</code> clears user images/playback references while preserving settings, PRO, Find and factory identity. <code>device restart</code> only reboots.</p>
 <p>Clearing can use <code>--expected-device-id</code> to verify the intended device before acting. This verifies identity; it is not a selector. If a result is unconfirmed, reconnect and inspect state rather than repeating the clearing operation.</p>
 <h2 id="images-displays-and-ota">Images, displays and OTA</h2>
 <p><code>image process</code> converts images offline and <code>image algorithms</code> lists algorithms. Uploads support <code>--slot next</code> or a specific slot, <code>--name</code>, and <code>--store-only</code>; an occupied slot can be explicitly replaced. Batch uploads process images for each target's actual screen. Static displays and device-executed dynamic layouts are different capabilities.</p>
@@ -179,8 +179,9 @@ inktag-cli device -n B892 ota update app.zip
 inktag-cli device -n B892 recovery enter
 inktag-cli device -n B892_OTA recovery exit
 </code></pre>
-<p>OTA requires a matching signed package and verifies package integrity, publisher signature and the returned device identity/state. Recovery entry is separate from choosing an OTA package. Use <code>recovery exit</code> to return to App; it is the same as <code>recovery resume-app</code>. Complete flashing uses separate MCU programmer tools.</p>
+<p>OTA requires a package matching the board and actual Recovery policy, and verifies integrity and the returned device identity/state. Self-built basic applications may use unsigned packages where Recovery permits them; a present signature must verify. PRO releases remain signed for older Recovery compatibility. Recovery entry is separate from choosing an OTA package. Use <code>recovery exit</code> to return to App; it is the same as <code>recovery resume-app</code>. Complete flashing uses separate MCU programmer tools.</p>
 <p>A short BLE name also works, for example <code>device -n 43D2 recovery exit</code>. Select a full name or address if several devices match. Platforms share connection, return-request and application-ready stages; use <code>--verbose</code> for connection diagnostics. <code>--json</code> retains native result fields and writes progress events to stderr.</p>
+<p><code>recovery exit</code> and <code>recovery resume-app</code> use a 90-second default return timeout on every platform. Override it with <code>--reconnect-wait SECONDS</code> (5–120), for example <code>recovery exit --reconnect-wait 120</code>. Successful return still requires application identity verification.</p>
 <h2 id="webui-local-logs-and-find">WebUI, local logs and Find</h2>
 <pre><code class="language-sh">inktag-cli webui serve
 inktag-cli webui start --enable-tls

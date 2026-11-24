@@ -82,12 +82,21 @@ def validate_recovery_preflight(data: bytes, manifest: dict, firmware: bytes) ->
     expected = struct.pack("<IBBHIII", 0x50524B49, 1, 0, 20,
                            profile["signature"], profile["slot"] - SIGNATURE_TRAILER_SIZE,
                            profile["slot"])
-    if bytes(data) != expected:
+    data = bytes(data)
+    valid_tail = len(data) == 26 and data[20:25] == b'IKSP\x01' and data[25] in (0, 1, 2)
+    if not (data == expected or (valid_tail and data[:20] == expected)):
         raise ValueError(
             "Recovery preflight is missing or incompatible; a separately authorized "
             "fixed-Recovery Full upgrade is required"
         )
     signature = manifest.get("signature", {})
+    if signature.get('required') is False:
+        # This proof belongs to this live identified Recovery connection. A
+        # manifest or software version is never permission to send unsigned.
+        if not valid_tail or data[25] != 2:
+            raise ValueError('This Recovery requires a publisher-signed App; unsigned image was not sent')
+        verify_base_payload(manifest, firmware)
+        return
     if signature.get("signed_board") != profile["board"] or \
             signature.get("signed_layout") != manifest["layout"] or \
             signature.get("board_signature") != profile["board_signature"] or \
@@ -99,6 +108,49 @@ def validate_recovery_preflight(data: bytes, manifest: dict, firmware: bytes) ->
             len(firmware) != app_size + SIGNATURE_TRAILER_SIZE or \
             manifest["application"].get("transfer_size") != len(firmware):
         raise ValueError("Recovery preflight package exceeds the signed profile")
+
+
+def verify_base_payload(manifest: dict, firmware: bytes) -> dict:
+    profile = package_profile(manifest)
+    if (manifest.get('sourceProfile') != 'base' or
+            manifest.get('signature') != dict(required=False, algorithm='none', policy='crc-only')):
+        raise ValueError('Invalid OnMicro unsigned InkTag package policy')
+    application = manifest['application']
+    size = application.get('size')
+    if (type(size) is not int or not 40 < size <= profile['slot']-SIGNATURE_TRAILER_SIZE or
+            size != len(firmware) or application.get('transfer_size') != size or
+            hashlib.sha256(firmware).hexdigest() != application.get('sha256')):
+        raise ValueError('OnMicro unsigned payload size/hash mismatch')
+    if __package__:
+        from .app_integrity import inspect_payload
+    else:
+        inspect_payload = runpy.run_path(str(Path(__file__).with_name('app_integrity.py')))['inspect_payload']
+    return inspect_payload(firmware, body_bytes=size-40,
+                           board=profile['board_signature'], layout=profile['signature'],
+                           epoch=manifest.get('compatibilityEpoch'),
+                           release=manifest.get('releaseVersion'))
+
+
+def application_body_size(manifest: dict, firmware: bytes) -> int:
+    """Runtime reports linked App bytes, excluding IKCI and the signature.
+
+    Called after package verification. Legacy signed Apps without IKCI retain
+    their original size. A present descriptor is validated, never just subtracted.
+    """
+    if manifest.get('signature', {}).get('required') is False:
+        return verify_base_payload(manifest, firmware)['bodyBytes']
+    size = int(manifest['application']['size'])
+    if size > 40 and firmware[size-40:size-36] == b'IKCI':
+        profile = package_profile(manifest)
+        if __package__:
+            from .app_integrity import inspect_payload
+        else:
+            inspect_payload = runpy.run_path(str(Path(__file__).with_name('app_integrity.py')))['inspect_payload']
+        return inspect_payload(bytes(firmware[:size]), body_bytes=size-40,
+                               board=profile['board_signature'], layout=profile['signature'],
+                               epoch=manifest.get('compatibilityEpoch'),
+                               release=manifest.get('releaseVersion'))['bodyBytes']
+    return size
 
 
 def load_package(path: Path) -> tuple[dict, bytes]:
@@ -120,6 +172,9 @@ def load_package(path: Path) -> tuple[dict, bytes]:
     if hashlib.sha256(firmware).hexdigest() != application["sha256"]:
         raise ValueError("package SHA-256 verification failed")
     signature = manifest.get("signature")
+    if isinstance(signature, dict) and signature.get('required') is False:
+        verify_base_payload(manifest, firmware)
+        return manifest, firmware
     if not isinstance(signature, dict) or signature.get("required") is not True:
         raise ValueError("OnMicro OTA package must carry a required publisher signature")
     if signature.get("trust_profile") != TRUSTED_SIGNING_KEY["trust_profile"] or \
@@ -180,4 +235,5 @@ def load_package(path: Path) -> tuple[dict, bytes]:
         )
     except InvalidSignature as error:
         raise ValueError("OnMicro OTA ECDSA P-256 signature verification failed") from error
+    application_body_size(manifest, firmware)
     return manifest, firmware

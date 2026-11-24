@@ -1,0 +1,4441 @@
+{
+  "schemaVersion": 1,
+  "layoutRevision": "v1",
+  "renderer": "firmware/common/gui/inktag_gui_default.inc",
+  "renders": [
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "a0cd668ca48b94314a905fb3861fb9e57965d839d9e5a49691f8a61f63617a00"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "9751ef01476fdd33c92e74c12eb86ecaaa8d7a47bc481a5a5f95e9967e229c76"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "clock",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "28714e36522f3b1f570bb036594b227728d6007a2f4c4c73be88af3dd62d5306"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "clock",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "8b79085fe006ee9656972424acd7287031cd9a45c116bb9dce22beadd52d6eaa"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "device-info",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "6300867742acc03723a4be27a76beb71f45e09d85fdbb0686135265a432e740c"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "device-info",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "fdd53f247180571afbda8f2cf0d7ff8d7f7bc816f40bc82ffc2cef6ccbc41e6c"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "7f4fbac13e7d32894c679ae2bbee3bf7b05594ed8aed41b9216e2d866aa2e71d"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "6e0275b3d3d458646512b0c04605808218590e9344de76bb7a5f92f47e1419c7"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "clock",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "1bb6acacd1289ddd21eaedb9cdc1d12448f08ccfbc11e34579c4028e193159c2"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "clock",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "07e056286715a4323acc53f7f5fead1cc2ecf1bd8006e727151653dc294384ea"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "device-info",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "995c8ec8def852d9b4ddca0e36f14e2253c93d653f38f26bac853bfd25a7f2ab"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "device-info",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "a88a4eb7673a61891d830162c059786d693a1a4dae1b67435ffe099ef70faa34"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "dc8c1385e3bc6a94a1b591939c67e8d2183802a24e5b7676c450df9a54fbb395"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "cbc8bc421fdd42fe6f4db825c918113dd3c507d24ae055e11f6a278588cfd707"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "clock",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "7fc4417fb63ed14ef8fb146e148fab77c9e37ec9b17a27c800b3a5ea21725c86"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "clock",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "b309db9ca74f6916bdd92c339b09d1431cfe969332573944eeec841151107fe8"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "device-info",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "5bf9af58b9edc47d9630bef197d8c4036dc15efff9e34965b21c37a069d14e0b"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "device-info",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "e72bfa2e533d08d9ec0fbba51911249f7fb711644e4f5357cf52e7f27ceda1fa"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "e392f9cce8a4954809f4e643d4916d316b441295d08ee731e1b4b2bb0746e76e"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "d78084fb2090cac9ffed42f4bf8f06f0c6c5662b3b7f3ec04e50f6b082ba0890"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "clock",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "f0db1b0f56e1462381355c3190f788e0c23afed234a3c92a9174496576285d60"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "clock",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "c5eca825f4b4152801d59aada8488005a59c017b05fd059b6a0bf8b756dd8cfc"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "device-info",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "7fa1bb1e81bc178f41212e54a5ec3ee9e969b1d8e47b8d99b60ecf198883c318"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "device-info",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "9ddc1ea8a75d70229d752528c676d6d19586465e60888ce9073e2b364d28634b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "c63f928e9c58f902401349c6e02b53bfd813f997c7c40b5a70d5949545fb1adf"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "32935a23eaa6a681c5046b574bd8601dbd6928834a10c901d00ed8e9daec3bf6"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "clock",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "b03cf611234d0021524ed41737fe2daa88b4fdd02e87575fe1172cf9cd1b0550"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "clock",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "c30d656ec482a28a2006c1bfbd90774fce87373ceb84b32647268d1a5ffb0b2e"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "device-info",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "5c0db4104f107363c596460d10f9d5f0cd1d45d31209963247201cf25ccb3a3b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "device-info",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "71f516546b5d979e28c5cd41b35163e7fdf60d8dc50235625d950a3fa089723b"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "d174af85bac675ab379e9939931d0b3628f1c314f8bc14596a99ad0f3ef3a7ba"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "b4c738b3cd1b07c8343a05a2d1f7ec9b3940f9cd867193784b2bdee8d01fe5e0"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "clock",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "a1413a26ef27b0c03204444cfc64afb3e7aade43c52216f975f8b7a4b6707cbd"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "clock",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "701da37a2fe1e33a2900689afd45d705b7b932fc8afdf429fea799a4e09d0603"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "device-info",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "3e2170fa7b87d27e3136eff4001f7c93d19464dac0c75815309993f4fa909e4e"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "device-info",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "c0b9f74ef2ada6fc0725a97e707de6010e8c2ec422c3d7423febfa3a6a79e52b"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "7985a18f6efefbe7f1c76f21daa8f18d84eeedfbdd652d95890b5ce606d55793"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "ae155389e8d54a080033edd50d7b09fee40112d96fd0922382cb5f82cdb3ba65"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "clock",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "3b81f4fc86444aeafca0463dffdb77f9d270033ff3f8a22e63066a6d41d67d9f"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "clock",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "5110471cee628e93c3c57e18289cdf24cd48f7b442f746f4dc4406883f02ac72"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "device-info",
+      "edition": "base",
+      "scalePercent": 100,
+      "pixelSha256": "ae26c0092fcc6e92890d9dc879f8b69d3b47b82e3d33733acdd7b8365a1ec354"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "device-info",
+      "edition": "pro",
+      "scalePercent": 100,
+      "pixelSha256": "3e1cebc31e93a2cbf82e6af217936bbce10da20840e6468241cfdfbea2e1d285"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "edition": "base",
+      "scalePercent": 125,
+      "pixelSha256": "4915fa7c2e6ab095478ef8e636bc487b65e6f0b98d61b7fa1a1dcbe911e19c2a"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "edition": "pro",
+      "scalePercent": 125,
+      "pixelSha256": "d595e5c37ccd89177a2d12db25da5429712b0151915500c0b7c4121eab221929"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "clock",
+      "edition": "base",
+      "scalePercent": 125,
+      "pixelSha256": "3bfa7f6422e5d30f555bfd149fecd125c9aee946152c198f27cb5155fdfe8d3d"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "clock",
+      "edition": "pro",
+      "scalePercent": 125,
+      "pixelSha256": "3212da4bbbb0bf981a2e321ac3614cb69d7654f601042d2501831c6e9b7ed37a"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "device-info",
+      "edition": "base",
+      "scalePercent": 125,
+      "pixelSha256": "b5cab1feb50ed1e55efb164d6ac637755bd879f773ec4d1a86cf0fef5ec0fb3a"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "device-info",
+      "edition": "pro",
+      "scalePercent": 125,
+      "pixelSha256": "fb142e9f06877b7ab62b844347c9eb5d69a991f882e951ac7f8302af3a5b2b90"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "edition": "base",
+      "scalePercent": 150,
+      "pixelSha256": "199fbe97997a1b23f5c472537b2bbaeb7ef9401511f6368ba733ef083b46e689"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "edition": "pro",
+      "scalePercent": 150,
+      "pixelSha256": "0456b8cd565ed78cb6c1354a8bfb8ca3bc20ca43c37aac76173b3a683b793f5f"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "clock",
+      "edition": "base",
+      "scalePercent": 150,
+      "pixelSha256": "95f47ea706b758511300dea28362b6d13196dde4c6e21e174c2b2f0358aa8655"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "clock",
+      "edition": "pro",
+      "scalePercent": 150,
+      "pixelSha256": "c3ebe09510b19cb7ca9f28eae785c25dc27e8a299e65fd9392a37718063c1d13"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "device-info",
+      "edition": "base",
+      "scalePercent": 150,
+      "pixelSha256": "54e0f01f04e131e507a9c5ddbee8d74d576fcebd4534ce873fbb5e1916d70dca"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "device-info",
+      "edition": "pro",
+      "scalePercent": 150,
+      "pixelSha256": "34c028bdb6643606ed10e4c19f9dd2f09831a8e1219c6bf52b2deb1f731ac4b0"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "edition": "base",
+      "scalePercent": 150,
+      "pixelSha256": "e6e6bc071a4d8a51edbda7c3090a2a4f0042db139ce01096154f27a7b8a5130d"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "edition": "pro",
+      "scalePercent": 150,
+      "pixelSha256": "5ef84345f7c264a06c68ac2b6e6c33e9105ae171bc4383830ad1e54a94668ce2"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "clock",
+      "edition": "base",
+      "scalePercent": 150,
+      "pixelSha256": "eb880503d3dd8bae52dea138daff2db470017f23b12e204a3347528aed260775"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "clock",
+      "edition": "pro",
+      "scalePercent": 150,
+      "pixelSha256": "85269b78cf06e2509104975a5073b9990c824a554fff5f1e116eaa4c2940500e"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "device-info",
+      "edition": "base",
+      "scalePercent": 150,
+      "pixelSha256": "29df8e7a3a4d36075d61cb3c77d7f58f3c3a49298c95e346778d7501e23a4a57"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "device-info",
+      "edition": "pro",
+      "scalePercent": 150,
+      "pixelSha256": "d29ada49437d20599bfe5ba85d1a4155765b39132e9fcbee7009ded7b15e04af"
+    }
+  ],
+  "countdowns": [
+    {
+      "case": "future",
+      "width": 400,
+      "height": 300,
+      "nativeUiScale": 1,
+      "timestamp": 1790346480,
+      "countdown": {
+        "name": "国庆",
+        "targetTimestamp": 1790812800
+      },
+      "pixelSha256": "8d3a56e5599ca85e9b9943671a94cdbc01f91198d4680cab7911a75328d3a4e1"
+    },
+    {
+      "case": "today",
+      "width": 400,
+      "height": 300,
+      "nativeUiScale": 1,
+      "timestamp": 1790899199,
+      "countdown": {
+        "name": "国庆",
+        "targetTimestamp": 1790812800
+      },
+      "pixelSha256": "3f8b234c7087d2ad29787cc91a69f192946d51711c8d6e0327525c1bccb8b3c6"
+    },
+    {
+      "case": "expired",
+      "width": 400,
+      "height": 300,
+      "nativeUiScale": 1,
+      "timestamp": 1790899200,
+      "countdown": {
+        "name": "国庆",
+        "targetTimestamp": 1790899199
+      },
+      "pixelSha256": "9960249c4e25eaba6a4e3632965e0722a326eb7b57f288489e46c7b01fdbf475"
+    },
+    {
+      "case": "unset",
+      "width": 400,
+      "height": 300,
+      "nativeUiScale": 1,
+      "timestamp": 1798761599,
+      "countdown": {
+        "name": "",
+        "targetTimestamp": 0
+      },
+      "pixelSha256": "4638e7ce1c251e6ea9ccbbc41ff91feb9f19b575ba412188c88e9e41d35bf938"
+    },
+    {
+      "case": "unnamed",
+      "width": 400,
+      "height": 300,
+      "nativeUiScale": 1,
+      "timestamp": 1798761599,
+      "countdown": {
+        "name": " \t ",
+        "targetTimestamp": 1798761600
+      },
+      "pixelSha256": "4638e7ce1c251e6ea9ccbbc41ff91feb9f19b575ba412188c88e9e41d35bf938"
+    },
+    {
+      "case": "year-edge",
+      "width": 400,
+      "height": 300,
+      "nativeUiScale": 1,
+      "timestamp": 1798761600,
+      "countdown": {
+        "name": "元旦",
+        "targetTimestamp": 1798934399
+      },
+      "pixelSha256": "038666d1d09d0faccca0096be41661ee5dcad0a2fc7f977c88b1fd88b553d6ff"
+    },
+    {
+      "case": "leap-day",
+      "width": 400,
+      "height": 300,
+      "nativeUiScale": 1,
+      "timestamp": 1835395199,
+      "countdown": {
+        "name": "春分",
+        "targetTimestamp": 1835481600
+      },
+      "pixelSha256": "cdbd26e9daa82ccfb4d7a324c5c6a5c23ce5b9a0fed29f7121d8fc0d1cc86caf"
+    },
+    {
+      "case": "long-label",
+      "width": 400,
+      "height": 300,
+      "nativeUiScale": 1,
+      "timestamp": 1790346480,
+      "countdown": {
+        "name": "小寒小寒小寒小寒小寒小寒小寒小寒小寒小寒小寒小寒小寒小寒小寒小寒",
+        "targetTimestamp": 1822348800
+      },
+      "pixelSha256": "1f8e721ba2e558f764b14defa2abfce78f0270278bc0bdc037a1eb6e1443784b"
+    },
+    {
+      "case": "missing-glyph",
+      "width": 400,
+      "height": 300,
+      "nativeUiScale": 1,
+      "timestamp": 1790346480,
+      "countdown": {
+        "name": "生日",
+        "targetTimestamp": 1790812800
+      },
+      "pixelSha256": "dd30620bb1a5b0f50e3f5c8f73b450fb127d88ee63139e6fbe847e7d726fe495"
+    },
+    {
+      "case": "ascii",
+      "width": 400,
+      "height": 300,
+      "nativeUiScale": 1,
+      "timestamp": 1790346480,
+      "countdown": {
+        "name": "Goal",
+        "targetTimestamp": 1790812800
+      },
+      "pixelSha256": "fafadc4adb06803b1af5f1fffa0ef5a57cb579fa519c98c244e4de6bef0519c9"
+    },
+    {
+      "case": "future",
+      "width": 752,
+      "height": 568,
+      "nativeUiScale": 2,
+      "timestamp": 1790346480,
+      "countdown": {
+        "name": "国庆",
+        "targetTimestamp": 1790812800
+      },
+      "pixelSha256": "9c593242b3755a06e98b196223bafb221aedf642a6ef36cf0e8ede0605c256e7"
+    },
+    {
+      "case": "today",
+      "width": 752,
+      "height": 568,
+      "nativeUiScale": 2,
+      "timestamp": 1790899199,
+      "countdown": {
+        "name": "国庆",
+        "targetTimestamp": 1790812800
+      },
+      "pixelSha256": "e6e1918c8b2bd0c65d4d3d5d064bad95b05e28ca531655f5cd93277ceeac6dc3"
+    },
+    {
+      "case": "expired",
+      "width": 752,
+      "height": 568,
+      "nativeUiScale": 2,
+      "timestamp": 1790899200,
+      "countdown": {
+        "name": "国庆",
+        "targetTimestamp": 1790899199
+      },
+      "pixelSha256": "868e3277dd4c181269c82fcc4941be9139fbd05ee5eb903dc84856c4201fa9f6"
+    },
+    {
+      "case": "unset",
+      "width": 752,
+      "height": 568,
+      "nativeUiScale": 2,
+      "timestamp": 1798761599,
+      "countdown": {
+        "name": "",
+        "targetTimestamp": 0
+      },
+      "pixelSha256": "c2c397b9439b2846c9a3c908416d46e72ae86d0f71e691d51b9a8325e684226c"
+    },
+    {
+      "case": "unnamed",
+      "width": 752,
+      "height": 568,
+      "nativeUiScale": 2,
+      "timestamp": 1798761599,
+      "countdown": {
+        "name": " \t ",
+        "targetTimestamp": 1798761600
+      },
+      "pixelSha256": "c2c397b9439b2846c9a3c908416d46e72ae86d0f71e691d51b9a8325e684226c"
+    },
+    {
+      "case": "year-edge",
+      "width": 752,
+      "height": 568,
+      "nativeUiScale": 2,
+      "timestamp": 1798761600,
+      "countdown": {
+        "name": "元旦",
+        "targetTimestamp": 1798934399
+      },
+      "pixelSha256": "57d45ae623206ee7b70b417e66bae661c229e282db94eaf0511bdbcc3d6568a9"
+    },
+    {
+      "case": "leap-day",
+      "width": 752,
+      "height": 568,
+      "nativeUiScale": 2,
+      "timestamp": 1835395199,
+      "countdown": {
+        "name": "春分",
+        "targetTimestamp": 1835481600
+      },
+      "pixelSha256": "cb3fc31b3a2c8b939331abac7f05e4db735404e2579aeaf6eb8d3a1e72463416"
+    },
+    {
+      "case": "long-label",
+      "width": 752,
+      "height": 568,
+      "nativeUiScale": 2,
+      "timestamp": 1790346480,
+      "countdown": {
+        "name": "小寒小寒小寒小寒小寒小寒小寒小寒小寒小寒小寒小寒小寒小寒小寒小寒",
+        "targetTimestamp": 1822348800
+      },
+      "pixelSha256": "d747ff38c9fbcebccbf96bceb9c613116fdaf09472f2cc608146f16a1772e10e"
+    },
+    {
+      "case": "missing-glyph",
+      "width": 752,
+      "height": 568,
+      "nativeUiScale": 2,
+      "timestamp": 1790346480,
+      "countdown": {
+        "name": "生日",
+        "targetTimestamp": 1790812800
+      },
+      "pixelSha256": "9a4c55bfe2e01b93b0f1a8cbe4fc3afa7f664b9e6a69ff795f50fab2ad85f638"
+    },
+    {
+      "case": "ascii",
+      "width": 752,
+      "height": 568,
+      "nativeUiScale": 2,
+      "timestamp": 1790346480,
+      "countdown": {
+        "name": "Goal",
+        "targetTimestamp": 1790812800
+      },
+      "pixelSha256": "2d5d9d98d0c85c338987dbe96e4d63f41e44d05b13f5f61463fcacf6a430717b"
+    }
+  ],
+  "boardNames": [
+    {
+      "width": 152,
+      "height": 152,
+      "nativeUiScale": 1,
+      "edition": "base",
+      "boardName": "nrf52832_priceetag",
+      "boardNameShort": "priceetag",
+      "pixelSha256": "6300867742acc03723a4be27a76beb71f45e09d85fdbb0686135265a432e740c"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "nativeUiScale": 1,
+      "edition": "pro",
+      "boardName": "nrf52832_priceetag",
+      "boardNameShort": "priceetag",
+      "pixelSha256": "fdd53f247180571afbda8f2cf0d7ff8d7f7bc816f40bc82ffc2cef6ccbc41e6c"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "nativeUiScale": 1,
+      "edition": "base",
+      "boardName": "nrf52832_priceetag",
+      "boardNameShort": "priceetag",
+      "pixelSha256": "5c0db4104f107363c596460d10f9d5f0cd1d45d31209963247201cf25ccb3a3b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "nativeUiScale": 1,
+      "edition": "pro",
+      "boardName": "nrf52832_priceetag",
+      "boardNameShort": "priceetag",
+      "pixelSha256": "71f516546b5d979e28c5cd41b35163e7fdf60d8dc50235625d950a3fa089723b"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "nativeUiScale": 1,
+      "edition": "base",
+      "boardName": "nrf52832_priceetag",
+      "boardNameShort": "priceetag",
+      "pixelSha256": "ae26c0092fcc6e92890d9dc879f8b69d3b47b82e3d33733acdd7b8365a1ec354"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "nativeUiScale": 1,
+      "edition": "pro",
+      "boardName": "nrf52832_priceetag",
+      "boardNameShort": "priceetag",
+      "pixelSha256": "3e1cebc31e93a2cbf82e6af217936bbce10da20840e6468241cfdfbea2e1d285"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "nativeUiScale": 2,
+      "edition": "base",
+      "boardName": "nrf52832_priceetag",
+      "boardNameShort": "priceetag",
+      "pixelSha256": "29df8e7a3a4d36075d61cb3c77d7f58f3c3a49298c95e346778d7501e23a4a57"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "nativeUiScale": 2,
+      "edition": "pro",
+      "boardName": "nrf52832_priceetag",
+      "boardNameShort": "priceetag",
+      "pixelSha256": "d29ada49437d20599bfe5ba85d1a4155765b39132e9fcbee7009ded7b15e04af"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "nativeUiScale": 1,
+      "edition": "base",
+      "boardName": "unknown_mcu_board",
+      "boardNameShort": "",
+      "pixelSha256": "6300867742acc03723a4be27a76beb71f45e09d85fdbb0686135265a432e740c"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "nativeUiScale": 1,
+      "edition": "pro",
+      "boardName": "unknown_mcu_board",
+      "boardNameShort": "",
+      "pixelSha256": "fdd53f247180571afbda8f2cf0d7ff8d7f7bc816f40bc82ffc2cef6ccbc41e6c"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "nativeUiScale": 1,
+      "edition": "base",
+      "boardName": "unknown_mcu_board",
+      "boardNameShort": "",
+      "pixelSha256": "ae26c0092fcc6e92890d9dc879f8b69d3b47b82e3d33733acdd7b8365a1ec354"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "nativeUiScale": 1,
+      "edition": "pro",
+      "boardName": "unknown_mcu_board",
+      "boardNameShort": "",
+      "pixelSha256": "3e1cebc31e93a2cbf82e6af217936bbce10da20840e6468241cfdfbea2e1d285"
+    }
+  ],
+  "variants": [
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "dfb6aa9c5f317dbe37653f54991192e3265559ac53eaeebad77633eac43df68e"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "4785b8736ac31b977ba2e3ac4a7336cbc69fd8b99461d93288c2f725e8b1cb08"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "a0cd668ca48b94314a905fb3861fb9e57965d839d9e5a49691f8a61f63617a00"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "9751ef01476fdd33c92e74c12eb86ecaaa8d7a47bc481a5a5f95e9967e229c76"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "28714e36522f3b1f570bb036594b227728d6007a2f4c4c73be88af3dd62d5306"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "8b79085fe006ee9656972424acd7287031cd9a45c116bb9dce22beadd52d6eaa"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "6300867742acc03723a4be27a76beb71f45e09d85fdbb0686135265a432e740c"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "fdd53f247180571afbda8f2cf0d7ff8d7f7bc816f40bc82ffc2cef6ccbc41e6c"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "2bbdd06865c5ac41e1e82cd47138f9817aa759dd38c1925970a7252b4be70ec1"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "7a092f85f52f3ffca162ed706691b494f13e96cf892d86ff0aed67cb9bcd0095"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "247458bd1c5ad368aae57220fb0673e69fbe6c39137dfcc686f0f4935c49dd2b"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "5a44f1c6d916a6eb02ac526e881a3d92ae598c300c62f529232f0b007d5a125d"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "28714e36522f3b1f570bb036594b227728d6007a2f4c4c73be88af3dd62d5306"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "8b79085fe006ee9656972424acd7287031cd9a45c116bb9dce22beadd52d6eaa"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "6300867742acc03723a4be27a76beb71f45e09d85fdbb0686135265a432e740c"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "fdd53f247180571afbda8f2cf0d7ff8d7f7bc816f40bc82ffc2cef6ccbc41e6c"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "2bbdd06865c5ac41e1e82cd47138f9817aa759dd38c1925970a7252b4be70ec1"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "7a092f85f52f3ffca162ed706691b494f13e96cf892d86ff0aed67cb9bcd0095"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "247458bd1c5ad368aae57220fb0673e69fbe6c39137dfcc686f0f4935c49dd2b"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "5a44f1c6d916a6eb02ac526e881a3d92ae598c300c62f529232f0b007d5a125d"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "28714e36522f3b1f570bb036594b227728d6007a2f4c4c73be88af3dd62d5306"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "8b79085fe006ee9656972424acd7287031cd9a45c116bb9dce22beadd52d6eaa"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "6300867742acc03723a4be27a76beb71f45e09d85fdbb0686135265a432e740c"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "fdd53f247180571afbda8f2cf0d7ff8d7f7bc816f40bc82ffc2cef6ccbc41e6c"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "2bbdd06865c5ac41e1e82cd47138f9817aa759dd38c1925970a7252b4be70ec1"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "7a092f85f52f3ffca162ed706691b494f13e96cf892d86ff0aed67cb9bcd0095"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "247458bd1c5ad368aae57220fb0673e69fbe6c39137dfcc686f0f4935c49dd2b"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "5a44f1c6d916a6eb02ac526e881a3d92ae598c300c62f529232f0b007d5a125d"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "28714e36522f3b1f570bb036594b227728d6007a2f4c4c73be88af3dd62d5306"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "8b79085fe006ee9656972424acd7287031cd9a45c116bb9dce22beadd52d6eaa"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "6300867742acc03723a4be27a76beb71f45e09d85fdbb0686135265a432e740c"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "fdd53f247180571afbda8f2cf0d7ff8d7f7bc816f40bc82ffc2cef6ccbc41e6c"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "2bbdd06865c5ac41e1e82cd47138f9817aa759dd38c1925970a7252b4be70ec1"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "7a092f85f52f3ffca162ed706691b494f13e96cf892d86ff0aed67cb9bcd0095"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "247458bd1c5ad368aae57220fb0673e69fbe6c39137dfcc686f0f4935c49dd2b"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "5a44f1c6d916a6eb02ac526e881a3d92ae598c300c62f529232f0b007d5a125d"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "28714e36522f3b1f570bb036594b227728d6007a2f4c4c73be88af3dd62d5306"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "8b79085fe006ee9656972424acd7287031cd9a45c116bb9dce22beadd52d6eaa"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "6300867742acc03723a4be27a76beb71f45e09d85fdbb0686135265a432e740c"
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "fdd53f247180571afbda8f2cf0d7ff8d7f7bc816f40bc82ffc2cef6ccbc41e6c"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "0a6a00a60a178ebcdf6647602bc3690243fb5aaf1b3bd35f8a6aec47aa1369e7"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "497abfee2a99cd2bb0d9aebe9d46a2f11cef81a22639277d2a9ef21a2fd217c9"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "7f4fbac13e7d32894c679ae2bbee3bf7b05594ed8aed41b9216e2d866aa2e71d"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "6e0275b3d3d458646512b0c04605808218590e9344de76bb7a5f92f47e1419c7"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "1bb6acacd1289ddd21eaedb9cdc1d12448f08ccfbc11e34579c4028e193159c2"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "07e056286715a4323acc53f7f5fead1cc2ecf1bd8006e727151653dc294384ea"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "995c8ec8def852d9b4ddca0e36f14e2253c93d653f38f26bac853bfd25a7f2ab"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "a88a4eb7673a61891d830162c059786d693a1a4dae1b67435ffe099ef70faa34"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "0a6a00a60a178ebcdf6647602bc3690243fb5aaf1b3bd35f8a6aec47aa1369e7"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "497abfee2a99cd2bb0d9aebe9d46a2f11cef81a22639277d2a9ef21a2fd217c9"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "7f4fbac13e7d32894c679ae2bbee3bf7b05594ed8aed41b9216e2d866aa2e71d"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "6e0275b3d3d458646512b0c04605808218590e9344de76bb7a5f92f47e1419c7"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "1bb6acacd1289ddd21eaedb9cdc1d12448f08ccfbc11e34579c4028e193159c2"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "07e056286715a4323acc53f7f5fead1cc2ecf1bd8006e727151653dc294384ea"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "995c8ec8def852d9b4ddca0e36f14e2253c93d653f38f26bac853bfd25a7f2ab"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "a88a4eb7673a61891d830162c059786d693a1a4dae1b67435ffe099ef70faa34"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "0a6a00a60a178ebcdf6647602bc3690243fb5aaf1b3bd35f8a6aec47aa1369e7"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "497abfee2a99cd2bb0d9aebe9d46a2f11cef81a22639277d2a9ef21a2fd217c9"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "7f4fbac13e7d32894c679ae2bbee3bf7b05594ed8aed41b9216e2d866aa2e71d"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "6e0275b3d3d458646512b0c04605808218590e9344de76bb7a5f92f47e1419c7"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "1bb6acacd1289ddd21eaedb9cdc1d12448f08ccfbc11e34579c4028e193159c2"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "07e056286715a4323acc53f7f5fead1cc2ecf1bd8006e727151653dc294384ea"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "995c8ec8def852d9b4ddca0e36f14e2253c93d653f38f26bac853bfd25a7f2ab"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "a88a4eb7673a61891d830162c059786d693a1a4dae1b67435ffe099ef70faa34"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "0a6a00a60a178ebcdf6647602bc3690243fb5aaf1b3bd35f8a6aec47aa1369e7"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "497abfee2a99cd2bb0d9aebe9d46a2f11cef81a22639277d2a9ef21a2fd217c9"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "7f4fbac13e7d32894c679ae2bbee3bf7b05594ed8aed41b9216e2d866aa2e71d"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "6e0275b3d3d458646512b0c04605808218590e9344de76bb7a5f92f47e1419c7"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "1bb6acacd1289ddd21eaedb9cdc1d12448f08ccfbc11e34579c4028e193159c2"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "07e056286715a4323acc53f7f5fead1cc2ecf1bd8006e727151653dc294384ea"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "995c8ec8def852d9b4ddca0e36f14e2253c93d653f38f26bac853bfd25a7f2ab"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "a88a4eb7673a61891d830162c059786d693a1a4dae1b67435ffe099ef70faa34"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "0a6a00a60a178ebcdf6647602bc3690243fb5aaf1b3bd35f8a6aec47aa1369e7"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "497abfee2a99cd2bb0d9aebe9d46a2f11cef81a22639277d2a9ef21a2fd217c9"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "7f4fbac13e7d32894c679ae2bbee3bf7b05594ed8aed41b9216e2d866aa2e71d"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "6e0275b3d3d458646512b0c04605808218590e9344de76bb7a5f92f47e1419c7"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "1bb6acacd1289ddd21eaedb9cdc1d12448f08ccfbc11e34579c4028e193159c2"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "07e056286715a4323acc53f7f5fead1cc2ecf1bd8006e727151653dc294384ea"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "995c8ec8def852d9b4ddca0e36f14e2253c93d653f38f26bac853bfd25a7f2ab"
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "a88a4eb7673a61891d830162c059786d693a1a4dae1b67435ffe099ef70faa34"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "713882790267c05148aa8fa1effcb32f5a248cbbe3b43fbe7619510e3f1c6de8"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "4df74827e9837543437adf4c7cc98ece071837e969222a28ba4c4bce7b811670"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "dc8c1385e3bc6a94a1b591939c67e8d2183802a24e5b7676c450df9a54fbb395"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "cbc8bc421fdd42fe6f4db825c918113dd3c507d24ae055e11f6a278588cfd707"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "7fc4417fb63ed14ef8fb146e148fab77c9e37ec9b17a27c800b3a5ea21725c86"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "b309db9ca74f6916bdd92c339b09d1431cfe969332573944eeec841151107fe8"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "5bf9af58b9edc47d9630bef197d8c4036dc15efff9e34965b21c37a069d14e0b"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "e72bfa2e533d08d9ec0fbba51911249f7fb711644e4f5357cf52e7f27ceda1fa"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "713882790267c05148aa8fa1effcb32f5a248cbbe3b43fbe7619510e3f1c6de8"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "4df74827e9837543437adf4c7cc98ece071837e969222a28ba4c4bce7b811670"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "dc8c1385e3bc6a94a1b591939c67e8d2183802a24e5b7676c450df9a54fbb395"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "cbc8bc421fdd42fe6f4db825c918113dd3c507d24ae055e11f6a278588cfd707"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "7fc4417fb63ed14ef8fb146e148fab77c9e37ec9b17a27c800b3a5ea21725c86"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "b309db9ca74f6916bdd92c339b09d1431cfe969332573944eeec841151107fe8"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "5bf9af58b9edc47d9630bef197d8c4036dc15efff9e34965b21c37a069d14e0b"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "e72bfa2e533d08d9ec0fbba51911249f7fb711644e4f5357cf52e7f27ceda1fa"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "713882790267c05148aa8fa1effcb32f5a248cbbe3b43fbe7619510e3f1c6de8"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "4df74827e9837543437adf4c7cc98ece071837e969222a28ba4c4bce7b811670"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "dc8c1385e3bc6a94a1b591939c67e8d2183802a24e5b7676c450df9a54fbb395"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "cbc8bc421fdd42fe6f4db825c918113dd3c507d24ae055e11f6a278588cfd707"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "7fc4417fb63ed14ef8fb146e148fab77c9e37ec9b17a27c800b3a5ea21725c86"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "b309db9ca74f6916bdd92c339b09d1431cfe969332573944eeec841151107fe8"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "5bf9af58b9edc47d9630bef197d8c4036dc15efff9e34965b21c37a069d14e0b"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "e72bfa2e533d08d9ec0fbba51911249f7fb711644e4f5357cf52e7f27ceda1fa"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "713882790267c05148aa8fa1effcb32f5a248cbbe3b43fbe7619510e3f1c6de8"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "4df74827e9837543437adf4c7cc98ece071837e969222a28ba4c4bce7b811670"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "dc8c1385e3bc6a94a1b591939c67e8d2183802a24e5b7676c450df9a54fbb395"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "cbc8bc421fdd42fe6f4db825c918113dd3c507d24ae055e11f6a278588cfd707"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "7fc4417fb63ed14ef8fb146e148fab77c9e37ec9b17a27c800b3a5ea21725c86"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "b309db9ca74f6916bdd92c339b09d1431cfe969332573944eeec841151107fe8"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "5bf9af58b9edc47d9630bef197d8c4036dc15efff9e34965b21c37a069d14e0b"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "e72bfa2e533d08d9ec0fbba51911249f7fb711644e4f5357cf52e7f27ceda1fa"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "713882790267c05148aa8fa1effcb32f5a248cbbe3b43fbe7619510e3f1c6de8"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "4df74827e9837543437adf4c7cc98ece071837e969222a28ba4c4bce7b811670"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "dc8c1385e3bc6a94a1b591939c67e8d2183802a24e5b7676c450df9a54fbb395"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "cbc8bc421fdd42fe6f4db825c918113dd3c507d24ae055e11f6a278588cfd707"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "7fc4417fb63ed14ef8fb146e148fab77c9e37ec9b17a27c800b3a5ea21725c86"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "b309db9ca74f6916bdd92c339b09d1431cfe969332573944eeec841151107fe8"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "5bf9af58b9edc47d9630bef197d8c4036dc15efff9e34965b21c37a069d14e0b"
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "e72bfa2e533d08d9ec0fbba51911249f7fb711644e4f5357cf52e7f27ceda1fa"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "03c4604d3bf7a0a8301d60894d55823764b1485074d022080aa8eb970f85054c"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "426f60b448145a50588dd7d918ab7ac62f8fc64cb8aab98ce5e0fcfdd79558b4"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "e392f9cce8a4954809f4e643d4916d316b441295d08ee731e1b4b2bb0746e76e"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "d78084fb2090cac9ffed42f4bf8f06f0c6c5662b3b7f3ec04e50f6b082ba0890"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "f0db1b0f56e1462381355c3190f788e0c23afed234a3c92a9174496576285d60"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "c5eca825f4b4152801d59aada8488005a59c017b05fd059b6a0bf8b756dd8cfc"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "7fa1bb1e81bc178f41212e54a5ec3ee9e969b1d8e47b8d99b60ecf198883c318"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "9ddc1ea8a75d70229d752528c676d6d19586465e60888ce9073e2b364d28634b"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "03c4604d3bf7a0a8301d60894d55823764b1485074d022080aa8eb970f85054c"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "426f60b448145a50588dd7d918ab7ac62f8fc64cb8aab98ce5e0fcfdd79558b4"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "e392f9cce8a4954809f4e643d4916d316b441295d08ee731e1b4b2bb0746e76e"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "d78084fb2090cac9ffed42f4bf8f06f0c6c5662b3b7f3ec04e50f6b082ba0890"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "f0db1b0f56e1462381355c3190f788e0c23afed234a3c92a9174496576285d60"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "c5eca825f4b4152801d59aada8488005a59c017b05fd059b6a0bf8b756dd8cfc"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "7fa1bb1e81bc178f41212e54a5ec3ee9e969b1d8e47b8d99b60ecf198883c318"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "9ddc1ea8a75d70229d752528c676d6d19586465e60888ce9073e2b364d28634b"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "03c4604d3bf7a0a8301d60894d55823764b1485074d022080aa8eb970f85054c"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "426f60b448145a50588dd7d918ab7ac62f8fc64cb8aab98ce5e0fcfdd79558b4"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "e392f9cce8a4954809f4e643d4916d316b441295d08ee731e1b4b2bb0746e76e"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "d78084fb2090cac9ffed42f4bf8f06f0c6c5662b3b7f3ec04e50f6b082ba0890"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "f0db1b0f56e1462381355c3190f788e0c23afed234a3c92a9174496576285d60"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "c5eca825f4b4152801d59aada8488005a59c017b05fd059b6a0bf8b756dd8cfc"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "7fa1bb1e81bc178f41212e54a5ec3ee9e969b1d8e47b8d99b60ecf198883c318"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "9ddc1ea8a75d70229d752528c676d6d19586465e60888ce9073e2b364d28634b"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "03c4604d3bf7a0a8301d60894d55823764b1485074d022080aa8eb970f85054c"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "426f60b448145a50588dd7d918ab7ac62f8fc64cb8aab98ce5e0fcfdd79558b4"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "e392f9cce8a4954809f4e643d4916d316b441295d08ee731e1b4b2bb0746e76e"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "d78084fb2090cac9ffed42f4bf8f06f0c6c5662b3b7f3ec04e50f6b082ba0890"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "f0db1b0f56e1462381355c3190f788e0c23afed234a3c92a9174496576285d60"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "c5eca825f4b4152801d59aada8488005a59c017b05fd059b6a0bf8b756dd8cfc"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "7fa1bb1e81bc178f41212e54a5ec3ee9e969b1d8e47b8d99b60ecf198883c318"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "9ddc1ea8a75d70229d752528c676d6d19586465e60888ce9073e2b364d28634b"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "03c4604d3bf7a0a8301d60894d55823764b1485074d022080aa8eb970f85054c"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "426f60b448145a50588dd7d918ab7ac62f8fc64cb8aab98ce5e0fcfdd79558b4"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "e392f9cce8a4954809f4e643d4916d316b441295d08ee731e1b4b2bb0746e76e"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "d78084fb2090cac9ffed42f4bf8f06f0c6c5662b3b7f3ec04e50f6b082ba0890"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "f0db1b0f56e1462381355c3190f788e0c23afed234a3c92a9174496576285d60"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "c5eca825f4b4152801d59aada8488005a59c017b05fd059b6a0bf8b756dd8cfc"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "7fa1bb1e81bc178f41212e54a5ec3ee9e969b1d8e47b8d99b60ecf198883c318"
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "9ddc1ea8a75d70229d752528c676d6d19586465e60888ce9073e2b364d28634b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "2563e5e8f9a81216c31cab6dae100b531bd8396cd279dfa0abe92d02f4f4a60d"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "d454541397ae3f89bea4b961092431919b22110aa6bf574b295523a40a42ee32"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "c63f928e9c58f902401349c6e02b53bfd813f997c7c40b5a70d5949545fb1adf"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "32935a23eaa6a681c5046b574bd8601dbd6928834a10c901d00ed8e9daec3bf6"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "b03cf611234d0021524ed41737fe2daa88b4fdd02e87575fe1172cf9cd1b0550"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "c30d656ec482a28a2006c1bfbd90774fce87373ceb84b32647268d1a5ffb0b2e"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "5c0db4104f107363c596460d10f9d5f0cd1d45d31209963247201cf25ccb3a3b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "71f516546b5d979e28c5cd41b35163e7fdf60d8dc50235625d950a3fa089723b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "7bcdac126000c623fe49184a5fd3c111e9ec2c5bf401024e007ca7478005d56d"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "bcf12afee338a11f87aa0850e069973e52e77974c7b6e7bd7465da984ada726b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "d326cb0d36662a1a68c5b314f29e2151e58be8d671fcf8a87e298e9628c377ad"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "9bcc4da44a04c11b4c62edffbf3cf4b1b948bb59875f3695399679de8aab4ffd"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "b03cf611234d0021524ed41737fe2daa88b4fdd02e87575fe1172cf9cd1b0550"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "c30d656ec482a28a2006c1bfbd90774fce87373ceb84b32647268d1a5ffb0b2e"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "5c0db4104f107363c596460d10f9d5f0cd1d45d31209963247201cf25ccb3a3b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "71f516546b5d979e28c5cd41b35163e7fdf60d8dc50235625d950a3fa089723b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "7bcdac126000c623fe49184a5fd3c111e9ec2c5bf401024e007ca7478005d56d"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "bcf12afee338a11f87aa0850e069973e52e77974c7b6e7bd7465da984ada726b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "d326cb0d36662a1a68c5b314f29e2151e58be8d671fcf8a87e298e9628c377ad"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "9bcc4da44a04c11b4c62edffbf3cf4b1b948bb59875f3695399679de8aab4ffd"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "b03cf611234d0021524ed41737fe2daa88b4fdd02e87575fe1172cf9cd1b0550"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "c30d656ec482a28a2006c1bfbd90774fce87373ceb84b32647268d1a5ffb0b2e"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "5c0db4104f107363c596460d10f9d5f0cd1d45d31209963247201cf25ccb3a3b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "71f516546b5d979e28c5cd41b35163e7fdf60d8dc50235625d950a3fa089723b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "7bcdac126000c623fe49184a5fd3c111e9ec2c5bf401024e007ca7478005d56d"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "bcf12afee338a11f87aa0850e069973e52e77974c7b6e7bd7465da984ada726b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "d326cb0d36662a1a68c5b314f29e2151e58be8d671fcf8a87e298e9628c377ad"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "9bcc4da44a04c11b4c62edffbf3cf4b1b948bb59875f3695399679de8aab4ffd"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "b03cf611234d0021524ed41737fe2daa88b4fdd02e87575fe1172cf9cd1b0550"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "c30d656ec482a28a2006c1bfbd90774fce87373ceb84b32647268d1a5ffb0b2e"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "5c0db4104f107363c596460d10f9d5f0cd1d45d31209963247201cf25ccb3a3b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "71f516546b5d979e28c5cd41b35163e7fdf60d8dc50235625d950a3fa089723b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "7bcdac126000c623fe49184a5fd3c111e9ec2c5bf401024e007ca7478005d56d"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "bcf12afee338a11f87aa0850e069973e52e77974c7b6e7bd7465da984ada726b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "d326cb0d36662a1a68c5b314f29e2151e58be8d671fcf8a87e298e9628c377ad"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "9bcc4da44a04c11b4c62edffbf3cf4b1b948bb59875f3695399679de8aab4ffd"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "b03cf611234d0021524ed41737fe2daa88b4fdd02e87575fe1172cf9cd1b0550"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "c30d656ec482a28a2006c1bfbd90774fce87373ceb84b32647268d1a5ffb0b2e"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "5c0db4104f107363c596460d10f9d5f0cd1d45d31209963247201cf25ccb3a3b"
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "71f516546b5d979e28c5cd41b35163e7fdf60d8dc50235625d950a3fa089723b"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "978046e150dd0e14323c50b4685dddd4b30bd7fbbc6b626051f7979f684afad1"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "00ffc03f516088fed1acdb6a2bf96788f42fa4d7069e133c94e141d9a18cedd1"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "d174af85bac675ab379e9939931d0b3628f1c314f8bc14596a99ad0f3ef3a7ba"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "b4c738b3cd1b07c8343a05a2d1f7ec9b3940f9cd867193784b2bdee8d01fe5e0"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "a1413a26ef27b0c03204444cfc64afb3e7aade43c52216f975f8b7a4b6707cbd"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "701da37a2fe1e33a2900689afd45d705b7b932fc8afdf429fea799a4e09d0603"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "3e2170fa7b87d27e3136eff4001f7c93d19464dac0c75815309993f4fa909e4e"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "c0b9f74ef2ada6fc0725a97e707de6010e8c2ec422c3d7423febfa3a6a79e52b"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "978046e150dd0e14323c50b4685dddd4b30bd7fbbc6b626051f7979f684afad1"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "00ffc03f516088fed1acdb6a2bf96788f42fa4d7069e133c94e141d9a18cedd1"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "d174af85bac675ab379e9939931d0b3628f1c314f8bc14596a99ad0f3ef3a7ba"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "b4c738b3cd1b07c8343a05a2d1f7ec9b3940f9cd867193784b2bdee8d01fe5e0"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "a1413a26ef27b0c03204444cfc64afb3e7aade43c52216f975f8b7a4b6707cbd"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "701da37a2fe1e33a2900689afd45d705b7b932fc8afdf429fea799a4e09d0603"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "3e2170fa7b87d27e3136eff4001f7c93d19464dac0c75815309993f4fa909e4e"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "c0b9f74ef2ada6fc0725a97e707de6010e8c2ec422c3d7423febfa3a6a79e52b"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "978046e150dd0e14323c50b4685dddd4b30bd7fbbc6b626051f7979f684afad1"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "00ffc03f516088fed1acdb6a2bf96788f42fa4d7069e133c94e141d9a18cedd1"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "d174af85bac675ab379e9939931d0b3628f1c314f8bc14596a99ad0f3ef3a7ba"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "b4c738b3cd1b07c8343a05a2d1f7ec9b3940f9cd867193784b2bdee8d01fe5e0"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "a1413a26ef27b0c03204444cfc64afb3e7aade43c52216f975f8b7a4b6707cbd"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "701da37a2fe1e33a2900689afd45d705b7b932fc8afdf429fea799a4e09d0603"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "3e2170fa7b87d27e3136eff4001f7c93d19464dac0c75815309993f4fa909e4e"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "c0b9f74ef2ada6fc0725a97e707de6010e8c2ec422c3d7423febfa3a6a79e52b"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "978046e150dd0e14323c50b4685dddd4b30bd7fbbc6b626051f7979f684afad1"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "00ffc03f516088fed1acdb6a2bf96788f42fa4d7069e133c94e141d9a18cedd1"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "d174af85bac675ab379e9939931d0b3628f1c314f8bc14596a99ad0f3ef3a7ba"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "b4c738b3cd1b07c8343a05a2d1f7ec9b3940f9cd867193784b2bdee8d01fe5e0"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "a1413a26ef27b0c03204444cfc64afb3e7aade43c52216f975f8b7a4b6707cbd"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "701da37a2fe1e33a2900689afd45d705b7b932fc8afdf429fea799a4e09d0603"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "3e2170fa7b87d27e3136eff4001f7c93d19464dac0c75815309993f4fa909e4e"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "c0b9f74ef2ada6fc0725a97e707de6010e8c2ec422c3d7423febfa3a6a79e52b"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "978046e150dd0e14323c50b4685dddd4b30bd7fbbc6b626051f7979f684afad1"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "00ffc03f516088fed1acdb6a2bf96788f42fa4d7069e133c94e141d9a18cedd1"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "d174af85bac675ab379e9939931d0b3628f1c314f8bc14596a99ad0f3ef3a7ba"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "b4c738b3cd1b07c8343a05a2d1f7ec9b3940f9cd867193784b2bdee8d01fe5e0"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "a1413a26ef27b0c03204444cfc64afb3e7aade43c52216f975f8b7a4b6707cbd"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "701da37a2fe1e33a2900689afd45d705b7b932fc8afdf429fea799a4e09d0603"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "3e2170fa7b87d27e3136eff4001f7c93d19464dac0c75815309993f4fa909e4e"
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "c0b9f74ef2ada6fc0725a97e707de6010e8c2ec422c3d7423febfa3a6a79e52b"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "6b5ddf74ccd80cbaa4c9a812416d9b52f04ce05f821d62ffd59dc15ba658f43c"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "0c4367056254b5dac0f53fa50365d1dba818ce0dac37865af09c5534cdc2050f"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "7985a18f6efefbe7f1c76f21daa8f18d84eeedfbdd652d95890b5ce606d55793"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "ae155389e8d54a080033edd50d7b09fee40112d96fd0922382cb5f82cdb3ba65"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "3b81f4fc86444aeafca0463dffdb77f9d270033ff3f8a22e63066a6d41d67d9f"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "5110471cee628e93c3c57e18289cdf24cd48f7b442f746f4dc4406883f02ac72"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "ae26c0092fcc6e92890d9dc879f8b69d3b47b82e3d33733acdd7b8365a1ec354"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "3e1cebc31e93a2cbf82e6af217936bbce10da20840e6468241cfdfbea2e1d285"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "b404b6dde7b51153b440e2d6b0d3a794152cffab4a12a94f53bee8bded2fbec8"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "b39de0ab9e00009d117922e692e849b82731becdfd6898f1fb2603417838a4c4"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "a89829ab577b298cffb5a3eb3693d15b16a57bf09039266300372b3ec36607e4"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "7c8452f7bb341cfdafdb273cc9e76a52a2c4b6b854f9e693615d1024f4868e1e"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "3b81f4fc86444aeafca0463dffdb77f9d270033ff3f8a22e63066a6d41d67d9f"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "5110471cee628e93c3c57e18289cdf24cd48f7b442f746f4dc4406883f02ac72"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "ae26c0092fcc6e92890d9dc879f8b69d3b47b82e3d33733acdd7b8365a1ec354"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "3e1cebc31e93a2cbf82e6af217936bbce10da20840e6468241cfdfbea2e1d285"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "63723141ebc4643dc64e7115a5fa88d931a43fe2ddf001790d809113afc8e8e7"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "5b904c8aed74fc660aa78234a97e2d26f84242fd112f5d22f925d3feee8377c8"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "0875808dc0837f4dff3640681839cfc1a5aca330bbf6d93f9b9cb4fe5f329009"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "03d7bc040362121aaf8423818cc32273587db0ca28b070d8951bc6f2d4a9679b"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "3b81f4fc86444aeafca0463dffdb77f9d270033ff3f8a22e63066a6d41d67d9f"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "5110471cee628e93c3c57e18289cdf24cd48f7b442f746f4dc4406883f02ac72"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "ae26c0092fcc6e92890d9dc879f8b69d3b47b82e3d33733acdd7b8365a1ec354"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "3e1cebc31e93a2cbf82e6af217936bbce10da20840e6468241cfdfbea2e1d285"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "63723141ebc4643dc64e7115a5fa88d931a43fe2ddf001790d809113afc8e8e7"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "5b904c8aed74fc660aa78234a97e2d26f84242fd112f5d22f925d3feee8377c8"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "0875808dc0837f4dff3640681839cfc1a5aca330bbf6d93f9b9cb4fe5f329009"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "03d7bc040362121aaf8423818cc32273587db0ca28b070d8951bc6f2d4a9679b"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "3b81f4fc86444aeafca0463dffdb77f9d270033ff3f8a22e63066a6d41d67d9f"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "5110471cee628e93c3c57e18289cdf24cd48f7b442f746f4dc4406883f02ac72"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "ae26c0092fcc6e92890d9dc879f8b69d3b47b82e3d33733acdd7b8365a1ec354"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "3e1cebc31e93a2cbf82e6af217936bbce10da20840e6468241cfdfbea2e1d285"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "63723141ebc4643dc64e7115a5fa88d931a43fe2ddf001790d809113afc8e8e7"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "5b904c8aed74fc660aa78234a97e2d26f84242fd112f5d22f925d3feee8377c8"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "0875808dc0837f4dff3640681839cfc1a5aca330bbf6d93f9b9cb4fe5f329009"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "03d7bc040362121aaf8423818cc32273587db0ca28b070d8951bc6f2d4a9679b"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "3b81f4fc86444aeafca0463dffdb77f9d270033ff3f8a22e63066a6d41d67d9f"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "5110471cee628e93c3c57e18289cdf24cd48f7b442f746f4dc4406883f02ac72"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "ae26c0092fcc6e92890d9dc879f8b69d3b47b82e3d33733acdd7b8365a1ec354"
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "3e1cebc31e93a2cbf82e6af217936bbce10da20840e6468241cfdfbea2e1d285"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "7abb989a7ed73f0deee0d3dd33de6d110af581989373c040da74720f74709a9e"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "26c67460d9e3afc2e39ed9129ec9a341f99f33ac33c76f4d20400287eb4cc19c"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "ed4c0e0e925f28853806ce60dac8f54b4bc260f8e87ecbc0b558bcda5cff5686"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "28cf9f47a40feee37bd77de9384630f5cc5c39c1dbd8fdae243b865d387016da"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "1b11f653f40efa8413bb27628a54156c85a77ec6ee7f18614defd789ac01e839"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "09b436ce368522983bbc0364d1edb7520643b0dc589741aea242665bebd1a72d"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "e2c22cba7b7dcc2b720720776c72c90eedab302bf44df99abdcc200a9d9b0ab1"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "f1aa42311bda030e34c1ba6c907e9b34d4a759ed1ea5101286a21c9d2bc51b48"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "5ba45b293813c5b06883033e035a3749fa678b8efca5a57bee1067f2f959193a"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "49a3ea3fca281f8505101339953a75c6902d5eebe6df2a982080a9af7c409ddd"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "4915fa7c2e6ab095478ef8e636bc487b65e6f0b98d61b7fa1a1dcbe911e19c2a"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "d595e5c37ccd89177a2d12db25da5429712b0151915500c0b7c4121eab221929"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "3bfa7f6422e5d30f555bfd149fecd125c9aee946152c198f27cb5155fdfe8d3d"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "3212da4bbbb0bf981a2e321ac3614cb69d7654f601042d2501831c6e9b7ed37a"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "b5cab1feb50ed1e55efb164d6ac637755bd879f773ec4d1a86cf0fef5ec0fb3a"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "fb142e9f06877b7ab62b844347c9eb5d69a991f882e951ac7f8302af3a5b2b90"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "8d3f762e4f22b774a8e4835de5742f68dfa04f95ab0494993fe2606db107d192"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "4cda7d17dbfe48ea17df4f5abd23a0800485a4d0d99d4ff02b0befd0905409a5"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "7ee60a75e9062de0210ad6dfae2eb62028a90718430a88b968f7993091d81010"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "b1820abf4e1ffe49139c88f188899a905e61fc5f8fa1cb6565e20b1247fa40cb"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "165cf143a4c4eb5cc39dfe42717375b2b645a8a542cf9d9530f2da235fa63b48"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "c8321f646d4471ecb19f76ec85e7b57c2083039184accf659d7ccfb1fb77109b"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "c578b383b336123143b58153c77fd2f80bec41f3ede3cc8d9b9ea46601012135"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "a18f99fd97b8ed967974a5500ca496810f208da0f82b200fdc8c7b9a2d6d290d"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "6427537c3728b1d738aad1442358b606ade89d01a2589abf819b94a1fd086eec"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "b30bec78412b4201537df406eeeaacf2752dc0e6add70677e26d08356c531477"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "e880b81e22c85e6a9a01b0f88bf5213255ea6343e23eda2cc8ac1b8c1c04d644"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "a3b0aba906f1346577e39f1ed97dae5fb0751c0345609a3d607ae287b62c9249"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "165cf143a4c4eb5cc39dfe42717375b2b645a8a542cf9d9530f2da235fa63b48"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "c8321f646d4471ecb19f76ec85e7b57c2083039184accf659d7ccfb1fb77109b"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "623dc2f679ac3a34a235112426ffc9785c54d61ccee9174d8b255c927f12d143"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "6daeeb212e7bd4dc576d698e10d6ef3fbd54c6fbe9409095edb9c48cf7a5cc6e"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "ec226ff722523b8d86cdf1e1698841e0840858eaf36b216e3ca47cd35ad55c1c"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "6fe5775aa7718d18a5995cb8afe386bf3745fd3faf0486d46dbcb5b890fcb82f"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "f741bd0f03fe3ebf1b91e037fbc7f0c7b1d00e9f09dbdbf0f24f43c39754bb2e"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "4055d57229299f76a17764396a5d272f0ad1a39e00a44c2a875a97f89d2ece0d"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "165cf143a4c4eb5cc39dfe42717375b2b645a8a542cf9d9530f2da235fa63b48"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "c8321f646d4471ecb19f76ec85e7b57c2083039184accf659d7ccfb1fb77109b"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "623dc2f679ac3a34a235112426ffc9785c54d61ccee9174d8b255c927f12d143"
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "6daeeb212e7bd4dc576d698e10d6ef3fbd54c6fbe9409095edb9c48cf7a5cc6e"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "e136bc6a5cff9168d7493aaca4b8d4f09ae695d1c7d2f14ca8cfff2629cec8ab"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "ebaf494f475a5a3b1d2ea52050da0b5c4584da0557340242c29632c7cecd955d"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "8c232d04c647d5a21654feec3e562873bdc24a8df575e55ed7b5bb993be8d93b"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "ed893b14e29e610c3e70c7acc0f8b6808931305c6260c6cb530f6920d7856556"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "7ab0830880ee4e6af1f1a20be0fdaf1c47c5d453447ac0b11be9fcbb887da085"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "66a8cf9c6200955add616d23cf30c871dac7540d235f12962ba4fe3a87e6bcdb"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "460481efaf726485e1f5fe274e8e0c0ff81137ea5ebea0277722361bf7da0736"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "31053fe67704b43fc5d1d7564548acc147cd3ae2849c88ff68080f65eff1bc8c"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "2c8fc079667de6bf08b0271c1df8ef0efc81f96ed9e40115c122aea34c8dcacb"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "88403d60a21c2517e2fc29b6753b6166a5a9b2a5cb44791dd6471f31fcfb5875"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "0af3e0063465448f4af04c108c5f0c87ee06c865e1941b6b499c47721f50f120"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "77be0c353bda4aa35f7d04682ad4c7039c249c1702fc937590c811a9535988f7"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "20861d425cc5c98c4070a187b468ca4ca9ca5396e6ce21bfb7270eb85d8e2e3a"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "f7e2d00e97c3bb63cc9124f3bbd5c7a9ceb5966acdc8214f1a3fc4aaa8519a52"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "7ec0daa32f5e52b0400b455386556a251772bbf463b86f271ac798bb79b3d4c0"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "c932d3f543cf27d04b91a65ff73d62ec6e16ef5a125ad87e16e55f615eed664d"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "5cf65785cb28a2041989887bd955313ed460d4eea544e3f39a6f8a47219d45cc"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "5632a8351a190d39f5b737bde0d70ad9b9a96c96443ad2d8da6de3c3b5546737"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "199fbe97997a1b23f5c472537b2bbaeb7ef9401511f6368ba733ef083b46e689"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "0456b8cd565ed78cb6c1354a8bfb8ca3bc20ca43c37aac76173b3a683b793f5f"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "95f47ea706b758511300dea28362b6d13196dde4c6e21e174c2b2f0358aa8655"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "c3ebe09510b19cb7ca9f28eae785c25dc27e8a299e65fd9392a37718063c1d13"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "54e0f01f04e131e507a9c5ddbee8d74d576fcebd4534ce873fbb5e1916d70dca"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "34c028bdb6643606ed10e4c19f9dd2f09831a8e1219c6bf52b2deb1f731ac4b0"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "489f5b56e8e3916ad3ea29e393a1ddffecff770d821ccfee997251f11a2a641c"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "e1ee9fbef889b493cda2b578604cb6ee3d4df405f133ed07b5ed128c7dcdcc12"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "e04c3280c80dc69fbfc60851173bbfcec502ccde15eafdfd55b7f8fb0fbd5275"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "f2a2f9252d61a17a9f78a7f8ee2c29a3538a26eb571d19b1c5e548046e971fa7"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "95f47ea706b758511300dea28362b6d13196dde4c6e21e174c2b2f0358aa8655"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "c3ebe09510b19cb7ca9f28eae785c25dc27e8a299e65fd9392a37718063c1d13"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "bb7679d75f510f36440cb03f28235708d11a8e5730ea1e2d2dfae2963d50d9d2"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "537ebc73315876533f8c86abda14e9799af9893b8fdde9e8caba42fb3d9ae25b"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "9129c43f03c0f73b40af8190523932611685bc466a4ce64f9dc6d5095113745c"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "b1a29cb946ffc74963c4683534f5acca77804e8c7443110eb6d570bef4808a65"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "19a9ca5c1aaad8cc93dd749f9a8a9b19f4fbfad0b7d2f53526bf129132156cc4"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "c1b91794c86afd109b2f27f0faa9377c03cb018a1a2de5f8c78659ad31ec2b3a"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "95f47ea706b758511300dea28362b6d13196dde4c6e21e174c2b2f0358aa8655"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "c3ebe09510b19cb7ca9f28eae785c25dc27e8a299e65fd9392a37718063c1d13"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "bb7679d75f510f36440cb03f28235708d11a8e5730ea1e2d2dfae2963d50d9d2"
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "537ebc73315876533f8c86abda14e9799af9893b8fdde9e8caba42fb3d9ae25b"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "d03b7cd45643e19ad6b0833d13a9ec0160aca97cd116577190a5fa9b3eb284cc"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 0,
+      "pixelSha256": "641dd3b66bdb777e831be398c97347d826bff0f35fa750216314babf980efdd5"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "9102ff778e085bace6ac29d24398511126ade81324d3ea1069dbfd3597b4f80f"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "1ddaf54499d5293656c9fe2ed8b4734ab90fa7777d24ba49c7eea9b4aa5c0713"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "be57294095136b253e322027ac6fe38fb871982da43fb0442375e3bccd05f095"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "d347f8c9f8e8f4489137cb078c1cc0866ee047bccbe4e6d4978a955ea0ffeaff"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "a90e0d33c847b4112376a6b9e3125bf6e3463563ae3e9b262bff3afe15ce3fac"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 100,
+      "weekStart": 1,
+      "pixelSha256": "ee14b4255904d5faa07e7e59ff07704483b921e50de7ea3499c46df5da005262"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "fcef9aef6f57db719b180060386ded8705a977b799b58c4c9603ebe253b40818"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 0,
+      "pixelSha256": "a579d0a1b1632e0868fdbf0d072c2ae4750bcd1e5a5ab2dae84d97e6eca96db5"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "4eaed61926f3a32750e46594e32edaa814aa8e45219a224b1db89e6f61ce10c5"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "43d82b5cf81298865c34edaf8021399b8a010f4417518320cfe045a0ee6c823d"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "99fd837fa2020009c6f313f0bb5511117aa7b299ec4752d4fdb7db80d53296bb"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "61ca02b8dc92510457f19473410e16d91207dc80a3d3b165719027b8afeb4a8b"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "54ef55b5aefc3a3233e7dfbdb0552c68a201e80819a0c6d7493430c6783911e6"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 125,
+      "weekStart": 1,
+      "pixelSha256": "34f395767365145822343e899118581ad1a6dfe8a26e846019fafab9af669418"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "4b850aeb276946e665e964d7948efaf27ea178bc52bcc8b04524e5bba2335c42"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 0,
+      "pixelSha256": "b9eeccf057f7017b5c538556f738b5d1595ebefada5f74e30db37d4b800057ff"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "e6e6bc071a4d8a51edbda7c3090a2a4f0042db139ce01096154f27a7b8a5130d"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "5ef84345f7c264a06c68ac2b6e6c33e9105ae171bc4383830ad1e54a94668ce2"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "eb880503d3dd8bae52dea138daff2db470017f23b12e204a3347528aed260775"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "85269b78cf06e2509104975a5073b9990c824a554fff5f1e116eaa4c2940500e"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "29df8e7a3a4d36075d61cb3c77d7f58f3c3a49298c95e346778d7501e23a4a57"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 150,
+      "weekStart": 1,
+      "pixelSha256": "d29ada49437d20599bfe5ba85d1a4155765b39132e9fcbee7009ded7b15e04af"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "5d3a038196d89ba9f70289c8efebed320747090d658d2a54342a2352a5c42a52"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 0,
+      "pixelSha256": "efd8445b612a327fbc9edcf9a32550f0f586fd6be29e61ad5ff5afc55bb6e911"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "c0eefa6ee4fd121866c7a9da5fd791ee93ece97a39842c4492eed5364c201029"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "74df9b6f7ee615c44bbc673b409388406dabb47ce8f868bef6dcdc11822576d0"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "eb880503d3dd8bae52dea138daff2db470017f23b12e204a3347528aed260775"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "85269b78cf06e2509104975a5073b9990c824a554fff5f1e116eaa4c2940500e"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "36afca13635475390b3e22d0faf309c65dd3f6458fa3526eb80321bb821dd9cd"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 175,
+      "weekStart": 1,
+      "pixelSha256": "d603e885a34a37103d4fdc13b811c5723ff304cea51c33f541ebdcba8bff5b7b"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "706b659ffd074317e8fcc8ab56a43d25778a7ffb2fbae8fc98215b99ed0fe695"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 0,
+      "pixelSha256": "3eafccf452837541f27bfc8b6eb58aecab6bec9c339f3b574b5361e9033743ef"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "d82b43f199072db515f3ff13c94d98c2d54f3beef459a45f951fe276acad7c2d"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "calendar",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "fbfbbb41fb98df655b3de3a2205ea546ea77976ffbceb8720a72b833fb9d3b18"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "clock",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "eb880503d3dd8bae52dea138daff2db470017f23b12e204a3347528aed260775"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "clock",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "85269b78cf06e2509104975a5073b9990c824a554fff5f1e116eaa4c2940500e"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "device-info",
+      "variant": "base",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "36afca13635475390b3e22d0faf309c65dd3f6458fa3526eb80321bb821dd9cd"
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "page": "device-info",
+      "variant": "pro",
+      "scalePercent": 200,
+      "weekStart": 1,
+      "pixelSha256": "d603e885a34a37103d4fdc13b811c5723ff304cea51c33f541ebdcba8bff5b7b"
+    }
+  ]
+}

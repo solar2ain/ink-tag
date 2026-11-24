@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "screens": [
+    {
+      "id": "square-152",
+      "label": "1.54 寸低分",
+      "width": 152,
+      "height": 152
+    },
+    {
+      "id": "square-200",
+      "label": "1.54 寸高分",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "id": "square-240",
+      "label": "1.54 寸 240 方屏",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "id": "rect-212",
+      "label": "2.13 寸低分",
+      "width": 212,
+      "height": 104
+    },
+    {
+      "id": "rect-250",
+      "label": "2.13 寸高分",
+      "width": 250,
+      "height": 128
+    },
+    {
+      "id": "rect-296",
+      "label": "2.66 / 2.9 寸",
+      "width": 296,
+      "height": 152
+    },
+    {
+      "id": "normal-400",
+      "label": "4.2 寸",
+      "width": 400,
+      "height": 300
+    },
+    {
+      "id": "large-600",
+      "label": "5.83 寸",
+      "width": 600,
+      "height": 448
+    },
+    {
+      "id": "large-640",
+      "label": "640 宽屏",
+      "width": 640,
+      "height": 384
+    },
+    {
+      "id": "large-648",
+      "label": "5.83 寸高分",
+      "width": 648,
+      "height": 480
+    },
+    {
+      "id": "huawei-a0",
+      "label": "华为 A0 / A1",
+      "width": 768,
+      "height": 552
+    },
+    {
+      "id": "large-752",
+      "label": "752 高分屏",
+      "width": 752,
+      "height": 568
+    },
+    {
+      "id": "large-800",
+      "label": "800 宽屏",
+      "width": 800,
+      "height": 480
+    }
+  ]
+}

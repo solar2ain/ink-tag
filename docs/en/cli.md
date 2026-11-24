@@ -180,7 +180,7 @@ inktag-cli device -n B892 nfc usage
 inktag-cli device nfc commands calendar
 ```
 
-Both buttons share single/double/long-press actions. NFC has no mode selector or off switch. `device nfc usage` reads device instructions and advertised phone commands; `device nfc commands calendar` generates command text locally. On the phone, use NFC Tools: Write → Add a record → Text. Phone commands require Pro and supporting firmware; reading the device link does not execute a device action.
+Both buttons share single/double/long-press actions. NFC has no mode selector or off switch. `device nfc usage` reads device instructions and advertised phone commands; `device nfc commands calendar` generates command text locally. On the phone, use NFC Tools: Write → Add a record → Text. Phone commands require PRO and supporting firmware; reading the device link does not execute a device action.
 
 Use `setting font info / build / install` for fonts, `setting screen mark / calendar` for the InkTag mark and calendar preferences, and `setting buzzer test` for a short output test.
 
@@ -188,7 +188,7 @@ Use `setting font info / build / install` for fonts, `setting screen mark / cale
 
 Enter passwords through hidden prompts or `--password-stdin`, never command arguments. Successful authentication normally caches a reusable control credential. `--password-stdin` alone does not disable caching; `--no-credential-cache` prevents reading/writing reusable credentials on disk. Device authentication and throttling remain in effect.
 
-Use `setting password status / set / disable`. `setting reset-settings --yes` clears ordinary settings/password while preserving images, Pro, Find and factory identity; an enabled password still requires the original password. `setting clear-user-data --yes` clears user images/playback references while preserving settings, Pro, Find and factory identity. `device restart` only reboots.
+Use `setting password status / set / disable`. `setting reset-settings --yes` clears ordinary settings/password while preserving images, PRO, Find and factory identity; an enabled password still requires the original password. `setting clear-user-data --yes` clears user images/playback references while preserving settings, PRO, Find and factory identity. `device restart` only reboots.
 
 Clearing can use `--expected-device-id` to verify the intended device before acting. This verifies identity; it is not a selector. If a result is unconfirmed, reconnect and inspect state rather than repeating the clearing operation.
 

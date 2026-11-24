@@ -2,7 +2,7 @@
 
 [中文](../zh-CN/releases.md) | English
 
-Download the required files from [GitHub Releases](https://github.com/solar2ain/ink-tag/releases) and read that version's notes. No listed attachment means no download is available yet. This version provides WebUI, the Python CLI, user guides, OTA and complete firmware for adapted boards, and independent plaintext programmer tools. Tools are under `firmware/<controller_board>/` and require an explicitly supplied compatible complete-firmware file.
+Download the required files from [GitHub Releases](https://github.com/solar2ain/ink-tag/releases) and read that version's notes. No listed attachment means no download is available yet. This version provides WebUI, the Python CLI, user guides, OTA and complete firmware for adapted boards, and independent plaintext programmer tools. Tools are under `release/firmware/<controller_board>/` and require an explicitly supplied compatible complete-firmware file.
 
 WebUI, CLI and device firmware may have different versions and need not be updated together. Extract the standalone ZIP and open its HTML, use the static ZIP for your own hosting, or install the CLI bundle with local WebUI. See the [CLI guide](cli.md) for CLI installation.
 

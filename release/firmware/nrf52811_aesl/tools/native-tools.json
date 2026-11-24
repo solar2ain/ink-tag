@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "chip": "nrf52811",
+  "firmwareFamily": "aesl22_nrf",
+  "buildTarget": "nrf52811_aesl",
+  "brand": "aesl",
+  "artifactKind": "tools-only",
+  "fullWriter": "native-v1",
+  "baseline": "inktag-release-v1",
+  "runtimeKind": "windows-powershell-dotnet",
+  "toolsVersion": "0.2.2.5",
+  "sourceToolsVersion": "0.2.2.5",
+  "firmwareIncluded": false,
+  "pythonRequired": false,
+  "releaseApproved": false,
+  "hardwareQualified": false,
+  "files": {
+    "assets/full-writer.bin": {
+      "bytes": 1176,
+      "sha256": "d3e34c2be735e84c484198b95c9b10c92798a20c1abacfbb8af3e3a26b854acf"
+    },
+    "assets/full-writer.json": {
+      "bytes": 1081,
+      "sha256": "0677d7fe0a88cac7f6c25fcfca9cfea7b186e3e3a1b13a765fc0b7a6eda72179"
+    },
+    "flash-hex.bat": {
+      "bytes": 177,
+      "sha256": "a91ac344ff6960f4efb44b4debd801496ca7435b84dd3a218b4a3ce9223825f8"
+    },
+    "flash-zh.bat": {
+      "bytes": 590,
+      "sha256": "63614fdfc7329051ab50b9727d38a13d94308f3d12d62a3354ae55ef57e4a099"
+    },
+    "flash.bat": {
+      "bytes": 454,
+      "sha256": "7dd851cedc2a84ad949ac0d2b6c5ff253f58c257d283fe9604aa1e3a372bede3"
+    },
+    "generate-hex.bat": {
+      "bytes": 180,
+      "sha256": "28cdb886881d544b04b1f1b45d3f383ccf90e0f55afdaa6b48ae8fe82715cfba"
+    },
+    "INITIALIZATION.en.md": {
+      "bytes": 6648,
+      "sha256": "790d9f21d1c8a15e83083551c3ad04411eb8602a50b72fc9d1542c1985b621a1"
+    },
+    "INITIALIZATION.md": {
+      "bytes": 6099,
+      "sha256": "d6d24e6a20487f795848a7337b57023b58f6477576855fad8397d583ddc813c6"
+    },
+    "initialization.ps1": {
+      "bytes": 11101,
+      "sha256": "444a5221e0f0977cd3fac6bb94a119840ce0dd12bb4c118185335022784af611"
+    },
+    "internal/external-full-writer.c": {
+      "bytes": 6780,
+      "sha256": "f98b15606cd5fd82ba48cf4d858fb21f7e3283a3df05b2a9f4b1875d0b812e95"
+    },
+    "internal/external-full-writer.ld": {
+      "bytes": 203,
+      "sha256": "4633c6124b115168fc59ca5c13de8ed34f78153474c244f39b98512d9623010f"
+    },
+    "internal/initialization-bytes.cs": {
+      "bytes": 14230,
+      "sha256": "2f20971608a21d44d83ba12369b00ff65b73a77425e5128b5995d28d27bbfd8a"
+    },
+    "internal/initialization-close-zh.txt": {
+      "bytes": 49,
+      "sha256": "f6b71b0e3e522e310fc875217f0a80ee77005c28e5d05a85e8c8ac1cbcae33d2"
+    },
+    "internal/initialization-dependencies.json": {
+      "bytes": 787,
+      "sha256": "82afb3c4139cd6155d38627c94a370f043037c69253033534e6d6969c75d66a4"
+    },
+    "internal/initialization-format.ps1": {
+      "bytes": 21960,
+      "sha256": "29c44614dfbc471ae1e4ca7a0943d2e230c5962aa1b21e039dfaaa3e8ff3bb17"
+    },
+    "internal/initialization-jlink.ps1": {
+      "bytes": 14341,
+      "sha256": "7dd91da12fb95db6ca2a08b8ac27b68bf642c0906de335abcc4a63b958da75c7"
+    },
+    "internal/initialization-messages.json": {
+      "bytes": 4371,
+      "sha256": "c7f80f7d94c672d695b7334cbaa8bc14f9de88068db0e30c240035ac89f39208"
+    },
+    "internal/initialization-screen-rules.json": {
+      "bytes": 9206,
+      "sha256": "e1d4d86ebea762a5c4606f8d603bc22f27b56adec05f1471be508c59b248b95a"
+    },
+    "internal/initialization-session.ps1": {
+      "bytes": 14956,
+      "sha256": "6b29d72dfbea219f669e3841848bb53010c1c6477be03fda963f9341d1934418"
+    },
+    "LICENSE.native": {
+      "bytes": 34523,
+      "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0"
+    },
+    "native-configs/EL022HWRL-A0.toml": {
+      "bytes": 524,
+      "sha256": "4f7b49bd54d3e264fc822d93badde9948bcb622385cf3e0641f50dd743ec7f48"
+    },
+    "native-configs/EL022HWRL.toml": {
+      "bytes": 604,
+      "sha256": "3f1250d8940c590d2330fd04534cb15bb439a9b222370410771d0f45a6dd368d"
+    },
+    "THIRD_PARTY_NATIVE.md": {
+      "bytes": 9856,
+      "sha256": "4e8f8860022479fbbfea600135d9cf79a27e8fcf94acc3adf88efa98c6e6dc26"
+    }
+  }
+}

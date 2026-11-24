@@ -185,7 +185,8 @@ def _inspect_goodix(path: Path, archive: zipfile.ZipFile, manifest: dict[str, An
             "chip": manifest.get("chip"),
             "release": manifest.get("release"),
             "compatibilityEpoch": int(manifest["compatibilityEpoch"]),
-            "signingKey": manifest["signature"]["key_id"],
+            "signingKey": manifest["signature"].get("key_id"),
+            "signatureStatus": 'unsigned' if parsed.firmware_type == 0 else 'verified',
             "layout": manifest["layout"],
             "payloadLimit": int(application["slot_size"]) - trailer_size,
         },
@@ -215,8 +216,9 @@ def _inspect_onmicro(
             "container": "inktag-ota-v1", "wireTransport": "onmicro-dfu-v3",
             "slotBytes": int(application["slot_size"]),
             "transferBytes": len(firmware),
-            "trailerBytes": ONMICRO_SIGNATURE_TRAILER_SIZE,
-            "signingKey": manifest["signature"]["key_id"],
+            "trailerBytes": ONMICRO_SIGNATURE_TRAILER_SIZE if manifest['signature']['required'] else 40,
+            "signatureStatus": 'verified' if manifest['signature']['required'] else 'unsigned',
+            "signingKey": manifest["signature"].get("key_id"),
             "releaseVersion": int(manifest["releaseVersion"]),
             "compatibilityEpoch": manifest["compatibilityEpoch"],
             "signedBoard": manifest["board"], "signedLayout": manifest["layout"],
@@ -233,6 +235,14 @@ def _inspect_telink(path: Path, archive: zipfile.ZipFile, manifest: dict[str, An
     _, firmware = _application_bytes(archive, application)
     profile = tlsr_package_profile(layout, firmware)
     digest = _verify_sha(firmware, application.get("sha256"))
+    if (manifest.get('signature') or {}).get('required') is False:
+        from .tlsr_base_package import verify_base_payload
+        free=verify_base_payload(manifest,firmware)
+        return OtaPackageInfo(transport='telink',path=path,board=manifest['board'],
+            version=manifest['releaseVersion'],application_bytes=free['declaredSize'],sha256=digest,
+            details=dict(container='inktag-ota-v1',wireTransport='telink-fixed-recovery-v2',
+                transferBytes=len(firmware),trailerBytes=4,signatureStatus='unsigned',
+                compatibilityEpoch=1,crc32=f"0x{free['crc32']:08X}"))
     if len(firmware) < 32 + TLSR_SIGNATURE_TRAILER_SIZE or len(firmware) > profile["limit"]:
         raise ValueError("Telink application size is outside its layout's signed payload limit")
     if firmware[8:12] != b"KNLT":

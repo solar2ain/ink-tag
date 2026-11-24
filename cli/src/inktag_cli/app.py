@@ -64,13 +64,20 @@ from .protocol import (
     screen_profile_name,
     screen_profile_names,
 )
-from .generated_commands_v2 import CapabilityV2
+from .generated_commands_v2 import CapabilityV2, CommandV2, StatusV2
 from .gui_font_roles import MAX_PACKAGE_BYTES, validate_font_package, build_font_config
 from .device_link import build_device_link
 from .password_session import PasswordCredentialStore
 from .device_password import PASSWORD_WARNING
 from .local_service import local_data_directory
-from .transport import InkTagClient, InkTagError, SettingsResetUnconfirmedError, scan_device_status, scan_devices
+from .transport import (
+    InkTagClient,
+    InkTagError,
+    InkTagV2StatusError,
+    SettingsResetUnconfirmedError,
+    scan_device_status,
+    scan_devices,
+)
 
 
 DEFAULT_RECOVERY_RETURN_TIMEOUT = 90.0
@@ -112,7 +119,7 @@ find_identity_app = user_app(help="Manage private Find identities in the local W
 webui_app = user_app(help="Run the InkTag WebUI and its local services.", no_args_is_help=True)
 gui_assets_app = user_app(help="Build or install fonts: numbers, Latin, Chinese and large clock/calendar digits.", no_args_is_help=True)
 password_app = user_app(help="Configure the optional Pro device password. Secrets are read from hidden prompts or stdin.", no_args_is_help=True)
-pins_app = user_app(help="Configure screen, LED, button and buzzer pins.", no_args_is_help=True)
+pins_app = user_app(help="Configure screen, LED and button pins.", no_args_is_help=True)
 
 
 console = Console()
@@ -657,7 +664,7 @@ def activation_install(
     context: typer.Context,
     code: Annotated[str | None, typer.Argument(help="128-character device-bound IKAC1 activation code.")] = None,
     code_file: Annotated[Path | None, typer.Option("--code-file", help="Read the IKAC1 code from a local file instead of exposing it in the command line.")] = None,
-    restore: Annotated[bool, typer.Option("--restore", help="Restore a saved signed code on the same device only when Free authorization is empty; never replaces an existing code.")] = False,
+    restore: Annotated[bool, typer.Option("--restore", help="Restore a saved signed code on the same device only when base authorization is empty; never replaces an existing code.")] = False,
 ) -> None:
     options = _context(context)
     if (code is None) == (code_file is None):
@@ -856,9 +863,19 @@ def gui_assets_info(context: typer.Context) -> None:
 
     async def operation() -> dict[str, int | None]:
         async with options.client() as client:
-            return await client.get_gui_asset_info()
+            try:
+                return await client.get_gui_asset_info()
+            except InkTagV2StatusError as error:
+                if error.status != StatusV2.UNSUPPORTED or error.opcode != CommandV2.GET_GUI_ASSET_INFO:
+                    raise
+                return {"supported": False}
 
-    _emit(options, _run(options, operation()), title="GUI asset package")
+    info = _run(options, operation())
+    if info.get("supported") is False:
+        _emit(options, {**info, "message": "This device does not support user font packages."},
+              title="GUI asset package")
+        return
+    _emit(options, info, title="GUI asset package")
 
 
 @gui_assets_app.command("install")
@@ -942,7 +959,7 @@ def led_policy(
     context: typer.Context,
     preset: Annotated[
         str,
-        typer.Argument(help="Free preset: all, critical or off."),
+        typer.Argument(help="base preset: all, critical or off."),
     ],
 ) -> None:
     options = _context(context)
@@ -1743,6 +1760,35 @@ def find_disable(
             )}
 
     _emit(options, _run(options, operation()), title="Find disabled")
+
+
+@find_app.command("unregister")
+def find_unregister(
+    context: typer.Context,
+    server: Annotated[str | None, typer.Option(help="Local WebUI service holding the current Find identity.")] = None,
+    yes: Annotated[bool, typer.Option("--yes", "-y", help="Confirm device Find owner removal without prompting.")] = False,
+) -> None:
+    """Remove the connected device's Find registration and keep the local identity."""
+    options = _context(context)
+    if len(options.target_selections) > 1:
+        raise typer.BadParameter("Find owner unregister binds one device at a time; select one name/address")
+    _require_confirmation(options, yes, "Unregister Find from the connected device and turn off Find broadcasts?")
+
+    async def prove(fingerprint: str, nonce: bytes, device_id: str) -> bytes:
+        result = await asyncio.to_thread(
+            local_service_request, server, "/api/v1/find/identity/public-only/unregister/prove",
+            {"fingerprintHex": fingerprint, "nonceHex": nonce.hex(), "deviceId": device_id},
+        )
+        payload = result.get("payloadHex")
+        if not isinstance(payload, str) or not re.fullmatch(r"[0-9a-fA-F]{82}", payload):
+            raise InkTagError("Local Find service returned an invalid unregister proof")
+        return bytes.fromhex(payload)
+
+    async def operation() -> dict[str, Any]:
+        async with options.client(auto_sync_time=False) as client:
+            return {"ok": True, **await client.unregister_find_owner(prove)}
+
+    _emit(options, _run(options, operation()), title="Device Find registration removed")
 
 
 @find_app.command("query")
@@ -2606,10 +2652,10 @@ def led_locate(
     context: typer.Context,
     stop: Annotated[
         bool,
-        typer.Option("--stop", help="Stop the active local LED/buzzer locator."),
+        typer.Option("--stop", help="Stop the active local LED locator."),
     ] = False,
 ) -> None:
-    """Start or stop the device's bounded local LED/buzzer locator."""
+    """Start or stop the device's bounded local LED locator."""
     options = _context(context)
 
     async def operation() -> str:
@@ -2642,23 +2688,6 @@ def display_ghost_clean(
         "cycles": cycles,
         "deviceReply": reply,
     })
-
-
-def buzzer_play(
-    context: typer.Context,
-    duration_ms: Annotated[
-        int,
-        typer.Option(min=20, max=5000, help="Bounded output duration in milliseconds."),
-    ] = 500,
-) -> None:
-    options = _context(context)
-
-    async def operation() -> str:
-        async with options.client() as client:
-            return await client.test_buzzer(duration_ms)
-
-    reply = _run(options, operation())
-    _emit(options, {"ok": True, "action": "buzzer-test", "durationMs": duration_ms, "deviceReply": reply})
 
 
 @ota_app.command("check")
@@ -3128,7 +3157,7 @@ def _organize_user_commands():
     device_name=user_app(help='Name printed on the device information page (printable ASCII).')
     device_url=user_app(help='URL/text in the device information QR code; not the BLE name.')
     button=user_app(help='Single/double/long-press actions shared by both buttons.')
-    buzzer=user_app(help='Play a short buzzer test. Configure wiring with setting pins.')
+    advertising=user_app(help='InkTag connectable advertising; leaves Find My and scheduled display updates running.')
     backend=user_app(help='Manage the local Find account, identities, queries and tracking.')
     account=user_app(help='Apple account login and verification through the local Find service.')
     tracking=user_app(help='Manage local location query schedules and saved history.')
@@ -3156,6 +3185,8 @@ def _organize_user_commands():
     time_app.registered_groups=[]
 
     command(setting,'show',settings.settings_show)
+    command(advertising,'show',settings.advertising_show)
+    command(advertising,'set',settings.advertising_set)
     command(ble_name,'show',settings.ble_name_show)
     command(ble_name,'set',device_rename,help='Set the Bluetooth broadcast name; optionally update managed links.')
     command(device_name,'show',settings.device_name_show)
@@ -3168,19 +3199,20 @@ def _organize_user_commands():
     command(pins_app,'restore-screen-led-defaults',pins_defaults)
     command(button,'show',settings.button_show)
     command(button,'set',settings.button_set)
-    command(buzzer,'test',buzzer_play)
     nfc_app.registered_commands=[]
     command(nfc_app,'usage',settings.nfc_usage)
     command(nfc_app,'commands',settings.nfc_commands,offline=True)
     for name,group in [('ble-name',ble_name),('device-name',device_name),('device-url',device_url),
-                       ('screen',screen_app),('pins',pins_app),('button',button),
-                       ('font',gui_assets_app),('password',password_app),('buzzer',buzzer)]:
+                       ('screen',screen_app),('pins',pins_app),('button',button),('advertising',advertising),
+                       ('font',gui_assets_app),('password',password_app)]:
         setting.add_typer(group,name=name)
     command(setting,'reset-settings',device_reset_settings,help='Clear ordinary settings/password; preserve images, Pro, Find and factory identity.')
     command(setting,'clear-user-data',device_clear_user_data,help='Clear user images and playback references; preserve settings, Pro, Find and factory identity.')
 
     # Device Find actions and backend identity operations have separate scopes.
     select(find_app,[(n,n) for n in ('status','enable','disable')])
+    # Keep the original selection so unregister can reject a batch before scanning.
+    find_app.command('unregister')(find_unregister)
     find_app.registered_groups=[]
     backend.command('status')(findmy.status)
     backend.command('query')(find_query)

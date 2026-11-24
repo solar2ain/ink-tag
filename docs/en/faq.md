@@ -10,7 +10,7 @@ Refresh duration depends on colour, temperature, controller and mode. Transfer c
 
 ## Unavailable features and readings
 
-Capabilities depend on hardware, firmware and entitlement. nRF52811 and DA14585 are Free-only and use actual picture capacity without activation. On Pro-capable targets, activation unlocks all available slots. Unavailable measurements display `--`, not zero. Capacity remains the device-reported limit for the current panel. The Free `InkTag` mark cannot be hidden; authorized Pro devices can hide `InkTag Pro`. See [Pro features and activation](pro.md) for the Apple Find My tracker, NFC interaction and code process.
+Capabilities depend on hardware, firmware, and edition. nRF52811 and DA14585 offer BASIC only. Picture capacity depends on available storage and the current panel. BASIC always shows the InkTag mark. PRO can hide the InkTag PRO mark. See [PRO features and activation](pro.md) for Find My, NFC, and activation.
 
 ## Time after power loss
 

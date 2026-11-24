@@ -1,0 +1,24 @@
+# Keyless native base entry; identical in private and curated base source trees.
+REPO_ROOT ?= $(abspath ../../../..)
+SDK_ROOT := $(abspath $(REPO_ROOT)/.sdk/onmicro/OM6626.SDK)
+TOOLCHAIN_PATH ?= $(abspath $(REPO_ROOT)/.toolchains/arm/gcc-arm-none-eabi-10.3-2021.10/bin)
+BOARD ?= om6626_zkc
+PYTHON ?= python3
+OTA_OUTPUT ?= $(REPO_ROOT)/_build/onmicro/$(BOARD)/app-ota.zip
+SUPPORTED_BOARDS := om6626_zkc om6626_zkcxxb
+ifeq ($(filter $(BOARD),$(SUPPORTED_BOARDS)),)
+$(error Unsupported OM family; expected one of $(SUPPORTED_BOARDS))
+endif
+.PHONY: all build materialize gui-asset-package ota
+.NOTPARALLEL:
+all: build
+materialize:
+	$(PYTHON) $(REPO_ROOT)/tools/sdk/materialize-onmicro-port.py --repo "$(REPO_ROOT)" --board $(BOARD) --next-layout --profile base
+build: materialize
+	PATH="$(TOOLCHAIN_PATH):$$PATH" $(MAKE) -C "$(SDK_ROOT)/projects/ble_app_inktag_base/gcc" all
+	PATH="$(TOOLCHAIN_PATH):$$PATH" $(MAKE) -C "$(SDK_ROOT)/projects/inktag_om_swap_boot_base/gcc" all
+gui-asset-package:
+	$(PYTHON) $(REPO_ROOT)/tools/sdk/make-gui-asset-package.py --fonts "$(REPO_ROOT)/firmware/common/gui/inktag_gui_fonts.c" --output "$(REPO_ROOT)/_build/onmicro/$(BOARD)/InkTag-$(BOARD)-gui-assets.itfa" --generation 1
+
+ota: build
+	$(PYTHON) $(REPO_ROOT)/tools/sdk/package-onmicro-base-ota.py --app-elf "$(SDK_ROOT)/projects/ble_app_inktag_base/gcc/InkTag-$(BOARD)-base.elf" --app-bin "$(SDK_ROOT)/projects/ble_app_inktag_base/gcc/InkTag-$(BOARD)-base.bin" --recovery-elf "$(SDK_ROOT)/projects/inktag_om_swap_boot_base/gcc/InkTag-om6626-recovery-base.elf" --recovery-bin "$(SDK_ROOT)/projects/inktag_om_swap_boot_base/gcc/InkTag-om6626-recovery-base.bin" --build-target om6626_zkel --out "$(OTA_OUTPUT)"

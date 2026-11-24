@@ -1,0 +1,1431 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "0988ba2d0ac9817eb14dd14b379ed3eb2fdf66c2",
+  "profileMacro": "INKTAG_BUILD_PRO",
+  "default": "pro",
+  "translationUnitsPreserved": true,
+  "items": [
+    {
+      "path": "inktag_gr_findmy_pro.c",
+      "originalSha256": "4286602966b9b43a54cb63ee5b54b2bd6f9d9b7c3b51d38ae15dfaa1355f5320",
+      "kind": "pro-module",
+      "nativeBasename": "inktag_gr_findmy.c"
+    },
+    {
+      "path": "inktag_gr_findmy_pro.h",
+      "originalSha256": "9f5840111e5933a3a7cb1442e17404ff20331a77f6a3995f5acee441349c5d2a",
+      "kind": "pro-module",
+      "nativeBasename": "inktag_gr_findmy.h"
+    },
+    {
+      "path": "inktag_gr_find_public_store_pro.c",
+      "originalSha256": "bdf41ad871a8d6bf3d98b946b7b83c4cea31899018ea7bf1a503999a02edf38a",
+      "kind": "pro-module",
+      "nativeBasename": "inktag_gr_find_public_store.c"
+    },
+    {
+      "path": "inktag_gr_find_public_store_pro.h",
+      "originalSha256": "e02b5eb0a1be6be41cde0730d4df472faef28cd112c50a52cc6c0394b9e99246",
+      "kind": "pro-module",
+      "nativeBasename": "inktag_gr_find_public_store.h"
+    },
+    {
+      "path": "inktag_gr_p224_public_pro.c",
+      "originalSha256": "7a21ecb6ce809b78ece83386c6dfc54f65a2ca621f4553adaabfbadd02048c64",
+      "kind": "pro-module",
+      "nativeBasename": "inktag_gr_p224_public.c"
+    },
+    {
+      "path": "inktag_gr_p224_public_pro.h",
+      "originalSha256": "04d4200b2a4474db60b736e55d2c83439db58c8055da02e72bb4c63a37fb9db2",
+      "kind": "pro-module",
+      "nativeBasename": "inktag_gr_p224_public.h"
+    },
+    {
+      "path": "inktag_gr_find_init_pro.inc",
+      "originalSha256": "ec80f07abd35a722d0bf941056beb7bb325721497dd557214425b0e709f021ba",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 5027
+    },
+    {
+      "path": "inktag_gr_find_telemetry_pro.inc",
+      "originalSha256": "bdbb3b48a1594161a079324d26eae007502238d3abd1e106fbdc79dd3aae36a9",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4957
+    },
+    {
+      "path": "inktag_gr_find_event_disconnect_pro.inc",
+      "originalSha256": "5537f3fb93d5398daea655f5fc22ac95ca0fc989529924a47de392c71440fc43",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4924
+    },
+    {
+      "path": "inktag_gr_find_event_connect_pro.inc",
+      "originalSha256": "1c5c7f70efbc3aaf85f31e54b0bd21c4f96ab99bab4f4c316252e8b6e96ebdfa",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4842
+    },
+    {
+      "path": "inktag_gr_find_event_connect_telemetry_pro.inc",
+      "originalSha256": "2f9c2efe66caeebc2021b55329e08114fd97d3dfe4711612e9c5653dc0ee429e",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4824
+    },
+    {
+      "path": "inktag_gr_find_event_adv_stop_pro.inc",
+      "originalSha256": "af3816fcbde90411841c20b09db603b4e471210c558febcdc839b4d0ea871331",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4786
+    },
+    {
+      "path": "inktag_gr_find_event_start_retry_pro.inc",
+      "originalSha256": "a87f53f735dd974e1ab024b0fa911b1477cb659687271db4d67e7c161450385b",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4764
+    },
+    {
+      "path": "inktag_gr_find_event_start_ready_pro.inc",
+      "originalSha256": "58f29ab5c998fbae09eb4473d4c03f4d1f1b15ed61cfd35f43fd6632a13c743c",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4753
+    },
+    {
+      "path": "inktag_gr_find_event_adv_start_pro.inc",
+      "originalSha256": "08c5051f7f478ce9af71e417a2e019d9d6a4d742073c01d938d241bf93b6d1f7",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4739
+    },
+    {
+      "path": "inktag_gr_find_advertising_init_pro.inc",
+      "originalSha256": "ce410bbfbdfc35913bace463237d5617aee0c8e61cf29dcb94e1625721d3fc7d",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4697
+    },
+    {
+      "path": "inktag_gr_find_address_capture_pro.inc",
+      "originalSha256": "6aaa01f2c2270ab100403b32ed7fd9acdfefbe27ee83a9fe964194a6950627ef",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4661
+    },
+    {
+      "path": "inktag_gr_find_time_pro.inc",
+      "originalSha256": "5f694e2f005fda8494c1f3b33c0edf5001131af4e08d8f0709cbac8c77f705c6",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4583
+    },
+    {
+      "path": "inktag_gr_find_poll_pro.inc",
+      "originalSha256": "09f68a5a82ce1b1f94044be6bdb56682ffd75a355b47be30419c89e758af547b",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3622
+    },
+    {
+      "path": "inktag_gr_find_mux_pro.inc",
+      "originalSha256": "0e8c9a2422614d39a83bad4d461c24e68781fff14807cf7bdca4dbcfdfcc6227",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 2565
+    },
+    {
+      "path": "inktag_gr_find_restart_pro.inc",
+      "originalSha256": "e47b849f5c4c8c80e82237efdfbc18e02d75e389e14bf1e1d6df48cf422fcfa8",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 2550
+    },
+    {
+      "path": "inktag_gr_find_advertising_pro.inc",
+      "originalSha256": "3b07a8d4704bc86457d0beb7593ba11d31c278dd54ee046cf1e8b419c3bf8126",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 2504
+    },
+    {
+      "path": "inktag_gr_find_address_pro.inc",
+      "originalSha256": "f6850ed779ce51b6bf91ef15031019a5621a5d9d9a4de86236678e978b1e7e7e",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 2271
+    },
+    {
+      "path": "inktag_gr_find_identity_pro.inc",
+      "originalSha256": "4814290dba102423c6043d6cb796f00c7150f9d4e89f9c5433210cbebaeb06f8",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 2159
+    },
+    {
+      "path": "inktag_gr_find_access_pro.inc",
+      "originalSha256": "2d96813ba74a2a79b71d426f958e5be58fd9763fa74bc586c37fe06c87cd110d",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 523
+    },
+    {
+      "path": "inktag_gr_find_state_pro.inc",
+      "originalSha256": "cb523d088e1fe0a422dfcfeb22337b366b8d9576a18d61c9d800bc2074a5d04a",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 335
+    },
+    {
+      "path": "inktag_gr_find_advertising_state_pro.inc",
+      "originalSha256": "0f28c434be30e11dd913feb762c71faca8c0c635a5db12e52cdaff12bf3ab479",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 255
+    },
+    {
+      "path": "inktag_gr_find_types_pro.inc",
+      "originalSha256": "32daa46202380c13a9382810dfbc82912e22ac0f150f1ec58e1e565bdb30dd0c",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 213
+    },
+    {
+      "path": "inktag_gr_find_owner_state_pro.inc",
+      "originalSha256": "85e344ae08975b1eba761441b40414f9dae68010fa1ced2f217ab72aed34832f",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 14
+    },
+    {
+      "path": "inktag_gr_activation_protocol_pro.inc",
+      "originalSha256": "12c588be807ed1199563709469feadd4c6e90c27614d4f5249c28313dbc573c7",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1455
+    },
+    {
+      "path": "inktag_gr_find_config_protocol_pro.inc",
+      "originalSha256": "52c9814f2e32808c287ab09a4aa8cf11439f76877d2b427d24ba7e60da0f56a9",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 2516
+    },
+    {
+      "path": "inktag_gr_find_owner_protocol_pro.inc",
+      "originalSha256": "fcf20e8881c28ed413cf3af9e826184cf99c19baa75634321c1e8d233235c5be",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 2665
+    },
+    {
+      "path": "inktag_gr_security_random.inc",
+      "originalSha256": "6b2b80fbdb26c92cc90d869ea5b90c465c6a9b07bf96284498455b03835b6708",
+      "kind": "base-security-foundation"
+    },
+    {
+      "path": "inktag_gr_startup_measure.inc",
+      "originalSha256": "2a410b4e804a36b740a25a5ec6bd92c654ba749cc2f3086b3ca0882a36925c5c",
+      "kind": "pro-increment"
+    },
+    {
+      "path": "inktag_gr_activation_pro.inc",
+      "originalSha256": "393f5c840b76bcb01a5608321eb110ce6bb4cca1d1069c2289db1e603c9b7021",
+      "kind": "pro-activation-adapter",
+      "nativeBasename": "inktag_gr_activation.c"
+    },
+    {
+      "path": "inktag_gr_clock_partial_pro.inc",
+      "originalSha256": "5e03eb3dd321debd2d8ddb242a19d72fb54edeb2ccfcf9529e41573419e8d928",
+      "kind": "pro-increment",
+      "nativeBasename": "inktag_gr_clock_partial.inc",
+      "currentCanonicalSha256": "2229869678138810ad1d805ab87037874351650be138751170b9dd0654c8a339",
+      "changeDecision": "2026-11-11 human: only actual NFC image work skips temperature; preserve ordinary and command-only reads"
+    },
+    {
+      "path": "inktag_gr_clock_400x300_pro.inc",
+      "originalSha256": "4643aa603017bbfd6a4e60d12864fae13d87ab0236ddb47fec2737c7addd1385",
+      "kind": "pro-increment",
+      "nativeBasename": "inktag_gr_clock_400x300.inc",
+      "currentCanonicalSha256": "e8d5b841f3b53ced648f7627f58ef430065dec7ff4769102b66f68bfa5db5409",
+      "changeDecision": "2026-11-11 human: only actual NFC image work skips temperature; preserve ordinary and command-only reads"
+    },
+    {
+      "path": "inktag_gr_nfc_stream_pro.inc",
+      "originalSha256": "3ad96b36167cbf9a8551e9ed3bbd32880a689e09f2f3ae320141e55b7dff465f",
+      "kind": "pro-increment",
+      "nativeBasename": "inktag_gr_nfc_stream.inc",
+      "currentCanonicalSha256": "2981bfd21250a07878da6c02982973c76fc6037a6875bb47da63ae0d6267f4fb",
+      "changeDecision": "2026-11-23 integration: retain reviewed Goodix 0.2.2 App sources"
+    },
+    {
+      "path": "inktag_gr_nfc_image_pro.inc",
+      "originalSha256": "9bb199dc72fea070f5d0f80c32960582f2517f44dbc87b9e22f4b768010e7fd0",
+      "kind": "pro-increment",
+      "nativeBasename": "inktag_gr_nfc_image.inc",
+      "currentCanonicalSha256": "78b5c008e09352ee8b3c38bd9ee5dee311f2536ca79a07ef8b5bcd05c9e913dd",
+      "changeDecision": "2026-11-23 integration: retain reviewed Goodix 0.2.2 App sources"
+    },
+    {
+      "path": "inktag_gr_nfc_pro.c",
+      "kind": "pro-module",
+      "nativeBasename": "inktag_gr_nfc.c",
+      "originalSha256": "035ac55cfe006785f222ef09d2e1d101b381224cdf197aa0cc9994fd4e9ddafc",
+      "currentCanonicalSha256": "8fc9865975a4256ed904f7a42af55f29fd9b06c8b37db8bdf3b34f1496bfe8be",
+      "changeDecision": "2026-11-23 integration: retain reviewed Goodix 0.2.2 App sources"
+    },
+    {
+      "path": "inktag_gr_nfc_pro.h",
+      "kind": "pro-module",
+      "nativeBasename": "inktag_gr_nfc.h",
+      "originalSha256": "e30eaa6f9596b0a8885c00853e151adf895340f873186a9a770ed0d3b0248f78",
+      "currentCanonicalSha256": "10863f4f4dbe5c2808db2cd6059b53dbe74e059c3e2060add5126b45e19f777a",
+      "changeDecision": "2026-11-23 integration: retain reviewed Goodix 0.2.2 App sources"
+    },
+    {
+      "path": "inktag_gr_app_state_pro.inc",
+      "kind": "pro-increment",
+      "changeDecision": "2026-11-23 integration: retain reviewed Goodix 0.2.2 App sources",
+      "sourceCommit": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "currentCanonicalSha256": "f19f5e8e9ba48c9a2e54e3c5a3654b66cb71d03303f83b6bd1a2bec5504f429f",
+      "composedFrom": [
+        {
+          "path": "inktag_gr_nfc_state_pro.inc",
+          "kind": "pro-increment",
+          "original": "inktag_gr_app.c",
+          "originalLine": 361,
+          "originalSha256": "a5e7aac9cb565f7f2487a48cc8b410260f583d355d6e2502ecb59f45b8a9cc56",
+          "compositionInputSha256": "b4ef67e10618538098d1202a9ec85f6cd0c03004e205ef47bea5d7591c49c806"
+        },
+        {
+          "path": "inktag_gr_simulation_state_pro.inc",
+          "kind": "pro-increment",
+          "original": "inktag_gr_app.c",
+          "originalLine": 364,
+          "originalSha256": "f08d7e167501b40e210901dff0b4a3d0d5e63a4a39699a602823f0fcdffdd281",
+          "currentCanonicalSha256": "9d627ceae8d1f3b10d8ccdac514af4337f741653557eca1a880b34c3bfc7f650",
+          "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base",
+          "compositionInputSha256": "9d627ceae8d1f3b10d8ccdac514af4337f741653557eca1a880b34c3bfc7f650"
+        }
+      ]
+    },
+    {
+      "path": "inktag_gr_nfc_commands_pro.inc",
+      "kind": "pro-increment",
+      "changeDecision": "2026-11-23 integration: retain reviewed Goodix 0.2.2 App sources",
+      "sourceCommit": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "currentCanonicalSha256": "a6c3ec2c3dbddbce030486ee6adc5716150b4c6f33dc412d145f7e73046d1f55",
+      "composedFrom": [
+        {
+          "path": "inktag_gr_nfc_command_report_pro.inc",
+          "kind": "pro-increment",
+          "original": "inktag_gr_app.c",
+          "originalLine": 3404,
+          "originalSha256": "e7d68e8c92b394bd8c9c91e972dbae5c82dedbe6780089521fce926e2f0c4b03",
+          "compositionInputSha256": "1b4acd9e568288ccb70f3d2d99b92d2e39604e1ada3062b0095ebf1fc72eccf8"
+        },
+        {
+          "path": "inktag_gr_nfc_command_abort_pro.inc",
+          "kind": "pro-increment",
+          "original": "inktag_gr_app.c",
+          "originalLine": 3413,
+          "originalSha256": "2c431611fdd93ebd26a96de53a78612ff4a0a70fe29863160be91c2a41924985",
+          "compositionInputSha256": "793d2ffdeb26c33530b0e0a0af6ee8ee902c7055c7a2af45bcfdf2eb1744b7ad"
+        },
+        {
+          "path": "inktag_gr_nfc_command_commit_pro.inc",
+          "kind": "pro-increment",
+          "original": "inktag_gr_app.c",
+          "originalLine": 3426,
+          "originalSha256": "c82368e18b89e55c6f3ccfefb67c3331614cf115d5e0243ca5eda9c431908459",
+          "compositionInputSha256": "be0214339c9ee1bd60ee1cbe90a0b6d883e2f9f084d5849c7c0aa581af658db9"
+        },
+        {
+          "path": "inktag_gr_nfc_command_binding_pro.inc",
+          "kind": "pro-increment",
+          "original": "inktag_gr_app.c",
+          "originalLine": 3440,
+          "originalSha256": "bb504ed1646089c49bb3a4ede53d5dbb8989ed453c1e0135f2933e37191d5e51",
+          "compositionInputSha256": "f5249afb4fb0f258bbacfe41009e2a3e8f96e3f71da021bc05543a4785707585"
+        },
+        {
+          "path": "inktag_gr_process_nfc_command_action_pro.inc",
+          "kind": "pro-increment",
+          "original": "inktag_gr_app.c",
+          "originalLine": 3474,
+          "originalSha256": "343451cac744a0d0cb45893d331581f8f5d292924cfd7282f740880763788146",
+          "compositionInputSha256": "3434d11e510f975695c934e523f437f6af99e42d3fb3c45390f7622ecc3dffa9"
+        }
+      ]
+    },
+    {
+      "path": "inktag_gr_process_nfc_input_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3505,
+      "originalSha256": "b632713f7fcab2d59343b8dc0ad054dfc30f6d6c5ee18df0084fe9719a0ca00d",
+      "currentCanonicalSha256": "24cd9e9bd8e41efa776e9006a1f84743f9a731faf8234785bd7c9a3754a5fe10",
+      "changeDecision": "2026-11-23 integration: retain reviewed Goodix 0.2.2 App sources"
+    },
+    {
+      "path": "inktag_gr_nfc_worker_5_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4036,
+      "originalSha256": "6bed6e95f83ef4220040a74fb928c4425abc210fdc4ba044bb72597d8424a90a"
+    },
+    {
+      "path": "inktag_gr_nfc_worker_4_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3889,
+      "originalSha256": "bc468e0ed63fb1bd36387dfbf581e8d010ea01a83216fe7e83cbe4d4e46add6d"
+    },
+    {
+      "path": "inktag_gr_nfc_worker_3_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3841,
+      "originalSha256": "bc468e0ed63fb1bd36387dfbf581e8d010ea01a83216fe7e83cbe4d4e46add6d"
+    },
+    {
+      "path": "inktag_gr_nfc_worker_2_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3793,
+      "originalSha256": "ec068daddf92c08b4836293f59e9e1a4ad00d02d6ce4f4b1978592de2f779e0e"
+    },
+    {
+      "path": "inktag_gr_nfc_init_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 5045,
+      "originalSha256": "7d0852d49f3d7e5433eb7857a87cc2ba9fab4994d1698af225dffdc74b777369"
+    },
+    {
+      "path": "inktag_gr_nfc_startup_uri_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 5068,
+      "originalSha256": "d5734c15492676119d04d83132f1cf385bd505d5ef48e468a14ca606a56d246d"
+    },
+    {
+      "path": "inktag_gr_v2_send_nfc_channel_snapshot_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 567,
+      "originalSha256": "d0e7736e9dc2ca06880e68a7772e74ea128d28dd4f88e73f231589cbf4fee840"
+    },
+    {
+      "path": "inktag_gr_v2_send_nfc_capabilities_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 979,
+      "originalSha256": "026df94715861ada91acdcfebf1bcd9a46cc37e861aa57401e3c8abcf48aa028"
+    },
+    {
+      "path": "inktag_gr_v2_send_nfc_status_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1004,
+      "originalSha256": "7382b997f21cf7ad496b39147a68db6a9cb9966dddf6ee475ae2222866a27aa0"
+    },
+    {
+      "path": "inktag_gr_v2_get_nfc_ndef_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1050,
+      "originalSha256": "8d9b44dd66a2b9369d0921b06126bde96b9adb790b0ca833cf10593c9f4c063a"
+    },
+    {
+      "path": "inktag_gr_v2_set_nfc_ndef_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1070,
+      "originalSha256": "34a7010356e2c75c17845b1fb4a4b5ed923b52526c9f06b11f4d5a0a488a1f9e"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_16_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4620,
+      "originalSha256": "ea5e154a1a94c786d505a4fd0c4bcf4a66a91f69fa3aefc855fa80a4e0952070"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_15_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4375,
+      "originalSha256": "33c2bcf51fd175475e4556074718c80d150e488be80f6f9b192ce923ad827d84"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_14_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4102,
+      "originalSha256": "57fa30f832ddd725ebd526649d446777fbc4f2fed602c99f4709b5aad036615f"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_13_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3673,
+      "originalSha256": "56cbef5bda522f615ebc52e889748df1fe75e222111e6f73419b6cb4f6dd2012"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_12_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3609,
+      "originalSha256": "e76c7d53ef5e8b2e382b648fe40873a86f0ec9ca8161fed1d39470aa5cf38a21"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_10_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 1708,
+      "originalSha256": "0c710174994e7587b6429b4fab2706dd11dc164b59cc2a311b2a4a69c55c4055"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_9_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 1695,
+      "originalSha256": "85bf6ea556887eace5e20ec430bbec84009338ab816ec8bb8bec2d93ea193dd0"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_8_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 1689,
+      "originalSha256": "dba92f326aedcd22be20d875db8ac1f4f2bfe8f353037c8e743ed2c80d3a5665"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_7_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 1685,
+      "originalSha256": "d188de0bcf49a9938330412cd116b8932f03fea99cb2e227e5b2d9afc73f43ce"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_6_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 1677,
+      "originalSha256": "3778e7a565164570d42eeb06ac08bf52f765e4c84b825c10c723e71851718c36"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_5_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 843,
+      "originalSha256": "e76c7d53ef5e8b2e382b648fe40873a86f0ec9ca8161fed1d39470aa5cf38a21"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_4_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 647,
+      "originalSha256": "d3497210b34574bc6aa664318500d19552811719c3e1679150f5f1dc012f7541"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_3_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 617,
+      "originalSha256": "bf23abdca5f32faeeadd86f0ff3d5d5d2c8f3f6111b7278b2f6a413e80014616"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_2_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 285,
+      "originalSha256": "ee4bd0713fcc2dd8040318b0305bf4033c9287679650bac9dd4c81e4ed65bf82"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_1_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 201,
+      "originalSha256": "d1f090d0166d2d2e7b891326ee967748a51cb4fc8a8f5a7acb452dd3780823c2"
+    },
+    {
+      "path": "inktag_gr_nfc_protocol_bulk_2_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 3279,
+      "originalSha256": "b13e0537f03cf4d9c2eb2cf1e047ec57402f9893e885f1bac61c6a43d6ebb923"
+    },
+    {
+      "path": "inktag_gr_nfc_protocol_bulk_1_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 2335,
+      "originalSha256": "1494ec65a6edd93744ffd57be97a4dd1f2f34bde7b90d5447f9e14c082a582c5"
+    },
+    {
+      "path": "inktag_gr_nfc_protocol_packaged_1_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 981,
+      "originalSha256": "54ecb4972bae063bae1c161f63c3eab7ee77d8bdea6972a52f1ff056aea0c89f"
+    },
+    {
+      "path": "inktag_gr_nfc_protocol_capability_1_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 227,
+      "originalSha256": "51c66ee585844bc4f2fb2854f3dd14f9c6e497844a6ac36f2be47969906edfe7"
+    },
+    {
+      "path": "inktag_gr_nfc_simulation_busy_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 620,
+      "originalSha256": "d4e1c8895664a70629e134da244194b8973bb30269618df90114e2843f4027ae"
+    },
+    {
+      "path": "inktag_gr_aux_io_backend_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_aux_io.c",
+      "originalLine": 1,
+      "originalSha256": "dad653a45f7d2f219e0d32f5195f5d56d290bb0bb4f699218f3585f69b905278",
+      "changeDecision": "2026-11-23 integration: retain reviewed Goodix 0.2.2 App sources",
+      "currentSha256": "b68cad6415f5b00494316f0e485647c93405e64fe8fdc50f3ff409abf99ffeb8",
+      "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+      "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+      "currentCanonicalSha256": "03c2733338d83e8bb8566f06e2111c9c7c99d68ab1e1b34b6f26a62be120d854",
+      "currentChangeDecision": "2026-11-10 human: reserved AUX wire tail is opaque; button-only implementation; base naming; no retired output API",
+      "beforeReservedRetirementCanonicalSha256": "a1d759893bc5d9c8323784ad9560c01d8b25cf0ddb42b1b0173627450cf5c040"
+    },
+    {
+      "path": "inktag_gr_input_actions_pro.inc",
+      "kind": "pro-increment",
+      "changeDecision": "2026-11-23 integration: retain reviewed Goodix 0.2.2 App sources",
+      "sourceCommit": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "currentCanonicalSha256": "e5292b7767cbf258e1c2a60fac42b53f74a490692bd773268baa45fbfeb7295a",
+      "composedFrom": [
+        {
+          "path": "inktag_gr_custom_input_dispatch_pro.inc",
+          "kind": "pro-increment",
+          "original": "inktag_gr_app.c",
+          "originalLine": 3265,
+          "originalSha256": "47626cabcd3b27a29e2bc39f465d8b8f663c3561d516575d337b6a9875a5f5e6",
+          "changeDecision": "2026-11-10 human: custom button/GPIO/actions and retired AUX output Pro; exact GR maintained defaults have no admitted stock software key",
+          "currentSha256": "2e6adf98ce0ad4d494f5c09595f4a631dc64e5c8b4c85e7925066d627b7ad3d7",
+          "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+          "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+          "currentCanonicalSha256": "dc0602dd23d2a64fa394bb4f700f76109a34bcbf22457b79673db55d1949d1ff",
+          "compositionInputSha256": "dc0602dd23d2a64fa394bb4f700f76109a34bcbf22457b79673db55d1949d1ff"
+        },
+        {
+          "path": "inktag_gr_process_nfc_slideshow_command_pro.inc",
+          "kind": "pro-increment",
+          "original": "inktag_gr_app.c",
+          "originalLine": 3351,
+          "originalSha256": "53b0acf5da2e783a91d51c7fb0003edd5d8b63f8c769c826da68c07a0fc3f39c",
+          "compositionInputSha256": "e76536e5b32df41807f79442deaad67bfc749f93c66c0b5aeaf919254a0eec3a"
+        },
+        {
+          "path": "inktag_gr_custom_input_busy_pro.inc",
+          "kind": "pro-increment",
+          "original": "inktag_gr_app.c",
+          "originalLine": 3394,
+          "originalSha256": "4f2919f137248f5867a6616f6608e4ec19a9ddb6de5bdd7130c289a5982bd204",
+          "changeDecision": "2026-11-10 human: custom button/GPIO/actions and retired AUX output Pro; exact GR maintained defaults have no admitted stock software key",
+          "currentSha256": "a51f0a7b5b75b4e57d1ab79852e1cb8f3132b057afef3cbeadf0526158e7110c",
+          "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+          "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+          "currentCanonicalSha256": "8c64411e2da00fd74a15300b61544e67193b8f0c8d4ff7335520bc632f70a54e",
+          "compositionInputSha256": "8c64411e2da00fd74a15300b61544e67193b8f0c8d4ff7335520bc632f70a54e"
+        }
+      ]
+    },
+    {
+      "path": "inktag_gr_custom_input_poll_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3371,
+      "originalSha256": "85bbdb953b1bd69c18a2174b3b7ffb36b2e6679ab00ace73d97e519e0a710f29",
+      "changeDecision": "2026-11-23 integration: retain reviewed Goodix 0.2.2 App sources",
+      "currentSha256": "d6ee09cb6a2441740c0fd7474099b56d60304e5933f100350251b4b16d4b37fb",
+      "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+      "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+      "currentCanonicalSha256": "9f1385c27b6b25b769a1995c2f771c38589ea381588b87f74f15f6ec7f02ddba",
+      "beforeReservedRetirementCanonicalSha256": "7a196a403bb2b07d41929b93ebd12e85292c9e618a62ca62f757023170265e28",
+      "currentChangeDecision": "2026-11-10 human: reserved AUX wire tail is opaque; button-only implementation; base naming; no retired output API"
+    },
+    {
+      "path": "inktag_gr_custom_get_input_config_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1146,
+      "originalSha256": "e23edec214160ad9b4585ff8484009281969b08a2fe65453f9a31935f6cf49b5",
+      "changeDecision": "2026-11-10 human: custom button/GPIO/actions and retired AUX output Pro; exact GR maintained defaults have no admitted stock software key",
+      "currentSha256": "6dcc690cd4cc07a7a6ff16c8fdf912643d6956b48cc84377dc2fff8f3d5e8c66",
+      "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+      "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+      "currentCanonicalSha256": "6a390441fcfdcc593338f2793682f363da844dee2150e4fa8d08b022c838af7a"
+    },
+    {
+      "path": "inktag_gr_custom_set_input_config_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1186,
+      "originalSha256": "347a0289e3e706353533991094b1533337143bb5a29c01ab829ceb24445c2185",
+      "changeDecision": "2026-11-10 human: custom button/GPIO/actions and retired AUX output Pro; exact GR maintained defaults have no admitted stock software key",
+      "currentSha256": "237c0b43390660eb1d43314d89e03b3ebb55db7bfd0b3204d6fa60b2ac7184d0",
+      "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+      "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+      "currentCanonicalSha256": "a58d0b8a4373f3e526387f7ea534eec4881ac1ef72fa8261e794686ea0d3ad06",
+      "latestAdjustment": "Preserve malformed/NFC-retired wire classification before Pro admission of actual custom-button writes"
+    },
+    {
+      "path": "inktag_gr_custom_get_aux_io_config_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1230,
+      "originalSha256": "a1190a94347a6c27b3413d3e36b69dfcde2cf7855ab2dc6f0a68c6299fcdbdf5",
+      "changeDecision": "2026-11-10 human: custom button/GPIO/actions and retired AUX output Pro; exact GR maintained defaults have no admitted stock software key",
+      "currentSha256": "40603e1ca1e1e2240ed294e5f32f3fcd5d13b68737c6e7f075d0163cdfa43243",
+      "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+      "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+      "currentCanonicalSha256": "b5317da337cbca8c526c75ff7c345ccf04c9755dd6c581510dd11cd297f1d530"
+    },
+    {
+      "path": "inktag_gr_custom_set_aux_io_config_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1247,
+      "originalSha256": "8e0042834f2fa7985c8161e0d01f1a3e3a885948667a6eb06d0b3daad1f44541",
+      "changeDecision": "2026-11-10 human: custom button/GPIO/actions and retired AUX output Pro; exact GR maintained defaults have no admitted stock software key",
+      "currentSha256": "47163745a93010d3d3b101451cdff0e2fa960b2616a95b0fdb6c6854edba20aa",
+      "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+      "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+      "currentCanonicalSha256": "58cb559ef6cffb264e63ba18edc97c4262105702f3a6349feefe01e1f1fb11b4",
+      "currentChangeDecision": "2026-11-10 human: reserved AUX wire tail is opaque; button-only implementation; base naming; no retired output API",
+      "beforeReservedRetirementCanonicalSha256": "780d929b02d49804f8f1e9ffe55ef56163c28f02b6e2b36b71c15eb9703a439a"
+    },
+    {
+      "path": "inktag_gr_custom_input_simulation_busy_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 618,
+      "originalSha256": "d625b41dfb3ab220df6139b979392541363d07826935dbb46123e311a7f4fd2d",
+      "changeDecision": "2026-11-10 human: custom button/GPIO/actions and retired AUX output Pro; exact GR maintained defaults have no admitted stock software key",
+      "currentSha256": "2167909ce23e65046ca811b31d085c956463483611f273c1f11730c6626bffcd",
+      "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+      "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+      "currentCanonicalSha256": "913e1cd255c0ad968b8f0f58475de8b5eaaa6c91316069853b00331b4f1c79f5"
+    },
+    {
+      "path": "inktag_gr_custom_input_simulation_begin_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 627,
+      "originalSha256": "0909e64630f8c0acc056c375d4be7a9d678d69cc18ecc8be5c09bb83bbb3a44a",
+      "changeDecision": "2026-11-10 human: custom button/GPIO/actions and retired AUX output Pro; exact GR maintained defaults have no admitted stock software key",
+      "currentSha256": "aaaaba35617ce0519362cee4d8f8168369c5d04410fe1ae74802c206adf699c1",
+      "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+      "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+      "currentCanonicalSha256": "45915898ec5c1757f23bfd6c58a4e135438459b2152ec939527988b86c37679d"
+    },
+    {
+      "path": "inktag_gr_custom_input_simulation_service_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 665,
+      "originalSha256": "372a55ac6fb224745b5e3045d188ef13a51e23e681d022b89d3c922548057db2",
+      "changeDecision": "2026-11-10 human: custom button/GPIO/actions and retired AUX output Pro; exact GR maintained defaults have no admitted stock software key",
+      "currentSha256": "d3162e432c284af65d7402c9d551e5a47239c32747d4b8032dd3bba3a4a870a8",
+      "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+      "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+      "currentCanonicalSha256": "52e98c96beed166009c3de902d7d6134d85326048426d4eddbd54057e00ee3bf"
+    },
+    {
+      "path": "inktag_gr_custom_input_simulation_cancel_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 768,
+      "originalSha256": "b7c3d99df86ea11757315f615e29ff7a8993cc6e97f605becded6ae437ec69ed",
+      "changeDecision": "2026-11-10 human: custom button/GPIO/actions and retired AUX output Pro; exact GR maintained defaults have no admitted stock software key",
+      "currentSha256": "0767da8c5702d281284c127e12cb15e5e12462c091656f9cb97a3033ddea0bff",
+      "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+      "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+      "currentCanonicalSha256": "37fe919d6e710f76ee01da79f0649ecb1e309afc190407b51592e0c9ca4d70b8"
+    },
+    {
+      "path": "inktag_gr_custom_aux_storage_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_pin_storage.c",
+      "originalLine": 151,
+      "originalSha256": "ba968f6e843e46dd8ad7c0b7db5f502d9b87bc02466e453f939e83bfd678cae4",
+      "changeDecision": "2026-11-10 human: custom button/GPIO/actions and retired AUX output Pro; exact GR maintained defaults have no admitted stock software key",
+      "currentSha256": "37dd725603df872f548fe13a8dcd5f941385c767df4ddef3d8011637bc70b299",
+      "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+      "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+      "currentCanonicalSha256": "6591073bf5b2ec2144dcc5fccdc5f97f801c1d07d681e2ed2f7d23e343a59a71"
+    },
+    {
+      "path": "inktag_gr_custom_aux_routes_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_pin_routes.c",
+      "originalLine": 159,
+      "originalSha256": "41e17c557208e029eaf836748545df2a031f6a1fff88b3806777a8501a9f8f52",
+      "changeDecision": "2026-11-10 human: custom button/GPIO/actions and retired AUX output Pro; exact GR maintained defaults have no admitted stock software key",
+      "currentSha256": "3994b35e49859c8a96f7b3348e73038eea371543dc036c64e5eae562f84583c8",
+      "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+      "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+      "currentCanonicalSha256": "0fc85dd0b5f1675acd0264147b3884d63b28e01350d72d9a460f94a775418023"
+    },
+    {
+      "path": "inktag_gr_custom_run_test_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 816,
+      "originalSha256": "afc62de48aea4d61749b19d4cd2824b06308485862d8e7a15586088ee94d7588",
+      "changeDecision": "2026-11-10 human custom button/retired AUX output Pro: native base compile exposed remaining test dispatch; physical source move, no Pro behavior change",
+      "currentCanonicalSha256": "b08929c464147a942613e32c148636679113cad40323a9bdb1d1eaf52ac46f93",
+      "currentChangeDecision": "2026-11-10 human: reserved AUX wire tail is opaque; button-only implementation; base naming; no retired output API",
+      "beforeReservedRetirementCanonicalSha256": "1695842c1cd57055ebf98565c5962b70ebe7a76d0692f7e44638f7c151aa3326"
+    },
+    {
+      "path": "inktag_gr_custom_locate_available_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 855,
+      "originalSha256": "346f2720a53ca9a2917eebc4a6c0f9624b2dd3494a4953657c8c2d1e71675a42",
+      "changeDecision": "2026-11-10 human custom button/retired AUX output Pro: native base compile exposed remaining test dispatch; physical source move, no Pro behavior change",
+      "currentCanonicalSha256": "707bbaa6d937c3fcc563f6746af8d4fa2cd416ffacbbb9e5c1e527f3282f13cf",
+      "currentChangeDecision": "2026-11-10 human: reserved AUX wire tail is opaque; button-only implementation; base naming; no retired output API",
+      "beforeReservedRetirementCanonicalSha256": "3efb55af94d20b6dd23dce71096a4033544ef27ddf40a8617c2be3abfb5e307b"
+    },
+    {
+      "path": "inktag_gr_custom_locate_stop_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 871,
+      "originalSha256": "275681209c42350ae36f70511afa4b0e3bea1fd147710a6aad92fc8af65eabf0",
+      "changeDecision": "2026-11-10 human custom button/retired AUX output Pro: native base compile exposed remaining test dispatch; physical source move, no Pro behavior change",
+      "currentCanonicalSha256": "7f0059bc9e8d67d8d7fbf6262ee32df60f89a2062b4da3bb1cf28baca8f5b3b1",
+      "currentChangeDecision": "2026-11-10 human: reserved AUX wire tail is opaque; button-only implementation; base naming; no retired output API",
+      "beforeReservedRetirementCanonicalSha256": "9cdbae83b89db7a5613621620dc414e970153788d4ceade126de4c2d421f2c62"
+    },
+    {
+      "path": "inktag_gr_custom_locate_start_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 883,
+      "originalSha256": "a9b3333893ace83e1fdef43f34d2f45bb91a41533e31a1975d869b429ceec4c5",
+      "changeDecision": "2026-11-10 human custom button/retired AUX output Pro: native base compile exposed remaining test dispatch; physical source move, no Pro behavior change",
+      "currentCanonicalSha256": "87b08ebf44d8be106c76cd75d3bb57230c592541f5f59dba5a89e90483db0e59",
+      "currentChangeDecision": "2026-11-10 human: reserved AUX wire tail is opaque; button-only implementation; base naming; no retired output API",
+      "beforeReservedRetirementCanonicalSha256": "203a7e0105d7d17b601aa8bb36e73d8cd2b3c440147f2150a67ccaf28a8e61cf"
+    },
+    {
+      "path": "inktag_gr_custom_locate_inventory_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 607,
+      "originalSha256": "ec0a7eebe79c0420dacd509cb7d844aaed6b87f91566dbfb564e5b7ef69920b7",
+      "changeDecision": "2026-11-10 human custom button/retired AUX output Pro: native base compile exposed remaining test dispatch; physical source move, no Pro behavior change",
+      "currentCanonicalSha256": "12c3ca16fcd256fbc38e371044c3943ab81e2ccb6faa91109e1ef10f2a662631",
+      "currentChangeDecision": "2026-11-10 human: reserved AUX wire tail is opaque; button-only implementation; base naming; no retired output API",
+      "beforeReservedRetirementCanonicalSha256": "2652c149723ce9eafdbb5a7c2dfff4a9840ad06a84c5da50c51a4c77e0204e49"
+    },
+    {
+      "path": "inktag_gr_font_render_admission_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_gui_assets.c",
+      "originalLine": 237,
+      "originalSha256": "01a6038fc7ca145b835714a687cf59d3ea2a24eb98c90f8e19350dbe45a265d7",
+      "currentCanonicalSha256": "f721f477b6991af246828437afc68be4895df6471412a14778715a0605e3c82c",
+      "changeDecision": "2026-11-10 human: physical base font-management source exclusion; Pro preprocessed token stream retained"
+    },
+    {
+      "path": "inktag_gr_font_update_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_gui_assets.c",
+      "originalLine": 172,
+      "originalSha256": "9af385b74ef6404866462431edc42bc22c5ee3a3b5c942addafa02ea2c9f989b",
+      "currentCanonicalSha256": "50ad846b4f17b81c711a153c854381ddf38993c5a89207c909fc324862b5a658",
+      "changeDecision": "2026-11-10 human: physical base font-management source exclusion; Pro preprocessed token stream retained"
+    },
+    {
+      "path": "inktag_gr_font_transfer_predicates_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_gui_assets.c",
+      "originalLine": 158,
+      "originalSha256": "b94f15c55a63ee555109814826bfd3a9e001a9aeec1ff1a5d512abd3da445639",
+      "currentCanonicalSha256": "cc7957e9a7abff993a571af4805a340693ecca0355a152c99bda061aac9f08aa",
+      "changeDecision": "2026-11-10 human: physical base font-management source exclusion; Pro preprocessed token stream retained"
+    },
+    {
+      "path": "inktag_gr_font_storage_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_gui_assets.c",
+      "originalLine": 63,
+      "originalSha256": "5232e8924ec019b11403302bbb388d2884d6c5243c80d27574e60c0a60989b63",
+      "currentCanonicalSha256": "a9ed35458b351e33c6eb159d176bccf659e74c47a47a57b39bb8102964cdc811",
+      "changeDecision": "2026-11-10 human: physical base font-management source exclusion; Pro preprocessed token stream retained"
+    },
+    {
+      "path": "inktag_gr_font_transaction_state_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_gui_assets.c",
+      "originalLine": 41,
+      "originalSha256": "228bcc37a54934447d604bd4643044167343788ebe97cd2fac03308c71a123f0",
+      "currentCanonicalSha256": "8d0efeb37459b1c2a0a793e4623693d0ce877149b01ff78e39b652e19f371d52",
+      "changeDecision": "2026-11-10 human: physical base font-management source exclusion; Pro preprocessed token stream retained"
+    },
+    {
+      "path": "inktag_gr_font_transaction_type_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_gui_assets.c",
+      "originalLine": 30,
+      "originalSha256": "5d51b65411b17983332c1a71838fae2e1bd5485e3609ad4b89fff6128d79955d",
+      "currentCanonicalSha256": "8cdd4307156b60b0e2c268dd2156be99f14d33daf34cb4a38a3ef8aaab6e8260",
+      "changeDecision": "2026-11-10 human: physical base font-management source exclusion; Pro preprocessed token stream retained"
+    },
+    {
+      "path": "inktag_gr_font_protocol_commit_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1672,
+      "originalSha256": "f1c009a7c58e6cffe467e8ec663d7c1d957852f3f901b3ca87adfc50ff1a1451",
+      "currentCanonicalSha256": "dc9e8f86599c860af704bb686b361f938ab80f130c567faf751493e29a2d8786",
+      "changeDecision": "2026-11-10 human: physical base font-management source exclusion; Pro preprocessed token stream retained"
+    },
+    {
+      "path": "inktag_gr_font_protocol_append_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1484,
+      "originalSha256": "a20914fd5f0962cd199bca4efc203b3823520fe99b5593fbd2855ca48282f199",
+      "currentCanonicalSha256": "51eff33bf7000bb22bdf15c5a94c2b9d34b38037d96327c682e38359b8c219b1",
+      "changeDecision": "2026-11-10 human: physical base font-management source exclusion; Pro preprocessed token stream retained"
+    },
+    {
+      "path": "inktag_gr_font_protocol_begin_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1406,
+      "originalSha256": "f3d0154ed3ea6944ec2bd5adaf4163d743aac0f9ed80d3d97df001236ba3c72c",
+      "currentCanonicalSha256": "55383ae3ef359f61a771ee861e46797d7b3605048f92fa9f82ffe2450e38d11e",
+      "changeDecision": "2026-11-10 human: physical base font-management source exclusion; Pro preprocessed token stream retained"
+    },
+    {
+      "path": "inktag_gr_font_protocol_admit_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1293,
+      "originalSha256": "40026ff9c6c6c63a0a5f086022313a4bd65269384f50c2e78e0e874b2880c289",
+      "currentCanonicalSha256": "9a22ed28b883ff4a66eb15daf382532a39562036dd9d5f4c876c486806bb8c38",
+      "changeDecision": "2026-11-10 human: physical base font-management source exclusion; Pro preprocessed token stream retained"
+    },
+    {
+      "path": "inktag_gr_font_protocol_available_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 168,
+      "originalSha256": "a5f40a461b842fb224bed86b0da19755f8b4df572aab0e345cd41708e5a0c4ac",
+      "currentCanonicalSha256": "6db0855b6c3b833ff30aebb89eb90b7b6e791e45b29cfc7339c6750bdaacc7a2",
+      "changeDecision": "2026-11-10 human: physical base font-management source exclusion; Pro preprocessed token stream retained"
+    },
+    {
+      "path": "inktag_gr_font_protocol_abort_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 50,
+      "originalSha256": "446e87a4cd8386c4d850edb2145aa06687402ce848f6fdc2bef3d56d8048b9c0",
+      "currentCanonicalSha256": "4c8d891aca7ff72da28315932cf251488f430d4240d359ba87b187d44499cadf",
+      "changeDecision": "2026-11-10 human: physical base font-management source exclusion; Pro preprocessed token stream retained"
+    },
+    {
+      "path": "inktag_gr_brand_hidden_apply_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 2300,
+      "originalSha256": "0a70674d519f9c9a96f8115904d862fb058e888a4eea17c66fa351ffb6253a6b",
+      "currentCanonicalSha256": "4917a9a7ac06e9ccaab0c0e4fb5e2e93759cd603e1c8d820a18af511912b7810",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_brand_hidden_request_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 2251,
+      "originalSha256": "bfaf9921c52e394cd1f72ad1196c68cdc35c474e54dafc691d86a94b918b5e7f",
+      "currentCanonicalSha256": "82f26db7c7845eb9934205d895897d20fae9a36df36668f3f0d1d3d4f11e934d",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_ble_name_apply_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 2173,
+      "originalSha256": "ac64db0c517d361162e66375c20741b0eff2aa3335a10434b885e606a016d8d4",
+      "currentCanonicalSha256": "9faf16709ed2318663ee74e61bc1a7542c98bfa558d06cae99f53f4f7b5c70a9",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_ble_name_boot_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 2121,
+      "originalSha256": "3d655a36bd636164adb5f0e5a636b863b7a6227cc27c564d5a5f5e631a920308",
+      "currentCanonicalSha256": "299d381e8a1444ac265fe506dded2fcc71de6c30cd14864d4cebc7111e3d7378",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_brand_hidden_settings_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 2037,
+      "originalSha256": "c7aa1eaf2bba5afeb31524c12fdbca7886c09e3804ba9bc5ac7e162ddb01c0c7",
+      "currentCanonicalSha256": "06107848f4e4554dac2741af3e8300cab22ab4c73d449eff1592f330c08a110c",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_ble_name_settings_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1980,
+      "originalSha256": "9a25a23bdf18e68152cc04cba9f65198cae7eebbbf09703968ce75fa3701290e",
+      "currentCanonicalSha256": "00909390040c1830cabc28955d9b74eb4a4cf3a1ac0896dee9828c129dc8416e",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_password_protocol_commit_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1643,
+      "originalSha256": "1952c53342546734e3280476d4a09d8d691bfda99bfaadf43fb2e8d2aaa97481",
+      "currentCanonicalSha256": "f2ba7ea221e102685107c2b163beeaa47b3134ef4b44542884aaec0b5429ecfc",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_password_protocol_begin_2_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1409,
+      "originalSha256": "2565c446eafd3b0df0d0ddd34218e4b17bcef6d355e19aadf0bfd1a2931da434",
+      "currentCanonicalSha256": "184c2bb763e1958b56b8738e983cadadd03972f382f88a9f9debdbf2c7afd359",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_password_protocol_begin_1_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1306,
+      "originalSha256": "05452927907a4c17c74ecea15f2e49459bb2a37188c5919621d8cfb06df07f6e",
+      "currentCanonicalSha256": "c610dffc0aaf59e957cd166476384d9eb8373f70c58933c2a1ed22efdb816c83",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_ble_name_report_2_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1100,
+      "originalSha256": "ac3191fea398eac1e82d702e17a8e6332187c9b4a73d135309a18fd1d4652792",
+      "currentCanonicalSha256": "2ebddb0928ed0e59b48284edcb2dfea4f9b9fd5cb98af6c08692fd43e2bb2127",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_ble_name_report_1_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 435,
+      "originalSha256": "ac3191fea398eac1e82d702e17a8e6332187c9b4a73d135309a18fd1d4652792",
+      "currentCanonicalSha256": "fd3b02108466b497790720ee5da2f6f02db31e3304acdd7f53e8484ca1a55822",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_password_show_protocol_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 337,
+      "originalSha256": "c3f603bdde83e520dac0b4a031c919cb68cd51b99ecb1c5c832b36c56d22af9e",
+      "currentCanonicalSha256": "c545bed76d7f02b7facb72b962edd737e5883795e7f74592f1f2bbbd8411cdea",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_password_bundle_commit_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_device_info_qr.c",
+      "originalLine": 158,
+      "originalSha256": "c75d37639e737d973a820b3a086a873c2ebb0231e9ae910a7c739a9fe080a6cf",
+      "currentCanonicalSha256": "994da84810018bccd41d9b74936b6b8501bca75458c01edada7e1bd8efee5c6d",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_password_bundle_begin_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_device_info_qr.c",
+      "originalLine": 111,
+      "originalSha256": "62bae6b2b8db5fdb8ec9a13d9ea296cf3882d87a4bf566840ce55d46e83111d3",
+      "currentCanonicalSha256": "210662643e0ae05c24136c25f94b5830739b91e626a22a8cb76d62c4eb875dd8",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_simulation_rx_busy_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 4027,
+      "originalSha256": "0d9fa85f97e571111c3728794b8f3d9b814c53ca5fcf5b7371faef0e403652ba",
+      "currentCanonicalSha256": "930f147e608e67786e57306f6496b2ef39cd22d17ea283c2a315f41b9045771a",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_simulation_rx_cancel_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3991,
+      "originalSha256": "d104cece52fedd8e5c5f03131e45887a0310971e95d053dd2f981ffb87d46e4a",
+      "currentCanonicalSha256": "a16307a7ca26ab53538dbcb38030822d4d5db0a13b77539156ed08d2494474c7",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_simulation_pin_busy_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3718,
+      "originalSha256": "afffdf29191e4d7339507f1a869c05e69212ea7ef15e4223c6dba3de8564f291",
+      "currentCanonicalSha256": "6eaa8035f385272552331e2e8295d641295a22e2787ce0f1ee0f21e361658915",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_work_admission_pro.inc",
+      "kind": "pro-increment",
+      "changeDecision": "2026-11-23 integration: retain reviewed Goodix 0.2.2 App sources",
+      "sourceCommit": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "currentCanonicalSha256": "749af0a0e729e001aedbde607619b72d99435887c8298db86bb455b79708d8ee",
+      "composedFrom": [
+        {
+          "path": "inktag_gr_simulation_revocation_pro.inc",
+          "kind": "pro-increment",
+          "original": "inktag_gr_app.c",
+          "originalLine": 3281,
+          "originalSha256": "b9ac49eb6f77acf4082b99add40e0bb6ac3904e280e993e9676bf16bd5c46ac9",
+          "currentCanonicalSha256": "3da77014b58bd9e2edb156a2931623e099a8cbbe8279842cbfca062e492b5261",
+          "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base",
+          "compositionInputSha256": "3da77014b58bd9e2edb156a2931623e099a8cbbe8279842cbfca062e492b5261"
+        },
+        {
+          "path": "inktag_gr_nfc_worker_1_pro.inc",
+          "kind": "pro-increment",
+          "original": "inktag_gr_app.c",
+          "originalLine": 3724,
+          "originalSha256": "6b609712041e148f89c8a46e46f0a1c8e0b5584dd91f7a45b6e8a44665b132c1",
+          "compositionInputSha256": "52f3aa26514e5e4881b8c3bfc9ef97d182a13c8b8d68c1ad9efe82e3c6607128"
+        }
+      ]
+    },
+    {
+      "path": "inktag_gr_simulation_temperature_busy_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 2055,
+      "originalSha256": "89d95cf92ae538550b6b2a9d03c940de2e7ea170bbb835aa333c1cce65bcabf5",
+      "currentCanonicalSha256": "8e435f567498e5e34799229e62a281b2c11bf18588233c0ff0675c6390734875",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_simulation_clear_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 781,
+      "originalSha256": "2a4f80cdff0a7969f01af4a7b82623611ce49c4be1fb467fb2bf3b5c237dc8f9",
+      "currentCanonicalSha256": "4d0d1d52f6a3d3ef8cc5e24e9517021324b0e959ea5b52638ea8399451962e27",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_simulation_complete_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 745,
+      "originalSha256": "a186829c6f65991a3eb15358eb77599c80db63bde2b778b5d7b0922b22908da7",
+      "currentCanonicalSha256": "007a199b77f4eae2b22b8fe2045eb98af3f56938ffe557a7d3f9d1b2f88f57a3",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_simulation_dispatch_busy_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 2513,
+      "originalSha256": "1b1fd84fb45179b69317ec29d74f8f37e15629d54728911f7a1b52e3ba1aadb3",
+      "currentCanonicalSha256": "eb47c3a75045f92aa6caf3e491190c8c17bae768102d2df025113afc147df0c8",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_simulation_cancel_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_protocol_v2.inc",
+      "originalLine": 1874,
+      "originalSha256": "c99b88841e81807faf9853abedd803201b95e316fd525753cf7ef70b039be99b",
+      "currentCanonicalSha256": "1609c0b6062c802398928a9a03a245792ee37c16545d37c113db478a90e88d6a",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base"
+    },
+    {
+      "path": "inktag_gr_advertising_state_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalSha256": "17c84cf5a6005efd14409ed225b67597375dc2a2fc49a72ef5f5ed24761ab4ba"
+    },
+    {
+      "path": "inktag_gr_advertising_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalSha256": "dcf4d13256c6d6b8199431f2eb9bdb602c738fde8d879811fa6e84c96d36f543"
+    },
+    {
+      "path": "inktag_gr_advertising_protocol_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalSha256": "afd15be2c731c437b96399380eef43b8fc3152dc9dc743bbf7143f786c3bcad5"
+    },
+    {
+      "path": "inktag_gr_advertising_pro.h",
+      "kind": "pro-module",
+      "nativeBasename": "inktag_gr_advertising_pro.h",
+      "originalSha256": "79c529f916f14765fe62771f33f20acd8be126cde99a0d0c7647f3dbf31298fc"
+    },
+    {
+      "path": "inktag_gr_idle_clock_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalSha256": "6bd73987cb31d15c0f1df7002c2dba7ba1a948a6300f2a5f2dde8be1dcf7436f",
+      "currentCanonicalSha256": "2af820aba7406249bac82e263f1f6ddfa5b92a8b0244d3891f1b889bbd0a31b4",
+      "changeDecision": "2026-11-23 integration: retain reviewed Goodix 0.2.2 App sources"
+    },
+    {
+      "path": "inktag_gr_idle_watchdog_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_health.c",
+      "originalSha256": "a4d97b70763158da3fd2c394ea59377c01bc70eff5f40e8986d0bf2120f0370b"
+    },
+    {
+      "path": "inktag_gr_idle_clock_state_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalSha256": "886f201524789be365f0568fcaf3508f2f092c09bfc841ad091dab4d9992cffa"
+    }
+  ],
+  "compositionExceptions": [
+    "inktag_gr_activation.c conditionally includes Pro adapter; ordinary RNG and no-authority base UID initializer are independent; startup code measurement is private Pro only",
+    "inktag_gr_app.c and protocol entry keep compile-time call sites; private positive state/bodies are separate Pro increments; source line restoration preserves native SDK diagnostic coordinates",
+    "Image resource-name matching is shared base storage, not NFC implementation; root shared resource_name header keeps original Pro alias ABI/TU, base uses independent common C."
+  ],
+  "latestHumanBoundary": "All NFC implementation/storage/driver/binding is Pro; base has reserved IDs only. Custom button GPIO/actions remain Pro, stock button paths are board-qualified; screen/LED interfaces remain base. AUX tail bytes are opaque reserved data, with no output API or implementation.",
+  "currentCanonicalHashEncoding": "UTF-8 file bytes with CRLF normalized to LF; original/fixed-local-byte hashes retained separately",
+  "retiredItems": [
+    {
+      "path": "inktag_gr_nfc_state_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 361,
+      "originalSha256": "a5e7aac9cb565f7f2487a48cc8b410260f583d355d6e2502ecb59f45b8a9cc56",
+      "retiredAtSource": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "replacedBy": "inktag_gr_app_state_pro.inc",
+      "retirementInputSha256": "b4ef67e10618538098d1202a9ec85f6cd0c03004e205ef47bea5d7591c49c806",
+      "retirementReason": "Adjacent composition"
+    },
+    {
+      "path": "inktag_gr_simulation_state_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 364,
+      "originalSha256": "f08d7e167501b40e210901dff0b4a3d0d5e63a4a39699a602823f0fcdffdd281",
+      "currentCanonicalSha256": "9d627ceae8d1f3b10d8ccdac514af4337f741653557eca1a880b34c3bfc7f650",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base",
+      "retiredAtSource": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "replacedBy": "inktag_gr_app_state_pro.inc",
+      "retirementInputSha256": "9d627ceae8d1f3b10d8ccdac514af4337f741653557eca1a880b34c3bfc7f650",
+      "retirementReason": "Adjacent composition"
+    },
+    {
+      "path": "inktag_gr_custom_input_dispatch_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3265,
+      "originalSha256": "47626cabcd3b27a29e2bc39f465d8b8f663c3561d516575d337b6a9875a5f5e6",
+      "changeDecision": "2026-11-10 human: custom button/GPIO/actions and retired AUX output Pro; exact GR maintained defaults have no admitted stock software key",
+      "currentSha256": "2e6adf98ce0ad4d494f5c09595f4a631dc64e5c8b4c85e7925066d627b7ad3d7",
+      "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+      "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+      "currentCanonicalSha256": "dc0602dd23d2a64fa394bb4f700f76109a34bcbf22457b79673db55d1949d1ff",
+      "retiredAtSource": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "replacedBy": "inktag_gr_input_actions_pro.inc",
+      "retirementInputSha256": "dc0602dd23d2a64fa394bb4f700f76109a34bcbf22457b79673db55d1949d1ff",
+      "retirementReason": "Adjacent composition"
+    },
+    {
+      "path": "inktag_gr_process_nfc_slideshow_command_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3351,
+      "originalSha256": "53b0acf5da2e783a91d51c7fb0003edd5d8b63f8c769c826da68c07a0fc3f39c",
+      "retiredAtSource": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "replacedBy": "inktag_gr_input_actions_pro.inc",
+      "retirementInputSha256": "e76536e5b32df41807f79442deaad67bfc749f93c66c0b5aeaf919254a0eec3a",
+      "retirementReason": "Adjacent composition"
+    },
+    {
+      "path": "inktag_gr_custom_input_busy_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3394,
+      "originalSha256": "4f2919f137248f5867a6616f6608e4ec19a9ddb6de5bdd7130c289a5982bd204",
+      "changeDecision": "2026-11-10 human: custom button/GPIO/actions and retired AUX output Pro; exact GR maintained defaults have no admitted stock software key",
+      "currentSha256": "a51f0a7b5b75b4e57d1ab79852e1cb8f3132b057afef3cbeadf0526158e7110c",
+      "validation": "Private body split with exact-board/current-Pro admission; boot/poll/dispatch and revocation covered by host fixtures; native qualification recorded separately.",
+      "currentSha256Scope": "fixed 4d9d310e3 pre-commit M local bytes; not a universal checkout hash",
+      "currentCanonicalSha256": "8c64411e2da00fd74a15300b61544e67193b8f0c8d4ff7335520bc632f70a54e",
+      "retiredAtSource": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "replacedBy": "inktag_gr_input_actions_pro.inc",
+      "retirementInputSha256": "8c64411e2da00fd74a15300b61544e67193b8f0c8d4ff7335520bc632f70a54e",
+      "retirementReason": "Adjacent composition"
+    },
+    {
+      "path": "inktag_gr_nfc_command_report_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3404,
+      "originalSha256": "e7d68e8c92b394bd8c9c91e972dbae5c82dedbe6780089521fce926e2f0c4b03",
+      "retiredAtSource": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "replacedBy": "inktag_gr_nfc_commands_pro.inc",
+      "retirementInputSha256": "1b4acd9e568288ccb70f3d2d99b92d2e39604e1ada3062b0095ebf1fc72eccf8",
+      "retirementReason": "Adjacent composition"
+    },
+    {
+      "path": "inktag_gr_nfc_command_abort_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3413,
+      "originalSha256": "2c431611fdd93ebd26a96de53a78612ff4a0a70fe29863160be91c2a41924985",
+      "retiredAtSource": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "replacedBy": "inktag_gr_nfc_commands_pro.inc",
+      "retirementInputSha256": "793d2ffdeb26c33530b0e0a0af6ee8ee902c7055c7a2af45bcfdf2eb1744b7ad",
+      "retirementReason": "Adjacent composition"
+    },
+    {
+      "path": "inktag_gr_nfc_command_commit_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3426,
+      "originalSha256": "c82368e18b89e55c6f3ccfefb67c3331614cf115d5e0243ca5eda9c431908459",
+      "retiredAtSource": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "replacedBy": "inktag_gr_nfc_commands_pro.inc",
+      "retirementInputSha256": "be0214339c9ee1bd60ee1cbe90a0b6d883e2f9f084d5849c7c0aa581af658db9",
+      "retirementReason": "Adjacent composition"
+    },
+    {
+      "path": "inktag_gr_nfc_command_binding_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3440,
+      "originalSha256": "bb504ed1646089c49bb3a4ede53d5dbb8989ed453c1e0135f2933e37191d5e51",
+      "retiredAtSource": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "replacedBy": "inktag_gr_nfc_commands_pro.inc",
+      "retirementInputSha256": "f5249afb4fb0f258bbacfe41009e2a3e8f96e3f71da021bc05543a4785707585",
+      "retirementReason": "Adjacent composition"
+    },
+    {
+      "path": "inktag_gr_process_nfc_command_action_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3474,
+      "originalSha256": "343451cac744a0d0cb45893d331581f8f5d292924cfd7282f740880763788146",
+      "retiredAtSource": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "replacedBy": "inktag_gr_nfc_commands_pro.inc",
+      "retirementInputSha256": "3434d11e510f975695c934e523f437f6af99e42d3fb3c45390f7622ecc3dffa9",
+      "retirementReason": "Adjacent composition"
+    },
+    {
+      "path": "inktag_gr_simulation_revocation_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3281,
+      "originalSha256": "b9ac49eb6f77acf4082b99add40e0bb6ac3904e280e993e9676bf16bd5c46ac9",
+      "currentCanonicalSha256": "3da77014b58bd9e2edb156a2931623e099a8cbbe8279842cbfca062e492b5261",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base",
+      "retiredAtSource": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "replacedBy": "inktag_gr_work_admission_pro.inc",
+      "retirementInputSha256": "3da77014b58bd9e2edb156a2931623e099a8cbbe8279842cbfca062e492b5261",
+      "retirementReason": "Adjacent composition"
+    },
+    {
+      "path": "inktag_gr_nfc_worker_1_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3724,
+      "originalSha256": "6b609712041e148f89c8a46e46f0a1c8e0b5584dd91f7a45b6e8a44665b132c1",
+      "retiredAtSource": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "replacedBy": "inktag_gr_work_admission_pro.inc",
+      "retirementInputSha256": "52f3aa26514e5e4881b8c3bfc9ef97d182a13c8b8d68c1ad9efe82e3c6607128",
+      "retirementReason": "Adjacent composition"
+    },
+    {
+      "path": "inktag_gr_simulation_include_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 79,
+      "originalSha256": "52979d99ceaeeb7964b647b96ce493d35c44d08de476889339c41562b2e3d3db",
+      "currentCanonicalSha256": "33cd2bf0cdb91ca8d4bd8e2c615825f2e8afe07bf45c07d43ad06d761bc0f17c",
+      "changeDecision": "2026-11-10 human: physical feature/call-chain audit; private positive workflow excluded from base",
+      "retiredAtSource": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "replacedBy": "inktag_gr_app.c",
+      "retirementInputSha256": "33cd2bf0cdb91ca8d4bd8e2c615825f2e8afe07bf45c07d43ad06d761bc0f17c",
+      "retirementReason": "Transparent header/include wrapper inlined at original guarded site"
+    },
+    {
+      "path": "inktag_gr_nfc_app_packaged_1_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 102,
+      "originalSha256": "47c3e9b129da057b49ac47719e1bce5253d556b63547c381975c3f9b8cdd6f51",
+      "retiredAtSource": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "replacedBy": "inktag_gr_app.c",
+      "retirementInputSha256": "6b5b1b7da19b5884e1c75849cbea5914b6464eeb953c240407f6737b2b2e2ab8",
+      "retirementReason": "Transparent header/include wrapper inlined at original guarded site"
+    },
+    {
+      "path": "inktag_gr_nfc_app_bulk_11_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 3502,
+      "originalSha256": "6a301dbbcfedf774f700a339f923bc46a4fe50457da219f9f30fa3c074eb990b",
+      "retiredAtSource": "2f9d3d3b2084f8090d3a783c6b5b61f274d89e66",
+      "replacedBy": "inktag_gr_app.c",
+      "retirementInputSha256": "583e49eb9ba559ffba57395d14c557470dad77b2e57004d5c6551998273c298e",
+      "retirementReason": "Transparent header/include wrapper inlined at original guarded site"
+    },
+    {
+      "path": "inktag_gr_nfc_temperature_2_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 1094,
+      "originalSha256": "7cc202cdd06099a578f299a240f983c030138f0b46639fb23a22080c112cc488",
+      "retiredAtSource": "3a60b78923b4d212368292f3af7a310a142c3a52",
+      "replacedBy": null,
+      "retirementInputSha256": "fa374cf38ea21b7f3b95686ebf1c5f8e7bd4f1df7e9a23d2fa9a4ffd079bc316",
+      "retirementReason": "2026-11-11 human: set the default-on temperature option before init/sampling only; no cooperative-maintenance updates"
+    },
+    {
+      "path": "inktag_gr_nfc_temperature_1_pro.inc",
+      "kind": "pro-increment",
+      "original": "inktag_gr_app.c",
+      "originalLine": 1076,
+      "originalSha256": "f93472d582c1861faadb71fa185050a0b84044e662fb1eb8ad8d1bd214484c53",
+      "retiredAtSource": "e7f0dd73de17bcf577955b26e2727405bc7d7b2e",
+      "replacedBy": "inktag_gr_nfc_image_pro.inc",
+      "retirementInputSha256": "40f5f6bdeff68dbc999f1c178c8a31e5c0cd80916ee5744022848f8cff6d1615",
+      "retirementReason": "2026-11-11 human: only NFC image chooses false; ordinary reads ignore RF presence. No temperature RF helper."
+    }
+  ]
+}

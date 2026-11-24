@@ -1,63 +1,44 @@
-# InkTag 0.2.1
+# InkTag 0.2.2
 
-新增部分 4.2 寸屏幕的 Pro 时钟局刷适配，改进 Find 标签管理，并修复日历显示、设备更新和本地客户端使用中的问题。
+基础版（BASIC）的固件源码、WebUI 和 CLI 随本版提供。高级版固件请通过 [InkTag QQ 群 418446983 获取](https://github.com/solar2ain/ink-tag/blob/main/docs/zh-CN/pro.md#获取高级版固件)。
 
-[图文使用手册](https://solar2ain.github.io/ink-tag-manual/) · [打开 WebUI](https://solar2ain.github.io/ink-tag/) · [使用本地客户端](https://github.com/solar2ain/ink-tag/blob/main/docs/zh-CN/webui.md)
+## 基础版与客户端
 
-## 新增功能（Feature）
+- **自己编译和安装**。按主控和主板选择 BASIC 固件。发布材料提供[固件构建说明](https://github.com/solar2ain/ink-tag/blob/main/docs/build-firmware.md)、OTA 包、完整烧录包、预转换的 BIN／Intel HEX，以及 Windows 烧录入口。
+- **基础版固件体积**。同一主控和主板上，基础版的 App 比高级版小约 30–61 KiB。不同屏幕、布局和存储配置仍需使用配套文件。
+- **按实际容量保存图片**。图槽数量随屏幕和可用存储而定。设备信息页用 `BASIC` 和 `PRO` 标识档位。
+- **创作字体**。小屏默认用 10 px 缝合像素字体，大屏默认用 12 px Z 工坊像素黑体。新增原生点阵字号，改善课表中加粗汉字的间距。创作的设备效果预览支持窗口适配、1:1 和细步进缩放。[字体指南](https://github.com/solar2ain/ink-tag/blob/main/docs/creation-fonts.md)
+- **图片与升级**。WebUI 和 CLI 可调整图片亮度。WebUI 支持下载发布渠道中与设备匹配的 OTA 包，并在页面中升级。
+- **使用体验**。改善日历和有线刷机提示。双击 `flash.bat` 或 `flash-zh.bat` 可按提示操作。
 
-- **4.2 寸 Pro 时钟局刷**：新增 SSD1683、SSD1619／SSD1619A、UC8276 的 400×300 黑白红屏幕适配，平台与设备范围如下。
+## 高级版
 
-  | 平台 | 主板／设备 | 适配屏幕 |
-  | --- | --- | --- |
-  | Goodix GR5513／GR5515 | ZKEL 标准版主板，使用 `gr551x_zkel` 固件；对应 ZKC42V／ZKC42VM 的兼容配置 | SSD1683、SSD1619／SSD1619A、UC8276，4.2 寸 400×300 黑白红 |
-  | Telink TLSR8359 | 汉朔 HSEL 主板，使用 `tlsr8359_hsel` 固件；包括匹配 SSD1683 配置的 Nebular-420R-N 三色装配及兼容换屏主板 | SSD1683、SSD1619／SSD1619A、UC8276，4.2 寸 400×300 黑白红 |
-  | Nordic nRF52832 | PriceETag 主板，使用 `nrf52832_priceetag` 固件并改接兼容屏幕 | SSD1683、SSD1619／SSD1619A、UC8276，4.2 寸 400×300 黑白红 |
+- **NFC 传图与校时**。指定 Goodix、OnMicro 和 Telink 主板搭配支持的 NFC 硬件和应用，可用手机传图。D3-Pro InkTag 版在 InkTag QQ 群获取，用法见 [NFC 指南](https://github.com/solar2ain/ink-tag/blob/main/docs/zh-CN/nfc.md)。NFC 校时可同步时区，单独校时保留当前画面。
+- **蓝牙广播方式**。支持的设备可在断开连接后延时关闭普通蓝牙广播。用受支持的按键或 NFC 恢复广播。已启用的 Find My 广播会继续工作。
+- **Find 身份管理**。验证原身份后可解除设备上的登记，同时保留本机资料。打开地图时保持页面滚动位置。
+- **日历和时区**。改进设备当地午夜换日和重启后保留时区的处理。
 
-  需要激活 Pro，并匹配屏幕接线和配置；这项功能仅用于时钟数字区域。不同屏幕的残影和显示效果可能不同，具体实测搭配见[已实测屏幕](https://github.com/solar2ain/ink-tag/blob/main/docs/zh-CN/tested-screens.md)。本次新增的 4.2 寸局刷不适用于 OM6626、GR5331、GR5513 内置图片版、nRF52811 或 DA14585。
-
-- **Find 标签管理**：点击已登记标签即可切换当前标签并查看最新位置；导出增加全选、清空选择，默认不选中。单台标签或不含轨迹的资料支持复制为字符串。
-- **设备测试**：按设备能力提供时间设置、日期偏移和电池电压测试。
-- **自编译固件更新**：nRF52811、DA14585 开源版支持未签名 App OTA，需先安装允许未签名更新的开源 Recovery；已有签名的固件仍需通过签名验证，官方固件的验证方式保持不变。
-
-## 问题修复（Bug Fix）
-
-- **节气日期**：更新节气日期数据，改善日历中的节气显示。
-- **日历显示**：改善方屏、2.66 寸和 4.2 寸屏幕的排版，修复部分文字截断、内容拥挤和六行月份显示不协调的问题。
-- **Find 地图与身份管理**：修复部分环境下单点地图不显示、最新位置与所选标签不同步的问题；完善身份删除与私钥备份提醒。
-- **OTA 与恢复模式**：改善设备更新后的重连、状态显示和自动校时；CLI 退出恢复模式统一默认等待上限为 90 秒。
-- **本地客户端安装与启动**：完善 Windows 的 7-Zip 依赖及数据目录访问权限提示，修复后台启动日志中文乱码。
-
-> 更新时请选择匹配主控与主板的 OTA 固件，保持供电并等待设备返回。App OTA 不会替换 Recovery；nRF52811、DA14585 的独立显示资源也需要配套有线更新。首次安装及有线恢复请阅读对应主板的烧录说明。
+安装前核对主控、主板丝印、屏幕和存储配置。需要配套屏幕资源的设备请按对应版型的[有线烧录说明](https://github.com/solar2ain/ink-tag/blob/main/docs/zh-CN/flash.md)更新。
 
 ---
 
-English
+## BASIC and shared clients
 
-Adds Pro clock partial-refresh support for selected 4.2-inch displays, improves Find tag management, and fixes calendar, device-update and local-client issues.
+- **Build and install.** BASIC firmware, WebUI and CLI source ship with 0.2.2. Use the [firmware build guide](https://github.com/solar2ain/ink-tag/blob/main/docs/build-firmware.en.md) and choose the OTA, complete installation, BIN or Intel HEX file for your exact board. Windows users can run `flash.bat` for guided setup.
+- **Firmware size.** On the seven targets with both editions, the BASIC App uses about 30–61 KiB less flash than the PRO App.
+- **Image storage.** Available capacity determines the number of pictures you can store. The device information page shows `BASIC` or `PRO`.
+- **Creation fonts.** Small canvases default to 10 px Fusion Pixel and larger canvases to 12 px Z Labs Pixel CN. Native bitmap sizes and better spacing improve small text and timetable headings. The device-effect preview fits the available space and offers smaller zoom steps. [Font guide](https://github.com/solar2ain/ink-tag/blob/main/docs/creation-fonts.en.md)
+- **Images and updates.** Adjust brightness in WebUI or CLI. WebUI can download and install a compatible OTA package from the published update channel.
 
-## Feature
+## PRO
 
-- **Pro clock partial refresh on 4.2-inch displays**: adds support for 400×300 black/white/red panels using SSD1683, SSD1619/SSD1619A or UC8276 on the following platforms.
+Obtain PRO firmware through the [InkTag QQ group 418446983](https://github.com/solar2ain/ink-tag/blob/main/docs/en/pro.md#get-pro-firmware).
 
-  | Platform | Boards/devices | Adapted displays |
-  | --- | --- | --- |
-  | Goodix GR5513/GR5515 | Standard ZKEL boards using `gr551x_zkel`, with compatible ZKC42V/ZKC42VM configurations | SSD1683, SSD1619/SSD1619A, UC8276; 4.2-inch, 400×300, black/white/red |
-  | Telink TLSR8359 | Hanshow HSEL boards using `tlsr8359_hsel`, including the three-color Nebular-420R-N with its matching SSD1683 profile and compatible replacement-screen boards | SSD1683, SSD1619/SSD1619A, UC8276; 4.2-inch, 400×300, black/white/red |
-  | Nordic nRF52832 | PriceETag boards using `nrf52832_priceetag`, rewired for a compatible display | SSD1683, SSD1619/SSD1619A, UC8276; 4.2-inch, 400×300, black/white/red |
+- **NFC image transfer and time sync.** Available with supported Goodix, OnMicro and Telink boards and compatible hardware and apps. Get D3-Pro InkTag through the QQ group. Time sync can set the time zone and preserves the current screen. [NFC guide](https://github.com/solar2ain/ink-tag/blob/main/docs/en/nfc.md)
+- **Bluetooth advertising.** Supported devices can stop ordinary advertising after a configurable delay. An available button or NFC restores it. Enabled Find My advertising continues.
+- **Find registration.** Verify the current identity to deregister it from the device while retaining local data. Opening the map preserves the page's scroll position.
+- **Calendar and time zone.** Improved local-midnight rollover and time-zone retention across restarts.
 
-  Pro activation and matching wiring/configuration are required. This feature updates the clock digits only. Ghosting and visual quality vary by panel; see [tested displays](https://github.com/solar2ain/ink-tag/blob/main/docs/en/tested-screens.md) for tested combinations. This new 4.2-inch support does not apply to OM6626, GR5331, the GR5513 internal-image build, nRF52811 or DA14585.
+Check the controller, board markings, display and storage configuration first. Follow the [wired flashing guide](https://github.com/solar2ain/ink-tag/blob/main/docs/en/flash.md) for devices that require matching display resources.
 
-- **Find tag management**: select a registered tag by clicking its row to view its latest location. Export adds select-all and clear-selection controls, with nothing selected by default. A single tag or an export without tracks can be copied as text.
-- **Device tests**: time-setting, date-offset and battery-voltage tests are available according to device capabilities.
-- **Self-built firmware updates**: open-source nRF52811 and DA14585 builds support unsigned App OTA with an installed open-source Recovery that permits it. Signed images still require a valid signature; official firmware verification is unchanged.
-
-## Bug Fix
-
-- **Solar-term dates**: update solar-term date data used by the calendar.
-- **Calendar display**: improve square, 2.66-inch and 4.2-inch layouts, addressing clipped text, crowded content and uneven six-row month layouts.
-- **Find maps and identity management**: fix missing single-point maps and latest-location panels showing the wrong tag; improve identity-deletion and private-key backup guidance.
-- **OTA and Recovery**: improve reconnection, status information and clock synchronization after updates. CLI Recovery exit now has a consistent 90-second default wait limit.
-- **Local-client setup and startup**: improve Windows guidance for 7-Zip and data-directory permissions, and fix garbled Chinese in background-startup logs.
-
-> Select the OTA firmware matching your controller and board, keep power connected and wait for the application to return. App OTA does not replace Recovery; the separate display resources on nRF52811 and DA14585 also require a matching wired update. Follow the board's flashing guide for first installation or wired recovery.
+Nordic 完整包中的 S112 和 S132 随附 [Nordic SoftDevice 许可](https://github.com/solar2ain/ink-tag/blob/main/release/firmware/Nordic-SoftDevice-LICENSE.txt)。 / Nordic Full packages include S112 or S132 under the [Nordic SoftDevice license](https://github.com/solar2ain/ink-tag/blob/main/release/firmware/Nordic-SoftDevice-LICENSE.txt).

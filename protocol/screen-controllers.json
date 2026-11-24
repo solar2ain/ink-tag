@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "wireSize": 17,
+  "status": "implemented",
+  "nativeUiScales": [
+    { "id": 0, "name": "AUTO" },
+    { "id": 1, "name": "X1" },
+    { "id": 2, "name": "X1_5" },
+    { "id": 3, "name": "X2" },
+    { "id": 4, "name": "X1_25" },
+    { "id": 5, "name": "X1_75" }
+  ],
+  "controllers": [
+    {
+      "id": 16, "name": "UC8XXX", "family": "UC8XXX",
+      "recipes": [
+        { "id": 0, "name": "STANDARD", "busyActiveHigh": false },
+        { "id": 1, "name": "HANSHOW_NOWA_213R_N", "experimental": true, "busyActiveHigh": false }
+      ]
+    },
+    {
+      "id": 17, "name": "UC8151", "family": "UC8XXX",
+      "recipes": [
+        { "id": 0, "name": "STANDARD", "busyActiveHigh": false },
+        { "id": 1, "name": "SES_SE2213FS093", "busyActiveHigh": false },
+        { "id": 2, "name": "SES_SE2266FS093", "busyActiveHigh": false }
+      ]
+    },
+    { "id": 18, "name": "UC8159", "family": "UC8XXX", "recipes": [{ "id": 0, "name": "STANDARD", "busyActiveHigh": false }] },
+    {
+      "id": 19, "name": "UC8176", "family": "UC8XXX",
+      "recipes": [
+        { "id": 0, "name": "STANDARD", "busyActiveHigh": false },
+        { "id": 1, "name": "ZKC42V_FACTORY", "busyActiveHigh": false }
+      ]
+    },
+    { "id": 20, "name": "UC8179", "family": "UC8XXX", "recipes": [{ "id": 0, "name": "STANDARD", "busyActiveHigh": false }] },
+    {
+      "id": 21, "name": "UC8276", "family": "UC8XXX",
+      "recipes": [
+        { "id": 0, "name": "STANDARD", "busyActiveHigh": false },
+        { "id": 1, "name": "ZKC42V_HE042AD7A2", "busyActiveHigh": false }
+      ]
+    },
+    {
+      "id": 32, "name": "SSD1619", "family": "SSD1XXX",
+      "recipes": [
+        { "id": 0, "name": "STANDARD", "busyActiveHigh": true },
+        { "id": 1, "name": "HEMA_213_BWR", "busyActiveHigh": true }
+      ]
+    },
+    {
+      "id": 33, "name": "SSD1675", "family": "SSD1XXX",
+      "recipes": [
+        { "id": 0, "name": "STANDARD", "busyActiveHigh": true },
+        { "id": 1, "name": "HANSHOW_NOWA_154R_N", "busyActiveHigh": true }
+      ]
+    },
+    { "id": 34, "name": "SSD1677", "family": "SSD1XXX", "recipes": [{ "id": 0, "name": "STANDARD", "busyActiveHigh": true }] },
+    {
+      "id": 35, "name": "SSD1680", "family": "SSD1XXX",
+      "recipes": [
+        { "id": 0, "name": "STANDARD", "busyActiveHigh": true },
+        { "id": 1, "name": "ZKC21V_FACTORY", "busyActiveHigh": true }
+      ]
+    },
+    {
+      "id": 36, "name": "SSD1683", "family": "SSD1XXX",
+      "recipes": [
+        { "id": 0, "name": "STANDARD", "busyActiveHigh": true },
+        { "id": 1, "name": "ZKC42VM_FACTORY", "busyActiveHigh": true }
+      ]
+    },
+    {
+      "id": 47, "name": "SSD1XXX", "family": "SSD1XXX", "experimental": true,
+      "recipes": [
+        { "id": 1, "name": "HANSHOW_200_BWR_OLD", "experimental": true, "busyActiveHigh": true },
+        { "id": 2, "name": "HANSHOW_HSEL5_154M02_NATIVE_OTP", "busyActiveHigh": true }
+      ]
+    },
+    {
+      "id": 48, "name": "JD79661", "family": "JD79XXX",
+      "recipes": [
+        { "id": 0, "name": "STANDARD", "busyActiveHigh": false },
+        { "id": 1, "name": "ZKC21B_FACTORY_B2", "busyActiveHigh": false }
+      ]
+    },
+    {
+      "id": 49, "name": "JD79665AA", "family": "JD79XXX",
+      "recipes": [
+        { "id": 0, "name": "STANDARD", "busyActiveHigh": false },
+          { "id": 1, "name": "HUAWEI_398_A0", "busyActiveHigh": false },
+          { "id": 2, "name": "HUAWEI_398_A1", "busyActiveHigh": false }
+      ]
+    },
+    {
+      "id": 50, "name": "JD79665CA", "family": "JD79XXX",
+      "recipes": [
+        { "id": 1, "name": "LENMORY_H364F067_E6", "busyActiveHigh": false }
+      ]
+    },
+    {
+      "id": 51, "name": "JD79668AA", "family": "JD79XXX",
+      "recipes": [
+        { "id": 0, "name": "STANDARD", "busyActiveHigh": false },
+        { "id": 1, "name": "HANSHOW_NEBULAR_420R_N", "busyActiveHigh": false },
+        { "id": 2, "name": "ZKC42B_FACTORY_B3", "busyActiveHigh": false }
+      ]
+    },
+    {
+      "id": 52, "name": "JD79653A", "family": "JD79XXX", "experimental": true,
+      "recipes": [{ "id": 1, "name": "STELLAR_154_BWR", "experimental": true, "busyActiveHigh": false }]
+    },
+    {
+      "id": 64, "name": "IST7513", "family": "IST7XXX", "experimental": true,
+        "recipes": [{ "id": 1, "name": "OSPREY_HT0154A10_E6", "experimental": true, "busyActiveHigh": false }]
+    },
+    {
+      "id": 65, "name": "IST7601", "family": "IST7XXX", "experimental": true,
+      "recipes": [
+          { "id": 1, "name": "OSPREY_HT0169A06_E6", "experimental": true, "busyActiveHigh": false },
+          { "id": 2, "name": "OSPREY_HT037A02_E6", "experimental": true, "busyActiveHigh": false }
+      ]
+    },
+    {
+      "id": 63, "name": "JD79XXX", "family": "JD79XXX", "experimental": true,
+      "recipes": [
+        { "id": 0, "name": "STANDARD", "busyActiveHigh": false },
+        { "id": 1, "name": "HANSHOW_NEBULAR_213R_N", "busyActiveHigh": false },
+        { "id": 2, "name": "HANSHOW_HSEL4Q_01_54M_31", "experimental": true, "busyActiveHigh": false },
+        { "id": 3, "name": "HANSHOW_HSEL3_02_66M_36", "experimental": true, "busyActiveHigh": false },
+        { "id": 4, "name": "HANSHOW_STELLAR_PRO_154Q_N", "experimental": true, "busyActiveHigh": false },
+        { "id": 5, "name": "HANSHOW_AN0437A480", "busyActiveHigh": false }
+      ]
+    }
+  ],
+  "rules": [
+    { "controller": 47, "recipe": 1, "colors": [2], "widthAlignment": 8, "maxSize": [200, 200], "fixedSizes": [[200, 200]], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 47, "recipe": 2, "colors": [2], "widthAlignment": 8, "maxSize": [200, 200], "fixedSizes": [[200, 200]], "colorFixedSizes": [], "transferFormat": 0, "fullViewport": true },
+    { "controller": 52, "recipe": 1, "colors": [2], "widthAlignment": 8, "maxSize": [200, 200], "fixedSizes": [[200, 200]], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 63, "recipe": 2, "colors": [3], "widthAlignment": 4, "maxSize": [200, 200], "fixedSizes": [[200, 200]], "colorFixedSizes": [], "transferFormat": 3 },
+    { "controller": 63, "recipe": 3, "colors": [3], "widthAlignment": 4, "maxSize": [152, 296], "fixedSizes": [[152, 296]], "colorFixedSizes": [], "transferFormat": 3 },
+    { "controller": 63, "recipe": 4, "colors": [3], "widthAlignment": 4, "maxSize": [200, 200], "fixedSizes": [[200, 200]], "colorFixedSizes": [], "transferFormat": 3 },
+    { "controller": 65, "recipe": 1, "colors": [10], "widthAlignment": 2, "maxSize": [400, 400], "fixedSizes": [[400, 400]], "colorFixedSizes": [], "transferFormat": 5 },
+    { "controller": 65, "recipe": 2, "colors": [10], "widthAlignment": 2, "maxSize": [720, 480], "fixedSizes": [[720, 480]], "colorFixedSizes": [], "transferFormat": 5 },
+    { "controller": 64, "recipe": 1, "colors": [10], "widthAlignment": 2, "maxSize": [240, 240], "fixedSizes": [[240, 240]], "colorFixedSizes": [], "transferFormat": 5 },
+    { "controller": 16, "recipe": 0, "colors": [1, 2], "widthAlignment": 8, "maxSize": [800, 600], "fixedSizes": [], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 16, "recipe": 1, "colors": [2], "widthAlignment": 8, "maxSize": [128, 250], "fixedSizes": [[128, 250]], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 17, "recipe": 0, "colors": [2], "widthAlignment": 8, "maxSize": [152, 296], "fixedSizes": [[104, 212], [152, 296]], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 17, "recipe": 1, "colors": [2], "widthAlignment": 8, "maxSize": [104, 212], "fixedSizes": [[104, 212]], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 17, "recipe": 2, "colors": [2], "widthAlignment": 8, "maxSize": [152, 296], "fixedSizes": [[152, 296]], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 18, "recipe": 0, "colors": [1, 2], "widthAlignment": 2, "maxSize": [800, 600], "fixedSizes": [], "colorFixedSizes": [], "transferFormat": 5 },
+    { "controller": 19, "recipe": 0, "colors": [1, 2], "widthAlignment": 8, "maxSize": [800, 600], "fixedSizes": [], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 19, "recipe": 1, "colors": [2], "widthAlignment": 8, "maxSize": [400, 300], "fixedSizes": [[400, 300]], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 20, "recipe": 0, "colors": [1, 2], "widthAlignment": 8, "maxSize": [960, 680], "fixedSizes": [], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 21, "recipe": 0, "colors": [1, 2], "widthAlignment": 8, "maxSize": [800, 600], "fixedSizes": [], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 21, "recipe": 1, "colors": [2], "widthAlignment": 8, "maxSize": [400, 300], "fixedSizes": [[400, 300]], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 32, "recipe": 0, "colors": [1, 2], "widthAlignment": 8, "maxSize": [400, 300], "fixedSizes": [], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 32, "recipe": 1, "colors": [2], "widthAlignment": 8, "maxSize": [128, 250], "fixedSizes": [[128, 250]], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 33, "recipe": 0, "colors": [1, 2], "widthAlignment": 8, "maxSize": [152, 152], "fixedSizes": [[152, 152]], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 33, "recipe": 1, "colors": [2], "widthAlignment": 8, "maxSize": [152, 152], "fixedSizes": [[152, 152]], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 34, "recipe": 0, "colors": [1, 2, 4], "widthAlignment": 8, "maxSize": [960, 680], "fixedSizes": [], "colorFixedSizes": [{ "color": 4, "sizes": [[800, 480]] }], "transferFormat": 0 },
+    { "controller": 35, "recipe": 0, "colors": [1, 2], "widthAlignment": 8, "maxSize": [128, 250], "fixedSizes": [[128, 250]], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 35, "recipe": 1, "colors": [1, 2], "widthAlignment": 8, "maxSize": [128, 250], "fixedSizes": [[128, 250]], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 36, "recipe": 0, "colors": [1, 2], "widthAlignment": 8, "maxSize": [400, 300], "fixedSizes": [], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 36, "recipe": 1, "colors": [1, 2], "widthAlignment": 8, "maxSize": [400, 300], "fixedSizes": [], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 48, "recipe": 0, "colors": [3], "widthAlignment": 4, "maxSize": [400, 300], "fixedSizes": [], "colorFixedSizes": [], "transferFormat": 3 },
+    { "controller": 48, "recipe": 1, "colors": [3], "widthAlignment": 4, "maxSize": [128, 250], "fixedSizes": [[128, 250]], "colorFixedSizes": [], "transferFormat": 3 },
+    { "controller": 49, "recipe": 0, "colors": [3], "widthAlignment": 4, "maxSize": [800, 600], "fixedSizes": [], "colorFixedSizes": [], "transferFormat": 3 },
+    { "controller": 49, "recipe": 1, "colors": [3], "widthAlignment": 4, "maxSize": [768, 552], "fixedSizes": [[768, 552]], "colorFixedSizes": [], "transferFormat": 3 },
+    { "controller": 49, "recipe": 2, "colors": [3], "widthAlignment": 4, "maxSize": [768, 552], "fixedSizes": [[768, 552]], "colorFixedSizes": [], "transferFormat": 3 },
+    { "controller": 50, "recipe": 1, "colors": [10], "widthAlignment": 4, "maxSize": [760, 568], "fixedSizes": [[760, 568]], "colorFixedSizes": [], "transferFormat": 6 },
+    { "controller": 51, "recipe": 0, "colors": [2, 3], "widthAlignment": 4, "maxSize": [400, 300], "fixedSizes": [], "colorFixedSizes": [], "transferFormat": 3 },
+    { "controller": 51, "recipe": 1, "colors": [3], "widthAlignment": 4, "maxSize": [400, 300], "fixedSizes": [[400, 300]], "colorFixedSizes": [], "transferFormat": 3 },
+    { "controller": 51, "recipe": 2, "colors": [3], "widthAlignment": 4, "maxSize": [400, 300], "fixedSizes": [[400, 300]], "colorFixedSizes": [], "transferFormat": 3 },
+    { "controller": 63, "recipe": 0, "colors": [2, 3], "widthAlignment": 4, "maxSize": [800, 600], "fixedSizes": [], "colorFixedSizes": [], "transferFormat": 3 },
+    { "controller": 63, "recipe": 1, "colors": [2, 3], "widthAlignment": 4, "maxSize": [128, 250], "fixedSizes": [[128, 250]], "colorFixedSizes": [], "transferFormat": 3 },
+    { "controller": 63, "recipe": 5, "colors": [3], "widthAlignment": 4, "maxSize": [176, 480], "fixedSizes": [[176, 480]], "colorFixedSizes": [], "transferFormat": 3 }
+  ],
+  "colors": [
+    { "id": 1, "name": "BW" },
+    { "id": 2, "name": "BWR" },
+    { "id": 3, "name": "BWRY" },
+    { "id": 4, "name": "GRAY4" },
+    { "id": 5, "name": "BWY" },
+    { "id": 6, "name": "BWB" },
+    { "id": 7, "name": "BWG" },
+    { "id": 8, "name": "BWO" },
+    { "id": 9, "name": "GRAY16" },
+    { "id": 10, "name": "BWRYGB" },
+    { "id": 11, "name": "BWRYGBO" }
+  ]
+}

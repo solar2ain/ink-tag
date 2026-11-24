@@ -1,0 +1,23 @@
+[
+  {
+    "target": "da14585_aesl",
+    "path": "da14585_aesl.img",
+    "bytes": 82564,
+    "sha256": "ada6ad76cb0551014cff9a49ed715a1764b8f7072fae3bd5c2dbe095b2503ef9",
+    "origin": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-da14585_aesl-ota-v0.2.0.34462-e3c0352c6f9c.img"
+  },
+  {
+    "target": "nrf52811_aesl",
+    "path": "nrf52811_aesl.zip",
+    "bytes": 70221,
+    "sha256": "e4eee8f1b59842faf0cff85ed8d30b8fce1e58c114923f863e7feae795a84c5b",
+    "origin": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-nrf52811_aesl-ota-v0.2.0.0-b6fb6ecc78cd.zip"
+  },
+  {
+    "target": "nrf52832_priceetag",
+    "path": "nrf52832_priceetag.zip",
+    "bytes": 135801,
+    "sha256": "4a7d3fd05bf1dbcdd43b74c472ae31de1337339199eab6cf9aa2335156488452",
+    "origin": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.0-20261031.2/InkTag-nrf52832_priceetag-ota-v0.2.0.0-411fb02cbf64.zip"
+  }
+]

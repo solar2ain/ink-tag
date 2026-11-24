@@ -1,0 +1,5 @@
+# Optional explicit entry for the default InkTag implementation.
+override INKTAG_BUILD_PRO := 0
+override TLSR_TRUSTED_ENTRY := 1
+override TLSR_OTA_PRODUCTION_KEY := 1
+include $(dir $(lastword $(MAKEFILE_LIST)))Makefile

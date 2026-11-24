@@ -1,6 +1,6 @@
 # InkTag 命令行客户端
 
-中文 | [English](README.en.md)
+[English](README.en.md)
 
 InkTag CLI 可以连接设备、发送图片、管理显示内容和执行 OTA，也能启动 WebUI、查询 Find 和运行主机天气任务。命令名为 `inktag-cli`，也可以使用 `inktag`；两者功能相同。
 
@@ -177,9 +177,9 @@ inktag-cli device -n B892 setting pins set --config pins.json --yes
 }
 ```
 
-GPIO 255 表示未连接。屏幕和 LED 的格式可参考 `pins show` 返回的 `configuration`。屏幕 BUSY／RESET 等行为由所选驱动决定；板卡 EN 和 LED 保留有效电平设置。不提供 TXD/RXD 配置。按键最多两个，默认低电平有效；蜂鸣器通过模式和引脚配置，无需另一个启用开关。仅能修改设备实际声明可编辑的项目。
+GPIO 255 表示未连接。屏幕和 LED 的格式可参考 `pins show` 返回的 `configuration`。屏幕 BUSY／RESET 等行为由所选驱动决定；板卡 EN 和 LED 保留有效电平设置。不提供 TXD/RXD 配置。按键最多两个，默认低电平有效。仅能修改设备实际声明可编辑的项目。
 
-屏幕/LED 与按键/蜂鸣器是分步写入；如果失败，结果会列出已经确认的区域，请先读取当前配置再决定下一步。`pins restore-screen-led-defaults` 只恢复屏幕和 LED 默认接线。
+屏幕/LED 与按键是分步写入；如果失败，结果会列出已经确认的区域，请先读取当前配置再决定下一步。`pins restore-screen-led-defaults` 只恢复屏幕和 LED 默认接线。
 
 ```sh
 inktag-cli device -n B892 setting button show
@@ -188,7 +188,7 @@ inktag-cli device -n B892 nfc usage
 inktag-cli device nfc commands calendar
 ```
 
-两个按键共用单击、双击、长按动作。NFC 无需选择模式或开关；`device nfc usage` 只读显示设备的使用说明及已声明的手机命令。用 `device nfc commands calendar` 在本地生成命令文本，再在手机 NFC Tools 中选择“写入 → 添加记录 → 文本”。手机写命令需要 Pro 和对应固件支持，读取设备链接不执行设备动作。
+两个按键共用单击、双击、长按动作。NFC 无需选择模式或开关；`device nfc usage` 只读显示设备的使用说明及已声明的手机命令。用 `device nfc commands calendar` 在本地生成命令文本，再在手机 NFC Tools 中选择“写入 → 添加记录 → 文本”。手机写命令需要 PRO 和对应固件支持，读取设备链接不执行设备动作。
 
 字体使用 `setting font info / build / install`。图标显示和日历偏好在 `setting screen mark / calendar`。短蜂鸣器测试使用 `setting buzzer test`。
 
@@ -196,7 +196,7 @@ inktag-cli device nfc commands calendar
 
 设备密码通过隐藏提示或 `--password-stdin` 输入，不把密码放在命令参数中。默认会保存可复用控制凭据；`--password-stdin` 不代表不缓存。`--no-credential-cache` 禁止读取和写入本机控制凭据，仍保留设备端密码验证与限速。
 
-`setting password status / set / disable` 管理设备密码。`setting reset-settings --yes` 清除普通设置和设备密码，保留图片、Pro、Find 和出厂身份；密码已启用时仍需原密码。`setting clear-user-data --yes` 清除用户图片与播放引用，保留设置、Pro、Find 和出厂身份。`device restart` 只重启。
+`setting password status / set / disable` 管理设备密码。`setting reset-settings --yes` 清除普通设置和设备密码，保留图片、PRO、Find 和出厂身份；密码已启用时仍需原密码。`setting clear-user-data --yes` 清除用户图片与播放引用，保留设置、PRO、Find 和出厂身份。`device restart` 只重启。
 
 清理命令可使用 `--expected-device-id` 核验预期设备身份；这是操作前核验，不是设备选择方式。结果未确认时先重连读取状态，不自动重复清理。
 
@@ -213,9 +213,11 @@ inktag-cli device -n B892 recovery enter
 inktag-cli device -n B892_OTA recovery exit
 ```
 
-OTA 使用与主板匹配的已签名包，保留包完整性、签名和更新后身份/状态检查。进入 Recovery 与选择 OTA 包是独立操作。返回应用使用 `recovery exit`（与 `recovery resume-app` 相同）。完整烧录使用独立主控工具，不通过 CLI 代替烧录器。
+OTA 使用与主板及实际 Recovery 策略匹配的包，保留完整性和更新后身份/状态检查。自行编译的基础应用可按 Recovery 策略使用无签名包；带签名的包必须验签，PRO 发行继续签名以兼容旧 Recovery。进入 Recovery 与选择 OTA 包是独立操作。返回应用使用 `recovery exit`（与 `recovery resume-app` 相同）。完整烧录使用独立主控工具，不通过 CLI 代替烧录器。
 
 返回应用也可以用蓝牙短名，例如 `device -n 43D2 recovery exit`；匹配到多台时需指定完整名称或地址。各平台显示相同的连接、请求返回和应用就绪阶段，详细连接诊断用 `--verbose` 查看；`--json` 的原始结果字段保持不变，阶段提示写到 stderr。
+
+`recovery exit` 和 `recovery resume-app` 在所有平台上默认等待 90 秒。需要调整时可加 `--reconnect-wait 秒数`（5–120 秒），例如 `recovery exit --reconnect-wait 120`。返回成功仍需完成应用身份核验。
 
 ## WebUI、本地日志与 Find
 

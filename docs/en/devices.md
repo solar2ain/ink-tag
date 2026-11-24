@@ -112,7 +112,7 @@ Saved images use a full decoded frame, a 96-byte record header and 4 KiB alignme
 | E6 3.7-inch 720×480 | 4bpp | 172 KiB |
 | E6 3.64-inch 760×568 | 4bpp | 212 KiB |
 
-The counts below show **storage capacity before Free-edition quotas**. On Pro-capable controllers, Free normally allows 10 pictures when the visible long edge is below 300 pixels, or 4 otherwise. **DA14585 and nRF52811 are Free-only due to firmware-size limits, cannot activate Pro, and have no such count quota.** Storage still has a physical limit. E6 control requires Pro and is unavailable on these two controllers.
+The counts below estimate picture capacity from available storage, display dimensions and colors. Both editions use the same storage rules. **DA14585 and nRF52811 offer BASIC only.** E6 screen control requires PRO and compatible hardware.
 
 1 KiB = 1,024 bytes. `0` means that a full image cannot be saved; `—` means E6 is not supported. This is a capacity comparison, not confirmation that every listed screen works on every board; see [tested screens](tested-screens.md).
 
@@ -171,4 +171,4 @@ Some large screens can be displayed directly without enough room for saved slots
 
 Panel and MCU temperatures have different sources. Missing, stale, busy or unsupported samples appear as `--`, not 0 °C. A0/A1 panel temperature on nRF52811 is not physically tested; DA availability also depends on controller and sampling state.
 
-nRF52811 and DA14585 are permanently Free without activation, Find, passwords, NFC actions or Bluetooth renaming. LEDs/buttons/buzzers on other families depend on fitted hardware and actual capabilities. Labels use printable English/ASCII characters; default `InkTag XXXX` is separate from advertising.
+nRF52811 and DA14585 are permanently BASIC without activation, Find, passwords, NFC actions or Bluetooth renaming. LEDs/buttons/buzzers on other families depend on fitted hardware and actual capabilities. Labels use printable English/ASCII characters; default `InkTag XXXX` is separate from advertising.

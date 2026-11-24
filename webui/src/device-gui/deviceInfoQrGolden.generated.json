@@ -1,0 +1,618 @@
+{
+  "cases": [
+    {
+      "width": 152,
+      "height": 152,
+      "modules": 25,
+      "divider": 76,
+      "fnv": 640740592
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "modules": 33,
+      "divider": 76,
+      "fnv": 4135029475
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "modules": 57,
+      "divider": 76,
+      "fnv": 842282867
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "modules": 25,
+      "divider": 100,
+      "fnv": 2623312842
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "modules": 33,
+      "divider": 100,
+      "fnv": 2650480621
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "modules": 57,
+      "divider": 100,
+      "fnv": 323203505
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "modules": 25,
+      "divider": 82,
+      "fnv": 2237463853
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "modules": 33,
+      "divider": 82,
+      "fnv": 3762734852
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "modules": 57,
+      "divider": 82,
+      "fnv": 3763485440
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "modules": 25,
+      "divider": 82,
+      "fnv": 3485907615
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "modules": 33,
+      "divider": 82,
+      "fnv": 220542531
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "modules": 57,
+      "divider": 82,
+      "fnv": 77822306
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "modules": 25,
+      "divider": 123,
+      "fnv": 2750390697
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "modules": 33,
+      "divider": 123,
+      "fnv": 1064556202
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "modules": 57,
+      "divider": 123,
+      "fnv": 4282579165
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "modules": 25,
+      "divider": 198,
+      "fnv": 2588326919
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "modules": 33,
+      "divider": 198,
+      "fnv": 525508607
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "modules": 57,
+      "divider": 198,
+      "fnv": 4273014082
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "modules": 25,
+      "divider": 297,
+      "fnv": 605195097
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "modules": 33,
+      "divider": 297,
+      "fnv": 3204223141
+    },
+    {
+      "width": 600,
+      "height": 448,
+      "modules": 57,
+      "divider": 297,
+      "fnv": 11048780
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "modules": 25,
+      "divider": 353,
+      "fnv": 767431000
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "modules": 33,
+      "divider": 353,
+      "fnv": 3745522432
+    },
+    {
+      "width": 752,
+      "height": 568,
+      "modules": 57,
+      "divider": 353,
+      "fnv": 1620868261
+    },
+    {
+      "width": 768,
+      "height": 552,
+      "modules": 25,
+      "divider": 356,
+      "fnv": 136343838
+    },
+    {
+      "width": 768,
+      "height": 552,
+      "modules": 33,
+      "divider": 356,
+      "fnv": 4016371242
+    },
+    {
+      "width": 768,
+      "height": 552,
+      "modules": 57,
+      "divider": 356,
+      "fnv": 2954502249
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "modules": 25,
+      "divider": 356,
+      "fnv": 844154807
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "modules": 33,
+      "divider": 356,
+      "fnv": 3352850695
+    },
+    {
+      "width": 800,
+      "height": 480,
+      "modules": 57,
+      "divider": 356,
+      "fnv": 1489656384
+    }
+  ],
+  "metadataCases": [
+    {
+      "width": 152,
+      "height": 152,
+      "bluetoothName": "IKT_GR_6775",
+      "deviceName": "Kitchen",
+      "fnv": 3039706013
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "bluetoothName": "IKT_GR_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 433513343
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "bluetoothName": "IKT_GR_6775",
+      "deviceName": "Kitchen",
+      "fnv": 398072105
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "bluetoothName": "IKT_GR_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 860969813
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "bluetoothName": "IKT_GR_6775",
+      "deviceName": "Kitchen",
+      "fnv": 2145779842
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "bluetoothName": "IKT_GR_6775",
+      "deviceName": "Kitchen",
+      "fnv": 2800730739
+    },
+    {
+      "width": 296,
+      "height": 128,
+      "bluetoothName": "IKT_GR_6775",
+      "deviceName": "Kitchen",
+      "fnv": 1853824842
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "bluetoothName": "IKT_GR_6775",
+      "deviceName": "Kitchen",
+      "fnv": 4280819654
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "bluetoothName": "IKT_GR_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 2106949864
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "bluetoothName": "IKT_GR_6775",
+      "deviceName": "Kitchen",
+      "fnv": 3544011967
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "bluetoothName": "IKT_GR_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 3118640257
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "bluetoothName": "IKT_OM_6775",
+      "deviceName": "Kitchen",
+      "fnv": 3039706013
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "bluetoothName": "IKT_OM_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 433513343
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "bluetoothName": "IKT_OM_6775",
+      "deviceName": "Kitchen",
+      "fnv": 398072105
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "bluetoothName": "IKT_OM_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 860969813
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "bluetoothName": "IKT_OM_6775",
+      "deviceName": "Kitchen",
+      "fnv": 3561352291
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "bluetoothName": "IKT_OM_6775",
+      "deviceName": "Kitchen",
+      "fnv": 2948502998
+    },
+    {
+      "width": 296,
+      "height": 128,
+      "bluetoothName": "IKT_OM_6775",
+      "deviceName": "Kitchen",
+      "fnv": 4020417363
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "bluetoothName": "IKT_OM_6775",
+      "deviceName": "Kitchen",
+      "fnv": 1269744047
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "bluetoothName": "IKT_OM_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 2262141961
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "bluetoothName": "IKT_OM_6775",
+      "deviceName": "Kitchen",
+      "fnv": 1942367692
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "bluetoothName": "IKT_OM_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 2097178998
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "bluetoothName": "IKT_TL_6775",
+      "deviceName": "Kitchen",
+      "fnv": 3039706013
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "bluetoothName": "IKT_TL_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 433513343
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "bluetoothName": "IKT_TL_6775",
+      "deviceName": "Kitchen",
+      "fnv": 398072105
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "bluetoothName": "IKT_TL_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 860969813
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "bluetoothName": "IKT_TL_6775",
+      "deviceName": "Kitchen",
+      "fnv": 4247649797
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "bluetoothName": "IKT_TL_6775",
+      "deviceName": "Kitchen",
+      "fnv": 2183372000
+    },
+    {
+      "width": 296,
+      "height": 128,
+      "bluetoothName": "IKT_TL_6775",
+      "deviceName": "Kitchen",
+      "fnv": 2290002869
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "bluetoothName": "IKT_TL_6775",
+      "deviceName": "Kitchen",
+      "fnv": 3629184333
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "bluetoothName": "IKT_TL_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 3546716503
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "bluetoothName": "IKT_TL_6775",
+      "deviceName": "Kitchen",
+      "fnv": 154421170
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "bluetoothName": "IKT_TL_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 2765158284
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "bluetoothName": "IKT_NRF_6775",
+      "deviceName": "Kitchen",
+      "fnv": 3039706013
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "bluetoothName": "IKT_NRF_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 433513343
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "bluetoothName": "IKT_NRF_6775",
+      "deviceName": "Kitchen",
+      "fnv": 398072105
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "bluetoothName": "IKT_NRF_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 860969813
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "bluetoothName": "IKT_NRF_6775",
+      "deviceName": "Kitchen",
+      "fnv": 573185693
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "bluetoothName": "IKT_NRF_6775",
+      "deviceName": "Kitchen",
+      "fnv": 3032957747
+    },
+    {
+      "width": 296,
+      "height": 128,
+      "bluetoothName": "IKT_NRF_6775",
+      "deviceName": "Kitchen",
+      "fnv": 3952666386
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "bluetoothName": "IKT_NRF_6775",
+      "deviceName": "Kitchen",
+      "fnv": 2730477054
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "bluetoothName": "IKT_NRF_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 1549562360
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "bluetoothName": "IKT_NRF_6775",
+      "deviceName": "Kitchen",
+      "fnv": 178704711
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "bluetoothName": "IKT_NRF_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 812660353
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "bluetoothName": "IKT_DA_6775",
+      "deviceName": "Kitchen",
+      "fnv": 3039706013
+    },
+    {
+      "width": 152,
+      "height": 152,
+      "bluetoothName": "IKT_DA_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 433513343
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "bluetoothName": "IKT_DA_6775",
+      "deviceName": "Kitchen",
+      "fnv": 398072105
+    },
+    {
+      "width": 200,
+      "height": 200,
+      "bluetoothName": "IKT_DA_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 860969813
+    },
+    {
+      "width": 212,
+      "height": 104,
+      "bluetoothName": "IKT_DA_6775",
+      "deviceName": "Kitchen",
+      "fnv": 1258268909
+    },
+    {
+      "width": 250,
+      "height": 128,
+      "bluetoothName": "IKT_DA_6775",
+      "deviceName": "Kitchen",
+      "fnv": 2976667688
+    },
+    {
+      "width": 296,
+      "height": 128,
+      "bluetoothName": "IKT_DA_6775",
+      "deviceName": "Kitchen",
+      "fnv": 2239564285
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "bluetoothName": "IKT_DA_6775",
+      "deviceName": "Kitchen",
+      "fnv": 2320921085
+    },
+    {
+      "width": 296,
+      "height": 152,
+      "bluetoothName": "IKT_DA_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 4005560231
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "bluetoothName": "IKT_DA_6775",
+      "deviceName": "Kitchen",
+      "fnv": 1483531018
+    },
+    {
+      "width": 400,
+      "height": 300,
+      "bluetoothName": "IKT_DA_6775",
+      "deviceName": "IKT_GR_ABCD",
+      "fnv": 3434515636
+    }
+  ],
+  "schemaVersion": 1,
+  "renderer": "firmware/common/gui/inktag_gui.c",
+  "sourceSha256": {
+    "tests/test_gui_device_info.c": "e1cd990c1a53dcd27e9c4128cb35500c127b702a6606e86110a5100f66e71811",
+    "firmware/common/gui/Adafruit_GFX.c": "8516e6664465918bd1ddb15ce759af63f7e43cefee603bd9c2807a27ec39d5d5",
+    "firmware/common/gui/u8g2_font.c": "aecacc159efc0c971f24054a936f23d28dace169202595b1877e3a902a5ad746",
+    "firmware/common/gui/inktag_gui_fonts.c": "238a197ac2b083914bfc7f9a831cfeff09dd53341a3c5c695d81ae53a6c95579",
+    "firmware/common/gui/inktag_calendar.c": "37d36827677551eb441e98dfdbbaa06094999febf85ad580f9b8990dc1fdf11d",
+    "firmware/common/gui/inktag_gui.c": "7591dceea7dd6b8298354df17a826405e3d94c2134947823afaa3c32053f0f64",
+    "firmware/common/gui/inktag_gui.h": "4b3595e20f51f65cc137d01253834c6ca1538920cf085e6d80c30e4561f3ba46",
+    "firmware/common/gui/inktag_gui_default.inc": "5495a47cf93e735aade146835789afea997b0e9c3562c055aff11d00ca9b57dc",
+    "firmware/common/gui/inktag_gui_calendar.inc": "5f383f6230b3d9ef2bc47766161d48d1b07bedff1be941a905fc8a3c9612e126",
+    "firmware/common/gui/inktag_gui_device_qr.h": "9acc461c4be2ba79821763c2b84268d1adb0038c54292c6a877178ee16bdf569",
+    "firmware/common/epd/inktag_version.h": "928fc31e16938cea2649d5034d4223ec5ac72465ac7eecc5329f6c901b6fde11",
+    "tools/emulator/inktag_gui_badge_preview.inc": "ae0570d5b8a5bb633ceb2b125ccd87e8608562a874ae00e827003b0d1e232675",
+    "tools/emulator/inktag_gui_edition_name_preview.inc": "e215e00169e4c99ff67f98ced3e4d7d6f9cf5aace44f5551ae1e829b54a84d7f"
+  }
+}

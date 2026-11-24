@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "buildTarget": "nrf52811_aesl",
+  "files": [
+    {
+      "canonical": "firmware/common/ble/inktag_ble_power.h",
+      "portForwarder": "firmware/ports/nordic/nrf52811/compat/common/ble/inktag_ble_power.h",
+      "sha256": "8eb916df34eb6470b755499abc5850be621dce895edf85aa58abee2879c59058"
+    },
+    {
+      "canonical": "firmware/common/ble/inktag_device_display_name.h",
+      "portForwarder": "firmware/ports/nordic/nrf52811/compat/common/ble/inktag_device_display_name.h",
+      "sha256": "e6eff422b622d91211292218419ebb060ce02b4e618f421fe9e83715090916f5"
+    },
+    {
+      "canonical": "firmware/common/epd/inktag_epd_wait_policy.h",
+      "portForwarder": "firmware/ports/nordic/nrf52811/compat/common/epd/inktag_epd_wait_policy.h",
+      "sha256": "682ab99e096e1a4d039b8cfea8b37a285ad5c76d94042cc2a77343de6bd345ad"
+    },
+    {
+      "canonical": "firmware/common/health/inktag_health_store_retry.h",
+      "portForwarder": "firmware/ports/nordic/nrf52811/compat/common/health/inktag_health_store_retry.h",
+      "sha256": "76a9619d031d94f5dde047c6255d5ac43fbf81e53034876cabf77bbe1136d686"
+    },
+    {
+      "canonical": "firmware/common/protocol/inktag_pin_config.c",
+      "portForwarder": "firmware/ports/nordic/nrf52811/compat/common/protocol/inktag_pin_config.c",
+      "sha256": "4ffaaba70612633eeae43c8187bc6589324ec7b64b7b9fee4960af6758ba9cbc"
+    },
+    {
+      "canonical": "firmware/common/protocol/inktag_pin_config.h",
+      "portForwarder": "firmware/ports/nordic/nrf52811/compat/common/protocol/inktag_pin_config.h",
+      "sha256": "44f653eaa89ca7a0abb8510d4c68f159c1a3a6072a3f1d13f8b960d09365773c"
+    },
+    {
+      "canonical": "firmware/common/protocol/inktag_release_v1.h",
+      "portForwarder": "firmware/ports/nordic/nrf52811/compat/common/protocol/inktag_release_v1.h",
+      "sha256": "b2b009e51723ff7fcb753667969152ea8c2345d6243787889e36917a2320f75c"
+    },
+    {
+      "canonical": "firmware/common/security/inktag_sha256.c",
+      "portForwarder": "firmware/ports/nordic/nrf52811/compat/common/security/inktag_sha256.c",
+      "sha256": "cd00be3f5907a6e24f7c17b152edfe9a24942ef22998cdb42fc38595ea199e4d"
+    },
+    {
+      "canonical": "firmware/common/security/inktag_sha256.h",
+      "portForwarder": "firmware/ports/nordic/nrf52811/compat/common/security/inktag_sha256.h",
+      "sha256": "b20f6b2d639a2537673ea932a08e7e93b9cf73ec2e0cbc50363c204075c32f4d"
+    },
+    {
+      "canonical": "firmware/common/status/inktag_temperature_wire.h",
+      "portForwarder": "firmware/ports/nordic/nrf52811/compat/common/status/inktag_temperature_wire.h",
+      "sha256": "791b46791b700bc57a2a3b4ec887725affa3a9330364c51bcf9dd10e88292355"
+    },
+    {
+      "canonical": "firmware/common/time/inktag_monotonic_clock.c",
+      "portForwarder": "firmware/ports/nordic/nrf52811/compat/common/time/inktag_monotonic_clock.c",
+      "sha256": "c838bca79e0b97f7c6133c906af25ed17d948cab318cad4840fd96640a023b48"
+    },
+    {
+      "canonical": "firmware/common/time/inktag_monotonic_clock.h",
+      "portForwarder": "firmware/ports/nordic/nrf52811/compat/common/time/inktag_monotonic_clock.h",
+      "sha256": "033a02501a6b349db3b19eabd33b99c86eaad2114ccb356c75455b7b32c26fbe"
+    }
+  ]
+}

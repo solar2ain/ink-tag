@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "decision": "2026-11-10 human: new Recovery does not verify App publisher signatures; Free needs no signing; Pro publisher signing retained for older Recovery",
+  "policyValues": {"optional-signature": 0, "signature-required": 1, "crc-only": 2},
+  "integrityExtension": {"magicHex": "494b5350", "schema": 1, "bytes": 6, "crcOnlyHex": "494b53500102"},
+  "softwareVersions": {"default": "1.0.1", "da14585": "1.0.1", "application": "0.2.2", "decision": "2026-11-10 latest human: all new Recovery 1.0.1, all new App 0.2.2; prior locally built versions remain historical"},
+  "compatibilityEpoch": 1,
+  "layoutChange": false,
+  "transports": {
+    "goodix": {"query": "Existing selected Recovery native GET_INFO", "unchangedPrefixBytes": 20, "softwareIdentityBytes": 8, "policyOffset": 28, "exactReplyBytes": 34, "tailHex": "494b53500102"},
+    "onmicro": {"query": "Existing selected Recovery IKRP profile characteristic", "unchangedPrefixBytes": 20, "nativePrefixDeclaredBytes": 20, "policyOffset": 20, "exactReplyBytes": 26, "tailHex": "494b53500102", "softwareRevision": "Existing separate 2A28 ASCII characteristic remains unchanged in format"},
+    "telink": {"query": "Existing selected Recovery version characteristic", "unchangedPrefixBytes": 8, "policyOffset": 8, "exactReplyBytes": 14, "tailHex": "494b53500102"},
+    "nordic": {"query": "Secure DFU protocol-version opcode 0x00", "crcOnlyPayloadHex": "e1", "requiredPayloadHex": "81", "optionalPayloadHex": "c1", "safeResumePayloadHex": ["81", "c1", "e1"], "softwareVersionQuery": "Existing FW_VERSION opcode 0x0b record unchanged"},
+    "dialog": {"query": "Existing SUOTA VERSION characteristic", "crcOnlyPayloadHex": "0d494b010153500102", "requiredPayloadHex": ["0d494b0101", "0d494b010153500101"], "optionalPayloadHex": "0d494b010153500100", "softwareVersionQuery": "Existing separate software revision readback"}
+  },
+  "clientAdmission": [
+    "Package inspection is separate from permission to write",
+    "Unsigned supported native formats require exact optional or crc-only policy on the same identified Recovery connection before update actions",
+    "Unknown, legacy, malformed, duplicate or conflicting policy never grants unsigned admission",
+    "Never infer policy from software version, product name, package manifest or source edition alone",
+    "Signed Pro packages retain existing fixed publisher key verification; invalid signed inputs do not silently become unsigned",
+    "Keep native format, hash/CRC, target/layout, epoch/version floors, physical size/ranges, transaction/power, ACK and reconnect identity checks",
+    "New Recovery has no publisher-signature SDK/key dependency in cold boot, resume-app or update admission; Pro App activation remains private and unchanged"
+  ],
+  "publication": "Local preparation only; no remote push or public deployment in this batch"
+}

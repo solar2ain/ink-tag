@@ -1983,6 +1983,28 @@ class QuerySession:
             )
             return {"proofHex": proof.hex().upper(), "fingerprintHex": normalized.upper()}
 
+    async def prove_public_only_unregister(
+        self, fingerprint_hex: str, nonce_hex: str, device_id: str,
+    ) -> dict[str, str]:
+        fingerprint = fingerprint_hex.lower()
+        identity_id = self._clean_device_id(device_id).lower()
+        if (not re.fullmatch(r"[0-9a-f]{32}", fingerprint) or
+                not re.fullmatch(r"[0-9a-fA-F]{16}", nonce_hex) or
+                not re.fullmatch(r"activation:[0-9a-f]{16}", identity_id)):
+            raise ValueError("解除 Find 登记需要有效的设备身份、指纹和挑战。")
+        async with self.lock:
+            entry = self.identities.get(fingerprint)
+            material = self.identity_seeds.get(fingerprint)
+            if (entry is None or material is None or len(material) != 44 or
+                    entry.get("historyOnly") or entry.get("derivationVersion") != find_public_only.VERSION or
+                    entry.get("deviceId", "").lower() != identity_id):
+                raise ValueError("本机没有与该标签匹配的旧 Find 身份资料。")
+            payload = find_public_only.unregister_request(
+                material[28:], bytes.fromhex(identity_id[11:]), bytes.fromhex(nonce_hex),
+                bytes.fromhex(fingerprint),
+            )
+            return {"payloadHex": payload.hex().upper()}
+
     async def prepare_public_only_owner(
         self, nonce_hex: str, *, find_note: str, device_name: str,
         bluetooth_name: str, device_id: str,
@@ -2240,7 +2262,8 @@ class QuerySession:
             if normalized not in self.identities:
                 raise ValueError("需要删除的 Find 身份不存在。")
             deleted = self.identities[normalized]
-            selected_changed = normalized == self.selected_key_fingerprint
+            selected_fingerprint = self.selected_key_fingerprint
+            selected_changed = normalized == selected_fingerprint
             if selected_changed:
                 remaining = [
                     (candidate_fingerprint, entry)
@@ -2253,16 +2276,13 @@ class QuerySession:
                 ]
                 candidates = same_device or remaining
                 if candidates:
-                    replacement_fingerprint = max(
+                    selected_fingerprint = max(
                         candidates,
                         key=lambda item: str(item[1]["createdAt"] or ""),
                     )[0]
-                    self._select_identity(replacement_fingerprint)
                 else:
-                    self.selected_key_fingerprint = ""
+                    selected_fingerprint = ""
 
-            del self.identities[normalized]
-            self.identity_seeds.pop(normalized, None)
             with self.identity_database:
                 self.identity_database.execute(
                     "DELETE FROM find_track_points WHERE key_fingerprint=?",
@@ -2277,8 +2297,11 @@ class QuerySession:
                     INSERT INTO find_settings(name, value) VALUES ('selectedKeyFingerprint', ?)
                     ON CONFLICT(name) DO UPDATE SET value=excluded.value
                     """,
-                    (self.selected_key_fingerprint,),
+                    (selected_fingerprint,),
                 )
+            del self.identities[normalized]
+            self.identity_seeds.pop(normalized, None)
+            self.selected_key_fingerprint = selected_fingerprint
             self.identity_database.execute("PRAGMA wal_checkpoint(TRUNCATE)")
             self._secure_identity_database_files()
             return {
@@ -2580,7 +2603,7 @@ def create_app(session: QuerySession, port: int = DEFAULT_PORT, *, parent: Paren
             "form-action 'self'; img-src 'self' data: https://tile.openstreetmap.org; object-src 'none'; "
             "script-src 'self'; style-src 'self'; connect-src 'self'; "
             "frame-src https://api.map.baidu.com https://map.baidu.com "
-            "https://uri.amap.com https://ditu.amap.com "
+            "https://uri.amap.com https://ditu.amap.com https://www.amap.com https://m.amap.com "
             "https://www.openstreetmap.org"
         )
         return response
@@ -2742,6 +2765,15 @@ def create_app(session: QuerySession, port: int = DEFAULT_PORT, *, parent: Paren
 
         return await run_action(request, action)
 
+    async def prove_public_only_unregister(request: web.Request) -> web.Response:
+        async def action(body: dict[str, Any]) -> dict[str, str]:
+            return await session.prove_public_only_unregister(
+                str(body.get("fingerprintHex", "")), str(body.get("nonceHex", "")),
+                str(body.get("deviceId", "")),
+            )
+
+        return await run_action(request, action)
+
     async def prepare_public_only_replacement(request: web.Request) -> web.Response:
         async def action(body: dict[str, Any]) -> dict[str, Any]:
             return await session.prepare_public_only_replacement(
@@ -2860,6 +2892,7 @@ def create_app(session: QuerySession, port: int = DEFAULT_PORT, *, parent: Paren
     app.router.add_post("/api/identity/update", update_identity)
     app.router.add_post("/api/identity/public-only/prepare", prepare_public_only_owner)
     app.router.add_post("/api/identity/public-only/replace/prepare", prepare_public_only_replacement)
+    app.router.add_post("/api/identity/public-only/unregister/prove", prove_public_only_unregister)
     app.router.add_post("/api/identity/public-only/finalize", finalize_public_only_owner)
     app.router.add_post("/api/identity/public-only/abort", abort_public_only_owner)
     app.router.add_post("/api/identity/public-only/recover", recover_public_only_owner)

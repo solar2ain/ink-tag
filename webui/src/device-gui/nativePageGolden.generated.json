@@ -1,0 +1,1380 @@
+{
+  "schemaVersion": 1,
+  "layoutRevision": "v0",
+  "renderer": "firmware/common/gui/GUI.c::DrawGUIEx",
+  "timestamp": 1788791280,
+  "sourceSha256": {
+    "tools/emulator/render-native-layout.c": "b379a9a90f74faf5fa3773a48c75c1d1dc0bb9a11de1172622dbaf1d2a328852",
+    "firmware/common/gui/Adafruit_GFX.c": "8516e6664465918bd1ddb15ce759af63f7e43cefee603bd9c2807a27ec39d5d5",
+    "firmware/common/gui/u8g2_font.c": "aecacc159efc0c971f24054a936f23d28dace169202595b1877e3a902a5ad746",
+    "firmware/common/gui/fonts.c": "ec9149051c174beac64f105e8c0acae05c278248fd76bac3efb5603a31b1e192",
+    "firmware/common/gui/GUI.c": "31d488037673aee2e5471087d14b9af4bb49edd2fe5871a82f6a72e3d183beba",
+    "firmware/common/gui/Lunar.c": "2a0518b238a0e257b1ee27afa1ddda3a60324da7a8f7a6929fd3589741eea075",
+    "firmware/common/gui/GUI_calendar.inc": "c3ecbb0ef65b1391c29fcf2860adbe9ad92e2b3aa6071ed9dcbd8d6ba720a631",
+    "firmware/common/gui/GUI_default.inc": "3faa6471a9933f703ce9ce68d91ae034b5fe3c105d2876c85adfca6f470ec49d",
+    "firmware/common/gui/GUI_legacy.inc": "74593e3549b25d972ccb357ad9680f1f265bf4e1e45d111e4e29cb9053f39d00"
+  },
+  "scalesByScreen": {
+    "square-154": 100,
+    "square-200": 100,
+    "rect-212": 100,
+    "rect-250": 100,
+    "rect-296": 100,
+    "normal-400": 100,
+    "large-600": 150,
+    "large-752": 150,
+    "large-800": 150
+  },
+  "assets": [
+    {
+      "file": "square-154-device-info-100-firmware.png",
+      "screen": "square-154",
+      "page": "device-info",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 154,
+      "height": 154,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "2aa6268b65057bbad34e413b6dd93a6bc32d129d17140c68371096077c348a30",
+      "pixelSha256": "828cf54a313877634c4eb1ea43b9393e702c986f4c33407991a2323a33118e78"
+    },
+    {
+      "file": "square-154-device-info-100-free.png",
+      "screen": "square-154",
+      "page": "device-info",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 154,
+      "height": 154,
+      "defaultMark": [
+        74,
+        141,
+        79,
+        12
+      ],
+      "changedRegion": [
+        74,
+        141,
+        79,
+        12
+      ],
+      "sha256": "8dd52f2ace3d05f6f72e3cd056d399f2661b623e7e83aa0b1b32310902b02cf8",
+      "pixelSha256": "29c4b06050ab0b1069e31d8fc383badf85607f82447c735c4f9181095f966199",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 146
+      }
+    },
+    {
+      "file": "square-154-calendar-100-firmware.png",
+      "screen": "square-154",
+      "page": "calendar",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 154,
+      "height": 154,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "8354d520a7428105a4cd4ef5294c9fb3f0711426e52711c635d16101b20e01b1",
+      "pixelSha256": "57c021446086e3144427b63073794e011e3f033f628a9be654e7e794a57f22f8"
+    },
+    {
+      "file": "square-154-calendar-100-free.png",
+      "screen": "square-154",
+      "page": "calendar",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 154,
+      "height": 154,
+      "defaultMark": [
+        74,
+        141,
+        79,
+        12
+      ],
+      "changedRegion": [
+        74,
+        141,
+        79,
+        12
+      ],
+      "sha256": "42c409b05b4a071300b373e2987c6d504f05a37c4706412c0803e1463987bec9",
+      "pixelSha256": "c556af4863fe20b9284ab42c02b079e21eff3b6a56453af77462baf51ec68912",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 0
+      }
+    },
+    {
+      "file": "square-154-clock-100-firmware.png",
+      "screen": "square-154",
+      "page": "clock",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 154,
+      "height": 154,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "30d28d34bf172391109256ede3d4bbf796d12dbfa2740edda9fddb8e246ecb24",
+      "pixelSha256": "4552f8a5f3d7295d2a7176f02f0c6ab4aa1730cfe7e1a06ceb71c8a03989240a"
+    },
+    {
+      "file": "square-154-clock-100-free.png",
+      "screen": "square-154",
+      "page": "clock",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 154,
+      "height": 154,
+      "defaultMark": [
+        74,
+        133,
+        79,
+        12
+      ],
+      "changedRegion": [
+        0,
+        121,
+        154,
+        33
+      ],
+      "sha256": "da548bd29ce43ccece94f421ef91a5bf8f0fe5609c2d21ca4db446e38a37c4c8",
+      "pixelSha256": "1a79b94f7334bcd73864b0f4d527245123df9222b1797dbeb06cd2cbeeb44755",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 699
+      }
+    },
+    {
+      "file": "square-200-device-info-100-firmware.png",
+      "screen": "square-200",
+      "page": "device-info",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 200,
+      "height": 200,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "34e8e9677bbb5ff6223e2747b12310134b1d1f33f34bac6e03245e8a1d73f173",
+      "pixelSha256": "cdcfcc123ce7bbe5d9514a1615cfb94fe46838325455f232c4e70ed154711411"
+    },
+    {
+      "file": "square-200-device-info-100-free.png",
+      "screen": "square-200",
+      "page": "device-info",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 200,
+      "height": 200,
+      "defaultMark": [
+        120,
+        187,
+        79,
+        12
+      ],
+      "changedRegion": [
+        120,
+        187,
+        79,
+        12
+      ],
+      "sha256": "1629e6c1e9351aa92bbff69ba623f45036e0d5f16e28b8c82e3e6400aa6664c5",
+      "pixelSha256": "25f2d897363c99ba9423fd4a0f56a04eec95fee94893d4478061d295ce580b88",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 0
+      }
+    },
+    {
+      "file": "square-200-calendar-100-firmware.png",
+      "screen": "square-200",
+      "page": "calendar",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 200,
+      "height": 200,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "cfb2c0a0dd02d0f3103290f93c3f42227c87960b1d3ee28d16f801a3af2c9278",
+      "pixelSha256": "c42c8cf5fb3c03ae75a2f1c32727c8eb87d26949f3dbcff820d38d0dd1e9a6f3"
+    },
+    {
+      "file": "square-200-calendar-100-free.png",
+      "screen": "square-200",
+      "page": "calendar",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 200,
+      "height": 200,
+      "defaultMark": [
+        120,
+        187,
+        79,
+        12
+      ],
+      "changedRegion": [
+        120,
+        187,
+        79,
+        12
+      ],
+      "sha256": "c52df5dee306fa690ec21696374a1631970a12e2de4b33da96f819de1993ba46",
+      "pixelSha256": "5e55ced58455b4b3a78a1412e320f4451405cad1c189a239c11fc18aa6f9718b",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 0
+      }
+    },
+    {
+      "file": "square-200-clock-100-firmware.png",
+      "screen": "square-200",
+      "page": "clock",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 200,
+      "height": 200,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "13f13d132731b205138dad3f33657de2164c3c5ae9554bdd4f4bf1897cd6f4d5",
+      "pixelSha256": "cbcaaeddf47e9eccf150f175eddbbac5b813b4fe42976fea88875bbaaa28aac6"
+    },
+    {
+      "file": "square-200-clock-100-free.png",
+      "screen": "square-200",
+      "page": "clock",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 200,
+      "height": 200,
+      "defaultMark": [
+        120,
+        179,
+        79,
+        12
+      ],
+      "changedRegion": [
+        0,
+        167,
+        200,
+        33
+      ],
+      "sha256": "51c023e8ec24a065ad63d6debfb71b3fa61a89c84e8ee3291ec407d0e4f35c3a",
+      "pixelSha256": "f82f956e1fcfe7c61a7bf586e1b6c42b4d8626e477a83882341d34c691d16b5a",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 764
+      }
+    },
+    {
+      "file": "rect-212-device-info-100-firmware.png",
+      "screen": "rect-212",
+      "page": "device-info",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 212,
+      "height": 104,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "ab16c0dffc3568a8644b777cc37ef4b202a6269b30703c036f4a50068658c95c",
+      "pixelSha256": "66dfd90faa1b54b211040845b5976da9f41af40aa2b6b4badd39b06cba0e22b2"
+    },
+    {
+      "file": "rect-212-device-info-100-free.png",
+      "screen": "rect-212",
+      "page": "device-info",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 212,
+      "height": 104,
+      "defaultMark": [
+        132,
+        91,
+        79,
+        12
+      ],
+      "changedRegion": [
+        132,
+        91,
+        79,
+        12
+      ],
+      "sha256": "b319d60fa475e8a0722108cb4c32ceb7cfc9fa5aa1024aa3b61d650a9f17e402",
+      "pixelSha256": "5d70b6addb7046f8aa3b49d366a7154dfd9fcdc5622dab049a5b780edb3ebf78",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 0
+      }
+    },
+    {
+      "file": "rect-212-calendar-100-firmware.png",
+      "screen": "rect-212",
+      "page": "calendar",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 212,
+      "height": 104,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "3dd4b83ba95b79fc3061dfc1201e559d2fe961f1d1b9fa667925206988fc65a5",
+      "pixelSha256": "99864bfb038632bd0daed1c6dbf786d7f24440ae236c69bdb5a0585ba22a0b05"
+    },
+    {
+      "file": "rect-212-calendar-100-free.png",
+      "screen": "rect-212",
+      "page": "calendar",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 212,
+      "height": 104,
+      "defaultMark": [
+        132,
+        91,
+        79,
+        12
+      ],
+      "changedRegion": [
+        132,
+        91,
+        79,
+        12
+      ],
+      "sha256": "8332a771d6f50299eb8c291ef0f10af26b46b704f1644ba4c41f11ad917134ba",
+      "pixelSha256": "0f6317f708b239b78187355fdedc9af2f329c626720ac488aa7d1a3ca84c91d0",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 0
+      }
+    },
+    {
+      "file": "rect-212-clock-100-firmware.png",
+      "screen": "rect-212",
+      "page": "clock",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 212,
+      "height": 104,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "396ae521ce37c7af40553809a2e2dc22f9039cd3a484d66583054c8d884870cf",
+      "pixelSha256": "7d733fa986aadbc5e58c0cad7fb86d262822880c4a000f57280d6ca0b50ce972"
+    },
+    {
+      "file": "rect-212-clock-100-free.png",
+      "screen": "rect-212",
+      "page": "clock",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 212,
+      "height": 104,
+      "defaultMark": [
+        132,
+        85,
+        79,
+        12
+      ],
+      "changedRegion": [
+        0,
+        77,
+        212,
+        27
+      ],
+      "sha256": "cec45fd5fd9672a4420a152e5cc4fccc312ef65883258c7ef3c5c9ae187b849a",
+      "pixelSha256": "b072745fbb66754cd240a38eda8e536b83d48198fba8cc2b3683867f7c13da80",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 796
+      }
+    },
+    {
+      "file": "rect-250-device-info-100-firmware.png",
+      "screen": "rect-250",
+      "page": "device-info",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 250,
+      "height": 128,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "ce8588a8fb2ea9927f4fec62815b3d6045b42ca29cd6792aebc75d8b1ece6fef",
+      "pixelSha256": "297eb9a04e6f7fcb115fd62287c1ad0b6d9c44e6869c65c4e31a52430d4c80f4"
+    },
+    {
+      "file": "rect-250-device-info-100-free.png",
+      "screen": "rect-250",
+      "page": "device-info",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 250,
+      "height": 128,
+      "defaultMark": [
+        170,
+        115,
+        79,
+        12
+      ],
+      "changedRegion": [
+        170,
+        115,
+        79,
+        12
+      ],
+      "sha256": "2c13fae9544e2d59d29538caa601070ff04df7ea676c42555a41cae05d8a1fbc",
+      "pixelSha256": "33ec7a29bd395c6c4d83e73a7cfd490c9dd6c3188257641d3d0d4a6299a68160",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 0
+      }
+    },
+    {
+      "file": "rect-250-calendar-100-firmware.png",
+      "screen": "rect-250",
+      "page": "calendar",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 250,
+      "height": 128,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "09f0c50f7f5e389f23ecfb44021a34232b414e338232fcf70437232f82df27df",
+      "pixelSha256": "7feeff59e3b84af5632c583c7eb53e91ef2823fe4fb657a46352bfe10c4bbfe1"
+    },
+    {
+      "file": "rect-250-calendar-100-free.png",
+      "screen": "rect-250",
+      "page": "calendar",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 250,
+      "height": 128,
+      "defaultMark": [
+        170,
+        115,
+        79,
+        12
+      ],
+      "changedRegion": [
+        170,
+        115,
+        79,
+        12
+      ],
+      "sha256": "71ef412e4e3589144fa97243f9602f465b0ce5e20da70867a4c20163db97b93a",
+      "pixelSha256": "062f5b1a1b35aef03f70a37a806817fc4e63762ab81ad35df193ed10f13ffc76",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 0
+      }
+    },
+    {
+      "file": "rect-250-clock-100-firmware.png",
+      "screen": "rect-250",
+      "page": "clock",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 250,
+      "height": 128,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "f6e5d9df5ff114628d03479c72f745d7378cd0f46feaedf4bd4cdccc35adf162",
+      "pixelSha256": "13d62fffd536bc51ca45dfe437691edfe58607c3832f2aeca2341e418904acc6"
+    },
+    {
+      "file": "rect-250-clock-100-free.png",
+      "screen": "rect-250",
+      "page": "clock",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 250,
+      "height": 128,
+      "defaultMark": [
+        170,
+        107,
+        79,
+        12
+      ],
+      "changedRegion": [
+        0,
+        95,
+        250,
+        33
+      ],
+      "sha256": "3a716cbf8aa9e2af5dcb1873a3a82af1cec1b52be778315d0fdbe755f0655fa7",
+      "pixelSha256": "a7243ac4bdc1e3b597211d09e879d0b8bdabe4b0e2f10d0a9bb6285f5861b2a5",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 868
+      }
+    },
+    {
+      "file": "rect-296-device-info-100-firmware.png",
+      "screen": "rect-296",
+      "page": "device-info",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 296,
+      "height": 152,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "2ab88044d584fc07673ae266b5eda4621e37374ab09a86d796efc20047b20c9c",
+      "pixelSha256": "1756f0be0fa06af633b4e0a9154ea35c855aaf98e4f14374f0a6691de5bd5c14"
+    },
+    {
+      "file": "rect-296-device-info-100-free.png",
+      "screen": "rect-296",
+      "page": "device-info",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 296,
+      "height": 152,
+      "defaultMark": [
+        216,
+        139,
+        79,
+        12
+      ],
+      "changedRegion": [
+        216,
+        139,
+        79,
+        12
+      ],
+      "sha256": "389d4f9b9d7d51da7b70cc4b126c6f79308d10cb513c0fb371656d098b833626",
+      "pixelSha256": "bde8791788faf44b3eb5537c7cdb0fa9fca4026976c64f88c915eefe6e199344",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 0
+      }
+    },
+    {
+      "file": "rect-296-calendar-100-firmware.png",
+      "screen": "rect-296",
+      "page": "calendar",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 296,
+      "height": 152,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "fff5e20722a8558d2be340526b58bba61edb29ef58118532b3975b4acb36d79b",
+      "pixelSha256": "4f2444d12106fd2e2fc1ba7c63ce7ffed3507a8320bc24c67a20225fb766f653"
+    },
+    {
+      "file": "rect-296-calendar-100-free.png",
+      "screen": "rect-296",
+      "page": "calendar",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 296,
+      "height": 152,
+      "defaultMark": [
+        216,
+        139,
+        79,
+        12
+      ],
+      "changedRegion": [
+        216,
+        139,
+        79,
+        12
+      ],
+      "sha256": "85e4cbcc9bb4d021d6641eb3b37e3815f4f0e883e7b81fecc62cf68a254fe03f",
+      "pixelSha256": "9a3f1edbea98e34beed15912f8c358df502ff698dc9d352d55c225e602e7ad69",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 0
+      }
+    },
+    {
+      "file": "rect-296-clock-100-firmware.png",
+      "screen": "rect-296",
+      "page": "clock",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 296,
+      "height": 152,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "c4205abfa07a46b3433b8227027abda19cbeba59c25afddca22c117dc536270d",
+      "pixelSha256": "719c2e2e209cdd1d7d6f158f8305f0b7fcbdc62ceb18343f03120660bd825d5a"
+    },
+    {
+      "file": "rect-296-clock-100-free.png",
+      "screen": "rect-296",
+      "page": "clock",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 296,
+      "height": 152,
+      "defaultMark": [
+        216,
+        131,
+        79,
+        12
+      ],
+      "changedRegion": [
+        0,
+        119,
+        296,
+        33
+      ],
+      "sha256": "f91f15045d20af613f178b6f319f676354ca7c2e96de1ada2b3079319756e4cf",
+      "pixelSha256": "229ba6942b5060385d27d0854510996d94ac626837f78941e7caafaaa9c660d4",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 888
+      }
+    },
+    {
+      "file": "normal-400-device-info-100-firmware.png",
+      "screen": "normal-400",
+      "page": "device-info",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 400,
+      "height": 300,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "acba6ba734b9d917f2742b2dc58f12fa36190ac02c84e4b539fcbc698490772a",
+      "pixelSha256": "818050606ad91069a86fdbff40ba3067516e36cace23cc76803dba1bbf818bb7"
+    },
+    {
+      "file": "normal-400-device-info-100-free.png",
+      "screen": "normal-400",
+      "page": "device-info",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 400,
+      "height": 300,
+      "defaultMark": [
+        316,
+        281,
+        81,
+        16
+      ],
+      "changedRegion": [
+        316,
+        281,
+        81,
+        16
+      ],
+      "sha256": "ed6b46a9002ca373d76caab2b79d33604c6e1229f858599f4787fb213c5663a2",
+      "pixelSha256": "5f075e80882b38c68b861f62d1d01dd1030a55296cec76e6235a0ff7ba647aaf",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 59
+      }
+    },
+    {
+      "file": "normal-400-calendar-100-firmware.png",
+      "screen": "normal-400",
+      "page": "calendar",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 400,
+      "height": 300,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "c932ec0c8599d3d5c07396eefd652d9ac66d2499f037e581c68f9774e9d1e6b4",
+      "pixelSha256": "2c81ec689ba2125c64edee2ed8bd9d93093b35e4d9597bcda4871783b34c8171"
+    },
+    {
+      "file": "normal-400-calendar-100-free.png",
+      "screen": "normal-400",
+      "page": "calendar",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 400,
+      "height": 300,
+      "defaultMark": [
+        316,
+        281,
+        81,
+        16
+      ],
+      "changedRegion": [
+        316,
+        281,
+        81,
+        16
+      ],
+      "sha256": "77296a0f451e6562e33c84069472f585a4110c5374737e6ab41979ed0affb515",
+      "pixelSha256": "f4fb3c20e1e756c1e4aabe50b121481647178749c4720f686c8c2fd354727eea",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 0
+      }
+    },
+    {
+      "file": "normal-400-clock-100-firmware.png",
+      "screen": "normal-400",
+      "page": "clock",
+      "scalePercent": 100,
+      "variant": "firmware",
+      "width": 400,
+      "height": 300,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "88f11ba32399e8eb737791f1e4fe96d9e2e99823ac3b99b8e0861fe0db068ed3",
+      "pixelSha256": "a43621046d00741c118d0a83403047bc638bacf25153be4c349e10b4864783b7"
+    },
+    {
+      "file": "normal-400-clock-100-free.png",
+      "screen": "normal-400",
+      "page": "clock",
+      "scalePercent": 100,
+      "variant": "base",
+      "width": 400,
+      "height": 300,
+      "defaultMark": [
+        316,
+        281,
+        81,
+        16
+      ],
+      "changedRegion": [
+        316,
+        281,
+        81,
+        16
+      ],
+      "sha256": "6e27d0cb55ee8fb6d500a37220f801c37ddd5881df7cf22c55bbddc05dfc174a",
+      "pixelSha256": "af13ee70f620420954169bbce6d16f2f8190f1716bc2b631c66801ba22c1e26a",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 0
+      }
+    },
+    {
+      "file": "large-600-device-info-150-firmware.png",
+      "screen": "large-600",
+      "page": "device-info",
+      "scalePercent": 150,
+      "variant": "firmware",
+      "width": 600,
+      "height": 448,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "34d56ab03c74de10fb04d835bca0f95e7075429bb74611c3cd9ae332dfafdf18",
+      "pixelSha256": "ecf9b902145e97598ceefd162b115255563dc17c5b973443d6553bd6d84fb66e"
+    },
+    {
+      "file": "large-600-device-info-150-free.png",
+      "screen": "large-600",
+      "page": "device-info",
+      "scalePercent": 150,
+      "variant": "base",
+      "width": 600,
+      "height": 448,
+      "defaultMark": [
+        477,
+        421,
+        117,
+        21
+      ],
+      "changedRegion": [
+        477,
+        421,
+        117,
+        21
+      ],
+      "sha256": "b2e42cf95c4001a0dc94172f2faf608f4aa45d55f173cca34d3e5ac544f10056",
+      "pixelSha256": "87ced4cc52e2c34280453bb5edb735fe921b17e4d057278cca965a13291fb16a",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 63
+      }
+    },
+    {
+      "file": "large-600-calendar-150-firmware.png",
+      "screen": "large-600",
+      "page": "calendar",
+      "scalePercent": 150,
+      "variant": "firmware",
+      "width": 600,
+      "height": 448,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "810cd18501bdd66f1cabad49b4084df835530d89a924e817c62ea1add2441b37",
+      "pixelSha256": "99a4555ad4de53a18d4026851f181bf1430c572dcacb161f66ce3966be82099c"
+    },
+    {
+      "file": "large-600-calendar-150-free.png",
+      "screen": "large-600",
+      "page": "calendar",
+      "scalePercent": 150,
+      "variant": "base",
+      "width": 600,
+      "height": 448,
+      "defaultMark": [
+        477,
+        421,
+        117,
+        21
+      ],
+      "changedRegion": [
+        477,
+        421,
+        117,
+        21
+      ],
+      "sha256": "554194d74ccf86500ad3f15e76a3888d51ccda9e2adc4b7e24e0a81c45b6eede",
+      "pixelSha256": "b1c8a7476abd762822114f4d72c23d5e151fc7ed6cf8c821d149f8a705b59a5d",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 2
+      }
+    },
+    {
+      "file": "large-600-clock-150-firmware.png",
+      "screen": "large-600",
+      "page": "clock",
+      "scalePercent": 150,
+      "variant": "firmware",
+      "width": 600,
+      "height": 448,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "2a976609a0934a412f1c45649f5a48d2b5cc1397330797e6d9a697d74cada232",
+      "pixelSha256": "6313a327408265094443515baa6188a11810c8d8b2cc765f40386856d73658db"
+    },
+    {
+      "file": "large-600-clock-150-free.png",
+      "screen": "large-600",
+      "page": "clock",
+      "scalePercent": 150,
+      "variant": "base",
+      "width": 600,
+      "height": 448,
+      "defaultMark": [
+        477,
+        421,
+        117,
+        21
+      ],
+      "changedRegion": [
+        477,
+        421,
+        117,
+        21
+      ],
+      "sha256": "8087a2f28737335b78e60023e905806a24d98e504e87640a433511577c3c562f",
+      "pixelSha256": "54e2a80cf535b3576558e3d9192ce18e4aa0eef5f4bb5880ce187e4a55c9b15f",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 0
+      }
+    },
+    {
+      "file": "large-752-device-info-150-firmware.png",
+      "screen": "large-752",
+      "page": "device-info",
+      "scalePercent": 150,
+      "variant": "firmware",
+      "width": 752,
+      "height": 568,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "e7bab6a85f176d4408336f372a6a01ba4a5a7c5ee1f91f557764360a0a057c99",
+      "pixelSha256": "7278646afe0016e12f57d0e470b30e014b6f90001547cea7dac8a8a3db7889c0"
+    },
+    {
+      "file": "large-752-device-info-150-free.png",
+      "screen": "large-752",
+      "page": "device-info",
+      "scalePercent": 150,
+      "variant": "base",
+      "width": 752,
+      "height": 568,
+      "defaultMark": [
+        629,
+        541,
+        117,
+        21
+      ],
+      "changedRegion": [
+        629,
+        541,
+        117,
+        21
+      ],
+      "sha256": "c5f74dcdf06cb8b546ec6f00c8a4e7d45a3dfde4699f24c0a57726e1bdddf1e6",
+      "pixelSha256": "7ea768e336a3c52cc6c2db026da191fbe18c0fdbc6792f5b11b58853f83e7f77",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 63
+      }
+    },
+    {
+      "file": "large-752-calendar-150-firmware.png",
+      "screen": "large-752",
+      "page": "calendar",
+      "scalePercent": 150,
+      "variant": "firmware",
+      "width": 752,
+      "height": 568,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "eb6b71aafa7b28c123b042e5580ef177f2869760875cc1278525cca147d10f93",
+      "pixelSha256": "dcb77096706abd0df3671c752ea62ecbd28c7dc49e42f925466811c05b407e55"
+    },
+    {
+      "file": "large-752-calendar-150-free.png",
+      "screen": "large-752",
+      "page": "calendar",
+      "scalePercent": 150,
+      "variant": "base",
+      "width": 752,
+      "height": 568,
+      "defaultMark": [
+        629,
+        541,
+        117,
+        21
+      ],
+      "changedRegion": [
+        629,
+        541,
+        117,
+        21
+      ],
+      "sha256": "0f69c524d10e7d643a0256b8eda36543ee37653dd314a79d1c339025ee971a55",
+      "pixelSha256": "f03f5d535eaf82e5ff16576c45e050379dad444c1b346cd88a48dc0ab11047a4",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 2
+      }
+    },
+    {
+      "file": "large-752-clock-150-firmware.png",
+      "screen": "large-752",
+      "page": "clock",
+      "scalePercent": 150,
+      "variant": "firmware",
+      "width": 752,
+      "height": 568,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "51a303cf1aacceb06eea8c89fb5bb36e09b85e8ec58bdb5361205d1d3622dfbb",
+      "pixelSha256": "505b7338111f9eeab7eb3a345a7804beaad03425af9a6bb54e3cea616d2e25f9"
+    },
+    {
+      "file": "large-752-clock-150-free.png",
+      "screen": "large-752",
+      "page": "clock",
+      "scalePercent": 150,
+      "variant": "base",
+      "width": 752,
+      "height": 568,
+      "defaultMark": [
+        629,
+        541,
+        117,
+        21
+      ],
+      "changedRegion": [
+        629,
+        541,
+        117,
+        21
+      ],
+      "sha256": "0bacbff183cc99978a555ba5a36637d2a7a199be4e40ca571f9cb7b91caac768",
+      "pixelSha256": "f0083a87e51e228ce1e84a23282446b33fdd8c1b35ab14ae99eb25f7775e33cb",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 0
+      }
+    },
+    {
+      "file": "large-800-device-info-150-firmware.png",
+      "screen": "large-800",
+      "page": "device-info",
+      "scalePercent": 150,
+      "variant": "firmware",
+      "width": 800,
+      "height": 480,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "1ff2164fbb409ca0537abab01d0abab0f537d517c99dfdc2da316d459b217566",
+      "pixelSha256": "ac6625ed3347547a49fd08099323016781d4c13d903ce50d291cb374cc6a0c20"
+    },
+    {
+      "file": "large-800-device-info-150-free.png",
+      "screen": "large-800",
+      "page": "device-info",
+      "scalePercent": 150,
+      "variant": "base",
+      "width": 800,
+      "height": 480,
+      "defaultMark": [
+        677,
+        453,
+        117,
+        21
+      ],
+      "changedRegion": [
+        677,
+        453,
+        117,
+        21
+      ],
+      "sha256": "60f564d1d14bdf280590a73d85be4d4d7b8335b104295207648343333041dcb6",
+      "pixelSha256": "e458f3e239f2446b5f4694d6e27cd88fb5ab10ff4750225afb6dc6ae201d9437",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 63
+      }
+    },
+    {
+      "file": "large-800-calendar-150-firmware.png",
+      "screen": "large-800",
+      "page": "calendar",
+      "scalePercent": 150,
+      "variant": "firmware",
+      "width": 800,
+      "height": 480,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "e9b96759833d329290f1294602a282fd8d671914be7ac79d51f78e8ff044fdc1",
+      "pixelSha256": "be193057ee3f5e83b24d0ab75afd04545efcbdc8574025bd719710b7b0f24626"
+    },
+    {
+      "file": "large-800-calendar-150-free.png",
+      "screen": "large-800",
+      "page": "calendar",
+      "scalePercent": 150,
+      "variant": "base",
+      "width": 800,
+      "height": 480,
+      "defaultMark": [
+        677,
+        453,
+        117,
+        21
+      ],
+      "changedRegion": [
+        677,
+        453,
+        117,
+        21
+      ],
+      "sha256": "caf9c88f1b7697db221000545ae934364e34798403cdc59c2e6cf551b4dce2bc",
+      "pixelSha256": "c1243ee8bf39892b3c7b81e06b3d5ed874541df513427b5ccff95ff8a116bf7b",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 0
+      }
+    },
+    {
+      "file": "large-800-clock-150-firmware.png",
+      "screen": "large-800",
+      "page": "clock",
+      "scalePercent": 150,
+      "variant": "firmware",
+      "width": 800,
+      "height": 480,
+      "defaultMark": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "changedRegion": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "b249a373dc492357ce6b84ead884061c3113c7535b67c53e24f5f60bbb875008",
+      "pixelSha256": "f4f2203c9b90a0726291e7a7e7da7d4cc321ef3cef9e1d423ae3507789c4627b"
+    },
+    {
+      "file": "large-800-clock-150-free.png",
+      "screen": "large-800",
+      "page": "clock",
+      "scalePercent": 150,
+      "variant": "base",
+      "width": 800,
+      "height": 480,
+      "defaultMark": [
+        677,
+        453,
+        117,
+        21
+      ],
+      "changedRegion": [
+        677,
+        453,
+        117,
+        21
+      ],
+      "sha256": "cd1a77fd7cedab2b60dffaced78589253a4d04904ca554b8addd27bff5e4b6dd",
+      "pixelSha256": "46a615ee3485c128d0d128e15c29069fd9f23c5a8e1ada4521e889a4250a664b",
+      "audit": {
+        "outsideDifferencePixels": 0,
+        "coveredFirmwareInkPixels": 0
+      }
+    }
+  ]
+}

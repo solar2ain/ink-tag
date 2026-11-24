@@ -3,6 +3,7 @@ from __future__ import annotations
 import re
 import struct
 from typing import Any
+from .generated_commands_v2 import FindCapabilityV2
 from .generated_release_v1 import FIND_CONFIG_VERSION, FIND_CAPABILITIES_VERSION, FIND_PUBLIC_VERSION
 
 
@@ -58,6 +59,7 @@ def decode_capabilities(payload: bytes) -> dict[str, Any]:
         "ownerRotation": bool(flags & 0x20),
         "publicOnlyP224": bool(flags & PUBLIC_ONLY_CAPABILITY),
         "publicOnlyOwnerReplacement": bool(flags & PUBLIC_ONLY_OWNER_REPLACEMENT_CAPABILITY),
+        "publicOnlyOwnerUnregister": bool(flags & FindCapabilityV2.PUBLIC_ONLY_OWNER_UNREGISTER),
     })
     return result
 

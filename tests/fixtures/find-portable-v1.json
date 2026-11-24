@@ -1,0 +1,43 @@
+{
+  "payload": {
+    "format": "inktag-find-backup",
+    "version": 1,
+    "identities": [
+      {
+        "fingerprint": "ccbe0ce6e1a9056b99db2dcce6572ea9",
+        "materialHex": "000000000000000000000000000000000000000000000000000000070102030405060708090a0b0c0d0e0f10",
+        "deviceId": "activation:0123456789ABCDEF",
+        "deviceName": "测试标签",
+        "bluetoothName": "IKT_TEST_FAKE",
+        "findNote": "迁移测试",
+        "createdAt": "2026-01-01T00:00:00Z",
+        "derivationVersion": 2,
+        "periodSeconds": 900,
+        "tracks": []
+      }
+    ],
+    "selectedFingerprint": "ccbe0ce6e1a9056b99db2dcce6572ea9"
+  },
+  "password": "synthetic-passphrase-测试",
+  "encrypted": "IKTFIND1.AQABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhup-CeArVgKneF0CumdIbVEWLkKTpHgKU-ULuTFfNEztY-Ro16DLqqtFlvrtOEfIi5GFTruc1jHqs9ANLiB1Ri2bNu7woQ7vQ9MrI2XcziPzrrPYR8tZ9u3oZ9qvZOVDnFP_e2mmJMHHZfzdoA0gzgwMQBxksb_4vsQbwWS9uohW63oVLqpd9Lh8VBtZ3UNIkdmmwDvg2dGFd4pPXvRV96GlFKBYyHTeLM7nJ12QWxdomkCb8WpGgO9HIjPw2CkIJSHG7E2CxD4RlpOoEU6ZdjltNjErpaTIkyire-W93iOPIlkriN6XMZswDdIszCxP1e2EhroiS1g4gu-MQffzff5rhzZ5aY5y5a1MdWu-j8Lepym9Ao-I6Kt4cz_xeQZGXPkrW3rg_T7Ew9ldP9ObDAfKrguKXgNU8iQLeywl1lT8DbMY24A-_PTnb2V1osXi7Q8HvNgF-jPir4OfSvBgiEwX7EdStBYP2gK3I5fdfu_eCyO1Ds3jeH62JtffiDQb_o3Imo7Xw0w0TNoIq6Iu2Zsd_tP0vyDg8_L67NYHBlhElOvnIEyLs-96JxRO1n_oi8NCwSWb5sxgvcfYsLDFlxpaF65MBpL169GVwpT8IVALM4qnRp5xGCvM5TseqI5SkKT6KPwKDqQbBSgpGq_yN8dL_jys5vBbw",
+  "publicMasterHex": "db2f6be630e246a5cf7d99b85194b123d487e2d466b94b24a03c3e280f3a30085497f2f611ee2517b163ef8c53b715d18bb4e4808d02b963",
+  "proofs": [
+    {
+      "slot": 0,
+      "publicKeyHex": "b68accf9f2feee8dac49a12023028a9c87b49e8f4482c34a1ffdf9c9",
+      "fingerprintHex": "ccbe0ce6e1a9056b99db2dcce6572ea9"
+    },
+    {
+      "slot": 1955200,
+      "publicKeyHex": "377def08b81e8887ac66b449c38c86bb907eb0598444124490058f1c",
+      "fingerprintHex": "ccbe0ce6e1a9056b99db2dcce6572ea9"
+    },
+    {
+      "slot": 1955201,
+      "publicKeyHex": "b2275e633244a5946a15adadf3a19c96af45282f92ad614d911f5b69",
+      "fingerprintHex": "ccbe0ce6e1a9056b99db2dcce6572ea9"
+    }
+  ],
+  "shortPassword": "123456",
+  "shortEncrypted": "IKTFIND1.AQABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhsFWs4UH1_aw95OzEY2B_OsL-Z7CryI8EYfh53FHJxgrNLkHmco4q7F63OZN_RF6FqfWRvQvn83FJ6b1I6LqjdgKLunBiwYz45kn6wfDpT3BCyFKfAMCCNJZR0A6cJGIXrYqxI6ZyVQWzL2f17VDW9O4e8gVCHeXzIyvVnKPbTRHC2hwqIg3kJo3clMH5sXL0ZEOi59m23fvAf6soD8DVaRMP5O08GYXSWH6AtQ7WRwiIa9h62vJOhxcmGntMinYhbTnQ_Tftd0OVNM-AlFwYVpt0cBHP_hbsl78opoa4imlijMsDcVYz6L_jUrjvL5BUju3ToN_hXYP1gAyLlDdB1-t2GC5rYBJiT20XnD82ChdBAIku69TyyOH1ceiiJEllMMfJ8xDkNugyxhEnMUBfUVbc800ucWx7JV-21Z7EYkyF4BnZK7BcYVBYsq1AjPrjzdiOcuS3jSfaSa6R1lvaeIc75DAbIe8yDuITuhSqxMGlptH40sSvfxusjam6LM3aruBwK-c_wfLGf1AvtpsU1ZjIhJm-zAVqx77TQ7c72IRhv-4SC5QkT0HniX64n2n0sMXGTvVSkGlBTAlq3XJ9zY3f2uYBko52Ex1STwGEplm0foVxk2dm8w4FmP1KdX1bQR92ZPOGe2bSmN_m0jXx0Wrw7eiZB--w"
+}

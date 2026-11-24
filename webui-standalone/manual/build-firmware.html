@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="构建-inktag-basic-固件">构建 InkTag BASIC 固件</h1>
+<p>共用固件在 <code>firmware/common/</code>，各主控在 <code>firmware/ports/&lt;厂商&gt;/&lt;主控&gt;/</code>。nRF52811 和 DA14585 的 <code>compat/</code> 保存已验证的容量适配，<code>build-support/</code> 提供各自原生构建脚本。烧录工具源码统一在 <code>tools/platforms/&lt;厂商&gt;/&lt;主控&gt;/programmer/</code>，可直接使用的烧录包见 <code>release/firmware/</code>。</p>
+<p><a target="_blank" rel="noopener noreferrer" href="build-firmware.en.html">English</a></p>
+<p>从完整的 <code>ink-tag</code> 源码根目录执行。准备 Git、Python 3、GNU Make，以及目标 MCU 对应的 SDK 和编译器。下方 <code>make</code> 示例按 Linux／WSL 环境编写，DA14585 使用其 Windows 步骤。示例路径请替换为本机路径。<code>TOOLCHAIN_ROOT</code> 指包含 <code>bin/</code> 的工具链根目录。每个目标使用自己的构建输出目录。仅有 nRF52811 源码包时，直接使用 <a target="_blank" rel="noopener noreferrer" href="#nordic-nrf52811">nRF52811</a> 一节。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>主控</th>
+<th>基础版目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Goodix GR5331</td>
+<td><code>gr5331_zkel</code></td>
+</tr>
+<tr>
+<td>Goodix GR5513／GR5515</td>
+<td><code>gr551x_zkel</code>、<code>gr551x_zkel_internal</code></td>
+</tr>
+<tr>
+<td>OnMicro OM6626</td>
+<td><code>om6626_zkel</code></td>
+</tr>
+<tr>
+<td>Telink TLSR8359</td>
+<td><code>tlsr8359_hsel</code></td>
+</tr>
+<tr>
+<td>Nordic nRF52832</td>
+<td><code>nrf52832_priceetag</code></td>
+</tr>
+<tr>
+<td>Nordic nRF52811</td>
+<td><code>nrf52811_aesl</code></td>
+</tr>
+<tr>
+<td>Dialog DA14585</td>
+<td><code>da14585_aesl</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/build-parameters.json">本次交付使用的实际编译参数</a> · <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/tree/main/release/firmware">已转换的固件和主板配置</a></p>
+<p>交付参数保留原始构建命令。用当前源码重新编译时，按下方对应平台的步骤运行。</p>
+<h2 id="goodix-gr5331gr5513gr5515">Goodix GR5331、GR5513／GR5515</h2>
+<p>准备 <a target="_blank" rel="noopener noreferrer" href="https://gitee.com/goodix-ble/GR533x.SDK">GR533x SDK</a> 的 <code>v1.0.7_patch_1</code> 或 <a target="_blank" rel="noopener noreferrer" href="https://gitee.com/goodix-ble/GR551x.SDK">GR551x SDK</a> 的 <code>v2.1.1</code>，以及 Arm GNU Toolchain 15.2.Rel1。以 GR551x 标准版为例：</p>
+<pre><code class="language-sh">make BUILD_TARGET=gr551x_zkel \
+  SDK_ROOT=/path/to/GR551x.SDK \
+  TOOLCHAIN_ROOT=/path/to/arm-gnu-toolchain-15.2.rel1 \
+  OUTPUT=.local/builds/gr551x-zkel JOBS=4
+</code></pre>
+<p>Internal 版使用同一个 GR551x SDK，改用 <code>gr551x_zkel_internal</code> 和独立输出目录。GR5331 使用 <code>gr5331_zkel</code> 和 GR533x SDK。按目标输出及配套工具分别选择 App、Recovery 和对应板型的有线材料。</p>
+<h2 id="onmicro-om6626">OnMicro OM6626</h2>
+<p>从 <a target="_blank" rel="noopener noreferrer" href="https://gitee.com/jtcom/OM6626">Gitee 的 OM6626 SDK 镜像</a>获取 SDK，并准备 Arm GNU Embedded <strong>10.3-2021.10</strong>。根 Makefile 从 <code>.sdk/onmicro/OM6626.SDK/</code> 读取 SDK，例如：</p>
+<pre><code class="language-sh">git clone https://gitee.com/jtcom/OM6626.git .sdk/onmicro/OM6626.SDK
+
+make BUILD_TARGET=om6626_zkel \
+  TOOLCHAIN_ROOT=/path/to/gcc-arm-none-eabi-10.3-2021.10 \
+  OUTPUT=.local/builds/om6626-zkel JOBS=4
+</code></pre>
+<p>Gitee 的 Git 下载若提示登录，需使用有仓库访问权限的账号。也可按<a target="_blank" rel="noopener noreferrer" href="https://bbs.onmicro.com.cn/OM6626/381.html">昂瑞微官方 SDK 获取说明</a>申请，将取得的 SDK 放到同一目录。</p>
+<p>App 和 Recovery 分别输出到 <code>app/</code> 和 <code>recovery/</code>。</p>
+<h2 id="telink-tlsr8359">Telink TLSR8359</h2>
+<p>准备 <a target="_blank" rel="noopener noreferrer" href="https://github.com/atc1441/ATC_TLSR_Paper">ATC_TLSR_Paper</a> 的 Telink 工程及配套 TC32 工具链。将 <code>SDK_ROOT</code> 指向准备好的 <code>Firmware/</code> 工程根目录，使工具链可用，然后运行：</p>
+<pre><code class="language-sh">make BUILD_TARGET=tlsr8359_hsel \
+  SDK_ROOT=/path/to/ATC_TLSR_Paper/Firmware \
+  OUTPUT=.local/builds/tlsr8359-hsel JOBS=4
+</code></pre>
+<p>此入口执行本地编译。需要原生 OTA 或 Recovery 时，使用<a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/build-parameters.json">交付参数</a>中的对应目标。</p>
+<h2 id="nordic-nrf52832">Nordic nRF52832</h2>
+<p>nRF52832 使用 nRF5 SDK 17.1.0、S132 和 Arm GNU Toolchain。应用和 Recovery 分别输出到 <code>app/</code>、<code>recovery/</code>。</p>
+<pre><code class="language-sh">make BUILD_TARGET=nrf52832_priceetag \
+  SDK_ROOT=/path/to/nRF5_SDK_17.1.0_ddde560 \
+  TOOLCHAIN_ROOT=/path/to/arm-gnu-toolchain \
+  OUTPUT=.local/builds/nrf52832-priceetag JOBS=4
+</code></pre>
+<h2 id="nordic-nrf52811">Nordic nRF52811</h2>
+<p>使用 <strong>nRF5 SDK 17.1.0、S112 7.3.0 和 Arm GNU Toolchain 15.2.Rel1</strong>。从源码根目录执行：</p>
+<pre><code class="language-sh">make BUILD_TARGET=nrf52811_aesl \
+  SDK_ROOT=/path/to/nRF5_SDK_17.1.0_ddde560 \
+  TOOLCHAIN_ROOT=/path/to/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi \
+  OUTPUT=.local/builds/nrf52811-aesl JOBS=4
+</code></pre>
+<ul>
+<li>App 和字体资源输出到 <code>firmware/crc-only/</code>，Recovery 在其 <code>bootloader/</code> 子目录。以上路径均相对于 <code>OUTPUT</code>。</li>
+<li>需要生成完整烧录包时，在上面的 <code>make</code> 后加上 <code>full</code>，其余参数相同，<code>OUTPUT</code> 必须在源码目录内。</li>
+<li>App OTA 要求设备已装有配对的 GUI 资源。首次安装或 GUI 也需更新时，使用对应的完整包。有线全刷会重建设备设置并使旧图片失效，先备份所需内容。</li>
+<li>屏幕缓冲、字体缓存和存储适配由端口维护。资源配对和独立源码包的构建步骤见 <code>firmware/ports/nordic/nrf52811/BUILDING.md</code>。</li>
+</ul>
+<h2 id="dialog-da14585">Dialog DA14585</h2>
+<p>在 Windows 准备 DA145xx SDK 6.0.24.1464、Keil Arm Compiler 6.24 和 PowerShell 7。从源码根目录运行：</p>
+<pre><code class="language-powershell">pwsh -NoProfile -File .\firmware\ports\dialog\da14585\build.ps1 -Board da14585_aesl -SdkRoot &quot;D:\InkTagSDK&quot; -Output &quot;.local\builds\da14585-aesl&quot;
+</code></pre>
+<p><code>-SdkRoot</code> 指向准备好的 SDK 工作区根目录，其下应有 <code>dialog/DA145xx_SDK/6.0.24.1464/</code>。SDK 工作区准备、构建产物和地址说明见 <code>firmware/ports/dialog/da14585/BUILDING.md</code>。Keil 使用非默认安装位置时可指定 <code>-KeilRoot</code>。</p>
+<h2 id="使用构建结果">使用构建结果</h2>
+<p>基础版构建无需签名密钥。OTA 只更新 App；首次安装、更换 Recovery 或更新配对 GUI 资源，使用对应版型的完整包和<a target="_blank" rel="noopener noreferrer" href="zh-CN/flash.html">有线烧录说明</a>。同一 App 可能对应多份板型或屏幕配置，烧录前按丝印和存储地址选择。</p></main></body></html>

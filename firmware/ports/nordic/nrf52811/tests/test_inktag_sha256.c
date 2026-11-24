@@ -1,0 +1,81 @@
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+
+#include "inktag_sha256.h"
+
+static int expect_digest(const char *name, const uint8_t actual[32],
+                         const uint8_t expected[32]) {
+    if (memcmp(actual, expected, 32u) == 0) return 0;
+    fprintf(stderr, "%s SHA-256 mismatch\n", name);
+    return 1;
+}
+
+int main(void) {
+    static const uint8_t empty_digest[32] = {
+        0xE3,0xB0,0xC4,0x42,0x98,0xFC,0x1C,0x14,
+        0x9A,0xFB,0xF4,0xC8,0x99,0x6F,0xB9,0x24,
+        0x27,0xAE,0x41,0xE4,0x64,0x9B,0x93,0x4C,
+        0xA4,0x95,0x99,0x1B,0x78,0x52,0xB8,0x55,
+    };
+    static const uint8_t abc_digest[32] = {
+        0xBA,0x78,0x16,0xBF,0x8F,0x01,0xCF,0xEA,
+        0x41,0x41,0x40,0xDE,0x5D,0xAE,0x22,0x23,
+        0xB0,0x03,0x61,0xA3,0x96,0x17,0x7A,0x9C,
+        0xB4,0x10,0xFF,0x61,0xF2,0x00,0x15,0xAD,
+    };
+    static const uint8_t long_digest[32] = {
+        0x24,0x8D,0x6A,0x61,0xD2,0x06,0x38,0xB8,
+        0xE5,0xC0,0x26,0x93,0x0C,0x3E,0x60,0x39,
+        0xA3,0x3C,0xE4,0x59,0x64,0xFF,0x21,0x67,
+        0xF6,0xEC,0xED,0xD4,0x19,0xDB,0x06,0xC1,
+    };
+    static const uint8_t long_message[] =
+        "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq";
+    uint8_t digest[32];
+    inktag_sha256_context_t context;
+    uint8_t key[32];
+    struct { uint8_t before, scratch[96], after; } hmac;
+    static const uint8_t empty_hmac[32] = {
+        0xd3,0x8b,0x42,0x09,0x6d,0x80,0xf4,0x5f,
+        0x82,0x6b,0x44,0xa9,0xd5,0x60,0x7d,0xe7,
+        0x24,0x96,0xa4,0x15,0xd3,0xf4,0xa1,0xa8,
+        0xc8,0x8e,0x3b,0xb9,0xda,0x8d,0xc1,0xcb,
+    };
+    static const uint8_t short_hmac[32] = {
+        0x27,0x86,0x39,0xec,0x02,0x30,0x9d,0x3a,
+        0xfd,0xed,0x1b,0x27,0x3f,0x13,0x49,0xba,
+        0x63,0xb9,0x08,0x9c,0x12,0x47,0x6d,0x71,
+        0x6b,0xee,0x3e,0xcc,0x94,0x67,0x3e,0x9e,
+    };
+    for (uint8_t i = 0u; i < 32u; ++i) key[i] = i;
+    memset(&hmac, 0xa5, sizeof(hmac));
+    inktag_hmac_sha256_32_inplace(key, hmac.scratch, 0u, digest);
+    if (expect_digest("empty HMAC", digest, empty_hmac) != 0) return 1;
+    memcpy(hmac.scratch + 64u, "Hi There", 8u);
+    inktag_hmac_sha256_32_inplace(key, hmac.scratch, 8u, digest);
+    if (expect_digest("short HMAC", digest, short_hmac) != 0 ||
+        hmac.before != 0xa5u || hmac.after != 0xa5u) return 1;
+
+    inktag_sha256(NULL, 0u, digest);
+    if (expect_digest("empty", digest, empty_digest) != 0) return 1;
+    inktag_sha256((const uint8_t *)"abc", 3u, digest);
+    if (expect_digest("abc", digest, abc_digest) != 0) return 1;
+
+    inktag_sha256_init(&context);
+    inktag_sha256_update(&context, long_message, 1u);
+    inktag_sha256_update(&context, &long_message[1], 7u);
+    inktag_sha256_update(&context, &long_message[8], 48u);
+    inktag_sha256_update(&context, long_message, 0u);
+    inktag_sha256_final(&context, digest);
+    if (expect_digest("chunked boundary", digest, long_digest) != 0) return 1;
+
+    for (uint32_t index = 0u; index < sizeof(context); ++index) {
+        if (((const uint8_t *)&context)[index] != 0u) {
+            fputs("SHA-256 final did not clear its retained context\n", stderr);
+            return 1;
+        }
+    }
+    puts("SHA-256 one-shot and cooperative streaming vectors passed.");
+    return 0;
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../index.html">InkTag WebUI</a></nav><main><h1 id="choosing-fonts-for-an-e-paper-display">Choosing fonts for an e-paper display</h1>
+<p><a target="_blank" rel="noopener noreferrer" href="creation-fonts.html">简体中文</a></p>
+<p>Open <strong>Create</strong> in the WebUI and start a static page or open a static template. Select a text block and use the text toolbar to change its font or size. Select part of the text to style only that part. To set the font for an entire list or table, use <strong>Appearance → Font</strong>.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Font</th>
+<th>Suggested size</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="noopener noreferrer" href="https://github.com/Astro-2539/ZLabs-Pixel-12px">Z Labs Pixel CN</a></td>
+<td>12 px, based on an 11×12 bitmap design</td>
+<td>The default for larger screens such as 400×300. Good for body text, timetables, and checklists. Uses mainland Chinese glyph shapes. The author reports coverage of 12,994 Han characters.</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener noreferrer" href="https://github.com/TakWolf/fusion-pixel-font">Fusion Pixel Font</a></td>
+<td>Native 8, 10, and 12 px</td>
+<td>Smaller screens default to the 10 px proportional Simplified Chinese strike. Try 8 px for very short labels, 10 px for 212×104 timetables and six-row lunar calendars at 296×152, and 12 px for body text and calendar labels at 400×300. <a target="_blank" rel="noopener noreferrer" href="https://github.com/TakWolf/fusion-pixel-font/blob/master/LICENSE-OFL">SIL OFL 1.1</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener noreferrer" href="https://github.com/DWNfonts/MuzaiPixel">Muzai Pixel</a></td>
+<td>Original-width 8×12 px</td>
+<td>Narrow lists and mixed Chinese–Latin text. Common Han characters advance by 8 px. The bundled revision covers all 6,763 GB2312 Han characters.</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener noreferrer" href="https://github.com/Warren2060/ChillBitmap">Chill Bitmap</a></td>
+<td>7 px glyphs on an 8 px cell</td>
+<td>Short menu or status labels. Check complex characters on the display and switch to the 12 px sans font if they are hard to read.</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener noreferrer" href="https://sources.debian.org/src/xfonts-wqy/1.0.0~rc1-8/">WenQuanYi Bitmap Song</a></td>
+<td>Native 12, 13, 14, 15, and 16 px</td>
+<td>A classic device-style Song face. Start at 12 or 13 px.</td>
+</tr>
+<tr>
+<td>Ma Shan Zheng and Kai</td>
+<td>Start at 32 px</td>
+<td>Titles, cards, and short quotations. Kai depends on the fonts available on your system.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Start at the native size for small text. For larger text, choose a whole-number multiple such as 24 or 36 px. The WebUI enlarges each pixel by the same amount. WenQuanYi uses its own native glyphs at each size from 12 to 16 px. Select <strong>1:1</strong> above the canvas to check fine strokes at the original size. In the device-effect preview, <strong>Fit</strong> uses the available width and height. <strong>1:1</strong> shows native pixels, and the plus and minus buttons move in smaller steps. For narrow layouts, shorten the text or widen the text box.</p>
+<p>The font picker offers Fusion, Z Labs, Muzai, Chill Bitmap, and WenQuanYi for static canvases, exported PNGs, and images sent to a tag. Device-rendered dynamic pages use the device font library. Fusion and Z Labs are included in the standalone HTML. For the other fonts, extract <code>assets/</code> alongside the HTML for offline use.</p></main></body></html>

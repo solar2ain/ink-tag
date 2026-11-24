@@ -1,0 +1,6 @@
+#ifndef INKTAG_DIALOG_SDK_CONFIG_H
+#define INKTAG_DIALOG_SDK_CONFIG_H
+
+#define FDS_ENABLED 0
+
+#endif

@@ -1,0 +1,3 @@
+# Common CRC-only E1 Recovery; same executable as the Pro delivery entry.
+override INKTAG_BUILD_PRO := 0
+include firmware/ports/nordic/nrf52832/bootloader/Makefile

@@ -1,0 +1,23 @@
+{
+  "directories": ["src", "public", "../packages/inktag-client-core/src", "../packages/inktag-editor-core/src"],
+  "excludedDirectories": ["public/.local", "public/layouts-generated"],
+  "normalizeTextLineEndings": true,
+  "files": [
+    {"path": "../protocol/release-baseline-v1.json", "name": "protocol/release-baseline-v1.json"},
+    {"path": "../cli/src/inktag_cli/_assets/fontRoles.js", "name": "cli-font-assets/fontRoles.js"},
+    {"path": "../cli/src/inktag_cli/_assets/nativePreview.js", "name": "cli-font-assets/nativePreview.js"},
+    {"path": "../cli/src/inktag_cli/_assets/nativePreviewWasm.js", "name": "cli-font-assets/nativePreviewWasm.js"},
+    {"path": "package.json", "name": "package.json"},
+    {"path": "package-lock.json", "name": "package-lock.json"},
+    {"path": "vite.config.ts", "name": "vite.config.ts"},
+    {"path": "index.html", "name": "index.html"},
+    {"path": "tools/client-build.mjs", "name": "tools/client-build.mjs"},
+    {"path": "tools/client-build.d.mts", "name": "tools/client-build.d.mts"},
+    {"path": "tools/client-build-inputs.json", "name": "tools/client-build-inputs.json"},
+    {"path": "tools/html-security.mjs", "name": "tools/html-security.mjs"},
+    {"path": "tools/optional-assets-plugin.ts", "name": "tools/optional-assets-plugin.ts"},
+    {"path": "tools/ota-adapters-plugin.ts", "name": "tools/ota-adapters-plugin.ts"},
+    {"path": "tools/finalize-standalone.mjs", "name": "tools/finalize-standalone.mjs"},
+    {"path": "tools/verify-builds.mjs", "name": "tools/verify-builds.mjs"}
+  ]
+}

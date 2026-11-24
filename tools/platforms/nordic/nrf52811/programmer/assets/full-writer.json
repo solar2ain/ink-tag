@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "chip": "nrf52811",
+  "board": "EL022H2",
+  "workerBytes": 1176,
+  "workerSha256": "d3e34c2be735e84c484198b95c9b10c92798a20c1abacfbb8af3e3a26b854acf",
+  "sourceSha256": "f98b15606cd5fd82ba48cf4d858fb21f7e3283a3df05b2a9f4b1875d0b812e95",
+  "linkerSha256": "4633c6124b115168fc59ca5c13de8ed34f78153474c244f39b98512d9623010f",
+  "loadAddress": 536870912,
+  "codeWindowBytes": 4096,
+  "mailboxAddress": 536875008,
+  "bufferAddress": 536879104,
+  "bufferBytes": 4096,
+  "stackTop": 536895232,
+  "jedec": "A14013",
+  "writableSectorRange": [
+    0,
+    20480
+  ],
+  "imageHeadRange": [
+    40960,
+    524288,
+    4096,
+    4
+  ],
+  "validation": "actual C fault matrix; physical validation not performed for this worker",
+  "entryFirstBytes": "72b6",
+  "entryFirstInstruction": "cpsid i",
+  "debuggerPreGoRegisters": {
+    "PRIMASK": 1,
+    "CONTROL": 0,
+    "XPSR": 16777216
+  },
+  "originalBuildSourceSha256": "f7521882fbf1fde6011d782dc74d69f58fadc071fa0750e7e50424d7d6229030",
+  "sourceNormalization": "CRLF to Git LF only; compiled worker bytes unchanged"
+}

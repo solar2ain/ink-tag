@@ -44,38 +44,46 @@ You can disconnect after completion. The device retains its picture, and support
 
 See the [illustrated manual](https://solar2ain.github.io/ink-tag-manual/) and [getting started](docs/en/getting-started.md) for more detail.
 
-## Free and Pro features
+## BASIC and PRO features
 
-InkTag offers a free edition (Free) that already meets most everyday needs. Pro adds advanced and experimental features for users who enjoy tinkering and exploring. Availability depends on the capabilities of the connected device.
+InkTag BASIC covers most everyday needs (it can usually use the full external image storage, such as the 2 MiB of external flash available for image slots on the ZKC42B). InkTag PRO adds advanced and experimental features. Feature availability depends on the connected device.
 
 > [!NOTE]
 > **Usage notes**
 >
 > InkTag firmware is free to use. The project provides no purchase links. If you bought a device or related service from a merchant, contact that seller for purchase-related problems.
 >
-> Sponsoring this project provides a Pro activation code. Most Pro features are experimental; please consider this carefully before activating Pro.
+> Obtain PRO firmware through the [InkTag QQ group 418446983](https://qun.qq.com/universal-share/share?ac=1&busi_data=eyJncm91cENvZGUiOiI0MTg0NDY5ODMiLCJ0b2tlbiI6ImRPVW00UnZxcWNKTU41M1JXZTQrRGpDeDRqTzI5UDkrTkdPb2U0Y1JGbE00MlcreFRuNnpkSU9QWkF3d01lTEEifQ%3D%3D&data=vETdxuw2M9SvyY0uJLAPuFrwhYCMPMCkYfiu-HzwB4-vWHpF2Jo9CtUXgTsNHzOrklunriznP8R1fytCHQWXpQ&svctype=4&tempid=h5_group_info). See [PRO firmware and group access](docs/en/pro.md#get-pro-firmware). Most PRO features are experimental.
 
-| Feature | 🆓 Free | ✨ Pro |
+| Feature | 🆓 BASIC | ✨ PRO |
 | --- | --- | --- |
 | Images, built-in calendar, clock, device page and QR codes | Yes | Yes |
 | Crop, rotate, dither, editable canvas and device preview | Yes | Yes |
-| Stored images and slideshow | Normally 10 compact-screen or 4 larger-screen images | All available qualified storage |
+| Stored images and slideshow | Uses available storage | Same |
 | Screen, orientation, display and LED routing | Where supported | Same |
 | Status LEDs and adapted buttons/buzzer | Where supported | Same |
 | Bluetooth, diagnostics, OTA and Recovery | Yes | Yes |
-| Passive NFC device link | With supported hardware | Yes |
+| Passive NFC device link | — | With supported hardware |
 | Host pages and custom delivery | Edit and preview | Advanced content admission follows device entitlement; scheduled delivery requires an online host |
 | Switch pages or image slots with NFC phone commands | — | With supported hardware |
 | Advanced screen control | — | Partial refresh on selected screens and E6 six-colour control, with compatible hardware, wiring and drivers |
 | User fonts, BLE rename, optional device password | — | Where supported |
 | Adjust/hide InkTag branding | — | Yes |
 | Anti-loss tracker (Apple Find My network) | — | Experimental; register/control broadcasts online, query locations through a local service |
-| NFC image transfer (planned) | — | Planned Pro feature; not yet available |
-| Custom dynamic device layouts (planned) | — | Planned Pro feature; not yet available |
+| NFC image transfer | — | Available with supported NFC hardware and a compatible app. See the [PRO guide](docs/en/pro.md). |
+| Custom dynamic device layouts (planned) | — | Planned PRO feature; not yet available |
 
-Compact means a visible long edge below 300 pixels. **Firmware-size limits make DA14585 and nRF52811 Free-only: Pro cannot be activated on these controllers. Their Free firmware has no image-slot count quota; the 10/4 limits do not apply, and the number of stored pictures is limited only by available storage.** See [image capacity](docs/en/devices.md#image-capacity) for storage sizes and estimates. Activation cannot add missing hardware. Partial-refresh clocks still perform a daily full refresh/background change and use more power than infrequent image updates. Offline E6 conversion is available without Pro.
+**DA14585 and nRF52811 offer BASIC only.** See [image capacity](docs/en/devices.md#image-capacity) for storage sizes and estimates. Partial-refresh clocks still perform a daily full refresh and use more power than infrequent image updates. Offline E6 conversion is available in BASIC.
 
-See [Pro](docs/en/pro.md), [host pages](docs/en/host-pages.md), and [screens](docs/en/devices.md). Expanded partial refresh, custom device-executed layouts, NFC image transfer and disabling BLE advertising are future work, not promises of this version.
+See [PRO](docs/en/pro.md), [host pages](docs/en/host-pages.md), and [screens](docs/en/devices.md). Custom device-executed layouts remain planned. NFC image transfer and delayed shutdown of connectable Bluetooth advertising are available on supported PRO devices.
+
+To build BASIC yourself, see the [BASIC build guide](docs/build-firmware.en.md).
+
+## Low power and battery life
+
+An e-paper panel retains its image between refreshes. Most measured boards draw about **2–3 µA** between advertising events and average **30–40 µA** with one ordinary Bluetooth advertisement per second. Find My advertising adds an estimated **15–20 µA**.
+
+With **200 mAh** of usable capacity and one calendar refresh per day, expect about **6.6–8.6 months** with ordinary Bluetooth advertising, or **4.4–5.9 months** with Find My also enabled. A clock drawing **5–10 mA** during a **2–3 second** partial refresh every minute would last about **15–43 days** with ordinary Bluetooth advertising. See [Low power and battery life](docs/en/power.md) for the assumptions, measurements and calculations.
 
 ## Supported controllers
 
@@ -88,6 +96,14 @@ See [Pro](docs/en/pro.md), [host pages](docs/en/host-pages.md), and [screens](do
 | Renesas, formerly Dialog | DA14585 |
 
 See [supported devices](docs/en/supported-devices.md) for board markings, product names and limitations, and [tested screens](docs/en/tested-screens.md) for panels, tested use and partial refresh. A supported controller does not make every board using it compatible.
+
+## Build from source
+
+This release includes the WebUI, CLI, and BASIC firmware source for the supported controllers.
+
+- [Build firmware](docs/build-firmware.en.md) with the SDK and toolchain for your controller. See the [OM6626 SDK and build steps](docs/build-firmware.en.md#onmicro-om6626) or the [nRF52811 build and packaging steps](docs/build-firmware.en.md#nordic-nrf52811).
+- [Build WebUI](docs/build-webui.en.md) with Node.js to preview changes or produce static and standalone builds.
+- [Install and develop the CLI](cli/README.en.md) in a Python environment.
 
 ## Choose how to use InkTag
 
@@ -116,6 +132,8 @@ sh install_inktag.sh
 ```
 
 This installs the CLI into `cli/.venv` and automatically installs the **local Find query service dependencies** in a separate `find/runtime/.venv` under the per-user data directory. It then starts local WebUI and Find in the background (`webui start`); closing the terminal does not stop them. Setup prints copyable start, stop, status and log commands. New macOS installations store data and logs in `~/.inktag/`; an existing legacy directory is retained to preserve sessions and tags. System Python is unchanged; installation does not log into Apple, connect devices or clear existing data.
+
+The installer uses the included `webui/dist/static/` build and requires no Node.js. To update a modified WebUI, follow the [WebUI build guide](docs/build-webui.en.md) and rerun the installer.
 
 First setup requires internet access. macOS uses native system authentication and does not need 7-Zip or the Apple image below. Location queries on Linux are not yet qualified.
 
@@ -218,14 +236,24 @@ Download firmware, programmer tools and clients from the actual [Release attachm
 
 ## Help and privacy
 
-E-paper has limited native colours and flashes during full updates. Low temperatures may slow refresh. For connection/display/login issues, see [FAQ](docs/en/faq.md). Report problems through [GitHub Issues](https://github.com/solar2ain/ink-tag/issues), including client version, controller, steps, error and redacted logs. Do not share passwords, activation codes, Find keys, sessions or location history; read [security/privacy](SECURITY.md).
+E-paper has limited native colours and flashes during full updates. Low temperatures may slow refresh. For connection/display/login issues, see [FAQ](docs/en/faq.md). Do not share passwords, activation codes, Find keys, sessions or location history; read [security/privacy](SECURITY.md).
+
+## Feedback and contributions
+
+InkTag supports many combinations of controllers, boards, and displays. The current tests cover only part of that range. Hardware test results, flashing tutorials, and documentation improvements are welcome.
+
+Please include the controller, PCB model, firmware and client versions, steps to reproduce, and the error you saw. Redact any logs you share. [Open an issue](https://github.com/solar2ain/ink-tag/issues)
+
+Pull requests are welcome for fixes, tutorials, and better-looking, readable templates for different e-paper sizes. [Open a pull request](https://github.com/solar2ain/ink-tag/pulls)
 
 ## Acknowledgements
 
 Thanks to [ATC_TLSR_Paper](https://github.com/atc1441/ATC_TLSR_Paper), [epdoptimize](https://github.com/paperlesspaper/epdoptimize), [U8g2 for Adafruit GFX](https://github.com/olikraus/U8g2_for_Adafruit_GFX), WenQuanYi, [FindMy.py](https://github.com/malmeloo/FindMy.py), [os-findmy-e](https://github.com/sacca97/os-findmy-e), Leafer, React, Lucide, the controller tooling ecosystem, and everyone contributing hardware, tests and feedback. See [third-party notices](THIRD_PARTY_NOTICES.md).
 
+The creation editor uses [Fusion Pixel](https://github.com/TakWolf/fusion-pixel-font), [Z Labs Pixel CN](https://github.com/Astro-2539/ZLabs-Pixel-12px), [Muzai Pixel](https://github.com/DWNfonts/MuzaiPixel), [Chill Bitmap](https://github.com/Warren2060/ChillBitmap), and [WenQuanYi Bitmap Song](https://sources.debian.org/src/xfonts-wqy/1.0.0~rc1-8/). Thanks to their authors and contributors.
+
 ## License
 
-InkTag-owned firmware, compiled WebUI and CLI use [PolyForm Noncommercial 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0) for purposes permitted by its noncommercial terms. Third-party works retain their original terms. See [licensing scope](LICENSING.md) for details and component information.
+InkTag-owned BASIC firmware, WebUI, and CLI source use [GNU AGPL v3](LICENSE). PRO firmware and third-party works retain their accompanying terms. See [third-party notices](THIRD_PARTY_NOTICES.md#创作字体--creation-fonts) for creation font licenses and sources.
 
-User documentation © InkTag contributors. All rights reserved.
+User documentation © InkTag contributors, licensed under [AGPL-3.0-only](LICENSE).

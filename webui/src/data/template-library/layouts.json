@@ -1,0 +1,848 @@
+{
+  "schemaVersion": 1,
+  "layouts": {
+    "business": {
+      "landscape": {
+        "elements": [
+          {
+            "type": "text",
+            "text": "LIN MO",
+            "x": 0.08,
+            "y": 0.12,
+            "size": 0.115,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "text",
+            "text": "林 默",
+            "x": 0.08,
+            "y": 0.3,
+            "size": 0.065,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "text",
+            "text": "产品设计 / PRODUCT DESIGN",
+            "x": 0.08,
+            "y": 0.43,
+            "size": 0.038
+          },
+          {
+            "type": "line",
+            "x": 0.08,
+            "y": 0.54,
+            "w": 0.46
+          },
+          {
+            "type": "text",
+            "text": "inktag.dev",
+            "x": 0.08,
+            "y": 0.64,
+            "size": 0.06,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "text",
+            "text": "hello@inktag.dev",
+            "x": 0.08,
+            "y": 0.76,
+            "size": 0.04
+          },
+          {
+            "type": "qr",
+            "x": 0.65,
+            "y": 0.25,
+            "w": 0.28,
+            "h": 0.5,
+            "value": "https://inktag.dev"
+          }
+        ]
+      },
+      "portrait": {
+        "elements": [
+          {
+            "type": "text",
+            "text": "LIN MO",
+            "x": 0.08,
+            "y": 0.07,
+            "size": 0.16,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "text",
+            "text": "林 默",
+            "x": 0.08,
+            "y": 0.18,
+            "size": 0.095,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "text",
+            "text": "产品设计 / DESIGN",
+            "x": 0.08,
+            "y": 0.27,
+            "size": 0.055
+          },
+          {
+            "type": "line",
+            "x": 0.08,
+            "y": 0.34,
+            "w": 0.84
+          },
+          {
+            "type": "qr",
+            "x": 0.2,
+            "y": 0.39,
+            "w": 0.6,
+            "h": 0.31,
+            "value": "https://inktag.dev"
+          },
+          {
+            "type": "text",
+            "text": "inktag.dev",
+            "x": 0.08,
+            "y": 0.77,
+            "size": 0.085,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "text",
+            "text": "hello@inktag.dev",
+            "x": 0.08,
+            "y": 0.84,
+            "size": 0.06
+          }
+        ]
+      }
+    },
+    "todo": {
+      "landscape": {
+        "elements": [
+          {
+            "type": "text",
+            "text": "今日待办",
+            "x": 0.07,
+            "y": 0.06,
+            "size": 0.08,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "line",
+            "x": 0.07,
+            "y": 0.19,
+            "w": 0.86,
+            "color": "#cf262d"
+          },
+          {
+            "type": "text",
+            "text": "09 / 25 · 星期五",
+            "x": 0.07,
+            "y": 0.22,
+            "size": 0.04
+          },
+          {
+            "type": "list",
+            "x": 0.07,
+            "y": 0.32,
+            "w": 0.86,
+            "h": 0.53,
+            "size": 0.045,
+            "checklist": true,
+            "items": [
+              "完成固件测试",
+              "整理本周计划",
+              "回复项目邮件",
+              "准备会议材料",
+              "更新设备图片"
+            ],
+            "accent": "#cf262d",
+            "itemColors": [
+              "#cf262d"
+            ]
+          }
+        ],
+        "compact": {
+          "core": 3,
+          "fontSize": 0.085
+        }
+      },
+      "portrait": {
+        "elements": [
+          {
+            "type": "text",
+            "text": "今日待办",
+            "x": 0.07,
+            "y": 0.06,
+            "size": 0.1,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "line",
+            "x": 0.07,
+            "y": 0.19,
+            "w": 0.86,
+            "color": "#cf262d"
+          },
+          {
+            "type": "text",
+            "text": "09 / 25 · 星期五",
+            "x": 0.07,
+            "y": 0.22,
+            "size": 0.055
+          },
+          {
+            "type": "list",
+            "x": 0.07,
+            "y": 0.32,
+            "w": 0.86,
+            "h": 0.53,
+            "size": 0.065,
+            "checklist": true,
+            "items": [
+              "完成固件测试",
+              "整理本周计划",
+              "回复项目邮件",
+              "准备会议材料",
+              "更新设备图片"
+            ],
+            "accent": "#cf262d",
+            "itemColors": [
+              "#cf262d"
+            ]
+          }
+        ],
+        "compact": {
+          "core": 3,
+          "fontSize": 0.085
+        }
+      }
+    },
+    "focus": {
+      "landscape": {
+        "elements": [
+          {
+            "type": "text",
+            "text": "今日专注",
+            "x": 0.07,
+            "y": 0.06,
+            "size": 0.08,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "line",
+            "x": 0.07,
+            "y": 0.19,
+            "w": 0.86,
+            "color": "#cf262d"
+          },
+          {
+            "type": "list",
+            "x": 0.07,
+            "y": 0.27,
+            "w": 0.43,
+            "h": 0.49,
+            "size": 0.05,
+            "checklist": true,
+            "items": [
+              "完成最重要的事",
+              "留出阅读时间",
+              "散步二十分钟"
+            ],
+            "accent": "#cf262d",
+            "itemColors": [
+              "#cf262d"
+            ]
+          },
+          {
+            "type": "text",
+            "text": "随手记",
+            "x": 0.58,
+            "y": 0.27,
+            "size": 0.06,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "line",
+            "x": 0.58,
+            "y": 0.4,
+            "w": 0.35,
+            "color": "#adb5af"
+          },
+          {
+            "type": "line",
+            "x": 0.58,
+            "y": 0.47000000000000003,
+            "w": 0.35,
+            "color": "#adb5af"
+          },
+          {
+            "type": "line",
+            "x": 0.58,
+            "y": 0.54,
+            "w": 0.35,
+            "color": "#adb5af"
+          }
+        ]
+      },
+      "portrait": {
+        "elements": [
+          {
+            "type": "text",
+            "text": "今日专注",
+            "x": 0.07,
+            "y": 0.06,
+            "size": 0.1,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "line",
+            "x": 0.07,
+            "y": 0.19,
+            "w": 0.86,
+            "color": "#cf262d"
+          },
+          {
+            "type": "list",
+            "x": 0.07,
+            "y": 0.27,
+            "w": 0.86,
+            "h": 0.3,
+            "size": 0.065,
+            "checklist": true,
+            "items": [
+              "完成最重要的事",
+              "留出阅读时间",
+              "散步二十分钟"
+            ],
+            "accent": "#cf262d",
+            "itemColors": [
+              "#cf262d"
+            ]
+          },
+          {
+            "type": "text",
+            "text": "随手记",
+            "x": 0.07,
+            "y": 0.66,
+            "size": 0.06,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "line",
+            "x": 0.07,
+            "y": 0.73,
+            "w": 0.86,
+            "color": "#adb5af"
+          },
+          {
+            "type": "line",
+            "x": 0.07,
+            "y": 0.8,
+            "w": 0.86,
+            "color": "#adb5af"
+          },
+          {
+            "type": "line",
+            "x": 0.07,
+            "y": 0.87,
+            "w": 0.86,
+            "color": "#adb5af"
+          }
+        ]
+      }
+    },
+    "schedule": {
+      "landscape": {
+        "elements": [
+          {
+            "type": "text",
+            "text": "课程表",
+            "x": 0.07,
+            "y": 0.06,
+            "size": 0.08,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "line",
+            "x": 0.07,
+            "y": 0.19,
+            "w": 0.86,
+            "color": "#cf262d"
+          },
+          {
+            "type": "table",
+            "x": 0.07,
+            "y": 0.28,
+            "w": 0.86,
+            "h": 0.57,
+            "size": 0.043,
+            "rows": [
+              [
+                "时间",
+                "周一",
+                "周二",
+                "周三",
+                "周四",
+                "周五"
+              ],
+              [
+                "08:00",
+                "数学",
+                "物理",
+                "语文",
+                "英语",
+                "数学"
+              ],
+              [
+                "10:00",
+                "英语",
+                "体育",
+                "自习",
+                "实验",
+                "社团"
+              ],
+              [
+                "14:00",
+                "自习",
+                "英语",
+                "物理",
+                "数学",
+                "班会"
+              ]
+            ],
+            "accent": "#cf262d",
+            "columnColors": [
+              "#cf262d"
+            ]
+          }
+        ],
+        "compact": {
+          "core": 2,
+          "fontSize": 0.1
+        }
+      },
+      "portrait": {
+        "elements": [
+          {
+            "type": "text",
+            "text": "课程表",
+            "x": 0.07,
+            "y": 0.06,
+            "size": 0.1,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "line",
+            "x": 0.07,
+            "y": 0.19,
+            "w": 0.86,
+            "color": "#cf262d"
+          },
+          {
+            "type": "list",
+            "x": 0.07,
+            "y": 0.28,
+            "w": 0.86,
+            "h": 0.6,
+            "size": 0.065,
+            "items": [
+              "周一  08:00 数学 / 英语",
+              "周二  09:50 物理 / 体育",
+              "周三  08:00 语文 / 自习",
+              "周四  09:50 英语 / 实验",
+              "周五  08:00 数学 / 社团"
+            ],
+            "accent": "#cf262d",
+            "itemColors": [
+              "#cf262d"
+            ]
+          }
+        ],
+        "compact": {
+          "core": 2,
+          "fontSize": 0.1
+        }
+      }
+    },
+    "wifi": {
+      "landscape": {
+        "elements": [
+          {
+            "type": "text",
+            "text": "访客 Wi-Fi",
+            "x": 0.07,
+            "y": 0.06,
+            "size": 0.08,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "line",
+            "x": 0.07,
+            "y": 0.19,
+            "w": 0.86,
+            "color": "#cf262d"
+          },
+          {
+            "type": "text",
+            "text": "INKTAG-STUDIO",
+            "x": 0.07,
+            "y": 0.26,
+            "size": 0.075,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "qr",
+            "x": 0.62,
+            "y": 0.28,
+            "w": 0.3,
+            "h": 0.52,
+            "value": "WIFI:T:WPA;S:INKTAG-STUDIO;P:inktag1234;;"
+          },
+          {
+            "type": "text",
+            "text": "扫码连接",
+            "x": 0.07,
+            "y": 0.62,
+            "size": 0.055
+          }
+        ]
+      },
+      "portrait": {
+        "elements": [
+          {
+            "type": "text",
+            "text": "访客 Wi-Fi",
+            "x": 0.07,
+            "y": 0.06,
+            "size": 0.1,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "line",
+            "x": 0.07,
+            "y": 0.19,
+            "w": 0.86,
+            "color": "#cf262d"
+          },
+          {
+            "type": "text",
+            "text": "INKTAG-STUDIO",
+            "x": 0.07,
+            "y": 0.26,
+            "size": 0.077,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "qr",
+            "x": 0.18,
+            "y": 0.4,
+            "w": 0.64,
+            "h": 0.34,
+            "value": "WIFI:T:WPA;S:INKTAG-STUDIO;P:inktag1234;;"
+          },
+          {
+            "type": "text",
+            "text": "扫码连接",
+            "x": 0.07,
+            "y": 0.83,
+            "size": 0.07
+          }
+        ]
+      }
+    },
+    "photo": {
+      "landscape": {
+        "elements": [
+          {
+            "type": "image-slot",
+            "name": "图片",
+            "x": 0.06,
+            "y": 0.06,
+            "w": 0.88,
+            "h": 0.65
+          },
+          {
+            "type": "text",
+            "text": "A QUIET AFTERNOON",
+            "x": 0.06,
+            "y": 0.76,
+            "size": 0.07,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "text",
+            "text": "2026.09 · SHANGHAI",
+            "x": 0.06,
+            "y": 0.85,
+            "size": 0.04
+          }
+        ]
+      },
+      "portrait": {
+        "elements": [
+          {
+            "type": "image-slot",
+            "name": "图片",
+            "x": 0.06,
+            "y": 0.06,
+            "w": 0.88,
+            "h": 0.65
+          },
+          {
+            "type": "text",
+            "text": "A QUIET AFTERNOON",
+            "x": 0.06,
+            "y": 0.76,
+            "size": 0.065,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "text",
+            "text": "2026.09 · SHANGHAI",
+            "x": 0.06,
+            "y": 0.85,
+            "size": 0.045
+          }
+        ]
+      }
+    },
+    "diptych": {
+      "landscape": {
+        "elements": [
+          {
+            "type": "text",
+            "text": "两段时光",
+            "x": 0.07,
+            "y": 0.06,
+            "size": 0.08,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "line",
+            "x": 0.07,
+            "y": 0.19,
+            "w": 0.86,
+            "color": "#cf262d"
+          },
+          {
+            "type": "image-slot",
+            "name": "图片 1",
+            "x": 0.06,
+            "y": 0.26,
+            "w": 0.42,
+            "h": 0.5
+          },
+          {
+            "type": "image-slot",
+            "name": "图片 2",
+            "x": 0.52,
+            "y": 0.26,
+            "w": 0.42,
+            "h": 0.5
+          },
+          {
+            "type": "text",
+            "text": "01 / MORNING",
+            "x": 0.06,
+            "y": 0.8,
+            "size": 0.04,
+            "color": "#cf262d"
+          },
+          {
+            "type": "text",
+            "text": "02 / EVENING",
+            "x": 0.52,
+            "y": 0.8,
+            "size": 0.04,
+            "color": "#cf262d"
+          }
+        ]
+      },
+      "portrait": {
+        "elements": [
+          {
+            "type": "text",
+            "text": "两段时光",
+            "x": 0.07,
+            "y": 0.06,
+            "size": 0.1,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "line",
+            "x": 0.07,
+            "y": 0.19,
+            "w": 0.86,
+            "color": "#cf262d"
+          },
+          {
+            "type": "image-slot",
+            "name": "图片 1",
+            "x": 0.06,
+            "y": 0.26,
+            "w": 0.88,
+            "h": 0.27
+          },
+          {
+            "type": "image-slot",
+            "name": "图片 2",
+            "x": 0.06,
+            "y": 0.59,
+            "w": 0.88,
+            "h": 0.27
+          },
+          {
+            "type": "text",
+            "text": "01 / MORNING",
+            "x": 0.06,
+            "y": 0.54,
+            "size": 0.04,
+            "color": "#cf262d"
+          },
+          {
+            "type": "text",
+            "text": "02 / EVENING",
+            "x": 0.06,
+            "y": 0.87,
+            "size": 0.04,
+            "color": "#cf262d"
+          }
+        ]
+      }
+    },
+    "grid": {
+      "landscape": {
+        "elements": [
+          {
+            "type": "text",
+            "text": "生活切片",
+            "x": 0.07,
+            "y": 0.06,
+            "size": 0.08,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "line",
+            "x": 0.07,
+            "y": 0.19,
+            "w": 0.86,
+            "color": "#cf262d"
+          },
+          {
+            "type": "image-slot",
+            "name": "图片 1",
+            "x": 0.06,
+            "y": 0.27,
+            "w": 0.42,
+            "h": 0.27
+          },
+          {
+            "type": "image-slot",
+            "name": "图片 2",
+            "x": 0.52,
+            "y": 0.27,
+            "w": 0.42,
+            "h": 0.27
+          },
+          {
+            "type": "image-slot",
+            "name": "图片 3",
+            "x": 0.06,
+            "y": 0.5800000000000001,
+            "w": 0.42,
+            "h": 0.27
+          },
+          {
+            "type": "image-slot",
+            "name": "图片 4",
+            "x": 0.52,
+            "y": 0.5800000000000001,
+            "w": 0.42,
+            "h": 0.27
+          }
+        ]
+      },
+      "portrait": {
+        "elements": [
+          {
+            "type": "text",
+            "text": "生活切片",
+            "x": 0.07,
+            "y": 0.06,
+            "size": 0.1,
+            "bold": true,
+            "color": "#cf262d"
+          },
+          {
+            "type": "line",
+            "x": 0.07,
+            "y": 0.19,
+            "w": 0.86,
+            "color": "#cf262d"
+          },
+          {
+            "type": "image-slot",
+            "name": "图片 1",
+            "x": 0.06,
+            "y": 0.27,
+            "w": 0.42,
+            "h": 0.27
+          },
+          {
+            "type": "image-slot",
+            "name": "图片 2",
+            "x": 0.52,
+            "y": 0.27,
+            "w": 0.42,
+            "h": 0.27
+          },
+          {
+            "type": "image-slot",
+            "name": "图片 3",
+            "x": 0.06,
+            "y": 0.5800000000000001,
+            "w": 0.42,
+            "h": 0.27
+          },
+          {
+            "type": "image-slot",
+            "name": "图片 4",
+            "x": 0.52,
+            "y": 0.5800000000000001,
+            "w": 0.42,
+            "h": 0.27
+          }
+        ]
+      }
+    }
+  },
+  "compact": {
+    "maxLongEdge": 300,
+    "maxShortEdge": 200,
+    "inset": 4,
+    "footer": 18
+  }
+}

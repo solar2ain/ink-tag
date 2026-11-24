@@ -36,6 +36,7 @@ from inktag_cli.onmicro_package import (
     package_profile,
     validate_recovery_preflight,
     load_package,
+    application_body_size,
 )
 from inktag_cli.ota_password import authorize_ota_application, ota_application_requests
 from inktag_cli.ota_rejection import describe_ota_rejection
@@ -485,7 +486,7 @@ async def attest_application(device, manifest: dict, firmware: bytes,
     build = state["build"]
 
     expected_version = int(manifest["releaseVersion"])
-    expected_app_size = int(manifest["application"]["size"])
+    expected_app_size = application_body_size(manifest, firmware)
     validate_attested_board(manifest["board"], board, expected_board)
     if build.get("build") != expected_version or \
             build.get("app_bytes") != expected_app_size:
@@ -712,13 +713,17 @@ async def open_recovery_transport(device, address: str, timeout: float,
 
 
 def fixed_recovery_profile(record: bytes) -> dict:
+    from inktag_cli.recovery_version import decode_policy_extension
+    policy = decode_policy_extension(record[20:]) if len(record) == 26 else 'required'
+    if len(record) not in (20, 26):
+        raise RuntimeError("OM requires a known fixed Recovery profile")
     profiles = [profile for profile in LAYOUT_PROFILES.values()
-                if bytes(record) == struct.pack("<IBBHIII", 0x50524B49, 1, 0, 20,
+                if bytes(record[:20]) == struct.pack("<IBBHIII", 0x50524B49, 1, 0, 20,
                     profile["signature"], profile["slot"]-SIGNATURE_TRAILER_SIZE,
                     profile["slot"])]
     if len(profiles) != 1:
         raise RuntimeError("OM requires a known fixed Recovery profile")
-    return profiles[0]
+    return {**profiles[0], 'signaturePolicy': policy}
 
 
 async def read_recovery_status(name: str | None, address: str | None,
@@ -775,7 +780,7 @@ async def read_recovery_status(name: str | None, address: str | None,
                     name=actual_name, address=peer.address, profileVerified=True,
                     applicationVerified=False, recoveryProfileHex=record.hex(),
                     recoveryIdentitySource=identity_source,
-                    board=profile["board"], **version)
+                    board=profile["board"], signaturePolicy=profile['signaturePolicy'], **version)
     except BaseException as error:
         failure = error
         raise
@@ -945,7 +950,10 @@ async def transfer(args) -> None:
         f"  Application: {manifest['application']['size']} / "
         f"{manifest['application']['slot_size'] - SIGNATURE_TRAILER_SIZE} bytes"
     )
-    print(f"  Signed transfer: {len(firmware)} bytes ({manifest['signature']['key_id']})")
+    if manifest['signature']['required']:
+        print(f"  Signed transfer: {len(firmware)} bytes ({manifest['signature']['key_id']})")
+    else:
+        print(f"  Unsigned base transfer: {len(firmware)} bytes (CRC verified; live CRC-only Recovery required)")
     device, direct_recovery = await discover(
         args.name, args.address, args.scan_timeout, include_role=True,
         allow_legacy_recovery=args.legacy_recovery_name_fallback

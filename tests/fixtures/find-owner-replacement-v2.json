@@ -1,0 +1,34 @@
+{
+  "description": "Synthetic Python v2 replacement HMAC interoperability; no device/user material",
+  "previous": {
+    "fingerprint": "ccbe0ce6e1a9056b99db2dcce6572ea9",
+    "materialHex": "000000000000000000000000000000000000000000000000000000070102030405060708090a0b0c0d0e0f10",
+    "deviceId": "activation:0123456789ABCDEF",
+    "deviceName": "测试标签",
+    "bluetoothName": "IKT_TEST_FAKE",
+    "findNote": "迁移测试",
+    "createdAt": "2026-01-01T00:00:00Z",
+    "derivationVersion": 2,
+    "periodSeconds": 900,
+    "tracks": []
+  },
+  "next": {
+    "fingerprint": "956ebbfa753b20fa741e22fe40d44331",
+    "materialHex": "000000000000000000000000000000000000000000000000000000020102030405060708090a0b0c0d0e0f10",
+    "deviceId": "activation:0123456789ABCDEF",
+    "deviceName": "测试标签",
+    "bluetoothName": "IKT_TEST_FAKE",
+    "findNote": "迁移测试",
+    "createdAt": "2026-01-01T00:00:00Z",
+    "derivationVersion": 2,
+    "periodSeconds": 900,
+    "tracks": []
+  },
+  "nonceHex": "0102030405060708",
+  "stageHex": "010102030405060708ccbe0ce6e1a9056b99db2dcce6572ea9706a46dc76dcb76798e60e6d89474788d16dc18032d268fd1a704fa61c2b76a7bc25e7702a704fa986892849fca629487acf3709d2e4e8bb0102030405060708090a0b0c0d0e0f10946015c41e67b1d33f2c39940d7aaac1",
+  "nextProof": {
+    "slot": 1955200,
+    "publicKeyHex": "9907ce60b090def32c0c68903381fbe09cb90fa2ceb8aec88aae4123",
+    "fingerprintHex": "956ebbfa753b20fa741e22fe40d44331"
+  }
+}

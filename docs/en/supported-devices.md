@@ -50,7 +50,7 @@ Updated 2026-10-28. Identify the complete board marking and fitted panel; comple
 | HSEL4Q_04_20M_33 | Hanshow Nebular-420R-N | 4.2 inch, 400×300, three or four colours | Use SSD1683 or JD79668AA according to the fitted panel |
 | HSEL5_01_54M_00 | Hanshow StellarPro-154R-N, earlier version | 1.54 inch, 200×200, three colours, replaceable panel | JD79653A; orientation, colours, native pages, fonts, RGB and NFC tested |
 | HSEL5_01_54M_02 | Hanshow StellarPro-154R-N, later version (YW2116 batch) | 1.54 inch, 200×200, three colours, fixed panel | Clock, calendar, device page, fonts, panel temperature, voltage display and phone NFC reading tested; use this board's separate screen profile |
-| HSEL5Q_01_54M_00 | Hanshow StellarPro-154Q-N | 1.54 inch, 200×200, four colours | Basic communication, OTA and configuration tested; complete-panel image and colours still unconfirmed, so installation is not yet recommended |
+| HSEL5Q_01_54M_00 | Hanshow StellarPro-154Q-N | 1.54 inch, 200×200, four colours | BASIC communication, OTA and configuration tested; complete-panel image and colours still unconfirmed, so installation is not yet recommended |
 | HSEL4Q_01_54M_31 | Hanshow NebularPro-154Q-N | 1.54 inch, 200×200, four colours | Original-panel native pages, Chinese fonts and digits visually confirmed; NFC tested; complete-flashing verification still needs completion |
 | HSEL3_02_66M_36 | Hanshow PolarisPro-260Q-N | 2.66 inch, 152×296, four colours | Calendar, portrait images, user fonts and orientation tested; NFC and standby current need separate confirmation |
 

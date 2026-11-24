@@ -1,90 +1,64 @@
-# Initial installation and complete flashing
+# First installation and complete flashing
 
-Stock labels need wired flashing for the first InkTag installation. Existing InkTag devices should normally use [OTA](ota.md). Identify the [controller, board marking and panel](supported-devices.md) before choosing firmware/configuration; a product name alone is not enough.
+Use wired flashing to install InkTag on a factory tag. Use [OTA](ota.md) for routine updates to compatible installed firmware. Check the [controller, PCB marking, and panel](supported-devices.md) first.
 
-## Directory layout
+## Flash with BAT in 0.2.2
 
-`firmware/` groups files by controller and board family, for example `gr551x_zkel`. Each board README maps product names, PCB markings and panel configurations.
+1. Open the target directory in [release/firmware](../../release/firmware/). Keep the relative paths of the tools, `full/`, and configurations. Use a Full package for first installation.
+2. Set up the programmer and software listed below. On Windows, double-click `flash.bat` for English or `flash-zh.bat` for Chinese. For command-line use, open the target directory and copy the command for your board from its installation guide.
+3. The guide uses a single suitable Full automatically, lists multiple matches, or opens a file picker if it finds none. Select the board and panel, then review and confirm the operation.
+4. After confirmation, detection waits for the target by default. The direct `flash-bin.bat` and `flash-hex.bat` entries also retry initial detection by default. Follow the prompt to cancel. Keep any write or readback error and check device state before retrying.
 
-```text
-firmware/<controller_board>/
-  README.md / README.en.md  devices, PCB markings and complete commands
-  LICENSE / NOTICE...      applicable licenses and copyright notices
-  ota/                    wireless update files
-  full/                   first installation and wired recovery files
-  tools/
-    setup.ps1 / check.ps1  dependency setup and offline checks, where provided
-    probe.ps1             board identification
-    backup.ps1            backup, where supported
-    flash.ps1             complete-flashing entry
-    configs/              board and panel configurations
-    internal/             entry routing and platform dependencies
-      native/             unchanged original backend and relative paths
-```
+| Target | English guide | Installation instructions |
+| --- | --- | --- |
+| GR5331 | [flash.bat](../../release/firmware/gr5331_zkel/tools/flash.bat) | [Board presets and commands](../../release/firmware/gr5331_zkel/INSTALL.en.md) |
+| GR5513/GR5515 standard | [flash.bat](../../release/firmware/gr551x_zkel/tools/flash.bat) | [Board presets and commands](../../release/firmware/gr551x_zkel/INSTALL.en.md) |
+| GR5513 Internal | [flash.bat](../../release/firmware/gr551x_zkel_internal/tools/flash.bat) | [Board presets and commands](../../release/firmware/gr551x_zkel_internal/INSTALL.en.md) |
+| OM6626 ZKEL | [flash.bat](../../release/firmware/om6626_zkel/payload/tools/flash.bat) | [Board presets and commands](../../release/firmware/om6626_zkel/INSTALL.en.md) |
+| TLSR8359 HSEL | [flash.bat](../../release/firmware/tlsr8359_hsel/firmware/ports/telink/tlsr8359/tools/flash.bat) | [Board presets and commands](../../release/firmware/tlsr8359_hsel/INSTALL.en.md) |
+| nRF52811 AESL | [flash.bat](../../release/firmware/nrf52811_aesl/tools/flash.bat) | [Board presets and commands](../../release/firmware/nrf52811_aesl/INSTALL.en.md) |
+| nRF52832 PriceETag | [flash.bat](../../release/firmware/nrf52832_priceetag/tools/flash.bat) | [Board presets and commands](../../release/firmware/nrf52832_priceetag/INSTALL.en.md) |
+| DA14585 AESL | [flash.bat](../../release/firmware/da14585_aesl/tools/programmer/flash.bat) | [Board presets and commands](../../release/firmware/da14585_aesl/INSTALL.en.md) |
 
-Run a board README's complete one-line command from that board directory in Windows PowerShell5.1. The common form is:
+## Required software
+
+The recommended BAT entries for GR, OM, nRF52811 and nRF52832 use the built-in **Windows PowerShell 5.1 and .NET** and work without Python. For J-Link targets, install **SEGGER J-Link Software and Documentation Pack 7.88j (Windows x64)** with its USB driver. 7.88j is the software version. [SEGGER downloads](https://www.segger.com/downloads/jlink/)
+
+| Controller | Connection | Additional requirements |
+| --- | --- | --- |
+| GR5331, GR5513/GR5515 | J-Link / SWD | [Goodix GProgrammer console 2.0.3.0](https://www.goodix.com/en/software_tool/gprogrammer_ble) with its loader, DLL, and configuration files |
+| OM6626 | J-Link / SWD | J-Link/J-Flash 7.88j and the matching OM device support files. Follow the instructions in `payload/` |
+| nRF52811, nRF52832 | J-Link / SWD | The J-Link software and driver above |
+| TLSR8359 | CH340 / SWS | Python 3.11+ and the CH340 driver. Run `setup.bat` to install the serial-tool dependencies |
+| DA14585 | J-Link / SWD | Python 3.12+ with `python` on PATH, plus the separately obtained licensed SRAM helper specified in the tools guide |
+
+For TLSR, run this command from `release/firmware/tlsr8359_hsel/`, or double-click [setup.bat](../../release/firmware/tlsr8359_hsel/firmware/ports/telink/tlsr8359/tools/setup.bat). With arguments, the BAT returns the exit code:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Firmware ".\full\matching-firmware-file" -Config ".\tools\configs\matching-board.toml" -RetryDetect
+.\firmware\ports\telink\tlsr8359\tools\setup.bat -Python python
 ```
-
-This illustrates the structure; use the actual filename/configuration already filled into each board README. TLSR also needs its real serial port. Tools require an explicit firmware argument and do not select or bind an old version.
-
-The same `ota/` and `full/` bytes are also supplied as Release attachments, with matching size/SHA256. App-only OTA does not replace Recovery and cannot replace first complete flashing. Existing unavailable-writer/backend limits remain in the target README.
-
-Dependencies remain within each original backend. Follow setup/check instructions; unsupported entry points are not fabricated. `releases/tool-manifests/` contains verification metadata, not another firmware family. The former top-level `flash/` and vendor placeholders are retired.
 
 ## Choose a programmer
 
-![Blue J-Link OB above; CH340 board with an external resistor below](../assets/flashing/programmers.webp)
+![Blue J-Link OB board above a CH340 USB adapter with a resistor](../assets/flashing/programmers.webp)
 
-- **Below: CH340 + a 1–2 kΩ resistor.** This simulates Telink SWS over a serial port. It is inexpensive but slower and less reliable; wiring, USB serial hardware and host timing matter. See the original author's [CH340/SWS wiring diagram](https://github.com/atc1441/ATC_TLSR_Paper/blob/main/USB_UART_Flashing_connection.jpg). Follow the resistor, SWS, ground and reset connections rather than treating it as an ordinary TX/RX connection. Never connect5V directly to label supply/signal pins.
-- **Above: J-Link OB.** Used for SWD on the ARM controllers here. Follow the board's SWDIO/SWCLK/GND and required supply/reset wiring. It does not replace Telink SWS wiring.
+- **Top, J-Link OB.** Use SWD for ARM controllers. Follow the board guide for SWDIO, SWCLK, ground, and power or reset as needed.
+- **Bottom, CH340 with a 1–2 kΩ resistor.** This serial adapter emulates Telink SWS. Wiring and USB timing affect speed and reliability. Follow the [wiring diagram](https://github.com/atc1441/ATC_TLSR_Paper/blob/main/USB_UART_Flashing_connection.jpg) and match the board's signal levels.
 
-The pictured boards each cost less than **RMB10** as a reference purchase price, excluding accessories. Search for “CH340 USB TTL” or “J-Link OB”; actual prices and specifications vary. These are examples of inexpensive boards, not a guarantee that every similarly named board is compatible.
+Both pictured adapters were purchased for under RMB 10 each, excluding accessories. If the system cannot find the CH340 serial port, install the [Windows driver](https://www.wch.cn/downloads/CH341SER_EXE.html) or [macOS driver](https://www.wch.cn/downloads/CH341SER_MAC_ZIP.html) from WCH. Telink's CH340/SWS approach also works on macOS. See the [macOS serial tool notes](https://github.com/pvvx/TlsrComSwireWriter). nRF DAPLink/SWD flashing has also been demonstrated on macOS. The current BAT workflow runs on Windows.
 
-## Software and drivers
+## Use prebuilt BIN or HEX images
 
-The J-Link routes use **SEGGER J-Link Software and Documentation Pack7.88j, Windows x64**, including the USB driver. Select that archived version from [SEGGER downloads](https://www.segger.com/downloads/jlink/).7.88j is the PC software version, not the probe's printed hardware version. Keep its installation directory, such as `C:\Program Files\SEGGER\JLink_V788j`.
+Choose the matching PCB and screen configuration in `programmer/` and follow its address table. BIN requires an explicit start address and address space. Intel HEX carries the addresses in its records.
 
-| Controller | Programmer | Required software/dependencies | Directory |
-| --- | --- | --- | --- |
-| GR5331, GR5513/GR5515 | J-Link OB / SWD | Windows x64; Python3.12 x64; J-Link7.88j; Goodix GProgrammer console2.0.3.0 with its original loaders/DLL | `firmware/gr5331_zkel`, `gr551x_zkel`, `gr551x_zkel_internal` |
-| OM6626 | J-Link OB / SWD | Windows x64; Python3.12.0 x64; J-Link7.88j; OM6626 J-Link device-support files. Follow the directory's `DEPENDENCIES.txt` and version checks | `firmware/om6626_zkel` |
-| TLSR8359 | CH340 / SWS | Python3.11+; CH340 driver; serial dependencies prepared by its `setup.ps1`. No J-Link needed | `firmware/tlsr8359_hsel` |
-| nRF52811 | Current tools: J-Link / SWD | Windows x64; J-Link7.88j and USB driver. Portable Python/dependencies are included; no system Python needed | `firmware/nrf52811_aesl` |
-| nRF52832 | Current tools: J-Link / SWD | Windows x64; J-Link7.88j and USB driver. Portable Python/dependencies included; check its README for actual writer availability | `firmware/nrf52832_priceetag` |
-| DA14585 | J-Link OB / SWD | Windows x64; J-Link7.88j and USB driver. Portable Python/dependencies included; complete writing also needs the backend conditions in its README | `firmware/da14585_aesl` |
+- GR, TLSR and DA14585 provide `flash-bin.bat`. GR and DA use the matching initialization materials. TLSR uses the requested BIN and its companion JSON. When using BDT on TLSR, follow the board's address table.
+- Both nRF targets provide `flash-hex.bat`. The nRF52811 settings and GUI resources have separate external flash addresses.
+- OM uses `flash.bat` with Full and a matching configuration. The segment files can be checked against the address table.
 
-If the CH340 already appears as a serial port, do not reinstall a driver unnecessarily. Otherwise use WCH's [Windows](https://www.wch.cn/downloads/CH341SER_EXE.html) or [macOS](https://www.wch.cn/downloads/CH341SER_MAC_ZIP.html) driver. Follow actual pin markings, not wire colours in the photo.
+Complete flashing and initialization may clear device settings and data. Follow the board guide to back up the data you need and check the readback result.
 
-### What about macOS?
+## Flash with a graphical tool
 
-- **Telink CH340/SWS serial simulation can be used on macOS**, with tools for the actual host/controller. The Windows PowerShell commands below are not macOS commands.
-- **nRF flashing through DAPLink on macOS has been demonstrated, but is not yet integrated into the current distribution tools.** DAPLink is not CH340; nRF uses SWD, not Telink SWS.
-- Other wired flashing workflows in this release use **Windows**. This is the current tool support boundary, not a claim that the hardware can never be programmed on another OS.
+Guides for graphical flashing tools are in progress. If you have a tested procedure, please share the tool and version, PCB marking, firmware files, and flash addresses you used. [Open an issue](https://github.com/solar2ain/ink-tag/issues) · [Submit a guide](https://github.com/solar2ain/ink-tag/pulls)
 
-See [pvvx's macOS serial-tool information](https://github.com/pvvx/TlsrComSwireWriter) for host timing/platform background. External links explain construction/wiring/platforms; they do not replace InkTag's matching complete-firmware and retention/verification procedure with another project's generic erase commands.
-
-## Download, connect and flash
-
-1. Download the exact target's **complete firmware** from [Releases](https://github.com/solar2ain/ink-tag/releases). Plaintext tools are in `firmware/<controller_board>/` in the repository. Pass firmware explicitly; tools contain no firmware and an OTA package is not a complete image.
-2. Open Windows PowerShell5.1 or newer in the chosen directory and read its bilingual README. It lists a complete copyable command for every device/board/configuration.
-3. Install the software above, then follow the board README for its `tools/setup.ps1` or `tools/check.ps1`. Public entry points use the same layout; the native backend manages its own dependencies.
-4. Use the board's actual wiring, stable power and common ground. Probe and preserve an available factory backup, then select the exact configuration, flash and verify readback.
-
-For example, view help without a device from **`firmware/gr5331_zkel`**:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\tools\flash.ps1" -Help
-```
-
-Copy the actual flashing line from the selected directory's README. It supplies `-Firmware`, `-Config` and `-RetryDetect`; TLSR also needs the actual port, such as `-Port COM3`. RetryDetect retries initial detection only, never an erase/write or unknown result.
-
-Complete flashing clears MCU-side settings/data. Necessary factory identity, BLE address, calibration and valid same-device Pro are retained according to each tool's instructions. Separate external picture Flash without an erase backend is retained. Some portable writing entries are not yet available: an offline preflight is not proof that writing is enabled.
-
-## If startup or connection fails
-
-Check the battery, power, wiring, actual controller and tool versions. Stop on unknown hardware, abnormal supply or readback failure; retain errors/backups rather than repeatedly erasing. If InkTag Recovery remains reachable, use a matching trusted OTA package.
-
-Ordinary WebUI/CLI use does not require a firmware SDK, Keil or MCU compiler. See [devices/panels](devices.md), [OTA/Recovery](ota.md) and [getting started](getting-started.md).
+[Build firmware](../build-firmware.en.md) · [Supported devices](supported-devices.md) · [OTA and Recovery](ota.md)

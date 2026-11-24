@@ -87,6 +87,7 @@ def image_process(
     preset: Annotated[str, typer.Option(help="balanced, dynamic, vivid, soft, grayscale, restore or posterScan.")] = "balanced",
     strength: Annotated[float, typer.Option(min=0.0, max=5.0)] = DEFAULT_IMAGE_STRENGTH,
     contrast: Annotated[float, typer.Option(min=0.5, max=2.0)] = DEFAULT_IMAGE_CONTRAST,
+    brightness: Annotated[float, typer.Option(min=-100.0, max=100.0, help="Brightness adjustment in percent; 0 keeps the original brightness.")] = 0.0,
     heavy_ink: Annotated[bool, typer.Option("--heavy-ink", help="Strengthen dark and saturated regions.")] = False,
     fit: Annotated[str, typer.Option(help="crop or stretch.")] = "crop",
     rotate: Annotated[str, typer.Option(help="auto, 0, 90, 180 or 270.")] = "auto",
@@ -98,7 +99,7 @@ def image_process(
     try:
         width, height = _parse_size(size)
         color_id = _parse_color(color)
-        processing = ImageProcessOptions(algorithm, preset, contrast, strength, heavy_ink).validated()
+        processing = ImageProcessOptions(algorithm, preset, contrast, strength, heavy_ink, brightness=brightness).validated()
         composed = compose_image(
             source,
             width,
@@ -125,6 +126,7 @@ def image_process(
             "algorithm": algorithm_spec.name,
             "algorithmIndex": algorithm_spec.index,
             "preset": processing.preset,
+            "brightness": processing.brightness,
             "rotation": composed.rotation,
             "rgbaSha256": hashlib.sha256(result.data).hexdigest(),
         },
@@ -139,6 +141,7 @@ def image_upload(
     preset: Annotated[str, typer.Option(help="balanced, dynamic, vivid, soft, grayscale, restore or posterScan.")] = "balanced",
     strength: Annotated[float, typer.Option(min=0.0, max=5.0)] = DEFAULT_IMAGE_STRENGTH,
     contrast: Annotated[float, typer.Option(min=0.5, max=2.0)] = DEFAULT_IMAGE_CONTRAST,
+    brightness: Annotated[float, typer.Option(min=-100.0, max=100.0, help="Brightness adjustment in percent; 0 keeps the original brightness.")] = 0.0,
     heavy_ink: Annotated[bool, typer.Option("--heavy-ink", help="Strengthen dark and saturated regions.")] = False,
     fit: Annotated[str, typer.Option(help="crop or stretch.")] = "crop",
     rotate: Annotated[str, typer.Option(help="auto, 0, 90, 180 or 270.")] = "auto",
@@ -153,12 +156,12 @@ def image_upload(
     preview: Annotated[Path | None, typer.Option(help="Also save the exact processed device preview as PNG.")] = None,
     refresh_timeout: Annotated[float, typer.Option(min=10.0, max=300.0, help="Physical refresh timeout in seconds.")] = 120.0,
     expected_size: Annotated[str | None, typer.Option("--expect-size", help="Fail before upload if the device's visible canvas differs.")] = None,
-    wire_encoding: Annotated[str, typer.Option(help="Transfer encoding: auto (capability and savings), none (raw), or packbits-rle (requires device support; no raw fallback).")] = "auto",
+    wire_encoding: Annotated[str, typer.Option(help="Transfer encoding: auto (device capabilities and savings), none (raw), lzo1x or packbits-rle (explicit codecs require device support; no raw fallback).")] = "auto",
 ) -> None:
     options = _options(context)
     try:
         requested_wire_encoding = normalize_wire_encoding(wire_encoding)
-        processing = ImageProcessOptions(algorithm, preset, contrast, strength, heavy_ink).validated()
+        processing = ImageProcessOptions(algorithm, preset, contrast, strength, heavy_ink, brightness=brightness).validated()
         if content_type not in CONTENT_TYPE_IDS:
             raise ValueError(f"content type must be one of: {', '.join(CONTENT_TYPE_IDS)}")
         if force and (slot is None or slot.lower() != "next"):
@@ -255,6 +258,7 @@ def image_upload(
             "algorithm": algorithm_spec.name,
             "algorithmIndex": algorithm_spec.index,
             "preset": processing.preset,
+            "brightness": processing.brightness,
             "rotation": int(resolved_rotation),
             "preview": str(preview.resolve()) if preview else None,
             "requested_wire_encoding": requested_wire_encoding,

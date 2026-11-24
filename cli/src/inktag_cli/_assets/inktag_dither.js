@@ -140,6 +140,16 @@ function visitHilbert(width, height, visitor) {
   visit(0, 0, side, 0, 0, side, depth)
 }
 
+function adjustBrightness(image, amount = 0) {
+  validate(image)
+  if (!Number.isFinite(amount) || amount < -100 || amount > 100) throw new RangeError('Invalid brightness')
+  if (amount === 0) return image
+  const offset = amount * 255 / 100
+  for (let i = 0; i < image.data.length; i += 4)
+    for (let c = 0; c < 3; c++) image.data[i + c] = clip(image.data[i + c] + offset)
+  return image
+}
+
 function adjustContrast(image, factor) {
   validate(image)
   if (!Number.isFinite(factor) || factor < 0) throw new RangeError('Invalid contrast')
@@ -235,4 +245,4 @@ function ditherImage(image, algorithm, strength, mode, options = {}) {
   return finish()
 }
 
-export { adjustContrast, ditherImage }
+export { adjustBrightness, adjustContrast, ditherImage }

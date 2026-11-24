@@ -34,6 +34,7 @@ from inktag_cli.tlsr_layout import (
     tlsr_layout_profile, tlsr_package_profile, validate_tlsr_epoch,
     TLSR_RECOVERY_CONTEXT_UUID, signed_tlsr_context, validate_tlsr_recovery_context,
     TLSR_RECOVERY_ENTRY_UUID, validate_tlsr_recovery_entry,
+    unsigned_tlsr_image,
 )
 
 
@@ -326,6 +327,10 @@ def validate_application(path: Path) -> bytes:
             raise ValueError("not an InkTag Hanshow TLSR8359 fixed-Recovery package")
         application = manifest["application"]
         image = package.read(application["file"])
+    if (manifest.get('signature') or {}).get('required') is False:
+        from inktag_cli.tlsr_base_package import verify_base_payload
+        verify_base_payload(manifest,image)
+        return image
     profile = tlsr_package_profile(layout, image)
     image = validate_application_bytes(image, profile["limit"])
     validate_publisher_signature(image, manifest)
@@ -772,6 +777,14 @@ async def enter_recovery(device, connect_timeout: float, password_data_dir: Path
 
 
 async def check_recovery_compatibility(client, image: bytes) -> None:
+    if unsigned_tlsr_image(image):
+        from inktag_cli.recovery_version import decode_ikrv
+        revision = characteristic(client, RECOVERY_VERSION_UUID)
+        if revision is None or 'read' not in set(getattr(revision,'properties',()) or ()):
+            raise RuntimeError('This Recovery requires a publisher-signed App; unsigned image was not sent')
+        policy=decode_ikrv(bytes(await client.read_gatt_char(revision)))
+        if policy.get('signaturePolicy') != 'crc-only':
+            raise RuntimeError('This Recovery requires a publisher-signed App; unsigned image was not sent')
     context = characteristic(client, TLSR_RECOVERY_CONTEXT_UUID)
     if context is None:
         raise RuntimeError("Recovery lacks read-only compatibility information; Full is required")

@@ -46,3 +46,51 @@ def test_empty_component_record_does_not_bypass_stable_channel_policy(tmp_path):
  record=fixture(tmp_path);entry=record['releases'][1]
  entry['channel']='stable';entry['components']={}
  with pytest.raises(ValueError):feeds.validate_record(record)
+
+
+@pytest.mark.parametrize('reverse', [False, True])
+@pytest.mark.parametrize('ready', [False, True])
+def test_project_release_precedes_legacy_component_numbering(tmp_path, reverse, ready):
+ record=fixture(tmp_path)
+ old=record['releases'][0]
+ old['components']['webui']=old['components'].pop('cli')
+ old['components']['webui']['version']='1.2.0'
+ old['components']['webui']['artifacts'][0]['type']='web'
+ new=copy.deepcopy(old);tag='v0.2.1-20261107.1'
+ new.update(releaseTag=tag,published=ready,releaseReady=ready,candidateOnly=not ready)
+ new['components']['webui'].update(version='0.2.1',buildNumber=2026110703,buildId='new-project-build')
+ new['components']['webui']['artifacts'][0]['downloadUrl']=f'https://github.com/{feeds.REPOSITORY}/releases/download/{tag}/client.zip'
+ folder=tmp_path/tag;folder.mkdir();(folder/'client.zip').write_bytes((tmp_path/'v0.2.0/client.zip').read_bytes())
+ record['releases'].append(new)
+ if reverse:record['releases'].reverse()
+ chosen=feeds.generate(record,tmp_path)['stable']['components']['webui']
+ assert chosen['releaseTag']==(tag if ready else 'v0.2.0')
+ assert chosen['version']==('0.2.1' if ready else '1.2.0')
+
+
+@pytest.mark.parametrize('edition', ['basic', 'pro', 'unknown'])
+def test_firmware_edition_passes_through_only_for_known_editions(tmp_path, edition):
+    record = fixture(tmp_path)
+    record['firmwareEnabled'] = True
+    release = record['releases'][0]
+    tag = release['releaseTag']
+    artifacts = []
+    for kind in ('ota', 'full'):
+        path = tmp_path / tag / f'{kind}.zip'
+        path.write_bytes(kind.encode())
+        artifacts.append({
+            'type': kind, 'name': path.name, 'bytes': path.stat().st_size,
+            'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+            'downloadUrl': f'https://github.com/{feeds.REPOSITORY}/releases/download/{tag}/{path.name}',
+        })
+    firmware = {'version': '0.2.0', 'buildId': 'test-firmware', 'buildNumber': 1, 'releaseVersion': 200,
+                'target': {'boardId': 'test', 'family': 'test', 'protocolVersion': 16,
+                           'layout': 'layout-v1', 'compatibilityEpoch': 1},
+                'candidateOnly': False, 'releaseReady': True, 'published': True,
+                'edition': edition, 'artifacts': artifacts}
+    release['firmware'] = [firmware]
+    if edition == 'unknown':
+        with pytest.raises(feeds.UpdateError, match='Invalid firmware edition'):
+            feeds.generate(record, tmp_path)
+        return
+    assert feeds.generate(record, tmp_path)['stable']['firmware'][0]['edition'] == edition

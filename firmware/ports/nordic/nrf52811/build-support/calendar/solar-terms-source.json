@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "method": "Apparent geocentric solar ecliptic longitude at 15-degree crossings",
+  "civilTimezone": "UTC+08:00",
+  "firstYear": 2000,
+  "lastYear": 2050,
+  "records": 1224,
+  "resourceBytes": 160,
+  "resourceSha256": "0b81abfd6d8d92f221702b0f1a75196653165e505ef302761d0c56290436c51a",
+  "kernel": {
+    "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/de440s.bsp",
+    "sha256": "c1c7feeab882263fc493a9d5a5b2ddd71b54826cdf65d8d17a76126b260a49f2"
+  },
+  "packages": {
+    "skyfield": "1.53",
+    "numpy": "2.2.6",
+    "jplephem": "2.23",
+    "sgp4": "2.24"
+  },
+  "timescale": "Skyfield 1.53 bundled leap seconds and Delta-T data; builtin=True",
+  "filesSha256": {
+    "compat/common/gui/inktag_solar_terms.inc": "79d520cffe4c685d266df6c8295966f77c67573782f416d19d87675e5965d109",
+    "build-support/calendar/solar-terms-2000-2050.csv": "f496ab67b98294c541bfc24aa3e19200a426807c779b0e3f953422b8ebc85861"
+  }
+}

@@ -1,0 +1,31 @@
+* text=auto
+
+.gitattributes text eol=lf
+.gitignore text eol=lf
+LICENSE text eol=lf
+Makefile text eol=lf
+**/Makefile text eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.ps1 text eol=lf
+*.bat text eol=lf
+*.cs text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+*.toml text eol=lf
+*._pth text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+*.txt text eol=lf
+# Keep the third-party GPL license's original CRLF bytes.
+LICENSES/GPL-3.0.txt -text whitespace=cr-at-eol
+*.md text eol=lf
+*.c text eol=lf
+*.h text eol=lf
+*.ld text eol=lf
+*.S text eol=lf
+compat/common/gui/inktag_gui_default.inc text eol=lf
+compat/nordic/nrf52.mk text eol=lf
+*.inc text eol=lf
+compat/common/**/*.json text eol=lf

@@ -1,0 +1,30 @@
+# Human-agreed asel29 model name for the observed board without a silkscreen.
+# Shipped defaults only. Flash/ADC/clock/power/protected nets are not user data.
+format_version = 1
+board_marking = "asel29"
+
+[screen]
+ic = "SSD1619"
+recipe = 0
+color = "BWR"
+rotation = 90
+mirror_x = false
+mirror_y = false
+native_ui_scale = 0
+width = 128
+height = 296
+visible_x = 0
+visible_y = 0
+visible_width = 128
+visible_height = 296
+
+[gpio.display]
+mosi = "P2.0"
+clock = "P0.1"
+cs = "P2.1"
+dc = "P0.7"
+reset = "P1.0"
+busy = "P1.1"
+bs = "P2.2"
+enable = "P2.3"
+enable_active_low = false

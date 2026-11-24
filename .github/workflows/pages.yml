@@ -58,8 +58,43 @@ jobs:
           test "$GITHUB_REF" = "refs/heads/main"
           test "$EXPECTED" = "$TRIGGER_SHA"
           test "$(git rev-parse HEAD)" = "$EXPECTED"
-      - name: Validate compiled static site
-        run: python3 tools/verify-pages.py --site webui
+      - name: Set up Node.js
+        if: hashFiles('webui/package-lock.json') != ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: webui/package-lock.json
+      - name: Install WebUI verification dependencies
+        if: hashFiles('webui/package-lock.json') != ''
+        working-directory: webui
+        run: npm ci --no-audit --no-fund
+      - name: Verify the checked-in release WebUI
+        if: hashFiles('webui/package-lock.json') != '' && hashFiles('webui/dist/static/index.html') != ''
+        working-directory: webui
+        run: node tools/verify-builds.mjs
+      - name: Build WebUI from source when dist is absent
+        if: hashFiles('webui/package-lock.json') != '' && hashFiles('webui/dist/static/index.html') == ''
+        working-directory: webui
+        run: npm run build
+      - name: Prepare the compiled site
+        id: site
+        run: |
+          site=webui
+          if [ -f webui/package-lock.json ]; then
+            site=webui/dist/static
+            for subdir in updates manual licenses; do
+              if [ -d "webui/$subdir" ]; then
+                cp -R "webui/$subdir" "$site/"
+              fi
+            done
+            if [ -d "$site/licenses" ]; then
+              cp "$site/LICENSING.txt" "$site/licenses/LICENSING.txt"
+              cp "$site/THIRD_PARTY_NOTICES.txt" "$site/licenses/THIRD_PARTY_NOTICES.txt"
+            fi
+          fi
+          echo "path=$site" >> "$GITHUB_OUTPUT"
+          python3 tools/verify-pages.py --site "$site"
       - name: Require public review for a deployment
         if: github.event_name == 'workflow_dispatch' && inputs.accept_deferred_review != true
         run: python3 tools/verify-release.py --repo . --public --download-source-materials
@@ -82,6 +117,12 @@ jobs:
               raise SystemExit('Release publication is not attested by this commit')
           PY
 
+      - name: Upload the reviewed compiled site
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ steps.site.outputs.path }}
+
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
     needs: validate
@@ -101,10 +142,6 @@ jobs:
           ref: ${{ inputs.expected_commit }}
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Upload compiled WebUI only
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: webui
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4

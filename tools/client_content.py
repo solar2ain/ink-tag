@@ -6,7 +6,7 @@ import html
 import os
 from pathlib import Path
 import re
-from urllib.parse import unquote, urlsplit
+from urllib.parse import quote, unquote, urlsplit
 from html_security import csp_meta, safe_url
 
 
@@ -20,7 +20,7 @@ def scriptless_document(title: str, body: str, language: str = 'zh-CN') -> str:
             csp_meta()+'<title>'+html.escape(title)+'</title></head><body>'+new_window_links(body)+'</body></html>\n')
 
 GUIDES = ('cli', 'devices', 'faq', 'find', 'flash', 'getting-started', 'github-pages',
-          'host-pages', 'ota', 'pro', 'projects', 'releases', 'supported-devices', 'tested-screens', 'updates', 'webui')
+          'host-pages', 'nfc', 'ota', 'power', 'pro', 'projects', 'releases', 'supported-devices', 'tested-screens', 'updates', 'webui')
 DOCUMENT_IMAGES = {
     'docs/assets/devices/supported-devices.webp': 'manual/assets/devices/supported-devices.webp',
     'docs/assets/flashing/programmers.webp': 'manual/assets/flashing/programmers.webp',
@@ -29,24 +29,26 @@ DOCUMENT_IMAGES = {
     'docs/assets/projects/mini-clock.webp': 'manual/assets/projects/mini-clock.webp',
     'docs/assets/projects/phototag.webp': 'manual/assets/projects/phototag.webp',
     'docs/assets/projects/instant-photo-build.webp': 'manual/assets/projects/instant-photo-build.webp',
-    'docs/assets/projects/calendar-front.webp': 'manual/assets/projects/calendar-front.webp',
-    'docs/assets/projects/calendar-back.webp': 'manual/assets/projects/calendar-back.webp',
 }
 SOURCE_DOCUMENTS = ('README.md', 'README.en.md', 'CHANGELOG.md', 'SECURITY.md', 'RELEASE_NOTES.md',
-    'cli/README.md', 'cli/README.en.md',
+    'cli/README.md', 'cli/README.en.md', 'docs/build-firmware.md', 'docs/build-firmware.en.md',
+    'docs/build-webui.md', 'docs/build-webui.en.md', 'docs/creation-fonts.md', 'docs/creation-fonts.en.md',
     *(f'docs/{language}/{name}.md' for language in ('zh-CN', 'en') for name in GUIDES),
     'firmware/README.md', 'firmware/README.en.md')
 # These files are maintained separately from ordinary user guides. Exporters
 # preserve them unless their exact old bytes have been acknowledged explicitly.
 LICENSING_DOCUMENTS = ('LICENSING.md', 'THIRD_PARTY_NOTICES.md', 'release-materials.md',
     'cli/LICENSING.md', 'cli/THIRD_PARTY_NOTICES.md')
-NOTICE_FILES = ('CLI-PolyForm-Noncommercial-1.0.0.txt',
+CREATION_FONT_NOTICES = ('FusionPixel-NOTICES.txt', 'OFL-ZLabsPixel.txt', 'OFL-MuzaiPixel.txt',
+                         'OFL-ChillBitmap.txt', 'ChillBitmap7x-LICENSE.txt')
+NOTICE_FILES = ('AGPL-3.0.txt', *CREATION_FONT_NOTICES,
     'noble-curves-2.0.1-LICENSE.txt', 'noble-hashes-2.0.1-LICENSE.txt',
     'Lucide-LICENSE.txt', 'MaShanZheng-OFL.txt',
     'RgbQuant-MIT.txt', 'dexie-4.4.5-LICENSE.txt', 'dexie-4.4.5-NOTICE.txt',
     'epdoptimize-Apache-2.0.txt', 'leafer-ui-2.2.10-LICENSE.txt',
     'react-19.2.8-LICENSE.txt', 'react-dom-19.2.8-LICENSE.txt',
-    'react-router-7.18.2-LICENSE.txt', 'LICENSING.txt', 'THIRD_PARTY_NOTICES.txt',
+    'react-router-7.18.2-LICENSE.txt', 'qrcode-1.5.4-LICENSE.txt', 'zustand-5.0.15-LICENSE.txt',
+    'dijkstrajs-1.0.3-LICENSE.txt', 'scheduler-0.27.0-LICENSE.txt', 'LICENSING.txt', 'THIRD_PARTY_NOTICES.txt',
     'release-materials.txt', 'GPL-2.0.txt', 'U8g2-LICENSE.txt', 'WenQuanYi-Bitmap-Song-NOTICE.txt')
 
 
@@ -89,8 +91,18 @@ def rewrite_reference(repo: Path, source: Path, target: Path, reference: str) ->
         if not original.is_file():
             raise ValueError('Missing user-document image: '+relative)
         output = repo/'webui'/DOCUMENT_IMAGES[relative]
-    elif relative == 'cli/LICENSE':
-        output = repo/'webui/licenses/CLI-PolyForm-Noncommercial-1.0.0.txt'
+    elif relative in {'LICENSE', 'cli/LICENSE', 'webui/LICENSE'}:
+        output = repo/'webui/licenses/AGPL-3.0.txt'
+    elif relative.startswith('webui/src/assets/fonts/') and original.name in CREATION_FONT_NOTICES:
+        output = repo/'webui/licenses'/original.name
+    elif relative == 'webui/src/assets/fonts/README.md':
+        return 'https://github.com/solar2ain/ink-tag/blob/main/' + relative
+    elif relative.startswith('webui/public/assets/'):
+        output = repo/'webui/assets'/original.name
+    elif relative == 'release/firmware' or relative.startswith(('release/firmware/', 'firmware/boards/', 'ports/', 'tools/')):
+        mode = 'tree' if original.is_dir() else 'blob'
+        quoted = '/'.join(quote(part) for part in relative.split('/'))
+        return f'https://github.com/solar2ain/ink-tag/{mode}/main/{quoted}' + ('#'+parts.fragment if parts.fragment else '')
     elif relative == 'webui-standalone/InkTag-WebUI.html':
         # Bundled manuals open their own app entry. Standalone packaging maps
         # index.html to InkTag-WebUI.html without linking outside the bundle.
@@ -105,7 +117,10 @@ def rewrite_reference(repo: Path, source: Path, target: Path, reference: str) ->
         raise ValueError('Unlisted local document reference: '+relative)
     confined(repo/'webui', output)
     result = os.path.relpath(output, target.parent).replace('\\', '/')
-    return result + ('?'+parts.query if parts.query else '') + ('#'+parts.fragment if parts.fragment else '')
+    fragment = parts.fragment
+    if relative == 'THIRD_PARTY_NOTICES.md' and fragment == '创作字体--creation-fonts':
+        fragment = '创作字体-creation-fonts'
+    return result + ('?'+parts.query if parts.query else '') + ('#'+fragment if fragment else '')
 
 
 def render_documents(repo: Path) -> dict[str, bytes]:
@@ -191,7 +206,8 @@ def validate_html_links(site: Path, pages=None) -> list[str]:
 
 def notice_bytes(repo: Path) -> dict[str, bytes]:
     # Never replace independently reviewed license text during packaging.
-    return {'THIRD_PARTY_NOTICES.txt': (repo/'webui/THIRD_PARTY_NOTICES.txt').read_bytes(),
+    return {'LICENSING.txt': (repo/'webui/public/LICENSING.txt').read_bytes(),
+            'THIRD_PARTY_NOTICES.txt': (repo/'webui/THIRD_PARTY_NOTICES.txt').read_bytes(),
             **{'licenses/'+name: (repo/'webui/licenses'/name).read_bytes() for name in NOTICE_FILES}}
 
 
@@ -201,9 +217,10 @@ DOWNLOAD_EXCLUDED_WEB_PATHS = frozenset({'updates/stable.json', 'updates/preview
 def user_web_files(repo: Path, *, include_update_feeds: bool = True) -> dict[str, bytes]:
     site = repo/'webui'
     result = {}
-    for path in site.rglob('*'):
+    runtime = site/'dist/static' if (site/'dist/static/index.html').is_file() else site
+    for path in runtime.rglob('*'):
         if not path.is_file(): continue
-        name = path.relative_to(site).as_posix()
+        name = path.relative_to(runtime).as_posix()
         if not include_update_feeds and name in DOWNLOAD_EXCLUDED_WEB_PATHS: continue
         if name.startswith(('manual/', 'licenses/')): continue
         if (path.suffix.lower() == '.md' or
@@ -212,6 +229,8 @@ def user_web_files(repo: Path, *, include_update_feeds: bool = True) -> dict[str
             raise ValueError('Non-runtime document cannot be packaged: '+name)
         if path.is_symlink(): raise ValueError('Links cannot be packaged')
         result[name] = path.read_bytes()
+    if include_update_feeds and runtime != site:
+        result.update({name: (site/name).read_bytes() for name in DOWNLOAD_EXCLUDED_WEB_PATHS if (site/name).is_file()})
     result.update(notice_bytes(repo))
     result.update({name: (site/name).read_bytes() for name in document_map().values()})
     result.update({name: (site/name).read_bytes() for name in DOCUMENT_IMAGES.values() if (site/name).is_file()})

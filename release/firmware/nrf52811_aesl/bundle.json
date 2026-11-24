@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "chip": "nrf52811",
+  "firmwareFamily": "aesl22_nrf",
+  "buildTarget": "nrf52811_aesl",
+  "brand": "aesl",
+  "artifactKind": "tools-only",
+  "fullWriter": "native-v1",
+  "baseline": "inktag-release-v1",
+  "runtimeKind": "windows-powershell-dotnet",
+  "toolsVersion": "0.2.2.5",
+  "sourceToolsVersion": "0.2.2.5",
+  "firmwareIncluded": false,
+  "pythonRequired": false,
+  "releaseApproved": false,
+  "hardwareQualified": false,
+  "nativeManifest": "tools/native-tools.json"
+}

@@ -1,0 +1,13 @@
+[
+  {"id":"date","name":"公历年月日","runs":[{"text":"{{year}}","style":{"color":"#dc3026"}},{"text":"年","gap":2},{"text":"{{month}}","gap":2,"style":{"color":"#dc3026"}},{"text":"月","gap":2},{"text":"{{day}}","gap":2,"style":{"color":"#dc3026"}},{"text":"日","gap":2}]},
+  {"id":"lunar-date","name":"农历月日","runs":[{"text":"{{lunarMonth}}","style":{"color":"#dc3026"}},{"text":"月","gap":2},{"text":"{{lunarDay}}","gap":2,"style":{"color":"#dc3026"}}]},
+  {"id":"lunar-year-date","name":"农历年月日与生肖","runs":[{"text":"{{lunarYearName}}"},{"text":"年","gap":2},{"text":"{{lunarZodiac}}","gap":3,"style":{"color":"#dc3026"}},{"text":"{{lunarMonth}}","gap":6,"style":{"color":"#dc3026"}},{"text":"月","gap":2},{"text":"{{lunarDay}}","gap":2,"style":{"color":"#dc3026"}}]},
+  {"id":"weekday","name":"星期","runs":[{"text":"星期"},{"text":"{{weekdayName}}","gap":2,"style":{"color":"#dc3026"}}]},
+  {"id":"week","name":"周数","runs":[{"text":"["},{"text":"{{week}}","style":{"color":"#dc3026"}},{"text":"周]"}]},
+  {"id":"countdown","name":"事件／节气倒计时","runs":[{"text":"离","fontId":"wqy9-lunar"},{"text":"{{countdownName}}","fontId":"wqy12-lunar","gap":3,"style":{"fontSize":16,"color":"#dc3026"}},{"text":"{{countdownDays}}","fontId":"wqy9-lunar","gap":3},{"text":"天","fontId":"wqy9-lunar","gap":2}]},
+  {"id":"bluetooth","name":"蓝牙名称","group":"device","runs":[{"text":"[{{bluetoothName}}]"}]},
+  {"id":"device-name","name":"设备名称","group":"device","runs":[{"text":"{{deviceName}}"}]},
+  {"id":"temperature","name":"温度","group":"device","runs":[{"text":"{{temperature}}"}]},
+  {"id":"voltage","name":"电池电压","group":"device","runs":[{"text":"{{voltage}}"}]},
+  {"id":"battery-percent","name":"电量百分比","group":"device","runs":[{"text":"{{battery}}"}]}
+]

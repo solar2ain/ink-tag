@@ -1,0 +1,47 @@
+{
+  "schema": "inktag-findmy-p224-derived-v1",
+  "derivationVersion": 1,
+  "rotationPeriodSeconds": 900,
+  "domainAscii": "P224",
+  "blockEncoding": "ASCII(domain) || BE64(slot) || BE32(j)",
+  "candidateEncoding": "AES-128-ECB(K,B(slot,2r)) || AES-128-ECB(K,B(slot,2r+1)); first 28 bytes, big-endian",
+  "secp224r1OrderHex": "ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d",
+  "vectors": [
+    {
+      "name": "slot-zero",
+      "secretHex": "00112233445566778899aabbccddeeff",
+      "slot": "0",
+      "rejectedCandidates": 0,
+      "privateScalarHex": "370f50ac07bb49782496345d2e5c86bc6e0e33f8b705253f72413099",
+      "publicXHex": "3b0d29d4ac020375bcad399b9870b66da5272aea74c4729654db77a4",
+      "publicYHex": "f7c0e0c1cdd9ebe485bbeaafa682f486818a8839edda24b48609d39d"
+    },
+    {
+      "name": "be-slot",
+      "secretHex": "000102030405060708090a0b0c0d0e0f",
+      "slot": "72623859790382856",
+      "rejectedCandidates": 0,
+      "privateScalarHex": "8277a728cb09da310168de0012d2b5c30d8b3c017c898aad9cf21c23",
+      "publicXHex": "43c9372f437601ed8131dd8a30075b35d6eb9713efde00f61ca9a8df",
+      "publicYHex": "7b56c7dfae356fa6ddef63c7c7cebec0d15df74e40fdc23b98ad7424"
+    },
+    {
+      "name": "uint64-max-slot",
+      "secretHex": "ffffffffffffffffffffffffffffffff",
+      "slot": "18446744073709551615",
+      "rejectedCandidates": 0,
+      "privateScalarHex": "059b090a42037f21accfeb24d0c75b292fb6e75d6145e6eb3246e951",
+      "publicXHex": "ba5470230169c24dd746a8e155f0d7c8654c6d2320375b0a7d981787",
+      "publicYHex": "2a1b625b81ff7d98861ce6e860575a47295dffd3e03e50f63891505c"
+    },
+    {
+      "name": "leading-zero-scalar",
+      "secretHex": "00112233445566778899aabbccddeeff",
+      "slot": "264",
+      "rejectedCandidates": 0,
+      "privateScalarHex": "0091d7d5ef8f5a34fb27bf80805a2a30cab9f1123e6a6a068e6357eb",
+      "publicXHex": "beb5e96deb258779b4fd783d55a90e47acc46d0ced47df5bad7abb18",
+      "publicYHex": "337fb4c0379b20205ded1b5f9f8a51ebbe3abf3f5d3bee7495968f7a"
+    }
+  ]
+}

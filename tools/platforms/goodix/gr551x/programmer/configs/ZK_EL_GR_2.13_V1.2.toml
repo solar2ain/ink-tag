@@ -1,0 +1,33 @@
+format_version = 1
+board_marking = "ZK_EL_GR_2.13_V1.2"
+
+[screen]
+ic = "SSD1680"
+recipe = 1
+color = "BWR"
+rotation = 90
+mirror_x = false
+mirror_y = true
+native_ui_scale = 0
+width = 128
+height = 250
+visible_x = 0
+visible_y = 0
+visible_width = 122
+visible_height = 250
+
+[gpio.display]
+mosi = "GPIO4"
+clock = "GPIO3"
+cs = "GPIO2"
+dc = "GPIO5"
+reset = "GPIO7"
+busy = "GPIO6"
+enable = "GPIO24"
+enable_active_low = false
+
+[gpio.led]
+red = "MSIO0"
+green = "MSIO1"
+blue = "GPIO31"
+active_low = ["red", "green", "blue"]

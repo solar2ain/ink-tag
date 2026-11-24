@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "profileMacro": "INKTAG_BUILD_PRO",
+  "profiles": {
+    "base": {
+      "INKTAG_BUILD_PRO": 0,
+      "INKTAG_PROTOCOL_BASE_ONLY_TARGET": 1
+    }
+  },
+  "overrides": [
+    {
+      "logicalPath": "firmware/common/security/inktag_activation.c",
+      "base": "firmware/common/security/inktag_activation.c"
+    },
+    {
+      "logicalPath": "firmware/common/security/inktag_activation_product_key.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/ble/inktag_findmy.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/ble/inktag_findmy_public.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/ble/inktag_findmy_keyring.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/ble/inktag_findmy_owner.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/ble/inktag_findmy_p224.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/storage/inktag_findmy_public_store.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/storage/inktag_findmy_keyring_store.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_nfc_fmsc.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_nfc_fmsc.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_gt_stream.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_gt_stream.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_gt_pipe.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_gt_pipe.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/epd/inktag_epd_e6.inc",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/epd/inktag_epd_clock_flow.inc",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/epd/inktag_epd_partial_lut.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/epd/inktag_epd_partial_lut_data.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/epd/inktag_uc8276_clock.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/epd/inktag_ssd1683_clock.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/epd/inktag_ssd1619_clock.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/epd/inktag_epd_clock_deadline.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_gt_mirror.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_gt_mirror.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_ndef.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_ndef.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_nfc_binding.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_nfc_binding.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_nfc_command.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_nfc_command.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_nfc_link.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_nfc_link.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_nfc_volatile_command.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_nfc_volatile_command.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_type4_ndef.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_type4_ndef.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_type2_uri_store.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_type2_uri_store.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_type4_apdu.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_type4_apdu.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_type4_transport.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_type4_transport.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/security/inktag_owner_auth.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/security/inktag_owner_auth.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/epd/inktag_epd_jd.c",
+      "base": "firmware/common/epd/inktag_epd_jd.c"
+    },
+    {
+      "logicalPath": "firmware/common/security/inktag_device_password.c",
+      "base": "firmware/common/security/inktag_device_password.c"
+    },
+    {
+      "logicalPath": "firmware/common/security/inktag_device_password_store.c",
+      "base": "firmware/common/security/inktag_device_password_store.c"
+    },
+    {
+      "logicalPath": "firmware/common/security/inktag_access.c",
+      "base": "firmware/common/security/inktag_access.c"
+    },
+    {
+      "logicalPath": "firmware/common/security/inktag_code_guard.c",
+      "base": "firmware/common/security/inktag_code_guard.c"
+    },
+    {
+      "logicalPath": "firmware/common/security/inktag_code_guard.h",
+      "base": "firmware/common/security/inktag_code_guard.h"
+    },
+    {
+      "logicalPath": "firmware/common/security/inktag_brand_overlay.c",
+      "base": "firmware/common/security/inktag_brand_overlay.c"
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_input.c",
+      "base": "firmware/common/input/inktag_input.c"
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_input_simulation.c",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_input_simulation.h",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/gui/inktag_gui_edition_badge.inc",
+      "base": "firmware/common/gui/inktag_gui_edition_badge.inc"
+    },
+    {
+      "logicalPath": "firmware/common/gui/inktag_gui_edition_name.inc",
+      "base": "firmware/common/gui/inktag_gui_edition_name.inc"
+    },
+    {
+      "logicalPath": "firmware/common/storage/inktag_image_fixed_stream_pro.inc",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_nfc_fmsc_c_base_pro.inc",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_nfc_fmsc_c_r16_pro.inc",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_nfc_fmsc_h_base_pro.inc",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_nfc_fmsc_h_r16_pro.inc",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_type4_apdu_c_base_pro.inc",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_type4_apdu_c_r16_pro.inc",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_type4_apdu_h_base_pro.inc",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_type4_apdu_h_r16_pro.inc",
+      "base": null
+    },
+    {
+      "logicalPath": "firmware/common/input/inktag_nfc_r16_profile.h",
+      "base": null
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../index.html">InkTag WebUI</a></nav><main><h1 id="low-power-and-battery-life">Low power and battery life</h1>
+<p><a target="_blank" rel="noopener noreferrer" href="../zh-CN/power.html">简体中文</a></p>
+<p>An e-paper panel retains its image between refreshes. For calendars and photo displays that rarely refresh, sleep and Bluetooth advertising account for most of the power use. Bluetooth connections, image transfers and frequent refreshes shorten battery life.</p>
+<h2 id="current-measurements-and-estimates">Current measurements and estimates</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Operating state</th>
+<th>Reference current</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sleep between advertising events</td>
+<td>About 2–3 µA on most measured boards, excluding advertising pulses</td>
+</tr>
+<tr>
+<td>One ordinary BLE advertisement per second</td>
+<td>About 30–40 µA average on most low-power boards, including advertising pulses while disconnected</td>
+</tr>
+<tr>
+<td>Find My advertising also enabled</td>
+<td>Estimated additional average of about 15–20 µA</td>
+</tr>
+<tr>
+<td>Clock with a partial refresh every minute</td>
+<td>About 5–10 mA for 2–3 seconds per refresh. Estimate the average from the time spent refreshing and idle</td>
+</tr>
+</tbody>
+</table></div>
+<p>Selected measurements from a calendar or idle state are shown below. The board, panel and firmware can affect the result.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Measured example</th>
+<th>Current</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Goodix GR5513 / GR5515</td>
+<td>About 3 µA between advertisements and about 35 / 37 µA average with ordinary BLE advertising</td>
+</tr>
+<tr>
+<td>OnMicro OM6626 (ZKC42B)</td>
+<td>About 3 µA between advertisements and about 31 µA average with ordinary BLE advertising</td>
+</tr>
+<tr>
+<td>Telink TLSR8359 with a JD79665AA panel</td>
+<td>About 3 µA with ordinary BLE advertising off and about 30 µA average with it on</td>
+</tr>
+</tbody>
+</table></div>
+<p>Use the reference ranges for boards without recorded figures. For a device that only supports ordinary advertising, use the corresponding ordinary BLE row. On PRO devices with delayed advertising shutoff, Find My can continue after ordinary advertising stops.</p>
+<h2 id="calendar-and-clock-battery-life">Calendar and clock battery life</h2>
+<p>These examples assume <strong>200 mAh</strong> or <strong>500 mAh</strong> of usable capacity within the device's operating voltage range. The calendar refreshes once per day. An illustrative refresh at <strong>10 mA for 15 seconds</strong> uses about <strong>0.042 mAh</strong> per day, equivalent to about <strong>1.7 µA</strong> averaged over the day. The calendar estimates include that refresh. Use your panel's measurements for a more representative estimate.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Usage</th>
+<th align="right">Estimated device average</th>
+<th align="right">200 mAh</th>
+<th align="right">500 mAh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calendar, both kinds of advertising off</td>
+<td align="right">3.7–4.7 µA</td>
+<td align="right">About 4.8–6.1 years</td>
+<td align="right">About 12–15 years</td>
+</tr>
+<tr>
+<td>Calendar, Find My advertising only</td>
+<td align="right">18.7–24.7 µA</td>
+<td align="right">About 11–15 months</td>
+<td align="right">About 2.3–3.0 years</td>
+</tr>
+<tr>
+<td>Calendar, ordinary BLE advertising once per second</td>
+<td align="right">31.7–41.7 µA</td>
+<td align="right">About 6.6–8.6 months</td>
+<td align="right">About 16–22 months</td>
+</tr>
+<tr>
+<td>Calendar, ordinary BLE every second plus Find My</td>
+<td align="right">46.7–61.7 µA</td>
+<td align="right">About 4.4–5.9 months</td>
+<td align="right">About 11–15 months</td>
+</tr>
+<tr>
+<td>Clock, partial refresh every minute, ordinary Bluetooth advertising on</td>
+<td align="right">About 196–538 µA</td>
+<td align="right">About 15–43 days</td>
+<td align="right">About 39–106 days</td>
+</tr>
+</tbody>
+</table></div>
+<p>The multi-year figures are theoretical upper bounds based on capacity and current. Self-discharge, temperature, the cutoff voltage and voltage sag during refresh can reduce actual runtime. Each minute includes 2–3 seconds of refreshing at 5–10 mA and 57–58 seconds of ordinary Bluetooth advertising at 30–40 µA on average. Calculate <code>(refresh current × refresh seconds + average idle current × remaining seconds) ÷ 60</code> to get about 196–538 µA. Include the energy used by any periodic full refreshes separately.</p>
+<p>Calculate <code>runtime (days) = usable capacity (mAh) × 1000 ÷ average current (µA) ÷ 24</code>. When measuring standby and refresh separately, use <code>daily charge (mAh) = average standby current (mA) × 24 + extra charge per refresh (mAh) × refreshes per day</code>. To measure the advertising average, disconnect Bluetooth and the debugger, let the screen finish refreshing and sample across multiple advertising intervals.</p></main></body></html>

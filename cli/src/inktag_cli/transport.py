@@ -25,6 +25,7 @@ from .generated_commands_v2 import (
     DisplayActionV2,
     DisplayModeV2,
     EventV2,
+    FindActionV2,
     PROTOCOL_V2_VERSION,
     RequestFlagV2,
     NfcCapabilityV2,
@@ -741,15 +742,16 @@ class InkTagClient(DevicePasswordSession):
 
     async def get_aux_configuration(self) -> dict[str, Any]:
         if not self.supports_capability(CapabilityV2.IO | CapabilityV2.PIN_CONFIG):
-            raise InkTagError("Firmware does not advertise readable button/buzzer IO configuration")
+            raise InkTagError("Firmware does not advertise readable button IO configuration")
         payload = await self.request_v2(CommandV2.GET_IO_CONFIG, b'\x03')
         return decode_aux_configuration(payload)
 
     async def set_aux_configuration(self, config: dict) -> dict[str, Any]:
         if not self.supports_capability(CapabilityV2.IO):
-            raise InkTagError("Firmware does not advertise writable button/buzzer IO configuration")
+            raise InkTagError("Firmware does not advertise writable button IO configuration")
         payload = encode_aux_configuration(config)
         current = await self.get_aux_configuration()
+        payload = encode_aux_configuration(dict(config, reserved=current["reserved"]))
         if current['version'] != config['version']:
             raise ValueError('IO version changed; read io status before writing')
         if self.supports_capability(CapabilityV2.PIN_CONFIG):
@@ -1563,6 +1565,9 @@ class InkTagClient(DevicePasswordSession):
         if (status["config"]["identityPresent"] and
                 not capabilities.get("publicOnlyOwnerReplacement")):
             raise InkTagError("Device does not support authenticated Find v2 owner replacement")
+        return await self._begin_find_owner_challenge()
+
+    async def _begin_find_owner_challenge(self) -> bytes:
         payload = await self.request_v2(
             CommandV2.BEGIN_FIND_OWNER_ROTATION,
             flags=RequestFlagV2.CONFIRM,
@@ -1570,6 +1575,48 @@ class InkTagClient(DevicePasswordSession):
         if payload[:1] != bytes((PUBLIC_ONLY_OWNER_VERSION,)):
             raise InkTagError("Device returned a non-current Find owner challenge")
         return decode_owner_rotation_challenge(payload)
+
+    async def unregister_find_owner(
+        self, prove: Callable[[str, bytes, str], Awaitable[bytes]],
+    ) -> dict[str, Any]:
+        status = await self.find_status()
+        capabilities = status["capabilities"]
+        if not (capabilities.get("publicOnlyP224") and capabilities.get("publicOnlyOwnerUnregister")):
+            raise InkTagError("Device firmware does not support Find owner unregister")
+        owner, config = status["owner"], status["config"]
+        if not owner["identityPresent"]:
+            if config["identityPresent"] or config["enabled"]:
+                raise InkTagError("Device Find configuration does not confirm an empty, disabled identity")
+            return {"alreadyUnregistered": True, "config": config}
+
+        fingerprint = owner["fingerprintHex"].lower()
+        activation_id = self.snapshot.activation.activation_id.strip().upper()
+        if not re.fullmatch(r"(?!0{32}$)[0-9a-f]{32}", fingerprint):
+            raise InkTagError("Device did not provide a valid Find owner fingerprint")
+        if not re.fullmatch(r"(?!0{16}$)[0-9A-F]{16}", activation_id):
+            raise InkTagError("Find owner unregister requires a stable activation identity")
+        nonce = await self._begin_find_owner_challenge()
+        try:
+            proof = await prove(fingerprint, nonce, f"activation:{activation_id}")
+            header = bytes((FindActionV2.UNREGISTER_OWNER,)) + nonce + bytes.fromhex(fingerprint)
+            if len(proof) != len(header) + 16 or not proof.startswith(header):
+                raise InkTagError("Local Find proof does not match this device owner and challenge")
+            reply = await self.request_v2(
+                CommandV2.FIND_ACTION, proof, flags=RequestFlagV2.CONFIRM, timeout=20.0,
+            )
+            if reply:
+                raise InkTagError("Device did not confirm Find owner unregister")
+            status = await self.find_status()
+            config = status["config"]
+            if status["owner"]["identityPresent"] or config["identityPresent"] or config["enabled"]:
+                raise InkTagError("Device still reports a Find identity or enabled broadcasts")
+            return {"alreadyUnregistered": False, "config": config}
+        except BaseException:
+            try:
+                await self.abort_find_owner_rotation()
+            except Exception:
+                pass
+            raise
 
     async def find_owner_status(self) -> dict[str, object]:
         status = await self.find_status()
@@ -2090,6 +2137,31 @@ class InkTagClient(DevicePasswordSession):
             raise InkTagError("Device returned an out-of-range clock compensation")
         return {"ppm": ppm, "persistence": "volatile", "resetDefaultPpm": default_ppm}
 
+    @staticmethod
+    def _decode_advertising_config(response: bytes) -> dict[str, int | str]:
+        if len(response) != 4 or response[0] != 1 or response[1] > 1:
+            raise InkTagError("Device returned an invalid advertising configuration")
+        seconds = struct.unpack_from("<H", response, 2)[0]
+        if not seconds:
+            raise InkTagError("Device returned an invalid advertising timeout")
+        return {"mode": "delayed" if response[1] else "always", "timeoutSeconds": seconds}
+
+    async def get_advertising_config(self) -> dict[str, int | str]:
+        return self._decode_advertising_config(await self.request_v2(CommandV2.GET_ADVERTISING_CONFIG))
+
+    async def set_advertising_config(self, mode: str, timeout_seconds: int = 120) -> dict[str, int | str]:
+        if mode not in ("always", "delayed") or type(timeout_seconds) is not int or not 1 <= timeout_seconds <= 65535:
+            raise InkTagError("Advertising mode must be always/delayed and timeout an integer from 1 to 65535 seconds")
+        payload = struct.pack("<BBH", 1, int(mode == "delayed"), timeout_seconds)
+        echo = await self.request_v2(CommandV2.SET_ADVERTISING_CONFIG, payload)
+        acknowledged = self._decode_advertising_config(echo)
+        if echo != payload:
+            raise InkTagError("Advertising acknowledgement mismatch; read state before retrying")
+        effective = await self.get_advertising_config()
+        if effective != acknowledged:
+            raise InkTagError("Advertising readback mismatch; read state before retrying")
+        return effective
+
     async def get_clock_rate(self) -> dict[str, int | str]:
         response = await self.request_v2(
             CommandV2.GET_SETTINGS, bytes([SettingsSectionV2.CLOCK_RATE]),
@@ -2455,7 +2527,7 @@ class InkTagClient(DevicePasswordSession):
 
 
     async def get_gui_asset_info(self) -> dict[str, int | None]:
-        # Fixed Free resources can report their manifest without supporting
+        # Fixed base resources can report their manifest without supporting
         # updates. The device's read-only response (or refusal) is authoritative.
         return decode_font_info(
             await self.request_v2(CommandV2.GET_GUI_ASSET_INFO)
@@ -2553,9 +2625,6 @@ class InkTagClient(DevicePasswordSession):
                     info = replace(info, occupied_ids=occupied)
                 return constrain_image_store_for_client(
                     info, items, self.snapshot.activation, self.snapshot.screen,
-                    tiered_capacity=bool(
-                        self._v2_capabilities & int(CapabilityV2.ACTIVATION)
-                    ),
                 )
             oriented = self.supports_capability_extension(CapabilityExtensionV2.IMAGE_READING_ORIENTATION)
             if len(payload) < 19 or payload[0] != 0 or len(payload) != 19 + payload[6] + int(oriented):
@@ -3041,20 +3110,8 @@ class InkTagClient(DevicePasswordSession):
         return struct.unpack_from("<H", payload, 0)[0]
 
 
-    async def test_buzzer(self, duration_ms: int) -> str:
-        duration = max(20, min(5000, int(duration_ms)))
-        await self.refresh_snapshot()
-        if not self.snapshot.settings_capabilities.custom_buzzer_gpio:
-            raise InkTagError("Firmware does not advertise buzzer configuration")
-        await self._require_v2_test(TestOperationV2.BUZZER)
-        await self.request_v2(
-            CommandV2.RUN_TEST,
-            bytes((int(TestOperationV2.BUZZER),)) + struct.pack("<H", duration),
-        )
-        return "buzzer:started"
-
     async def locate_device(self, *, start: bool = True) -> str:
-        """Run the bounded local LED/buzzer locator without changing Find state."""
+        """Run the bounded local LED locator without changing Find state."""
         await self._require_v2_test(TestOperationV2.DEVICE_LOCATE)
         await self.request_v2(
             CommandV2.RUN_TEST,

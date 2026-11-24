@@ -1,0 +1,8 @@
+ENTRY(inktag_tlsr_native_load)
+SECTIONS {
+  . = 0xf000;
+  .text : { KEEP(*(.native_entry)) *(.text*) *(.rodata*) }
+  ASSERT(. <= 0xf200,"native loader overlaps temporary instruction-cache tag")
+  .unexpected : { *(.data*) *(.bss*) *(COMMON) }
+  ASSERT(SIZEOF(.unexpected)==0,"native loader needs unexpected mutable data")
+}

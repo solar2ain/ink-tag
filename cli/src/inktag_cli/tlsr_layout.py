@@ -1,6 +1,7 @@
 """App-only OTA context; Full partition validation belongs to the Full tools."""
 
 import struct
+import zlib
 
 TLSR_APP_LIMIT = 0x3F000
 TLSR_LAYOUT = "layout-v1"
@@ -25,7 +26,8 @@ def tlsr_boot_binding(start: int) -> bytes:
 
 
 def tlsr_package_profile(layout: str, image: bytes) -> dict:
-    if signed_tlsr_context(image)[2] != TLSR_LAYOUT_SIGNATURE:
+    unsigned = unsigned_tlsr_image(image)
+    if native_tlsr_context(image)[2] != TLSR_LAYOUT_SIGNATURE:
         raise ValueError('Telink publisher signature metadata has an unsupported layout marker; no reinterpretation')
     at=TLSR_BOOT_BINDING_OFFSET
     if image[at:at+4] == b'IAB1':
@@ -33,6 +35,8 @@ def tlsr_package_profile(layout: str, image: bytes) -> dict:
         if at+20 > body_end or image[at:at+20] != tlsr_boot_binding(0x1000):
             raise ValueError('Invalid signed TLSR App address binding')
         return tlsr_layout_profile(layout, application_start=0x1000)
+    if unsigned:
+        raise ValueError('Unsigned Telink App requires its native entry-address binding')
     # Historical signed zero-linked images have no such body record. This
     # never authorizes relocating them, and a new receiver proves 0x1000.
     return tlsr_layout_profile(layout)
@@ -60,11 +64,27 @@ def signed_tlsr_context(image: bytes) -> tuple[int, int, int]:
     return struct.unpack_from("<III", image, app_size + 12)  # epoch, board, layout
 
 
+def unsigned_tlsr_image(image: bytes) -> bool:
+    return len(image) >= 36 and int.from_bytes(image[24:28], 'little') + 4 == len(image)
+
+
+def native_tlsr_context(image: bytes) -> tuple[int, int, int]:
+    if not unsigned_tlsr_image(image):
+        return signed_tlsr_context(image)
+    body_bytes = len(image)-4
+    if (image[8:12] != b'KNLT' or len(image) > TLSR_APP_LIMIT or
+            int.from_bytes(image[-4:], 'big') != zlib.crc32(image[:body_bytes])):
+        raise ValueError('Unsigned Telink native length/marker/CRC mismatch')
+    # The only supported native family/layout; live ITC1 and entry proof must
+    # still match before write, along with a separate exact CRC-only policy.
+    return 1, 0x53484c54, TLSR_LAYOUT_SIGNATURE
+
+
 def validate_tlsr_recovery_context(raw: bytes, image: bytes) -> None:
     if len(raw) != 20 or raw[:4] != b"ITC1":
         raise ValueError("Telink Recovery compatibility response is invalid")
     limit, epoch, layout, board = struct.unpack_from("<IIII", raw, 4)
     if (limit != TLSR_APP_LIMIT or layout != TLSR_LAYOUT_SIGNATURE
             or len(image) > limit or epoch > 0xFFFF
-            or (epoch, board, layout) != signed_tlsr_context(image)):
+            or (epoch, board, layout) != native_tlsr_context(image)):
         raise ValueError("Telink Recovery is incompatible with the signed image; Full is required")

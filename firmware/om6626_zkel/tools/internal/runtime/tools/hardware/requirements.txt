@@ -1,2 +1,0 @@
-# Host Full configuration parsing only; MCU firmware has no YAML dependency.
-PyYAML>=6.0.2,<7

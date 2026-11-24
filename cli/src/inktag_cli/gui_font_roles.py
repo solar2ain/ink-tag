@@ -43,6 +43,9 @@ def native_font_default_sizes(screen: dict[str, Any]) -> dict[str, Any]:
 
 
 def decode_font_info(payload: bytes) -> dict[str, Any]:
+    # nRF52811 reports a fixed factory resource with no user font bank.
+    if payload == struct.pack('<BBBBIIII', FONT_INFO_VERSION, 1, 255, 0, 0, 0, 16384, 0):
+        return {'supported': False}
     if len(payload) != 24 or payload[0] != FONT_INFO_VERSION:
         raise ValueError('native fonts require a 24-byte INFO v1 response')
     generation, size, maximum, crc = struct.unpack_from('<IIII', payload, 4)
@@ -56,7 +59,7 @@ def decode_font_info(payload: bytes) -> dict[str, Any]:
 
 def font_info_limit(info: dict[str, Any]) -> int:
     contract = (info.get('supportedSchemas'), info.get('roleVersion'), info.get('flags'))
-    if (info['version'] != FONT_INFO_VERSION or contract != (FONT_SCHEMA_MASK, FONT_ROLE_VERSION, FONT_FLAGS) or info['schema'] not in (0, FONT_VERSION) or info.get('storageMode') != 1 or
+    if (info.get('version') != FONT_INFO_VERSION or contract != (FONT_SCHEMA_MASK, FONT_ROLE_VERSION, FONT_FLAGS) or info['schema'] not in (0, FONT_VERSION) or info.get('storageMode') != 1 or
             type(info['maximumBytes']) is not int or not 88 <= info['maximumBytes'] <= 32768):
         raise ValueError('unsupported four-role font contract')
     if info['activeBank'] is None:

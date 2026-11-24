@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 3,
+  "channel": "stable",
+  "candidateOnly": false,
+  "releaseReady": true,
+  "components": {
+    "webui": null,
+    "cli": null,
+    "localServer": null
+  },
+  "firmwareSelection": {
+    "published": true
+  },
+  "firmware": [
+    {
+      "version": "0.2.0.10",
+      "releaseVersion": 210,
+      "buildId": "test-firmware-10",
+      "buildNumber": 10,
+      "candidateOnly": false,
+      "releaseReady": true,
+      "published": true,
+      "target": {
+        "boardId": 4,
+        "family": "gr5331_zkel",
+        "protocolVersion": 16,
+        "layout": "layout-v1",
+        "compatibilityEpoch": 1
+      },
+      "artifacts": [
+        {
+          "type": "ota",
+          "name": "InkTag-test-ota-v0.2.0.10.zip",
+          "bytes": 3,
+          "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.1/InkTag-test-ota-v0.2.0.10.zip"
+        },
+        {
+          "type": "full",
+          "name": "InkTag-test-full-v0.2.0.10.zip",
+          "bytes": 3,
+          "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+          "downloadUrl": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.1/InkTag-test-full-v0.2.0.10.zip"
+        }
+      ],
+      "releaseTag": "v0.2.1",
+      "channel": "stable"
+    }
+  ]
+}

@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 import argparse
+import os
 import shlex
 import subprocess
 import tempfile
 import sys
+import threading
+import time
+import tomllib
 from pathlib import Path
 
 
@@ -15,6 +19,38 @@ ROOT = next((parent for parent in (HERE, *HERE.parents)
              if (parent / "cli/src/inktag_cli/local_server.py").is_file()), HERE)
 sys.path.insert(0, str(ROOT / "cli/src"))
 from inktag_cli.local_server import default_data_directory
+
+
+def run_install_step(command, label: str, hint: str, *, wait_seconds: float = 15) -> None:
+    """Keep inherited subprocess output visible and report prolonged waits."""
+    print(f"{label}... {hint}", flush=True)
+    started = time.monotonic()
+    finished = threading.Event()
+
+    def report_wait():
+        while not finished.wait(wait_seconds):
+            elapsed = int(time.monotonic() - started)
+            print(f"{label}: still running ({elapsed}s). Downloads or network retries may take time; "
+                  "press Ctrl+C to cancel this installation step.", flush=True)
+
+    reporter = threading.Thread(target=report_wait, daemon=True)
+    reporter.start()
+    # The pip self-update check is unrelated to installing InkTag and may fail
+    # after a successful install. Apply this only to our child processes.
+    environment = {**os.environ, "PIP_DISABLE_PIP_VERSION_CHECK": "1"}
+    try:
+        subprocess.run(command, check=True, env=environment)
+    except subprocess.CalledProcessError:
+        print(f"{label} failed. See the error above; later steps were not started.", flush=True)
+        raise
+    except KeyboardInterrupt:
+        print(f"{label} cancelled. Existing InkTag data was not cleared.", flush=True)
+        raise
+    else:
+        print(f"{label} completed ({time.monotonic() - started:.1f}s).", flush=True)
+    finally:
+        finished.set()
+        reporter.join()
 
 
 def check_data_directory(data: Path) -> None:
@@ -68,7 +104,18 @@ def main(argv=None) -> int:
         print("Installing CLI dependencies into cli/.venv (system Python is unchanged).", flush=True)
         if not cli_python.is_file():
             subprocess.run([sys.executable, "-m", "venv", str(cli_root / ".venv")], check=True)
-        subprocess.run([str(cli_python), "-m", "pip", "install", str(cli_root)], check=True)
+        with (cli_root / "pyproject.toml").open("rb") as metadata_file:
+            build_requirements = tomllib.load(metadata_file)["build-system"]["requires"]
+        run_install_step(
+            [str(cli_python), "-m", "pip", "install", "--verbose", *build_requirements, "wheel"],
+            "Preparing CLI build tools",
+            "Existing compatible tools are reused; any downloads use your configured package index.",
+        )
+        run_install_step(
+            [str(cli_python), "-m", "pip", "install", "--verbose", "--no-build-isolation", str(cli_root)],
+            "Installing CLI",
+            "Using the prepared build tools; runtime dependency download details follow.",
+        )
     find_data = data / "find"
     command = [str(cli_python), str(ROOT / "tools/findmy/bootstrap.py"),
                "--data-dir", str(find_data), "--runtime-dir", str(find_data / "runtime"),
@@ -82,7 +129,8 @@ def main(argv=None) -> int:
         print("If access is denied, use an administrator account with access to your InkTag folder and choose Run as administrator in PowerShell. Normal use of your own writable data folder does not require elevation.", flush=True)
     elif sys.platform == "darwin":
         print("macOS uses system AOSKit; 7-Zip and the Windows Apple image are not required.", flush=True)
-    subprocess.run(command, check=True)
+    run_install_step(command, "Preparing Find dependencies",
+                     "First setup may download files; existing installations are checked first.")
     print(f"Ready. Persistent data: {data}", flush=True)
     if args.prepare_only:
         return 0
@@ -107,5 +155,7 @@ def main(argv=None) -> int:
 if __name__ == "__main__":
     try:
         raise SystemExit(main())
+    except KeyboardInterrupt:
+        raise SystemExit(130)
     except (OSError, RuntimeError, subprocess.CalledProcessError) as error:
         raise SystemExit(f"InkTag setup failed ({type(error).__name__}): {error}. Check the step above; existing data was not cleared.")

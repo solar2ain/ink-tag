@@ -1,43 +1,203 @@
-InkTag WebUI：第三方组件与许可 / Third-party components and licenses
+InkTag WebUI third-party notices
 
-WebUI 使用下列第三方组件，原有版权及许可继续有效。InkTag 的项目许可不改变这些第三方组件的许可。
-WebUI uses the components below. Their original copyrights and licenses remain in effect. InkTag project terms do not relicense these components.
+This distribution includes open-source JavaScript libraries. Their source and
+license texts are available from the projects below and from the package lock
+in the InkTag source repository.
 
-React / React DOM 19.2.8 — MIT
-License: licenses/react-19.2.8-LICENSE.txt; licenses/react-dom-19.2.8-LICENSE.txt
-https://github.com/facebook/react
-
-React Router 7.18.2 — MIT
-License: licenses/react-router-7.18.2-LICENSE.txt
-https://github.com/remix-run/react-router
-
-Dexie 4.4.5 — Apache-2.0
-License: licenses/dexie-4.4.5-LICENSE.txt
-NOTICE: licenses/dexie-4.4.5-NOTICE.txt
-https://github.com/dexie/Dexie.js
-
-Leafer UI 2.2.10 — MIT
-License: licenses/leafer-ui-2.2.10-LICENSE.txt
-https://github.com/leaferjs/leafer-ui
-
-RgbQuant.js — MIT
-License: licenses/RgbQuant-MIT.txt
-https://github.com/leeoniya/RgbQuant.js
-
-epdoptimize — Apache-2.0
-License: licenses/epdoptimize-Apache-2.0.txt
+epdoptimize 1.3.0 - Apache License 2.0
 https://github.com/paperlesspaper/epdoptimize
 
-Lucide / Feather-derived icons — ISC / MIT
-License: licenses/Lucide-LICENSE.txt
+RgbQuant.js 1.1.2 - MIT License
+https://github.com/leeoniya/RgbQuant.js
+
+React and React DOM - MIT License
+https://github.com/facebook/react
+
+Dexie.js - Apache License 2.0
+https://github.com/dexie/Dexie.js
+
+Lucide - ISC License
 https://github.com/lucide-icons/lucide
 
-Ma Shan Zheng 字体 / font — SIL Open Font License 1.1
-License: licenses/MaShanZheng-OFL.txt
-Copyright 2018 The Ma Shan Zheng Project Authors
-https://github.com/google/fonts/tree/main/ofl/mashanzheng
 
-部分插件、字体和图片的许可信息尚未齐备；当前文件暂不作为正式公开发行包提供。InkTag 自有 WebUI 的使用和再分发条款见许可说明；第三方许可授予的权利不受此说明限制。
-License information for some plugins, fonts and images is not yet complete, and the current files are not yet offered as a formal public release. See the licensing notice for InkTag-owned WebUI use and redistribution terms. Third-party license grants remain unaffected.
+Find portable-identity cryptography: @noble/curves 2.0.1 and @noble/hashes 2.0.1
+https://github.com/paulmillr/noble-curves
+https://github.com/paulmillr/noble-hashes
 
-许可说明 / Licensing: licenses/LICENSING.txt
+@noble/curves 2.0.1 — MIT
+The MIT License (MIT)
+
+Copyright (c) 2022 Paul Miller (https://paulmillr.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+@noble/hashes 2.0.1 — MIT
+The MIT License (MIT)
+
+Copyright (c) 2022 Paul Miller (https://paulmillr.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+Lunar calendar year records: Lunar-Solar-Calendar-Converter
+https://github.com/isee15/Lunar-Solar-Calendar-Converter/tree/55d4e547947594736f7c9e4a35521ecc1c7342d8
+
+MIT License
+
+Copyright (c) 2020 isee15
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Solar-term dates: independently generated offline from pinned JPL DE440s / Skyfield 1.53 inputs, UTC+08:00. Astronomy packages are generation tools, not browser runtime dependencies.
+Source: https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/ ; https://rhodesmill.org/skyfield/almanac.html#solar-terms
+Built-in bitmap fonts: u8g2_font_wqy9_t_lunar, u8g2_font_wqy12_t_lunar, u8g2_font_helvB14_tn, u8g2_font_helvB18_tn. Font copyrights and terms remain unchanged and separate from the renderer. See licenses/U8g2-LICENSE.txt, licenses/WenQuanYi-Bitmap-Song-NOTICE.txt and their accompanying license texts.
+
+WebUI creation fonts / 创作画布字体
+
+- Muzai Pixel, DWNfonts and Num Kadoma — SIL OFL 1.1.
+  https://github.com/DWNfonts/MuzaiPixel/tree/59e79de047d344c7675944424e56bb9a1ab5503c
+- Z Labs Pixel 12px CN, Astro_2539 — SIL OFL 1.1.
+  https://github.com/Astro-2539/ZLabs-Pixel-12px/releases/tag/Build_20260519
+- Fusion Pixel Font, TakWolf and upstream contributors — SIL OFL 1.1.
+  The Simplified Chinese proportional BDF strikes are from release 2026.11.10.
+  https://github.com/TakWolf/fusion-pixel-font/releases/tag/2026.11.10
+- Chill Bitmap 7x, Warren2060 and upstream contributors — see the project OFL and
+  the exact 7x archive's license and upstream attributions in the bundled notices.
+  https://github.com/Warren2060/ChillBitmap/tree/f9e3b2f988a2c4107f866aa43c3d61a2b27254d5
+- WenQuanYi Bitmap Song, Copyright 2004–2007 WenQuanYi's Board of Trustees and
+  Qianqian Fang — GPL version 2 with the upstream font embedding exception.
+  The unmodified BDF source and license are in assets/wenquanyi-bitmap-song-source.tar.gz.
+  The bitmap packing script is in assets/generate-creation-fonts.py.
+  https://sources.debian.org/copyright/license/xfonts-wqy/1.0.0~rc1-8/
+
+The full OFL and related notices are in assets/creation-font-licenses.txt.
+The editor bundles the two default fonts, Fusion and Z Labs.
+The other font assets load on demand. Glyph data retains its upstream terms.
+
+qrcode 1.5.4 - MIT License
+
+The MIT License (MIT)
+
+Copyright (c) 2012 Ryan Day
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+zustand 5.0.15 - MIT License
+
+MIT License
+
+Copyright (c) 2019 Paul Henschel
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+dijkstrajs 1.0.3 - MIT License
+
+```
+Dijkstra path-finding functions. Adapted from the Dijkstar Python project.
+
+Copyright (C) 2008
+  Wyatt Baldwin <self@wyattbaldwin.com>
+  All rights reserved
+
+Licensed under the MIT license.
+
+  http://www.opensource.org/licenses/mit-license.php
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```
+
+scheduler 0.27.0 - MIT License
+
+MIT License
+
+Copyright (c) Meta Platforms, Inc. and affiliates.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

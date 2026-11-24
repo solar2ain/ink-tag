@@ -1,0 +1,131 @@
+// @vitest-environment jsdom
+import { act } from 'react'
+import { createRoot, type Root } from 'react-dom/client'
+import { beforeEach, afterEach, expect, it, vi } from 'vitest'
+import { AdvertisingSettings } from './AdvertisingSettings'
+import { useDeviceStore } from '../store/device'
+import { setPreferences } from '../preferences'
+const client = vi.hoisted(() => ({ getAdvertisingConfig: vi.fn(), setAdvertisingConfig: vi.fn() }))
+vi.mock('../protocol/client', () => ({ inktagClient: client }))
+let host: HTMLDivElement, root: Root
+beforeEach(() => {
+  setPreferences({ language: 'zh-CN' })
+  vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true)
+  client.getAdvertisingConfig.mockReset().mockResolvedValue({ mode: 'delayed', timeoutSeconds: 120 })
+  client.setAdvertisingConfig.mockReset().mockResolvedValue({ mode: 'delayed', timeoutSeconds: 120 })
+  useDeviceStore.getState().resetDevice()
+  useDeviceStore.setState({ connection: 'connected', deviceId: 'fake-advertising', activation: { phase: 'active', edition: 'advanced' } })
+  host = document.createElement('div'); document.body.append(host); root = createRoot(host)
+})
+afterEach(async () => { await act(async () => root.unmount()); host.remove(); useDeviceStore.getState().resetDevice(); setPreferences({ language: 'zh-CN' }); vi.unstubAllGlobals() })
+const render = (wakeAvailable = true) => act(async () => root.render(<AdvertisingSettings wakeAvailable={wakeAvailable} />))
+const save = () => host.querySelector<HTMLButtonElement>('.behavior-section-heading button')!
+const delay = () => host.querySelector<HTMLInputElement>('input[type=number]')!
+const setDelay = (value: number) => act(async () => {
+  Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')!.set!.call(delay(), String(value))
+  delay().dispatchEvent(new Event('input', { bubbles: true }))
+})
+it('shows legacy short delays unchanged without writing and requires 30 seconds for delayed saves', async () => {
+  client.getAdvertisingConfig.mockResolvedValue({ mode: 'delayed', timeoutSeconds: 10 })
+  await render()
+  expect(delay().value).toBe('10'); expect(delay().min).toBe('30')
+  expect(delay().getAttribute('aria-invalid')).toBe('true')
+  expect(host.querySelector('#advertising-delay-error')?.textContent).toContain('30–65535')
+  expect(save().disabled).toBe(true); expect(client.setAdvertisingConfig).not.toHaveBeenCalled()
+  await act(async () => save().click())
+  expect(client.setAdvertisingConfig).not.toHaveBeenCalled()
+  await setDelay(30)
+  expect(save().disabled).toBe(false); expect(host.querySelector('#advertising-delay-error')).toBeNull()
+  await act(async () => save().click())
+  expect(client.setAdvertisingConfig).toHaveBeenCalledExactlyOnceWith({ mode: 'delayed', timeoutSeconds: 30 })
+})
+it.each([29, 30.5, 65536])('blocks invalid delayed writes (%s seconds)', async value => {
+  await render(); await setDelay(value)
+  expect(save().disabled).toBe(true)
+  await act(async () => save().click())
+  expect(client.setAdvertisingConfig).not.toHaveBeenCalled()
+})
+it('allows the upper boundary and leaves continuous advertising available for an old short delay', async () => {
+  await render(); await setDelay(65535); await act(async () => save().click())
+  expect(client.setAdvertisingConfig).toHaveBeenCalledWith({ mode: 'delayed', timeoutSeconds: 65535 })
+  client.getAdvertisingConfig.mockResolvedValue({ mode: 'delayed', timeoutSeconds: 10 })
+  await act(async () => useDeviceStore.setState({ deviceId: 'old-short-delay' }))
+  await act(async () => host.querySelector<HTMLInputElement>('input[value=always]')!.click())
+  expect(save().disabled).toBe(false)
+  await act(async () => save().click())
+  expect(client.setAdvertisingConfig).toHaveBeenLastCalledWith({ mode: 'always', timeoutSeconds: 10 })
+})
+it('explains the delayed minimum in English', async () => {
+  setPreferences({ language: 'en' })
+  client.getAdvertisingConfig.mockResolvedValue({ mode: 'delayed', timeoutSeconds: 10 })
+  await render()
+  expect(host.textContent).toContain('Advertising mode')
+  expect(host.querySelector('#advertising-delay-error')?.textContent).toContain('30 to 65535 seconds')
+  expect(host.querySelector('#advertising-delay-help')?.textContent).toContain('at least 30 seconds')
+})
+it('keeps offline and unsupported settings visible but disabled without guessing a selection', async () => {
+  useDeviceStore.setState({ connection: 'idle' }); await render()
+  expect(host.textContent).toContain('蓝牙广播方式'); expect(client.getAdvertisingConfig).not.toHaveBeenCalled()
+  expect(host.querySelectorAll('input[type=radio]')).toHaveLength(2)
+  expect([...host.querySelectorAll<HTMLInputElement>('input')].every(input => input.disabled)).toBe(true)
+  expect(host.querySelector('input:checked')).toBeNull(); expect(save().disabled).toBe(true)
+  client.getAdvertisingConfig.mockResolvedValue(null)
+  await act(async () => useDeviceStore.setState({ connection: 'connected' }))
+  expect(host.textContent).toContain('当前固件不支持')
+  expect(host.querySelectorAll('input[type=radio]')).toHaveLength(2)
+  expect(host.querySelector('input:checked')).toBeNull(); expect(save().disabled).toBe(true)
+  expect([...host.querySelectorAll<HTMLInputElement>('input')].every(input => input.disabled)).toBe(true)
+  expect(client.setAdvertisingConfig).not.toHaveBeenCalled()
+})
+it('keeps read failures visible and permits an explicit read-only retry', async () => {
+  client.getAdvertisingConfig.mockRejectedValueOnce(new Error('读取超时'))
+  await render()
+  expect(host.querySelector('[role=alert]')?.textContent).toContain('读取超时')
+  expect(save().disabled).toBe(true)
+  const read = [...host.querySelectorAll<HTMLButtonElement>('button')].find(button => button.textContent === '重新读取')!
+  await act(async () => read.click())
+  expect(host.querySelector('input:checked')?.getAttribute('value')).toBe('delayed')
+  expect(save().disabled).toBe(false)
+  expect(client.setAdvertisingConfig).not.toHaveBeenCalled()
+})
+it('shows exact device values with delay beside the options and keeps their explanation below', async () => {
+  await render()
+  expect(host.querySelector('input[type=radio]:checked')?.getAttribute('value')).toBe('delayed')
+  expect(host.querySelector<HTMLInputElement>('input[type=number]')?.value).toBe('120')
+  expect(host.querySelector('[role=radiogroup]')?.textContent).toBe('持续广播延时关闭延时（秒）')
+  expect(host.querySelector('.advertising-delay-field')?.parentElement).toBe(host.querySelector('.advertising-options'))
+  expect(host.querySelector('.behavior-section-note')?.textContent).toContain('Find My 继续运行')
+  expect(host.querySelector('select')).toBeNull()
+  expect(client.setAdvertisingConfig).not.toHaveBeenCalled()
+})
+it('allows read-only discovery without activated Pro', async () => {
+  useDeviceStore.setState({ activation: { phase: 'inactive', edition: 'base' } }); await render()
+  expect(host.querySelector<HTMLInputElement>('input[type=number]')?.value).toBe('120'); expect(save().disabled).toBe(true)
+  expect(host.textContent).toContain('需要激活 Pro')
+})
+it('disables both options, delay and save without a button or NFC wake source', async () => {
+  await render(false)
+  expect([...host.querySelectorAll<HTMLInputElement>('input')].every(input => input.disabled)).toBe(true)
+  expect(save().disabled).toBe(true)
+  expect(host.querySelector('[role=radiogroup]')?.getAttribute('title')).toContain('没有按键或 NFC')
+  expect(client.setAdvertisingConfig).not.toHaveBeenCalled()
+})
+it('changes the local selection without writing until saved', async () => {
+  await render()
+  await act(async () => host.querySelector<HTMLInputElement>('input[value=always]')!.click())
+  expect(host.querySelector('input[type=number]')).toBeNull()
+  expect(host.querySelector('.behavior-section-note')?.textContent).toContain('每秒广播一次')
+  expect(client.setAdvertisingConfig).not.toHaveBeenCalled()
+  await act(async () => save().click())
+  expect(client.setAdvertisingConfig).toHaveBeenCalledExactlyOnceWith({ mode: 'always', timeoutSeconds: 120 })
+})
+it('does not write until explicitly saved and blocks replay after an unknown result until readback', async () => {
+  client.setAdvertisingConfig.mockRejectedValue(new Error('响应超时'))
+  await render(); await act(async () => save().click())
+  expect(client.setAdvertisingConfig).toHaveBeenCalledExactlyOnceWith({ mode: 'delayed', timeoutSeconds: 120 })
+  expect(save().disabled).toBe(true); expect(host.querySelector('[role=alert]')?.textContent).toContain('重新读取')
+  const read = [...host.querySelectorAll<HTMLButtonElement>('button')].find(b => b.textContent === '重新读取')!
+  await act(async () => read.click())
+  expect(client.getAdvertisingConfig).toHaveBeenCalledTimes(2); expect(save().disabled).toBe(false)
+  expect(client.setAdvertisingConfig).toHaveBeenCalledTimes(1)
+})

@@ -1,0 +1,12 @@
+# Actual compiler/link/object inputs, queried by the maintained normal producer.
+$(info INKTAG_BUILD|APP_OBJS|$(APP_OBJS))
+$(info INKTAG_BUILD|RECOVERY_OBJS|$(RECOVERY_OBJS))
+$(info INKTAG_BUILD|RECOVERY_COMMON_BUILD_DIR|$(RECOVERY_COMMON_BUILD_DIR))
+$(info INKTAG_BUILD|STAGE0_OBJS|$(STAGE0_OBJS))
+$(info INKTAG_BUILD|GCC_FLAGS|$(GCC_FLAGS))
+$(info INKTAG_BUILD|RECOVERY_GCC_FLAGS|$(RECOVERY_GCC_FLAGS))
+$(info INKTAG_BUILD|INCLUDE_PATHS|$(INCLUDE_PATHS))
+$(info INKTAG_BUILD|LS_FLAGS|$(LS_FLAGS))
+$(info INKTAG_BUILD|LIBS|$(LIBS))
+.PHONY: inktag-build-variables
+inktag-build-variables:

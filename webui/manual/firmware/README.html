@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../index.html">InkTag WebUI</a></nav><main><h1 id="inktag-固件与烧录工具">InkTag 固件与烧录工具</h1>
 <p>中文 | <a target="_blank" rel="noopener noreferrer" href="README.en.html">English</a></p>
-<p>按主控和主板家族选择目录。各目录的 <code>ota/</code> 是无线更新文件，<code>full/</code> 是首次安装和有线恢复文件；不要混用。</p>
+<p>请从 <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/tree/main/release/firmware">固件交付目录</a> 按主控和主板家族选择目录。各目录的 <code>ota/</code> 是无线更新文件，<code>full/</code> 是首次安装和有线恢复文件；不要混用。</p>
 <ul>
 <li><code>gr5331_zkel</code></li>
 <li><code>gr551x_zkel</code></li>
@@ -13,4 +13,6 @@
 <li><code>da14585_aesl</code></li>
 </ul>
 <p>本仓库同时保存已归集的固件，GitHub Releases 提供相同字节的下载附件。文件大小、SHA256与准确主板以 <code>manifest.json</code> 为准；目录存在不代表兼容任意同主控设备。</p>
-<p>每个目录的中英文 README 列出设备名、主板丝印、配置及完整的一行烧录命令。统一目录与使用方法见 <a target="_blank" rel="noopener noreferrer" href="../zh-CN/flash.html">完整烧录说明</a>。工具不捆绑某一版固件，仍通过 <code>-Firmware</code> 显式传入。</p></main></body></html>
+<p>每个目录的中英文 README 列出设备名、主板丝印、配置及完整的一行烧录命令。统一目录与使用方法见 <a target="_blank" rel="noopener noreferrer" href="../zh-CN/flash.html">完整烧录说明</a>。工具不捆绑某一版固件，仍通过 <code>-Firmware</code> 显式传入。</p>
+<h2 id="源码目录">源码目录</h2>
+<p>板级定义在 <code>firmware/boards/</code>，跨平台实现位于 <code>firmware/common/</code>，主控移植位于 <code>firmware/ports/</code>。nRF52811 和 DA14585 的端口各有一份 <code>BUILDING.md</code>，各自的容量适配和原生构建脚本保存在 <code>compat/</code> 和 <code>build-support/</code>。用户安装与使用说明统一由仓库主文档维护。<a target="_blank" rel="noopener noreferrer" href="../build-firmware.html">固件编译指南</a></p></main></body></html>

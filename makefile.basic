@@ -1,0 +1,60 @@
+# Build the BASIC firmware from this checkout with the platform's native tools.
+FREE_REPO_ROOT := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
+BUILD_TARGET ?=
+SDK_ROOT ?=
+TOOLCHAIN_ROOT ?=
+OUTPUT ?=
+JOBS ?= 4
+
+GR_TARGETS := gr5331_zkel gr551x_zkel gr551x_zkel_internal
+OM_TARGETS := om6626_zkel
+BASIC_TARGETS := $(GR_TARGETS) $(OM_TARGETS) tlsr8359_hsel nrf52832_priceetag nrf52811_aesl da14585_aesl
+ifeq ($(filter $(BUILD_TARGET),$(BASIC_TARGETS)),)
+$(error BUILD_TARGET must name a supported BASIC target: $(BASIC_TARGETS))
+endif
+ifeq ($(strip $(OUTPUT)),)
+$(error OUTPUT must name an explicit build output directory)
+endif
+
+.DEFAULT_GOAL := all
+.PHONY: all
+ifneq ($(filter $(BUILD_TARGET),$(GR_TARGETS)),)
+GR_PORT := $(if $(filter gr5331_zkel,$(BUILD_TARGET)),gr5331,gr551x)
+all:
+	$(MAKE) -C "$(FREE_REPO_ROOT)/firmware/ports/goodix/$(GR_PORT)" -f Makefile.base REPO_ROOT="$(FREE_REPO_ROOT)" BUILD_TARGET="$(BUILD_TARGET)" SDK_ROOT="$(abspath $(SDK_ROOT))" TOOLCHAIN_ROOT="$(abspath $(TOOLCHAIN_ROOT))" OUTPUT="$(abspath $(OUTPUT))" JOBS="$(JOBS)"
+else ifneq ($(filter $(BUILD_TARGET),$(OM_TARGETS)),)
+OM_BOARD := om6626_zkc
+OM_PROJECTS := $(FREE_REPO_ROOT)/.sdk/onmicro/OM6626.SDK/projects
+OM_APP := $(OM_PROJECTS)/ble_app_inktag_base/gcc/InkTag-$(OM_BOARD)-base
+OM_RECOVERY := $(OM_PROJECTS)/inktag_om_swap_boot_base/gcc/InkTag-om6626-recovery-base
+all:
+	$(MAKE) -C "$(FREE_REPO_ROOT)/firmware/ports/onmicro/om6626" -f Makefile.base REPO_ROOT="$(FREE_REPO_ROOT)" BOARD="$(OM_BOARD)" $(if $(strip $(TOOLCHAIN_ROOT)),TOOLCHAIN_PATH="$(abspath $(TOOLCHAIN_ROOT))/bin")
+	mkdir -p "$(abspath $(OUTPUT))/app" "$(abspath $(OUTPUT))/recovery"
+	cp "$(OM_APP).bin" "$(OM_APP).elf" "$(abspath $(OUTPUT))/app/"
+	cp "$(OM_RECOVERY).bin" "$(OM_RECOVERY).elf" "$(abspath $(OUTPUT))/recovery/"
+else ifeq ($(BUILD_TARGET),tlsr8359_hsel)
+ifeq ($(strip $(SDK_ROOT)),)
+$(error SDK_ROOT must name the prepared Telink firmware SDK workspace)
+endif
+all:
+	$(MAKE) -C "$(abspath $(SDK_ROOT))" -f "$(FREE_REPO_ROOT)/firmware/ports/telink/tlsr8359/Makefile.base" REPO_ROOT="$(FREE_REPO_ROOT)" TELINK_SDK="$(abspath $(SDK_ROOT))" BUILD_DIR="$(abspath $(OUTPUT))" compile-only
+else ifeq ($(BUILD_TARGET),nrf52832_priceetag)
+all:
+	$(MAKE) -C "$(FREE_REPO_ROOT)" -f firmware/ports/nordic/nrf52832/Makefile.base -j$(JOBS) BUILD_DIR="$(abspath $(OUTPUT))/objects" OUTPUT_DIR="$(abspath $(OUTPUT))/app" $(if $(strip $(SDK_ROOT)),SDK_ROOT="$(abspath $(SDK_ROOT))") $(if $(strip $(TOOLCHAIN_ROOT)),TOOLCHAIN_PATH="$(abspath $(TOOLCHAIN_ROOT))/bin")
+	$(MAKE) -C "$(FREE_REPO_ROOT)" -f firmware/ports/nordic/nrf52832/bootloader/Makefile.base -j$(JOBS) BUILD_DIR="$(abspath $(OUTPUT))/objects/recovery" OUTPUT_DIR="$(abspath $(OUTPUT))/recovery" $(if $(strip $(SDK_ROOT)),SDK_ROOT="$(abspath $(SDK_ROOT))") $(if $(strip $(TOOLCHAIN_ROOT)),TOOLCHAIN_PATH="$(abspath $(TOOLCHAIN_ROOT))/bin")
+else ifeq ($(BUILD_TARGET),nrf52811_aesl)
+ifeq ($(strip $(SDK_ROOT)),)
+$(error SDK_ROOT must name the prepared nRF5 SDK)
+endif
+ifeq ($(strip $(TOOLCHAIN_ROOT)),)
+$(error TOOLCHAIN_ROOT must contain bin/arm-none-eabi-gcc)
+endif
+.PHONY: full
+all:
+	$(MAKE) -C "$(FREE_REPO_ROOT)/firmware/ports/nordic/nrf52811" -j$(JOBS) SDK_ROOT="$(abspath $(SDK_ROOT))" TOOLCHAIN_PATH="$(abspath $(TOOLCHAIN_ROOT))/bin" NRF_BUILD_ROOT="$(abspath $(OUTPUT))/objects" NRF_OUTPUT_ROOT="$(abspath $(OUTPUT))/firmware" NRF_DEPENDENCY_FLAGS="-MD -MP"
+full:
+	python3 "$(FREE_REPO_ROOT)/firmware/ports/nordic/nrf52811/build.py" --sdk-root "$(abspath $(SDK_ROOT))" --toolchain-path "$(abspath $(TOOLCHAIN_ROOT))/bin" --build-root "$(abspath $(OUTPUT))/objects" --output-root "$(abspath $(OUTPUT))/firmware" --jobs $(JOBS)
+else ifeq ($(BUILD_TARGET),da14585_aesl)
+include $(FREE_REPO_ROOT)/firmware/ports/dialog/da14585/build-support/build/root-route.inc
+endif
+
