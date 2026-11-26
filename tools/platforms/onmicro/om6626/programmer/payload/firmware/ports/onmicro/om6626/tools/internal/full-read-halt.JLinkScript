@@ -1,0 +1,13 @@
+/* Full maintenance only. No target access, reset or loader replacement.
+ * ConfigTargetSettings runs before InitTarget. A readrange/saveas -exit is
+ * also a disconnect: Production/Start application = 0 is not its policy.
+ */
+int ConfigTargetSettings(void) {
+  int result;
+  result = JLINK_ExecCommand("SetRestartOnClose = 0");
+  if (result < 0) {
+    return result;
+  }
+  JLINK_SYS_Report("OM_FULL_READ_CLOSE_HALT_OK");
+  return 0;
+}

@@ -90,7 +90,7 @@ InkTag基础版（BASIC）已能满足大部分日常使用需求（通常可充
 | 主控厂商 | 主控 |
 | --- | --- |
 | Goodix 汇顶 | GR5331、GR5513、GR5515 |
-| OnMicro 昂瑞微 | OM6626 |
+| OnMicro 昂瑞微 | [OM6626](tools/platforms/onmicro/om6626/programmer/INSTALL.md) |
 | Telink 泰凌微 | TLSR8359（HS9118） |
 | Nordic | nRF52832、nRF52811 |
 | Renesas（原 Dialog） | DA14585 |

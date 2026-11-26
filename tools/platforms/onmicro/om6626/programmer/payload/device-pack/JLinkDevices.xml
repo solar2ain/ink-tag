@@ -1,0 +1,34 @@
+<DataBase>
+  <Device>
+    <ChipInfo Vendor="Onmicro" Name="HS6620" Core="JLINK_CORE_CORTEX_M3" WorkRAMAddr="0x20000000" WorkRAMSize="0x00020000" />
+    <FlashBankInfo Name="SPI Flash" BaseAddr="0x12000000" MaxSize="0x00100000" Loader="Devices/Onmicro/HS6620.elf" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1"/>
+  </Device>
+  <Device>
+    <ChipInfo Vendor="Onmicro" Name="HS6621" Core="JLINK_CORE_CORTEX_M4" WorkRAMAddr="0x20000000" WorkRAMSize="0x00020000" />
+    <FlashBankInfo Name="SPI Flash" BaseAddr="0x12000000" MaxSize="0x00100000" Loader="Devices/Onmicro/HS6621.elf" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1"/>
+  </Device>
+  <Device>
+    <ChipInfo Vendor="Onmicro" Name="HS6621C" Core="JLINK_CORE_CORTEX_M4" WorkRAMAddr="0x20000000" WorkRAMSize="0x00010000" />
+    <FlashBankInfo Name="SPI Flash" BaseAddr="0x00400000" MaxSize="0x00100000" Loader="Devices/Onmicro/HS6621C_mbr.elf" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1"/>
+  </Device>
+  <Device>
+    <ChipInfo Vendor="Onmicro" Name="HS6621C_NOMBR" Core="JLINK_CORE_CORTEX_M4" WorkRAMAddr="0x20000000" WorkRAMSize="0x00010000" />
+    <FlashBankInfo Name="SPI Flash" BaseAddr="0x00400000" MaxSize="0x00100000" Loader="Devices/Onmicro/HS6621C.elf" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1"/>
+  </Device>
+  <Device>
+    <ChipInfo Vendor="Onmicro" Name="HS6621CX" Core="JLINK_CORE_CORTEX_M4" WorkRAMAddr="0x20000000" WorkRAMSize="0x00010000" />
+    <FlashBankInfo Name="SPI Flash Ext" BaseAddr="0x00800000" MaxSize="0x00100000" Loader="Devices/Onmicro/HS6621CX.elf" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1"/>
+  </Device>
+  <Device>
+    <ChipInfo Vendor="Onmicro" Name="HS6621D-OTP" Core="JLINK_CORE_CORTEX_M4" WorkRAMAddr="0x20000000" WorkRAMSize="0x00010000" />
+    <FlashBankInfo Name="OTP" BaseAddr="0x00C00000" MaxSize="0x00004000" Loader="Devices/Onmicro/HS6621D_OTP.elf" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1"/>
+  </Device>
+  <Device>
+    <ChipInfo Vendor="Onmicro" Name="OM662XX" Core="JLINK_CORE_CORTEX_M4" WorkRAMAddr="0x20000000" WorkRAMSize="0x00010000" />
+    <FlashBankInfo Name="SPI Flash" BaseAddr="0x00400000" MaxSize="0x00100000" Loader="Devices/Onmicro/OM662XX.elf" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1"/>
+  </Device>
+  <Device>
+    <ChipInfo Vendor="Onmicro" Name="OM662XX_NOMBR" Core="JLINK_CORE_CORTEX_M4" WorkRAMAddr="0x20000000" WorkRAMSize="0x00010000" />
+    <FlashBankInfo Name="SPI Flash" BaseAddr="0x00400000" MaxSize="0x00100000" Loader="Devices/Onmicro/OM662XX_nombr.elf" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1"/>
+  </Device>
+</DataBase>

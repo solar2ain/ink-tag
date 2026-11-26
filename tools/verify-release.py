@@ -30,6 +30,14 @@ BASIC_TOOL_ASSETS = {
     'tools/platforms/nordic/nrf52811/programmer/assets/full-writer.bin':
         'd3e34c2be735e84c484198b95c9b10c92798a20c1abacfbb8af3e3a26b854acf',
 }
+OM6626_DEVICE_PACK = {
+    'tools/platforms/onmicro/om6626/programmer/payload/device-pack/JLinkDevices.xml':
+        '12f821b52aabddca30300bd10710ecae3be313d08d3b70da90481abf36f9ec60',
+    'tools/platforms/onmicro/om6626/programmer/payload/device-pack/Devices/Onmicro/OM662XX.elf':
+        '8523643fc138b84601c850571499068d36da954b60e7a3aa0be68386ad8e13af',
+    'tools/platforms/onmicro/om6626/programmer/payload/device-pack/Devices/Onmicro/OM662XX_nombr.elf':
+        '9a53c01b9363371e8eff44a7a9de80e2942e96025aede3ade8053875ab6ad640',
+}
 FORBIDDEN_SUFFIXES = {
     ".a",
     ".axf",
@@ -150,7 +158,12 @@ def validate_public_tree(repo: Path, include_untracked: bool = False) -> list[st
         if lowered_parts & FORBIDDEN_PARTS and not is_tool:
             failures.append(f"forbidden path: {relative}")
         basic_source = basic and public_basic_source(name)
-        if path.suffix.lower() in FORBIDDEN_SUFFIXES and not (basic_source or is_tool and tool_files[name] == 'dependency'):
+        om_device_pack = basic and name in OM6626_DEVICE_PACK
+        if om_device_pack and (path.is_symlink() or digest(path) != OM6626_DEVICE_PACK[name]):
+            failures.append(f"OM6626 device-pack bytes differ: {relative}")
+        if path.suffix.lower() in FORBIDDEN_SUFFIXES and not (
+            basic_source or om_device_pack or is_tool and tool_files[name] == 'dependency'
+        ):
             failures.append(f"forbidden source/private file: {relative}")
         if basic and (any(part == 'common_pro' for part in relative.parts) or
                       (path.suffix.lower() in {'.c', '.h', '.inc'} and re.search(r'_pro(?:_|\.)', path.name))):

@@ -14,7 +14,7 @@ Use wired flashing to install InkTag on a factory tag. Use [OTA](ota.md) for rou
 | GR5331 | [flash.bat](../../release/firmware/gr5331_zkel/tools/flash.bat) | [Board presets and commands](../../release/firmware/gr5331_zkel/INSTALL.en.md) |
 | GR5513/GR5515 standard | [flash.bat](../../release/firmware/gr551x_zkel/tools/flash.bat) | [Board presets and commands](../../release/firmware/gr551x_zkel/INSTALL.en.md) |
 | GR5513 Internal | [flash.bat](../../release/firmware/gr551x_zkel_internal/tools/flash.bat) | [Board presets and commands](../../release/firmware/gr551x_zkel_internal/INSTALL.en.md) |
-| OM6626 ZKEL | [flash.bat](../../release/firmware/om6626_zkel/payload/tools/flash.bat) | [Board presets and commands](../../release/firmware/om6626_zkel/INSTALL.en.md) |
+| OM6626 ZKEL | [flash.bat](../../tools/platforms/onmicro/om6626/programmer/payload/tools/flash.bat) | [Board presets and commands](../../tools/platforms/onmicro/om6626/programmer/INSTALL.en.md) |
 | TLSR8359 HSEL | [flash.bat](../../release/firmware/tlsr8359_hsel/firmware/ports/telink/tlsr8359/tools/flash.bat) | [Board presets and commands](../../release/firmware/tlsr8359_hsel/INSTALL.en.md) |
 | nRF52811 AESL | [flash.bat](../../release/firmware/nrf52811_aesl/tools/flash.bat) | [Board presets and commands](../../release/firmware/nrf52811_aesl/INSTALL.en.md) |
 | nRF52832 PriceETag | [flash.bat](../../release/firmware/nrf52832_priceetag/tools/flash.bat) | [Board presets and commands](../../release/firmware/nrf52832_priceetag/INSTALL.en.md) |
@@ -27,7 +27,7 @@ The recommended BAT entries for GR, OM, nRF52811 and nRF52832 use the built-in *
 | Controller | Connection | Additional requirements |
 | --- | --- | --- |
 | GR5331, GR5513/GR5515 | J-Link / SWD | [Goodix GProgrammer console 2.0.3.0](https://www.goodix.com/en/software_tool/gprogrammer_ble) with its loader, DLL, and configuration files |
-| OM6626 | J-Link / SWD | J-Link/J-Flash 7.88j and the matching OM device support files. Follow the instructions in `payload/` |
+| OM6626 | J-Link / SWD | The repository includes the OM device-support files |
 | nRF52811, nRF52832 | J-Link / SWD | The J-Link software and driver above |
 | TLSR8359 | CH340 / SWS | Python 3.11+ and the CH340 driver. Run `setup.bat` to install the serial-tool dependencies |
 | DA14585 | J-Link / SWD | Python 3.12+ with `python` on PATH, plus the separately obtained licensed SRAM helper specified in the tools guide |

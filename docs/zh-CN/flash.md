@@ -14,7 +14,7 @@
 | GR5331 | [flash-zh.bat](../../release/firmware/gr5331_zkel/tools/flash-zh.bat) | [版型与一行命令](../../release/firmware/gr5331_zkel/INSTALL.md) |
 | GR5513／GR5515 标准版 | [flash-zh.bat](../../release/firmware/gr551x_zkel/tools/flash-zh.bat) | [版型与一行命令](../../release/firmware/gr551x_zkel/INSTALL.md) |
 | GR5513 Internal | [flash-zh.bat](../../release/firmware/gr551x_zkel_internal/tools/flash-zh.bat) | [版型与一行命令](../../release/firmware/gr551x_zkel_internal/INSTALL.md) |
-| OM6626 ZKEL | [flash-zh.bat](../../release/firmware/om6626_zkel/payload/tools/flash-zh.bat) | [版型与一行命令](../../release/firmware/om6626_zkel/INSTALL.md) |
+| OM6626 ZKEL | [flash-zh.bat](../../tools/platforms/onmicro/om6626/programmer/payload/tools/flash-zh.bat) | [版型与一行命令](../../tools/platforms/onmicro/om6626/programmer/INSTALL.md) |
 | TLSR8359 HSEL | [flash-zh.bat](../../release/firmware/tlsr8359_hsel/firmware/ports/telink/tlsr8359/tools/flash-zh.bat) | [版型与一行命令](../../release/firmware/tlsr8359_hsel/INSTALL.md) |
 | nRF52811 AESL | [flash-zh.bat](../../release/firmware/nrf52811_aesl/tools/flash-zh.bat) | [版型与一行命令](../../release/firmware/nrf52811_aesl/INSTALL.md) |
 | nRF52832 PriceETag | [flash-zh.bat](../../release/firmware/nrf52832_priceetag/tools/flash-zh.bat) | [版型与一行命令](../../release/firmware/nrf52832_priceetag/INSTALL.md) |
@@ -27,7 +27,7 @@ GR、OM、nRF52811 和 nRF52832 的推荐 BAT 使用 Windows 自带的 **PowerSh
 | 主控 | 接口 | 还需准备 |
 | --- | --- | --- |
 | GR5331、GR5513／GR5515 | J-Link／SWD | [Goodix GProgrammer console 2.0.3.0](https://www.goodix.com/en/software_tool/gprogrammer_ble)，保留随附的 loader、DLL 和配置 |
-| OM6626 | J-Link／SWD | J-Link／J-Flash 7.88j 和对应 OM 设备支持包，按 `payload/` 中的说明准备 |
+| OM6626 | J-Link／SWD | 已随仓库提供 OM 设备支持文件 |
 | nRF52811、nRF52832 | J-Link／SWD | 上述 J-Link 软件和驱动即可 |
 | TLSR8359 | CH340／SWS | Python 3.11+ 和 CH340 驱动，首次运行 `setup.bat` 安装串口工具依赖 |
 | DA14585 | J-Link／SWD | Python 3.12+，让 `python` 命令可用，并单独准备工具说明指定的已许可 SRAM helper |
