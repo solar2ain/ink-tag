@@ -24,7 +24,7 @@ After running `npm ci`, run this command from `webui/`:
 npm run build
 ```
 
-The build replaces `webui/dist/static/` and `webui/dist/standalone/`. The repository ships both outputs with the source. The static build serves the local CLI and HTTPS static sites. Open `webui/dist/standalone/InkTag-WebUI.html` directly for offline use, and keep its `assets/` directory beside it for fonts and other resources loaded on demand. Installing and running the release requires no Node.js.
+The build writes `webui/dist/static/` for the local CLI and HTTPS sites and `webui/dist/standalone/` for local testing. The repository ships one offline copy in [webui-standalone/](../webui-standalone/InkTag-WebUI.html). Open its HTML and keep the adjacent `assets/`. Preparing a release candidate refreshes this copy from a local build when available. Installing and using the release requires no Node.js.
 
 After building, return to the repository root and rerun the client installer to start the updated WebUI.
 

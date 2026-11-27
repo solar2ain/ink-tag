@@ -50,7 +50,7 @@ describe('activation status presentation (simulated client)', () => {
   })
   it.each([
     ['unavailable', '无法读取设备激活身份'],
-    ['inactive', '免费版'],
+    ['inactive', '基础版'],
     ['active', '高级版已激活'],
     ['invalid', '设备激活信息损坏'],
   ] as const)('keeps the connected %s state distinct', async (phase, label) => {

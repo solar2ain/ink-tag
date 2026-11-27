@@ -212,7 +212,7 @@ class GProgrammerTransport:
 
     def detect(self,*,timeout=None):
         result=self.folder/f'identity-{self.counter}.json'
-        cmd=[self.options.powershell,'-NoProfile','-File',ROOT/'firmware/ports/goodix/common/tools/internal/goodix-stock-entry.ps1',
+        cmd=[self.options.powershell,'-NoProfile','-File',ROOT/'tools/platforms/goodix/common/programmer/internal/goodix-stock-entry.ps1',
              '-Action','probe','-Chip',self.options.chip,'-EvidenceDir',self.folder/f'probe-{self.counter}',
              '-ResultFile',result,'-Snr',self.options.snr,'-JLinkExe',self.jlink,'-LeaveHalted']
         cmd+=['-FrequencyHz',str(getattr(self.options,'frequency_hz',500000))]
@@ -273,7 +273,7 @@ class GProgrammerTransport:
         # vendor writer uses the detected MCU/capacity, then full readback.
         self.log.emit('write', 'Identity and protected Factory data reviewed; starting one Full write.',level='notice')
         self.write_started=True
-        self.command([self.options.powershell,'-NoProfile','-File',ROOT/'firmware/ports/goodix/common/tools/internal/flash-goodix-gprogrammer.ps1',
+        self.command([self.options.powershell,'-NoProfile','-File',ROOT/'tools/platforms/goodix/common/programmer/internal/flash-goodix-gprogrammer.ps1',
             '-Target','gr5331' if identity['chip']=='gr5331' else 'gr5515','-Mode','download','-Layout','ota',
             '-Firmware',self.image,'-Snr',self.options.snr,'-ConsoleExe',self.console,
             '-GProgrammerDir',Path(self.console).parent,

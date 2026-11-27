@@ -77,7 +77,7 @@ it.each(builtInScreenProfiles.filter(profile => profile.config.color === 10).map
     const warning = host.querySelector('[role="note"][aria-label="E6 屏幕接线提醒"]')!
     expect(warning).not.toBeNull()
     expect(warning.previousElementSibling).toBe(host.querySelector('.profile-form-section'))
-    expect(warning.textContent).toContain('普通价签主板')
+    expect(warning.textContent).toContain('普通设备主板')
     expect(warning.textContent).toContain('绝缘胶带贴住屏幕排线的第 16 脚，使其悬空')
     expect(warning.textContent).toContain('屏幕会发热，且非常耗电')
     expect(client.setScreen).not.toHaveBeenCalled()

@@ -1,1 +1,0 @@
-InkTag-owned host tool source follows the accompanying maintained-source LICENSE. Existing third-party grants remain unchanged. SEGGER software, vendor SDK/loaders, firmware, keys and history are not included. This is an unpublished local candidate.

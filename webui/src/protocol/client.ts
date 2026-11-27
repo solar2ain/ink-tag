@@ -41,6 +41,7 @@ import { imageSlotContentTypeIds, type ButtonActionSettings, type ButtonBehavior
 import { encodeUploadImageName } from './imageNames'
 import { resourceReadBudget, retryResourceRead, type ResourceReadBudget } from './resourceRead'
 import { resourceInfoFailureMessage } from '../image/storageAvailability'
+import { formatImageRate } from '../image/transferRate'
 import { acquireImageLink, type ImageLinkLease } from './imageLink'
 import { ImageTransferTiming, decodeTlsrNotifyCounters, imageDocumentVisibility, observeImageTiming, type ImageTimingSink } from './imageTransferTiming'
 import { buildBluetoothRequestOptions, type BluetoothDiscoveryOptions } from './bluetoothDiscovery'
@@ -517,9 +518,11 @@ export class InkTagClient {
       store.setConnection('unsupported')
       return
     }
+    let selected = false
     try {
       store.setConnection('selecting')
       const device = await navigator.bluetooth.requestDevice(buildBluetoothRequestOptions(OPTIONAL_SERVICES, discovery))
+      selected = true
       await this.connectInteractiveDevice(device)
     } catch (error) {
       if (error instanceof DOMException && error.name === 'AbortError' && !this.disconnectRequested) return
@@ -527,10 +530,35 @@ export class InkTagClient {
         store.setConnection('idle')
         return
       }
-      const cancelled = error instanceof DOMException && error.name === 'NotFoundError'
+      const cancelled = !selected && error instanceof DOMException && error.name === 'NotFoundError'
       store.setConnection(cancelled ? 'idle' : 'error')
       store.addLog(cancelled ? '已取消设备选择' : `连接失败：${String(error)}`, cancelled ? 'info' : 'error')
     }
+  }
+
+  async selectRecoveryForOta(handoff: { deviceId: string; recoveryName: string }) {
+    const store = useDeviceStore.getState()
+    const expected = this.expectedFixedRecovery
+    if (store.action !== 'idle' || this.device || !expected ||
+        expected.deviceId !== handoff.deviceId || expected.name !== handoff.recoveryName) {
+      throw new Error('原设备的 Recovery 交接已变化，请重新确认设备')
+    }
+    if (!navigator.bluetooth) throw new Error('当前浏览器不支持蓝牙扫描')
+    const generation = this.connectionGeneration
+    store.setAction('ota', 0, '正在选择 Recovery 设备')
+    try {
+      // Nordic advertisements can be incomplete in WinRT. The grant and
+      // live role checks still apply whichever chooser filter is used.
+      const device = await navigator.bluetooth.requestDevice(expected.type === 'nordic'
+        ? { acceptAllDevices: true, optionalServices: OPTIONAL_SERVICES }
+        : { filters: [{ name: expected.name }, { name: expected.legacyName }], optionalServices: OPTIONAL_SERVICES })
+      if (device.id !== expected.deviceId || generation !== this.connectionGeneration ||
+          this.expectedFixedRecovery !== expected) throw new Error('所选设备与原设备不一致')
+      await this.connectInteractiveDevice(device, false, true)
+      if (this.device !== device || this.otaRecoveryType !== expected.type) {
+        throw new Error('未读到原设备的 Recovery 状态')
+      }
+    } finally { useDeviceStore.getState().setAction('idle') }
   }
 
   async getKnownDevices() {
@@ -572,11 +600,11 @@ export class InkTagClient {
     }
   }
 
-  async reconnectDevice(device: BluetoothDevice, timeoutMs = CONNECTION_TIMEOUT_MS) {
-    await this.connectDevice(device, timeoutMs)
+  async reconnectDevice(device: BluetoothDevice, timeoutMs = CONNECTION_TIMEOUT_MS, requireRecovery = false) {
+    await this.connectDevice(device, timeoutMs, false, requireRecovery)
   }
 
-  private async connectInteractiveDevice(device: BluetoothDevice, remembered = false) {
+  private async connectInteractiveDevice(device: BluetoothDevice, remembered = false, requireRecovery = false) {
     this.interactiveConnectionAbort?.abort()
     const connection = new AbortController()
     this.interactiveConnectionAbort = connection
@@ -587,7 +615,7 @@ export class InkTagClient {
       for (let attempt = 0; ; attempt++) {
         if (connection.signal.aborted) throw new DOMException('蓝牙连接已取消', 'AbortError')
         try {
-          await this.connectDevice(device)
+          await this.connectDevice(device, CONNECTION_TIMEOUT_MS, true, requireRecovery)
           if (connection.signal.aborted) throw new DOMException('蓝牙连接已取消', 'AbortError')
           return
         } catch (error) {
@@ -617,7 +645,7 @@ export class InkTagClient {
     }
   }
 
-  private async connectDevice(device: BluetoothDevice, timeoutMs = CONNECTION_TIMEOUT_MS) {
+  private async connectDevice(device: BluetoothDevice, timeoutMs = CONNECTION_TIMEOUT_MS, allowCachedTelinkName = false, requireRecovery = false) {
     // A timed-out GR native promise can outlive the UI action. Do not let an
     // ordinary reconnect bypass the adapter's exact-grant quarantine. This
     // synchronous check does not connect, discover or touch other grants.
@@ -625,7 +653,7 @@ export class InkTagClient {
     if (typeof window !== 'undefined') window.TelinkOta?.assertDeviceAvailable?.(device)
     if (this.connectionAttempt) return this.connectionAttempt
     const generation = ++this.connectionGeneration
-    const attempt = this.connectDeviceOnce(device, generation, timeoutMs)
+    const attempt = this.connectDeviceOnce(device, generation, timeoutMs, allowCachedTelinkName, requireRecovery)
     this.connectionAttempt = attempt
     try {
       await attempt
@@ -634,7 +662,7 @@ export class InkTagClient {
     }
   }
 
-  private async connectDeviceOnce(device: BluetoothDevice, generation: number, timeoutMs: number) {
+  private async connectDeviceOnce(device: BluetoothDevice, generation: number, timeoutMs: number, allowCachedTelinkName: boolean, requireRecovery: boolean) {
     if (typeof window !== 'undefined') window.TelinkOta?.cancelRecoveryDiscovery?.(device)
     const store = useDeviceStore.getState()
     const deadline = Date.now() + timeoutMs
@@ -717,10 +745,17 @@ export class InkTagClient {
         applicationServiceError = error
       }
       if (!service) {
-        const namedRecovery = fixedRecoveryFromName(device.name || '')
+        const name = device.name || ''
+        const namedRecovery = fixedRecoveryFromName(name)
         const expected = this.expectedFixedRecovery ?? rememberedOnMicroRecovery(device, preference)
         const cachedSameDevice = expected?.deviceId === device.id
-        const recovery = namedRecovery ?? (cachedSameDevice ? expected : null)
+        let recovery = namedRecovery ?? (cachedSameDevice ? expected : null)
+        // TLSR retains its browser grant across modes. A cached factory App name
+        // selects a read-only probe on this same GATT link, even on a fresh origin.
+        // The live Recovery profile below still determines the role.
+        if (allowCachedTelinkName && !recovery && !expected && /^(?:IKT|InkTag)_TL_[0-9A-F]{4}$/i.test(name)) {
+          recovery = fixedRecoveryFromName(`${name}_OTA`)
+        }
         if (!recovery) throw applicationServiceError
         if (expected && (!cachedSameDevice || (namedRecovery &&
           namedRecovery.name !== expected.name && namedRecovery.name !== expected.legacyName))) {
@@ -764,6 +799,7 @@ export class InkTagClient {
         store.addLog(`已连接 ${label} 固定 Recovery，可重新发送完整应用`, 'success')
         return
       }
+      if (requireRecovery) throw new Error('设备已返回应用，请重新确认升级')
       this.expectedFixedRecovery = null
       this.recoveryHandoffDevice = null
       this.characteristic = await connectionStep(service.getCharacteristic(COMMAND_UUID), '读取命令通道')
@@ -779,7 +815,7 @@ export class InkTagClient {
       this.protocolV2 = true
       store.setIdentity({
         protocolVersion: protocolByte,
-        firmwareVersion: `${version.getUint8(1)}.${version.getUint8(2)}.${version.getUint8(3)}`,
+        firmwareVersion: Array.from({ length: version.byteLength >= 5 ? 4 : 3 }, (_, i) => version.getUint8(i + 1)).join('.'),
       })
       await connectionStep(this.characteristic.startNotifications(), '开启设备通知')
       this.characteristic.addEventListener('characteristicvaluechanged', this.onNotification)
@@ -977,21 +1013,6 @@ export class InkTagClient {
     return this.getExpectedRecoveryIdentity()!
   }
 
-  async releaseTelinkAppForOta(expectedDeviceId: string) {
-    const expected = this.expectedFixedRecovery
-    if (expected?.type !== 'telink' || expected.deviceId !== expectedDeviceId ||
-        (this.device && this.device.id !== expectedDeviceId)) throw new Error('TLSR App 交接身份已变化')
-    const release = this.releaseForRecovery({ deviceId: expectedDeviceId, recoveryName: expected.name }, 900)
-    // disconnect() is synchronous up to this point. Preserve only this exact
-    // requested handoff; a later user disconnect/new generation invalidates it.
-    this.expectedFixedRecovery = expected
-    const generation = this.connectionGeneration
-    await release
-    if (generation !== this.connectionGeneration || this.expectedFixedRecovery !== expected) {
-      throw new Error('TLSR Recovery 交接已取消；未继续传输')
-    }
-    return this.getExpectedRecoveryIdentity()!
-  }
   getOtaRecoveryType() { return this.otaRecoveryType }
   getRecoverySafeResumeSupported() {
     const type = this.getOtaRecoveryType()
@@ -3360,7 +3381,7 @@ export class InkTagClient {
         }
       }
       const elapsed = Math.max(0.001, (performance.now() - startedAt) / 1000)
-      store.addLog(`图片传输完成：${elapsed.toFixed(1)} 秒，${(totalSize / 1024 / elapsed).toFixed(1)} KiB/s`, 'success')
+      store.addLog(`图片传输完成：${elapsed.toFixed(1)} 秒，${formatImageRate(totalSize / elapsed)}`, 'success')
       store.addLog(`图片统计：decoded=${totalSize} encoded=${measuredEncoded} chunks=${measuredChunks} decoded_crc32=${beginView.getUint32(8, true).toString(16).padStart(8, '0')} quarter_s=${[...quarters, Number(elapsed.toFixed(3))].join(',')}`)
       store.addLog(`图片主机耗时 100%（平均/最大）：${hostTiming.summary()} visibility=${imageDocumentVisibility()}`)
       await imageLink?.close()

@@ -95,7 +95,7 @@ try {
     if($Action -ceq 'flash') {
         if(!$Materials){$Materials=Read-GrPath 'Initialization materials directory'}
         $materialReview=Read-GrCleanMaterials $Materials $Port;$package=$materialReview.firmware;$selected=$materialReview.config
-        $sourceFirmware=Join-Path $Materials 'components.zip'
+        $sourceFirmware=$materialReview.firmwarePath
     } else {
         if($InteractiveMenu -and !$Firmware){$Firmware=Select-GrFirmware $ToolDirectory $Port}
         if($Action -ceq 'preserve' -and !$Config){$Config=Select-GrBoard}

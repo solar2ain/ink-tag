@@ -886,7 +886,7 @@ class InkTagClient(DevicePasswordSession):
                     )
                 if len(version) < 4:
                     raise InkTagError("Firmware version characteristic is incomplete")
-                self.snapshot.firmware_version = f"{version[1]}.{version[2]}.{version[3]}"
+                self.snapshot.firmware_version = ".".join(map(str, version[1:5]))
                 attempt_stage = "notification-setup"
                 await self._client.start_notify(COMMAND_UUID, self._on_notification)
                 self._notify_started = True

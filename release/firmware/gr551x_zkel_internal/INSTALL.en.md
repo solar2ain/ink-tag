@@ -10,8 +10,8 @@ Use the Internal board profile and its flash map.
 
 ### ZK_EL_GR_2.13_V1.2
 
-[BIN / HEX](programmer/ZK_EL_GR_2.13_V1.2/) · [配置 / Configuration](tools/configs/ZK_EL_GR_2.13_V1.2.toml)
+[BIN](flash-images/ZK_EL_GR_2.13_V1.2/) · [配置 / Configuration](tools/configs/ZK_EL_GR_2.13_V1.2.toml)
 
 ```powershell
-.\tools\flash.bat -Firmware ".\full\app-full.zip" -Config ".\tools\configs\ZK_EL_GR_2.13_V1.2.toml"
+.\tools\flash.bat -Firmware ".\full\InkTag-BASIC-0.2.2.1-gr551x_zkel_internal-full.zip" -Config ".\tools\configs\ZK_EL_GR_2.13_V1.2.toml"
 ```

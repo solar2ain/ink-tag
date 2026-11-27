@@ -19,6 +19,16 @@ describe('screen configuration wire contract', () => {
       expect(validateScreenConfig({ ...native, transform })).toBe(true)
     }
   })
+  it('accepts a standard SSD1680 2.66-inch panel with rotation and mirror', () => {
+    const panel = makeScreenConfig({ driver: 0x23, color: 2, transform: 5,
+      width: 152, height: 296, visibleX: 0, visibleY: 0, visibleWidth: 152, visibleHeight: 296 })
+    expect(decodeScreenConfig(encodeScreenConfig(panel))).toEqual(panel)
+    expect(validateScreenConfig({ ...panel, width: 176, visibleWidth: 176 })).toBe(true)
+    expect(validateScreenConfig({ ...panel, width: 184, visibleWidth: 184 })).toBe(false)
+    expect(validateScreenConfig({ ...panel, width: 153 })).toBe(false)
+    expect(validateScreenConfig({ ...panel, height: 297 })).toBe(false)
+    expect(validateScreenConfig({ ...panel, recipe: 1 })).toBe(false)
+  })
   const uc8176 = makeScreenConfig({
     driver: 0x13, color: 2, transform: 0, width: 400, height: 300,
     visibleX: 0, visibleY: 0, visibleWidth: 400, visibleHeight: 300,

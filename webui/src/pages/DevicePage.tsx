@@ -70,17 +70,12 @@ export function DevicePage() {
     value.update?.currentVersion === state.firmwareVersion) && state.connection === 'connected'
   const [searchParams, setSearchParams] = useSearchParams()
   const requestedTab = searchParams.get('tab')
-  const initialTab = tabs.some(([id]) => id === requestedTab) ? requestedTab as DeviceTab : 'overview'
-  const [tab, setTab] = useState<DeviceTab>(initialTab)
-  useEffect(() => {
-    if (tabs.some(([id]) => id === requestedTab)) setTab(requestedTab as DeviceTab)
-  }, [requestedTab])
+  const tab = tabs.some(([id]) => id === requestedTab) ? requestedTab as DeviceTab : 'overview'
   const selectTab = (next: DeviceTab) => {
-    setTab(next)
     setSearchParams(next === 'overview' ? {} : { tab: next }, { replace: true })
   }
   const clientTab = tab === 'preferences' || tab === 'about'
-  const tabButton = ([id, label, Icon]: (typeof tabs)[number]) => <button key={id} className={tab === id ? 'active' : ''} onClick={() => selectTab(id)}><Icon />{t(label)}{id === 'ota' && firmwareUpdateAvailable && <span className="tab-update-dot" title="有可用固件更新" aria-label="有可用固件更新" />}</button>
+  const tabButton = ([id, label, Icon]: (typeof tabs)[number]) => <button key={id} aria-current={tab === id ? 'page' : undefined} className={tab === id ? 'active' : ''} onClick={() => selectTab(id)}><Icon />{t(label)}{id === 'ota' && firmwareUpdateAvailable && <span className="tab-update-dot" title="有可用固件更新" aria-label="有可用固件更新" />}</button>
   return (
     <div className="page device-page">
       <PageHeader title={t('设置')} />
@@ -122,7 +117,7 @@ function ActivationSettings() {
   }, [connection, activation.phase])
   const phaseLabels = {
     unsupported: '该设备不支持激活', unavailable: '无法读取设备激活身份',
-    inactive: '免费版', active: '高级版已激活', invalid: '设备激活信息损坏',
+    inactive: '基础版', active: '高级版已激活', invalid: '设备激活信息损坏',
   }
   const loadRequest = async (force = false) => {
     const next = await inktagClient.readActivationRequest(force)
@@ -164,7 +159,7 @@ function ActivationSettings() {
     } catch (error) { setMessage(error instanceof Error ? error.message : String(error)) }
   }
   return <section><div className="panel-title"><div><h2>设备激活</h2><p>使用设备请求码获取并安装授权。</p></div><button className="button secondary" disabled={!available} onClick={() => void refresh()}><RefreshCw />刷新状态</button></div>
-    <dl className="settings-list activation-status"><div><dt>当前版本</dt><dd><span className={`edition-badge ${activation.edition}`}>{activation.edition === 'advanced' && activation.phase === 'active' ? '高级版' : '免费版'}</span></dd></div><div><dt>激活状态</dt><dd>{connection === 'connected' ? phaseLabels[activation.phase] : '连接设备后读取'}</dd></div><div><dt>设备码</dt><dd>{activation.activationId || '--'}</dd></div><div><dt>授权序号</dt><dd>{activation.sequence || '--'}</dd></div><div><dt>功能位</dt><dd>{activation.featureMask ? `0x${activation.featureMask.toString(16).padStart(8, '0')}` : '--'}</dd></div><div><dt>授权方式</dt><dd>{activation.phase === 'active' ? '永久设备绑定签名' : '--'}</dd></div></dl>
+    <dl className="settings-list activation-status"><div><dt>当前版本</dt><dd><span className={`edition-badge ${activation.edition}`}>{activation.edition === 'advanced' && activation.phase === 'active' ? '高级版' : '基础版'}</span></dd></div><div><dt>激活状态</dt><dd>{connection === 'connected' ? phaseLabels[activation.phase] : '连接设备后读取'}</dd></div><div><dt>设备码</dt><dd>{activation.activationId || '--'}</dd></div><div><dt>授权序号</dt><dd>{activation.sequence || '--'}</dd></div><div><dt>功能位</dt><dd>{activation.featureMask ? `0x${activation.featureMask.toString(16).padStart(8, '0')}` : '--'}</dd></div><div><dt>授权方式</dt><dd>{activation.phase === 'active' ? '永久设备绑定签名' : '--'}</dd></div></dl>
     <div className="activation-actions"><label>设备请求码<input type="text" readOnly value={request?.requestCode || ''} placeholder="连接设备后生成" /></label><div className="button-row"><button className="button secondary" disabled={!request} onClick={() => void copyRequest()}><Copy />复制请求</button><button className="button secondary" disabled={!available} onClick={() => void rotate()}><RefreshCw />重新生成</button></div><span>{request ? '请求码已生成，请用于获取此设备的激活码。' : '重新生成后，之前未使用的激活码将失效。'}</span></div>
     <div className="activation-actions"><div className="activation-code-field"><label>激活码<textarea rows={3} value={code} disabled={!canActivate} autoComplete="off" spellCheck={false} maxLength={ACTIVATION_CODE_CHARS} onChange={(event) => setCode(event.target.value.trim())} placeholder="粘贴激活码" /></label>{activation.phase === 'inactive' && <label className="checkbox-label"><input type="checkbox" checked={restoreCode} disabled={!canActivate} onChange={(event) => setRestoreCode(event.target.checked)} />使用已保存的原激活码恢复授权</label>}</div><button className="button primary" disabled={!canActivate || code.length !== ACTIVATION_CODE_CHARS} onClick={() => void activate()}><KeyRound />{restoreCode ? '恢复授权' : activation.phase === 'active' ? '更新授权' : '激活设备'}</button><span>{activation.phase === 'unavailable' ? '当前设备无法激活。' : '激活码仅适用于当前设备。'}</span></div>
     {message && <FeedbackNotice className="library-message" noticeKey={messageRevision}>{message}</FeedbackNotice>}
@@ -193,7 +188,7 @@ function DeviceOverview() {
     <TemperatureFact connected={connected} boardId={state.boardId} temperature={state.temperature} mcuTemperature={state.mcuTemperature} panelTemperature={state.panelTemperature} />
     <div><dt>NFC</dt><dd>{connected ? state.capabilities.nfc === 'none' ? '无板载' : '板载 NFC' : '--'}</dd></div><div><dt>按键</dt><dd>{connected ? state.capabilities.button ? '板载按键' : '可扩展' : '--'}</dd></div>
     <div><dt>状态灯</dt><dd>{connected ? state.capabilities.led === 'rgb' ? '板载 RGB' : state.capabilities.led === 'mono' ? '板载单色' : '无板载' : '--'}</dd></div>
-    <div><dt>授权</dt><dd className="activation-fact"><span>{connected ? advanced ? '高级版' : '免费版' : '--'}</span>{connected && !advanced && <button className="inline-action-button" title="激活设备" aria-label="激活设备" onClick={() => { location.hash = '/device?tab=activation' }}><KeyRound /></button>}</dd></div><div><dt>浏览器设备 ID</dt><dd title={connected ? state.deviceId : undefined}>{connected ? state.deviceId || '--' : '--'}</dd></div>
+    <div><dt>授权</dt><dd className="activation-fact"><span>{connected ? advanced ? '高级版' : '基础版' : '--'}</span>{connected && !advanced && <button className="inline-action-button" title="激活设备" aria-label="激活设备" onClick={() => { location.hash = '/device?tab=activation' }}><KeyRound /></button>}</dd></div><div><dt>浏览器设备 ID</dt><dd title={connected ? state.deviceId : undefined}>{connected ? state.deviceId || '--' : '--'}</dd></div>
   </dl>
     <div className="device-lifecycle"><div><strong>设备操作</strong><span>清除图槽只删除图片；清除设置会关闭密码，两者均保留 Pro、Find 和板型数据。</span></div><div className="device-lifecycle-actions"><button className="button secondary" onClick={() => setPasswordDialog(true)}>设备密码</button><button className="button secondary" disabled={!connected || state.protocolVersion !== PROTOCOL_V2_VERSION} onClick={() => setLocateDialog(true)}>寻找设备</button><button className="button secondary" disabled={!connected || state.protocolVersion !== PROTOCOL_V2_VERSION} onClick={() => setLifecycleAction('reset')}>重启设备</button><button className="button secondary" title={lifecycleAvailable ? '仅删除图片及图片元数据' : '固件尚未支持新的清除范围'} disabled={!connected || !lifecycleAvailable} onClick={() => setLifecycleAction('clear-user-data')}>清除图槽</button><button className="button secondary danger-text" title={lifecycleAvailable ? '清除设置和密码，保留图片；密码开启时需原密码' : '固件尚未支持新的清除范围'} disabled={!connected || !lifecycleAvailable} onClick={() => setLifecycleAction('reset-settings')}>清除设置</button></div></div>
     {identityField && <DeviceIdentityDialog initialField={identityField} onClose={() => setIdentityField(null)} />}
@@ -428,7 +423,7 @@ function ScreenSettings() {
   return <section>
     <div className="panel-title"><div><h2>屏幕配置</h2><p>配置屏幕驱动、尺寸、颜色及方向。</p></div><button className="button secondary" onClick={() => { setProfileMeta((value) => ({ ...value, size: resolutions.find(([, width, height]) => width === form.width && height === form.height)?.[0] || value.size })); setProfileEditor(!profileEditor) }}><BookmarkPlus />保存新 Profile</button></div>
     <div className="form-section profile-form-section"><label>屏幕 Profile<ScreenProfileSelect profiles={profiles} selectedId={selectedId} showCustom={Boolean(current) || !selectedId} onSelect={chooseProfile} onDeleteUser={(profile) => void deleteProfile(profile)} /></label><button className="button primary" disabled={!connected || !valid || screenSaving || screenWriteUncertain} onClick={() => void saveToDevice()}><Save />{screenSaving ? '正在保存…' : '保存到设备'}</button><button type="button" className="button secondary" disabled={!connected || !currentProfileApplied || action !== 'idle' || screenSaving || screenTesting} title={!currentProfileApplied ? '请先将屏幕配置保存到设备，再测试清屏。' : '使用设备当前屏幕配置清白，不删除图片槽。'} onClick={() => void testClearScreen()}>{screenTesting ? <LoaderCircle className="spin" /> : <RotateCcw />}{screenTesting ? '正在清屏…' : '测试清屏'}</button></div>
-    {form.color === 10 && <div className="notice warning e6-panel-warning" role="note" aria-label="E6 屏幕接线提醒"><CircleAlert aria-hidden="true" /><div><strong>E6 屏幕接线提醒</strong><span>在普通价签主板上使用时，请用绝缘胶带贴住屏幕排线的第 16 脚，使其悬空；否则屏幕会发热，且非常耗电。</span></div></div>}
+    {form.color === 10 && <div className="notice warning e6-panel-warning" role="note" aria-label="E6 屏幕接线提醒"><CircleAlert aria-hidden="true" /><div><strong>E6 屏幕接线提醒</strong><span>在普通设备主板上使用时，请用绝缘胶带贴住屏幕排线的第 16 脚，使其悬空；否则屏幕会发热，且非常耗电。</span></div></div>}
     {screenRequiresPro(form) && <p className="hint" role="note" aria-label="E6 Pro 说明">E6 屏幕控制需要 Pro；离线预览和图片转换不受限制。</p>}
     {connected && current && <p className="hint screen-readback" aria-label="设备当前屏参">已读取：{current.width}×{current.height} · {colorCode(current.color)} · 旋转 {(current.transform & 3) * 90}° · 逻辑 {canvasSizeForScreen(current).width}×{canvasSizeForScreen(current).height} · 驱动 0x{current.driver.toString(16).padStart(2, '0')} / recipe {current.recipe} · 可视区 {current.visibleX},{current.visibleY},{current.visibleWidth}×{current.visibleHeight} · UI scale {current.nativeUiScale} / schema {current.schemaVersion}</p>}
     {profileEditor && <div className="profile-editor"><label>Profile 备注名（必填）<input value={profileMeta.name} onChange={(event) => setProfileMeta({ ...profileMeta, name: event.target.value })} placeholder="例如：会议室门牌屏" /></label><label>屏幕型号（可空）<input value={profileMeta.model} onChange={(event) => setProfileMeta({ ...profileMeta, model: event.target.value })} placeholder="例如：GDEQ0426T82" /></label><label>来源设备（可空）<input value={profileMeta.device} onChange={(event) => setProfileMeta({ ...profileMeta, device: event.target.value })} placeholder="例如：ZKC21VM" /></label><label>尺寸<input value={profileMeta.size} onChange={(event) => setProfileMeta({ ...profileMeta, size: event.target.value })} placeholder="4.2" /></label><button className="button primary" disabled={!profileMeta.name.trim()} onClick={() => void saveProfile()}><Save />保存为用户 Profile</button></div>}
@@ -582,6 +577,10 @@ function OtaSettings() {
   const downloadController = useRef<AbortController | null>(null)
   const [resumeError, setResumeError, resumeErrorRevision] = useFeedbackMessage('')
   const [resumeRunning, setResumeRunning] = useState(false)
+  const [recoverySelection, setRecoverySelection] = useState<ReturnType<typeof inktagClient.getExpectedRecoveryIdentity>>(null)
+  const recoveryHandoff = inktagClient.getExpectedRecoveryIdentity()
+  const reselectRecovery = phase === 'transfer-error' && recoverySelection && recoveryHandoff &&
+    recoverySelection.deviceId === recoveryHandoff.deviceId && recoverySelection.recoveryName === recoveryHandoff.recoveryName
   const connected = connection === 'connected'
   const recovery = connected && firmwareVersion === 'Recovery'
   const appConnected = connected && /^\d+\.\d+\.\d+(?:\.\d+)?$/.test(firmwareVersion)
@@ -596,7 +595,9 @@ function OtaSettings() {
     downloadController.current?.abort()
     // App -> Recovery temporarily resets board/capabilities. Keep the active
     // transaction and its eventual result visible across that role change.
-    if (action !== 'ota') { setPackage(null); setStatus(''); setProgress(0); setPhase('idle') }
+    if (action !== 'ota' && !(recovery && recoverySelection?.deviceId === deviceId)) {
+      setRecoverySelection(null); setPackage(null); setStatus(''); setProgress(0); setPhase('idle')
+    }
     return () => { selectionEpoch.current++; downloadController.current?.abort() }
   }, [capabilities.ota, boardId, deviceId, connection, firmwareVersion, firmwareBuildEdition])
   const choose = async (file?: File, epoch = ++selectionEpoch.current) => {
@@ -643,6 +644,7 @@ function OtaSettings() {
   }
   const start = async () => {
     if (!pkg) return
+    setRecoverySelection(null)
     setProgress(0); setStatus('正在准备更新'); setPhase('running')
     try {
       const ota = await import('../protocol/ota')
@@ -650,16 +652,33 @@ function OtaSettings() {
       // 100% is a transport checkpoint, not proof that the returning App passed.
       setPhase('success')
     } catch (error) {
-      setStatus(`OTA 失败：${error instanceof Error ? error.message : String(error)}`)
+      if (error instanceof Error && 'code' in error && error.code === 'RECOVERY_SELECT_REQUIRED') {
+        setRecoverySelection(inktagClient.getExpectedRecoveryIdentity())
+        setStatus(error.message)
+      } else setStatus(`OTA 失败：${error instanceof Error ? error.message : String(error)}`)
       setPhase('transfer-error')
     }
+  }
+  const selectRecovery = async () => {
+    if (!recoverySelection) return
+    setResumeRunning(true)
+    try {
+      await inktagClient.selectRecoveryForOta(recoverySelection)
+      setStatus(pkg?.summary ?? '')
+      setPhase('ready')
+    } catch (error) {
+      if (!(error instanceof DOMException && error.name === 'NotFoundError')) {
+        setResumeError(error instanceof Error ? error.message : String(error))
+      }
+    } finally { setResumeRunning(false) }
   }
   const failed = phase === 'package-error' || phase === 'transfer-error'
   const packageInfo = pkg ? otaPackagePresentation(pkg, boardId) : null
   // Recovery role switching shares the device lock, not transfer progress.
   const running = phase === 'running' || (action === 'ota' && !resumeRunning)
   const preparing = phase === 'downloading' || phase === 'checking'
-  const title = failed ? (phase === 'package-error' ? '升级包校验失败' : 'OTA 更新失败')
+  const title = reselectRecovery ? '需要重新连接 Recovery'
+    : failed ? (phase === 'package-error' ? '升级包校验失败' : 'OTA 更新失败')
     : running ? '正在更新固件' : phase === 'success' ? 'OTA 已完成'
       : phase === 'downloading' ? '正在下载在线固件' : phase === 'checking' ? '正在校验升级包' : pkg ? '升级包已通过校验' : '选择固件包'
   return <section><div className="panel-title"><div><h2>固件更新</h2><p>请连接设备查看可用的 OTA 固件包，或选择本地固件包。</p></div>{appConnected && firmwareBuildEdition && <FirmwareBuildBadge edition={firmwareBuildEdition} />}</div>
@@ -675,8 +694,8 @@ function OtaSettings() {
       <button className="button primary" disabled={!pkg || !connected || action !== 'idle' || resumeRunning || running} onClick={() => void start()}>{running ? <LoaderCircle className="spin" /> : <FileUp />}{running ? '正在更新' : '开始 OTA'}</button>
     </div>
     <label className={`drop-zone ${failed ? 'failed' : running || preparing ? 'working' : pkg ? 'ready' : ''}`}>{failed ? <CircleAlert /> : running || preparing ? <LoaderCircle className="spin" /> : pkg ? <CheckCircle2 /> : <FileUp />}<strong>{title}</strong><span>{failed && pkg ? '已选升级包信息见下方。' : phase === 'ready' ? '核对下方包信息后开始更新。' : status || (capabilities.ota === 'none' ? '连接设备后识别更新格式' : `当前平台：${otaPlatformLabel(capabilities.ota, boardId)}`)}</span>{pkg && phase !== 'ready' && <small className="ota-package-note">升级包已通过校验{running || phase === 'transfer-error' ? '；这不代表更新成功。' : ''}</small>}<input type="file" accept=".zip,.img" disabled={capabilities.ota === 'none' || running || resumeRunning || preparing} onChange={(event) => { const file = event.currentTarget.files?.[0]; event.currentTarget.value = ''; void choose(file) }} /></label>
-    {failed && <FeedbackNotice className="library-message error" persistent noticeKey={statusRevision}>{title}：{status} 请重新连接设备确认结果；若升级未完成，重新选择 OTA 应用文件并重试。</FeedbackNotice>}
-    {failed && <div className="ota-failure" role="alert"><CircleAlert aria-hidden="true" /><div><strong>{title}</strong><p>{status}</p><span>{phase === 'package-error' ? '请选择与当前设备匹配的 OTA 应用文件，然后重新开始升级。' : '请重新连接设备确认更新结果；若升级未完成，请重新选择 OTA 应用文件并重试。'}</span></div></div>}
+    {failed && !reselectRecovery && <FeedbackNotice className="library-message error" persistent noticeKey={statusRevision}>{title}：{status} 请重新连接设备确认结果；若升级未完成，重新选择 OTA 应用文件并重试。</FeedbackNotice>}
+    {failed && <div className="ota-failure" role="alert"><CircleAlert aria-hidden="true" /><div><strong>{title}</strong><p>{status}</p><span>{reselectRecovery ? '重新选择同一台 Recovery。连接成功后可用已选固件继续。' : phase === 'package-error' ? '请选择与当前设备匹配的 OTA 应用文件，然后重新开始升级。' : '请重新连接设备确认更新结果；若升级未完成，请重新选择 OTA 应用文件并重试。'}</span>{reselectRecovery && <div className="firmware-online-actions"><button type="button" className="button secondary" disabled={resumeRunning || action !== 'idle'} onClick={() => void selectRecovery()}>重新选择 Recovery</button></div>}</div></div>}
     {resumeError && <FeedbackNotice className="library-message error" role="alert" noticeKey={resumeErrorRevision}>Recovery 操作未完成：{resumeError}</FeedbackNotice>}
     {pendingRecoveryRead && !recovery && !connected && <RecoveryReadButton collapsed onRunningChange={setResumeRunning} />}
     {packageInfo && <section className="ota-package-card" aria-label="升级包信息"><header><h3>升级包信息</h3><span className="ota-platform-label">{packageInfo.platform}</span></header><dl><div><dt>文件名</dt><dd>{packageInfo.fileName}</dd></div><div><dt>应用大小</dt><dd>{packageInfo.applicationSize}</dd></div><div><dt>{packageInfo.versionLabel}</dt><dd>{packageInfo.version}</dd></div>{packageInfo.signatureLabel && <div><dt>签名</dt><dd>{packageInfo.signatureLabel}</dd></div>}</dl><details className="ota-technical-details"><summary>详情</summary><p>{packageInfo.technicalSummary}</p></details></section>}

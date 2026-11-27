@@ -24,7 +24,7 @@ npm run dev -- --host 127.0.0.1
 npm run build
 ```
 
-构建会更新 `webui/dist/static/` 和 `webui/dist/standalone/`。仓库随源码提供这两份产物。静态版供 CLI 本地服务和 HTTPS 静态站使用。离线版可直接打开 `webui/dist/standalone/InkTag-WebUI.html`，请保留旁边的 `assets/`，供字体等资源按需加载。安装和运行发布版无需 Node.js。
+构建输出位于 `webui/dist/static/` 和 `webui/dist/standalone/`。静态版供 CLI 本地服务和 HTTPS 静态站使用。仓库提供的离线版统一在 [webui-standalone/](../webui-standalone/InkTag-WebUI.html)，可打开其中的 HTML，并保留旁边的 `assets/`。打包候选时会用本地新构建更新这份离线版。普通安装和使用无需 Node.js。
 
 重编后回到仓库根目录，重新运行客户端安装脚本即可启动新版 WebUI。
 

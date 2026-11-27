@@ -72,7 +72,7 @@ def package_native(*, family, app, app_elf, recovery, recovery_elf, version, out
     app_proof = verify_code(app_elf.read_bytes(), 'app', linked, family)
     rec_proof = verify_code(recovery_elf.read_bytes(), 'recovery', rec, family)
     parts = tuple(int(part) for part in version['version'].split('.'))
-    if (len(parts) != 3 or any(part < 0 or part > 255 for part in parts) or
+    if (len(parts) not in (3, 4) or any(part < 0 or part > 255 for part in parts) or
         not 0 <= version['protocolVersion'] <= 255 or
         version['otaVersion'] != parts[0]*10000 + parts[1]*100 + parts[2] or
         bytes((version['protocolVersion'], *parts)) not in linked or

@@ -1,7 +1,15 @@
 import { describe, expect, it } from 'vitest'
-import { clampImageScale, imageCoverScale, imageDrawSize, zoomPanAtPoint } from './crop'
+import { clampImagePan, clampImageScale, imageCoverScale, imageDrawSize, zoomPanAtPoint } from './crop'
 
 describe('image crop geometry', () => {
+  it('retains a visible piece of a rotated, scaled image even at all four extremes', () => {
+    const board = { width: 400, height: 300 }
+    const image = imageDrawSize(800, 400, board.width, board.height, 90, 'crop', .25)
+    expect(clampImagePan({ x: 999, y: -999 }, image, board, 90)).toEqual({ x: 238, y: -238 })
+    expect(clampImagePan({ x: -999, y: 999 }, image, board, 90)).toEqual({ x: -238, y: 238 })
+    expect(clampImagePan({ x: -215, y: 190 }, image, board, 90)).toEqual({ x: -215, y: 190 })
+  })
+
   it('allows zooming out below the cover size while keeping a bounded range', () => {
     expect(clampImageScale(.1)).toBe(.25)
     expect(clampImageScale(.75)).toBe(.75)

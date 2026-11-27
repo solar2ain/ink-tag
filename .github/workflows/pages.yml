@@ -72,7 +72,10 @@ jobs:
       - name: Verify the checked-in release WebUI
         if: hashFiles('webui/package-lock.json') != '' && hashFiles('webui/dist/static/index.html') != ''
         working-directory: webui
-        run: node tools/verify-builds.mjs
+        run: |
+          mkdir -p dist/standalone
+          cp -a ../webui-standalone/InkTag-WebUI.html ../webui-standalone/assets dist/standalone/
+          node tools/verify-builds.mjs
       - name: Build WebUI from source when dist is absent
         if: hashFiles('webui/package-lock.json') != '' && hashFiles('webui/dist/static/index.html') == ''
         working-directory: webui

@@ -242,7 +242,9 @@ def main():
     version = json.loads((ROOT/'version.json').read_text(encoding='utf-8'))
     memory, ota, manifest, seed = compose(full, packer, full.HEX['parse_hex'](sdk/SD_FILE),
         app, recovery, assets, version['otaVersion'], args.profile, int(match[1], 16))
-    display = version['version']+'.0'
+    display = version['version']
+    if display.count('.') == 2:
+        display += '.0'
     name = 'InkTag-nrf52811_aesl-v'+display+'-self-built-full.zip'
     staged = evidence/name
     review = write_package(full, staged, memory, ota, assets, manifest)

@@ -90,7 +90,7 @@ InkTag基础版（BASIC）已能满足大部分日常使用需求（通常可充
 | 主控厂商 | 主控 |
 | --- | --- |
 | Goodix 汇顶 | GR5331、GR5513、GR5515 |
-| OnMicro 昂瑞微 | [OM6626](tools/platforms/onmicro/om6626/programmer/INSTALL.md) |
+| OnMicro 昂瑞微 | [OM6626](release/firmware/om6626_zkel/INSTALL.md) |
 | Telink 泰凌微 | TLSR8359（HS9118） |
 | Nordic | nRF52832、nRF52811 |
 | Renesas（原 Dialog） | DA14585 |
@@ -231,7 +231,7 @@ inktag-cli webui start --repo . --enable-tls
 - **已运行 InkTag 的设备**：优先使用 OTA。在“设置 → 固件”连接设备查看可用的 OTA 包，或选择本地已签名应用包，核对信息后开始升级。显示传输 100% 不代表完成；等待应用验身和回连成功。
 - **升级未完成**：保存日志，重新连接确认设备状态；需要继续时重新选择匹配的 OTA 应用包并重试，不盲目重复结果未知的写入。
 
-完整烧录工具的明文代码与配置位于本仓库的 `firmware/<主控_主板>/`，工具不包含固件。本版提供已适配主板的 OTA 与完整固件，烧录工具独立使用。固件与客户端附件均以 [Releases](https://github.com/solar2ain/ink-tag/releases) 实际附件为准。未列出的文件暂不可下载，不要按文件名、屏幕尺寸或相似型号互刷。
+固件全包和本仓库的 [release/firmware/](release/firmware/) 按目标提供 OTA、Full、烧录 BAT 和板型配置。固件与客户端附件均以 [Releases](https://github.com/solar2ain/ink-tag/releases) 实际附件为准。未列出的文件暂不可下载，不要按文件名、屏幕尺寸或相似型号互刷。
 
 操作与限制：[完整烧录](docs/zh-CN/flash.md) · [OTA 与 Recovery](docs/zh-CN/ota.md) · [检查客户端更新](docs/zh-CN/updates.md)
 
@@ -254,6 +254,7 @@ InkTag 涉及多种主控、主板和屏幕组合，现有测试还无法覆盖�
 
 感谢以下项目的作者与贡献者：
 
+- [EPD-nRF5](https://github.com/tsl0922/EPD-nRF5)：InkTag项目的早期参考，墨水屏驱动和日历等功能大量借鉴了该项目。
 - [ATC_TLSR_Paper](https://github.com/atc1441/ATC_TLSR_Paper)：Hanshow／TLSR8359 价签的硬件资料与开放实现参考。
 - [epdoptimize](https://github.com/paperlesspaper/epdoptimize)：电子纸图片颜色量化与抖动。
 - [U8g2 for Adafruit GFX](https://github.com/olikraus/U8g2_for_Adafruit_GFX) 及文泉驿字体项目：字形渲染与中文字体资源。

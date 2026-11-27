@@ -4,39 +4,25 @@
   "firmwareIncluded": false,
   "chip": "gr5331",
   "firmwareFamily": "gr5331_zkc21v",
-  "buildId": "native-guide-1a0298bb0d30",
-  "sourceCommit": "1a0298bb0d30c1904e44a650ba8bb8451fa318c6",
-  "nativeUserRuntime": "Windows PowerShell5.1/.NET + native GProgrammer + J-Link7.88j; no Python",
-  "legacyRuntime": "Existing setup/probe/backup/flash PS entries retain locked Python dependencies",
+  "buildId": "native-guide-48c59270c822",
+  "sourceCommit": "48c59270c8224552bfb4c022dbcef8c3b1566b70",
   "runtime": "tools/internal/runtime",
   "files": {
     "CLEAN_FLASHING.md": {
-      "bytes": 11382,
-      "sha256": "8b75751cf0acaf7153c0efea5fe0140abf4dd0d642fdcac00e4495d22096268a"
-    },
-    "LICENSE": {
-      "bytes": 34523,
-      "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0"
+      "bytes": 11767,
+      "sha256": "4061df3f7ed263b0bb8bd5cf583ba22f07c251c1e225d8c8376645387e99d083"
     },
     "README.en.md": {
-      "bytes": 3524,
-      "sha256": "80370e18c0a8baaa254077098e03f36078a127da6252720570e09d8262b62118"
+      "bytes": 312,
+      "sha256": "89ff899d29a3abaf293acba153146626753f8b5a5d271c55418cea3f1b6de14c"
     },
     "README.md": {
-      "bytes": 3037,
-      "sha256": "15359e59d44b0c28eb943c6ce011d07c59238432cbd98a7bd6099e6de6441d7e"
+      "bytes": 291,
+      "sha256": "23caa3ad965d93e2d0ece01adb3f5e1054fe71f9d8b566eb34b3c2c8d176f0fd"
     },
     "THIRD_PARTY_NOTICES.md": {
-      "bytes": 1556,
-      "sha256": "33e59ed7e1e69e64007376841d148a8bf0caab055d2a9fa89fba0f2168b386d0"
-    },
-    "tools/backup.ps1": {
-      "bytes": 1154,
-      "sha256": "a14d9ecb90bb77acd9b174e93c43dd485620cd2d4220400ec28a053151b8d32f"
-    },
-    "tools/check.ps1": {
-      "bytes": 522,
-      "sha256": "4d73ea3952e6f33f6509a91687fa0eea64bfe26919912a2c7c3c6e0f52e9ed02"
+      "bytes": 446,
+      "sha256": "c0ca81de001c8ea2b627cb38300be7e8dfc52683e997a48d462c251874727037"
     },
     "tools/configs/ZK_EL_GR5331_2.13_V1.1.toml": {
       "bytes": 549,
@@ -54,137 +40,33 @@
       "bytes": 940,
       "sha256": "5b29235871b5dc95e47f8963e7ffcd58431e5639477dab423de919e448817815"
     },
-    "tools/flash.ps1": {
-      "bytes": 1595,
-      "sha256": "35d564e12f49de0cd4092ae14199a91f818c1810b73a81c688f4c83707b05bb7"
-    },
     "tools/generate-bin.bat": {
       "bytes": 193,
       "sha256": "81ad1fb72ef2ddaf4ff708736db2e504d11b6c68fe278d33caca71bb9f8669f9"
-    },
-    "tools/internal/dependencies-windows-x64.lock.json": {
-      "bytes": 12245,
-      "sha256": "005b2ce6794071df14bc3b1243c77d3a3d4913c072dd641eb9892de689725a48"
-    },
-    "tools/internal/requirements-windows-x64.lock": {
-      "bytes": 564,
-      "sha256": "ab4d7144d834fee8c5b8d35ad2809cd04bc5f88aea3b61014f35645345578f2c"
     },
     "tools/internal/runtime/cli/LICENSE": {
       "bytes": 35184,
       "sha256": "e0eedba615d5cd1b986afb6c5b3a4b1ae33713e7e9dc74d19daec5e3221f9d2e"
     },
     "tools/internal/runtime/cli/LICENSING.md": {
-      "bytes": 895,
-      "sha256": "dcb0e5d6a881b790f415b59c48ae6005335e01a6e950ee5c70a74af48604345a"
+      "bytes": 907,
+      "sha256": "e81d7d108ea993e4f07d77cd594e8e74a4512507b2ed74606cd356bb33b6a134"
     },
     "tools/internal/runtime/cli/THIRD_PARTY_NOTICES.md": {
-      "bytes": 2519,
-      "sha256": "93dbae1f137d66d26570660901ec37395d98caa7a73298d46778f696767c22a4"
+      "bytes": 2638,
+      "sha256": "053d0f9d474825d8a1b9d6a20837ea22500dba52263e94dfdac79e595767dfaa"
     },
-    "tools/internal/runtime/firmware/boards/goodix-pin-backends.json": {
+    "tools/internal/runtime/metadata/goodix-pin-backends.json": {
       "bytes": 4055,
       "sha256": "837a274dc9ef0bb36eaa4801cbd7ca893e8dcce6e188603ff43661e62e30ae6e"
     },
-    "tools/internal/runtime/firmware/factory/native-font-template.json": {
-      "bytes": 15713,
-      "sha256": "52602986a8ac141dff31b35b60ee0d1bebce7ad88b74b81c433ceeb2100b56f1"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/flash-goodix-gprogrammer.ps1": {
-      "bytes": 33479,
-      "sha256": "0b057cf0e83ae35f8c8868b6c98843d3ccd31f02af6e65cf5bca9db015fe69a2"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/goodix-backup-archive.ps1": {
-      "bytes": 5806,
-      "sha256": "55c5b2a8dff1a5a344d098db61a945437438ff552a286d1e473b1b27f985e001"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/goodix-capture-window.ps1": {
-      "bytes": 5702,
-      "sha256": "5572ef6dc8ac929dc6d71612864624d74c345244573fca82419581e6a9455303"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/goodix-configured-full.ps1": {
-      "bytes": 5517,
-      "sha256": "d53b26cf6ac3919bd8afd2cd09f2bc7021209bdec6da3b478125a19fc117af15"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/goodix-native-output.ps1": {
-      "bytes": 363,
-      "sha256": "6b915a22a92905c5ca5bada265adc9ea08b30e05e5c399f119cd8fffad62238f"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/goodix-probe-entry.ps1": {
-      "bytes": 2103,
-      "sha256": "7befa2b62293c8a6cedabff8f0ac42bfa765d0f79df68de6cc7dbc7b7802cb08"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/goodix-stock-entry.ps1": {
-      "bytes": 10911,
-      "sha256": "ae92c2406207c0b62d34a8dfdc2a43a552d20d4d98e8f378b141e6544ac55904"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/goodix-vendor-read.ps1": {
-      "bytes": 8273,
-      "sha256": "2ff0a07473eba817f92295032dd83fea804adcbfc282f249071ef1cec6bea84c"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/goodix-xip-read.ps1": {
-      "bytes": 5815,
-      "sha256": "e9dc639e8d82e8668e144091c176b185bc18208a280805245a79ac112768bdfa"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/gr533x-package.ps1": {
-      "bytes": 2348,
-      "sha256": "6557bbd18c4f01d184fa2fe231bab048e5a84221419384d4101afac43041a3b8"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/gr551x-cache-ready.JLinkScript": {
-      "bytes": 665,
-      "sha256": "b2ec35a3dfa78b66a0391eb87404c18ae7ce366515cc55e5facebde2a9507595"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/manual-reset-capture.JLinkScript": {
-      "bytes": 3687,
-      "sha256": "f30f0d20009bf0a5a72867b797b017155b3ace777e9b65b1cc218a089eca9127"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/common/tools/internal/terminal-log.ps1": {
-      "bytes": 8463,
-      "sha256": "4f27c0cbb8f124139338c2bb1a209ea6154cf099c390ee2a9a026f88a72a45ed"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/gr5331/tools/backup.ps1": {
-      "bytes": 2599,
-      "sha256": "b2a3a066f749304fbc7e6106a3e25c2c0a20352942a9c0bed2dcfc5e7b295952"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/gr5331/tools/flash-bin.bat": {
-      "bytes": 188,
-      "sha256": "ddc6ae975a28eba5cabca8d8927f34f6e7b9a7f659f39bf44478bd36378140e7"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/gr5331/tools/flash-zh.bat": {
-      "bytes": 104,
-      "sha256": "6e073df352a3f7e278df8fee166a425d9aec06647dd812bd631f5a79862d33a0"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/gr5331/tools/flash.bat": {
-      "bytes": 936,
-      "sha256": "45858e863ebd0ed8670a272ce6fc56b1746a8a79c1c72b7fd4bf2163a84d2083"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/gr5331/tools/flash.ps1": {
-      "bytes": 1388,
-      "sha256": "269355668b60eefda4bd0362d1cb33a4f4f9a698f74b9450bf3122ff826c8bbb"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/gr5331/tools/generate-bin.bat": {
-      "bytes": 191,
-      "sha256": "580031bbbccfafc91753cd54efc9149f3f5ee982f9314512f93b9c14267eed4d"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/gr5331/tools/probe.ps1": {
-      "bytes": 710,
-      "sha256": "5fe1505ddf0aa6d0e317522ca38bf1a53d1de39dd6e83d003e8286f2cbda4600"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/gr5331/tools/restore.ps1": {
-      "bytes": 1354,
-      "sha256": "c473fb0bac5a55a7ff5a54c1d29beb086fc998246bc70b786dd62163d38454ff"
-    },
-    "tools/internal/runtime/firmware/ports/goodix/gr551x/tools/internal/gr551x-package.ps1": {
-      "bytes": 21597,
-      "sha256": "c7baa664194655ba9e33b75f58028c6a7d08a0857a0ed3062c37667ada1ed69a"
+    "tools/internal/runtime/metadata/native-font-template.json": {
+      "bytes": 15705,
+      "sha256": "79b13ea1d63e084556d618e368038ea6b882c3185716996ce580d1d983de6258"
     },
     "tools/internal/runtime/tools/flash-log.ps1": {
       "bytes": 726,
       "sha256": "536114fb6b957209a45890cecbe4f6352f3112119c6662cfc62b29df84ec8772"
-    },
-    "tools/internal/runtime/tools/hardware/activation-preservation.ps1": {
-      "bytes": 5115,
-      "sha256": "3af89fec09d30a67b70596fdaedbed5f0be2c0a650837748414eec526063029f"
     },
     "tools/internal/runtime/tools/hardware/activation_preservation.py": {
       "bytes": 3454,
@@ -199,8 +81,8 @@
       "sha256": "edcd67bb256982a726e1b5c35b122a8a428bc181a86de7f133016476c1415e4b"
     },
     "tools/internal/runtime/tools/hardware/flash-workflow.py": {
-      "bytes": 64362,
-      "sha256": "90b910b3ee1a4ae2a84b10f4602d87827343ebc1ec38ab473ad8d70a3d6125c6"
+      "bytes": 64368,
+      "sha256": "8cc745b0528354da31f8ae85b4442e434832af9d21d30d574e744ff240c65515"
     },
     "tools/internal/runtime/tools/hardware/goodix-backup-boards.json": {
       "bytes": 1450,
@@ -211,32 +93,32 @@
       "sha256": "ee9d12419836f4d3498666f0fa9b6af33676a7583fe4ac0e2e61613f97eb1cfb"
     },
     "tools/internal/runtime/tools/hardware/goodix-clean-bytes.cs": {
-      "bytes": 7417,
-      "sha256": "8d3b28103264afd8e83f15a20adf69766c7f96654e1b1fa12b0c19a1b8d11990"
+      "bytes": 7321,
+      "sha256": "1d7305f8b124be4089631bf1705b18860d5d5ade4d8607fd562de442ee3db25a"
     },
     "tools/internal/runtime/tools/hardware/goodix-clean-flash.ps1": {
-      "bytes": 9500,
-      "sha256": "1ee3994a55a90531f0cb374b40e0b4a49566daeb8245bee2e7090d9628426f96"
+      "bytes": 9305,
+      "sha256": "b32031addcdc75eead2122be473b885d5d49df38a463ba5f5c31627a6dbf9e1a"
     },
     "tools/internal/runtime/tools/hardware/goodix-clean-format.ps1": {
-      "bytes": 44786,
-      "sha256": "269f34b7e982eed4510506415479390296fc0cb3e7490fe0b01b72326ad08789"
+      "bytes": 44962,
+      "sha256": "2c55ac18e17ad86cfa981ed7fdf3ed365db451b33ae480a0dc3b20d72db28587"
     },
     "tools/internal/runtime/tools/hardware/goodix-clean-guide.ps1": {
       "bytes": 6262,
       "sha256": "a6574aa2622ef02f9cb3a7450602c4fcd155f78e28d1b7d9005dfee111e81033"
     },
     "tools/internal/runtime/tools/hardware/goodix-clean-programmer.ps1": {
-      "bytes": 19665,
-      "sha256": "28748b82216d495ad7300988ae4505620db0dc1fcec59fc9b67ab0f49fa90d24"
+      "bytes": 20165,
+      "sha256": "4562ba0e91980b09b8d0ad0b5084f81f985d483224800bd434a6a5bbedd3fc01"
     },
     "tools/internal/runtime/tools/hardware/goodix-clean-screen-rules.json": {
-      "bytes": 12679,
-      "sha256": "6f871a38883142d087c4e121f818eb18801e22aed28f9091740d5b29da053c70"
+      "bytes": 11895,
+      "sha256": "115697782b0269829599a54d0925535bc07a0ac73fa8509d835683db2402921e"
     },
     "tools/internal/runtime/tools/hardware/goodix-stock-workflow.py": {
-      "bytes": 21316,
-      "sha256": "722bcaf57ec9795e0ae3be9048c229a36c9604c9d51be99022d4ae9c3af7df3c"
+      "bytes": 21322,
+      "sha256": "012dc988c23d806653ecf19514a429e00778b2f0a84e51de27cec96607f3a5df"
     },
     "tools/internal/runtime/tools/hardware/goodix_activation_retention.py": {
       "bytes": 3137,
@@ -287,8 +169,8 @@
       "sha256": "fc607086de7b28b67be5edeb92a63e8e12d0e499c7adf78b8bd3fdac4c56d03f"
     },
     "tools/internal/runtime/tools/hardware/goodix_offline/goodix_package.py": {
-      "bytes": 12038,
-      "sha256": "a83c09e3185c4cf7bdfa5ee03e7f11baa3ed2a8e297f6166cad74b42bc6ec669"
+      "bytes": 12082,
+      "sha256": "ac7151583fe952074f28c6d8110ddb4463efaa57fd59e04c29480f0568746fc0"
     },
     "tools/internal/runtime/tools/hardware/goodix_offline/models.py": {
       "bytes": 7850,
@@ -308,23 +190,23 @@
     },
     "tools/internal/runtime/tools/hardware/goodix_offline/provenance.json": {
       "bytes": 2324,
-      "sha256": "e7df2520892f94f77cbbde74693d20bc908ec808032957c2f0727d73491a63c6"
+      "sha256": "d538e73168d82f8848b6e5eec4369c4d68bcb6225acc7df049d4e1e37e1a4405"
     },
     "tools/internal/runtime/tools/hardware/goodix_offline/safe_archive.py": {
       "bytes": 5004,
       "sha256": "45c578c4fc00cd3f820873c25e8b451e5aafee4523832a71fff5d0d93d535976"
     },
     "tools/internal/runtime/tools/hardware/goodix_pin_config.py": {
-      "bytes": 11551,
-      "sha256": "7e824e1af17fe12cc9b3d1b640e4ee35a72f87165121b1b63800c0c25cde4ab2"
+      "bytes": 11544,
+      "sha256": "d2dbc361b09d2d99b673856f0dec06a55e4a9ca9203f1198e5e9fdc2e1c4b99f"
     },
     "tools/internal/runtime/tools/hardware/goodix_portable_executor.py": {
-      "bytes": 29188,
-      "sha256": "dd0986534ab0ca8fb01c568f4e2460a58e021ece6e400368831dfe29040a33bd"
+      "bytes": 29200,
+      "sha256": "2f59cc4739094076a31672086d8c182bcfc114820645efde44fb605fe8b2a3e4"
     },
     "tools/internal/runtime/tools/hardware/goodix_release_full.py": {
-      "bytes": 14863,
-      "sha256": "51614a6256e49c9ca17fc5dba97231c7ae226f30e18cb75d38d9bdfaba06574b"
+      "bytes": 15021,
+      "sha256": "68208a922c3e3d6a249ae9fc1bc93953601c8d2943cc7209d2194230ec1c1d09"
     },
     "tools/internal/runtime/tools/hardware/goodix_release_seed.py": {
       "bytes": 3332,
@@ -338,6 +220,94 @@
       "bytes": 4389,
       "sha256": "ce6e5b060d335dddcdaad32ce85e3bc5a5240f48eeb56e1156b9a45d290132bf"
     },
+    "tools/internal/runtime/tools/platforms/goodix/common/programmer/internal/flash-goodix-gprogrammer.ps1": {
+      "bytes": 33479,
+      "sha256": "0b057cf0e83ae35f8c8868b6c98843d3ccd31f02af6e65cf5bca9db015fe69a2"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/common/programmer/internal/goodix-backup-archive.ps1": {
+      "bytes": 5806,
+      "sha256": "55c5b2a8dff1a5a344d098db61a945437438ff552a286d1e473b1b27f985e001"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/common/programmer/internal/goodix-capture-window.ps1": {
+      "bytes": 5702,
+      "sha256": "5572ef6dc8ac929dc6d71612864624d74c345244573fca82419581e6a9455303"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/common/programmer/internal/goodix-configured-full.ps1": {
+      "bytes": 5517,
+      "sha256": "d53b26cf6ac3919bd8afd2cd09f2bc7021209bdec6da3b478125a19fc117af15"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/common/programmer/internal/goodix-native-output.ps1": {
+      "bytes": 363,
+      "sha256": "6b915a22a92905c5ca5bada265adc9ea08b30e05e5c399f119cd8fffad62238f"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/common/programmer/internal/goodix-probe-entry.ps1": {
+      "bytes": 2103,
+      "sha256": "7befa2b62293c8a6cedabff8f0ac42bfa765d0f79df68de6cc7dbc7b7802cb08"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/common/programmer/internal/goodix-stock-entry.ps1": {
+      "bytes": 10917,
+      "sha256": "1d1ae30858cbc3ba8753c566fe263d298b434e5231bda78036538d367f40d832"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/common/programmer/internal/goodix-vendor-read.ps1": {
+      "bytes": 8273,
+      "sha256": "2ff0a07473eba817f92295032dd83fea804adcbfc282f249071ef1cec6bea84c"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/common/programmer/internal/goodix-xip-read.ps1": {
+      "bytes": 5815,
+      "sha256": "e9dc639e8d82e8668e144091c176b185bc18208a280805245a79ac112768bdfa"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/common/programmer/internal/gr533x-package.ps1": {
+      "bytes": 2348,
+      "sha256": "6557bbd18c4f01d184fa2fe231bab048e5a84221419384d4101afac43041a3b8"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/common/programmer/internal/gr551x-cache-ready.JLinkScript": {
+      "bytes": 665,
+      "sha256": "b2ec35a3dfa78b66a0391eb87404c18ae7ce366515cc55e5facebde2a9507595"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/common/programmer/internal/manual-reset-capture.JLinkScript": {
+      "bytes": 3687,
+      "sha256": "f30f0d20009bf0a5a72867b797b017155b3ace777e9b65b1cc218a089eca9127"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/common/programmer/internal/terminal-log.ps1": {
+      "bytes": 8463,
+      "sha256": "4f27c0cbb8f124139338c2bb1a209ea6154cf099c390ee2a9a026f88a72a45ed"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/gr5331/programmer/backup.ps1": {
+      "bytes": 2604,
+      "sha256": "39d912b194722fac6cf7ada1931f2e505553fb77f671d11af511bef7eec12f15"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/gr5331/programmer/flash-bin.bat": {
+      "bytes": 188,
+      "sha256": "ddc6ae975a28eba5cabca8d8927f34f6e7b9a7f659f39bf44478bd36378140e7"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/gr5331/programmer/flash-zh.bat": {
+      "bytes": 104,
+      "sha256": "6e073df352a3f7e278df8fee166a425d9aec06647dd812bd631f5a79862d33a0"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/gr5331/programmer/flash.bat": {
+      "bytes": 936,
+      "sha256": "45858e863ebd0ed8670a272ce6fc56b1746a8a79c1c72b7fd4bf2163a84d2083"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/gr5331/programmer/flash.ps1": {
+      "bytes": 1393,
+      "sha256": "9ce319eea82d4f7b63e044bbe8003900ade4b16adcb9c52bc246135ba28469b8"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/gr5331/programmer/generate-bin.bat": {
+      "bytes": 191,
+      "sha256": "580031bbbccfafc91753cd54efc9149f3f5ee982f9314512f93b9c14267eed4d"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/gr5331/programmer/probe.ps1": {
+      "bytes": 715,
+      "sha256": "3c496c15a826ee6b71ff4be4b6f0833e972e020f317ebed2997afd076298b95d"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/gr5331/programmer/restore.ps1": {
+      "bytes": 1360,
+      "sha256": "647b50e96057cd9a44a7b7e7aba4dfa1489168660b93e3fa5343add6ee32a833"
+    },
+    "tools/internal/runtime/tools/platforms/goodix/gr551x/programmer/internal/gr551x-package.ps1": {
+      "bytes": 21609,
+      "sha256": "d6ac5a35143be23ef04ca7598c254cf7d1319fd82879b5fa0d4d0cab79368445"
+    },
     "tools/internal/runtime/tools/powershell-cli.ps1": {
       "bytes": 3106,
       "sha256": "2a0651a4cdeff9bc46f3002fa2f6b30aeb0a207932831868c53312c557a570ce"
@@ -345,55 +315,11 @@
     "tools/internal/runtime/tools/stock-backup.ps1": {
       "bytes": 11807,
       "sha256": "aa4d9523f4c4a4fde59a003e608d0941e5509bf9662bfb007266e3e1fdc2cab7"
-    },
-    "tools/internal/standalone-entry.ps1": {
-      "bytes": 4885,
-      "sha256": "4193161ffc7de8d9f3aa615016b24440522f5357983b440ac43ccf72865181a0"
-    },
-    "tools/internal/standalone-runtime.py": {
-      "bytes": 9538,
-      "sha256": "4e6a4576d0cdfedee04a4409cf765a2a7a5ff10551da0e490f10d0149c6be8bc"
-    },
-    "tools/internal/wheels/cffi-2.1.1-cp312-cp312-win_amd64.whl": {
-      "bytes": 185919,
-      "sha256": "f53e442b08449d42821fa4a4fba000095af9f62742a500f978a9f557ec44339a"
-    },
-    "tools/internal/wheels/colorama-0.4.6-py2.py3-none-any.whl": {
-      "bytes": 25335,
-      "sha256": "4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"
-    },
-    "tools/internal/wheels/cryptography-50.0.0-cp311-abi3-win_amd64.whl": {
-      "bytes": 3840395,
-      "sha256": "bd1c592e4d5974f0d08d4888e432157adba757c66da0246918e43677fafa2d30"
-    },
-    "tools/internal/wheels/pycparser-3.0-py3-none-any.whl": {
-      "bytes": 48172,
-      "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992"
-    },
-    "tools/internal/wheels/pyyaml-6.0.3-cp312-cp312-win_amd64.whl": {
-      "bytes": 154003,
-      "sha256": "5fcd34e47f6e0b794d17de1b4ff496c00986e1c83f7ab2fb8fcfe9616ff7477b"
-    },
-    "tools/internal/wheels/qrcode-8.2-py3-none-any.whl": {
-      "bytes": 45986,
-      "sha256": "16e64e0716c14960108e85d853062c9e8bba5ca8252c0b4d0231b9df4060ff4f"
-    },
-    "tools/probe.ps1": {
-      "bytes": 1131,
-      "sha256": "7905a6cc4fea772414a5971a4606d5555bb17097c0ac875c00ab271f49adb6ce"
-    },
-    "tools/restore.ps1": {
-      "bytes": 801,
-      "sha256": "559cca17a96c086beaa9bd9c311830e4b493e3d35cce944ae6b3780c4ab25b93"
-    },
-    "tools/setup.ps1": {
-      "bytes": 601,
-      "sha256": "d42e6e8603730d6eef7a7360d890cd17652852cc914a052535dcba15c9ad6b72"
     }
   },
   "buildTarget": "gr5331_zkel",
   "brand": "zkel",
-  "toolsVersion": "0.2.0.8",
+  "toolsVersion": "0.2.0.9",
   "format": "plaintext-directory",
-  "baselineManifestSha256": "5f0aec24d9e101132df2bf5f2f3854f7ead3d49d91780a4de3fb9f7c20d1f6e1"
+  "baselineManifestSha256": "680fd44948b5fd96aad1b0c8b8944ab75ec3f83c82717fd3dc206334cb385072"
 }

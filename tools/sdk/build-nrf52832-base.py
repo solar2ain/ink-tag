@@ -138,6 +138,14 @@ def linked(repo, role):
             ('elf',raw), ('bin',app), ('hex',(output/(prefix+'.hex')).read_bytes()))}
 
 
+def fill_recovery_padding(recovery, rec_hex):
+    # Intel HEX omits linker alignment bytes that the linked BIN contains.
+    # Full must preserve these exact bytes, as the PRO packager does.
+    for address, value in enumerate(recovery, start=0x58000):
+        if rec_hex.setdefault(address, value) != value:
+            raise ValueError(f'Recovery HEX and linked BIN differ at 0x{address:05X}')
+
+
 def package(repo, output, config=None):
     repo, output = Path(repo).resolve(), Path(output).resolve()
     if output.exists():
@@ -146,6 +154,7 @@ def package(repo, output, config=None):
     version = (1 << 16) | version_info['otaVersion']
     app, app_hex, app_refs = linked(repo, 'app')
     recovery, rec_hex, rec_refs = linked(repo, 'recovery')
+    fill_recovery_padding(recovery, rec_hex)
     recovery_version, epoch, _ = recovery_identity(recovery, repo)
     app_context(app, version)
     helpers = runpy.run_path(str(repo/'tools/sdk/merge-ihex.py'))

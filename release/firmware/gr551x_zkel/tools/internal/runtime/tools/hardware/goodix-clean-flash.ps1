@@ -63,12 +63,9 @@ try {
             Assert-Gr (Test-Path -LiteralPath $folder -PathType Container) $script:GrGuideText.boardMissing
             return $folder
         }
-        $folder=Join-Path $script:GrCleanRoot ('firmware/ports/goodix/'+$Port+'/tools/configs')
-        if(!(Test-Path -LiteralPath $folder -PathType Container)) {
-            $bundle=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../../../..'))
-            Assert-Gr (Test-Path -LiteralPath (Join-Path $bundle 'inktag-goodix-tools.json') -PathType Leaf) 'Board preset directory missing'
-            $folder=Join-Path $bundle 'tools/configs'
-        }
+        $bundle=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../../../..'))
+        Assert-Gr (Test-Path -LiteralPath (Join-Path $bundle 'inktag-goodix-tools.json') -PathType Leaf) 'Board preset directory missing'
+        $folder=Join-Path $bundle 'tools/configs'
         return $folder
     }
     function Select-GrBoard {
@@ -92,7 +89,7 @@ try {
     if($Action -ceq 'flash') {
         if(!$Materials){$Materials=Read-GrPath 'Initialization materials directory'}
         $materialReview=Read-GrCleanMaterials $Materials $Port;$package=$materialReview.firmware;$selected=$materialReview.config
-        $sourceFirmware=Join-Path $Materials 'components.zip'
+        $sourceFirmware=$materialReview.firmwarePath
     } else {
         if($InteractiveMenu -and !$Firmware){$Firmware=Select-GrFirmware $ToolDirectory $Port}
         if($Action -ceq 'preserve' -and !$Config){$Config=Select-GrBoard}

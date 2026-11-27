@@ -99,7 +99,11 @@ def rewrite_reference(repo: Path, source: Path, target: Path, reference: str) ->
         return 'https://github.com/solar2ain/ink-tag/blob/main/' + relative
     elif relative.startswith('webui/public/assets/'):
         output = repo/'webui/assets'/original.name
-    elif relative == 'release/firmware' or relative.startswith(('release/firmware/', 'firmware/boards/', 'ports/', 'tools/')):
+    elif relative in {
+        'release/firmware',
+        'firmware/ports/dialog/da14585/SOURCE_NOTICES.md',
+        'firmware/ports/nordic/nrf52811/THIRD_PARTY_NOTICES.md',
+    } or relative.startswith(('release/firmware/', 'firmware/boards/', 'ports/', 'tools/')):
         mode = 'tree' if original.is_dir() else 'blob'
         quoted = '/'.join(quote(part) for part in relative.split('/'))
         return f'https://github.com/solar2ain/ink-tag/{mode}/main/{quoted}' + ('#'+parts.fragment if parts.fragment else '')

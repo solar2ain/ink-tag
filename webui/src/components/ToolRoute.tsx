@@ -14,10 +14,14 @@ class ToolBoundary extends Component<{ children: ReactNode; name: string; retry:
   }
   render() {
     if (!this.state.failed) return this.props.children
-    return <section className="panel tool-route-error" role="alert"><h2>{this.props.name}未能打开</h2>
-      <p>{this.state.resource ? `${this.props.name}的资源未能加载，请先重试。若仍失败，请在设备操作结束后刷新网页。` : `${this.props.name}发生了错误。可以重试，或先切换到其他页面。`}</p>
-      <button className="button secondary" onClick={this.props.retry}>重试打开{this.props.name}</button>
-      <p className="muted">重试不会刷新网页，也不会断开蓝牙连接。</p></section>
+    return <div className="page">
+      <section className="panel tool-route-error" role="alert">
+        <h2>{this.props.name}未能打开</h2>
+        <p>{this.state.resource ? `${this.props.name}的资源未能加载，请先重试。若仍失败，请在设备操作结束后刷新网页。` : `${this.props.name}发生了错误。可以重试，或先切换到其他页面。`}</p>
+        <button className="button secondary" onClick={this.props.retry}>重试打开{this.props.name}</button>
+        <p className="muted">重试不会刷新网页，也不会断开蓝牙连接。</p>
+      </section>
+    </div>
   }
 }
 

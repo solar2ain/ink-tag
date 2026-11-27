@@ -149,7 +149,10 @@ def package(proof_path, version_path):
         raise ValueError('Version input differs from native compiler capture')
     version = json.loads(version_data)
     semver = version['version']
-    if semver != '.'.join(str(version[k]) for k in ('major', 'minor', 'patch')):
+    expected = '.'.join(str(version[k]) for k in ('major', 'minor', 'patch'))
+    if version.get('revision'):
+        expected += f".{version['revision']}"
+    if semver != expected:
         raise ValueError('Version components differ')
     epoch = version['recoveryEpoch']
     raw = {}
@@ -166,7 +169,7 @@ def package(proof_path, version_path):
     recovery_version = version['recoveryVersion']
     if recovery_version.encode() + b'\0' not in raw['recovery']:
         raise ValueError('CRC-only Recovery actual software version is missing or mismatched')
-    app = OTA['package'](raw['application'], semver + '.0', epoch)
+    app = OTA['package'](raw['application'], semver + '.0' if semver.count('.') == 2 else semver, epoch)
     recovery = recovery_image(raw['recovery'], recovery_version + '.0')
     full = assemble(app, recovery, raw['bootloader'], raw['gui'], epoch)
     checks = verify_source_full(full, app, recovery, raw['bootloader'], raw['gui'], policy, epoch)

@@ -83,7 +83,7 @@ function Assert-GrGui {
     Assert-Gr ($end -eq $Gui.Length) 'Trailing GUI bytes'
 }
 function Get-GrDefaultGui {
-    $t=Get-GrJson ([IO.File]::ReadAllBytes((Join-Path $script:GrCleanRoot 'firmware/factory/native-font-template.json')))
+    $t=Get-GrJson ([IO.File]::ReadAllBytes((Join-Path $script:GrCleanRoot 'metadata/native-font-template.json')))
     $raw=[Convert]::FromBase64String($t.package_base64)
     Assert-Gr ([InkTag.GoodixBytes]::Sha($raw) -ceq $t.package_sha256) 'Default GUI template hash changed'
     Assert-GrGui $raw
@@ -113,7 +113,7 @@ function Read-GrConfig {
     } else {throw 'Native entry accepts TOML or JSON; existing Python entry retains YAML support'}
     Assert-GrKeys $data @('format_version','board_marking','screen','gpio')
     Assert-Gr ($data.format_version -is [int] -and $data.format_version -eq 1 -and $data.board_marking -is [string]) 'Invalid config version/marking'
-    $facts=(Get-GrJson ([IO.File]::ReadAllBytes((Join-Path $script:GrCleanRoot 'firmware/boards/goodix-pin-backends.json')))).backends
+    $facts=(Get-GrJson ([IO.File]::ReadAllBytes((Join-Path $script:GrCleanRoot 'metadata/goodix-pin-backends.json')))).backends
     $match=@($facts.PSObject.Properties|Where-Object{$_.Value.board_marking -ceq $data.board_marking});Assert-Gr ($match.Count -eq 1) 'Unregistered/ambiguous exact board marking'
     $backend=$match[0].Name;$f=$match[0].Value;$screen=$data.screen
     $geometry=@('width','height','visible_x','visible_y','visible_width','visible_height')
@@ -162,11 +162,13 @@ function Read-GrApp {
     $members=Read-GrArchive $Raw @{'manifest.json'=16384;'application.bin'=1048576}
     $m=Get-GrJson $members['manifest.json'];$a=$m.application;$app=$members['application.bin'];$family=$m.board
     $chip=if($family -ceq 'gr5331_zkc21v'){'GR5331'}else{'GR5513'};$g=Get-GrGeometry $family $chip;$layout=Get-GrLayout $family
-    Assert-Gr ($m.format -ceq 'inktag-ota-v1' -and $m.transport -ceq 'goodix-otas-v2' -and $m.layout -ceq 'layout-v1' -and $m.compatibilityEpoch -eq 1 -and $m.release -ceq '0.2.2') 'Wrong App container/version/epoch/layout'
+    Assert-Gr ($m.format -ceq 'inktag-ota-v1' -and $m.transport -ceq 'goodix-otas-v2' -and $m.layout -ceq 'layout-v1' -and $m.compatibilityEpoch -eq 1 -and $m.release -cin @('0.2.2','0.2.2.1')) 'Wrong App container/version/epoch/layout'
     Assert-Gr ($a.file -ceq 'application.bin' -and $a.size -is [int] -and $a.size -gt 40 -and $a.size -le $g.appEnd-$g.app-904 -and $a.transfer_size -eq $app.Length -and $app.Length -le $g.appEnd-$g.app -and $a.active_address -eq $g.base+$g.app -and $a.slot_size -eq $g.appEnd-$g.app) 'Wrong native App size/address'
     Assert-Gr ([InkTag.GoodixBytes]::Sha($app) -ceq $a.sha256) 'App SHA mismatch'
     $n=$a.size;$body=[InkTag.GoodixBytes]::Slice($app,0,$n);$info=[InkTag.GoodixBytes]::Slice($app,$n,48)
     Assert-Gr ([InkTag.GoodixBytes]::U16($info,0) -eq 0x4744 -and [InkTag.GoodixBytes]::U16($info,2) -eq 1 -and [InkTag.GoodixBytes]::U32($info,4) -eq $n -and [InkTag.GoodixBytes]::U32($info,8) -eq $a.checksum -and [InkTag.GoodixBytes]::Sum($body) -eq $a.checksum -and [InkTag.GoodixBytes]::U32($info,12) -eq $g.base+$g.app -and [InkTag.GoodixBytes]::U32($info,16) -eq $g.base+$g.app -and [InkTag.GoodixBytes]::U32($info,40) -eq $layout -and [InkTag.GoodixBytes]::U32($info,44) -eq ([uint32]::MaxValue -bxor $layout)) 'Native App descriptor mismatch'
+    $versionBytes=if($m.release -ceq '0.2.2.1'){[byte[]]@($m.protocol,0,2,2,1)}else{[byte[]]@($m.protocol,0,2,2)}
+    Assert-Gr ($m.releaseVersion -eq 202 -and $m.protocol -is [int] -and $m.protocol -ge 0 -and $m.protocol -le 255 -and [InkTag.GoodixBytes]::Contains($body,$versionBytes)) 'Native App release mismatch'
     $public=$null;$rsa=$family -cne 'gr5331_zkc21v'
     if($Base) {
         Assert-GrKeys $m.signature @('required','algorithm','policy')
@@ -179,7 +181,7 @@ function Read-GrApp {
     } else {
         $s=$m.signature;$expected=if($rsa){'a410a4f0ce51dd2c89ba8cca1dade9b9'}else{'3d96ce5cf20e58cca5f5e291ca2bfd81'}
         Assert-Gr ($app.Length -eq $n+904 -and $s.required -eq $true -and $s.trust_profile -ceq 'production' -and $s.algorithm -ceq $(if($rsa){'rsa-pss-sha256'}else{'ecdsa-p256-sha256'}) -and $s.key_id -ceq $(if($rsa){'inktag-gr551x-ota-v1'}else{'inktag-gr5331-ota-v1'}) -and $s.public_key_hash -ceq $expected -and $s.signature_extension_size -eq 856 -and $s.signed_trailer_size -eq 904) 'Wrong Pro publisher policy'
-        Assert-Gr ($m.chip -ceq $(if($rsa){'GR551x'}else{'GR5331'}) -and $m.releaseVersion -eq 202 -and $m.protocol -ge 0 -and $m.protocol -le 255 -and [InkTag.GoodixBytes]::Contains($body,[byte[]]@($m.protocol,0,2,2))) 'Pro native release mismatch'
+        Assert-Gr ($m.chip -ceq $(if($rsa){'GR551x'}else{'GR5331'})) 'Pro native chip mismatch'
         Assert-Gr ([InkTag.GoodixBytes]::U32($app,$n+48) -eq 3735928559L -and [Text.Encoding]::ASCII.GetString($app,$n+120,4) -ceq 'SIGN') 'Not a sign-only container'
         $public=[InkTag.GoodixBytes]::Slice($app,$n+128,$(if($rsa){520}else{65}))
         Assert-Gr ([InkTag.GoodixBytes]::Sha($public).Substring(0,32) -ceq $expected) 'Untrusted embedded publisher key'
@@ -210,7 +212,7 @@ function Read-GrFirmware {
     Assert-Gr ($rec.Length -ge 8 -and $rec.Length -le 114688 -and [InkTag.GoodixBytes]::Contains($rec,[byte[]]@(73,75,82,86,1,0,1,1)) -and [InkTag.GoodixBytes]::Contains($rec,[byte[]]@(73,75,83,80,1,2)) -and ![InkTag.GoodixBytes]::Contains($rec,[byte[]]@(73,75,83,80,1,0)) -and ![InkTag.GoodixBytes]::Contains($rec,[byte[]]@(73,75,83,80,1,1))) 'Common Recovery1.0.1/CRC-only policy required'
     if($isBase) {
         $m=Get-GrJson $data['full.json'];$chips=if($app.family -ceq 'gr551x_zkc42v'){@('GR5513','GR5515')}elseif($Chip -ceq 'GR5331'){@('GR5331')}else{@('GR5513')}
-        Assert-Gr ($m.schema -ceq 'inktag-gr-base-full-v1' -and $m.sourceProfile -ceq 'base' -and $m.family -ceq $app.family -and $m.layout -ceq 'layout-v1' -and $m.compatibilityEpoch -eq 1 -and $m.release -ceq '0.2.2' -and $m.integrityPolicy -ceq 'crc-only' -and $m.publisherSignature -eq $false -and ![bool](Compare-Object @($m.chips) $chips -CaseSensitive)) 'Invalid Base Full descriptor'
+        Assert-Gr ($m.schema -ceq 'inktag-gr-base-full-v1' -and $m.sourceProfile -ceq 'base' -and $m.family -ceq $app.family -and $m.layout -ceq 'layout-v1' -and $m.compatibilityEpoch -eq 1 -and $m.release -ceq $app.manifest.release -and $m.integrityPolicy -ceq 'crc-only' -and $m.publisherSignature -eq $false -and ![bool](Compare-Object @($m.chips) $chips -CaseSensitive)) 'Invalid Base Full descriptor'
         Assert-GrKeys $m.files @('app-ota.zip','recovery.bin','gui-font.bin');foreach($name in $m.files.PSObject.Properties.Name){Assert-GrRecord $data[$name] $m.files.$name}
         Assert-GrRecord $data['gui-font.bin'] $m.gui;Assert-GrGui $data['gui-font.bin']
         Assert-Gr ($m.recovery.version -ceq '1.0.1' -and $m.recovery.epoch -eq 1 -and [InkTag.GoodixBytes]::Equal([InkTag.GoodixBytes]::Slice($rec,$m.recoveryPolicyOffset,6),[byte[]]@(73,75,83,80,1,2))) 'Recovery metadata/policy mismatch'

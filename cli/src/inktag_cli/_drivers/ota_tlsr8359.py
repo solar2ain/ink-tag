@@ -1047,7 +1047,7 @@ async def attest_application(
             release_parts = tuple(int(part) for part in manifest["release"].split("."))
         except (KeyError, ValueError, AttributeError) as error:
             raise RuntimeError("OTA manifest release version is invalid") from error
-        if len(release_parts) != 3 or any(not 0 <= part <= 0xFF for part in release_parts):
+        if len(release_parts) not in (3, 4) or any(not 0 <= part <= 0xFF for part in release_parts):
             raise RuntimeError("OTA manifest release version is outside the GATT range")
         expected_gatt_version = bytes((int(manifest["protocol"]), *release_parts))
         if version != expected_gatt_version:

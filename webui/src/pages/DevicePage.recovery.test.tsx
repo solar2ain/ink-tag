@@ -46,7 +46,10 @@ it.each(['nordic', 'dialog', 'goodix', 'telink', 'onmicro'])('uses the exact que
 it('requires explicit confirmation, with cancel causing zero entry calls', async () => {
   await chooseOtaFile()
   await act(async () => button('进入 Recovery').click())
-  expect(host.querySelector('[role=dialog]')?.textContent).toContain('不发送升级包或清除用户数据')
+  const dialog = host.querySelector('[role=dialog]')
+  expect(dialog?.textContent).toContain('不发送升级包或清除用户数据')
+  expect(dialog?.textContent).toContain('Recovery 模式下 MCU 不会休眠，十分耗电，请不要长期停留在 Recovery 模式。')
+  expect(dialog?.textContent).not.toContain('安全退出是否可用由已安装的 Recovery 决定')
   expect(ota.enterFixedRecovery).not.toHaveBeenCalled()
   await act(async () => button('取消').click())
   expect(ota.enterFixedRecovery).not.toHaveBeenCalled()

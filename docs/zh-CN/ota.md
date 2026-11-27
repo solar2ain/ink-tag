@@ -17,7 +17,7 @@ WebUI 在固件更新页显示当前应用的 BASIC 或 PRO 标记，并检查�
 
 Recovery 是设备的无线更新模式，通常显示对应身份的 `_OTA` 蓝牙名。CLI 和 WebUI 可在已安装 Recovery 提供相应能力时安全返回正常应用。旧 Recovery 或应用无效时可能只允许上传合格固件，不能强制退出。
 
-CLI 入口为 `inktag-cli device -a ADDRESS recovery enter` 和 `inktag-cli device -a ADDRESS recovery resume-app`；应用进入 Recovery 仍受设备密码验证控制。Recovery 校验固件签名、兼容性和完整性，不会以退出操作替代这些检查。
+CLI 入口为 `inktag-cli device -a ADDRESS recovery enter` 和 `inktag-cli device -a ADDRESS recovery resume-app`。应用进入 Recovery 仍受设备密码验证控制。Recovery 检查固件兼容性和完整性，并按已安装版本的策略决定是否要求发布者签名。
 
 ## 发生中断或错误
 

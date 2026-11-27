@@ -999,7 +999,7 @@ export function FindPage() {
         </button>
       </div>
       {device.connection === 'connected' && deviceHasFindIdentity && !supportsFindOwnerReplacement(device.findCapabilities) && <p className="find-device-hint">当前固件尚未开放身份替换。</p>}
-      {!enabled && <p className="find-device-hint">开启前需保存加密设备信息，并导入支持查询的本地 WebUI，否则无法获取该设备的位置。设备本身无法找回查询密钥。</p>}
+      {!enabled && <p className="find-device-hint">开启 Find 时，查询密钥会加密保存在当前浏览器。导出备份后，可导入支持查询的本地 WebUI 查看位置。</p>}
       {deviceKeyMissingPrivate && <div className="notice warning"><AlertTriangle /><div><strong>本机缺少查询私钥</strong><span>请导入此前保存的设备信息。替换或删除设备身份需要原身份资料，无法从设备找回私钥。</span></div></div>}
       {selectedOtherIdentity && <div className="notice warning"><AlertTriangle /><div><strong>当前选中了其他标签</strong><span>请在“已登记标签”中选择当前设备。</span></div></div>}
       <p className="find-device-note">关闭广播不会删除已登记标签和历史轨迹。</p>

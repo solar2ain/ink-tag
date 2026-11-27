@@ -2,107 +2,115 @@
   "format": "DA-programmer-tools-v1",
   "kind": "tools-only",
   "buildTarget": "da14585_aesl",
-  "toolsVersion": "0.2.0.19",
+  "toolsVersion": "0.2.0.20",
   "source": "364bcfcfa7634f9980868e897f20c31247c1d500",
   "firmwareIncluded": false,
-  "fullHelperBundled": false,
+  "fullHelperBundled": true,
   "physicalWriterQualified": false,
   "files": {
-    "LICENSE": {
-      "bytes": 34523,
-      "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0"
-    },
     "README.md": {
-      "bytes": 342,
-      "sha256": "5e89a3699b4e37ca19fb4e7b814f6935c6622d0add7cdb6babd2bbbd5bc32acc"
+      "bytes": 172,
+      "sha256": "804880eb5c4f735ea20198a553fb59e023fa4d2c3d424767d8e6d4ff8e098e9a"
     },
-    "tools/hardware/da14585-board-config.py": {
-      "bytes": 8286,
-      "sha256": "de2444d92ba74e328614db2f35a3f323e8668bb4e10af610753d346e39dc80b3"
+    "tools/DA14585-SRAM-HELPER-NOTICE.md": {
+      "bytes": 2280,
+      "sha256": "3f04d4c78b087f59fda5e22dde786f29221c11a6ff745d3aae9a366cc40f3760"
     },
-    "tools/hardware/da14585-clean-bin.py": {
-      "bytes": 16716,
-      "sha256": "d33bbf988b51492cf86a4fd00dfb18629e68f5aa8410770e9d14bf30bd8f50e7"
+    "tools/README.md": {
+      "bytes": 6843,
+      "sha256": "3b37ae1c3281075d7475bcf98f465a58a16d53de7b2d88ca5df6cec395943d50"
     },
-    "tools/hardware/da14585-commander-backend.py": {
-      "bytes": 22303,
-      "sha256": "8c77d72d3b792802d172c024db5054bf5c5e0a432a74791fb538d022eaebab84"
-    },
-    "tools/hardware/da14585-commander-readback.py": {
-      "bytes": 7012,
-      "sha256": "b3eba06204d33fc3390b0f4c17641859bf4847fa15a8e15ba59623c6bccb4044"
-    },
-    "tools/hardware/da14585-commander-session.py": {
-      "bytes": 14465,
-      "sha256": "f2abd9a5969aef0a8252f6ba9538f2a3e7aad1e7552ce1937805f697fa80c1ca"
-    },
-    "tools/hardware/da14585-conpty.py": {
-      "bytes": 7528,
-      "sha256": "198f96e89b76c69727361074ca5528081bed7b94a119ad9ef724915ab81f4582"
-    },
-    "tools/hardware/da14585-dap-session.py": {
-      "bytes": 1360,
-      "sha256": "3c96a761be4eb76ac8d157c97986bb9efbc9f170d2e17486e0fcc735e19b22a7"
-    },
-    "tools/hardware/da14585-full-backend.py": {
-      "bytes": 35923,
-      "sha256": "f0062cc2803b492284f363b47de8858b7957860e7024bbe64d66119f1d9d1517"
-    },
-    "tools/hardware/da14585-full-state.py": {
-      "bytes": 9246,
-      "sha256": "e7a33fb25f652c87a12a326a2db58c0df3c0a40cc5b20b52978b74b0668c4660"
-    },
-    "tools/hardware/da14585-full-transaction.py": {
-      "bytes": 42514,
-      "sha256": "5b8a0891211e83f743cffe725a7536918286e3c8fafaa18d2e6cdc056ba9c169"
-    },
-    "tools/hardware/da14585-image-verify.py": {
-      "bytes": 13905,
-      "sha256": "c2e50ddde6d59272e0a207f153c0250230e8200b3c3fd88845ea48b8ee15400a"
-    },
-    "tools/programmer/README.md": {
-      "bytes": 7435,
-      "sha256": "396e828d62d8c2fb773b834cb07c34d29f8876c02816533192863e1e1d2c36a4"
-    },
-    "tools/programmer/configs/asel29.toml": {
+    "tools/configs/asel29.toml": {
       "bytes": 597,
       "sha256": "fcece5b344980e62384a69fe631361d6c4ee5fb79eab1ea2d86513d6b06e3b8e"
     },
-    "tools/programmer/configs/asel42-ssd1683.toml": {
+    "tools/configs/asel42-ssd1683.toml": {
       "bytes": 593,
       "sha256": "3fe3af291b6577fe743a5a9d40001d035181a01721815f919c14710af831a6f0"
     },
-    "tools/programmer/configs/asel42.toml": {
+    "tools/configs/asel42.toml": {
       "bytes": 595,
       "sha256": "d3876be4badf98565c7cfd1188b3e351db8c2ea00083febd644068ae3030616d"
     },
-    "tools/programmer/flash-bin.bat": {
-      "bytes": 116,
-      "sha256": "b9a36779dfd21569f1cb93222044aca6c76164dba235ea0e538302bed2850c1c"
+    "tools/flash-bin.bat": {
+      "bytes": 113,
+      "sha256": "fea434b91753f35bd8547789ac7ea527eb77fcd1eccc6d7ecc9b63b828304b30"
     },
-    "tools/programmer/flash-launch.bat": {
-      "bytes": 649,
-      "sha256": "a67e97e3317d7246223c0785fd4d861eb19b1779bd8a0aa62d4748020374a884"
+    "tools/flash-zh.bat": {
+      "bytes": 300,
+      "sha256": "a890c68472eb3881273547cb8330805ddca35e1cc594106de83d326cffb33260"
     },
-    "tools/programmer/flash-zh.bat": {
-      "bytes": 273,
-      "sha256": "ca98c402b592bb246006ae9dc030af2f32ca1a029efdd3a757a541f548ef3157"
+    "tools/flash.bat": {
+      "bytes": 293,
+      "sha256": "508900dce370aafd2329d209479442e844ba1de9ddaab3a43d2f7fa71f4c69ae"
     },
-    "tools/programmer/flash.bat": {
-      "bytes": 266,
-      "sha256": "49ea6c9c9abd13fee0d6baa13f5edb540e0d22b3381cf444a4122e75c6587158"
+    "tools/generate-bin.bat": {
+      "bytes": 112,
+      "sha256": "19d267698f2cc9cb3669b9fd862afc57046e5d4f7ca865a6cad050eee6619ece"
     },
-    "tools/programmer/generate-bin.bat": {
-      "bytes": 115,
-      "sha256": "6d226693f791d5f413ffc2a1c206c57963207e3b8a65cd8e192bac05cb606056"
+    "tools/internal/InkTag-da14585-guarded-helper-0f183172ce2d.bin": {
+      "bytes": 2832,
+      "sha256": "0f183172ce2d0ce86bf32c27dde76d2d77ceb0ce1a4f974dea1489ba6395dd7c"
     },
-    "tools/programmer/vendor-dependencies.json": {
-      "bytes": 1735,
-      "sha256": "97077f346be087c8e32546f806bd5fa005241891ad6fec90b4b8c71b9b3f390b"
+    "tools/internal/da14585-board-config.py": {
+      "bytes": 8286,
+      "sha256": "de2444d92ba74e328614db2f35a3f323e8668bb4e10af610753d346e39dc80b3"
+    },
+    "tools/internal/da14585-clean-bin.py": {
+      "bytes": 16058,
+      "sha256": "7c57b47d85cb97d80ab9068422c13c1479cd6fd79f8219e2812fd03b38711ddf"
+    },
+    "tools/internal/da14585-commander-backend.py": {
+      "bytes": 22303,
+      "sha256": "8c77d72d3b792802d172c024db5054bf5c5e0a432a74791fb538d022eaebab84"
+    },
+    "tools/internal/da14585-commander-readback.py": {
+      "bytes": 7012,
+      "sha256": "b3eba06204d33fc3390b0f4c17641859bf4847fa15a8e15ba59623c6bccb4044"
+    },
+    "tools/internal/da14585-commander-session.py": {
+      "bytes": 14465,
+      "sha256": "f2abd9a5969aef0a8252f6ba9538f2a3e7aad1e7552ce1937805f697fa80c1ca"
+    },
+    "tools/internal/da14585-conpty.py": {
+      "bytes": 7528,
+      "sha256": "198f96e89b76c69727361074ca5528081bed7b94a119ad9ef724915ab81f4582"
+    },
+    "tools/internal/da14585-dap-session.py": {
+      "bytes": 1360,
+      "sha256": "3c96a761be4eb76ac8d157c97986bb9efbc9f170d2e17486e0fcc735e19b22a7"
+    },
+    "tools/internal/da14585-full-backend.py": {
+      "bytes": 35734,
+      "sha256": "7c8c9266b3c8093f660bdd622fc2dda06a57681a508303f2052e6b2fb0d4744e"
+    },
+    "tools/internal/da14585-full-state.py": {
+      "bytes": 9246,
+      "sha256": "e7a33fb25f652c87a12a326a2db58c0df3c0a40cc5b20b52978b74b0668c4660"
+    },
+    "tools/internal/da14585-full-transaction.py": {
+      "bytes": 42514,
+      "sha256": "5b8a0891211e83f743cffe725a7536918286e3c8fafaa18d2e6cdc056ba9c169"
+    },
+    "tools/internal/da14585-image-verify.py": {
+      "bytes": 13905,
+      "sha256": "c2e50ddde6d59272e0a207f153c0250230e8200b3c3fd88845ea48b8ee15400a"
+    },
+    "tools/internal/flash-launch.bat": {
+      "bytes": 625,
+      "sha256": "5bb8bd5e1d35e960040eeb7ce1133349c6f68179224a3e4453bcdc47f562e856"
+    },
+    "tools/internal/portable-files.json": {
+      "bytes": 323,
+      "sha256": "3027ea1347d26ed42bb2969b1b446c6eba885c03ae90fe22a102c5eb80133d7e"
+    },
+    "tools/internal/vendor-dependencies.json": {
+      "bytes": 1453,
+      "sha256": "74f976667a16c5b3e187765117f457fd5dd8fb53e3ed5bac7e01a119342a479d"
     }
   },
-  "baseToolsVersion": "0.2.0.18",
-  "baseToolManifestSha256": "0120c34fac0f51b9fb60fb3836cb432440dff40ea485bfe7655250d3de121c1d",
+  "baseToolsVersion": "0.2.0.19",
+  "baseToolManifestSha256": "9aa9fe4fca80a562e3150a33b4f3f2a5cab0ffaa4d64c68fee4187d0b64f22a4",
   "sourcePatches": [
     {
       "commit": "b9167f6ebf4531541d1033d718a21a142522ad74",

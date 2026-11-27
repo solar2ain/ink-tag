@@ -8,13 +8,14 @@ import json
 import os
 from pathlib import Path
 import re
+import runpy
 import shutil
 import subprocess
 import sys
 from tempfile import TemporaryDirectory
 import zipfile
 
-from basic_release import INVENTORY, digest, inspect_basic_pair, native_inventory
+from basic_release import INVENTORY, digest, four_part_version, inspect_basic_pair, native_inventory
 from client_content import CREATION_FONT_NOTICES, GUIDES, render_documents, scriptless_document, user_web_files
 from publication_scope import artifacts, verify_firmware_bytes
 
@@ -22,9 +23,9 @@ from publication_scope import artifacts, verify_firmware_bytes
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def file_inventory(*paths):
-    listing = subprocess.check_output(
-        ['git', 'ls-files', '-z', '--cached', '--others', '--exclude-standard', '--', *paths], cwd=ROOT)
+def file_inventory(*paths, tracked_only=False):
+    source = ['--cached'] if tracked_only else ['--cached', '--others', '--exclude-standard']
+    listing = subprocess.check_output(['git', 'ls-files', '-z', *source, '--', *paths], cwd=ROOT)
     return {name: (ROOT / name).read_bytes()
             for raw in set(listing.split(b'\0')) if raw
             for name in (raw.decode('utf-8'),) if (ROOT / name).is_file()}
@@ -58,6 +59,28 @@ def refresh_manual():
                 f'href="{home}index.html"'.encode(), f'href="{home}InkTag-WebUI.html"'.encode()))
 
 
+def standalone_runtime():
+    """Use the checked-in standalone export, or refresh it from a local build."""
+    generated = ROOT / 'webui/dist/standalone'
+    destination = ROOT / 'webui-standalone'
+    if not (generated / 'InkTag-WebUI.html').is_file():
+        return {name.removeprefix('webui-standalone/'): body for name, body in
+                file_inventory('webui-standalone/InkTag-WebUI.html', 'webui-standalone/assets', tracked_only=True).items()}
+
+    files = {path.relative_to(generated).as_posix(): path.read_bytes()
+             for path in sorted(generated.rglob('*')) if path.is_file()}
+    if any(name != 'InkTag-WebUI.html' and not name.startswith('assets/') for name in files):
+        raise ValueError('Unexpected file in standalone WebUI build')
+    for name in file_inventory('webui-standalone/assets', tracked_only=True):
+        if name.removeprefix('webui-standalone/') not in files:
+            (ROOT / name).unlink()
+    for name, body in files.items():
+        output = destination / name
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_bytes(body)
+    return files
+
+
 def reference(path, tag, kind):
     return {'type': kind, 'name': path.name, 'bytes': path.stat().st_size, 'sha256': digest(path.read_bytes()),
             'downloadUrl': f'https://github.com/solar2ain/ink-tag/releases/download/{tag}/{path.name}'}
@@ -72,6 +95,7 @@ def prepare(tag, *, replace=False):
     previous = next((entry for entry in record['releases'] if entry['releaseTag'] == tag), None)
     if previous and (previous['published'] or previous['releaseReady'] or not previous['candidateOnly']):
         raise ValueError('Published or approved release tags cannot be rebuilt')
+    cli_version = runpy.run_path(str(ROOT / 'cli/src/inktag_cli/_version.py'))['__version__']
     assets = ROOT / '.release-assets' / tag
     if assets.exists() and not replace:
         raise ValueError('Candidate attachments already exist; compare or explicitly --replace local candidate files')
@@ -89,16 +113,13 @@ def prepare(tag, *, replace=False):
     index = (ROOT/'webui/licenses/index.html')
     index.write_bytes(static['licenses/index.html'])
     (ROOT/'webui-standalone/licenses/index.html').write_bytes(static['licenses/index.html'])
-    standalone = file_inventory('webui/dist/standalone')
-    standalone = {name.removeprefix('webui/dist/standalone/'): body for name, body in standalone.items()}
+    standalone = standalone_runtime()
     for name, body in static.items():
         if name.startswith(('manual/', 'licenses/')):
             standalone[name] = (ROOT / 'webui-standalone' / name).read_bytes() if (ROOT / 'webui-standalone' / name).is_file() else body
     standalone['LICENSE.txt'] = static['LICENSING.txt']
     standalone['THIRD_PARTY_NOTICES.txt'] = static['THIRD_PARTY_NOTICES.txt']
     standalone['README.txt'] = (ROOT / 'webui-standalone/README.txt').read_bytes()
-    dist = ROOT / 'webui/dist/standalone/InkTag-WebUI.html'
-    shutil.copyfile(dist, ROOT / 'webui-standalone/InkTag-WebUI.html')
 
     web_file = assets / f'InkTag-WebUI-static-{tag}.zip'
     offline_file = assets / f'InkTag-WebUI-standalone-{tag}.zip'
@@ -132,7 +153,7 @@ def prepare(tag, *, replace=False):
         subprocess.run([sys.executable, '-m', 'build', '--no-isolation', '--outdir', str(assets), str(project)],
                        env=dict(os.environ, SOURCE_DATE_EPOCH='1795478400'), check=True, stdout=subprocess.DEVNULL)
     cli_distributions = [reference(assets / name, tag, 'cli') for name in
-                         (f'inktag_cli-{version}-py3-none-any.whl', f'inktag_cli-{version}.tar.gz')]
+                         (f'inktag_cli-{cli_version}-py3-none-any.whl', f'inktag_cli-{cli_version}.tar.gz')]
     source = file_inventory('webui/src', 'webui/tools', 'webui/public', 'webui/vite.config.ts',
                             'webui/index.html', 'webui/leafer-lab.html', 'webui/package.json', 'webui/package-lock.json',
                             'webui/tsconfig.app.json', 'webui/tsconfig.node.json', 'webui/tsconfig.json',
@@ -151,25 +172,21 @@ def prepare(tag, *, replace=False):
     checksum = ROOT / INVENTORY
     for target, entry in sorted(native['targets'].items()):
         ota_ref, = entry['artifacts']['ota']
-        fulls = [a for a in entry['artifacts']['full'] if not a['path'].endswith('.hex')]
-        if not fulls and target == 'nrf52811_aesl':
-            # The maintained programmer consumes the ZIP; the primary HEX is
-            # also supplied for users of a graphical programmer.
-            fulls = [{'path': p.relative_to(root).as_posix()} for p in (root / target / 'full').glob('*.zip')]
-        full_ref, = fulls
+        full_ref, = entry['artifacts']['full']
         pair = [root / ota_ref['path'], root / full_ref['path']]
         if any(not p.is_relative_to(root / target) or p.relative_to(ROOT).as_posix() not in inventory for p in pair):
             raise ValueError(f'Invalid native artifact paths for {target}')
         qualified = inspect_basic_pair(ROOT, target, *pair)
-        if (qualified['version'] != version + '.0' or
+        if (qualified['version'] != four_part_version(version) or
                 qualified['target']['layout'] != entry.get('otaLayout', entry['layout']) or
                 qualified['target']['compatibilityEpoch'] != entry['epoch']):
             raise ValueError(f'Native artifact metadata differs from the distribution inventory: {target}')
         rows = []
         public = []
         for kind, source_path in zip(('ota', 'full'), pair):
-            sha = digest(source_path.read_bytes())
-            name = f'InkTag-{target}-{kind}-v{qualified["version"]}-{sha[:12]}{source_path.suffix}'
+            name = f'InkTag-BASIC-{qualified["version"]}-{target}-{kind}{source_path.suffix}'
+            if source_path.name != name:
+                raise ValueError(f'Unexpected {kind} firmware filename: {source_path.name}')
             destination = assets / name
             shutil.copyfile(source_path, destination)
             item = reference(destination, tag, kind)
@@ -189,23 +206,30 @@ def prepare(tag, *, replace=False):
                            releaseScope='candidate', artifacts=public, publication=qualified,
                            recoveryVersion=entry['recoveryVersion'], boardProfiles=entry['boardProfiles']))
 
+    bundle_file = assets / f'InkTag-BASIC-{version}-firmware.zip'
+    bundle_files = {name.removeprefix('release/firmware/'): (ROOT / name).read_bytes()
+                    for name in (*inventory, INVENTORY)}
+    write_zip(bundle_file, bundle_file.stem, bundle_files)
+    bundle = reference(bundle_file, tag, 'firmware-bundle')
+
     web, offline, client, sources = (reference(p, tag, k) for p, k in
         ((web_file, 'web'), (offline_file, 'web-standalone'), (cli_file, 'cli'), (source_file, 'source-material')))
     client.update(requiresPython='>=3.11', includesLocalServer=True)
     release = dict(releaseTag=tag, channel='stable', **pending, sourceMaterials=[sources], firmware=firmware,
+                   firmwareBundle=bundle,
                    components={'webui': dict(version=version, buildId=web_build, buildNumber=0, artifacts=[web, offline]),
-                               'cli': dict(version=version, buildId='sha256:' + client['sha256'], buildNumber=0,
+                               'cli': dict(version=cli_version, buildId='sha256:' + client['sha256'], buildNumber=0,
                                            artifacts=[client, *cli_distributions])})
     verify_firmware_bytes(ROOT, release, assets)
     record['releases'] = [r for r in record['releases'] if r['releaseTag'] != tag] + [release]
     record['firmwareEnabled'] = True
     write_json(record_path, record)
     manifest = dict(schemaVersion=2, product='InkTag', repository='solar2ain/ink-tag', releaseTag=tag,
-                    version=version, webuiVersion=version, cliVersion=version, edition='basic', channel='stable',
+                    version=version, webuiVersion=version, cliVersion=cli_version, edition='basic', channel='stable',
                     components=['cli', 'firmware', 'webui'], candidateOnly=True, releaseReady=False,
                     firmwareSelection=dict(included=True, published=False, boards=[f['buildTarget'] for f in firmware],
                         kinds=['ota', 'full'], publicationRecord='releases/record.json', state='prepared-release-snapshot'),
-                    boards=boards, programmerTools=tools, web=web, webStandalone=offline, cli=client,
+                    boards=boards, programmerTools=tools, firmwareBundle=bundle, web=web, webStandalone=offline, cli=client,
                     cliDistributions=cli_distributions, sourceMaterials=[sources])
     manifest_path = ROOT / 'firmware/manifest.json'
     write_json(manifest_path, manifest)

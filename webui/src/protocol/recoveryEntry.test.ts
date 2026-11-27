@@ -38,7 +38,7 @@ it.each(['goodix', 'onmicro', 'telink', 'dialog', 'nordic'] as const)('uses the 
   await vi.runAllTimersAsync(); await run
   expect(entry).toHaveBeenCalledOnce()
   if (type === 'goodix') expect(window.GoodixOta!.enterRecovery).toHaveBeenCalledExactlyOnceWith(server, expect.objectContaining({ isCurrent: expect.any(Function) }))
-  expect(reconnect).toHaveBeenCalledExactlyOnceWith(device, expect.any(Number))
+  expect(reconnect).toHaveBeenCalledExactlyOnceWith(device, expect.any(Number), true)
   expect(useDeviceStore.getState().action).toBe('idle')
 })
 it.each(['another-grant', ''])('rejects a changed target %s before issuing entry', async id => {

@@ -5,33 +5,39 @@ import { useDeviceStore } from '../store/device'
 
 const device = { id: 'same-tlsr-grant', name: 'IKT_TL_80FA' } as BluetoothDevice
 const boundary = new Error('test boundary before any firmware write')
-let enter: ReturnType<typeof vi.spyOn>, release: ReturnType<typeof vi.spyOn>
+let enter: ReturnType<typeof vi.spyOn>, release: ReturnType<typeof vi.spyOn>, reconnect: ReturnType<typeof vi.spyOn>
 let transfer: ReturnType<typeof vi.fn>
 beforeEach(() => {
   vi.useFakeTimers(); useDeviceStore.getState().resetDevice()
   transfer = vi.fn().mockRejectedValue(boundary)
-  vi.stubGlobal('window', { TelinkOta: { acquireRecoverySession: transfer } })
+  vi.stubGlobal('window', { TelinkOta: { acquireRecoverySession: transfer, isTransientGattError: () => false } })
   vi.stubGlobal('document', { createElement: () => ({ remove() {} }), head: { appendChild() {} } })
   vi.spyOn(inktagClient, 'getDevice').mockReturnValue(device)
   vi.spyOn(inktagClient, 'getGattServer').mockReturnValue({ connected: true } as BluetoothRemoteGATTServer)
   vi.spyOn(inktagClient, 'getOtaRecoveryType').mockReturnValue(null)
   enter = vi.spyOn(inktagClient, 'enterOtaRecovery').mockResolvedValue(undefined)
-  release = vi.spyOn(inktagClient, 'releaseTelinkAppForOta').mockResolvedValue({ deviceId: device.id, recoveryName: 'IKT_TL_80FA_OTA' })
+  release = vi.spyOn(inktagClient, 'releaseForRecovery').mockResolvedValue(undefined)
+  vi.spyOn(inktagClient, 'getExpectedRecoveryIdentity').mockReturnValue({ deviceId: device.id, recoveryName: 'IKT_TL_80FA_OTA' })
+  vi.spyOn(inktagClient, 'getVerifiedRecoveryName').mockReturnValue('IKT_TL_80FA_OTA')
+  reconnect = vi.spyOn(inktagClient, 'reconnectDevice').mockImplementation(async () => {
+    vi.mocked(inktagClient.getOtaRecoveryType).mockReturnValue('telink')
+  })
   vi.spyOn(inktagClient, 'takeTelinkRecoveryForOta').mockReturnValue({ deviceId: device.id, recoveryName: 'IKT_TL_80FA_OTA' })
 })
 afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); vi.useRealTimers() })
 
 it('awaits accepted enter then ordinary-client release before native discovery', async () => {
   let released = false
-  release.mockImplementation(async () => { released = true; return { deviceId: device.id, recoveryName: 'IKT_TL_80FA_OTA' } })
+  release.mockImplementation(async () => { released = true })
   transfer.mockImplementation(async () => { expect(released).toBe(true); throw boundary })
   const run = transferOta({ type: 'telink', payload: {}, summary: '' } as any, () => {})
   const result = expect(run).rejects.toThrow(boundary)
   await vi.runAllTimersAsync(); await result
   expect(enter).toHaveBeenCalledTimes(1)
-  expect(release).toHaveBeenCalledWith(device.id)
+  expect(release).toHaveBeenCalledWith({ deviceId: device.id, recoveryName: 'IKT_TL_80FA_OTA' })
   expect(enter.mock.invocationCallOrder[0]).toBeLessThan(release.mock.invocationCallOrder[0])
-  expect(release.mock.invocationCallOrder[0]).toBeLessThan(transfer.mock.invocationCallOrder[0])
+  expect(release.mock.invocationCallOrder[0]).toBeLessThan(reconnect.mock.invocationCallOrder[0])
+  expect(reconnect.mock.invocationCallOrder[0]).toBeLessThan(transfer.mock.invocationCallOrder[0])
   expect(transfer).toHaveBeenCalledTimes(1)
 })
 
@@ -42,6 +48,7 @@ it.each(['enter', 'release'])('never retries enter or discovers after failed %s'
   const result = expect(run).rejects.toThrow()
   await vi.runAllTimersAsync(); await result
   expect(enter).toHaveBeenCalledTimes(1)
+  expect(reconnect).not.toHaveBeenCalled()
   expect(transfer).not.toHaveBeenCalled()
   if (phase === 'enter') expect(release).not.toHaveBeenCalled()
 })
@@ -51,6 +58,6 @@ it('retains an already connected Recovery without enter or ordinary-App release'
   const run = transferOta({ type: 'telink', payload: {}, summary: '' } as any, () => {})
   const result = expect(run).rejects.toThrow(boundary)
   await vi.runAllTimersAsync(); await result
-  expect(enter).not.toHaveBeenCalled(); expect(release).not.toHaveBeenCalled()
+  expect(enter).not.toHaveBeenCalled(); expect(release).not.toHaveBeenCalled(); expect(reconnect).not.toHaveBeenCalled()
   expect(transfer).toHaveBeenCalledTimes(1)
 })

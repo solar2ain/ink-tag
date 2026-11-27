@@ -23,6 +23,7 @@ describe('all-platform Recovery choice dialog', () => {
     const html = render()
     expect(html).toContain('设备处于 Recovery')
     expect(html).toContain('IKT_GR_1234_OTA')
+    expect(html).toContain('Recovery 模式下 MCU 不会休眠，十分耗电，请不要长期停留在 Recovery 模式。')
     expect(html).toContain('进入 OTA 页面')
     expect(html).toContain('退出 Recovery')
     expect(html.match(/<button /g)).toHaveLength(2)

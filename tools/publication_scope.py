@@ -27,6 +27,8 @@ def artifacts(release):
     values=[a for c in release['components'].values() for a in c['artifacts']]
     values += [a for f in release.get('firmware',[]) for a in f['artifacts']]
     values += release.get('sourceMaterials',[])
+    if release.get('firmwareBundle'):
+        values.append(release['firmwareBundle'])
     result={}
     for a in values:
         if a['name'] in result and result[a['name']]!=a:raise ValueError('Conflicting release attachment')
@@ -35,6 +37,13 @@ def artifacts(release):
 
 def firmware_binding(repo, record, release, manifest):
     selected=release.get('firmware',[])
+    bundle = release.get('firmwareBundle')
+    if bundle != manifest.get('firmwareBundle'):
+        raise ValueError('Firmware bundle differs between manifest and record')
+    if bundle and (not selected or manifest.get('edition') != 'basic' or
+                       bundle.get('type') != 'firmware-bundle' or
+                       bundle.get('name') != f"InkTag-BASIC-{manifest['version']}-firmware.zip"):
+        raise ValueError('Invalid BASIC firmware bundle identity')
     if not selected:return {}
     if record.get('firmwareEnabled') is not True or manifest.get('releaseTag')!=release['releaseTag']:
         raise ValueError('New explicit firmware publication policy is required')

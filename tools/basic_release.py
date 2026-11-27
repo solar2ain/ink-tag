@@ -5,6 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import stat
 import sys
 import zipfile
 
@@ -42,8 +43,44 @@ def native_inventory(repo: Path) -> dict[str, str]:
     return {'release/firmware/' + name: value for name, value in files.items()}
 
 
+def verify_firmware_bundle(repo: Path, path: Path) -> None:
+    members = native_inventory(repo)
+    members[INVENTORY] = digest((repo / INVENTORY).read_bytes())
+    expected = {f"{path.stem}/{name.removeprefix('release/firmware/')}": name for name in members}
+    with zipfile.ZipFile(path) as archive:
+        names = archive.namelist()
+        if len(names) != len(expected) or set(names) != expected.keys():
+            raise ValueError('Firmware bundle does not match the release tree')
+        for member in archive.infolist():
+            source = expected[member.filename]
+            if (stat.S_ISLNK(member.external_attr >> 16) or member.file_size != (repo / source).stat().st_size or
+                    digest(archive.read(member)) != members[source]):
+                raise ValueError(f'Firmware bundle member changed: {member.filename}')
+
+
 def basic_policy(target: str) -> dict:
     return {'algorithm': 'none', 'packageBoard': EXECUTABLE_IDENTITIES[target][1], 'keyPolicy': 'crc-only'}
+
+
+def four_part_version(value: str) -> str:
+    if not re.fullmatch(r'\d+\.\d+\.\d+(?:\.\d+)?', value):
+        raise ValueError('Invalid native App version')
+    return value + '.0' if value.count('.') == 2 else value
+
+
+def nordic_version_from_inventory(repo: Path, target: str, ota: bytes, full: bytes) -> str | None:
+    # Nordic DAT encodes epoch and major/minor/patch. The separately audited
+    # native build inventory binds the revision to the exact OTA/Full pair.
+    manifest = repo / 'release/firmware/manifest.json'
+    if not manifest.is_file():
+        return None
+    data = json.loads(manifest.read_bytes())
+    artifacts = data['targets'].get(target, {}).get('artifacts', {})
+    for kind, package in (('ota', ota), ('full', full)):
+        if not any(entry['bytes'] == len(package) and entry['sha256'] == digest(package)
+                   for entry in artifacts.get(kind, [])):
+            return None
+    return data['appVersion']
 
 
 def inspect_basic_pair(repo: Path, build_target: str, ota: Path, full: Path) -> dict:
@@ -57,9 +94,13 @@ def inspect_basic_pair(repo: Path, build_target: str, ota: Path, full: Path) -> 
     policy = basic_policy(build_target)
     fields = info.details
     native_layout = fields.get('signedLayout', fields.get('layout'))
-    if info.transport == 'telink':
+    package_version = fields.get('version')
+    if info.transport in ('goodix', 'onmicro', 'telink'):
         with zipfile.ZipFile(ota) as package:
-            native_layout = json.loads(package.read('manifest.json'))['layout']
+            manifest = json.loads(package.read('manifest.json'))
+        package_version = manifest.get('release')
+        if info.transport == 'telink':
+            native_layout = manifest['layout']
     if (info.board != policy['packageBoard'] or fields.get('signatureStatus') != 'unsigned' or
             fields.get('compatibilityEpoch') != target['compatibilityEpoch'] or native_layout != target['layout']):
         raise ValueError(f'BASIC OTA native target, layout or integrity policy differs: {build_target}')
@@ -74,9 +115,13 @@ def inspect_basic_pair(repo: Path, build_target: str, ota: Path, full: Path) -> 
             if package.namelist().count('app-ota.zip') != 1 or package.read('app-ota.zip') != ota_bytes:
                 raise ValueError(f'Full package embeds a different BASIC OTA: {build_target}')
             if build_target == 'nrf52811_aesl':
-                direct_hex, = (repo / 'release/firmware' / build_target / 'full').glob('*.hex')
-                if package.read('full.hex') != direct_hex.read_bytes():
-                    raise ValueError('nRF52811 Full and direct Intel HEX differ')
+                images = json.loads(package.read('base.json'))['images']
+                for name in ('full.hex', 'gui-assets.bin'):
+                    if package.namelist().count(name) != 1:
+                        raise ValueError(f'nRF52811 Full requires a unique {name}')
+                    data = package.read(name)
+                    if images[name] != {'bytes': len(data), 'sha256': digest(data)}:
+                        raise ValueError(f'nRF52811 Full {name} differs from its manifest')
         method = 'embedded-ota'
     elif build_target == 'da14585_aesl' and full.suffix == '.bin':
         app = full_bytes[0x4000:0x4000 + len(ota_bytes)]
@@ -86,9 +131,15 @@ def inspect_basic_pair(repo: Path, build_target: str, ota: Path, full: Path) -> 
         method = 'native-image-role'
     else:
         raise ValueError(f'Unsupported BASIC Full container: {build_target}')
+    encoded_version = f'{version // 10000}.{version // 100 % 100}.{version % 100}'
+    if info.transport == 'nordic':
+        package_version = nordic_version_from_inventory(repo, build_target, ota_bytes, full_bytes)
+    app_version = four_part_version(package_version or encoded_version)
+    if app_version.rsplit('.', 1)[0] != encoded_version:
+        raise ValueError(f'BASIC package release differs from its native version code: {build_target}')
     return {
         'target': target,
-        'version': f'{version // 10000}.{version // 100 % 100}.{version % 100}.0',
+        'version': app_version,
         'releaseVersion': release,
         'signaturePolicy': policy,
         'pairing': {'otaSha256': digest(ota_bytes), 'fullSha256': digest(full_bytes), 'method': method},

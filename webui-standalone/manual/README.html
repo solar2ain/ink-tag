@@ -140,7 +140,7 @@
 </tr>
 <tr>
 <td>OnMicro 昂瑞微</td>
-<td>OM6626</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/om6626_zkel/INSTALL.md">OM6626</a></td>
 </tr>
 <tr>
 <td>Telink 泰凌微</td>
@@ -237,7 +237,7 @@ inktag-cli device --ble-name IKT_TL_1234 display slideshow stop
 <li><strong>已运行 InkTag 的设备</strong>：优先使用 OTA。在“设置 → 固件”连接设备查看可用的 OTA 包，或选择本地已签名应用包，核对信息后开始升级。显示传输 100% 不代表完成；等待应用验身和回连成功。</li>
 <li><strong>升级未完成</strong>：保存日志，重新连接确认设备状态；需要继续时重新选择匹配的 OTA 应用包并重试，不盲目重复结果未知的写入。</li>
 </ul>
-<p>完整烧录工具的明文代码与配置位于本仓库的 <code>firmware/&lt;主控_主板&gt;/</code>，工具不包含固件。本版提供已适配主板的 OTA 与完整固件，烧录工具独立使用。固件与客户端附件均以 <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/releases">Releases</a> 实际附件为准。未列出的文件暂不可下载，不要按文件名、屏幕尺寸或相似型号互刷。</p>
+<p>固件全包和本仓库的 <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/tree/main/release/firmware">release/firmware/</a> 按目标提供 OTA、Full、烧录 BAT 和板型配置。固件与客户端附件均以 <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/releases">Releases</a> 实际附件为准。未列出的文件暂不可下载，不要按文件名、屏幕尺寸或相似型号互刷。</p>
 <p>操作与限制：<a target="_blank" rel="noopener noreferrer" href="zh-CN/flash.html">完整烧录</a> · <a target="_blank" rel="noopener noreferrer" href="zh-CN/ota.html">OTA 与 Recovery</a> · <a target="_blank" rel="noopener noreferrer" href="zh-CN/updates.html">检查客户端更新</a></p>
 <h2 id="常见问题与反馈">常见问题与反馈</h2>
 <ul>
@@ -253,6 +253,7 @@ inktag-cli device --ble-name IKT_TL_1234 display slideshow stop
 <h2 id="致谢">致谢</h2>
 <p>感谢以下项目的作者与贡献者：</p>
 <ul>
+<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/tsl0922/EPD-nRF5">EPD-nRF5</a>：InkTag项目的早期参考，墨水屏驱动和日历等功能大量借鉴了该项目。</li>
 <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/atc1441/ATC_TLSR_Paper">ATC_TLSR_Paper</a>：Hanshow／TLSR8359 价签的硬件资料与开放实现参考。</li>
 <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/paperlesspaper/epdoptimize">epdoptimize</a>：电子纸图片颜色量化与抖动。</li>
 <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/olikraus/U8g2_for_Adafruit_GFX">U8g2 for Adafruit GFX</a> 及文泉驿字体项目：字形渲染与中文字体资源。</li>

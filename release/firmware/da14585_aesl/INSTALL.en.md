@@ -2,32 +2,32 @@
 
 [简体中文](INSTALL.md)
 
-Use the [OTA package](ota/) for wireless updates and the [complete package](full/) for first installation and wired recovery. Back up what you need first.
+Use the [Full BIN](full/) for first installation and wired recovery, and the [OTA IMG](ota/) for wireless updates. Back up what you need first.
 
-Run [flash.bat](tools/programmer/flash.bat) for the guided setup. Run the commands below from this directory. Device detection waits by default.
+Run [flash.bat](tools/flash.bat) for the guided setup. Run the commands below from this directory. Device detection waits by default.
 
-The sparse HEX and BIN segments target external SPI flash. Keep the vendor range 0x39000–0x3AFFF intact and obtain the loader per the tool instructions.
+On Windows, install Python 3.12+ and J-Link 7.88j. The flashing tool uses the included SRAM helper. The BAT uses the Full BIN and board preset to prepare writes to external SPI flash, skipping the factory range 0x39000–0x3AFFF. See the [tool guide](tools/README.md) to generate BIN segments offline.
 
 ### asel29
 
-[BIN / HEX](programmer/asel29/) · [配置 / Configuration](tools/programmer/configs/asel29.toml)
+[配置 / Configuration](tools/configs/asel29.toml)
 
 ```powershell
-.\tools\programmer\flash.bat -Firmware ".\full\InkTag-da14585_aesl-full.bin" -Config ".\tools\programmer\configs\asel29.toml"
+.\tools\flash.bat -Firmware ".\full\InkTag-BASIC-0.2.2.1-da14585_aesl-full.bin" -Config ".\tools\configs\asel29.toml"
 ```
 
 ### asel42
 
-[BIN / HEX](programmer/asel42/) · [配置 / Configuration](tools/programmer/configs/asel42.toml)
+[配置 / Configuration](tools/configs/asel42.toml)
 
 ```powershell
-.\tools\programmer\flash.bat -Firmware ".\full\InkTag-da14585_aesl-full.bin" -Config ".\tools\programmer\configs\asel42.toml"
+.\tools\flash.bat -Firmware ".\full\InkTag-BASIC-0.2.2.1-da14585_aesl-full.bin" -Config ".\tools\configs\asel42.toml"
 ```
 
 ### asel42-ssd1683
 
-[BIN / HEX](programmer/asel42-ssd1683/) · [配置 / Configuration](tools/programmer/configs/asel42-ssd1683.toml)
+[配置 / Configuration](tools/configs/asel42-ssd1683.toml)
 
 ```powershell
-.\tools\programmer\flash.bat -Firmware ".\full\InkTag-da14585_aesl-full.bin" -Config ".\tools\programmer\configs\asel42-ssd1683.toml"
+.\tools\flash.bat -Firmware ".\full\InkTag-BASIC-0.2.2.1-da14585_aesl-full.bin" -Config ".\tools\configs\asel42-ssd1683.toml"
 ```

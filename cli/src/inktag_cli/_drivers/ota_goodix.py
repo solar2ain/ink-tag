@@ -428,7 +428,7 @@ async def application_identity(
     if len(version) < 4:
         raise RuntimeError("InkTag application version characteristic is incomplete")
     protocol = version[0]
-    release = f"{version[1]}.{version[2]}.{version[3]}"
+    release = ".".join(map(str, version[1:5]))
     board = None
     build = None
     authorization_succeeded = False
@@ -778,14 +778,15 @@ async def query_otas_target(
     if len(info) < 18 or info[0] != ACK_SUCCESS or info[17] != 2:
         raise RuntimeError("target does not report Goodix OTAS v2")
     otas.recovery_version = parse_recovery_version(info)
-    if package is not None and package.firmware_type == 0:
-        if not otas.recovery_version or otas.recovery_version.get('signaturePolicy') != 'crc-only':
-            raise RuntimeError('This Recovery requires a publisher-signed App; unsigned image was not sent')
     target = await otas.request(CMD_DFU_FW_INFO_GET)
     if len(target) < 54 or target[0] != ACK_SUCCESS:
         raise RuntimeError("target rejected DFU firmware-info query")
     if target[5] not in (0, 1):
         raise RuntimeError("target reports an unknown Goodix OTA role")
+    # The App can request Recovery entry but cannot attest Recovery's policy.
+    if target[5] == 0 and package is not None and package.firmware_type == 0:
+        if not otas.recovery_version or otas.recovery_version.get('signaturePolicy') != 'crc-only':
+            raise RuntimeError('This Recovery requires a publisher-signed App; unsigned image was not sent')
     if package is not None:
         pattern, active_epoch = struct.unpack_from("<HH", target, 6)
         active_size, _, active_load, active_run = struct.unpack_from("<IIII", target, 10)

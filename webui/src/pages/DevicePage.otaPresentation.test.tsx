@@ -9,7 +9,7 @@ import { useFirmwareUpdateStore } from '../store/firmwareUpdate'
 import { otaPresentationFixtures } from './fixtures/otaPresentation'
 import { PROTOCOL_V2_VERSION } from '../protocol/generatedCommandsV2'
 
-const client = vi.hoisted(() => ({ getOtaRecoveryType: vi.fn(), getExpectedRecoveryIdentity: vi.fn(), getRecoverySafeResumeSupported: vi.fn() }))
+const client = vi.hoisted(() => ({ getOtaRecoveryType: vi.fn(), getExpectedRecoveryIdentity: vi.fn(), getRecoverySafeResumeSupported: vi.fn(), selectRecoveryForOta: vi.fn() }))
 const ota = vi.hoisted(() => ({ parseOtaPackage: vi.fn(), transferOta: vi.fn(), enterFixedRecovery: vi.fn(), inspectNordicRecovery: vi.fn(), inspectTelinkRecovery: vi.fn() }))
 vi.mock('../protocol/client', () => ({ inktagClient: client }))
 vi.mock('../protocol/ota', () => ota)
@@ -100,6 +100,30 @@ it.each(otaPresentationFixtures)('shows progress separately from completion for 
   expect(ota.transferOta).toHaveBeenCalledExactlyOnceWith(sample.pkg, expect.any(Function))
   await act(async () => finish())
 })
+it('keeps the verified package after TLSR discovery loss and offers an explicit Recovery selection', async () => {
+  const sample = otaPresentationFixtures.find(item => item.pkg.type === 'telink')!
+  const start = await chooseSample(sample)
+  const handoff = { deviceId: 'offline-display-fixture', recoveryName: 'IKT_TL_335C_OTA' }
+  ota.transferOta.mockImplementationOnce(async () => {
+    client.getExpectedRecoveryIdentity.mockReturnValue(handoff)
+    throw Object.assign(new Error('固件尚未传输。'), { code: 'RECOVERY_SELECT_REQUIRED' })
+  })
+  await act(async () => start.click())
+  expect(host.querySelector('.ota-failure')?.textContent).toContain('需要重新连接 Recovery')
+  expect(host.querySelector('.ota-failure')?.textContent).not.toContain('重新选择 OTA 应用文件')
+  const select = [...host.querySelectorAll('button')].find(b => b.textContent === '重新选择 Recovery')!
+  client.selectRecoveryForOta.mockImplementation(async () => {
+    useDeviceStore.getState().setAction('ota')
+    useDeviceStore.setState({ firmwareVersion: 'Recovery' })
+    useDeviceStore.getState().setAction('idle')
+  })
+  await act(async () => select.click())
+  expect(client.selectRecoveryForOta).toHaveBeenCalledExactlyOnceWith(handoff)
+  expect(host.querySelector('.ota-package-card dl')?.textContent).toContain(sample.pkg.payload.fileName)
+  expect(ota.transferOta).toHaveBeenCalledTimes(1)
+  expect(ota.parseOtaPackage).toHaveBeenCalledTimes(1)
+})
+
 it('uses red alert styling for Recovery errors while keeping the exact entry action', async () => {
   useDeviceStore.setState({ connection: 'connected', deviceId: 'offline-display-fixture', boardId: 'nrf52832_priceetag', protocolVersion: PROTOCOL_V2_VERSION,
     capabilities: { ...useDeviceStore.getState().capabilities, ota: 'nordic' } })

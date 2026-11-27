@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../index.html">InkTag WebUI</a></nav><main><h1 id="首次安装与完整烧录">首次安装与完整烧录</h1>
 <p>原厂价签首次安装 InkTag 使用有线烧录。已安装兼容 InkTag 固件的设备，日常升级见 <a target="_blank" rel="noopener noreferrer" href="ota.html">OTA</a>。先核对<a target="_blank" rel="noopener noreferrer" href="supported-devices.html">主控、主板丝印和屏幕</a>。</p>
-<h2 id="022-用-bat-烧录">0.2.2 用 BAT 烧录</h2>
+<h2 id="用-bat-烧录">用 BAT 烧录</h2>
 <ol>
 <li>打开 <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/tree/main/release/firmware">release/firmware</a> 中对应的目标目录，保留工具、<code>full/</code> 和配置的相对路径。首次安装使用 Full。</li>
-<li>按下方准备好烧录器和软件。Windows 用户双击 <code>flash-zh.bat</code> 使用中文向导，<code>flash.bat</code> 使用英文。命令行用户在目标目录复制安装说明里的对应版型命令。</li>
+<li>按下方准备好烧录器和软件。Windows 用户双击 <code>tools/flash-zh.bat</code> 使用中文向导，<code>tools/flash.bat</code> 使用英文。命令行用户在目标目录复制安装说明里的对应版型命令。</li>
 <li>向导找到唯一合用的 Full 会自动采用，多份时列出选项，找不到时打开文件选择框。选择主板和屏幕配置，核对烧录范围后再确认。</li>
 <li>确认后默认持续检测，直接烧录的 <code>flash-bin.bat</code>、<code>flash-hex.bat</code> 也默认轮询。按窗口提示取消。轮询只用于初始探测。写入或回读失败后，先保留提示并核对目标状态。</li>
 </ol>
@@ -34,12 +34,12 @@
 </tr>
 <tr>
 <td>OM6626 ZKEL</td>
-<td><a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/om6626_zkel/payload/tools/flash-zh.bat">flash-zh.bat</a></td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/om6626_zkel/tools/flash-zh.bat">flash-zh.bat</a></td>
 <td><a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/om6626_zkel/INSTALL.md">版型与一行命令</a></td>
 </tr>
 <tr>
 <td>TLSR8359 HSEL</td>
-<td><a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/tlsr8359_hsel/firmware/ports/telink/tlsr8359/tools/flash-zh.bat">flash-zh.bat</a></td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/tlsr8359_hsel/tools/flash-zh.bat">flash-zh.bat</a></td>
 <td><a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/tlsr8359_hsel/INSTALL.md">版型与一行命令</a></td>
 </tr>
 <tr>
@@ -54,7 +54,7 @@
 </tr>
 <tr>
 <td>DA14585 AESL</td>
-<td><a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/da14585_aesl/tools/programmer/flash-zh.bat">flash-zh.bat</a></td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/da14585_aesl/tools/flash-zh.bat">flash-zh.bat</a></td>
 <td><a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/da14585_aesl/INSTALL.md">版型与一行命令</a></td>
 </tr>
 </tbody>
@@ -78,7 +78,7 @@
 <tr>
 <td>OM6626</td>
 <td>J-Link／SWD</td>
-<td>J-Link／J-Flash 7.88j 和对应 OM 设备支持包，按 <code>payload/</code> 中的说明准备</td>
+<td>已随仓库提供 OM 设备支持文件</td>
 </tr>
 <tr>
 <td>nRF52811、nRF52832</td>
@@ -93,12 +93,12 @@
 <tr>
 <td>DA14585</td>
 <td>J-Link／SWD</td>
-<td>Python 3.12+，让 <code>python</code> 命令可用，并单独准备工具说明指定的已许可 SRAM helper</td>
+<td>Python 3.12+，让 <code>python</code> 命令可用。烧录工具自动校验随包的 SRAM helper</td>
 </tr>
 </tbody>
 </table></div>
-<p>TLSR 在 <code>release/firmware/tlsr8359_hsel/</code> 中执行以下命令，或双击 <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/tlsr8359_hsel/firmware/ports/telink/tlsr8359/tools/setup.bat">setup.bat</a>。命令行带参数调用会返回退出码：</p>
-<pre><code class="language-powershell">.\firmware\ports\telink\tlsr8359\tools\setup.bat -Python python
+<p>TLSR 在 <code>release/firmware/tlsr8359_hsel/</code> 中执行以下命令，或双击 <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/release/firmware/tlsr8359_hsel/tools/setup.bat">setup.bat</a>。命令行带参数调用会返回退出码：</p>
+<pre><code class="language-powershell">.\tools\setup.bat -Python python
 </code></pre>
 <h2 id="选择烧录器">选择烧录器</h2>
 <p><img alt="上侧蓝色 J-Link OB 小板，下侧 CH340 串口小板及外接电阻" src="../assets/flashing/programmers.webp" /></p>
@@ -108,13 +108,19 @@
 </ul>
 <p>两种小板的参考购入价均不到人民币 10 元，不含配件。系统未识别 CH340 串口时，安装沁恒的 <a target="_blank" rel="noopener noreferrer" href="https://www.wch.cn/downloads/CH341SER_EXE.html">Windows 驱动</a>或 <a target="_blank" rel="noopener noreferrer" href="https://www.wch.cn/downloads/CH341SER_MAC_ZIP.html">macOS 驱动</a>。Telink 的 CH340／SWS 方案可在 macOS 使用，参考 <a target="_blank" rel="noopener noreferrer" href="https://github.com/pvvx/TlsrComSwireWriter">macOS 串口工具说明</a>。nRF 的 DAPLink／SWD 曾在 macOS 验证可行，当前 BAT 流程使用 Windows。</p>
 <h2 id="使用预转换的-binhex">使用预转换的 BIN／HEX</h2>
-<p>从 <code>programmer/</code> 选择匹配主板和屏幕的材料，按地址表操作。BIN 需要对应的写入地址及地址空间，Intel HEX 自带地址记录。</p>
+<p>GR、TLSR 和 nRF52832 的 <code>flash-images/</code> 存放可直接用于烧录工具的镜像及地址表。请选择匹配主板和屏幕的文件。BIN 需要对应的写入地址及地址空间，Intel HEX 自带地址记录。</p>
 <ul>
-<li>GR、TLSR 和 DA14585 提供 <code>flash-bin.bat</code>。GR 和 DA 使用配套初始化物料，TLSR 使用对应 BIN 及同名 JSON。用 BDT 烧 TLSR 时按该板型地址表操作。</li>
-<li>两款 nRF 提供 <code>flash-hex.bat</code>。nRF52811 的外置设置和 GUI 有单独的写入地址。</li>
-<li>OM 使用 <code>flash.bat</code> 加 Full 和匹配的配置，分段文件可对照地址表。</li>
+<li>GR 和 TLSR 提供 <code>flash-bin.bat</code>。GR 使用配套初始化物料，TLSR 使用对应 BIN 及同名 JSON。用 BDT 烧 TLSR 时按该板型地址表操作。</li>
+<li>nRF52832 提供 <code>flash-hex.bat</code>。</li>
 </ul>
 <p>完整烧录及初始化可能清理设置和数据。先按板型说明备份，烧录完成后核对回读结果。</p>
+<h2 id="为什么这三个平台推荐用-flashbat">为什么这三个平台推荐用 flash.bat</h2>
+<p>以下三款主控请从 <code>tools/flash.bat</code> 或 <code>tools/flash-zh.bat</code> 进入，选择对应主板配置。</p>
+<ul>
+<li><strong>OM6626</strong> 使用 Full ZIP。BAT 会保留原厂启动区，再按所选主板配置安装 App 和 Recovery。单独的 App／Recovery 分段无法完成这套安装。</li>
+<li><strong>nRF52811</strong> 使用 Full ZIP。内部 Flash、外置设置和 GUI 资源需要分别写入，App 与 GUI 必须配对。BAT 会处理这三部分。需要分开烧录时，可用 <code>generate-hex.bat</code> 生成三份配套 HEX。</li>
+<li><strong>DA14585</strong> 使用 <code>full/</code> 中的 Full BIN。BAT 按板型准备外置 SPI Flash 写入数据，并跳过原厂区域 <code>0x39000–0x3AFFF</code>。有线写入所用的 SRAM helper 已随包提供，BAT 会自动查找和校验。<code>ota/</code> 中的 IMG 用于无线更新，无需 SRAM helper。</li>
+</ul>
 <h2 id="使用图形界面烧录工具">使用图形界面烧录工具</h2>
 <p>各平台的图形界面烧录教程待补充。欢迎分享你实测过的操作步骤，并注明烧录软件和版本、主板丝印、使用的文件及写入地址。 <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/issues">提交 Issue</a> · <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/pulls">提交教程 PR</a></p>
 <p><a target="_blank" rel="noopener noreferrer" href="../build-firmware.html">构建固件</a> · <a target="_blank" rel="noopener noreferrer" href="supported-devices.html">已适配设备</a> · <a target="_blank" rel="noopener noreferrer" href="ota.html">OTA 与 Recovery</a></p></main></body></html>

@@ -213,6 +213,10 @@ export async function verifyTelinkRecovery(server: BluetoothRemoteGATTServer) {
   return await window.TelinkOta!.queryRecovery(server)
 }
 
+function formatTelinkRecoveryStatus(result: { status: number; raw: Uint8Array }) {
+  return `Recovery 状态 ${result.status} · ${Array.from(result.raw, value => value.toString(16).padStart(2, '0')).join(' ')}`
+}
+
 // Explicit read-only UI action. Reuse only the exact pre-entry grant; never
 // turn a failed discovery into another enter/reset/firmware request.
 export async function inspectTelinkRecovery(onPhase: (message: string) => void) {
@@ -220,6 +224,15 @@ export async function inspectTelinkRecovery(onPhase: (message: string) => void) 
   if (state.action !== 'idle') throw new Error('请等待当前操作结束')
   const current = inktagClient.getDevice()
   const verified = inktagClient.getOtaRecoveryType() === 'telink' ? inktagClient.getVerifiedRecoveryName() : ''
+  const liveServer = verified && current ? inktagClient.getGattServer() : null
+  if (liveServer?.connected) {
+    state.setAction('ota', 0, '正在读取 Recovery 状态')
+    try {
+      loadAdapters()
+      const result = await window.TelinkOta!.queryRecovery(liveServer, onPhase)
+      return formatTelinkRecoveryStatus(result)
+    } finally { useDeviceStore.getState().setAction('idle') }
+  }
   const expected = inktagClient.getExpectedRecoveryIdentity() || (current && verified
     ? { deviceId: current.id, recoveryName: verified } : null)
   if (!expected || !/^(?:IKT|InkTag)_TL_[0-9A-F]{4}_OTA$/i.test(expected.recoveryName)) {
@@ -244,7 +257,7 @@ export async function inspectTelinkRecovery(onPhase: (message: string) => void) 
     if (inktagClient.getDevice()) throw new Error('设备连接已变化，已停止读取')
     loadAdapters()
     const result = await window.TelinkOta!.queryRecoveryDevice(device, { onPhase })
-    return `Recovery 状态 ${result.status} · ${Array.from(result.raw as Uint8Array, value => value.toString(16).padStart(2, '0')).join(' ')}`
+    return formatTelinkRecoveryStatus(result)
   } finally { useDeviceStore.getState().setAction('idle') }
 }
 
@@ -336,6 +349,37 @@ async function requestAndReleaseFixedRecovery(
   return { expected, requireHandoff }
 }
 
+function recoverySelectionRequired(cause?: unknown) {
+  return Object.assign(new Error('尚未连上 Recovery，固件尚未传输。', { cause }), {
+    code: 'RECOVERY_SELECT_REQUIRED',
+  })
+}
+
+async function reconnectFixedRecovery(
+  device: BluetoothDevice, type: Exclude<OtaType, 'none'>,
+  { expected, requireHandoff }: Awaited<ReturnType<typeof requestAndReleaseFixedRecovery>>,
+) {
+  const state = useDeviceStore.getState()
+  const deadline = Date.now() + 45000
+  let lastError: unknown
+  for (let attempt = 0; attempt < 9 && Date.now() < deadline; attempt++) {
+    await new Promise(resolve => setTimeout(resolve, attempt === 0 ? 1800 : 900))
+    requireHandoff()
+    try {
+      await inktagClient.reconnectDevice(device, Math.min(10000, Math.max(1, deadline - Date.now())), true)
+      const verifiedName = inktagClient.getVerifiedRecoveryName()
+      if (inktagClient.getDevice()?.id === device.id &&
+          inktagClient.getOtaRecoveryType() === type &&
+          (verifiedName === expected.recoveryName || verifiedName === expected.recoveryName.replace(/^IKT_/, 'InkTag_'))) {
+        state.addLog('同一设备的 Recovery 角色已核对；可更新固件或按设备能力安全退出', 'success')
+        return
+      }
+      throw new Error('连接已恢复，但没有核对到期望的 Recovery 角色')
+    } catch (error) { lastError = error }
+  }
+  throw new Error(`进入请求已接受，但 Recovery 回连尚未确认；请从附近设备选择 ${expected.recoveryName} 只读确认，不要重复进入或复位${lastError ? `：${String(lastError)}` : ''}`, { cause: lastError })
+}
+
 export async function enterFixedRecovery(expectedDeviceId: string) {
   const state = useDeviceStore.getState()
   const device = inktagClient.getDevice(), server = inktagClient.getGattServer()
@@ -352,23 +396,7 @@ export async function enterFixedRecovery(expectedDeviceId: string) {
   state.setAction('ota', 0, '正在进入 Recovery')
   try {
     const { expected, requireHandoff } = await requestAndReleaseFixedRecovery(type, device, server)
-    const deadline = Date.now() + 45000
-    let lastError: unknown
-    for (let attempt = 0; attempt < 9 && Date.now() < deadline; attempt++) {
-      await new Promise(resolve => setTimeout(resolve, attempt === 0 ? 1800 : 900))
-      requireHandoff()
-      try {
-        await inktagClient.reconnectDevice(device, Math.min(10000, Math.max(1, deadline - Date.now())))
-        if (inktagClient.getDevice()?.id === expectedDeviceId &&
-            inktagClient.getOtaRecoveryType() === type &&
-            inktagClient.getVerifiedRecoveryName() === expected.recoveryName) {
-          state.addLog('同一设备的 Recovery 角色已核对；可更新固件或按设备能力安全退出', 'success')
-          return
-        }
-        throw new Error('连接已恢复，但没有核对到期望的 Recovery 角色')
-      } catch (error) { lastError = error }
-    }
-    throw new Error(`进入请求已接受，但 Recovery 回连尚未确认；请从附近设备选择 ${expected.recoveryName} 只读确认，不要重复进入或复位${lastError ? `：${String(lastError)}` : ''}`)
+    await reconnectFixedRecovery(device, type, { expected, requireHandoff })
   } finally { useDeviceStore.getState().setAction('idle') }
 }
 
@@ -418,6 +446,9 @@ async function exitGuardedRecoveryWork(type: 'goodix' | 'telink' | 'onmicro' | '
   }
   options.onPhase?.('正在核对 App')
   inktagClient.verifyReturnedApplication(device)
+  // Web Bluetooth may reuse the GATT object after a verified return to App.
+  const appServer = inktagClient.getGattServer()
+  if (appServer) requestedRecoveryEntries.delete(appServer)
   if (options.syncTime !== false) {
     useDeviceStore.getState().addLog('原应用已核验，正在校时', 'info')
     options.onPhase?.('正在校时')
@@ -440,7 +471,7 @@ export async function transferOta(pkg: ParsedOtaPackage, onProgress: (progress: 
   const applicationDevice = inktagClient.getDevice()
   if (!server?.connected || !applicationDevice) throw new Error('请先连接应用设备')
   const store = useDeviceStore.getState()
-  if (pkg.type === 'goodix' && store.action !== 'idle') throw new Error('请等待当前操作结束')
+  if (store.action !== 'idle') throw new Error('请等待当前操作结束')
   const onmicroRecovery = pkg.type === 'onmicro' && inktagClient.getOtaRecoveryType() === 'onmicro'
   const dialogRecovery = pkg.type === 'dialog' && inktagClient.getOtaRecoveryType() === 'dialog'
   const telinkRecovery = pkg.type === 'telink' && inktagClient.getOtaRecoveryType() === 'telink'
@@ -556,62 +587,72 @@ export async function transferOta(pkg: ParsedOtaPackage, onProgress: (progress: 
           store.addLog(`GR Recovery 清理未确认（保留原始失败）：${String(error)}`, 'warning')
         }
       }
-    } else if (pkg.type === 'onmicro') {
-      if (onmicroRecovery) {
-        onProgress({ percent: 0, message: '已连接 OM6626 固定 Recovery，正在重新发送完整应用' })
-      } else {
-        onProgress({ percent: 0, message: '正在切换到 OM6626 固定 Recovery' })
-        await inktagClient.enterOtaRecovery()
-        // The App may acknowledge before its intentional reboot/disconnect.
-        // Release that GATT session, as the CLI does, before probing DFU.
-        await inktagClient.disconnectAndWait(900)
+    } else if (pkg.type === 'onmicro' || pkg.type === 'dialog') {
+      const type = pkg.type
+      const label = type === 'onmicro' ? 'OM6626' : 'DA14585'
+      const alreadyInRecovery = type === 'onmicro' ? onmicroRecovery : dialogRecovery
+      onProgress({ percent: 0, message: alreadyInRecovery
+        ? `已连接 ${label} 固定 Recovery，正在重新发送完整应用`
+        : `正在切换到 ${label} 固定 Recovery` })
+      if (!alreadyInRecovery) {
+        const handoff = await requestAndReleaseFixedRecovery(type, applicationDevice, server)
+        try { await reconnectFixedRecovery(applicationDevice, type, handoff) }
+        catch (error) {
+          handoff.requireHandoff()
+          if (inktagClient.getDevice()) throw error
+          store.addLog(String(error), 'warning')
+          throw recoverySelectionRequired(error)
+        }
       }
-      await window.OnMicroOta!.transferDevice(applicationDevice, pkg.payload, progress, {
-        onPhase: (message: string) => store.addLog(message),
-      })
-    } else if (pkg.type === 'dialog') {
-      if (dialogRecovery) {
-        onProgress({ percent: 0, message: '已连接 DA14585 固定 Recovery，正在重新发送完整应用' })
-      } else {
-        onProgress({ percent: 0, message: '正在切换到 DA14585 固定 Recovery' })
-        await inktagClient.enterOtaRecovery()
+      const recoveryServer = inktagClient.getGattServer()
+      if (!recoveryServer?.connected || inktagClient.getDevice()?.id !== applicationDevice.id ||
+          inktagClient.getOtaRecoveryType() !== type) {
+        throw new Error('未确认原设备的 Recovery 连接，固件尚未传输')
       }
-      await window.DialogSuota!.transferDevice(applicationDevice, pkg.payload, progress, {
-        onPhase: (message: string) => onProgress({ percent: 0, message }),
+      const adapter = type === 'onmicro' ? window.OnMicroOta! : window.DialogSuota!
+      await adapter.transferServer(recoveryServer, pkg.payload, progress, {
+        onPhase: (message: string) => {
+          if (type === 'onmicro') store.addLog(message)
+          else onProgress({ percent: 0, message })
+        },
       })
     } else if (pkg.type === 'telink') {
-      let handoff: { deviceId: string; recoveryName: string }
+      const adapter = window.TelinkOta!
+      const selectRecovery = (error: unknown) => {
+        const cause = error instanceof Error ? error.cause ?? error : error
+        if (!adapter.isTransientGattError(cause)) throw error
+        store.addLog(`TLSR Recovery 连接中断：${String(cause)}`, 'warning')
+        throw recoverySelectionRequired(error)
+      }
       if (telinkRecovery) {
         onProgress({ percent: 0, message: '已连接 TLSR8359 固定 Recovery，正在重新发送完整应用' })
-        handoff = inktagClient.takeTelinkRecoveryForOta(applicationDevice.id)
       } else {
         onProgress({ percent: 0, message: '正在切换到 TLSR8359 固定 Recovery' })
-        if (requestedRecoveryEntries.has(server)) throw new Error('TLSR 进入结果尚未确认；不要重复进入或复位')
-        requestedRecoveryEntries.add(server)
-        try { await inktagClient.enterOtaRecovery() }
+        const entry = await requestAndReleaseFixedRecovery('telink', applicationDevice, server)
+        try { await reconnectFixedRecovery(applicationDevice, 'telink', entry) }
         catch (error) {
-          if (error instanceof ProtocolV2Error && ([StatusV2.UNKNOWN_COMMAND, StatusV2.UNSUPPORTED,
-            StatusV2.INVALID_REQUEST, StatusV2.INVALID_STATE, StatusV2.BUSY, StatusV2.DENIED,
-            StatusV2.LOCKED, StatusV2.LOW_POWER] as number[]).includes(error.status)) requestedRecoveryEntries.delete(server)
-          throw error
+          entry.requireHandoff()
+          selectRecovery(error)
         }
-        handoff = await inktagClient.releaseTelinkAppForOta(applicationDevice.id)
       }
+      const handoff = inktagClient.takeTelinkRecoveryForOta(applicationDevice.id)
       const generation = inktagClient.getConnectionGeneration()
       const current = () => {
         const expected = inktagClient.getExpectedRecoveryIdentity()
         return inktagClient.getConnectionGeneration() === generation &&
           expected?.deviceId === handoff.deviceId && expected.recoveryName === handoff.recoveryName
       }
-      const handle = await window.TelinkOta!.acquireRecoverySession({
+      const handle = await adapter.acquireRecoverySession({
         device: applicationDevice, generation, isCurrent: current,
-        afterAppEntry: !telinkRecovery,
         onDiagnostics: (metrics: unknown) => useDeviceStore.getState().addLog(`TLSR OTA 统计：${JSON.stringify(metrics)}`),
         onStage: (message: string) => {
           useDeviceStore.getState().addLog(message)
           onProgress({ percent: 0, message })
         },
-      }, pkg.payload)
+      }, pkg.payload).catch((error: unknown) => {
+        if (!current()) throw error
+        return selectRecovery(error)
+      })
       let failure: unknown
       try { await window.TelinkOta!.transferRecoverySession(handle, pkg.payload, progress) }
       catch (error) { failure = error; throw error }
@@ -628,23 +669,18 @@ export async function transferOta(pkg: ParsedOtaPackage, onProgress: (progress: 
         const identity = useDeviceStore.getState()
         const dfuName = adapter.bootloaderName('', identity.bleAddress)
         onProgress({ percent: 0, message: `正在切换到 ${dfuName}` })
-        // The shared entry enforces ordinary AUTH and records the exact V2
-        // identity/grant before the device changes role. Do not enter twice.
-        await inktagClient.enterOtaRecovery()
-        const handoff = inktagClient.getExpectedRecoveryIdentity()
-        if (!handoff || handoff.deviceId !== applicationDevice.id || handoff.recoveryName !== dfuName) {
+        const entry = await requestAndReleaseFixedRecovery('nordic', applicationDevice, server)
+        const handoff = entry.expected
+        if (handoff.recoveryName !== dfuName) {
           throw new Error('无法确认升级前的 nRF 设备身份；不要重复请求进入 Recovery')
         }
         const recoveryStatus = (message: string) => {
           useDeviceStore.getState().addLog(message)
           onProgress({ percent: 0, message })
         }
-        let device = await adapter.findGrantedBootloaderDevice(dfuName, handoff, applicationDevice, recoveryStatus)
-        if (!device) {
-          useDeviceStore.getState().addLog('已授权设备未通过 Recovery 通道校验，需要在蓝牙列表重新选择')
-          onProgress({ percent: 0, message: `请在设备列表选择 ${dfuName}` })
-          device = await adapter.requestBootloaderDevice(dfuName, handoff)
-        }
+        const device = await adapter.findGrantedBootloaderDevice(dfuName, handoff, applicationDevice, recoveryStatus)
+        entry.requireHandoff()
+        if (!device) throw recoverySelectionRequired()
         await transferNordic(device)
       }
     }

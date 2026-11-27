@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "path": "activation-preservation.ps1",
+      "bytes": 5115,
+      "sha256": "3af89fec09d30a67b70596fdaedbed5f0be2c0a650837748414eec526063029f"
+    },
+    {
+      "path": "backup-import.ps1",
+      "bytes": 1789,
+      "sha256": "21a80a0852ef1aa42f346ddbf3e35aa3045f4b43200482695a1ba277f42782f9"
+    },
+    {
+      "path": "backup-jlink.ps1",
+      "bytes": 18028,
+      "sha256": "a783224c34184d70ab5bd3a65c1e74fd3681230e0e30c0f4c6aab7a707a333a9"
+    },
+    {
+      "path": "backup.ps1",
+      "bytes": 5839,
+      "sha256": "5f61da35607a61338d10a5213bc79f966003ec54a6f7b1abc6e94767e776328e"
+    },
+    {
+      "path": "check.ps1",
+      "bytes": 2881,
+      "sha256": "2b40baf1d2d4832f58d8ae5fbac62faba8469ce051f884e0ac5f5e630b9a27dd"
+    },
+    {
+      "path": "device-pack/Devices/Onmicro/OM662XX.elf",
+      "bytes": 468008,
+      "sha256": "8523643fc138b84601c850571499068d36da954b60e7a3aa0be68386ad8e13af"
+    },
+    {
+      "path": "device-pack/Devices/Onmicro/OM662XX_nombr.elf",
+      "bytes": 467392,
+      "sha256": "9a53c01b9363371e8eff44a7a9de80e2942e96025aede3ade8053875ab6ad640"
+    },
+    {
+      "path": "device-pack/JLinkDevices.xml",
+      "bytes": 2643,
+      "sha256": "12f821b52aabddca30300bd10710ecae3be313d08d3b70da90481abf36f9ec60"
+    },
+    {
+      "path": "device-pack/SOURCE.md",
+      "bytes": 624,
+      "sha256": "b5754ddbe84491bb5cc8f970be9d70ab4dbdcc9160dddc5236c8fda767692da2"
+    },
+    {
+      "path": "entry.ps1",
+      "bytes": 8586,
+      "sha256": "bf32499364bca8a36edea9b5a6965bc928b8202199b30ddd5783b829c39695e3"
+    },
+    {
+      "path": "full-capture.JLinkScript",
+      "bytes": 4708,
+      "sha256": "0281aad79169a749cb2fe9399c43ccbe4139622d13a99513b3c8216d4f68159a"
+    },
+    {
+      "path": "full-read-halt.JLinkScript",
+      "bytes": 449,
+      "sha256": "ed086b1d929753ded137522bda2d0869fc56d86727156fa432f49afb19c85b1e"
+    },
+    {
+      "path": "jlink-tools.ps1",
+      "bytes": 4389,
+      "sha256": "ce6e5b060d335dddcdaad32ce85e3bc5a5240f48eeb56e1156b9a45d290132bf"
+    },
+    {
+      "path": "native-operations.ps1",
+      "bytes": 44060,
+      "sha256": "16ff7a6ce99aefd734ccdf97a91eebcbdbf34d30e57023c5dee6f88db0d9594e"
+    },
+    {
+      "path": "om-codec.ps1",
+      "bytes": 14968,
+      "sha256": "3327dc55e11db9d7ce78e9f31d51d0643b97d13bcc8f6e5ffec1e313cd13c145"
+    },
+    {
+      "path": "om-contract.json",
+      "bytes": 13786,
+      "sha256": "0fac55e474ce420bac21a6a214f8a19e78f8d214c27c3c67c02dcac49d93023a"
+    },
+    {
+      "path": "om-format.ps1",
+      "bytes": 21325,
+      "sha256": "189218b0b2b33fd79650f3569adc753c6fbc6c183e6b0361bc35cf5e78480830"
+    },
+    {
+      "path": "om-native.ps1",
+      "bytes": 19855,
+      "sha256": "f9d3ecbc79400002bfafda5b18884edc9551798f99842778740092fa33611835"
+    },
+    {
+      "path": "om6626-readonly-v788j.jflash",
+      "bytes": 1378,
+      "sha256": "0efaad642a2ecc5f6efcdbd76191b2b2ae0c99c249781b438bca8a113090d9b4"
+    },
+    {
+      "path": "powershell-cli.ps1",
+      "bytes": 3106,
+      "sha256": "2a0651a4cdeff9bc46f3002fa2f6b30aeb0a207932831868c53312c557a570ce"
+    },
+    {
+      "path": "probe-native.ps1",
+      "bytes": 9051,
+      "sha256": "25576ca06f167a65383641cec619c38c36160dc1dc54847e1a01fe6ca5732ecc"
+    },
+    {
+      "path": "probe-om6626.ps1",
+      "bytes": 2707,
+      "sha256": "d5ea13cf10d635f7c3ed20d0edde09707644ad2ffcf34467ddb2dec29f56961e"
+    },
+    {
+      "path": "probe.ps1",
+      "bytes": 4664,
+      "sha256": "af1e660eec0af75d317f2ccbade0dd295c3cd8eaf7ba313a44ace40df15ef914"
+    },
+    {
+      "path": "readonly-process.ps1",
+      "bytes": 6523,
+      "sha256": "8b947afb842effdde771c8401f4c0d805a0b18528aac990bb6cd4e9e5dcd75b7"
+    },
+    {
+      "path": "records/dependencies.json",
+      "bytes": 1365,
+      "sha256": "f0c767c669f68d011a1a4a17fb4cc419f66e4d5bd7a8c0d029fb7ae93bac7cd6"
+    },
+    {
+      "path": "terminal-log.ps1",
+      "bytes": 21873,
+      "sha256": "e62f338d60d98f0b32775d1a4c4cdcc8d3520a54a83be3eda1d59a99ec0f36f0"
+    }
+  ]
+}

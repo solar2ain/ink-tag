@@ -7,8 +7,9 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { PageHeader } from '../components/PageHeader'
 import { PageModeFilter } from '../components/PageModeFilter'
 import { useConfirmationDialog } from '../components/ConfirmationDialog'
-import { db, type Asset, type PageKind, type SavedPage } from '../data/db'
+import { db, type Asset, type SavedPage } from '../data/db'
 import { documentKind, documentKindLabels, documentResolutions, emptyDocumentFilters, matchesDocumentFilters, type DocumentFilters } from '../data/documentLibrary'
+import { creationTemplateKindOrder } from '../data/templates'
 import { savedPageMode, canSendSavedPage, pageModeLabels, pageModeNotices, staticContentNotice } from '../data/pageMode'
 import { SendCanvasDialog } from '../components/SendCanvasDialog'
 import { useDeviceStore } from '../store/device'
@@ -93,7 +94,7 @@ export function LibraryPage() {
   }
 
   return <div className="page library-page">
-    <PageHeader title="资源" actions={<><input ref={assetInput} hidden type="file" accept="image/*" multiple onChange={(event) => void importAssets(event.target.files)} /><button className="button primary" onClick={() => assetInput.current?.click()}><ImagePlus />导入素材</button></>} />
+    <PageHeader title="资源" />
     <div className="library-tabs" role="tablist">
       <button className={tab === 'pages' ? 'active' : ''} onClick={() => setTab('pages')}><Images />我的页面 <span>{pages.length}</span></button>
       <button className={tab === 'assets' ? 'active' : ''} onClick={() => setTab('assets')}><Upload />图片素材 <span>{assets.length}</span></button>
@@ -103,7 +104,7 @@ export function LibraryPage() {
 
     {tab === 'pages' && <>
       <section className="template-toolbar" aria-label="页面筛选">
-        <div className="segmented-control template-kind-filter">{(Object.keys(documentKindLabels) as Array<PageKind | 'all'>).map(kind => <button key={kind} className={filters.kind === kind ? 'active' : ''} onClick={() => setFilters({ ...filters, kind })}>{documentKindLabels[kind]}</button>)}</div>
+        <div className="segmented-control template-kind-filter">{(['all', ...creationTemplateKindOrder, 'device-info'] as const).map(kind => <button key={kind} className={filters.kind === kind ? 'active' : ''} onClick={() => setFilters({ ...filters, kind })}>{documentKindLabels[kind]}</button>)}</div>
         <div className="template-filter-row page-filter-row">
           <PageModeFilter label="页面类型筛选" value={filters.pageMode} change={pageMode=>setFilters({...filters,pageMode})} />
           <label className="template-filter-control page-sort-control"><span>排序</span><select aria-label="页面排序" value={sort} onChange={event => setSort(event.target.value)}><option value="updated">最近保存</option><option value="name">名称</option><option value="resolution">分辨率从小到大</option></select></label>
@@ -133,7 +134,13 @@ export function LibraryPage() {
         </article>})}
     </section> : <section className="template-empty"><strong>没有匹配的页面</strong><span>调整筛选条件，或清除筛选查看全部页面。</span><button className="button secondary" onClick={() => setFilters(emptyDocumentFilters)}>清除筛选</button></section> : <EmptyPages />)}
 
-    {tab === 'assets' && (assets.length ? <section className="resource-grid asset-grid">{assets.map((asset) => <AssetItem key={asset.id} asset={asset} onDelete={async () => { await db.assets.delete(asset.id); await reload() }} />)}</section> : <section className="empty-state"><Upload /><h2>还没有素材</h2><p>导入图片后，它们会离线保存在当前浏览器中。</p><button className="button primary" onClick={() => assetInput.current?.click()}><ImagePlus />导入素材</button></section>)}
+    {tab === 'assets' && <>
+      <input ref={assetInput} hidden type="file" accept="image/*" multiple onChange={(event) => void importAssets(event.target.files)} />
+      {assets.length ? <>
+        <div className="asset-library-actions"><button className="button secondary" onClick={() => assetInput.current?.click()}><ImagePlus />导入素材</button></div>
+        <section className="resource-grid asset-grid">{assets.map((asset) => <AssetItem key={asset.id} asset={asset} onDelete={async () => { await db.assets.delete(asset.id); await reload() }} />)}</section>
+      </> : <section className="empty-state"><Upload /><h2>还没有素材</h2><p>导入图片后，它们会离线保存在当前浏览器中。</p><button className="button primary" onClick={() => assetInput.current?.click()}><ImagePlus />导入素材</button></section>}
+    </>}
 
     {sendTarget && <SendCanvasDialog defaultName={sendTarget.page.name}
       initialDestination={sendTarget.store ? 'store' : 'display'}

@@ -208,7 +208,7 @@ export function DeviceBar() {
       <div className="device-metrics" aria-label="设备状态">
         <span className={recovery ? 'recovery-mode' : ''} title={otaLabel || (recovery ? '蓝牙已连接 · Recovery 模式' : '连接状态')}>{otaInProgress ? <LoaderCircle className="spin" /> : recovery ? <ShieldCheck /> : <Radio />}{otaInProgress ? otaMetric : recovery ? 'Recovery' : connected ? 'BLE' : '离线'}</span>
         <span title="电池电压"><VoltageBatteryIcon voltage={state.voltage} />{state.voltage == null ? '--' : `${state.voltage.toFixed(2)} V`}</span>
-        <span title="固件授权"><KeyRound />{connected && !recovery ? state.activation.edition === 'advanced' && state.activation.phase === 'active' ? '高级版' : '免费版' : '--'}</span>
+        <span title="固件授权"><KeyRound />{connected && !recovery ? state.activation.edition === 'advanced' && state.activation.phase === 'active' ? '高级版' : '基础版' : '--'}</span>
         <span className={state.action === 'idle' ? '' : 'active-action'}>
           {state.action === 'idle' ? <Bluetooth /> : <LoaderCircle className="spin" />}
           {actionLabel}

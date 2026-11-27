@@ -6,20 +6,20 @@
 
 双击 [flash-zh.bat](tools/flash-zh.bat) 可按中文引导操作。以下命令从本目录执行，脚本默认持续检测设备。
 
-内置镜像、外置设置和 GUI 分开写入。App 与 GUI 必须配对。
+使用 Full ZIP 和对应板型配置。BAT 会写入内部镜像、外置设置和配对的 GUI 资源。需要手工烧录时，可用 [generate-hex.bat](tools/generate-hex.bat) 生成整组镜像，按[地址空间和烧录顺序](tools/INITIALIZATION.md)操作。
 
 ### EL022HWRL
 
-[BIN / HEX](programmer/EL022HWRL/) · [配置 / Configuration](tools/native-configs/EL022HWRL.toml)
+[配置 / Configuration](tools/configs/EL022HWRL.toml)
 
 ```powershell
-.\tools\flash-zh.bat -Firmware ".\full\InkTag-nrf52811_aesl-v0.2.2.0-self-built-full.zip" -Config ".\tools\native-configs\EL022HWRL.toml"
+.\tools\flash-zh.bat -Firmware ".\full\InkTag-BASIC-0.2.2.1-nrf52811_aesl-full.zip" -Config ".\tools\configs\EL022HWRL.toml"
 ```
 
 ### EL022HWRL-A0
 
-[BIN / HEX](programmer/EL022HWRL-A0/) · [配置 / Configuration](tools/native-configs/EL022HWRL-A0.toml)
+[配置 / Configuration](tools/configs/EL022HWRL-A0.toml)
 
 ```powershell
-.\tools\flash-zh.bat -Firmware ".\full\InkTag-nrf52811_aesl-v0.2.2.0-self-built-full.zip" -Config ".\tools\native-configs\EL022HWRL-A0.toml"
+.\tools\flash-zh.bat -Firmware ".\full\InkTag-BASIC-0.2.2.1-nrf52811_aesl-full.zip" -Config ".\tools\configs\EL022HWRL-A0.toml"
 ```

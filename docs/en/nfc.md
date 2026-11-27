@@ -1,4 +1,4 @@
-# Control a tag and send images with phone NFC
+# Control a tag and send images with NFC
 
 [简体中文](../zh-CN/nfc.md)
 
@@ -22,6 +22,27 @@ Use NFC Tools or another writer that supports NDEF text. Add one text record, en
 | `time#<current UTC Unix seconds>` | Set the clock on supported firmware while keeping the device's time zone and page |
 
 Enter the saved image name by itself, without a command prefix. Watch the tag for completion. The phone's write confirmation can arrive while the display is still refreshing. For clock sync, D3-Pro InkTag can send the phone's current time.
+
+## Use NFC in WebUI
+
+### Send commands
+
+Open **Dashboard → Quick controls → NFC control**. WebUI shows the controls available in your browser.
+
+- **Chrome on Android.** Turn on NFC, open WebUI over HTTPS, and select a command. Grant NFC permission when prompted, then hold the phone against the target tag. Tap one tag at a time. To send images from your phone, use D3-Pro InkTag as described below.
+- **Chrome or Edge on a computer.** Open WebUI over HTTPS or on a local address that your browser trusts. Place the tag on the PN532/PCR532 reader and select a command. Choose the reader's serial port if prompted. The browser may reuse a port you previously authorized.
+
+The **Calendar** and **Clock** shortcuts include the current UTC timestamp and local time zone offset when they write the command. For example, `calendar#1795276800,+480` specifies UTC+8. For older firmware, send `calendar` or `clock` from **Custom** to keep the date, time, and time zone already on the tag. **Clock** asks for confirmation because frequent refreshes can increase power use. You can also enter an image slot number or use **Custom** to send an image name that your firmware recognizes.
+
+After WebUI confirms the write, check the tag's screen to see whether the command ran.
+
+### Send an image with a desktop reader
+
+1. Open the **Pictures** page, choose an image, and set the size, orientation, and colors for the tag's display.
+2. Place the tag on the reader, select **NFC image transfer**, and choose the serial port if prompted.
+3. WebUI reads the tag's display settings and sends the image once they match. Wait for the display to refresh after the transfer. The tag displays the image directly.
+
+Progress follows the data acknowledged by the tag. The displayed speed covers the data transfer phase and uses the compressed byte count when compression is active. If the transfer is interrupted or times out, check the tag before retrying.
 
 ## Send an image from Android
 
@@ -52,6 +73,6 @@ Hanshow TLSR8359 tags typically use Type 4. ZKONG tags with Goodix or OnMicro co
 
 Complex images usually compress less and take longer to send even on the same screen. Once the app confirms that the tag accepted the refresh, you can move the phone away and wait for the display to update. The original iOS D3-Pro also transferred images successfully to the tested 4.2-inch Type 4 tag. The table lists only the timed Android runs.
 
-## Use a computer and NFC reader
+## Use an NFC reader from the command line
 
 The repository and full CLI ZIP include the PN532/PCR532 tool. It supports compatible Type 2 and Type 4 InkTag PRO tags, including link reading, text commands, time sync, and image transfer. [PN532/PCR532 setup and commands](../../tools/nfc/README.en.md)

@@ -8,6 +8,7 @@ import { bytes, encryptPortableBackup, generateMigrationPassword, MAX_BACKUP_TEX
   type PortableBackup, type PortableIdentity } from './portable'
 import { enrollOfflineFind, savedFindBackups, saveFindBackup, markFindBackupHistorical, type SavedFindBackup } from './offlineOwner'
 import { findDeviceDisplayName, groupFindIdentities } from './identities'
+import { downloadBlob } from '../download'
 
 export interface FindTransferRequest { mode: 'export' | 'import' | 'saved'; deviceId?: string; replacementDeviceId?: string }
 interface Props {
@@ -24,6 +25,7 @@ interface Props {
 export function FindTransferTools(props: Props) {
   const device = useDeviceStore()
   const mode = props.offlineAction || props.request?.mode
+  const savesBrowserBackup = mode === 'enroll' || mode === 'replace' || mode === 'enable'
   const [password, setPassword] = useState(''), [repeat, setRepeat] = useState('')
   const [generatedPassword, setGeneratedPassword] = useState('')
   const [encrypted, setEncrypted] = useState(''), [confirmed, setConfirmed] = useState(false)
@@ -87,11 +89,10 @@ export function FindTransferTools(props: Props) {
     if (current.connection !== 'connected' || ('activation:' + current.activation.activationId).toLowerCase() !== id.toLowerCase())
       throw new Error('设备连接已变化。迁移资料仍保留，请连接原设备后核对登记状态。')
   }
-  const remember = (owner: PortableIdentity, text: string) => {
-    // Plaintext must never enter persistent browser storage.
-    if (text.startsWith('IKTFIND1.')) saveFindBackup({ fingerprint: owner.fingerprint, deviceId: owner.deviceId,
-      deviceName: owner.deviceName || owner.bluetoothName, encryptedBackup: text })
-  }
+  const remember = (owner: PortableIdentity, text: string) => saveFindBackup({
+    fingerprint: owner.fingerprint, deviceId: owner.deviceId,
+    deviceName: owner.deviceName || owner.bluetoothName, encryptedBackup: text,
+  })
   const encode = (payload: PortableBackup) => encrypt ? encryptPortableBackup(payload, password) : Promise.resolve(plainPortableBackup(payload))
   const prepare = () => act(async () => {
     if (encrypt && password !== repeat) throw new Error('两次迁移口令不一致。')
@@ -108,11 +109,16 @@ export function FindTransferTools(props: Props) {
         setEncrypted(await encode(selectPortableBackup(source.current, props.request.deviceId, includeKeys, includeHistory)))
       }
     } else {
-      if (mode === 'replace' && !previousIdentity.current) throw new Error('请先提供并核对原身份的设备信息。')
-      if (device.activation.phase !== 'active' || device.activation.edition !== 'advanced') throw new Error('请先激活 Pro，再登记 Find。')
-      const owner = await newPortableIdentity(metadata())
+      let owner = identity.current
+      if (mode !== 'enable') {
+        if (mode === 'replace' && !previousIdentity.current) throw new Error('请先提供并核对原身份的设备信息。')
+        if (device.activation.phase !== 'active' || device.activation.edition !== 'advanced') throw new Error('请先激活 Pro，再登记 Find。')
+        owner = await newPortableIdentity(metadata())
+      }
+      if (!owner) throw new Error('请先核对现有 Find 身份。')
       checkTarget(owner.deviceId)
-      const text = await encode(singleIdentityBackup(owner))
+      const text = await encryptPortableBackup(singleIdentityBackup(owner), password)
+      checkTarget(owner.deviceId)
       remember(owner, text)
       identity.current = owner; setEncrypted(text)
     }
@@ -131,11 +137,11 @@ export function FindTransferTools(props: Props) {
     const owner = identity.current
     if (!owner || !confirmed) throw new Error('请先保存设备信息。')
     checkTarget(owner.deviceId)
-    await enrollOfflineFind(owner, encrypted, inktagClient, () => checkTarget(owner.deviceId), localStorage, !encrypt && confirmed,
+    await enrollOfflineFind(owner, encrypted, inktagClient, () => checkTarget(owner.deviceId), localStorage, false,
       mode === 'replace' ? previousIdentity.current || undefined : undefined)
     if (mode === 'replace' && previousIdentity.current) markFindBackupHistorical(previousIdentity.current.fingerprint)
     reset(); props.closeOfflineAction()
-    props.onMessage(mode === 'replace' ? 'Find 身份已替换。请保管新的设备信息，并导入本地 WebUI 查询位置。' : '设备已登记并开启 Find。请保管设备信息，导入本地 WebUI 后查询位置。')
+    props.onMessage(mode === 'replace' ? 'Find 身份已替换，新密钥已加密保存在当前浏览器。' : '设备已登记并开启 Find，密钥已加密保存在当前浏览器。')
   })
   const enableSaved = () => act(async () => {
     const owner = identity.current
@@ -146,10 +152,12 @@ export function FindTransferTools(props: Props) {
     if (!status.identityPresent) throw new Error('设备身份已变化，请重新打开 Find 登记。')
     await verifyOwnerProof(owner, status)
     checkTarget(owner.deviceId)
+    if (!savedFindBackups().some(record => record.fingerprint === owner.fingerprint && record.encryptedBackup === encrypted && !record.historyOnly))
+      throw new Error('浏览器中的加密备份已变化，请重新打开页面并保存备份。')
     await inktagClient.configureFind(true)
     checkTarget(owner.deviceId)
     reset(); props.closeOfflineAction()
-    props.onMessage('Find 广播已开启。请将设备信息导入本地 WebUI 后查询位置。')
+    props.onMessage('Find 广播已开启，密钥已加密保存在当前浏览器。')
   })
   const readInput = () => act(async () => {
     const plain = encrypted.trimStart().startsWith('{')
@@ -198,11 +206,16 @@ export function FindTransferTools(props: Props) {
       return
     }
     if (mode === 'enable') {
-      const text = plain ? plainPortableBackup(singleIdentityBackup(owner)) : await encryptPortableBackup(singleIdentityBackup(owner), password)
+      if (plain) {
+        identity.current = owner
+        setUnlocked(true); setEncrypted(''); setPassword(''); setPlainAcknowledged(false)
+        setHint('已核对原身份。请设置迁移口令，将密钥加密保存在当前浏览器。')
+        return
+      }
+      const text = await encryptPortableBackup(singleIdentityBackup(owner), password)
       checkTarget(id)
-      identity.current = owner; remember(owner, text); setEncrypted(text); setEncrypt(!plain); setPrepared(true)
+      identity.current = owner; remember(owner, text); setEncrypted(text); setPrepared(true)
       setPassword(''); setGeneratedPassword(''); setConfirmed(false)
-      setHint('已核对设备身份。请复制或保存这份资料，再确认开启。')
       return
     }
     const key = bytes(owner.materialHex).slice(28)
@@ -214,18 +227,20 @@ export function FindTransferTools(props: Props) {
     catch { textField.current?.focus(); textField.current?.select(); setHint('请手动复制已选中的字符串，或保存文件。') }
   }
   const download = () => {
-    const url = URL.createObjectURL(new Blob([encrypted], { type: 'application/octet-stream' }))
-    const a = document.createElement('a'); a.href = url; a.download = encrypted.startsWith('IKTFIND1.') ? 'inktag-find-backup.iktfind' : 'inktag-find-backup.json'; a.click()
-    setTimeout(() => URL.revokeObjectURL(url), 1000); setHint('已生成备份文件，请妥善保存。')
+    try {
+      downloadBlob(new Blob([encrypted], { type: 'application/octet-stream' }),
+        encrypted.startsWith('IKTFIND1.') ? 'inktag-find-backup.iktfind' : 'inktag-find-backup.json')
+      setHint('已生成备份文件，请妥善保存。')
+    } catch { setError('无法导出文件，请重试或复制备份。') }
   }
   const readFile = async (file?: File) => {
     if (!file) return
     if (file.size > MAX_BACKUP_TEXT) { setError('迁移文件超过大小限制。'); return }
     try { setEncrypted(await file.text()); setPlainAcknowledged(false); setError('') } catch { setError('无法读取迁移文件。') }
   }
-  const needsInput = mode === 'import' || mode === 'disable' || (mode === 'replace' && !unlocked) || (mode === 'enable' && !prepared) || (mode === 'export' && !props.serverAvailable && !unlocked)
+  const needsInput = mode === 'import' || mode === 'disable' || (mode === 'replace' && !unlocked) || (mode === 'enable' && !prepared && !unlocked) || (mode === 'export' && !props.serverAvailable && !unlocked)
   const isOutput = mode === 'saved' || prepared
-  const createsOutput = mode === 'enroll' || (mode === 'replace' && unlocked) || (mode === 'export' && !needsInput)
+  const createsOutput = mode === 'enroll' || ((mode === 'replace' || mode === 'enable') && unlocked) || (mode === 'export' && !needsInput)
   const plainInput = needsInput && encrypted.trimStart().startsWith('{')
   const plainOutput = prepared && !encrypted.startsWith('IKTFIND1.')
   const fileOnly = mode === 'export' && !props.request?.deviceId && includeHistory && selectedDevices.length !== 1
@@ -246,7 +261,7 @@ export function FindTransferTools(props: Props) {
       {hint && <p role="status">{hint}</p>}
       {props.request?.replacementDeviceId && <p>请粘贴此前保存的设备信息字符串，或选择备份文件；加密资料还需原口令。资料必须包含当前设备的查询私钥，仅轨迹备份无法替换身份。</p>}
       {mode === 'replace' && !unlocked && <p>请提供当前设备原先保存的设备信息（含查询私钥），粘贴字符串或选择备份文件。原口令和身份都必须匹配，才能替换。</p>}
-      {(mode === 'enroll' || mode === 'enable') && <div className="notice warning"><span>请保存设备信息，并导入支持查询的本地 WebUI，否则后续无法获取该设备的位置。设备本身无法找回查询密钥。</span></div>}
+      {savesBrowserBackup && <div className="notice warning"><span>Find 密钥会加密保存在当前浏览器。请另存一份备份并保管口令，再导入支持查询的本地 WebUI，否则后续无法获取该设备的位置。</span></div>}
       {(mode === 'saved' || needsInput) && <>
         {saved.length > 0 && (mode !== 'import' || props.request?.replacementDeviceId) && <label>已保存标签<select value={encrypted} onChange={e => { setEncrypted(e.target.value); setPlainAcknowledged(false) }}>
           <option value="">选择标签或粘贴资料</option>{saved.map(x => <option key={x.fingerprint} value={x.encryptedBackup}>{x.deviceName ? `${x.deviceName} · ` : ''}{x.fingerprint.slice(-8).toUpperCase()}</option>)}</select></label>}
@@ -269,7 +284,10 @@ export function FindTransferTools(props: Props) {
           <p className="find-transfer-hint">仅轨迹资料不含查询私钥，导入后只能查看历史。</p>
         </fieldset>
       </>}
-      {createsOutput && !prepared && <div className="find-transfer-encryption"><label className="find-transfer-ack"><input type="checkbox" checked={encrypt} onChange={e => { setEncrypt(e.target.checked); setPlainAcknowledged(false); setPassword(''); setRepeat(''); setGeneratedPassword('') }} disabled={busy} />使用口令加密（推荐）</label>{encrypt && <button className="button secondary" disabled={busy} onClick={() => void generate()}>自动生成口令</button>}</div>}
+      {createsOutput && !prepared && <div className="find-transfer-encryption">
+        {mode === 'export' && <label className="find-transfer-ack"><input type="checkbox" checked={encrypt} onChange={e => { setEncrypt(e.target.checked); setPlainAcknowledged(false); setPassword(''); setRepeat(''); setGeneratedPassword('') }} disabled={busy} />使用口令加密（推荐）</label>}
+        {encrypt && <button className="button secondary" disabled={busy} onClick={() => void generate()}>自动生成口令</button>}
+      </div>}
       {(plainInput || (createsOutput && !prepared && !encrypt)) && <div className="notice find-plaintext-warning">
         <div><strong>未加密资料可能泄露隐私</strong><p>设备信息包含查询私钥，持有者可能查询设备位置；轨迹会暴露历史位置。请勿公开或发送给他人。</p>
         <label className="find-transfer-ack"><input type="checkbox" checked={plainAcknowledged} onChange={e => setPlainAcknowledged(e.target.checked)} disabled={busy} />我了解并接受未加密资料的风险</label></div>
@@ -282,6 +300,7 @@ export function FindTransferTools(props: Props) {
       </>}
       {generatedPassword && <label>生成的口令<div className="find-transfer-password-row"><input ref={generatedField} aria-label="生成的迁移口令" value={generatedPassword} readOnly autoComplete="off" spellCheck={false} /><button className="button secondary" onClick={() => void copyPassword()}>复制口令</button></div><span className="find-transfer-hint">关闭窗口后不再显示，请另行保存。</span></label>}
       {isOutput && encrypted && <>
+        {savesBrowserBackup && <p role="status">已加密保存到当前浏览器。可在 Find 页随时导出或删除本机备份。</p>}
         {plainOutput && <div className="notice danger">这份资料未加密，请勿公开；不会自动保存在浏览器中。</div>}
         {fileOnly ? <p role="status">备份文件已生成，请选择“保存文件”。轨迹较多时无需复制字符串。</p>
           : <label>{encrypted.startsWith('IKTFIND1.') ? '加密迁移字符串' : '未加密迁移字符串'}<textarea ref={textField} value={encrypted} readOnly spellCheck={false} /></label>}
@@ -292,7 +311,7 @@ export function FindTransferTools(props: Props) {
         <p className="find-transfer-hint">请导入支持查询的本地 WebUI。仅轨迹资料只能查看历史；加密资料需另外保管口令。</p>
         {mode === 'export' && !props.request?.deviceId && !fileOnly && <p className="find-transfer-hint">也可保存为文件，方便保管或导入。</p>}
       </>}
-      {(mode === 'enroll' || mode === 'enable' || mode === 'replace') && prepared && <label className="find-transfer-ack"><input type="checkbox" checked={confirmed} onChange={e => setConfirmed(e.target.checked)} disabled={busy} />我已保存设备信息及所需口令，了解需导入本地 WebUI 后查询</label>}
+      {savesBrowserBackup && prepared && <label className="find-transfer-ack"><input type="checkbox" checked={confirmed} onChange={e => setConfirmed(e.target.checked)} disabled={busy} />我已另存备份并保管口令</label>}
       {mode === 'import' && <p className="find-transfer-hint">合并设备和轨迹，不覆盖已有资料；新导入设备的定期查询默认关闭。</p>}
       </div>
       <footer><button className="button secondary" disabled={busy} onClick={close}>关闭</button>

@@ -1,0 +1,58 @@
+{
+  "schema": "inktag-tlsr-offline-bin-v1",
+  "device_access": false,
+  "image_bytes": 524288,
+  "image_sha256": "9710F1F02077BF55C39C0F6960C2DA8923B49814335C2BD93DAD9CFB42AF12D8",
+  "load_address": 0,
+  "write_end_exclusive": 524288,
+  "firmware_package_sha256": "388E90A2113F280267DC8194555B501785ACAE8A78C4E4D312ED8DA9C3C26671",
+  "address_spaces": [
+    {
+      "space": "internal-flash",
+      "load_address": 0,
+      "bytes": 524288
+    }
+  ],
+  "factory_defaults_range": {
+    "start": 520192,
+    "end_exclusive": 524288
+  },
+  "upper_flash_cleared": false,
+  "config_sha256": "2B1991254FE0EB8B4BD11CEA905BF9CDB042F23330EF9E606781406BADAD57E9",
+  "board": "hs_nebular420",
+  "board_marking": "HSEL4Q_04_20M_33",
+  "layout": "layout-v1",
+  "compatibility_epoch": 1,
+  "mac": null,
+  "address_type": "StaticRandom",
+  "automatic_mac": true,
+  "application_profile": "base",
+  "application_signature_policy": "crc-only",
+  "release_version": 202,
+  "application_crc32": 2620269392,
+  "application_bytes": 186900,
+  "first_boot_identity": "Firmware initializes and persists a Static Random address before BLE",
+  "initial_edition": "Free",
+  "pro_preserved": false,
+  "application_bytes_unchanged": true,
+  "recovery_bytes_unchanged": true,
+  "stage0_bytes_unchanged": true,
+  "defaults": {
+    "deviceLabel": "",
+    "applicationName": null,
+    "managedLink": null
+  },
+  "first_boot_display": "one-shot-device-info-after-startup",
+  "original_factory_preserved": false,
+  "crystal_trim": "0xFF: existing SDK default; not original calibration",
+  "base_image_store_only": false,
+  "upper_flash": "Not included; existing upper Flash is preserved. Selected image slots are erased before writing.",
+  "warnings": [
+    "Burning replaces lower512-KiB settings, credentials, Pro, fonts, images and original Factory/calibration data. Back up separately if needed.",
+    "Omit MAC for a reusable generic image; explicit MAC images are for one identity. StaticRandom requires high bits11.",
+    "BDT must load at address0 and verify the exact image extent after writing. Match the physical capacity and selected PCB; never use whole-chip erase outside that extent.",
+    "No device capacity, calibration, RF, screen or physical BDT qualification is performed by this generator."
+  ],
+  "output": "InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL4Q_04_20M_33-SSD1683-flash.bin",
+  "dry_run": false
+}

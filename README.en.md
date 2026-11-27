@@ -226,7 +226,7 @@ Open Find in the local WebUI, log in to your query account, register a tag or im
 
 ## Complete flashing and OTA
 
-This version includes clients, guides, OTA and complete firmware for adapted boards, plus independent plaintext programmer tools under `firmware/<controller_board>/`.
+The firmware bundle and [release/firmware/](release/firmware/) in this repository include OTA and Full firmware, flashing BAT files, and board presets for supported targets.
 
 Stock devices and wired recovery require an exact-controller, exact-board complete-flashing package. This clears MCU-side settings/data; heed the tool's scope warning, preserve identity/calibration and keep stock backups. Some boards retain a separate external image Flash as explicitly stated by the tool.
 
@@ -248,7 +248,15 @@ Pull requests are welcome for fixes, tutorials, and better-looking, readable tem
 
 ## Acknowledgements
 
-Thanks to [ATC_TLSR_Paper](https://github.com/atc1441/ATC_TLSR_Paper), [epdoptimize](https://github.com/paperlesspaper/epdoptimize), [U8g2 for Adafruit GFX](https://github.com/olikraus/U8g2_for_Adafruit_GFX), WenQuanYi, [FindMy.py](https://github.com/malmeloo/FindMy.py), [os-findmy-e](https://github.com/sacca97/os-findmy-e), Leafer, React, Lucide, the controller tooling ecosystem, and everyone contributing hardware, tests and feedback. See [third-party notices](THIRD_PARTY_NOTICES.md).
+We thank the authors and contributors of the following projects.
+
+- [EPD-nRF5](https://github.com/tsl0922/EPD-nRF5) — InkTag drew heavily on this project in its early development, particularly for e-paper drivers and calendar features.
+- [ATC_TLSR_Paper](https://github.com/atc1441/ATC_TLSR_Paper) — Hardware documentation and an open implementation for Hanshow TLSR8359 labels.
+- [epdoptimize](https://github.com/paperlesspaper/epdoptimize) — Color quantization and dithering for e-paper images.
+- [U8g2 for Adafruit GFX](https://github.com/olikraus/U8g2_for_Adafruit_GFX) and the WenQuanYi font project — Glyph rendering and Chinese font resources.
+- [FindMy.py](https://github.com/malmeloo/FindMy.py) and [os-findmy-e](https://github.com/sacca97/os-findmy-e) — Find queries and local authentication support.
+
+We also thank Leafer, React, Lucide, the controller tooling ecosystem, and everyone who contributed hardware, testing, or feedback. [Third-party notices](THIRD_PARTY_NOTICES.md)
 
 The creation editor uses [Fusion Pixel](https://github.com/TakWolf/fusion-pixel-font), [Z Labs Pixel CN](https://github.com/Astro-2539/ZLabs-Pixel-12px), [Muzai Pixel](https://github.com/DWNfonts/MuzaiPixel), [Chill Bitmap](https://github.com/Warren2060/ChillBitmap), and [WenQuanYi Bitmap Song](https://sources.debian.org/src/xfonts-wqy/1.0.0~rc1-8/). Thanks to their authors and contributors.
 

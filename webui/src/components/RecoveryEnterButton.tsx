@@ -19,7 +19,7 @@ export function RecoveryEnterButton({ onError, onRunningChange, alwaysVisible = 
     const expectedId = deviceId
     setRunning(true); onRunningChange(true); onError('')
     try {
-      if (!await confirm({ title: '进入 Recovery', confirmLabel: '确认进入', message: '将同一设备切换到固件维护模式，不发送升级包或清除用户数据。设备密码仍须验证；安全退出是否可用由已安装的 Recovery 决定，不支持时需完成匹配的签名固件更新。' })) return
+      if (!await confirm({ title: '进入 Recovery', confirmLabel: '确认进入', message: '将同一设备切换到固件维护模式，不发送升级包或清除用户数据。设备密码仍须验证。\n\nRecovery 模式下 MCU 不会休眠，十分耗电，请不要长期停留在 Recovery 模式。' })) return
       const ota = await import('../protocol/ota')
       await ota.enterFixedRecovery(expectedId)
     } catch (reason) {

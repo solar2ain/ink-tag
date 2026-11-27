@@ -4,7 +4,7 @@
 
 适用主板为提供配置的 EL022HWRL / CAL_VER06，实际芯片必须是 nRF52811、192 KiB Flash / 24 KiB RAM，并装有该板型支持的 512 KiB 外置 Flash。配置文件选择原屏或已经适配的换屏，不能凭同主控推断其他主板兼容。
 
-双击 `flash.bat` 使用英文，或双击 `flash-zh.bat` 使用中文；从其他当前目录启动也可。启动教程会说明 J-Link 7.88j、SWDIO / SWCLK / GND 接线、主板供电、初始化范围及取消方法。工具旁、相邻 `firmware` 或 `full` 目录里只有一份有效 Full ZIP 时自动采用，有多份时才询问选择；没有可用文件时弹出 Windows 文件选择框。OTA 包和单独 App 不能作为 Full。固件验证通过后，才从实际随附的 `native-configs` 中选择主板丝印及屏幕配置。
+双击 `flash.bat` 使用英文，或双击 `flash-zh.bat` 使用中文；从其他当前目录启动也可。启动教程会说明 J-Link 7.88j、SWDIO / SWCLK / GND 接线、主板供电、初始化范围及取消方法。工具旁、相邻 `firmware` 或 `full` 目录里只有一份有效 Full ZIP 时自动采用，有多份时才询问选择；没有可用文件时弹出 Windows 文件选择框。OTA 包和单独 App 不能作为 Full。固件验证通过后，才从实际随附的 `configs` 中选择主板丝印及屏幕配置。
 
 固件和主板校验通过后，先说明完整刷机影响并询问是否继续，默认否。回答否或直接回车会退出，不枚举探针、不访问串口或目标。同意后才持续等待 USB 探针和已供电的 SWD 目标，没有等待次数或总时限；状态会持续显示，按 Q 或 Esc 可取消。写入前仍检查目标芯片、容量及既有身份和安全条件。菜单留空取消；编号无效、依赖缺失、校验或烧录失败都会显示原因，按任意键关闭。完整刷机会重建普通设置并使旧图片失效。只有写入前探测可重试，写入失败不会自动重放。
 
@@ -13,13 +13,13 @@
 正常、推荐的完整烧录入口是 `flash.bat`。它先尝试保全可用原信息，缺失时按默认初始化；完整烧录会重建普通设置并使旧图片失效，保全范围见下文。
 
 ```bat
-flash.bat -Firmware "D:\Firmware\app-full.zip" -Config ".\native-configs\EL022HWRL.toml" -Yes
+flash.bat -Firmware "D:\Firmware\app-full.zip" -Config ".\configs\EL022HWRL.toml" -Yes
 ```
 
 需要先离线生成通用 HEX 物料时，使用以下两个入口：
 
 ```bat
-generate-hex.bat -Firmware "D:\Firmware\app-full.zip" -Config ".\native-configs\EL022HWRL.toml" -Output "D:\Firmware\new initialization"
+generate-hex.bat -Firmware "D:\Firmware\app-full.zip" -Config ".\configs\EL022HWRL.toml" -Output "D:\Firmware\new initialization"
 flash-hex.bat -Materials "D:\Firmware\new initialization" -Yes
 ```
 

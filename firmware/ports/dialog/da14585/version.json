@@ -1,9 +1,10 @@
 {
-  "version": "0.2.2",
+  "version": "0.2.2.1",
   "recoveryVersion": "1.0.1",
   "major": 0,
   "minor": 2,
   "patch": 2,
+  "revision": 1,
   "protocolVersion": 16,
   "otaVersion": 202,
   "recoveryEpoch": 1

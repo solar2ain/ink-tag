@@ -2,9 +2,11 @@
 
 双击 `flash.bat` 使用英文，双击 `flash-zh.bat` 使用中文。只找到一份可用 Full ZIP 时直接采用，多份时列出选项，没有时弹文件选择框。接着选择主板并确认完整刷机。确认后才开始探测设备。
 
-这份目录只含工具，不含固件、Python、SDK、编译器或私钥。BAT 使用
+完整固件在 [full/](full/)，板型配置见[安装说明](INSTALL.md)。BAT 使用
 Windows x64 自带的 PowerShell 5.1/.NET。连接硬件时另行安装原版 SEGGER
 J-Link 7.88j；程序检查 EXE/DLL 的固定哈希。
+
+发布包在 flash-images/ 提供按板型命名的 HEX，BAT 复用 full/ 中的完整包复算校验。HEX 约 1.47 MB，是覆盖 512 KiB 内部 Flash 的 Intel HEX 文本。若自行运行 generate-hex.bat，其输出目录会包含用于校验的 source-full.zip，方便独立携带。
 
 双击 BAT 可输入必要路径，空输入取消；命令行也接受完整参数。中文和含空格
 路径需要引号。完成返回 0，拒绝、写入或读回失败返回非零，不自动重刷。
@@ -21,7 +23,7 @@ J-Link 7.88j；程序检查 EXE/DLL 的固定哈希。
 generate-hex.bat -Firmware "D:\固件\app-full.zip" -Config "configs\PriceEtag_V1.7.toml" -Output "D:\初始化 材料"
 ```
 
-固件必须由调用者明确提供。工具验证 App/Recovery 配对及实际原生布局；
+交互模式会自动使用唯一匹配的 Full ZIP，离线生成时可通过 `-Firmware` 指定。工具验证 App/Recovery 配对及实际原生布局；
 Base 使用 CRC 完整性校验，Pro 使用固定发行公钥验证签名。存在但无效的签名
 不会按无签名处理。配置支持 TOML/JSON；本入口不支持 YAML。
 
