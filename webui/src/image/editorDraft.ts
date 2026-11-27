@@ -3,6 +3,7 @@ import type { ImageFitMode } from './crop'
 import type { ImageAlgorithm } from './optimize'
 import type { ImagePreviewMode } from './previewMode'
 import { imageDefaults } from './defaults'
+import type { SerialScreen } from '../nfc/serialTag'
 
 export interface ImageEditorDraft {
   source: HTMLImageElement | null
@@ -10,12 +11,14 @@ export interface ImageEditorDraft {
   fileName: string
   targetResolution: string
   simulatedColor: number
+  nfcScreen: SerialScreen | null
   algorithm: ImageAlgorithm
   preset: ProcessingPresetName
   contrast: number
   brightness: number
   strength: number
   heavyInk: boolean
+  warmColors: boolean
   rotationOffset: number
   canvasTurned: boolean
   fitMode: ImageFitMode
@@ -34,12 +37,14 @@ export const imageEditorDraft: ImageEditorDraft = {
   fileName: '图片',
   targetResolution: '400x300',
   simulatedColor: 2,
+  nfcScreen: null,
   algorithm: 'auto',
   preset: 'balanced',
   contrast: imageDefaults.contrast,
   brightness: 0,
   strength: imageDefaults.strength,
   heavyInk: false,
+  warmColors: false,
   rotationOffset: 0,
   canvasTurned: false,
   fitMode: 'crop',

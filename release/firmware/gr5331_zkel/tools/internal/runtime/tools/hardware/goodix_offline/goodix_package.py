@@ -128,10 +128,10 @@ def load_package(path: Path) -> Package:
             application.get("recovery_state_addresses") != profile["recovery_state_addresses"]:
         raise ValueError("Goodix OTA board/chip/address policy does not match")
     release = str(manifest.get("release") or "")
-    release_match = re.fullmatch(r"(\d+)\.(\d+)\.(\d+)", release)
+    release_match = re.fullmatch(r"(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?", release)
     if release_match is None:
-        raise ValueError("Goodix OTA release must be MAJOR.MINOR.PATCH")
-    release_parts = tuple(int(value) for value in release_match.groups())
+        raise ValueError("Goodix OTA release must be MAJOR.MINOR.PATCH[.REVISION]")
+    release_parts = tuple(int(value) for value in release_match.groups() if value is not None)
     protocol = int(manifest.get("protocol", -1))
     release_version = int(manifest["releaseVersion"])
     compatibility_epoch = int(manifest["compatibilityEpoch"])

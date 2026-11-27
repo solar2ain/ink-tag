@@ -1,12 +1,12 @@
 # GR 初始化 BIN 与保全刷机 / Clean initialization and preservation
 
-在所选主板的 `gr5331/tools` 或 `gr551x/tools` 目录运行对应的 BAT。
+在此目标目录的 `tools/` 运行对应的 BAT。具体配置见[安装说明](INSTALL.md)。
 正常烧录推荐使用 `flash.bat`，先尝试保全可用原信息；缺失时采用默认初始化。
 用户端需要 Windows PowerShell 5.1/.NET；生成物料不需要 Python、SDK 或设备。
 实际读写沿用 Goodix GProgrammer 的原生 console、DLL/loader 与 SEGGER J-Link
 7.88j。请按厂商许可单独安装，并用 `-ConsoleExe` / `-JLinkExe` 指定路径；工具
 不下载固件、不捆绑私有 SDK，也不调用 InkTag CLI、BLE 或 Find 服务。
-旧 Python 工具保留；新原生入口支持维护的 TOML 配置和等价 JSON，YAML 继续使用旧入口。
+原生入口使用随包的 TOML 配置，也接收等价 JSON。
 
 ```bat
 generate-bin.bat -Firmware "D:\Firmware\app-full.zip" -Config "configs\ZK_EL_GR42V_V1.2_w_NFC.toml" -Output "D:\Firmware\new materials"
@@ -31,7 +31,7 @@ Full ZIP 时，向导会显示文件名并直接进入主板菜单。有多份�
 `generate-bin` 仅接收完整的外部 Full ZIP，检查实际 App、Common Recovery、板型、
 布局、CRC 和适用的发行签名，再生成 `mcu.bin`（已包含 GUI 字体）、`flash-map.json`
 及绑定的组件/配置副本。App-only BIN/OTA 不是完整初始化镜像。旧固件如果没有
-首次启动地址持久化能力，会在访问设备前拒绝。版本保持 App 0.2.2、Recovery 1.0.1、
+首次启动地址持久化能力，会在访问设备前拒绝。支持 App 0.2.2 / 0.2.2.1，Recovery 保持 1.0.1、
 epoch 1 / layout-v1，基础版与 Pro 使用同一 Common Recovery。
 
 | 实际芯片 / 布局 | MCU BIN 起始地址 | 字节数 | NVDS 相对偏移 / 字节数 |
@@ -72,17 +72,17 @@ UID/记录缺失、不支持、读取失败或校验失败会逐项告知，不�
 生成成功、写入完成、回读匹配、实际显示/蓝牙功能分别记录；主机假设备测试不代表
 已经完成本批实物 Full 或低功耗测试。
 
+发布包在 `flash-images/<板型>/` 附上带版级、版本、目标与板型的 BIN。该目录的 `flash-map.json` 关联 `full/` 中的唯一 Full。离线自行生成材料时仍会得到可独立携带的 `mcu.bin` 和配套校验材料。
+
 ## English
 
-Run the BAT entries in the exact board's `gr5331/tools` or `gr551x/tools`
-directory. The native path uses Windows PowerShell 5.1/.NET, with no Python,
+Run the BAT entries in `tools/` under this target directory.
+See the [installation guide](INSTALL.en.md) for the exact preset. The native path uses Windows PowerShell 5.1/.NET, with no Python,
 pip, virtual environment or bundled Python. Offline generation needs no device
 or SDK. Hardware operations reuse the installed native Goodix GProgrammer
 console/DLLs/loaders and SEGGER J-Link 7.88j, supplied separately under their
 licenses. Pass `-ConsoleExe`, optional `-JLinkExe`, and an exact `-Snr` when
-multiple probes are attached. Existing Python backends remain available;
-native entries accept maintained TOML and equivalent JSON, while YAML remains
-on the existing Python entry. No CLI, BLE or Find service is started.
+multiple probes are attached. Use the bundled TOML presets or equivalent JSON with the native entries. No CLI, BLE or Find service is started.
 
 The examples above accept paths containing spaces. Double-click `flash.bat`
 for the English guide or `flash-zh.bat` for Chinese. A single verified local Full
@@ -106,7 +106,7 @@ completed; nonzero means failure. Use a new `-Evidence` directory for each run.
 `generate-bin` validates an explicit external Full ZIP and produces the complete
 MCU BIN (including GUI), address map and bound component/config copies. An App BIN
 or App-only OTA is insufficient. Both actual App and Common Recovery must
-include first-boot address persistence. App 0.2.2, Recovery 1.0.1, epoch1 and
+include first-boot address persistence. App 0.2.2 / 0.2.2.1, Recovery 1.0.1, epoch1 and
 layout-v1 remain unchanged; Base and Pro share Common Recovery. The address
 table above gives exact internal Flash extents, not inferred physical capacity.
 
@@ -150,3 +150,5 @@ New materials contain no separate top-level `gui-font.bin`: GUI is already
 embedded in `mcu.bin`. Verification uses the bound component resource (or the
 existing Pro default template), retains its hash and compares the complete MCU
 bytes. Historical materials retain their existing GUI binding when read.
+
+The release keeps named BIN files in `flash-images/<board>/` and validates them against the single firmware package in `full/`. Locally generated material sets remain self-contained.

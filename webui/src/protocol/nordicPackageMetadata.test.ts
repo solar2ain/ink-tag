@@ -15,7 +15,7 @@ function packet(version=65736, appBytes=69592, duplicate=false) {
 it('reads the signed-command metadata structure without modifying bytes or claiming a signature check',()=>{
  const bytes=packet(currentVersion),before=bytes.slice();expect(readNordicPackageVersion(bytes,69592)).toEqual({encodedVersion:currentVersion,compatibilityEpoch:1,releaseNumber:INKTAG_FIRMWARE_VERSION.otaVersion});expect(bytes).toEqual(before)
  const shown=otaPackagePresentation({type:'nordic',payload:{initPacket:bytes,firmware:new Uint8Array(69592),fileName:'misleading-v9.9.9.zip'},summary:'original'},'aesl22_nrf')
- expect(shown.version).toBe(INKTAG_FIRMWARE_VERSION.version+'.0');expect(shown.technicalSummary).toContain(String(currentVersion));expect(shown).not.toHaveProperty('signatureVerified')
+ expect(shown.version).toBe(INKTAG_FIRMWARE_VERSION.version);expect(shown.technicalSummary).toContain(String(currentVersion));expect(shown).not.toHaveProperty('signatureVerified')
 })
 it('uses an exact raw version number for an unknown release instead of guessing semantic version',()=>{
  const shown=otaPackagePresentation({type:'nordic',payload:{initPacket:packet(131071),firmware:new Uint8Array(69592)},summary:''},'aesl22_nrf');expect([shown.versionLabel,shown.version]).toEqual(['版本编号','131071'])

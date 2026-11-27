@@ -50,6 +50,14 @@ describe('public update discovery', () => {
     expect(componentUpdate(latest, { version: '0.2.2', buildId: 'older-hash', buildNumber: 1 })).toBe('current')
     expect(componentUpdate(latest, { version: '0.2.1', buildId: 'unknown-hash', buildNumber: 3 })).toBe('current')
   })
+  it('accepts and orders the four-component WebUI version', () => {
+    const value = feed()
+    const latest = value.components.webui!
+    latest.version = '0.2.2.1'
+    expect(validateFeed(value, 'stable').components.webui).toEqual(latest)
+    expect(componentUpdate(latest, { version: '0.2.2', buildId: 'test-2', buildNumber: 2 })).toBe('available')
+    expect(componentUpdate(latest, { version: '0.2.2.2', buildId: 'test-3', buildNumber: 3 })).toBe('current')
+  })
   it('matches complete exact board/family/protocol/layout/epoch only', () => {
     expect(resolveFirmwareUpdate(feed(), target.family, '0.2.0', options).status).toBe('available')
     for (const changed of [{ boardId: 5 }, { family: 'gr551x_zkel' }, { protocolVersion: 1 }, { layout: 'other' }, { compatibilityEpoch: 2 }]) {

@@ -6,6 +6,7 @@ import { useDeviceStore } from '../store/device'
 let transfer: ReturnType<typeof vi.fn>
 let enter: ReturnType<typeof vi.fn>
 let select: ReturnType<typeof vi.fn>
+let chooser: ReturnType<typeof vi.fn>
 let sharedEntry: ReturnType<typeof vi.spyOn>
 const recovery = { id: 'granted-nrf', name: 'IKT_NRF_6775_OTA' } as BluetoothDevice
 const stop = new Error('virtual transfer boundary')
@@ -14,12 +15,14 @@ beforeEach(() => {
   transfer = vi.fn().mockRejectedValue(stop)
   enter = vi.fn().mockResolvedValue('IKT_NRF_6775_OTA')
   select = vi.fn().mockResolvedValue(recovery)
+  chooser = vi.fn()
   vi.stubGlobal('document', { createElement: () => ({ remove() {} }), head: { appendChild() {} } })
   vi.stubGlobal('window', { NordicDfu: { transferDevice: transfer, enterButtonless: enter,
-    bootloaderName: () => 'IKT_NRF_6775_OTA', findGrantedBootloaderDevice: select } })
+    bootloaderName: () => 'IKT_NRF_6775_OTA', findGrantedBootloaderDevice: select, requestBootloaderDevice: chooser } })
   vi.spyOn(inktagClient, 'getGattServer').mockReturnValue({ connected: true } as BluetoothRemoteGATTServer)
   vi.spyOn(inktagClient, 'getDevice').mockReturnValue(recovery)
   sharedEntry = vi.spyOn(inktagClient, 'enterOtaRecovery').mockResolvedValue(undefined)
+  vi.spyOn(inktagClient, 'releaseForRecovery').mockResolvedValue(undefined)
   vi.spyOn(inktagClient, 'getExpectedRecoveryIdentity').mockReturnValue({
     deviceId: recovery.id, recoveryName: 'IKT_NRF_6775_OTA',
   })
@@ -60,6 +63,7 @@ it('normal Nordic App uses one shared AUTH entry and binds the same-grant DFU se
   const progress = vi.fn()
   select.mockImplementationOnce(async (_name, _handoff, _device, status) => {
     expect(useDeviceStore.getState().otaPhase).toBe('connecting-recovery')
+    expect(inktagClient.releaseForRecovery).toHaveBeenCalledOnce()
     status('Recovery 服务仍在切换，断开后重新发现通道')
     return recovery
   })
@@ -83,10 +87,20 @@ it('an entry refusal or unknown result does not select, transfer or repeat entry
   expect(select).not.toHaveBeenCalled()
   expect(transfer).not.toHaveBeenCalled()
 })
+it('asks the user to choose Recovery from a new click when nRF discovery finds no verified connection', async () => {
+  vi.spyOn(inktagClient, 'getOtaRecoveryType').mockReturnValue(null)
+  select.mockResolvedValue(null)
+  await expect(transferOta({ type: 'nordic', payload: {}, summary: '' }, () => {}))
+    .rejects.toMatchObject({ code: 'RECOVERY_SELECT_REQUIRED' })
+  expect(sharedEntry).toHaveBeenCalledOnce()
+  expect(chooser).not.toHaveBeenCalled()
+  expect(transfer).not.toHaveBeenCalled()
+})
+
 it('a missing or changed pre-entry identity cannot select or transfer', async () => {
   vi.spyOn(inktagClient, 'getOtaRecoveryType').mockReturnValue(null)
   vi.mocked(inktagClient.getExpectedRecoveryIdentity).mockReturnValue({ deviceId: 'another-grant', recoveryName: 'IKT_NRF_6775_OTA' })
-  await expect(transferOta({ type: 'nordic', payload: {}, summary: '' }, () => {})).rejects.toThrow('无法确认升级前')
+  await expect(transferOta({ type: 'nordic', payload: {}, summary: '' }, () => {})).rejects.toThrow('交接身份尚未确认')
   expect(sharedEntry).toHaveBeenCalledOnce()
   expect(select).not.toHaveBeenCalled()
   expect(transfer).not.toHaveBeenCalled()

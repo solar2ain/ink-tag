@@ -1,0 +1,31 @@
+{
+  "files": [
+    {
+      "path": "InkTag-BASIC-0.2.2.1-nrf52832_priceetag-PriceEtag_V1.7-flash.hex",
+      "bytes": 1474709,
+      "sha256": "ff28cdc5e9625bd7d1511097196b2b42b26a0298d7b137792f98ca4aad2a3ad5"
+    },
+    {
+      "path": "InkTag-BASIC-0.2.2.1-nrf52832_priceetag-full.zip",
+      "bytes": 428584,
+      "sha256": "821dcc68f6be19d93a081a044041077c0d7357f16879297b6f30cf5c1213528f"
+    },
+    {
+      "path": "addresses.json",
+      "bytes": 882,
+      "sha256": "1bd071972107924285023687cd93889b08f1c296ae2ed8475cd8309c8a2b94b1"
+    },
+    {
+      "path": "board.toml",
+      "bytes": 738,
+      "sha256": "3c0215157a3f1758fba335fd014a20b10b8cac4c14db8497130dfb28bbbce3ed"
+    }
+  ],
+  "initializationMode": "clean",
+  "sourceProfile": "base",
+  "buildTarget": "nrf52832_priceetag",
+  "layout": "N3V1",
+  "mainFlashSha256": "6022342594c73d19dd7135a6f1623d1ac41340b0412920ffddd7761dca1c2fcb",
+  "schemaVersion": 3,
+  "configurationFile": "board.toml"
+}

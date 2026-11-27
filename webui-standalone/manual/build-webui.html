@@ -13,7 +13,7 @@ npm run dev -- --host 127.0.0.1
 <p>在已执行过 <code>npm ci</code> 的 <code>webui/</code> 目录运行：</p>
 <pre><code class="language-sh">npm run build
 </code></pre>
-<p>构建会更新 <code>webui/dist/static/</code> 和 <code>webui/dist/standalone/</code>。仓库随源码提供这两份产物。静态版供 CLI 本地服务和 HTTPS 静态站使用。离线版可直接打开 <code>webui/dist/standalone/InkTag-WebUI.html</code>，请保留旁边的 <code>assets/</code>，供字体等资源按需加载。安装和运行发布版无需 Node.js。</p>
+<p>构建输出位于 <code>webui/dist/static/</code> 和 <code>webui/dist/standalone/</code>。静态版供 CLI 本地服务和 HTTPS 静态站使用。仓库提供的离线版统一在 <a target="_blank" rel="noopener noreferrer" href="../InkTag-WebUI.html">webui-standalone/</a>，可打开其中的 HTML，并保留旁边的 <code>assets/</code>。打包候选时会用本地新构建更新这份离线版。普通安装和使用无需 Node.js。</p>
 <p>重编后回到仓库根目录，重新运行客户端安装脚本即可启动新版 WebUI。</p>
 <ul>
 <li>Windows 运行 <code>install_inktag.cmd</code>。</li>

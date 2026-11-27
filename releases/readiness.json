@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "edition": "basic",
-  "reviewedReleaseTag": "v0.2.2-20261124.8",
+  "reviewedReleaseTag": "v0.2.2.1-20261127.1",
   "publicReleaseApproved": true,
   "cliCorrespondingSourceVerified": false,
   "webuiBinaryTermsApproved": false,
@@ -13,18 +13,18 @@
   "sourceMaterials": [
     {
       "id": "client-source",
-      "bytes": 18189963,
-      "sha256": "ce5ddf2cb45a35cfebb9511e447895b613c92b497b3ce322a1bfc6c319c13667",
+      "bytes": 18241657,
+      "sha256": "ba6b933b6f2e198c1a0e832f21be3f7ee6f7ab7f5116fee59d345ea24a34ab84",
       "forComponents": [
         {
           "path": "cli/src/inktag_cli/_assets/nativePreviewWasm.js",
-          "sha256": "7dd139876c52e6d554899bad903dfb75cb43b38d99ba1c4aea6875910e5ee893"
+          "sha256": "57a98a4a7b397a6f76aaa761c0bce733badf47617c60455b74cb7fdd1aecc88b"
         }
       ],
       "delivery": {
         "kind": "release-asset",
-        "name": "InkTag-client-source-v0.2.2-20261124.8.zip",
-        "url": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.2-20261124.8/InkTag-client-source-v0.2.2-20261124.8.zip"
+        "name": "InkTag-client-source-v0.2.2.1-20261127.1.zip",
+        "url": "https://github.com/solar2ain/ink-tag/releases/download/v0.2.2.1-20261127.1/InkTag-client-source-v0.2.2.1-20261127.1.zip"
       }
     }
   ],
@@ -50,10 +50,10 @@
     "cli/src/inktag_cli/find_public_only.py": "658290c9d7ac28556fae5d06b88e0dd5efe881bbc0669e020200707aa624e9df",
     "cli/src/inktag_cli/find_query.py": "aa90bcfcb3f02b28423b74243e0d81a009c63105f0195067c68248c0a6687069",
     "cli/src/inktag_cli/generated_busy_defaults.py": "fbf52a9bdb9e6ba65dab641127106c8113d7b4d580113d95780edd3d7a1159db",
-    "cli/src/inktag_cli/generated_commands_v2.py": "e8e95cc4e098eae5cbc987b378dc1369784dec379337a112e5df1233a509c2d4",
+    "cli/src/inktag_cli/generated_commands_v2.py": "51ddb4e081d7f4ecb3f2c827481d931d4c8d43d8a50a6dcbf036802b758e66c5",
     "cli/src/inktag_cli/generated_layout_v1.py": "c00bb7c51e6ce811f7d3b3e7f1cec045a531ee33419c2dbb430381313946dcc5",
     "cli/src/inktag_cli/generated_release_v1.py": "fc607086de7b28b67be5edeb92a63e8e12d0e499c7adf78b8bd3fdac4c56d03f",
-    "cli/src/inktag_cli/goodix_package.py": "1c7a412938d116bbaacd14efe25a4d589eeb1bed77951dedb07998c9344178f2",
+    "cli/src/inktag_cli/goodix_package.py": "e6542b0ad622249f763bd3c668af106436730a195c825d43168b17b14b170551",
     "cli/src/inktag_cli/gui_font_roles.py": "3f26ff7205cb3e95641b01521b608cc9922b960b33edc39e646ee5c802a739b8",
     "cli/src/inktag_cli/host_commands.py": "4802e3a23c5855bccc7c090548d7db27085b862686dc4bc3e6ed6caf65712b55",
     "cli/src/inktag_cli/host_pages.py": "1c81fc5371a90292c4851b8f9f8a6f183a834b20537652550fbd2b90c74130da",
@@ -95,7 +95,7 @@
     "cli/src/inktag_cli/time_reference.py": "e1757e2266de708c213fea9c03b1d296ae29b554a3cad421c89ed59ef7d85064",
     "cli/src/inktag_cli/tlsr_base_package.py": "848b48b4472570eca01da5d016857170fde71a81bc8ef598fcdc350daac4ba38",
     "cli/src/inktag_cli/tlsr_layout.py": "6ae877a426410ba9f372c422819d5181670e71c9bc9969183db78dd2c7acc1d8",
-    "cli/src/inktag_cli/transport.py": "6bf909720efd5546f9e14804ee12e9d0a94e3d18cc834659a62ffc524135d33b",
+    "cli/src/inktag_cli/transport.py": "e6cfe474071186777e3affeb5623b0c8a8c8437fc48b1f1afad4b5485fdef9f4",
     "cli/src/inktag_cli/user_settings.py": "aa6debb6672cbe218311a177c54ab452f2678f0e12883bc2e0a2a5b63ea6e272",
     "cli/src/inktag_cli/wait_status.py": "b1ebff653c670b429c2fd52af53d12d7f76f19ce05190567d2af7d9ec98fec9e",
     "cli/src/inktag_cli/webui_build.py": "065a784af18e78b6c1d78f30d18e2fc71b5e6d1260fde6497ff6408557294dd0",
@@ -107,40 +107,40 @@
     "cli/src/inktag_cli/_assets/fontRoles.js": "79044e1ba45f1b729b721278c7b3ba857e88e94ba3245799d91b9de14de9ec00",
     "cli/src/inktag_cli/_assets/hostScene.js": "3f754a043062f039fbe3eb01d9a7ae2359cc6d7ff55463a6a74cffe0cdcc0b7d",
     "cli/src/inktag_cli/_assets/inktag_dither.js": "20d4ed2ec570e96abfb56905139c11155d4673ac5de17df8c619631a5e618204",
-    "cli/src/inktag_cli/_assets/nativePreview.inputs.json": "eb37f9cc28cc57821413ad08dc484fb9336d016c4270c092f40225fa6167ecbe",
+    "cli/src/inktag_cli/_assets/nativePreview.inputs.json": "1477e6866a72a1ab4bc23189329dbb3e5a3ee78dc0f958290d30ac513c44f63b",
     "cli/src/inktag_cli/_assets/nativePreview.js": "db3ba58578f53a5308bb65c30814b48990c8c27cdc1fe0c134a34f627b563922",
-    "cli/src/inktag_cli/_assets/nativePreviewWasm.js": "7dd139876c52e6d554899bad903dfb75cb43b38d99ba1c4aea6875910e5ee893",
+    "cli/src/inktag_cli/_assets/nativePreviewWasm.js": "57a98a4a7b397a6f76aaa761c0bce733badf47617c60455b74cb7fdd1aecc88b",
     "cli/src/inktag_cli/_assets/template-agent-quota.json": "4340d69f4204ca60bacbec2a9644a9da371d28ff15d6c58aaf473e447486e856",
     "cli/src/inktag_cli/_assets/__init__.py": "4dd81165bd15f2c044f6268e906f79f583c894c5c68fe151246c72a835cc57bf",
     "cli/src/inktag_cli/_drivers/ota_da14585.py": "5dde40cc43893534753d74405487aa125cc8dbda30fc075b7b2e3e63ba767dba",
-    "cli/src/inktag_cli/_drivers/ota_goodix.py": "8323c7adfb687001cf86cda55949a3d5e2e1fc719cde43ad468fa4beb2fd3089",
+    "cli/src/inktag_cli/_drivers/ota_goodix.py": "4f2c1cc7eb9f1d7aa705d88dfd800c8206572aba828d60de471ee4cacd9a745b",
     "cli/src/inktag_cli/_drivers/ota_nrf52811.py": "17ae0d508227148ce6ea0fefff21ff7cc02d3b4bfbc91a5fb5d089b61712241a",
     "cli/src/inktag_cli/_drivers/ota_om6626.py": "810ce0aca2a23f3df4e165ffde2bc6a98f588421bb4d26d34f4833b63990d03c",
-    "cli/src/inktag_cli/_drivers/ota_tlsr8359.py": "0166e9dddf3f674b346f9f5e93d49f64fe993e7d2dd179c9e6d7f84465d7a6c7",
+    "cli/src/inktag_cli/_drivers/ota_tlsr8359.py": "36ba274e7377ff3573d9941f612e1ed5d8c1d2d80024289308f994c3d7fff283",
     "cli/src/inktag_cli/_drivers/__init__.py": "c5aae1dba3a0274d04dfb4f75c9af0c57e3e87d0a8b6b4c270b6c68d589f47e7",
     "webui/dist/static/assets/connect-BolsT6C-.png": "03d51b542d990a660dddc5e5f29ddeee27964a5d17c947d6f96782e26f59d92a",
     "webui/dist/static/assets/creation-font-licenses.txt": "2410d842cc1e0cc395f047d73f88c4de0645775a7ed31aa35bad10e6cbb025fd",
-    "webui/dist/static/assets/editionBadgeBitmap-D6m1RwhI.js": "6436845bdc22537907730f24a729422f62299215488be8d536593743a9d738ba",
-    "webui/dist/static/assets/fonts.generated-DbpoxF9Q.js": "3f6b7f03cd5b5d721e00eb7e510e0d403bfb63fd84497cac635b60277f81e105",
+    "webui/dist/static/assets/editionBadgeBitmap-CjUWlR3j.js": "5dd3d0f9c25e62b5e2cf85cae67028f00756b9889beaaf1e22eb2e50e31669b8",
+    "webui/dist/static/assets/fonts.generated-D4jh_G4g.js": "3417f7aef8b43cdce4435e07a85cfd70a357a90c1e837d0666de0e8105242807",
     "webui/dist/static/assets/generate-creation-fonts.py": "82befb3886d9a5b05bd8a22cb2dfa5feb684a8fa9e78dc95972f55802b0d268b",
     "webui/dist/static/assets/glyphCatalog.generated-1Xg3yjDx.js": "6eff49672777d8b1339a06848e1309081f072a23bdfbf581277dcde792bf36ee",
-    "webui/dist/static/assets/ImagePage-kjNnsrbN.js": "73f8da223f022b373c328e9f3eeda09d4bd0f984090648cfec79a8e2c1ff1b73",
-    "webui/dist/static/assets/imageRaster-BRVxbHyn.js": "3172f9f179d9608e146a98534daeae39fb227f21b3bc9cc3c0f2a2b465603a63",
-    "webui/dist/static/assets/index-CN7gbP9_.js": "58f6c91b0843f49d9a584c58e2b078df1de8deda262c1b5687d763e8bc026210",
-    "webui/dist/static/assets/index-Zfg-NZGD.css": "7dc204c17a4eda1385956bfbe48f4d31aa8624489b0de5c7c4b4dce6e54c9557",
-    "webui/dist/static/assets/LeaferEditorPage-BIkBbXrr.js": "bca51889e4208b12bff021652a664c38a934f9b9846eea085ecd7603fe1189e7",
+    "webui/dist/static/assets/ImagePage-BwcZdVYI.js": "b5a4540a1dec4dbc8e1e71eb5c34fffb9356dff88f9128fd87c3b1c53ffc2561",
+    "webui/dist/static/assets/imageRaster-BDwDlcNk.js": "404a088df2f9d63f99918ac4f6200faffa92795438e78ca623063e5f79c04339",
+    "webui/dist/static/assets/index-C1XlHDyd.js": "801e234d6ed1d293dec1eecd18c112fb74a96b7ef802f69220a172c721dff4a6",
+    "webui/dist/static/assets/index-DhC3-SEy.css": "1accaed23821cf4a0d02bdcff9a346a12b6d9b475057b4a0070de0ca264242ce",
+    "webui/dist/static/assets/LeaferEditorPage-Di8579y9.js": "10b642a1e34650e5189307ea759c58b436a8343aa36286cfcaf91faa56795e73",
     "webui/dist/static/assets/LeaferEditorPage-DX4qUUXJ.css": "b6c65ee9428f319981c7eb3aed47cda5578c251184f0ed78574540bd0dd1f7e1",
     "webui/dist/static/assets/optional-calligraphy-31563e1b1d107037.js": "d750197baf77e2c0697b4d2eb324989ae46344767781b6b43e2273022bd70c57",
     "webui/dist/static/assets/optional-colorPhoto-87fe784037345f4f.js": "aa05ff76dee1885f62d1d472009bae43aee20817ab643ddb99b171b9177c43d2",
     "webui/dist/static/assets/optional-pixelCompact-2fa396ce5f3598eb.js": "0633a366c1213911ba05adb25e7fe9489e89f6a3c0d6a576eea698529c40ecf6",
     "webui/dist/static/assets/optional-pixelMini-3adcbfd5b9a5af10.js": "46f6abdaa4748f188bcfcb300b42280a00e8b96b80034e5d58c627492a1de4c5",
     "webui/dist/static/assets/optional-pixelSong-7c7b5789264a4727.js": "9d7b22fa8c6cd9cf6cf0eaaa607271627c860a7390597e6157bfa5b4095d61a5",
-    "webui/dist/static/assets/ota-9wybgYNT.js": "87e6e13f1496fcfc5cd3c7fabcdc5702cb79b55eacbe3ec7e80d13467d85276e",
-    "webui/dist/static/assets/scenePreview-CK5hHq9j.js": "72b9032e096b9827b81349023023572ca75a2b16ce803200ab548fdfed465dbb",
+    "webui/dist/static/assets/ota-DhIW5LzX.js": "e9b24b6a20d0ec2b90011344dc60da26f4d10484228293697ac14b436ff051f1",
+    "webui/dist/static/assets/scenePreview-CXAhYwvp.js": "753d4dcab523a5fb1c086388d17b8ac0cb2d5d4096f3062cfbbe88c68c2256d1",
     "webui/dist/static/assets/schedule-editor-BwIKmkW2.png": "82fa72ac1bf407f2f7841280d5e99e11a980301358aef288691c22add62e8faf",
     "webui/dist/static/assets/schedule-template-B35vdVFs.png": "2594901ec44951f62cb06238daf21b0ef3dbf9d490f0e2640dce6a82a0fae24f",
     "webui/dist/static/assets/screen-BQVrbDX5.png": "4aa3d04bc7323b422d6afb81d9f8c18df60ef2f1641c86bd8c5e18b61e583f16",
     "webui/dist/static/assets/wenquanyi-bitmap-song-source.tar.gz": "af655fedfb490aabbb8ce73602a08a6a847fafc78dc363ff3901aa6c3384ca5d",
-    "webui/dist/static/assets/zoom-out-C2zzIkV5.js": "afd819712c46a8fa30a3748ecc39ba2efad9770a489340a0ddc45228a17a4109"
+    "webui/dist/static/assets/zoom-out-B4auZ_nG.js": "56acb103602cbae9e784d5dd15b9fed63228d04c309ed38094ecf55aeadaccd9"
   }
 }

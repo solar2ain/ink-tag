@@ -1,28 +1,23 @@
 [
   {
-    "path": "LICENSE",
-    "bytes": 4694,
-    "sha256": "75f5f2ae732cdc31adf8ad90a42ed4ed47476b3f27fcdf90de13e79d6788309d"
-  },
-  {
     "path": "LICENSING.md",
-    "bytes": 1261,
-    "sha256": "70b6b926885201904c6ee3c48c31dfa58c83da63418756118c86feee2c7e6599"
+    "bytes": 423,
+    "sha256": "09f3209441a682f712487fa21d496b1c724c7a72072886f062eaa82f286108c3"
   },
   {
     "path": "README.en.md",
-    "bytes": 4266,
-    "sha256": "b0695508dc608e818c0e7634fa54be3ce3f7ceff0676c5c236bacda53c692202"
+    "bytes": 4578,
+    "sha256": "cccd82e2f0746228b241e3c6433bfc5e93b45c2b2b802be68ca1595f04631139"
   },
   {
     "path": "README.md",
-    "bytes": 3768,
-    "sha256": "9e37b209b05be9702335e6cbacc3941cc50392b35ad76b6ea795f932fe8b0276"
+    "bytes": 4121,
+    "sha256": "b13d229cfffbe38d21bb9e0d4a0f99d6d08fd60e5c0705fdb11b718c5bcd087f"
   },
   {
     "path": "THIRD_PARTY_NOTICES.md",
-    "bytes": 279,
-    "sha256": "41e1365264198995cfe0c49241c5b9791a55d26abf2367b29dec03901f04ecdd"
+    "bytes": 282,
+    "sha256": "f81d00d64385720cbe7979987a7783ae7a7be0bfde77ff8aaec177ea5bcb6a5f"
   },
   {
     "path": "tools/bundle.json",
@@ -41,33 +36,33 @@
   },
   {
     "path": "tools/flash-hex.bat",
-    "bytes": 226,
-    "sha256": "668cde55cd404a95421d0ddafc9ad92f4fffa521fc0d7670f4e61e37ae4a87ea"
+    "bytes": 235,
+    "sha256": "d40c562af2765175d1459f7975c7b380e8d3377cf60286cd14660050cb489bdd"
   },
   {
     "path": "tools/flash-zh.bat",
-    "bytes": 725,
-    "sha256": "536e2a698e9c4e12b9176a8e3f85af3e16da8484af27f46b48bf7f26fb141d2d"
+    "bytes": 743,
+    "sha256": "23b56f901d3c29acd50ff206400d288e1c0daf3a904c455daa0dbcaf9fa7ca33"
   },
   {
     "path": "tools/flash.bat",
-    "bytes": 555,
-    "sha256": "a619b8fa23208fc1d86021229c94a13ab3c899e173045a60602cd152cc24fd1a"
+    "bytes": 573,
+    "sha256": "4a903b12efd65f984b1dc82b2657c22835da298cf421a845779176e1355216b9"
   },
   {
-    "path": "tools/flash.ps1",
-    "bytes": 14148,
-    "sha256": "81b26f3841c3aa10c3ce0643f7611ba6ec6bd4bf406dc54c8d5b435a311ccb1a"
+    "path": "tools/internal/flash.ps1",
+    "bytes": 14168,
+    "sha256": "08e66713e4675f5850171898d8936668e9f5ab3797395eb96019fb42808cb0b4"
   },
   {
     "path": "tools/generate-hex.bat",
-    "bytes": 225,
-    "sha256": "9e1c9f0673a424afa4616f3493cb349c6c8fa83576fe601743828144de9fec8c"
+    "bytes": 234,
+    "sha256": "a32c312c4943d2f7aab86c4baf764a7d453eaa53d8f7095639292f189e819e1d"
   },
   {
-    "path": "tools/initialization.ps1",
-    "bytes": 13810,
-    "sha256": "93b0602b93292b9ad293a6d01f8c67ed81e1ebdc36ccf4e6f6369b8f43737aca"
+    "path": "tools/internal/initialization.ps1",
+    "bytes": 14546,
+    "sha256": "683067332750e96590eecac2248bc732faa145ea8c1e7d5905992716d080d8c3"
   },
   {
     "path": "tools/internal/activation-preservation.ps1",

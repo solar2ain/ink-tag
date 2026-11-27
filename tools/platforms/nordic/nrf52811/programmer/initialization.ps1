@@ -33,7 +33,7 @@ try {
     if(Test-Path -LiteralPath $manifestPath) {
         $bundle=Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8|ConvertFrom-Json
         if($bundle.chip -cne 'nrf52811' -or $bundle.buildTarget -cne 'nrf52811_aesl' -or $bundle.artifactKind -cne 'tools-only' -or $bundle.runtimeKind -cne 'windows-powershell-dotnet' -or $bundle.firmwareIncluded -ne $false){throw 'Use the complete native Windows tools directory'}
-        foreach($required in @('initialization.ps1','internal/initialization-bytes.cs','internal/initialization-format.ps1','internal/initialization-session.ps1','internal/initialization-jlink.ps1','internal/initialization-dependencies.json','internal/initialization-screen-rules.json','assets/full-writer.bin','native-configs/EL022HWRL.toml','native-configs/EL022HWRL-A0.toml','LICENSE.native','THIRD_PARTY_NATIVE.md')) {
+        foreach($required in @('initialization.ps1','internal/initialization-bytes.cs','internal/initialization-format.ps1','internal/initialization-session.ps1','internal/initialization-jlink.ps1','internal/initialization-dependencies.json','internal/initialization-screen-rules.json','assets/full-writer.bin','configs/EL022HWRL.toml','configs/EL022HWRL-A0.toml','LICENSE.native','THIRD_PARTY_NATIVE.md')) {
             if($bundle.files.PSObject.Properties.Name -cnotcontains $required){throw "Incomplete native tools manifest: $required"}
         }
         foreach($entry in $bundle.files.PSObject.Properties) {
@@ -81,8 +81,8 @@ try {
         if(-not $Materials){$Materials=([string](Read-Host 'Initialization directory (empty cancels)')).Trim().Trim('"');if(-not $Materials){exit 0}}
     } else {
         if(-not $Config) {
-            $choices=@(Get-ChildItem -LiteralPath (Join-Path $PSScriptRoot 'native-configs') -Filter '*.toml' -File | Sort-Object @{Expression={$_.BaseName.Length}},Name | ForEach-Object {
-                if(-not (Test-Path -LiteralPath $manifestPath) -or $bundle.files.PSObject.Properties.Name -ccontains ('native-configs/'+$_.Name)) {
+            $choices=@(Get-ChildItem -LiteralPath (Join-Path $PSScriptRoot 'configs') -Filter '*.toml' -File | Sort-Object @{Expression={$_.BaseName.Length}},Name | ForEach-Object {
+                if(-not (Test-Path -LiteralPath $manifestPath) -or $bundle.files.PSObject.Properties.Name -ccontains ('configs/'+$_.Name)) {
                     $c=Get-InitConfig $_.FullName
                     [pscustomobject]@{Path=$_.FullName;Label=($c.BoardMarking+' / '+$c.Note+' ['+$_.BaseName+']')}
                 }

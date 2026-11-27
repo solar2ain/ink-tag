@@ -26,7 +26,7 @@ SELECTOR_OFFSET = 0xF00
 FACTORY_OFFSET = 0xF20
 EDITABLE_ROLES = 0x03FF
 DEFAULT_AUX = bytes((AUX_VERSION,255,0,255,0,255,0,0,255,255,0xD0,7))
-FACTS = json.loads((ROOT / "firmware/boards/goodix-pin-backends.json").read_text(encoding="utf-8"))["backends"]
+FACTS = json.loads((ROOT / "metadata/goodix-pin-backends.json").read_text(encoding="utf-8"))["backends"]
 
 
 def _require(ok: bool, message: str) -> None:

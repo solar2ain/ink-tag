@@ -1,7 +1,7 @@
 import {
   ChevronLeft, ChevronRight, Monitor, PanelTop, RectangleHorizontal, RectangleVertical, Square, Search, FilePlus2, FolderOpen, LayoutTemplate, Trash2, X,
 } from 'lucide-react'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { PageHeader } from '../components/PageHeader'
 import { TemplatePreview } from '../components/TemplatePreview'
@@ -29,7 +29,6 @@ type CatalogTemplate = { source: 'preset'; record: PageTemplate } | { source: 'm
 export function CreatePage() {
   const navigate = useNavigate()
   const confirmation = useConfirmationDialog()
-  const templateHeading = useRef<HTMLHeadingElement>(null)
   const screen = useDeviceStore((state) => state.screen)
   const connection = useDeviceStore((state) => state.connection)
   const boardId = useDeviceStore((state) => state.boardId)
@@ -159,8 +158,7 @@ export function CreatePage() {
 
   return (
     <div className="page create-page">
-      <PageHeader title="创作" actions={<><button className="button primary" disabled={connection === 'connected' && !screen} title={connection === 'connected' ? '选择页面类型，使用当前设备的屏幕尺寸和色彩' : '选择页面类型、屏幕尺寸和色彩'} onClick={newBlankCanvas}><FilePlus2 />新建页面</button><button className="button secondary" onClick={() => { templateHeading.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); templateHeading.current?.focus({ preventScroll: true }) }}><LayoutTemplate />选择模板开始</button><Link className="button secondary" to="/library?tab=pages"><FolderOpen />我的页面</Link></>} />
-      <div className="template-catalog-heading"><h2 ref={templateHeading} tabIndex={-1}>选择模板开始</h2><label className="template-filter-control"><LayoutTemplate /><select aria-label="模板来源" value={source} onChange={event => setSource(event.target.value as typeof source)}><option value="all">全部模板</option><option value="preset">预置模板</option><option value="mine">我的模板</option></select></label></div>
+      <PageHeader title="创作" actions={<><button className="button primary" disabled={connection === 'connected' && !screen} title={connection === 'connected' ? '选择页面类型，使用当前设备的屏幕尺寸和色彩' : '选择页面类型、屏幕尺寸和色彩'} onClick={newBlankCanvas}><FilePlus2 />新建页面</button><Link className="button secondary" to="/library?tab=pages"><FolderOpen />我的页面</Link></>} />
       <section className="template-toolbar" aria-label="模板筛选">
         <div className="segmented-control template-kind-filter">
           {(['all', ...creationTemplateKindOrder] as Array<PageKind | 'all'>).map((item) => (
@@ -191,6 +189,13 @@ export function CreatePage() {
             <button title="竖屏模板" aria-label="竖屏模板" className={layout === 'portrait' ? 'active' : ''} onClick={() => setLayout('portrait')}><RectangleVertical /><span>竖屏</span></button>
             <button title="方屏模板" aria-label="方屏模板" className={layout === 'square' ? 'active' : ''} onClick={() => setLayout('square')}><Square /><span>方屏</span></button>
           </div>
+        </div>
+        <div className="template-search-row">
+          <label className="template-filter-control template-source-filter">
+            <select aria-label="模板来源" value={source} onChange={event => setSource(event.target.value as typeof source)}>
+              <option value="all">全部模板</option><option value="preset">预置模板</option><option value="mine">我的模板</option>
+            </select>
+          </label>
           <label className="search-field template-search"><Search /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索模板" /></label>
         </div>
       </section>

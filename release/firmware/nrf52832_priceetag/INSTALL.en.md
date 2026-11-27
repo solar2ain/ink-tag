@@ -10,8 +10,8 @@ The 512 KiB internal-flash image starts at 0.
 
 ### PriceEtag_V1.7
 
-[BIN / HEX](programmer/PriceEtag_V1.7/) · [配置 / Configuration](tools/configs/PriceEtag_V1.7.toml)
+[Intel HEX](flash-images/PriceEtag_V1.7/) · [配置 / Configuration](tools/configs/PriceEtag_V1.7.toml)
 
 ```powershell
-.\tools\flash.bat -Firmware ".\full\app-full.zip" -Config ".\tools\configs\PriceEtag_V1.7.toml"
+.\tools\flash.bat -Firmware ".\full\InkTag-BASIC-0.2.2.1-nrf52832_priceetag-full.zip" -Config ".\tools\configs\PriceEtag_V1.7.toml"
 ```

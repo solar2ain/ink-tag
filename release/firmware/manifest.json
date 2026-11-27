@@ -1,8 +1,8 @@
 {
-  "appVersion": "0.2.2",
+  "appVersion": "0.2.2.1",
   "edition": "BASIC",
-  "firmwareInputsCommit": "e1b8682852df513988482c38710d61a53fa05a41",
-  "buildCheckoutCommit": "2154379637dc0bb491132ad9d6bb341e564a8561",
+  "firmwareInputsCommit": "f80cbce5798b832b1e5f16b772005eb2b5c6389d",
+  "buildCheckoutCommit": "f80cbce5798b832b1e5f16b772005eb2b5c6389d",
   "targets": {
     "gr5331_zkel": {
       "boardProfiles": [
@@ -14,47 +14,37 @@
       "artifacts": {
         "ota": [
           {
-            "path": "gr5331_zkel/ota/app-ota.zip",
-            "bytes": 214076,
-            "sha256": "8f3fa9e5700cb6aac7ae3a54806a14a1bae26e5695fe9cd0635f1a40ebec2bb6"
+            "path": "gr5331_zkel/ota/InkTag-BASIC-0.2.2.1-gr5331_zkel-ota.zip",
+            "bytes": 214082,
+            "sha256": "97888eff99d0cabff5a2575b025da37c62704638947605c9241c2dec17e94b47"
           }
         ],
         "full": [
           {
-            "path": "gr5331_zkel/full/app-full.zip",
-            "bytes": 325649,
-            "sha256": "2f1a9d343459cb610a2b05e6e6aa5592d869d76535276190de76511ce08d5746"
+            "path": "gr5331_zkel/full/InkTag-BASIC-0.2.2.1-gr5331_zkel-full.zip",
+            "bytes": 325657,
+            "sha256": "f8e8eea10b746cdd0e5165fc3e3f9cd4153d3e98190c1036409463357c2b6b42"
           }
         ],
         "programmer": [
           {
-            "path": "gr5331_zkel/programmer/ZK_EL_GR5331_2.13_V1.1/board.toml",
+            "path": "gr5331_zkel/flash-images/ZK_EL_GR5331_2.13_V1.1/InkTag-BASIC-0.2.2.1-gr5331_zkel-ZK_EL_GR5331_2.13_V1.1-flash.bin",
+            "bytes": 524288,
+            "sha256": "3e5dced01109a87b298a0907349c9a3479feb829ebc4c8f649e93aa65fc41079"
+          },
+          {
+            "path": "gr5331_zkel/flash-images/ZK_EL_GR5331_2.13_V1.1/board.toml",
             "bytes": 549,
             "sha256": "8e6974b6080fde760cfe3e0dd17fb7b99e067abc087503e62825a095e35b52bc"
           },
           {
-            "path": "gr5331_zkel/programmer/ZK_EL_GR5331_2.13_V1.1/components.zip",
-            "bytes": 325649,
-            "sha256": "2f1a9d343459cb610a2b05e6e6aa5592d869d76535276190de76511ce08d5746"
-          },
-          {
-            "path": "gr5331_zkel/programmer/ZK_EL_GR5331_2.13_V1.1/flash-map.json",
-            "bytes": 2377,
-            "sha256": "63fa753ebb28eec0971b52e4707cefbd7474f9eea1c883e339481d420426c1b4"
-          },
-          {
-            "path": "gr5331_zkel/programmer/ZK_EL_GR5331_2.13_V1.1/mcu.bin",
-            "bytes": 524288,
-            "sha256": "fbf76671c45b15b345382eb69ce4077a44c4b72d438583d01bb995fd4ef828d1"
-          },
-          {
-            "path": "gr5331_zkel/programmer/ZK_EL_GR5331_2.13_V1.1/mcu.hex",
-            "bytes": 1245324,
-            "sha256": "adfbe9199b4ef2f4345bbc982e06b0f9e4aa23beffc052ebfb39921160b893eb"
+            "path": "gr5331_zkel/flash-images/ZK_EL_GR5331_2.13_V1.1/flash-map.json",
+            "bytes": 1624,
+            "sha256": "57af7646ab48ec8b474e4aee25d19d91837a540a654037659b70920b36b02e8d"
           }
         ]
       },
-      "toolsVersion": "0.2.0.8"
+      "toolsVersion": "0.2.0.9"
     },
     "gr551x_zkel": {
       "boardProfiles": [
@@ -69,122 +59,82 @@
       "artifacts": {
         "ota": [
           {
-            "path": "gr551x_zkel/ota/app-ota.zip",
-            "bytes": 222921,
-            "sha256": "53a2182d67ce036a9ec21d436cdb9b0618f1bcdc6359c68d90118bd24c8d583b"
+            "path": "gr551x_zkel/ota/InkTag-BASIC-0.2.2.1-gr551x_zkel-ota.zip",
+            "bytes": 222907,
+            "sha256": "3cfbf74a18c27ca376f80ca9ced318c23433669e635313c04d1d2adf63e49295"
           }
         ],
         "full": [
           {
-            "path": "gr551x_zkel/full/app-full.zip",
-            "bytes": 344244,
-            "sha256": "bf222bb45ff16b69fb475490a393496519e37cb9a8d19cc4b926f209963eab6f"
+            "path": "gr551x_zkel/full/InkTag-BASIC-0.2.2.1-gr551x_zkel-full.zip",
+            "bytes": 344232,
+            "sha256": "5adece108ef35c7d40ba2ebfb4e775d2eb98e1f7f513ecdc55c7d484db0fea49"
           }
         ],
         "programmer": [
           {
-            "path": "gr551x_zkel/programmer/ZK_EL_GR42V_V1.2/board.toml",
+            "path": "gr551x_zkel/flash-images/ZK_EL_GR42V_V1.2/InkTag-BASIC-0.2.2.1-gr551x_zkel-ZK_EL_GR42V_V1.2-flash.bin",
+            "bytes": 524288,
+            "sha256": "21847b12c0f5757beb07f3de16de53bb2c182214936a8bb2299593ba745651b1"
+          },
+          {
+            "path": "gr551x_zkel/flash-images/ZK_EL_GR42V_V1.2/board.toml",
             "bytes": 516,
             "sha256": "f12fe89e316f3b77b056e9d02fbe4139bcab80d26a879c994022e45679996d9b"
           },
           {
-            "path": "gr551x_zkel/programmer/ZK_EL_GR42V_V1.2/components.zip",
-            "bytes": 344244,
-            "sha256": "bf222bb45ff16b69fb475490a393496519e37cb9a8d19cc4b926f209963eab6f"
+            "path": "gr551x_zkel/flash-images/ZK_EL_GR42V_V1.2/flash-map.json",
+            "bytes": 1622,
+            "sha256": "f12cb57f727de4c6e104de364050c951ce71ce715d5d73d1e63d2b5b04847c02"
           },
           {
-            "path": "gr551x_zkel/programmer/ZK_EL_GR42V_V1.2/flash-map.json",
-            "bytes": 2381,
-            "sha256": "ba01bed6d2e1d6bf971eefbb7f8fdefdb212b2b576b2b408f75dd73f2c54e4b0"
-          },
-          {
-            "path": "gr551x_zkel/programmer/ZK_EL_GR42V_V1.2/mcu.bin",
+            "path": "gr551x_zkel/flash-images/ZK_EL_GR42V_V1.2_w_NFC-SSD1683/InkTag-BASIC-0.2.2.1-gr551x_zkel-ZK_EL_GR42V_V1.2_w_NFC-SSD1683-flash.bin",
             "bytes": 524288,
-            "sha256": "17e4dc38e7bc82c93652641fb6ba10802018a3a4d69eaa73febc134ef3be12d8"
+            "sha256": "6fdc6c55a764b59fe4f2a9aae954c35d15f6295800e7219693dad1539670cab6"
           },
           {
-            "path": "gr551x_zkel/programmer/ZK_EL_GR42V_V1.2/mcu.hex",
-            "bytes": 1245324,
-            "sha256": "d573e3fbeceeddfa9aa5afbf1a5e55a20734ef400c3ca8ce2c523d5f25e026f9"
-          },
-          {
-            "path": "gr551x_zkel/programmer/ZK_EL_GR42V_V1.2_w_NFC/board.toml",
-            "bytes": 547,
-            "sha256": "a867a4795378ca7fe21425c41ee49be665c3e471cd39825ade49da9042970221"
-          },
-          {
-            "path": "gr551x_zkel/programmer/ZK_EL_GR42V_V1.2_w_NFC/components.zip",
-            "bytes": 344244,
-            "sha256": "bf222bb45ff16b69fb475490a393496519e37cb9a8d19cc4b926f209963eab6f"
-          },
-          {
-            "path": "gr551x_zkel/programmer/ZK_EL_GR42V_V1.2_w_NFC/flash-map.json",
-            "bytes": 2380,
-            "sha256": "08c7b6f01c0d9521856a1050654f63332135b5b5fd78207c8e6b1348b6ad63a0"
-          },
-          {
-            "path": "gr551x_zkel/programmer/ZK_EL_GR42V_V1.2_w_NFC/mcu.bin",
-            "bytes": 524288,
-            "sha256": "d15831fe1262043bef39e25e205f56c38edff1dd989d9ca549022c4d99eefd1a"
-          },
-          {
-            "path": "gr551x_zkel/programmer/ZK_EL_GR42V_V1.2_w_NFC/mcu.hex",
-            "bytes": 1245324,
-            "sha256": "58f22325539017629197980923ee48c418e200e219b9a3a1d866c777e8c143bc"
-          },
-          {
-            "path": "gr551x_zkel/programmer/ZK_EL_GR42V_V1.2_w_NFC-SSD1683/board.toml",
+            "path": "gr551x_zkel/flash-images/ZK_EL_GR42V_V1.2_w_NFC-SSD1683/board.toml",
             "bytes": 548,
             "sha256": "7072fba9e93a6107669888ef41b6ad2a6600a620aa5c5a47975de7af78e34c0b"
           },
           {
-            "path": "gr551x_zkel/programmer/ZK_EL_GR42V_V1.2_w_NFC-SSD1683/components.zip",
-            "bytes": 344244,
-            "sha256": "bf222bb45ff16b69fb475490a393496519e37cb9a8d19cc4b926f209963eab6f"
+            "path": "gr551x_zkel/flash-images/ZK_EL_GR42V_V1.2_w_NFC-SSD1683/flash-map.json",
+            "bytes": 1635,
+            "sha256": "5749114b3b6ef4469c4c790b18ace2b4e6c8d6022ad0e7d2406ca5d88ff2fa9e"
           },
           {
-            "path": "gr551x_zkel/programmer/ZK_EL_GR42V_V1.2_w_NFC-SSD1683/flash-map.json",
-            "bytes": 2380,
-            "sha256": "5f9ac7ad738f47a04e7f901f2f28d86ce2ff89d200a9315cc89ddca31dd3013e"
-          },
-          {
-            "path": "gr551x_zkel/programmer/ZK_EL_GR42V_V1.2_w_NFC-SSD1683/mcu.bin",
+            "path": "gr551x_zkel/flash-images/ZK_EL_GR42V_V1.2_w_NFC/InkTag-BASIC-0.2.2.1-gr551x_zkel-ZK_EL_GR42V_V1.2_w_NFC-flash.bin",
             "bytes": 524288,
-            "sha256": "a6c56e9c42b34dbe724b138552f25dd1527814b8c4aadc48363d5253e1d72a6c"
+            "sha256": "c7b9204d79d025e61e49d10b086686335612254426e44f4a01109e795a3f9c2d"
           },
           {
-            "path": "gr551x_zkel/programmer/ZK_EL_GR42V_V1.2_w_NFC-SSD1683/mcu.hex",
-            "bytes": 1245324,
-            "sha256": "1a571f7d6f3fd60f98e0ea75d3c80aa38f0ee5323621c2647d80a2eed3b6e06d"
+            "path": "gr551x_zkel/flash-images/ZK_EL_GR42V_V1.2_w_NFC/board.toml",
+            "bytes": 547,
+            "sha256": "a867a4795378ca7fe21425c41ee49be665c3e471cd39825ade49da9042970221"
           },
           {
-            "path": "gr551x_zkel/programmer/zkc42vm_eailier_version/board.toml",
+            "path": "gr551x_zkel/flash-images/ZK_EL_GR42V_V1.2_w_NFC/flash-map.json",
+            "bytes": 1627,
+            "sha256": "c42ac126c6f2f0463d3305671495d3c3da354b3e03035418518c1a048e80c585"
+          },
+          {
+            "path": "gr551x_zkel/flash-images/zkc42vm_eailier_version/InkTag-BASIC-0.2.2.1-gr551x_zkel-zkc42vm_eailier_version-flash.bin",
+            "bytes": 1048576,
+            "sha256": "f8b734fe977849594181d034a5289fd6bb27d5e76c97dd6ab1ddf8083b28e74d"
+          },
+          {
+            "path": "gr551x_zkel/flash-images/zkc42vm_eailier_version/board.toml",
             "bytes": 525,
             "sha256": "97118652a4d5b350dbd89708fe7a06cb5c2c11e964697ab51153ec43ed6d3459"
           },
           {
-            "path": "gr551x_zkel/programmer/zkc42vm_eailier_version/components.zip",
-            "bytes": 344244,
-            "sha256": "bf222bb45ff16b69fb475490a393496519e37cb9a8d19cc4b926f209963eab6f"
-          },
-          {
-            "path": "gr551x_zkel/programmer/zkc42vm_eailier_version/flash-map.json",
-            "bytes": 2385,
-            "sha256": "86ec2d00cc651d0764e9bcd3f00ed1b4f1c6a0c98fc027b4b5cc4fc40ccb4d17"
-          },
-          {
-            "path": "gr551x_zkel/programmer/zkc42vm_eailier_version/mcu.bin",
-            "bytes": 1048576,
-            "sha256": "8a60d5b619d2b6ea6a47285574c429564c4139f82ccc13755638b7e1cdd0753d"
-          },
-          {
-            "path": "gr551x_zkel/programmer/zkc42vm_eailier_version/mcu.hex",
-            "bytes": 2490636,
-            "sha256": "41d2b0384a2537213e315ca760ddea386c57b7ea53ce2e492faf48d74104533a"
+            "path": "gr551x_zkel/flash-images/zkc42vm_eailier_version/flash-map.json",
+            "bytes": 1633,
+            "sha256": "c429d7ac8d6e44e34e76ecf247fd120c74779976f23a06db655a068eca912dcd"
           }
         ]
       },
-      "toolsVersion": "0.2.0.8"
+      "toolsVersion": "0.2.0.9"
     },
     "gr551x_zkel_internal": {
       "boardProfiles": [
@@ -196,47 +146,37 @@
       "artifacts": {
         "ota": [
           {
-            "path": "gr551x_zkel_internal/ota/app-ota.zip",
-            "bytes": 220923,
-            "sha256": "c1ef8147e4e9efdd08bf6fd2a44f803ae565123cfdc0c051c9d867d2f77e8b98"
+            "path": "gr551x_zkel_internal/ota/InkTag-BASIC-0.2.2.1-gr551x_zkel_internal-ota.zip",
+            "bytes": 220925,
+            "sha256": "75ebbf91a4ff39743d98a1d52cda36c4f34299f1da5c7dabb00830782765ffb1"
           }
         ],
         "full": [
           {
-            "path": "gr551x_zkel_internal/full/app-full.zip",
-            "bytes": 341892,
-            "sha256": "5cca4640fff2ced9952dc586c8e7ae198bc022e4c84e0222c6f68d4ca6290804"
+            "path": "gr551x_zkel_internal/full/InkTag-BASIC-0.2.2.1-gr551x_zkel_internal-full.zip",
+            "bytes": 341896,
+            "sha256": "ee04efeaba83a3924ad539e9b35c5f4f604f3797e1414d80d5065651f7175625"
           }
         ],
         "programmer": [
           {
-            "path": "gr551x_zkel_internal/programmer/ZK_EL_GR_2.13_V1.2/board.toml",
+            "path": "gr551x_zkel_internal/flash-images/ZK_EL_GR_2.13_V1.2/InkTag-BASIC-0.2.2.1-gr551x_zkel_internal-ZK_EL_GR_2.13_V1.2-flash.bin",
+            "bytes": 524288,
+            "sha256": "cf0dc263e491a6ae9458de121983e31bae0c79abc6ef9a1e705099db716741ea"
+          },
+          {
+            "path": "gr551x_zkel_internal/flash-images/ZK_EL_GR_2.13_V1.2/board.toml",
             "bytes": 544,
             "sha256": "05501121c5940213c4fb85cdd622cb57224b1e2905f13dff62f379864a31146f"
           },
           {
-            "path": "gr551x_zkel_internal/programmer/ZK_EL_GR_2.13_V1.2/components.zip",
-            "bytes": 341892,
-            "sha256": "5cca4640fff2ced9952dc586c8e7ae198bc022e4c84e0222c6f68d4ca6290804"
-          },
-          {
-            "path": "gr551x_zkel_internal/programmer/ZK_EL_GR_2.13_V1.2/flash-map.json",
-            "bytes": 2386,
-            "sha256": "f7932bc39390e8545e1cd79d7ed2077f0bb27243412d392cdcb5e74741113639"
-          },
-          {
-            "path": "gr551x_zkel_internal/programmer/ZK_EL_GR_2.13_V1.2/mcu.bin",
-            "bytes": 524288,
-            "sha256": "50eef4ed4564bac3829bd6ef28898d482ea4dec6752174fdbc8a8c4b2cfbc471"
-          },
-          {
-            "path": "gr551x_zkel_internal/programmer/ZK_EL_GR_2.13_V1.2/mcu.hex",
-            "bytes": 1245324,
-            "sha256": "766415d46f79eb27682f641dd1001e1a187488761ec8ecbf0181304629ae3aaa"
+            "path": "gr551x_zkel_internal/flash-images/ZK_EL_GR_2.13_V1.2/flash-map.json",
+            "bytes": 1647,
+            "sha256": "8574784b5b00c2ac114bb4c7a2fed15c411485d8d1c4f75e340389a90764aa7a"
           }
         ]
       },
-      "toolsVersion": "0.2.0.8"
+      "toolsVersion": "0.2.0.9"
     },
     "om6626_zkel": {
       "boardProfiles": [
@@ -250,67 +190,21 @@
       "artifacts": {
         "ota": [
           {
-            "path": "om6626_zkel/ota/app-ota.zip",
-            "bytes": 253045,
-            "sha256": "8ecef302ce10f0315a7b40b5cc605bd5c4e4caf11d14803cbe22432ed72a72dd"
+            "path": "om6626_zkel/ota/InkTag-BASIC-0.2.2.1-om6626_zkel-ota.zip",
+            "bytes": 253047,
+            "sha256": "d4d57d4e6553ba56f844fb9dffbecba889da73b7ad48451b3315ea4a818f1dbe"
           }
         ],
         "full": [
           {
-            "path": "om6626_zkel/full/app-full.zip",
-            "bytes": 479972,
-            "sha256": "55d9b771085780a36825d7c550e4f23105e8d081bcbca1ed386f31fb3a10cbfe"
+            "path": "om6626_zkel/full/InkTag-BASIC-0.2.2.1-om6626_zkel-full.zip",
+            "bytes": 480062,
+            "sha256": "97b9a2aaf540f0cd9bb5fcb2a2b4442f068510654349b61ea7d073d37cab8357"
           }
         ],
-        "programmer": [
-          {
-            "path": "om6626_zkel/programmer/ADDRESSES.md",
-            "bytes": 2240,
-            "sha256": "9941a0b3a64188ac191e926a869025eeebd2d475a211e77ab098e19d4afc999a"
-          },
-          {
-            "path": "om6626_zkel/programmer/segments/app-recovery-regions.hex",
-            "bytes": 1129947,
-            "sha256": "b687a4efa4ee7c60aeeb48f3abb8f4b1196a61c487bea9c6e1bd2cff752f87ab"
-          },
-          {
-            "path": "om6626_zkel/programmer/segments/app.bin",
-            "bytes": 252096,
-            "sha256": "5d6c57f8315b7c74636990789d8c80ff4319a1fce587d1ad532fdf608a50b4e8"
-          },
-          {
-            "path": "om6626_zkel/programmer/segments/app.hex",
-            "bytes": 709118,
-            "sha256": "b8b96c327557d83b12e5078f63523cae89c5f847af31da2ed6ae9f5a94959615"
-          },
-          {
-            "path": "om6626_zkel/programmer/segments/recovery.bin",
-            "bytes": 149616,
-            "sha256": "978b384002f0e56e5914b7029bcddca750271cd9cba9889bdd433db240624590"
-          },
-          {
-            "path": "om6626_zkel/programmer/segments/recovery.hex",
-            "bytes": 420859,
-            "sha256": "3baa1ebfd13ec0b157367dc6e5033cd77c348271c85f4ebab47929c4c2268ec8"
-          },
-          {
-            "path": "om6626_zkel/programmer/ZK_EL_OM21BA_V1.1/board.toml",
-            "bytes": 724,
-            "sha256": "addcf57294403cd0fc545bd3381d79b494b6cacf5c654ffb3236f6f556119e99"
-          },
-          {
-            "path": "om6626_zkel/programmer/ZK_EL_OM42BA_V1.0/board.toml",
-            "bytes": 727,
-            "sha256": "453269b1182d9b7c56f2f54046990c17d88f752252c26b2a77f66c9fc38d167e"
-          },
-          {
-            "path": "om6626_zkel/programmer/ZK_EL_OM6626_2.13_V1.1/board.toml",
-            "bytes": 1018,
-            "sha256": "05a2d32dbb0a99356610a178202093c4a38bff8e114adf5ecce0bdb77a655143"
-          }
-        ]
+        "programmer": []
       },
-      "toolsVersion": "0.2.0.16",
+      "toolsVersion": "0.2.0.20",
       "firmwareInputsCommit": "34024a6927c0459be0c424b00dc39ac5917886b2",
       "firmwarePortTree": "379c3165f7cc34d655b712fe677b447a916a3670"
     },
@@ -334,183 +228,128 @@
       "artifacts": {
         "ota": [
           {
-            "path": "tlsr8359_hsel/ota/InkTag-tlsr8359_hsel-base-ota.zip",
-            "bytes": 188012,
-            "sha256": "57f4464ccf8b0c26c559ba2159fa355fc0b50d0aff9709954d4d45cb2bd9cd23"
+            "path": "tlsr8359_hsel/ota/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-ota.zip",
+            "bytes": 188018,
+            "sha256": "7dc5531ad2023d869dcc8f1b1de78709a514b1a468442e162bfc4f4191d91136"
           }
         ],
         "full": [
           {
-            "path": "tlsr8359_hsel/full/InkTag-tlsr8359_hsel-base-full.zip",
-            "bytes": 252537,
-            "sha256": "04cdac5c1cc0bb46cb0e2fd37b7627361566ae34d3de81905342db0066bbad9b"
+            "path": "tlsr8359_hsel/full/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-full.zip",
+            "bytes": 252543,
+            "sha256": "388e90a2113f280267dc8194555b501785acae8a78c4e4d312ed8da9c3c26671"
           }
         ],
         "programmer": [
           {
-            "path": "tlsr8359_hsel/programmer/HS_EL5101_5M_60_04/InkTag-Basic-0.2.2-HS_EL5101_5M_60_04.bin",
+            "path": "tlsr8359_hsel/flash-images/HSEL3_02_66M_36/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL3_02_66M_36-flash.bin",
             "bytes": 524288,
-            "sha256": "19140b4483dfbcaac0b70c5b0d15ed65e832cf107e0aa1c95f436ef73d58935f"
+            "sha256": "eb8278a93555d4cf652fc38ddebac4cb5c077f7ed7111384935e17973492e7a0"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HS_EL5101_5M_60_04/InkTag-Basic-0.2.2-HS_EL5101_5M_60_04.hex",
-            "bytes": 1261717,
-            "sha256": "67d30fcaac9511c69b0cab4cce98c4c504abfbb8030e97935b93215545ce58b1"
+            "path": "tlsr8359_hsel/flash-images/HSEL3_02_66M_36/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL3_02_66M_36-flash.json",
+            "bytes": 2507,
+            "sha256": "1ecf82ffaf412f48c81fc16060930d01e2ec257aad27b7570728183414b1750f"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HS_EL5101_5M_60_04/InkTag-Basic-0.2.2-HS_EL5101_5M_60_04.json",
-            "bytes": 2683,
-            "sha256": "1cdd8ae1f8f83ce492b9d953b12d9157a77a457530f94d1e2d6b4f77dccd7083"
-          },
-          {
-            "path": "tlsr8359_hsel/programmer/HS_EL5101_5M_66_05/InkTag-Basic-0.2.2-HS_EL5101_5M_66_05.bin",
+            "path": "tlsr8359_hsel/flash-images/HSEL4Q_01_54M_31/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL4Q_01_54M_31-flash.bin",
             "bytes": 524288,
-            "sha256": "2a742e75a2bfba07547d0940e1765bbf38805db5132daf1e45c1e83b6fc38714"
+            "sha256": "c90777a13134ac1d33d80cfc34c9356467ad64a6196319d89d3936744ce0a1e3"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HS_EL5101_5M_66_05/InkTag-Basic-0.2.2-HS_EL5101_5M_66_05.hex",
-            "bytes": 1261717,
-            "sha256": "c9dfe6ea464d2be13f7faf0a44010f60f41bde9f7d57e9ae3139f4ad473f4a50"
+            "path": "tlsr8359_hsel/flash-images/HSEL4Q_01_54M_31/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL4Q_01_54M_31-flash.json",
+            "bytes": 2385,
+            "sha256": "46a6b688135a4316706e6ac7542ba7ad5d19c2f88c41ee44a23284b4bd51fad8"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HS_EL5101_5M_66_05/InkTag-Basic-0.2.2-HS_EL5101_5M_66_05.json",
-            "bytes": 2546,
-            "sha256": "a9191616ed1414b7e8dc6b971e9363b215048af5114f33fdec613a8752f36625"
-          },
-          {
-            "path": "tlsr8359_hsel/programmer/HS_EL5102_1M_67_33/InkTag-Basic-0.2.2-HS_EL5102_1M_67_33.bin",
+            "path": "tlsr8359_hsel/flash-images/HSEL4Q_02_13M_30/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL4Q_02_13M_30-flash.bin",
             "bytes": 524288,
-            "sha256": "7911e1544efc32c61f19644317b95df0f22c080c836c1cb2eeb0f53ef3e3ea55"
+            "sha256": "046e84944379a8b1ae664d7a2ff0d34d54176c10b3a6f1a2c112155e6a7b4d4d"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HS_EL5102_1M_67_33/InkTag-Basic-0.2.2-HS_EL5102_1M_67_33.hex",
-            "bytes": 1261717,
-            "sha256": "ea69e48e0847e2b896ccf4270b7017b3fdc4d87beb61d3c74d0ec3b96ea93ca6"
+            "path": "tlsr8359_hsel/flash-images/HSEL4Q_02_13M_30/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL4Q_02_13M_30-flash.json",
+            "bytes": 2381,
+            "sha256": "82565253d711a17eb1f13ff3487e1adbee220b0c947b1acd3d1fe55df7ea14a3"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HS_EL5102_1M_67_33/InkTag-Basic-0.2.2-HS_EL5102_1M_67_33.json",
-            "bytes": 2546,
-            "sha256": "b2caf0ab0252b0ba8a71a851487cd72cea8457ae66eb45fbca658aa5b07314a6"
-          },
-          {
-            "path": "tlsr8359_hsel/programmer/HSEL3_02_66M_36/InkTag-Basic-0.2.2-HSEL3_02_66M_36.bin",
+            "path": "tlsr8359_hsel/flash-images/HSEL4Q_04_20M_33-JD79668/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL4Q_04_20M_33-JD79668-flash.bin",
             "bytes": 524288,
-            "sha256": "dcf424d49462c8598766f258cb2cc4153bc14e4e308c93096221a1be2c7b3d7f"
+            "sha256": "381c7f4a5eaac09998d7ad3e69654f7179717a91aecf593729af28f6389254d5"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HSEL3_02_66M_36/InkTag-Basic-0.2.2-HSEL3_02_66M_36.hex",
-            "bytes": 1261717,
-            "sha256": "80f89cca8cc586360e81436390ef1fd44fa0c643c718a11381de8a324ab30957"
+            "path": "tlsr8359_hsel/flash-images/HSEL4Q_04_20M_33-JD79668/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL4Q_04_20M_33-JD79668-flash.json",
+            "bytes": 2389,
+            "sha256": "ef42c8a7072a6412f0b93a59aa7bdba84b2cb295f40150aeaa783e9cd134405d"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HSEL3_02_66M_36/InkTag-Basic-0.2.2-HSEL3_02_66M_36.json",
-            "bytes": 2669,
-            "sha256": "6670b05572b4d78cfbe2e8c63911a2438f3ae5739a2f7587a399f33ae13e73fe"
-          },
-          {
-            "path": "tlsr8359_hsel/programmer/HSEL4Q_01_54M_31/InkTag-Basic-0.2.2-HSEL4Q_01_54M_31.bin",
+            "path": "tlsr8359_hsel/flash-images/HSEL4Q_04_20M_33-SSD1683/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL4Q_04_20M_33-SSD1683-flash.bin",
             "bytes": 524288,
-            "sha256": "adc198ed32d0e23164839ee3745bab5e6407cb14842602f7aadca9035a66867d"
+            "sha256": "9710f1f02077bf55c39c0f6960c2da8923b49814335c2bd93dad9cfb42af12d8"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HSEL4Q_01_54M_31/InkTag-Basic-0.2.2-HSEL4Q_01_54M_31.hex",
-            "bytes": 1261717,
-            "sha256": "57580a117f711d68f2630c140879dea0d184bffda69113b1c296bb3bd29f36d7"
+            "path": "tlsr8359_hsel/flash-images/HSEL4Q_04_20M_33-SSD1683/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL4Q_04_20M_33-SSD1683-flash.json",
+            "bytes": 2389,
+            "sha256": "f5977d2bdd915b0e83efa525471a048915887b1b67dd57d8ed8541f1e2ee4580"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HSEL4Q_01_54M_31/InkTag-Basic-0.2.2-HSEL4Q_01_54M_31.json",
-            "bytes": 2547,
-            "sha256": "945185315b81785e2171301f729816fdc2fb78595747cefde158769f30973c34"
-          },
-          {
-            "path": "tlsr8359_hsel/programmer/HSEL4Q_02_13M_30/InkTag-Basic-0.2.2-HSEL4Q_02_13M_30.bin",
+            "path": "tlsr8359_hsel/flash-images/HSEL5Q_01_54M_00/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL5Q_01_54M_00-flash.bin",
             "bytes": 524288,
-            "sha256": "faebf85e873db748d40da863bcc37abf0799431994e102247a8b0dfb7f2c41ac"
+            "sha256": "cd3482f0c382614dffb89222e5ca676b20c23471d12cb3c3a5df90258a5ef39c"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HSEL4Q_02_13M_30/InkTag-Basic-0.2.2-HSEL4Q_02_13M_30.hex",
-            "bytes": 1261717,
-            "sha256": "db5b7df8edfe48720e41979fa9690aad2def9746d544863f99715c999a5d91d6"
+            "path": "tlsr8359_hsel/flash-images/HSEL5Q_01_54M_00/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL5Q_01_54M_00-flash.json",
+            "bytes": 2385,
+            "sha256": "5b69da4f00510c42455fa24fb1c51b89f4979e9f6ff60f7f57ce2c28e27f9af3"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HSEL4Q_02_13M_30/InkTag-Basic-0.2.2-HSEL4Q_02_13M_30.json",
-            "bytes": 2543,
-            "sha256": "4daadeb0e7f7e3259dda005c72e93184e7f0826ad42b8a9d1b9f01ab3fb483d7"
-          },
-          {
-            "path": "tlsr8359_hsel/programmer/HSEL4Q_04_20M_33-JD79668/InkTag-Basic-0.2.2-HSEL4Q_04_20M_33-JD79668.bin",
+            "path": "tlsr8359_hsel/flash-images/HSEL5_01_54M_00/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL5_01_54M_00-flash.bin",
             "bytes": 524288,
-            "sha256": "8c36a8fc923a6915390ee0664834871e7259f20482a876ec3ba3a0e97b739748"
+            "sha256": "39cdf6ecefcfef2b6da39f0a33780fb27d75d3ba445ab1f7aea12add621c769a"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HSEL4Q_04_20M_33-JD79668/InkTag-Basic-0.2.2-HSEL4Q_04_20M_33-JD79668.hex",
-            "bytes": 1261717,
-            "sha256": "7538ed10e9131156a3b37a66377da93143cc659cb86c71653aa335392005745b"
+            "path": "tlsr8359_hsel/flash-images/HSEL5_01_54M_00/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL5_01_54M_00-flash.json",
+            "bytes": 2379,
+            "sha256": "0aa444b4b61f673ab539559ff7bbcd544027befae1bba32c17fa7165d139817c"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HSEL4Q_04_20M_33-JD79668/InkTag-Basic-0.2.2-HSEL4Q_04_20M_33-JD79668.json",
-            "bytes": 2559,
-            "sha256": "32b1653abd7f821d65d1e7761227ca34cab079aab43e1fc647e1794712692fd2"
-          },
-          {
-            "path": "tlsr8359_hsel/programmer/HSEL4Q_04_20M_33-SSD1683/InkTag-Basic-0.2.2-HSEL4Q_04_20M_33-SSD1683.bin",
+            "path": "tlsr8359_hsel/flash-images/HSEL5_01_54M_02/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL5_01_54M_02-flash.bin",
             "bytes": 524288,
-            "sha256": "c74922340ba4b887d9749744601d8a220a99648bf0288e77541a5dae16e33b33"
+            "sha256": "78f7b760ff08c5e39611ddb2a05826249810d23577998501182af6229bfc257e"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HSEL4Q_04_20M_33-SSD1683/InkTag-Basic-0.2.2-HSEL4Q_04_20M_33-SSD1683.hex",
-            "bytes": 1261717,
-            "sha256": "07ecbb930b4579054da27a8abb2c62a07398987612b14963ce68f0cb44dc219c"
+            "path": "tlsr8359_hsel/flash-images/HSEL5_01_54M_02/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HSEL5_01_54M_02-flash.json",
+            "bytes": 2380,
+            "sha256": "e0925af9608949f448436b7ee17b1c1b9d8055ba82fde90488a31adcf785b4fa"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HSEL4Q_04_20M_33-SSD1683/InkTag-Basic-0.2.2-HSEL4Q_04_20M_33-SSD1683.json",
-            "bytes": 2559,
-            "sha256": "9296dd24f7b926b2aef083dd2dc02bd55c84b57beb5cd62b946514f96790fc83"
-          },
-          {
-            "path": "tlsr8359_hsel/programmer/HSEL5_01_54M_00/InkTag-Basic-0.2.2-HSEL5_01_54M_00.bin",
+            "path": "tlsr8359_hsel/flash-images/HS_EL5101_5M_60_04/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HS_EL5101_5M_60_04-flash.bin",
             "bytes": 524288,
-            "sha256": "11c876c979ef172972472ee0016c56024cd32b76df59cce3bf6588f5ad30529c"
+            "sha256": "c520f47118ff111bd049d648bb0f868affc4923ee6f89ffdd82ae5fc09c48e30"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HSEL5_01_54M_00/InkTag-Basic-0.2.2-HSEL5_01_54M_00.hex",
-            "bytes": 1261717,
-            "sha256": "e8ec6b8be6d2023b3b20373d1347b5e2efd7ae7c7d0b557d17f1e3e6789bc75b"
+            "path": "tlsr8359_hsel/flash-images/HS_EL5101_5M_60_04/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HS_EL5101_5M_60_04-flash.json",
+            "bytes": 2518,
+            "sha256": "51f179531455b4a604c05cae3c611f2dbc6d9ca6889e7c9010295a6f74dbe879"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HSEL5_01_54M_00/InkTag-Basic-0.2.2-HSEL5_01_54M_00.json",
-            "bytes": 2540,
-            "sha256": "20bae6cbb7ae70dac9eb3dd63b001d853f802228fbc6e5a705ef6c868bd910f4"
-          },
-          {
-            "path": "tlsr8359_hsel/programmer/HSEL5_01_54M_02/InkTag-Basic-0.2.2-HSEL5_01_54M_02.bin",
+            "path": "tlsr8359_hsel/flash-images/HS_EL5101_5M_66_05/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HS_EL5101_5M_66_05-flash.bin",
             "bytes": 524288,
-            "sha256": "708c596d937d4d96c24b201a2d48a8cfe90201068a85e091160d14425777a9b4"
+            "sha256": "f6358371f76dd9ca4cabaa69471cb256f87969f0615b586648a209ebecd40411"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HSEL5_01_54M_02/InkTag-Basic-0.2.2-HSEL5_01_54M_02.hex",
-            "bytes": 1261717,
-            "sha256": "cc14c5d0624d68cf0aba5f1610a92ccade37c753ebb1dd07e6d6ee421b423884"
+            "path": "tlsr8359_hsel/flash-images/HS_EL5101_5M_66_05/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HS_EL5101_5M_66_05-flash.json",
+            "bytes": 2382,
+            "sha256": "6b859eeaa6c6e20da4b90d3cda90464b6dd405c53533efee573780cfcace23fc"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HSEL5_01_54M_02/InkTag-Basic-0.2.2-HSEL5_01_54M_02.json",
-            "bytes": 2541,
-            "sha256": "186107aa59aa4e7de8b4fb7a3f9f8f4c154050c7fb5ee4024d26b345cb3aabe7"
-          },
-          {
-            "path": "tlsr8359_hsel/programmer/HSEL5Q_01_54M_00/InkTag-Basic-0.2.2-HSEL5Q_01_54M_00.bin",
+            "path": "tlsr8359_hsel/flash-images/HS_EL5102_1M_67_33/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HS_EL5102_1M_67_33-flash.bin",
             "bytes": 524288,
-            "sha256": "24f6db4503523eca8c25678c83acd966dba5b35b84adde6e99a835480af267a8"
+            "sha256": "a65fd3764d8e30b69be8c5d832841153c941b188a126f9ca064fd56413c274dd"
           },
           {
-            "path": "tlsr8359_hsel/programmer/HSEL5Q_01_54M_00/InkTag-Basic-0.2.2-HSEL5Q_01_54M_00.hex",
-            "bytes": 1261717,
-            "sha256": "550fb1b9a888424675bc64868701e391ce15cdabcf7ce6c0a74647cc61fe7a68"
-          },
-          {
-            "path": "tlsr8359_hsel/programmer/HSEL5Q_01_54M_00/InkTag-Basic-0.2.2-HSEL5Q_01_54M_00.json",
-            "bytes": 2547,
-            "sha256": "31e7f4449d052438edb87d1128ba38dd93fc7da87f5de0a779a8bf64a980166f"
+            "path": "tlsr8359_hsel/flash-images/HS_EL5102_1M_67_33/InkTag-BASIC-0.2.2.1-tlsr8359_hsel-HS_EL5102_1M_67_33-flash.json",
+            "bytes": 2382,
+            "sha256": "6f968a4fbc60de9f7c58733f5209baf04697ea6418f587acc7f64d21ec6ef5f6"
           }
         ]
       },
@@ -526,53 +365,38 @@
       "artifacts": {
         "ota": [
           {
-            "path": "nrf52832_priceetag/ota/app-ota.zip",
-            "bytes": 88385,
-            "sha256": "bde2c96f0b4bb86b84b327bd903701bc6baa6fec8a500d1c896a51613df3b2ea"
+            "path": "nrf52832_priceetag/ota/InkTag-BASIC-0.2.2.1-nrf52832_priceetag-ota.zip",
+            "bytes": 88390,
+            "sha256": "fa298879815e12b1b86592ff73c75de422b6286cfcbf676fb35ecc25ea08a467"
           }
         ],
         "full": [
           {
-            "path": "nrf52832_priceetag/full/app-full.zip",
-            "bytes": 428608,
-            "sha256": "2472eed9bc4a77d59a19c9f0dbdcf713943d1cd296534cb23c8d181c26a210e9"
+            "path": "nrf52832_priceetag/full/InkTag-BASIC-0.2.2.1-nrf52832_priceetag-full.zip",
+            "bytes": 428584,
+            "sha256": "821dcc68f6be19d93a081a044041077c0d7357f16879297b6f30cf5c1213528f"
           }
         ],
         "programmer": [
           {
-            "path": "nrf52832_priceetag/programmer/PriceEtag_V1.7/addresses.json",
-            "bytes": 1262,
-            "sha256": "c6a964b40abd6c0a55cd5d8db52ec2c65405f2969e8d16b3051da005a2bac1e6"
+            "path": "nrf52832_priceetag/flash-images/PriceEtag_V1.7/InkTag-BASIC-0.2.2.1-nrf52832_priceetag-PriceEtag_V1.7-flash.hex",
+            "bytes": 1474709,
+            "sha256": "ff28cdc5e9625bd7d1511097196b2b42b26a0298d7b137792f98ca4aad2a3ad5"
           },
           {
-            "path": "nrf52832_priceetag/programmer/PriceEtag_V1.7/bin-addresses.json",
-            "bytes": 221,
-            "sha256": "6eb28a81de827f8c679fbd1a726d09ebebfb1b443b8c207ab6187b468ceb9747"
+            "path": "nrf52832_priceetag/flash-images/PriceEtag_V1.7/addresses.json",
+            "bytes": 882,
+            "sha256": "1bd071972107924285023687cd93889b08f1c296ae2ed8475cd8309c8a2b94b1"
           },
           {
-            "path": "nrf52832_priceetag/programmer/PriceEtag_V1.7/board.toml",
+            "path": "nrf52832_priceetag/flash-images/PriceEtag_V1.7/board.toml",
             "bytes": 738,
             "sha256": "3c0215157a3f1758fba335fd014a20b10b8cac4c14db8497130dfb28bbbce3ed"
           },
           {
-            "path": "nrf52832_priceetag/programmer/PriceEtag_V1.7/initialization.json",
-            "bytes": 1266,
-            "sha256": "8fc153a8a4155ed44d7b374bf21e8286c18bb1de013d2932f28cc8c19a3e6891"
-          },
-          {
-            "path": "nrf52832_priceetag/programmer/PriceEtag_V1.7/main-flash.bin",
-            "bytes": 524288,
-            "sha256": "370a82afd123e4023911558f3cbd7f5ee9a8d1ea3154e9d3eb722a0f4488984c"
-          },
-          {
-            "path": "nrf52832_priceetag/programmer/PriceEtag_V1.7/main-flash.hex",
-            "bytes": 1474709,
-            "sha256": "2b462b99f435e1a5f30fad1dd5a175f4229ad67f77bdbe54d21b105e43462a1a"
-          },
-          {
-            "path": "nrf52832_priceetag/programmer/PriceEtag_V1.7/source-full.zip",
-            "bytes": 444051,
-            "sha256": "eb641de9058494205cbb98b599e54d4eebac9d1d2277170b3846fc3e496745c4"
+            "path": "nrf52832_priceetag/flash-images/PriceEtag_V1.7/initialization.json",
+            "bytes": 966,
+            "sha256": "6c06bbc8e6ff9ed1edc42e352a8d9f3e6870c4f6ee60cf7d1b6ab999555a2be9"
           }
         ]
       },
@@ -589,125 +413,19 @@
       "artifacts": {
         "ota": [
           {
-            "path": "nrf52811_aesl/ota/InkTag-nrf52811_aesl-v0.2.2.0-self-built-ota.zip",
-            "bytes": 54634,
-            "sha256": "7331c205187b9259a2e09cf25c1898c2f5d64075b6c29a8e913cdf4cf7948dc5"
+            "path": "nrf52811_aesl/ota/InkTag-BASIC-0.2.2.1-nrf52811_aesl-ota.zip",
+            "bytes": 54638,
+            "sha256": "b0c12f4aafb3e3c07ae83ab3cdcfe6a09bc3d24119e97375f4a570cb24e57cb7"
           }
         ],
         "full": [
           {
-            "path": "nrf52811_aesl/full/InkTag-nrf52811_aesl-v0.2.2.0-self-built-full.hex",
-            "bytes": 508348,
-            "sha256": "671767553ef9a2d147a210d97e368953e213cee590a5a1ef9934c1802a0625a7"
-          },
-          {
-            "path": "nrf52811_aesl/full/InkTag-nrf52811_aesl-v0.2.2.0-self-built-full.zip",
-            "bytes": 281440,
-            "sha256": "fef542cae88641a80cca2ddd90c22c982fdfc97b73689e3c47c2843bfdf07276"
+            "path": "nrf52811_aesl/full/InkTag-BASIC-0.2.2.1-nrf52811_aesl-full.zip",
+            "bytes": 281452,
+            "sha256": "7c8b769b058fe7d450b8e601b037aafc3ffd3dcbd012c059c40712f4f4388b50"
           }
         ],
-        "programmer": [
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL/addresses.json",
-            "bytes": 3487,
-            "sha256": "6e6d57259a4fce57366c4391651a62b392e8d9235eb7178969425906532cf776"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL/bin-addresses.json",
-            "bytes": 773,
-            "sha256": "06211fdf928da74475c37acd2d0393879509a8118f3da62738b2d4bcbe02a272"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL/board.toml",
-            "bytes": 604,
-            "sha256": "3f1250d8940c590d2330fd04534cb15bb439a9b222370410771d0f45a6dd368d"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL/gui-assets.bin",
-            "bytes": 12288,
-            "sha256": "dd75b14da2cdd7e68fa45fd83359c9364357ff46477873a47fdd2772c1238e12"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL/gui-assets.hex",
-            "bytes": 33820,
-            "sha256": "47a76a323025b73939bd597dfe23321592a8f964f03839126716668963b2927a"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL/internal.bin",
-            "bytes": 196608,
-            "sha256": "8040a321228f087ae57fccc308d9c657ac19dde40e5d7143425418ae2e59647e"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL/internal.hex",
-            "bytes": 540732,
-            "sha256": "f4dacf6ee8ac7177ce4208542ec3a96d01c445d6959d8998f24e401ea48a7c33"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL/settings.bin",
-            "bytes": 8192,
-            "sha256": "3975da2b6db462ff28261508889153e4463acc09e9587677970b86311e29e409"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL/settings.hex",
-            "bytes": 22556,
-            "sha256": "5032abb88d54cc9ffe8c31475d5b59f281378ebc68a4411873f4ea7dc731c18a"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL/source-full.zip",
-            "bytes": 281440,
-            "sha256": "fef542cae88641a80cca2ddd90c22c982fdfc97b73689e3c47c2843bfdf07276"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL-A0/addresses.json",
-            "bytes": 3487,
-            "sha256": "a0a6aca03fbbdcc307112a93c0aad403a43a7ea78fde2e5e0faae27b60dc6909"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL-A0/bin-addresses.json",
-            "bytes": 776,
-            "sha256": "79c7fcd6c021cc9f6c1a255df7f9b3958a4488d20fc312654c95d3b659a0a7ac"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL-A0/board.toml",
-            "bytes": 524,
-            "sha256": "4f7b49bd54d3e264fc822d93badde9948bcb622385cf3e0641f50dd743ec7f48"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL-A0/gui-assets.bin",
-            "bytes": 12288,
-            "sha256": "dd75b14da2cdd7e68fa45fd83359c9364357ff46477873a47fdd2772c1238e12"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL-A0/gui-assets.hex",
-            "bytes": 33820,
-            "sha256": "47a76a323025b73939bd597dfe23321592a8f964f03839126716668963b2927a"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL-A0/internal.bin",
-            "bytes": 196608,
-            "sha256": "8040a321228f087ae57fccc308d9c657ac19dde40e5d7143425418ae2e59647e"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL-A0/internal.hex",
-            "bytes": 540732,
-            "sha256": "f4dacf6ee8ac7177ce4208542ec3a96d01c445d6959d8998f24e401ea48a7c33"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL-A0/settings.bin",
-            "bytes": 8192,
-            "sha256": "1d272bee5ebc099827f82bfec97f711e3f1ef15774c4131ee0976c966e96275b"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL-A0/settings.hex",
-            "bytes": 22556,
-            "sha256": "c5bdb744ba93dc42eeb2f12b2a33cff0096af667bd920416be4cb5c30ec2a525"
-          },
-          {
-            "path": "nrf52811_aesl/programmer/EL022HWRL-A0/source-full.zip",
-            "bytes": 281440,
-            "sha256": "fef542cae88641a80cca2ddd90c22c982fdfc97b73689e3c47c2843bfdf07276"
-          }
-        ]
+        "programmer": []
       },
       "otaLayout": "N1V1",
       "toolsVersion": "0.2.2.5"
@@ -724,97 +442,21 @@
       "artifacts": {
         "ota": [
           {
-            "path": "da14585_aesl/ota/InkTag-da14585_aesl-ota.img",
-            "bytes": 80936,
-            "sha256": "3a0c5fd87c3212f13ee7aa300f92614bc4b118f703532169c283a4ab9c45b98e"
+            "path": "da14585_aesl/ota/InkTag-BASIC-0.2.2.1-da14585_aesl-ota.img",
+            "bytes": 80944,
+            "sha256": "48dd28e0dd4c4b5ae77b5d5a564af93f3f7d06909c63a6a7cfa855e62feefd31"
           }
         ],
         "full": [
           {
-            "path": "da14585_aesl/full/InkTag-da14585_aesl-full.bin",
+            "path": "da14585_aesl/full/InkTag-BASIC-0.2.2.1-da14585_aesl-full.bin",
             "bytes": 262144,
-            "sha256": "042f21fa1e4bd6ec8b98f35f121925aff4db2fe127122be52ff0c67dfd29d924"
+            "sha256": "589d78d79f3c40c5375ec0f7bdff81c7053fd9b01f2c5a3c55e745fc567db72f"
           }
         ],
-        "programmer": [
-          {
-            "path": "da14585_aesl/programmer/asel29/addresses.json",
-            "bytes": 2621,
-            "sha256": "6c6e18bc18e06dbcaa3d95fc565a931dc22ed4c420a716c48ebaa9b47d180dec"
-          },
-          {
-            "path": "da14585_aesl/programmer/asel29/config.toml",
-            "bytes": 597,
-            "sha256": "fcece5b344980e62384a69fe631361d6c4ee5fb79eab1ea2d86513d6b06e3b8e"
-          },
-          {
-            "path": "da14585_aesl/programmer/asel29/InkTag-da14585-asel29-spi.hex",
-            "bytes": 698444,
-            "sha256": "c68f886524afa50b27f6cc2a2e4209f139921fa90e8f381f3e0b983ec85ab85a"
-          },
-          {
-            "path": "da14585_aesl/programmer/asel29/spi-000000.bin",
-            "bytes": 233472,
-            "sha256": "502f9574efef9fc44e08d266f42ff882e7191048c199279402c4af3f774a8879"
-          },
-          {
-            "path": "da14585_aesl/programmer/asel29/spi-03b000.bin",
-            "bytes": 20480,
-            "sha256": "af38deaa7bdc227030bdbcf3ce4ce371e7c68549305c7174ae18702ddf558d5a"
-          },
-          {
-            "path": "da14585_aesl/programmer/asel42/addresses.json",
-            "bytes": 2619,
-            "sha256": "b39c12e4c79ce1309f359a52ed3e0767b2c8243f8b7944415fd97692e6b2696b"
-          },
-          {
-            "path": "da14585_aesl/programmer/asel42/config.toml",
-            "bytes": 595,
-            "sha256": "d3876be4badf98565c7cfd1188b3e351db8c2ea00083febd644068ae3030616d"
-          },
-          {
-            "path": "da14585_aesl/programmer/asel42/InkTag-da14585-asel42-spi.hex",
-            "bytes": 698444,
-            "sha256": "bf86022054df1fcb3254bc75eca84a9d3c5d1b36e3c14e9297fd484c491c0745"
-          },
-          {
-            "path": "da14585_aesl/programmer/asel42/spi-000000.bin",
-            "bytes": 233472,
-            "sha256": "502f9574efef9fc44e08d266f42ff882e7191048c199279402c4af3f774a8879"
-          },
-          {
-            "path": "da14585_aesl/programmer/asel42/spi-03b000.bin",
-            "bytes": 20480,
-            "sha256": "72ca6aa357ec4ce74a65a7b47cc7958eb66efca469b058833b0c9ab299e57f87"
-          },
-          {
-            "path": "da14585_aesl/programmer/asel42-ssd1683/addresses.json",
-            "bytes": 2620,
-            "sha256": "a896c1956b76937dbbfbd8def0b02aaa3ebb8b34408154c7c21edc184eca45a8"
-          },
-          {
-            "path": "da14585_aesl/programmer/asel42-ssd1683/config.toml",
-            "bytes": 593,
-            "sha256": "3fe3af291b6577fe743a5a9d40001d035181a01721815f919c14710af831a6f0"
-          },
-          {
-            "path": "da14585_aesl/programmer/asel42-ssd1683/InkTag-da14585-asel42-ssd1683-spi.hex",
-            "bytes": 698444,
-            "sha256": "448246312e59d52fafe4aefb9631004a4e4b1876ad82c2f2219638ff07a51446"
-          },
-          {
-            "path": "da14585_aesl/programmer/asel42-ssd1683/spi-000000.bin",
-            "bytes": 233472,
-            "sha256": "502f9574efef9fc44e08d266f42ff882e7191048c199279402c4af3f774a8879"
-          },
-          {
-            "path": "da14585_aesl/programmer/asel42-ssd1683/spi-03b000.bin",
-            "bytes": 20480,
-            "sha256": "a938458c6ec09c284115f0aa37e6bb99a093ad04e6c460a08f23caff12f3e8f5"
-          }
-        ]
+        "programmer": []
       },
-      "toolsVersion": "0.2.0.19"
+      "toolsVersion": "0.2.0.20"
     }
   }
 }

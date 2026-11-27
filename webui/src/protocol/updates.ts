@@ -15,7 +15,7 @@ export type UpdateFeed = { schemaVersion: 3; channel: UpdateChannel; candidateOn
 export type FetchLike = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>
 
 const safeName = /^[A-Za-z0-9][A-Za-z0-9._-]{0,180}$/
-const tagPattern = /^v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/
+const tagPattern = /^v\d+\.\d+\.\d+(?:\.\d+)?(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/
 function object(value: unknown): value is Record<string, unknown> { return !!value && typeof value === 'object' && !Array.isArray(value) }
 export function compareVersions(left: string, right: string): number {
   const parse = (value: string) => {
@@ -38,7 +38,7 @@ export function compareVersions(left: string, right: string): number {
   return 0
 }
 
-/** Native firmware has four numeric fields; client components remain SemVer. */
+/** Native firmware has four numeric fields; WebUI also accepts a fourth numeric component. */
 export function compareFirmwareVersions(left: string, right: string): number {
   const parse = (value: string) => {
     if (!/^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:\.(?:0|[1-9]\d*))?$/.test(value)) throw new Error('固件版本号无效')
@@ -60,14 +60,14 @@ export function validateArtifact(value: unknown, tag: string): Artifact {
       value.downloadUrl !== `https://github.com/solar2ain/ink-tag/releases/download/${tag}/${value.name}`) throw new Error('更新附件的地址、大小或 SHA256 无效')
   return value as Artifact
 }
-function component(value: unknown, channel: UpdateChannel, firmware = false): Component {
+function component(value: unknown, channel: UpdateChannel, kind?: 'firmware' | 'webui'): Component {
   if (!object(value) || value.candidateOnly !== false || value.releaseReady !== true || value.published !== true || value.channel !== channel ||
       typeof value.releaseTag !== 'string' || !tagPattern.test(value.releaseTag) || typeof value.version !== 'string' ||
       typeof value.buildId !== 'string' || !/^[A-Za-z0-9._:-]{1,128}$/.test(value.buildId) ||
       !Number.isSafeInteger(value.buildNumber) || Number(value.buildNumber) < 0 || !Array.isArray(value.artifacts) || !value.artifacts.length) throw new Error('更新附件尚未正式批准或发布')
-  if (firmware) compareFirmwareVersions(value.version, value.version)
+  if (kind === 'firmware' || kind === 'webui' && isFirmwareVersion(value.version)) compareFirmwareVersions(value.version, value.version)
   else compareVersions(value.version, value.version)
-  const datedRelease = /^v\d+\.\d+\.\d+-\d{8}\.[1-9]\d*$/.test(value.releaseTag)
+  const datedRelease = /^v\d+\.\d+\.\d+(?:\.\d+)?-\d{8}\.[1-9]\d*$/.test(value.releaseTag)
   if (channel === 'stable' && (value.version.includes('-') || value.releaseTag.includes('-') && !datedRelease)) throw new Error('正式通道不能包含预览版本')
   value.artifacts.forEach(item => validateArtifact(item, value.releaseTag as string))
   return value as Component
@@ -79,10 +79,10 @@ export function validateFeed(value: unknown, channel: UpdateChannel): UpdateFeed
       typeof value.firmwareSelection.published !== 'boolean' || !Array.isArray(value.firmware)) throw new Error('更新清单格式或通道无效')
   for (const key of ['webui', 'cli', 'localServer']) {
     const entry = value.components[key]
-    if (entry !== null) component(entry, channel)
+    if (entry !== null) component(entry, channel, key === 'webui' ? 'webui' : undefined)
   }
   for (const item of value.firmware) {
-    component(item, channel, true)
+    component(item, channel, 'firmware')
     const target = item.target
     if (!object(target) || !(Number.isSafeInteger(target.boardId) && Number(target.boardId) >= 0 || typeof target.boardId === 'string' && /^[a-z0-9_]+$/.test(target.boardId)) ||
         typeof target.family !== 'string' || !/^[a-z0-9_]+$/.test(target.family) ||
@@ -128,7 +128,8 @@ export async function loadUpdates(channel: UpdateChannel = 'stable', fetcher: Fe
 }
 export function componentUpdate(latest: Component | null, current: { version: string; buildId: string; buildNumber: number }) {
   if (!latest) return 'not-published' as const
-  const compare = compareVersions(latest.version, current.version)
+  const compare = isFirmwareVersion(latest.version) && isFirmwareVersion(current.version)
+    ? compareFirmwareVersions(latest.version, current.version) : compareVersions(latest.version, current.version)
   return compare > 0 || compare === 0 && latest.buildId !== current.buildId && latest.buildNumber > current.buildNumber ? 'available' as const : 'current' as const
 }
 export async function verifyDownload(bytes: ArrayBuffer, artifact: Artifact) {

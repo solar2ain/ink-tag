@@ -242,7 +242,7 @@ def entry(root: Path, board: Board, action: str) -> Path:
         name = "internal/backup-operation"
     if board.port == "telink/tlsr8359" and action == "probe":
         name = "internal/probe-operation"
-    return root / "firmware/ports" / board.port / "tools" / f"{name}.ps1"
+    return root / "tools/platforms" / board.port / "programmer" / f"{name}.ps1"
 
 
 def add_value(command: list[str], name: str, value: object) -> None:

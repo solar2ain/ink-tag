@@ -4,7 +4,7 @@ import { useDeviceStore } from '../store/device'
 
 const client = vi.hoisted(() => ({
   getDevice: vi.fn(), getGattServer: vi.fn(), getOtaRecoveryType: vi.fn(),
-  getExpectedRecoveryIdentity: vi.fn(), getConnectionGeneration: vi.fn(),
+  getExpectedRecoveryIdentity: vi.fn(), getConnectionGeneration: vi.fn(), getVerifiedRecoveryName: vi.fn(),
   releaseForRecovery: vi.fn(), takeGoodixRecoveryForOta: vi.fn(),
   enterOtaRecovery: vi.fn(), queryRuntimeBuild: vi.fn(),
   disconnectAndWait: vi.fn(), reconnectDevice: vi.fn(),
@@ -32,7 +32,7 @@ beforeEach(() => {
   vi.stubGlobal('window', {GoodixOta: { transferDevice: vi.fn().mockRejectedValue(new Error('legacy transfer forbidden')),
     enterRecovery: vi.fn().mockResolvedValue(undefined),
     acquireRecoverySession: vi.fn().mockResolvedValue(Object.freeze({})),
-    transferRecoverySession: transport, releaseRecoverySession: vi.fn().mockResolvedValue(undefined) }, OnMicroOta: {transferDevice: transport, applicationBodySize: () => 100}})
+    transferRecoverySession: transport, releaseRecoverySession: vi.fn().mockResolvedValue(undefined) }, OnMicroOta: {transferServer: transport, applicationBodySize: () => 100}})
   vi.stubGlobal('document', {createElement: () => ({remove() {}}), head: {appendChild() {}}})
   const runtime = {build: 17, appBytes: 100, swapResult: 0, swapState: 4, swapGeneration: 2, startupConfirm: 0}
   client.queryRuntimeBuild.mockResolvedValue(runtime)
@@ -45,6 +45,19 @@ function pkg(type: 'goodix' | 'onmicro', target: string): ParsedOtaPackage {
     manifest: {board: target, releaseVersion: 17, compatibilityEpoch: 17},
     application: {size: 100, checksum: 123},
   }}
+}
+
+function prepareOmRecovery() {
+  const handoff = { deviceId: 'exact-grant', recoveryName: 'IKT_OM_FC34_OTA' }
+  const recovery = { connected: true }
+  client.getExpectedRecoveryIdentity.mockReturnValue(handoff)
+  client.getVerifiedRecoveryName.mockReturnValue(handoff.recoveryName)
+  client.reconnectDevice.mockImplementationOnce(async (_device, _timeout, requireRecovery) => {
+    expect(requireRecovery).toBe(true)
+    client.getOtaRecoveryType.mockReturnValue('onmicro')
+    client.getGattServer.mockReturnValue(recovery)
+  })
+  return { handoff, recovery }
 }
 
 it.each(pairs)('rejects a cross-family %s package on %s before Recovery entry or any transport', async (type, identity, target) => {
@@ -61,7 +74,11 @@ it.each(pairs)('rejects a wrong %s family after reconnect on %s before success o
   useDeviceStore.setState({connection: 'connected', boardId: identity})
   client.queryRuntimeBuild.mockResolvedValueOnce({build: 16, appBytes: 99, swapState: 4, swapGeneration: 1})
     .mockResolvedValue({build: 17, appBytes: 100, swapState: 4, swapGeneration: 2})
-  client.reconnectDevice.mockImplementation(async () => useDeviceStore.setState({boardId: identity === 'om6626_hsela' ? 'om6626_zkcxxb' : 'om6626_hsela'}))
+  if (type === 'onmicro') prepareOmRecovery()
+  client.reconnectDevice.mockImplementation(async () => {
+    client.getOtaRecoveryType.mockReturnValue(null)
+    useDeviceStore.setState({boardId: identity === 'om6626_hsela' ? 'om6626_zkcxxb' : 'om6626_hsela'})
+  })
   const result = expect(transferOta(pkg(type, target), vi.fn())).rejects.toThrow('固件系列不匹配')
   await vi.runAllTimersAsync()
   await result
@@ -71,17 +88,23 @@ it.each(pairs)('rejects a wrong %s family after reconnect on %s before success o
 
 it.each(pairs)('keeps the normal %s update path for %s with one clock sync after attestation', async (type, identity, target) => {
   useDeviceStore.setState({connection: 'connected', boardId: identity})
-  if (type === 'onmicro') client.queryRuntimeBuild.mockResolvedValueOnce({build: 16, appBytes: 99, swapState: 4, swapGeneration: 1})
+  const om = type === 'onmicro' ? prepareOmRecovery() : null
+  if (om) {
+    client.queryRuntimeBuild.mockResolvedValueOnce({build: 16, appBytes: 99, swapState: 4, swapGeneration: 1})
+    client.reconnectDevice.mockImplementation(async () => client.getOtaRecoveryType.mockReturnValue(null))
+  }
   const progress = vi.fn()
   const operation = transferOta(pkg(type, target), progress)
   await vi.runAllTimersAsync()
   await operation
   expect(transport).toHaveBeenCalledOnce()
   expect(client.syncTime).toHaveBeenCalledOnce()
-  if (type === 'onmicro') {
-    expect(client.disconnectAndWait).toHaveBeenCalledWith(900)
-    expect(client.enterOtaRecovery.mock.invocationCallOrder[0]).toBeLessThan(client.disconnectAndWait.mock.invocationCallOrder[0])
-    expect(client.disconnectAndWait.mock.invocationCallOrder[0]).toBeLessThan(transport.mock.invocationCallOrder[0])
+  if (om) {
+    expect(client.releaseForRecovery).toHaveBeenCalledExactlyOnceWith(om.handoff)
+    expect(transport).toHaveBeenCalledExactlyOnceWith(om.recovery, expect.anything(), expect.any(Function), expect.anything())
+    expect(client.enterOtaRecovery.mock.invocationCallOrder[0]).toBeLessThan(client.releaseForRecovery.mock.invocationCallOrder[0])
+    expect(client.releaseForRecovery.mock.invocationCallOrder[0]).toBeLessThan(client.reconnectDevice.mock.invocationCallOrder[0])
+    expect(client.reconnectDevice.mock.invocationCallOrder[0]).toBeLessThan(transport.mock.invocationCallOrder[0])
   }
   expect(progress.mock.lastCall?.[0].message).toContain('应用已验身、重连并校时')
 })
@@ -108,12 +131,26 @@ it('preserves an OM baseline timeout without sending a package or prescribing a 
 
 it('does not declare OM success when the Recovery generation has not advanced', async () => {
   useDeviceStore.setState({connection: 'connected', boardId: 'om6626_zkcxxb'})
+  prepareOmRecovery()
+  client.reconnectDevice.mockImplementation(async () => client.getOtaRecoveryType.mockReturnValue(null))
   const result = expect(transferOta(pkg('onmicro', 'om6626_zkcxxb'), vi.fn()))
     .rejects.toThrow('没有推进 Recovery 代次')
   await vi.runAllTimersAsync()
   await result
   expect(transport).toHaveBeenCalledOnce()
   expect(client.syncTime).not.toHaveBeenCalled()
+})
+
+it('offers manual reselection without writing when OM never presents the expected Recovery', async () => {
+  useDeviceStore.setState({connection: 'connected', boardId: 'om6626_zkcxxb'})
+  client.releaseForRecovery.mockImplementation(async () => client.getDevice.mockReturnValue(null))
+  client.reconnectDevice.mockRejectedValue(new DOMException('service not found', 'NotFoundError'))
+  const result = expect(transferOta(pkg('onmicro', 'om6626_zkcxxb'), vi.fn()))
+    .rejects.toMatchObject({code: 'RECOVERY_SELECT_REQUIRED'})
+  await vi.runAllTimersAsync()
+  await result
+  expect(client.enterOtaRecovery).toHaveBeenCalledOnce()
+  expect(transport).not.toHaveBeenCalled()
 })
 
 it('does not declare GR success when the reconnected App is still the old image', async () => {

@@ -160,7 +160,7 @@
     { "controller": 33, "recipe": 0, "colors": [1, 2], "widthAlignment": 8, "maxSize": [152, 152], "fixedSizes": [[152, 152]], "colorFixedSizes": [], "transferFormat": 0 },
     { "controller": 33, "recipe": 1, "colors": [2], "widthAlignment": 8, "maxSize": [152, 152], "fixedSizes": [[152, 152]], "colorFixedSizes": [], "transferFormat": 0 },
     { "controller": 34, "recipe": 0, "colors": [1, 2, 4], "widthAlignment": 8, "maxSize": [960, 680], "fixedSizes": [], "colorFixedSizes": [{ "color": 4, "sizes": [[800, 480]] }], "transferFormat": 0 },
-    { "controller": 35, "recipe": 0, "colors": [1, 2], "widthAlignment": 8, "maxSize": [128, 250], "fixedSizes": [[128, 250]], "colorFixedSizes": [], "transferFormat": 0 },
+    { "controller": 35, "recipe": 0, "colors": [1, 2], "widthAlignment": 8, "maxSize": [176, 296], "fixedSizes": [], "colorFixedSizes": [], "transferFormat": 0 },
     { "controller": 35, "recipe": 1, "colors": [1, 2], "widthAlignment": 8, "maxSize": [128, 250], "fixedSizes": [[128, 250]], "colorFixedSizes": [], "transferFormat": 0 },
     { "controller": 36, "recipe": 0, "colors": [1, 2], "widthAlignment": 8, "maxSize": [400, 300], "fixedSizes": [], "colorFixedSizes": [], "transferFormat": 0 },
     { "controller": 36, "recipe": 1, "colors": [1, 2], "widthAlignment": 8, "maxSize": [400, 300], "fixedSizes": [], "colorFixedSizes": [], "transferFormat": 0 },

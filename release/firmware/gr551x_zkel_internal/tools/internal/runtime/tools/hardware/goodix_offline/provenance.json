@@ -11,8 +11,8 @@
   "modules": [
     {
       "privateFile": "goodix_package.py",
-      "sha256": "a83c09e3185c4cf7bdfa5ee03e7f11baa3ed2a8e297f6166cad74b42bc6ec669",
-      "bytes": 12038
+      "sha256": "ac7151583fe952074f28c6d8110ddb4463efaa57fd59e04c29480f0568746fc0",
+      "bytes": 12082
     },
     {
       "privateFile": "safe_archive.py",

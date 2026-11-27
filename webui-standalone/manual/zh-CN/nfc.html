@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="用手机-nfc-控制价签和传图">用手机 NFC 控制价签和传图</h1>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="用-nfc-控制价签和传图">用 NFC 控制价签和传图</h1>
 <p><a target="_blank" rel="noopener noreferrer" href="../en/nfc.html">English</a></p>
 <p>先用 WebUI 连接价签，在设备的交互页面确认 NFC 能力，并确认设备已安装对应版型的高级版固件并激活 PRO。打开链接、写入文本命令和传图是不同能力，以当前主板和固件支持为准。</p>
 <h2 id="碰一碰打开设备页面">碰一碰打开设备页面</h2>
@@ -41,6 +41,22 @@
 </tbody>
 </table></div>
 <p>按名称显示时，填写保存到设备的图片名称，无需加命令前缀。查看屏幕确认动作完成。NFC 写入提示表示手机已发出记录，屏幕刷新可能还在进行。校时时建议用 D3-Pro InkTag 版发送手机当前时间。</p>
+<h2 id="在-webui-中使用-nfc">在 WebUI 中使用 NFC</h2>
+<h3 id="写入命令">写入命令</h3>
+<p>打开 <strong>工作台 → 快捷控制 → NFC 控制</strong>。页面会根据浏览器支持的接口显示入口。</p>
+<ul>
+<li><strong>安卓 Chrome</strong>。打开手机 NFC，在 HTTPS 页面选择命令，按浏览器提示授权后，将手机贴近目标价签。写入时每次只贴一个价签。手机 NFC 传图请使用下节介绍的 D3-Pro InkTag 版。</li>
+<li><strong>桌面 Chrome 或 Edge</strong>。在 HTTPS 或浏览器信任的本地页面中，把价签放在 PN532／PCR532 读卡器上，选择命令，然后按提示选择读卡器的串口。浏览器可能会复用之前授权的串口。</li>
+</ul>
+<p>「日历」和「时钟」快捷按钮在写入时附上当前 UTC 时间和本地时区偏移，例如 <code>calendar#1795276800,+480</code>。旧固件可在「自定义」里发送 <code>calendar</code> 或 <code>clock</code>，保留设备已有的时间和时区。「时钟」会先提示频繁刷新可能增加耗电。也可以填图槽编号，或在「自定义」中输入固件支持的图片名称。</p>
+<p>网页提示写入成功后，请查看价签屏幕确认命令执行。</p>
+<h3 id="用桌面读卡器传图">用桌面读卡器传图</h3>
+<ol>
+<li>在 <strong>图片</strong> 页选择图片，设置实际屏幕的尺寸、方向和颜色。</li>
+<li>把价签放在读卡器上，点击 <strong>NFC 传图</strong>，按提示选择串口。</li>
+<li>WebUI 读取价签的屏幕参数，确认匹配后开始发送。传图完成后，等待墨水屏刷新。图片会直接显示在价签上。</li>
+</ol>
+<p>进度以设备确认的数据为准。显示的速度只计传输阶段，使用压缩时按压缩后的数据大小计。中断或超时后，先查看价签状态，再决定是否重发。</p>
 <h2 id="用-android-手机传图">用 Android 手机传图</h2>
 <ol>
 <li>从 <a target="_blank" rel="noopener noreferrer" href="pro.html#获取高级版固件">高级版获取说明</a>进入 <strong>InkTag QQ 群 418446983</strong>，在群公告获取 <strong>D3-Pro InkTag 版</strong>及与当前固件兼容的版本说明。</li>
@@ -89,5 +105,5 @@
 </table></div>
 <p><strong>ZKONG Type 2 传图较慢，仅建议用于小屏上的高压缩率简单图片。其他场景建议改用蓝牙传图。</strong></p>
 <p>同一尺寸的图片也可能差很多。内容越复杂、压缩后越大，贴卡时间通常越长。手机提示设备已接受刷新后，可以移开手机，等墨水屏更新完成。表中手机数据来自 Android。4.2 寸 Type 4 也有原版 iOS D3-Pro 的成功记录，未记录可比耗时。</p>
-<h2 id="用电脑和-nfc-读卡器传图">用电脑和 NFC 读卡器传图</h2>
+<h2 id="用命令行操作-nfc-读卡器">用命令行操作 NFC 读卡器</h2>
 <p>仓库及完整 CLI 下载包包含 PN532／PCR532 NFC 工具。同一套命令可用于兼容的 Type 2 和 Type 4 高级版标签，也支持读取链接、写文本命令和校时。安装与命令示例见 <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/tools/nfc/README.md">PN532／PCR532 工具说明</a>。</p></main></body></html>

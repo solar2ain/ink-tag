@@ -10,8 +10,8 @@
 
 ### ZK_EL_GR5331_2.13_V1.1
 
-[BIN / HEX](programmer/ZK_EL_GR5331_2.13_V1.1/) · [配置 / Configuration](tools/configs/ZK_EL_GR5331_2.13_V1.1.toml)
+[BIN](flash-images/ZK_EL_GR5331_2.13_V1.1/) · [配置 / Configuration](tools/configs/ZK_EL_GR5331_2.13_V1.1.toml)
 
 ```powershell
-.\tools\flash-zh.bat -Firmware ".\full\app-full.zip" -Config ".\tools\configs\ZK_EL_GR5331_2.13_V1.1.toml"
+.\tools\flash-zh.bat -Firmware ".\full\InkTag-BASIC-0.2.2.1-gr5331_zkel-full.zip" -Config ".\tools\configs\ZK_EL_GR5331_2.13_V1.1.toml"
 ```

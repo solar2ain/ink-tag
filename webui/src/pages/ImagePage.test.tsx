@@ -9,9 +9,11 @@ import {imageEditorDraft} from '../image/editorDraft'
 import {useDeviceStore} from '../store/device'
 import {createEditionBadgeBitmap,editionBadgeGeometry} from '../device-gui/editionBadgeBitmap'
 import {deviceScreenProfiles} from '../data/screenProfiles'
+import {useSerialTag} from '../nfc/serialTag'
 
 vi.mock('../components/DeviceImageSlots',()=>({DeviceImageSlots:()=> <div>设备图片区域</div>}))
 vi.mock('../components/SendCanvasDialog',()=>({SendCanvasDialog:()=>null}))
+vi.mock('../nfc/serialTag',()=>({useSerialTag:vi.fn()}))
 vi.mock('../device-gui/editionBadgeBitmap',async importOriginal=>({...await importOriginal<typeof import('../device-gui/editionBadgeBitmap')>(),createEditionBadgeBitmap:vi.fn(()=>document.createElement('canvas'))}))
 vi.mock('../image/optimize',()=>({algorithmGroups:[{label:'常用',options:[['auto','Hybrid 自适应（默认）']]}],processingPresets:[['balanced','不处理']],usesDirectStrength:()=>false,optimizeCanvas:vi.fn(async()=>{})}))
 
@@ -42,6 +44,138 @@ const choose=()=>act(async()=>{
   input.dispatchEvent(new Event('change',{bubbles:true}))
 })
 const clear=()=>act(async()=>[...host.querySelectorAll<HTMLButtonElement>('button')].find(b=>b.title==='清除图片')!.click())
+
+it.each([true,false])('keeps NFC screen reading and image transfer unavailable on phones with Web NFC support %s',async supported=>{
+  vi.stubGlobal('isSecureContext',true)
+  vi.spyOn(navigator,'userAgent','get').mockReturnValue('Android Mobile')
+  vi.stubGlobal('NDEFReader',supported ? class { scan() {} write() {} } : undefined)
+  Object.defineProperty(navigator,'serial',{configurable:true,value:{requestPort:vi.fn()}})
+  try {
+    await open()
+    const buttons=[...host.querySelectorAll('button')].map(button=>button.textContent)
+    expect(buttons).toContain('蓝牙传图')
+    expect(buttons).not.toContain('NFC 传图')
+    expect(buttons).not.toContain('贴卡识屏')
+  } finally {
+    Reflect.deleteProperty(navigator,'serial')
+  }
+})
+
+it('uses the serial D1 screen without changing the connected Bluetooth device',async()=>{
+  const uid=Uint8Array.of(4,0x61,0x7b,0x5c,0x43,2,0x69)
+  const screen={width:296,height:128,color:3}
+  const port={open:vi.fn(),close:vi.fn()}
+  vi.stubGlobal('isSecureContext',true)
+  Object.defineProperty(navigator,'serial',{configurable:true,value:{requestPort:async()=>port}})
+  let detect!: () => void
+  let finish!: () => void
+  vi.mocked(useSerialTag).mockImplementationOnce(async (_port,_action,_expected,_signal,progress)=>{
+    progress('请将 PN532 读卡器放到设备上。',undefined,true)
+    await new Promise<void>(resolve=>{detect=resolve})
+    progress('已检测到设备，请保持贴近。')
+    await new Promise<void>(resolve=>{finish=resolve})
+    return {uid,firmware:'1.6',tagType:'Type 2',outcome:'296 × 128 · BWRY',screen}
+  })
+  const originalModal=Object.getOwnPropertyDescriptor(HTMLDialogElement.prototype,'showModal')
+  Object.defineProperty(HTMLDialogElement.prototype,'showModal',{configurable:true,value:vi.fn()})
+  try {
+    const button=(label:string)=>[...host.querySelectorAll<HTMLButtonElement>('button')].find(item=>item.textContent===label)!
+    await open()
+    const [resolution,color]=host.querySelectorAll<HTMLSelectElement>('.image-target select')
+    expect([resolution.value,color.value]).toEqual(['400x300','2'])
+    await act(async()=>button('贴卡识屏').click())
+    expect(host.querySelector('dialog [data-placement="reader"]')).not.toBeNull()
+    await act(async()=>detect())
+    expect(host.querySelector('dialog [data-placement]')).toBeNull()
+    await act(async()=>finish())
+    expect(useSerialTag).toHaveBeenCalledWith(port,{kind:'screen'},undefined,expect.any(AbortSignal),expect.any(Function),expect.any(Function),expect.any(Function))
+    expect([...host.querySelectorAll('.image-target select')]).toEqual([resolution,color])
+    expect([resolution.value,color.value]).toEqual(['296x128','3'])
+    expect(imageEditorDraft.nfcScreen).toEqual(screen)
+    expect(useDeviceStore.getState().screen).toBeNull()
+    await act(async()=>{
+      resolution.value='400x300'
+      resolution.dispatchEvent(new Event('change',{bubbles:true}))
+    })
+    expect(imageEditorDraft.targetResolution).toBe('400x300')
+  } finally {
+    Reflect.deleteProperty(navigator,'serial')
+    if (originalModal) Object.defineProperty(HTMLDialogElement.prototype,'showModal',originalModal)
+    else Reflect.deleteProperty(HTMLDialogElement.prototype,'showModal')
+  }
+})
+
+it('adopts the NFC screen, waits for a second send, and closes only on success', async () => {
+  const screen = { width: 400, height: 300, color: 3 }
+  const replacement = { uid: Uint8Array.of(4, 1, 2, 3), firmware: '1.6', tagType: 'Type 2' }
+  let confirmGroup!: () => void
+  const exchange = vi.mocked(useSerialTag).mockClear()
+    .mockResolvedValueOnce({ ...replacement, screen, outcome: '已将目标屏幕切换为 400 × 300 · BWRY。请关闭窗口，确认预览后再次点击「NFC 传图」。' })
+    .mockImplementationOnce(async (_port, _action, _expected, _signal, progress) => {
+      for (let confirmed = 0; confirmed <= 8; confirmed++) {
+        progress(`D2 传图 ${confirmed}/8`, { confirmed, total: 8, bytesPerSecond: 500 })
+        if (confirmed === 2) {
+          progress('已发送 3/8 包 · 已确认 2 包', { confirmed, submitted: 3, total: 8, bytesPerSecond: 500 })
+          await new Promise<void>(resolve => { confirmGroup = resolve })
+        }
+      }
+      progress('正在请求设备刷新（D4）。')
+      return { ...replacement, outcome: '设备已接受刷新请求（9000）。' }
+    })
+    .mockImplementationOnce(async (_port, _action, _expected, _signal, progress) => {
+      progress('正在请求设备刷新（D4）。')
+      throw new Error('刷新请求未确认')
+    })
+  vi.stubGlobal('isSecureContext', true)
+  Object.defineProperty(navigator, 'serial', { configurable: true, value: { requestPort: async () => ({}) } })
+  const originalModal = Object.getOwnPropertyDescriptor(HTMLDialogElement.prototype, 'showModal')
+  Object.defineProperty(HTMLDialogElement.prototype, 'showModal', { configurable: true, value: vi.fn() })
+  try {
+    await open(); await choose(); await act(async () => images[0].onload?.())
+    await act(async () => vi.advanceTimersByTimeAsync(100))
+    const send = host.querySelector<HTMLButtonElement>('button[aria-label="NFC 传图"]')!
+    await act(async () => send.click())
+    expect(send.disabled).toBe(true)
+    expect(imageEditorDraft.nfcScreen).toEqual(screen)
+    const selects = host.querySelectorAll<HTMLSelectElement>('.image-target select')
+    expect([...selects].map(select => select.value)).toEqual(['400x300', '3'])
+    await act(async () => vi.advanceTimersByTimeAsync(2200))
+    expect(exchange).toHaveBeenCalledTimes(1)
+    expect(host.querySelector('dialog')?.textContent).toContain('再次点击「NFC 传图」')
+    expect(useDeviceStore.getState().logs).toContainEqual(expect.objectContaining({
+      level: 'warning', message: expect.stringContaining('目标屏幕切换为 400 × 300 · BWRY'),
+    }))
+    await act(async () => host.querySelector<HTMLButtonElement>('dialog footer button')!.click())
+    expect(send.disabled).toBe(false)
+    await act(async () => send.click())
+    expect(exchange.mock.calls[1][1]).toMatchObject({ kind: 'image', color: 3 })
+    expect(host.querySelector('[role="progressbar"]')?.getAttribute('aria-valuenow')).toBe('2')
+    expect(host.querySelector<HTMLElement>('.nfc-image-meter-submitted')?.style.width).toBe('37.5%')
+    expect(host.querySelector<HTMLElement>('.nfc-image-meter-confirmed')?.style.width).toBe('25%')
+    await act(async () => confirmGroup())
+    await act(async () => vi.advanceTimersByTimeAsync(1999))
+    expect(host.querySelector('dialog')?.textContent).toContain('9000')
+    await act(async () => vi.advanceTimersByTimeAsync(1))
+    expect(host.querySelector('dialog')).toBeNull()
+    await act(async () => send.click())
+    await act(async () => vi.advanceTimersByTimeAsync(2200))
+    expect(host.querySelector('dialog [role="alert"]')?.textContent).toBe('刷新请求未确认')
+    const logs = useDeviceStore.getState().logs
+    expect(logs.filter(entry => entry.level === 'tx').map(entry => entry.message)).toEqual(
+      [0, 2, 4, 6, 8].map(confirmed => `[NFC · Web Serial] NFC 传图：D2 传图 ${confirmed}/8`),
+    )
+    expect(logs).toContainEqual(expect.objectContaining({
+      level: 'success', message: expect.stringContaining('PN532 1.6 · Type 2 · UID 04010203 · 设备已接受刷新请求（9000）'),
+    }))
+    expect(logs.at(-1)).toMatchObject({
+      level: 'error', message: expect.stringContaining('刷新请求未确认（最后阶段：正在请求设备刷新（D4）。）'),
+    })
+  } finally {
+    Reflect.deleteProperty(navigator, 'serial')
+    if (originalModal) Object.defineProperty(HTMLDialogElement.prototype, 'showModal', originalModal)
+    else Reflect.deleteProperty(HTMLDialogElement.prototype, 'showModal')
+  }
+})
 
 it('describes E6 without a product brand or assuming a two-stage controller',async()=>{
   imageEditorDraft.simulatedColor=10
@@ -167,7 +301,7 @@ it.each(['connected','idle'] as const)('separates canvas and photo rotation whil
   expect([layer.style.left,layer.style.top]).toEqual([`${landscapeBadge.x}px`,`${landscapeBadge.y}px`])
   expect(imageEditorDraft.canvasTurned).toBe(true)
   // The send action must wait for fresh device pixels after a frame change.
-  if(connection==='connected')expect(host.querySelector<HTMLButtonElement>('button[title="发送图片"]')!.disabled).toBe(true)
+  if(connection==='connected')expect(host.querySelector<HTMLButtonElement>('button[title="蓝牙传图"]')!.disabled).toBe(true)
   expect(useDeviceStore.getState().screen).toEqual(screen)
   await act(async()=>root.render(<div>其他页面</div>));await open()
   expect(imageEditorDraft.canvasTurned).toBe(true)

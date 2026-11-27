@@ -3,7 +3,7 @@ setlocal
 chcp 65001 >nul
 set "inktag_interactive="
 if "%~1"=="" set "inktag_interactive=-Interactive"
-"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -STA -ExecutionPolicy Bypass -File "%~dp0initialization.ps1" -Action Preserve -Language en %inktag_interactive% %*
+"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -STA -ExecutionPolicy Bypass -File "%~dp0internal\initialization.ps1" -Action Preserve -Language en %inktag_interactive% %*
 set "inktag_exit=%errorlevel%"
 if "%~1"=="" (
     echo.

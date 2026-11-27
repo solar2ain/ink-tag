@@ -2,10 +2,12 @@
 
 Double-click `flash.bat` for English or `flash-zh.bat` for Chinese. The tool uses a single valid local Full ZIP, lists multiple matches and opens a picker if it finds none. Choose the board and confirm Full flashing before detection begins.
 
-This directory contains tools only: no firmware, Python runtime, SDK, compiler,
-or private key. The BAT entries use Windows x64 PowerShell 5.1/.NET.
+The complete firmware is in [full/](full/). See the [installation guide](INSTALL.en.md) for the board preset.
+The BAT entries use Windows x64 PowerShell 5.1/.NET.
 Install the original SEGGER J-Link 7.88j separately for hardware operations;
 the tools verify its pinned EXE/DLL hashes.
+
+The release keeps its board-specific HEX in flash-images/ and verifies it using the Full ZIP in full/. The HEX is 1.47 MB of Intel HEX text covering 512 KiB of internal flash. If you run generate-hex.bat yourself, its output includes source-full.zip as a verification input for that portable set.
 
 Double-click an entry for simple path prompts; an empty response cancels.
 Automation can supply all arguments. Quote paths containing spaces or Unicode.

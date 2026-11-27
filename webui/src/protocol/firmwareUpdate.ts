@@ -57,7 +57,7 @@ export async function checkFirmwareUpdate(family: string, version: string, optio
 export function firmwareBrowserDownloadUrl(update: FirmwareUpdateInfo): string {
   validateArtifact({ type: 'ota', name: update.artifactName, bytes: update.bytes,
     sha256: update.sha256, downloadUrl: update.downloadUrl }, update.releaseTag)
-  if (!/^v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/.test(update.releaseTag) ||
+  if (!/^v\d+\.\d+\.\d+(?:\.\d+)?(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/.test(update.releaseTag) ||
       !update.buildTarget || !/^[a-z0-9_]+$/.test(update.buildTarget)) {
     throw new Error('发布清单缺少在线载入所需的信息，请选择本地 OTA 固件包')
   }

@@ -9,6 +9,7 @@ import { useRuntimeStore } from '../server/runtime'
 import { useDeviceStore } from '../store/device'
 import vector from '../../../tests/fixtures/find-portable-v1.json'
 import { savedFindBackups, saveFindBackup, markFindBackupHistorical } from './offlineOwner'
+import { readPortableBackup } from './portable'
 import { setPreferences } from '../preferences'
 
 const api = vi.hoisted(() => ({ query: vi.fn(), selectIdentity: vi.fn(), status: vi.fn(), exportBackup: vi.fn(), importBackup: vi.fn(),
@@ -108,6 +109,8 @@ it('lists encrypted browser records inline and clears only the confirmed local r
   expect(list.querySelectorAll('li')).toHaveLength(1)
   expect(list.querySelectorAll('option')).toHaveLength(2)
   expect(list.textContent).toContain('当前浏览器保存的设备信息')
+  expect(list.querySelector('.notice.warning')?.textContent).toContain('已加密保存在当前浏览器')
+  expect(list.querySelector('.notice.warning')?.textContent).toContain('查询设备位置并跟踪设备')
   expect(list.textContent).toContain('办公桌标签')
   expect(list.innerHTML).not.toContain(vector.encrypted)
   expect(list.innerHTML).not.toContain(vector.payload.identities[0].materialHex)
@@ -407,19 +410,60 @@ it('does not unlock query or register unsupported/non-Pro devices', async () => 
 function checkbox(label: string) {
   return Array.from(host.querySelectorAll('label')).find(e => e.textContent?.includes(label))!.querySelector<HTMLInputElement>('input[type=checkbox]')!
 }
-it('requires a separate privacy acknowledgement for plaintext export and never puts it in browser storage', async () => {
+it('requires an encrypted browser backup for enrollment and stops when storage is unavailable', async () => {
   await act(async () => host.querySelector<HTMLInputElement>('input[role=switch]')!.click())
-  await act(async () => checkbox('使用口令加密').click())
-  expect(host.textContent).toContain('未加密资料可能泄露隐私')
-  expect(host.querySelector('[role=dialog] input[type=password]')).toBeNull()
-  expect(button('生成未加密资料').disabled).toBe(true)
-  await act(async () => checkbox('我了解并接受').click())
-  await act(async () => button('生成未加密资料').click())
-  const text = host.querySelector<HTMLTextAreaElement>('textarea[readonly]')!.value
-  const plain = JSON.parse(text)
-  expect(plain.identities[0].materialHex).toHaveLength(88)
+  expect(host.querySelector('[role=dialog] input[type=checkbox]')).toBeNull()
+  expect(button('生成未加密资料')).toBeUndefined()
+  await input(0, vector.password); await input(1, vector.password)
+  const write = vi.spyOn(localStorage, 'setItem').mockImplementation(() => { throw Error('storage denied') })
+  await act(async () => {
+    button('生成加密资料').click()
+    await vi.waitFor(() => expect(write).toHaveBeenCalled())
+  })
+  expect(host.querySelector('[role=alert]')?.textContent).toContain('无法保存加密迁移资料')
   expect(localStorage.length).toBe(0)
-  expect(button('登记并开启Find').disabled).toBe(true)
+  expect(button('登记并开启Find')).toBeUndefined()
+  expect(ble.beginPublicOnlyFindOwner).not.toHaveBeenCalled()
+  write.mockRestore()
+})
+
+it('can re-enable a device with only a legacy plaintext copy after saving a new encrypted backup', async () => {
+  const owner = vector.payload.identities[0]
+  ble.readPublicOnlyFindOwnerStatus.mockResolvedValue({ ...vector.proofs[1], identityPresent: true, timeValid: true })
+  await act(async () => useDeviceStore.setState({ findConfig: { ...useDeviceStore.getState().findConfig!, identityPresent: true } }))
+  await act(async () => host.querySelector<HTMLInputElement>('input[role=switch]')!.click())
+  const field = host.querySelector<HTMLTextAreaElement>('[role=dialog] textarea')!
+  await act(async () => {
+    Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value')!.set!.call(field, JSON.stringify(vector.payload))
+    field.dispatchEvent(new Event('input', { bubbles: true }))
+  })
+  await act(async () => checkbox('我了解并接受').click())
+  await act(async () => {
+    button('读取并核对资料').click()
+    await vi.waitFor(() => expect(ble.readPublicOnlyFindOwnerStatus).toHaveBeenCalled())
+  })
+  await vi.waitFor(async () => {
+    await act(async () => { await Promise.resolve() })
+    expect(button('生成加密资料')).toBeDefined()
+  })
+  expect(savedFindBackups()).toEqual([])
+  expect(ble.configureFind).not.toHaveBeenCalled()
+  await input(0, vector.password); await input(1, vector.password)
+  await act(async () => {
+    button('生成加密资料').click()
+    await vi.waitFor(() => expect(savedFindBackups()).toHaveLength(1))
+  })
+  const [backup] = savedFindBackups()
+  expect(backup).toMatchObject({ fingerprint: owner.fingerprint, deviceId: owner.deviceId })
+  expect(await readPortableBackup(backup.encryptedBackup, vector.password)).toMatchObject({
+    identities: [{ fingerprint: owner.fingerprint, materialHex: owner.materialHex }],
+  })
+  await act(async () => checkbox('我已另存备份').click())
+  await act(async () => {
+    button('开启Find').click()
+    await vi.waitFor(() => expect(ble.configureFind).toHaveBeenCalled())
+  })
+  expect(ble.configureFind).toHaveBeenCalledExactlyOnceWith(true)
   expect(ble.beginPublicOnlyFindOwner).not.toHaveBeenCalled()
 })
 
@@ -440,7 +484,7 @@ it.each(['static', 'standalone'] as const)('requires export and saved acknowledg
   await vi.waitFor(() => expect(host.querySelector<HTMLTextAreaElement>('textarea[readonly]')?.value).toMatch(/^IKTFIND1\./), {timeout:5000})
   expect(button('开启Find').disabled).toBe(true)
   expect(ble.configureFind).not.toHaveBeenCalled()
-  await act(async () => checkbox('我已保存设备信息').click())
+  await act(async () => checkbox('我已另存备份').click())
   await act(async () => button('开启Find').click())
   await act(async () => { await vi.waitFor(() => expect(ble.configureFind).toHaveBeenCalled()) })
   expect(ble.configureFind).toHaveBeenCalledExactlyOnceWith(true)

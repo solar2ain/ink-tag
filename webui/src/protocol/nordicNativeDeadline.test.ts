@@ -68,12 +68,16 @@ it('retains the just-validated same-grant connection instead of disconnect/recon
   const boundary = new Error('verified transfer boundary')
   a.SecureDfuTransport.prototype.transfer = vi.fn().mockRejectedValue(boundary)
   await expect(a.transferDevice(p.device, {}, () => {})).rejects.toBe(boundary)
-  expect(p.gatt.connect).toHaveBeenCalledOnce()
+  expect(p.gatt.connect).not.toHaveBeenCalled()
   expect(a.SecureDfuTransport.prototype.transfer).toHaveBeenCalledOnce()
 })
 it('does not restart the45s verification budget after a resolved missing-channel retry', async () => {
   const a = adapter(), p = peer()
-  p.gatt.connect.mockImplementationOnce(async () => p.gatt).mockImplementation(() => p.pending.promise)
+  p.gatt.connected = false
+  p.gatt.connect.mockImplementationOnce(async () => {
+    p.gatt.connected = true
+    return p.gatt
+  }).mockImplementation(() => p.pending.promise)
   p.service.getCharacteristic.mockImplementationOnce(async () => {
     await new Promise(resolve => setTimeout(resolve, 44000))
     throw new DOMException('No Characteristics matching UUID', 'NotFoundError')

@@ -14,16 +14,18 @@ SCHEMA = 3
 CHANNELS = ('stable', 'preview')
 KINDS = {'webui': {'web', 'web-standalone', 'web-resources'}, 'cli': {'cli'}, 'localServer': {'local-server'}}
 NAME = re.compile(r'[A-Za-z0-9][A-Za-z0-9._-]{0,180}\Z')
-TAG = re.compile(r'v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?\Z')
+TAG = re.compile(r'v\d+\.\d+\.\d+(?:\.\d+)?(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?\Z')
 class UpdateError(ValueError): pass
 
 def version(value):
     if not isinstance(value,str): raise UpdateError('Version must be a string')
-    match=re.fullmatch(r'(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z.-]+))?(?:\+[0-9A-Za-z.-]+)?',value)
-    if not match or any(int(n)>2**53-1 for n in match.groups()[:3]):raise UpdateError('Invalid semantic version')
-    pre=match[4].split('.') if match[4] else None
+    match=re.fullmatch(r'(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:\.(0|[1-9]\d*))?(?:-([0-9A-Za-z.-]+))?(?:\+[0-9A-Za-z.-]+)?',value)
+    if not match:raise UpdateError('Invalid release version')
+    core=tuple(int(n or 0) for n in match.groups()[:4])
+    if any(n>2**53-1 for n in core):raise UpdateError('Invalid release version')
+    pre=match[5].split('.') if match[5] else None
     if pre and any(not n or re.fullmatch(r'0\d+',n) for n in pre):raise UpdateError('Invalid prerelease version')
-    return tuple(map(int,match.groups()[:3])),pre
+    return core,pre
 
 def compare(a,b):
     ac,ap=version(a);bc,bp=version(b)
@@ -73,7 +75,7 @@ def validate_record(record):
         tags.add(tag)
         if release.get('channel') not in CHANNELS or any(type(release.get(k)) is not bool for k in ('candidateOnly','releaseReady','published')):raise UpdateError('Known update channels and explicit publication states are required')
         if release['channel']=='preview' and ('-' not in tag or release.get('prerelease') is not True):raise UpdateError('Preview requires a prerelease tag and explicit prerelease status')
-        dated_release=bool(re.fullmatch(r'v\d+\.\d+\.\d+-\d{8}\.[1-9]\d*',tag))
+        dated_release=bool(re.fullmatch(r'v\d+\.\d+\.\d+(?:\.\d+)?-\d{8}\.[1-9]\d*',tag))
         if release['channel']=='stable' and (release.get('prerelease') is True or '-' in tag and not dated_release):raise UpdateError('Stable cannot contain prereleases')
         if not isinstance(release.get('firmware'),list):raise UpdateError('Firmware must be a list')
         if not record['firmwareEnabled'] and release['firmware']:raise UpdateError('This client-only release must not contain firmware')

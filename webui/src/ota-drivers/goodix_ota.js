@@ -365,9 +365,9 @@
             application.recovery_state_addresses.some((value, index) => value !== profile.recoveryStateAddresses[index])) {
             throw new Error('Goodix OTA board/chip/address policy does not match');
         }
-        const releaseMatch = /^(\d+)\.(\d+)\.(\d+)$/.exec(String(manifest.release || ''));
-        if (!releaseMatch) throw new Error('Goodix OTA release must be MAJOR.MINOR.PATCH');
-        const releaseParts = releaseMatch.slice(1).map(Number);
+        const releaseMatch = /^(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?$/.exec(String(manifest.release || ''));
+        if (!releaseMatch) throw new Error('Goodix OTA release must be MAJOR.MINOR.PATCH[.REVISION]');
+        const releaseParts = releaseMatch.slice(1).filter(value => value !== undefined).map(Number);
         if (!Number.isInteger(manifest.protocol) || manifest.protocol < 0 || manifest.protocol > 0xff ||
             releaseParts.some(value => value > 0xff)) {
             throw new Error('Goodix OTA release/protocol bytes are out of range');

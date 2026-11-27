@@ -1,9 +1,10 @@
-import { CalendarDays, CirclePause, Clock3, Contact, Eraser, FileText, KeyRound, ListChecks, PanelsTopLeft, Pencil, Play, RefreshCw, Settings2, Table2, Wifi } from 'lucide-react'
+import { Bluetooth, CalendarDays, CirclePause, Clock3, Contact, Eraser, FileText, KeyRound, ListChecks, Nfc, PanelsTopLeft, Pencil, Play, RefreshCw, Settings2, Table2, Wifi } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { CalendarSettingsDialog } from '../components/CalendarSettingsDialog'
 import { useConfirmationDialog } from '../components/ConfirmationDialog'
 import { DeviceIdentityDialog, type DeviceIdentityField } from '../components/DeviceIdentityDialog'
+import { NfcCommandControls } from '../components/NfcCommandControls'
 import { PageHeader } from '../components/PageHeader'
 import { SlideshowDialog } from '../components/SlideshowDialog'
 import { TemplatePreview } from '../components/TemplatePreview'
@@ -12,6 +13,9 @@ import { calendarCountdownSupported, canStartSlideshow, clockPartialRefreshAvail
 import { pageTemplateTarget } from '../data/templates'
 import { displayDeviceName } from '../device/displayName'
 import { mcuDisplayName } from '../protocol/boards'
+import { usePhoneNdefReader } from '../nfc/browserNdef'
+import { webSerial } from '../nfc/pn532'
+import { useTranslation } from '../preferences'
 import { inktagClient } from '../protocol/client'
 import { canvasSizeForScreen, colorCode } from '../protocol/screen'
 import { useDeviceStore } from '../store/device'
@@ -22,8 +26,14 @@ import { renderFirmwareNativePage } from '../device-gui/nativePageRenderer'
 const pageIcons = { schedule: Table2, todo: ListChecks, wifi: Wifi, business: Contact, page: FileText } as const
 
 export function DashboardPage() {
+  const t = useTranslation()
   const { connection, action, capabilities, settingsCapabilities, screen, firmwareVersion, protocolVersion, boardId, deviceId, bleAddress, deviceName, localAlias, voltage, temperature, mcuTemperature, panelTemperature, activation, imageStoreInfo, imageStoreItems } = useDeviceStore()
   const [refreshing, setRefreshing] = useState(false)
+  const [quickMode, setQuickMode] = useState<'ble' | 'nfc'>('ble')
+  const PhoneReader = usePhoneNdefReader()
+  const phoneNfc = typeof PhoneReader?.prototype.write === 'function'
+  const canUseNfc = phoneNfc || Boolean(webSerial())
+  const nfcSelected = canUseNfc && quickMode === 'nfc'
   const [refreshMessage, setRefreshMessage] = useState('')
   const refreshPending = useRef(false)
   useEffect(() => setRefreshMessage(''), [deviceId])
@@ -33,6 +43,12 @@ export function DashboardPage() {
     return () => window.clearTimeout(timer)
   }, [refreshMessage])
   const connected = connection === 'connected'
+  useEffect(() => {
+    if (connected) setQuickMode('ble')
+  }, [connected])
+  const quickNote = nfcSelected
+    ? (phoneNfc ? '选择命令并将手机NFC贴近设备' : '连接PN532并放置好设备后使用')
+    : (!connected ? '连接设备蓝牙后使用' : '')
   const switching = refreshing || (action !== 'idle' && action !== 'slideshow')
   const slideshowCount = slideshowImageCount(imageStoreItems)
   const slideshowReady = connected && slideshowCount > 0 && canStartSlideshow(capabilities.imageStore, imageStoreInfo)
@@ -197,29 +213,33 @@ export function DashboardPage() {
 
       <section className="quick-control" aria-labelledby="quick-title">
         <div className="section-heading">
-          <div><h2 id="quick-title">快捷控制</h2><p>切换设备显示模式。</p></div>
-          {!connected && <span className="quiet-note">连接后可切换</span>}
+          <h2 id="quick-title">{t('快捷控制')}</h2>
+          {quickNote && <span className="quiet-note">{t(quickNote)}</span>}
         </div>
-        <div className="command-strip">
+        {canUseNfc && <div className="segmented-control quick-control-mode" role="group" aria-label={t('控制方式')}>
+          <button type="button" className={!nfcSelected ? 'active' : undefined} aria-pressed={!nfcSelected} onClick={() => setQuickMode('ble')}><Bluetooth />{t('蓝牙控制')}</button>
+          <button type="button" className={nfcSelected ? 'active' : undefined} aria-pressed={nfcSelected} onClick={() => setQuickMode('nfc')}><Nfc />{t('NFC 控制')}</button>
+        </div>}
+        {nfcSelected ? <NfcCommandControls disabled={switching} /> : <><div className="command-strip">
           <div className={`quick-command-split ${action === 'calendar' ? 'active' : ''}`}>
-            <button className="quick-command-main" disabled={!connected || switching} onClick={() => void runQuickDisplay('calendar', showCalendar)}><CalendarDays /><span>日历</span></button>
-            <button className="quick-command-settings" title="日历设置" aria-label="日历设置" disabled={!connected || switching || !deviceId} onClick={() => setCalendarSettingsOpen(true)}><Settings2 /></button>
+            <button className="quick-command-main" disabled={!connected || switching} onClick={() => void runQuickDisplay('calendar', showCalendar)}><CalendarDays /><span>{t('日历')}</span></button>
+            <button className="quick-command-settings" title={t('日历设置')} aria-label={t('日历设置')} disabled={!connected || switching || !deviceId} onClick={() => setCalendarSettingsOpen(true)}><Settings2 /></button>
           </div>
-          <button className={action === 'clock' ? 'active' : ''} disabled={!connected || switching} onClick={() => void showClock()}><Clock3 /><span>时钟</span></button>
-          <button className={action === 'device-info' ? 'active' : ''} disabled={!connected || (!settingsCapabilities.nativeDeviceInfo && !screen) || switching} title={connected && !settingsCapabilities.nativeDeviceInfo && !screen ? '屏幕信息未读到，请点击当前设备旁的刷新按钮重读' : '显示设备信息页'} onClick={() => void runQuickDisplay('device-info', showDeviceInfo)}><Contact /><span>设备</span></button>
+          <button className={action === 'clock' ? 'active' : ''} disabled={!connected || switching} onClick={() => void showClock()}><Clock3 /><span>{t('时钟')}</span></button>
+          <button className={action === 'device-info' ? 'active' : ''} disabled={!connected || (!settingsCapabilities.nativeDeviceInfo && !screen) || switching} title={t(connected && !settingsCapabilities.nativeDeviceInfo && !screen ? '屏幕信息未读到，请点击当前设备旁的刷新按钮重读' : '显示设备信息页')} onClick={() => void runQuickDisplay('device-info', showDeviceInfo)}><Contact /><span>{t('设备')}</span></button>
           <div className={`quick-command-split ${action === 'slideshow' ? 'active' : ''}`}>
-            <button className="quick-command-main" disabled={!connected || switching || action === 'slideshow'} onClick={startDefaultSlideshow}><Play /><span>图片{slideshowCount > 0 ? `（${slideshowCount}）` : ''}</span></button>
-            <button className="quick-command-settings" title="图片设置" aria-label="图片设置" disabled={!connected || switching} onClick={showSlideshow}><Settings2 /></button>
+            <button className="quick-command-main" disabled={!connected || switching || action === 'slideshow'} onClick={startDefaultSlideshow}><Play /><span>{t('图片')}{slideshowCount > 0 ? `（${slideshowCount}）` : ''}</span></button>
+            <button className="quick-command-settings" title={t('图片设置')} aria-label={t('图片设置')} disabled={!connected || switching} onClick={showSlideshow}><Settings2 /></button>
           </div>
-          <button className={action === 'clear' ? 'active' : ''} disabled={!connected || switching} onClick={() => void runQuickDisplay('clear', () => inktagClient.runAction('clear'))}><Eraser /><span>清屏</span></button>
-          <button disabled={!connected || action === 'ota' || stopping} title="请求设备停止当前刷新或轮播" onClick={() => void stopCurrentAction()}><CirclePause /><span>{stopping ? '停止中' : '暂停'}</span></button>
+          <button className={action === 'clear' ? 'active' : ''} disabled={!connected || switching} onClick={() => void runQuickDisplay('clear', () => inktagClient.runAction('clear'))}><Eraser /><span>{t('清屏')}</span></button>
+          <button disabled={!connected || action === 'ota' || stopping} title={t('请求设备停止当前刷新或轮播')} onClick={() => void stopCurrentAction()}><CirclePause /><span>{t(stopping ? '停止中' : '暂停')}</span></button>
         </div>
         {storedPages.length > 0 && <div className="stored-page-actions" aria-label="设备常用页面">
           {storedPages.map(({ item, label }) => {
             const Icon = pageIcons[item.contentType as keyof typeof pageIcons] || FileText
             return <button key={item.id} disabled={switching || action === 'slideshow'} onClick={() => void inktagClient.showStoredImage(item.id)}><Icon /><span>{label}</span></button>
           })}
-        </div>}
+        </div>}</>}
       </section>
 
       <div className="dashboard-grid">
@@ -240,7 +260,7 @@ export function DashboardPage() {
             <div><dt>按键</dt><dd>{connected ? capabilities.button ? '板载按键' : '可扩展' : '--'}</dd></div>
             <div><dt>状态灯</dt><dd>{connected ? capabilities.led === 'rgb' ? '板载 RGB' : capabilities.led === 'mono' ? '板载单色' : '无板载' : '--'}</dd></div>
 
-            <div><dt>授权</dt><dd className="activation-fact"><span>{connected ? advanced ? '高级版' : '免费版' : '--'}</span>{!advanced && (connected ? <Link className="inline-action-button" to="/device?tab=activation" title="激活设备" aria-label="激活设备"><KeyRound /></Link> : <button className="inline-action-button" title="连接设备后激活" aria-label="连接设备后激活" disabled><KeyRound /></button>)}</dd></div>
+            <div><dt>授权</dt><dd className="activation-fact"><span>{connected ? advanced ? '高级版' : '基础版' : '--'}</span>{!advanced && (connected ? <Link className="inline-action-button" to="/device?tab=activation" title="激活设备" aria-label="激活设备"><KeyRound /></Link> : <button className="inline-action-button" title="连接设备后激活" aria-label="连接设备后激活" disabled><KeyRound /></button>)}</dd></div>
             <div><dt>浏览器设备 ID</dt><dd title={connected ? deviceId : undefined}>{connected ? deviceId || '--' : '--'}</dd></div>
           </dl>
           {identityField && <DeviceIdentityDialog initialField={identityField} onClose={() => setIdentityField(null)} />}

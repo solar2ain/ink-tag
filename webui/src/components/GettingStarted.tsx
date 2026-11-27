@@ -187,7 +187,7 @@ export function AboutInkTag() {
   const [guide, setGuide] = useState(false)
   return <section className="panel about-inktag">
     <div className="panel-heading"><h2>{t('关于 InkTag')}</h2></div>
-    <p>{t('InkTag 为兼容电子价签提供纸张般的图片、日历与时钟展示，支持设备管理和无线更新。可用功能以当前设备为准。')}</p>
+    <p>{t('InkTag 为兼容设备提供纸张般的图片、日历与时钟展示，支持设备管理和无线更新。可用功能以当前设备为准。')}</p>
     <dl><dt>{t('项目与下载')}</dt><dd><a href={PROJECT_URL} target="_blank" rel="noopener noreferrer">github.com/solar2ain/ink-tag <ExternalLink /></a></dd>
       <dt>{t('Web 上位机')}</dt><dd><a href={WEBUI_URL} target="_blank" rel="noopener noreferrer">solar2ain.github.io/ink-tag/ <ExternalLink /></a></dd>
       <dt>{t('使用手册')}</dt><dd><a href={`${WEBUI_URL}manual/${language}/getting-started.html`} target="_blank" rel="noopener noreferrer">{t('首次使用与操作教程')} <ExternalLink /></a></dd></dl>

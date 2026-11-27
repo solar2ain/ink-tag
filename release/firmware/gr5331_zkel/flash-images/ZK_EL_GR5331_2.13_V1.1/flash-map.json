@@ -1,0 +1,65 @@
+{
+  "gui": {
+    "bytes": 11555,
+    "sha256": "1c2c85f87a505765550ca1ce6342fd43959f677e00b42af6b0e72960e93e52e0"
+  },
+  "addressRetained": false,
+  "chip": "GR5331",
+  "backend": "gr5331_zkc21v",
+  "hardwareQualified": false,
+  "skippedSpaces": [
+    "OTP",
+    "eFuse",
+    "Flash security registers",
+    "external SPI image Flash"
+  ],
+  "schema": "inktag-gr-clean-bin-v1",
+  "vendorRecordsRetained": 0,
+  "writeRanges": [
+    {
+      "space": "mcu-flash",
+      "bytes": 524288,
+      "address": 2097152
+    }
+  ],
+  "readbackMatched": false,
+  "generationSucceeded": true,
+  "writeSucceeded": false,
+  "files": {
+    "config": "board.toml",
+    "firmware": "InkTag-BASIC-0.2.2.1-gr5331_zkel-full.zip",
+    "image": "InkTag-BASIC-0.2.2.1-gr5331_zkel-ZK_EL_GR5331_2.13_V1.1-flash.bin"
+  },
+  "image": {
+    "bytes": 524288,
+    "sha256": "3e5dced01109a87b298a0907349c9a3479feb829ebc4c8f649e93aa65fc41079"
+  },
+  "hardwareAccessed": false,
+  "geometry": {
+    "capacity": 524288,
+    "journal": 425984,
+    "guiBytes": 32768,
+    "recovery": 16384,
+    "gui": 393216,
+    "base": 2097152,
+    "appEnd": 393216,
+    "app": 131072,
+    "journalBytes": 8192,
+    "nvdsBytes": 8192,
+    "nvds": 516096
+  },
+  "sourceProfile": "base",
+  "proRetained": false,
+  "family": "gr5331_zkc21v",
+  "package": {
+    "bytes": 325657,
+    "sha256": "f8e8eea10b746cdd0e5165fc3e3f9cd4153d3e98190c1036409463357c2b6b42"
+  },
+  "warnings": [
+    "Optional old NVDS unavailable; initializing SDK defaults/unactivated."
+  ],
+  "config": {
+    "bytes": 549,
+    "sha256": "8e6974b6080fde760cfe3e0dd17fb7b99e067abc087503e62825a095e35b52bc"
+  }
+}

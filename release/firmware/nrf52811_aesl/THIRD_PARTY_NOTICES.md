@@ -1,32 +1,32 @@
 # 第三方组件与许可 / Third-party notices
 
-根目录 [LICENSE](LICENSE) 的适用范围以 [NOTICE.md](NOTICE.md) 为准。以下材料保留其原始许可、版权和免责声明；完整条款以各组件的许可文本及源文件声明为准。
+本固件包的 InkTag 许可见 [LICENSE](../LICENSE)。源文件的适用范围见 [nRF52811 许可说明](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/NOTICE.md)。以下材料保留其原始许可、版权和免责声明；完整条款以各组件的许可文本及源文件声明为准。
 
-Root [LICENSE](LICENSE) applies only as described in [NOTICE.md](NOTICE.md). The following material retains its original license and copyright notices. For the complete terms, refer to each component's license text and source-file notices.
+The firmware bundle uses [LICENSE](../LICENSE) for InkTag code. The [nRF52811 source notice](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/NOTICE.md) describes the source-license scope. The following material retains its original license and copyright notices. For the complete terms, refer to each component's license text and source-file notices.
 
 ## Adafruit GFX
 
-**中文：** [Adafruit_GFX.c](firmware/common/gui/Adafruit_GFX.c) 保留 Adafruit Industries 2013 年的 BSD 风格声明与免责声明，也保留所含例程的 olikraus 2018 年声明。
+**中文：** [Adafruit_GFX.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/Adafruit_GFX.c) 保留 Adafruit Industries 2013 年的 BSD 风格声明与免责声明，也保留所含例程的 olikraus 2018 年声明。
 
-**English:** [Adafruit_GFX.c](firmware/common/gui/Adafruit_GFX.c), Adafruit Industries 2013; BSD-style notice and disclaimer retained in the file. The file also retains olikraus 2018 notices for incorporated routines.
+**English:** [Adafruit_GFX.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/Adafruit_GFX.c), Adafruit Industries 2013; BSD-style notice and disclaimer retained in the file. The file also retains olikraus 2018 notices for incorporated routines.
 
 ## U8g2 for Adafruit GFX
 
-**中文：** [u8g2_font.c](firmware/common/gui/u8g2_font.c) 及[头文件](firmware/common/gui/u8g2_font.h) 保留 olikraus 2018 年的 BSD 风格声明与免责声明。
+**中文：** [u8g2_font.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/u8g2_font.c) 及[头文件](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/u8g2_font.h) 保留 olikraus 2018 年的 BSD 风格声明与免责声明。
 
-**English:** [u8g2_font.c](firmware/common/gui/u8g2_font.c), [header](firmware/common/gui/u8g2_font.h); olikraus 2018, BSD-style notice and disclaimer retained.
+**English:** [u8g2_font.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/u8g2_font.c), [header](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/u8g2_font.h); olikraus 2018, BSD-style notice and disclaimer retained.
 
 ## Nordic 应用及 BLE 服务组件 / Nordic legacy application / BLE service
 
-**中文：** [平台 main.c](firmware/ports/nordic/common/src/main.c)、[inktag_epd_service.c](firmware/common/epd/inktag_epd_service.c) 及[头文件](firmware/common/epd/inktag_epd_service.h) 中的 Nordic 2012／2014 年声明援引 Nordic Standard Software License Agreement，须原样保留。
+**中文：** [平台 main.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/nordic/src/main.c)、[inktag_epd_service.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/epd/inktag_epd_service.c) 及[头文件](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/epd/inktag_epd_service.h) 中的 Nordic 2012／2014 年声明援引 Nordic Standard Software License Agreement，须原样保留。
 
-**English:** [platform main.c](firmware/ports/nordic/common/src/main.c), [inktag_epd_service.c](firmware/common/epd/inktag_epd_service.c), [header](firmware/common/epd/inktag_epd_service.h); Nordic 2012/2014 notices refer to the Nordic Standard Software License Agreement and must remain intact.
+**English:** [platform main.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/nordic/src/main.c), [inktag_epd_service.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/epd/inktag_epd_service.c), [header](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/epd/inktag_epd_service.h); Nordic 2012/2014 notices refer to the Nordic Standard Software License Agreement and must remain intact.
 
 ## Nordic Recovery 与配置 / Nordic Recovery and configuration
 
-**中文：** [Recovery main.c](firmware/ports/nordic/nrf52811/bootloader/src/main.c)、[分配器头文件](firmware/ports/nordic/nrf52811/bootloader/src/nrf_crypto_allocator.h)、[Recovery sdk_config.h](firmware/ports/nordic/nrf52811/bootloader/src/sdk_config.h) 和[共享 sdk_config.h](firmware/ports/nordic/common/config/sdk_config.h) 保留各自文件中的 Nordic 原始条件，包括 Nordic 芯片使用限制。
+**中文：** [Recovery main.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/app/bootloader/src/main.c)、[分配器头文件](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/app/bootloader/src/nrf_crypto_allocator.h)、[Recovery sdk_config.h](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/app/bootloader/src/sdk_config.h) 和[应用 sdk_config.h](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/nordic/config/sdk_config.h) 保留各自文件中的 Nordic 原始条件，包括 Nordic 芯片使用限制。
 
-**English:** [Recovery main.c](firmware/ports/nordic/nrf52811/bootloader/src/main.c), [allocator header](firmware/ports/nordic/nrf52811/bootloader/src/nrf_crypto_allocator.h), [Recovery sdk_config.h](firmware/ports/nordic/nrf52811/bootloader/src/sdk_config.h), [shared sdk_config.h](firmware/ports/nordic/common/config/sdk_config.h); original Nordic conditions remain in each header, including Nordic-chip restrictions.
+**English:** [Recovery main.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/app/bootloader/src/main.c), [allocator header](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/app/bootloader/src/nrf_crypto_allocator.h), [Recovery sdk_config.h](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/app/bootloader/src/sdk_config.h), [application sdk_config.h](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/nordic/config/sdk_config.h); original Nordic conditions remain in each header, including Nordic-chip restrictions.
 
 ## 外部 Nordic SDK／S112／密码库／工具链运行库 / External Nordic SDK / S112 / crypto / toolchain runtime
 
@@ -36,39 +36,39 @@ Root [LICENSE](LICENSE) applies only as described in [NOTICE.md](NOTICE.md). The
 
 ## 农历年份表 / Lunar year tables
 
-**中文：** [inktag_calendar.c](firmware/common/gui/inktag_calendar.c) 中的 `solar_1_1` 与 `lunar_month_days` 各为 55 个字、220 B。直接来源为 Lunar-Solar-Calendar-Converter 提交 `55d4e547947594736f7c9e4a35521ecc1c7342d8`；保留 isee15 2020 年版权及 [MIT 声明](firmware/common/gui/licenses/lunar-calendar-MIT.txt)。相同记录也出现在 EPD-nRF5 中。
+**中文：** [inktag_calendar.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/inktag_calendar.c) 中的 `solar_1_1` 与 `lunar_month_days` 各为 55 个字、220 B。直接来源为 Lunar-Solar-Calendar-Converter 提交 `55d4e547947594736f7c9e4a35521ecc1c7342d8`；保留 isee15 2020 年版权及 [MIT 声明](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/licenses/lunar-calendar-MIT.txt)。相同记录也出现在 EPD-nRF5 中。
 
-**English:** `solar_1_1` and `lunar_month_days`, 55 words / 220 B each in [inktag_calendar.c](firmware/common/gui/inktag_calendar.c). [MIT notice](firmware/common/gui/licenses/lunar-calendar-MIT.txt), copyright2020 isee15; direct source Lunar-Solar-Calendar-Converter commit55d4e547947594736f7c9e4a35521ecc1c7342d8. The same records also appear in EPD-nRF5.
+**English:** `solar_1_1` and `lunar_month_days`, 55 words / 220 B each in [inktag_calendar.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/inktag_calendar.c). [MIT notice](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/licenses/lunar-calendar-MIT.txt), copyright2020 isee15; direct source Lunar-Solar-Calendar-Converter commit55d4e547947594736f7c9e4a35521ecc1c7342d8. The same records also appear in EPD-nRF5.
 
 ## 中文历法文字资源 / Chinese calendar text resources
 
-**中文：** 八份定宽文字表 `Lunar_MonthString`、`Lunar_MonthLeapString`、`Lunar_DateString`、`Lunar_DayString`、`Lunar_ZodiacString`、`Lunar_StemStrig`、`Lunar_BranchStrig`、`JieQiStr` 共 648 B，保留 [EPD-nRF5 GUI/Lunar.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/Lunar.c) 中的条目。当前声明位于 [inktag_calendar.c](firmware/common/gui/inktag_calendar.c)；上游 GPLv3 文本保留于 [LICENSES/GPL-3.0.txt](LICENSES/GPL-3.0.txt)。
+**中文：** 八份定宽文字表 `Lunar_MonthString`、`Lunar_MonthLeapString`、`Lunar_DateString`、`Lunar_DayString`、`Lunar_ZodiacString`、`Lunar_StemStrig`、`Lunar_BranchStrig`、`JieQiStr` 共 648 B，保留 [EPD-nRF5 GUI/Lunar.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/Lunar.c) 中的条目。当前声明位于 [inktag_calendar.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/inktag_calendar.c)；上游 GPLv3 文本保留于 [LICENSES/GPL-3.0.txt](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/LICENSES/GPL-3.0.txt)。
 
-**English:** Eight fixed-width text tables (`Lunar_MonthString`, `Lunar_MonthLeapString`, `Lunar_DateString`, `Lunar_DayString`, `Lunar_ZodiacString`, `Lunar_StemStrig`, `Lunar_BranchStrig`, `JieQiStr`), 648 B in total, retain the entries in [EPD-nRF5 GUI/Lunar.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/Lunar.c). Current declarations: [inktag_calendar.c](firmware/common/gui/inktag_calendar.c); upstream GPLv3 text retained in [LICENSES/GPL-3.0.txt](LICENSES/GPL-3.0.txt).
+**English:** Eight fixed-width text tables (`Lunar_MonthString`, `Lunar_MonthLeapString`, `Lunar_DateString`, `Lunar_DayString`, `Lunar_ZodiacString`, `Lunar_StemStrig`, `Lunar_BranchStrig`, `JieQiStr`), 648 B in total, retain the entries in [EPD-nRF5 GUI/Lunar.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/Lunar.c). Current declarations: [inktag_calendar.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/inktag_calendar.c); upstream GPLv3 text retained in [LICENSES/GPL-3.0.txt](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/LICENSES/GPL-3.0.txt).
 
 ## 固定节日查表数据 / Fixed observance lookup data
 
-**中文：** [inktag_gui_default.inc](firmware/common/gui/inktag_gui_default.inc) 的 15 条公历和 11 条农历日期／名称记录，保留 [EPD-nRF5 GUI/GUI.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/GUI.c) 中 `festivals`／`festivals_lunar` 的条目。上游 GPLv3 文本保留于 [LICENSES/GPL-3.0.txt](LICENSES/GPL-3.0.txt)。
+**中文：** [inktag_gui_default.inc](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/inktag_gui_default.inc) 的 15 条公历和 11 条农历日期／名称记录，保留 [EPD-nRF5 GUI/GUI.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/GUI.c) 中 `festivals`／`festivals_lunar` 的条目。上游 GPLv3 文本保留于 [LICENSES/GPL-3.0.txt](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/LICENSES/GPL-3.0.txt)。
 
-**English:** The 15 civil-date and 11 lunar-date/name records in [inktag_gui_default.inc](firmware/common/gui/inktag_gui_default.inc) retain the entries of `festivals` / `festivals_lunar` in [EPD-nRF5 GUI/GUI.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/GUI.c). Upstream GPLv3 text retained in [LICENSES/GPL-3.0.txt](LICENSES/GPL-3.0.txt).
+**English:** The 15 civil-date and 11 lunar-date/name records in [inktag_gui_default.inc](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/inktag_gui_default.inc) retain the entries of `festivals` / `festivals_lunar` in [EPD-nRF5 GUI/GUI.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/GUI.c). Upstream GPLv3 text retained in [LICENSES/GPL-3.0.txt](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/LICENSES/GPL-3.0.txt).
 
 ## 节气资源生成依赖 / Solar-term resource generation
 
-**中文：** [InkTag 生成器](tools/calendar/generate-solar-terms.py) 与[来源记录](tools/calendar/solar-terms-source.json) 使用 JPL DE440s 和采用 MIT 许可的 [Skyfield 1.53](https://github.com/skyfielders/python-skyfield/tree/1.53) 计算资源。星历核的使用与再分发遵循 [NAIF 规则](https://naif.jpl.nasa.gov/naif/rules.html)；星历核与 Python 包属于外部生成输入。
+**中文：** [InkTag 生成器](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/build-support/calendar/generate-solar-terms.py) 与[来源记录](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/build-support/calendar/solar-terms-source.json) 使用 JPL DE440s 和采用 MIT 许可的 [Skyfield 1.53](https://github.com/skyfielders/python-skyfield/tree/1.53) 计算资源。星历核的使用与再分发遵循 [NAIF 规则](https://naif.jpl.nasa.gov/naif/rules.html)；星历核与 Python 包属于外部生成输入。
 
-**English:** [InkTag generator](tools/calendar/generate-solar-terms.py) and [source record](tools/calendar/solar-terms-source.json): calculated from JPL DE440s using [Skyfield 1.53](https://github.com/skyfielders/python-skyfield/tree/1.53), MIT. Kernel use and redistribution follow [NAIF rules](https://naif.jpl.nasa.gov/naif/rules.html); the kernel and Python packages are external generation inputs.
+**English:** [InkTag generator](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/build-support/calendar/generate-solar-terms.py) and [source record](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/build-support/calendar/solar-terms-source.json): calculated from JPL DE440s using [Skyfield 1.53](https://github.com/skyfielders/python-skyfield/tree/1.53), MIT. Kernel use and redistribution follow [NAIF rules](https://naif.jpl.nasa.gov/naif/rules.html); the kernel and Python packages are external generation inputs.
 
 ## 文泉驿位图字体子集 / WenQuanYi bitmap subsets
 
-**中文：** [inktag_gui_fonts.c](firmware/common/gui/inktag_gui_fonts.c) 中的 `u8g2_font_wqy9_t_lunar`（4,315 B）和 `u8g2_font_wqy12_t_lunar`（4,830 B）与 [EPD-nRF5 GUI/fonts.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/fonts.c) 分发的子集字节相同。保留原字体名称与现有声明；原字体数据许可与图形引擎许可分别适用。
+**中文：** [inktag_gui_fonts.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/inktag_gui_fonts.c) 中的 `u8g2_font_wqy9_t_lunar`（4,315 B）和 `u8g2_font_wqy12_t_lunar`（4,830 B）与 [EPD-nRF5 GUI/fonts.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/fonts.c) 分发的子集字节相同。保留原字体名称与现有声明；原字体数据许可与图形引擎许可分别适用。
 
-**English:** `u8g2_font_wqy9_t_lunar` (4,315 B) and `u8g2_font_wqy12_t_lunar` (4,830 B) in [inktag_gui_fonts.c](firmware/common/gui/inktag_gui_fonts.c) are the same subset bytes distributed in [EPD-nRF5 GUI/fonts.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/fonts.c). The source font names and existing notices are retained; original font-data terms apply separately from the graphics-engine license.
+**English:** `u8g2_font_wqy9_t_lunar` (4,315 B) and `u8g2_font_wqy12_t_lunar` (4,830 B) in [inktag_gui_fonts.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/inktag_gui_fonts.c) are the same subset bytes distributed in [EPD-nRF5 GUI/fonts.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/fonts.c). The source font names and existing notices are retained; original font-data terms apply separately from the graphics-engine license.
 
 ## Helvetica 位图字体子集 / Helvetica bitmap subsets
 
-**中文：** [inktag_gui_fonts.c](firmware/common/gui/inktag_gui_fonts.c) 中的 `u8g2_font_helvB14_tn`（287 B）和 `u8g2_font_helvB18_tn`（389 B）与 [EPD-nRF5 GUI/fonts.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/fonts.c) 的子集一致。保留源文件中的 Adobe 1984／1987 年、Digital Equipment Corporation 1988／1991 年版权记录，原字体数据条款继续适用。
+**中文：** [inktag_gui_fonts.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/inktag_gui_fonts.c) 中的 `u8g2_font_helvB14_tn`（287 B）和 `u8g2_font_helvB18_tn`（389 B）与 [EPD-nRF5 GUI/fonts.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/fonts.c) 的子集一致。保留源文件中的 Adobe 1984／1987 年、Digital Equipment Corporation 1988／1991 年版权记录，原字体数据条款继续适用。
 
-**English:** `u8g2_font_helvB14_tn` (287 B) and `u8g2_font_helvB18_tn` (389 B) in [inktag_gui_fonts.c](firmware/common/gui/inktag_gui_fonts.c) match the subsets in [EPD-nRF5 GUI/fonts.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/fonts.c). Adobe 1984/1987 and Digital Equipment Corporation 1988/1991 copyright records remain in the source; original font-data terms apply.
+**English:** `u8g2_font_helvB14_tn` (287 B) and `u8g2_font_helvB18_tn` (389 B) in [inktag_gui_fonts.c](https://github.com/solar2ain/ink-tag/blob/main/firmware/ports/nordic/nrf52811/compat/common/gui/inktag_gui_fonts.c) match the subsets in [EPD-nRF5 GUI/fonts.c](https://github.com/tsl0922/EPD-nRF5/blob/7e3196193997bd6a4644610c41d54a76eff88760/GUI/fonts.c). Adobe 1984/1987 and Digital Equipment Corporation 1988/1991 copyright records remain in the source; original font-data terms apply.
 
 ## 分发时保留声明 / Retaining notices in distributions
 

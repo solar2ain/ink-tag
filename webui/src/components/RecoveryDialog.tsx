@@ -24,6 +24,7 @@ export function RecoveryDialog() {
     <section className="lifecycle-dialog recovery-dialog" role="dialog" aria-modal="true" aria-labelledby="recovery-dialog-title">
       <header><div><ShieldCheck /><span><h2 id="recovery-dialog-title">设备处于 Recovery</h2><p>{deviceName}</p></span></div></header>
       <p>{canExit ? '可以更新固件，或请求安全返回原应用。退出不会升级固件或清除用户数据。原应用无效或更新未完成时，请重新选择与设备匹配的 OTA 应用文件，并完成 OTA 升级；供电不足时请先检查电源。' : '当前 Recovery 未提供安全退出协议，请选择与设备匹配的 OTA 应用文件，并完成 OTA 升级后返回应用。'}</p>
+      <p className="recovery-power-note"><strong>Recovery 模式下 MCU 不会休眠，十分耗电，请不要长期停留在 Recovery 模式。</strong></p>
       {error && <div className="identity-dialog-message error" role="alert">{error}</div>}
       <footer>
         <RecoveryExitButton onError={setError} onRunningChange={setRunning} />

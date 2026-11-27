@@ -87,6 +87,14 @@ def base_ota(raw):
             app.get('checksum') == checksum(firmware[:size]) and
             firmware[size:] == image_info(firmware[:size], family, 1),
             'base App native size/checksum/family descriptor mismatch')
+    release = manifest.get('release')
+    match = re.fullmatch(r'(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?', release) if isinstance(release, str) else None
+    require(match is not None, 'Invalid base App semantic release')
+    parts = tuple(int(part) for part in match.groups() if part is not None)
+    protocol = manifest.get('protocol')
+    require(type(protocol) is int and 0 <= protocol <= 255 and all(part <= 255 for part in parts) and
+            manifest.get('releaseVersion') == parts[0]*10000 + parts[1]*100 + parts[2] and
+            bytes((protocol, *parts)) in firmware[:size-40], 'base App GATT release mismatch')
     integrity = verify_integrity(firmware[:size], board=family, epoch=1)
     linked = firmware[:integrity['bodyBytes']]
     require(app.get('integrity') == integrity and app.get('linked_size') == len(linked) and

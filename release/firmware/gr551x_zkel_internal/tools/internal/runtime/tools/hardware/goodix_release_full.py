@@ -19,7 +19,9 @@ GEOMETRY={
  'GR5513':dict(bytes=0x80000,journal=0x7a000,user=0x72000,nvds=0x7c000,marker=b'G5V1'),
  'GR5515':dict(bytes=0x100000,journal=0x7a000,user=0x72000,nvds=0xfc000,marker=b'G5V1'),
 }
-PRODUCT=set(range(0x5201,0x5213))
+# Includes the independently preserved identity0x5212 and ordinary ads0x5213;
+# neither is an unknown vendor record to copy back alongside prepared defaults.
+PRODUCT=set(range(0x5201,0x5214))
 
 
 def geometry(chip,family=None):

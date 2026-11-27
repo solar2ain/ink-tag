@@ -10,6 +10,9 @@ import { neutralPaletteMismatch } from './image-processing'
 export type ImageStep = 'bw' | 'red' | 'color' | 'gray-msb' | 'gray-lsb' | 'e6-area0' | 'e6-area6'
 export interface ImageTransfer { data: Uint8Array; step: ImageStep }
 export interface EncodedImage { format: number; transfers: ImageTransfer[] }
+export type ImageGeometry = Pick<ScreenProfileLikeV2,
+  'width' | 'height' | 'visibleX' | 'visibleY' | 'visibleWidth' | 'visibleHeight' | 'transform' | 'color'>
+
 
 function luminance(r: number, g: number, b: number): number { return .299 * r + .587 * g + .114 * b }
 function colorDistance(r: number, g: number, b: number, target: readonly [number, number, number]): number {
@@ -20,7 +23,7 @@ function colorDistance(r: number, g: number, b: number, target: readonly [number
   return dr * dr + dg * dg + db * db
 }
 
-function framedImage(image: RgbaFrame, screen: ScreenProfileLikeV2): RgbaFrame {
+function framedImage(image: RgbaFrame, screen: ImageGeometry): RgbaFrame {
   const transformed = transformRgba(image, screen.transform)
   if (transformed.width !== screen.visibleWidth || transformed.height !== screen.visibleHeight) {
     throw new RangeError('页面尺寸与屏幕可视区域不匹配')
@@ -170,24 +173,45 @@ function lenmoryE6(frame: RgbaFrame): { area0: Uint8Array; area6: Uint8Array } {
 }
 
 export function encodeImage(image: RgbaFrame, screen: ScreenProfileLikeV2): EncodedImage {
-  const frame = framedImage(image, screen)
-  const format = transferFormatFor(screen)
+  const driver = 'driver' in screen ? screen.driver : screen.controller
+  return encodeFrame(framedImage(image, screen), screen.color, transferFormatFor(screen), driver === 0x40 || driver === 0x41)
+}
+
+/** D1 advertises packing directly. Native NFC pads every physical row. */
+export function encodeNfcImage(image: RgbaFrame, geometry: ImageGeometry, format: number): EncodedImage {
+  const alignment = format === TransferFormat.INDEXED_4BPP ? (geometry.color === 10 ? 2 : 8)
+    : format === TransferFormat.INDEXED_2BPP || format === TransferFormat.INDEXED_2X2BPP ? 4 : 1
+  const width = Math.ceil(geometry.width / alignment) * alignment
+  const encoded = encodeFrame(framedImage(image, { ...geometry, width }), geometry.color, format, geometry.color === 10)
+  if (format === TransferFormat.INDEXED_4BPP && geometry.color !== 10 && width !== geometry.width) {
+    const rowBytes = Math.ceil(geometry.width / 2)
+    const packed = encoded.transfers[0].data
+    const data = new Uint8Array(rowBytes * geometry.height)
+    for (let y = 0; y < geometry.height; y++) {
+      const start = y * width / 2
+      data.set(packed.subarray(start, start + rowBytes), y * rowBytes)
+    }
+    encoded.transfers[0].data = data
+  }
+  return encoded
+}
+
+function encodeFrame(frame: RgbaFrame, color: number, format: number, osprey: boolean): EncodedImage {
   if (format === TransferFormat.MONO_1BPP) return { format, transfers: [{ data: mono(frame), step: 'bw' }] }
   if (format === TransferFormat.DUAL_1BPP) {
-    const planes = dual(frame, screen.color)
+    const planes = dual(frame, color)
     return { format, transfers: [{ data: planes.black, step: 'bw' }, { data: planes.accent, step: 'red' }] }
   }
-  if (format === TransferFormat.INDEXED_2BPP) return { format, transfers: [{ data: indexed2(frame, screen.color), step: 'color' }] }
+  if (format === TransferFormat.INDEXED_2BPP) return { format, transfers: [{ data: indexed2(frame, color), step: 'color' }] }
   if (format === TransferFormat.PLANAR_2X1BPP) {
     const planes = gray4(frame)
     return { format, transfers: [{ data: planes.ram1, step: 'gray-msb' }, { data: planes.ram2, step: 'gray-lsb' }] }
   }
   if (format === TransferFormat.INDEXED_4BPP) {
-    const driver = 'driver' in screen ? screen.driver : screen.controller
-    if (driver === 0x40 || driver === 0x41) return { format, transfers: [{ data: ospreyE6(frame), step: 'bw' }] }
-    const planes = screen.color === 1
+    if (osprey) return { format, transfers: [{ data: ospreyE6(frame), step: 'bw' }] }
+    const planes = color === 1
       ? { black: mono(frame), accent: new Uint8Array(mono(frame).length).fill(0xff) }
-      : dual(frame, screen.color)
+      : dual(frame, color)
     return { format, transfers: [{ data: indexed4FromPlanes(planes.black, planes.accent), step: 'bw' }] }
   }
   if (format === TransferFormat.INDEXED_2X2BPP) {

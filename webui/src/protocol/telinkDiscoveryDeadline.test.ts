@@ -85,14 +85,14 @@ it.each(['missing', 'unreadable', 'truncated', 'address'])(
   },
 )
 
-it('rediscovers once after a settled retiring App link drops, before any firmware write', async () => {
+it.each([false, true])('rediscovers once when discovery reports a disconnected server (connected=%s)', async connected => {
   const a = adapter(), p = peer()
   p.gatt.getPrimaryService.mockImplementationOnce(async () => {
-    p.gatt.connected = false
+    p.gatt.connected = connected
     throw new DOMException('GATT Server is disconnected. Cannot retrieve services.', 'NetworkError')
   })
   const run = a.acquireRecoverySession({ device: p.device, generation: 1,
-    isCurrent: () => true, afterAppEntry: true }, { firmware })
+    isCurrent: () => true }, { firmware })
   await vi.advanceTimersByTimeAsync(901)
   const handle = await run
   expect(p.gatt.connect).toHaveBeenCalledTimes(2)
@@ -112,14 +112,14 @@ it('does not rediscover a disconnected ordinary read without an App handoff', as
   expect(p.write).not.toHaveBeenCalled()
 })
 
-it('limits settled App handoff discovery to one extra attempt', async () => {
+it('limits settled OTA discovery loss to one extra attempt', async () => {
   const a = adapter(), p = peer()
   p.gatt.getPrimaryService.mockImplementation(async () => {
     p.gatt.connected = false
     throw new DOMException('GATT Server is disconnected', 'NetworkError')
   })
   const run = a.acquireRecoverySession({ device: p.device, generation: 1,
-    isCurrent: () => true, afterAppEntry: true }, { firmware })
+    isCurrent: () => true }, { firmware })
   const rejected = expect(run).rejects.toThrow('disconnected')
   await vi.advanceTimersByTimeAsync(3000); await rejected
   expect(p.gatt.connect).toHaveBeenCalledTimes(2)
@@ -143,7 +143,7 @@ it('starts the selected package once instead of trusting an unidentified receivi
 it('never rediscovers an unknown native timeout even after an App handoff', async () => {
   const a = adapter(), p = peer('service')
   const run = a.acquireRecoverySession({ device: p.device, generation: 1,
-    isCurrent: () => true, afterAppEntry: true }, { firmware })
+    isCurrent: () => true }, { firmware })
   const rejected = expect(run).rejects.toMatchObject({ code: 'TLSR_RECOVERY_DISCOVERY_TIMEOUT' })
   await vi.advanceTimersByTimeAsync(46000); await rejected
   expect(p.gatt.connect).toHaveBeenCalledOnce()

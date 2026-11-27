@@ -1,6 +1,7 @@
 import { applyImageAdjustments, ditherImage, replaceColors, type DitherImageOptions, type PaletteColorEntry, type ProcessingPresetName } from 'epdoptimize'
 import { legacyAdjustFrame, legacyDitherFrame, previewFrameToNative, supportsLegacyPalette, type LegacyImageAlgorithm } from './dither'
 import { paletteForColor } from './processing'
+import { remapCoolColors } from './warmColors'
 import type { RgbaFrame } from '../protocol/screen'
 
 export type ImageAlgorithm =
@@ -64,6 +65,7 @@ export interface OptimizeOptions {
   contrast: number
   brightness?: number
   heavyInk: boolean
+  warmColors?: boolean
   color: number
   strength: number
 }
@@ -160,6 +162,7 @@ export async function optimizeCanvas(
   }
   const adjustedContext = adjusted.getContext('2d', { willReadFrequently: true })!
   const adjustedImage = adjustedContext.getImageData(0, 0, adjusted.width, adjusted.height)
+  if (options.warmColors) remapCoolColors(adjustedImage.data, options.color)
   const contrastedFrame = legacyAdjustFrame(adjustedImage, options.contrast, options.brightness ?? 0)
   adjustedContext.putImageData(new ImageData(new Uint8ClampedArray(contrastedFrame.data), contrastedFrame.width, contrastedFrame.height), 0, 0)
   restoreUncoveredCanvas(coverageMask, adjusted, [255, 255, 255])

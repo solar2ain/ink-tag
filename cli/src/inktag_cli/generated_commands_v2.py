@@ -487,7 +487,7 @@ SCREEN_RULES_V2 = {
     (0x21, 0x00): {'colors': frozenset((1, 2)), 'align': 8, 'max': (152, 152), 'fixed_sizes': ((152, 152),), 'color_fixed_sizes': {}, 'transfer_format': 0},
     (0x21, 0x01): {'colors': frozenset((2,)), 'align': 8, 'max': (152, 152), 'fixed_sizes': ((152, 152),), 'color_fixed_sizes': {}, 'transfer_format': 0},
     (0x22, 0x00): {'colors': frozenset((1, 2, 4)), 'align': 8, 'max': (960, 680), 'fixed_sizes': (), 'color_fixed_sizes': {4: ((800, 480),)}, 'transfer_format': 0},
-    (0x23, 0x00): {'colors': frozenset((1, 2)), 'align': 8, 'max': (128, 250), 'fixed_sizes': ((128, 250),), 'color_fixed_sizes': {}, 'transfer_format': 0},
+    (0x23, 0x00): {'colors': frozenset((1, 2)), 'align': 8, 'max': (176, 296), 'fixed_sizes': (), 'color_fixed_sizes': {}, 'transfer_format': 0},
     (0x23, 0x01): {'colors': frozenset((1, 2)), 'align': 8, 'max': (128, 250), 'fixed_sizes': ((128, 250),), 'color_fixed_sizes': {}, 'transfer_format': 0},
     (0x24, 0x00): {'colors': frozenset((1, 2)), 'align': 8, 'max': (400, 300), 'fixed_sizes': (), 'color_fixed_sizes': {}, 'transfer_format': 0},
     (0x24, 0x01): {'colors': frozenset((1, 2)), 'align': 8, 'max': (400, 300), 'fixed_sizes': (), 'color_fixed_sizes': {}, 'transfer_format': 0},

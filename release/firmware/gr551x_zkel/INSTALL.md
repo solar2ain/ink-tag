@@ -10,32 +10,32 @@
 
 ### ZK_EL_GR42V_V1.2
 
-[BIN / HEX](programmer/ZK_EL_GR42V_V1.2/) · [配置 / Configuration](tools/configs/ZK_EL_GR42V_V1.2.toml)
+[BIN](flash-images/ZK_EL_GR42V_V1.2/) · [配置 / Configuration](tools/configs/ZK_EL_GR42V_V1.2.toml)
 
 ```powershell
-.\tools\flash-zh.bat -Firmware ".\full\app-full.zip" -Config ".\tools\configs\ZK_EL_GR42V_V1.2.toml"
+.\tools\flash-zh.bat -Firmware ".\full\InkTag-BASIC-0.2.2.1-gr551x_zkel-full.zip" -Config ".\tools\configs\ZK_EL_GR42V_V1.2.toml"
 ```
 
 ### ZK_EL_GR42V_V1.2_w_NFC
 
-[BIN / HEX](programmer/ZK_EL_GR42V_V1.2_w_NFC/) · [配置 / Configuration](tools/configs/ZK_EL_GR42V_V1.2_w_NFC.toml)
+[BIN](flash-images/ZK_EL_GR42V_V1.2_w_NFC/) · [配置 / Configuration](tools/configs/ZK_EL_GR42V_V1.2_w_NFC.toml)
 
 ```powershell
-.\tools\flash-zh.bat -Firmware ".\full\app-full.zip" -Config ".\tools\configs\ZK_EL_GR42V_V1.2_w_NFC.toml"
+.\tools\flash-zh.bat -Firmware ".\full\InkTag-BASIC-0.2.2.1-gr551x_zkel-full.zip" -Config ".\tools\configs\ZK_EL_GR42V_V1.2_w_NFC.toml"
 ```
 
 ### ZK_EL_GR42V_V1.2_w_NFC-SSD1683
 
-[BIN / HEX](programmer/ZK_EL_GR42V_V1.2_w_NFC-SSD1683/) · [配置 / Configuration](tools/configs/ZK_EL_GR42V_V1.2_w_NFC-SSD1683.toml)
+[BIN](flash-images/ZK_EL_GR42V_V1.2_w_NFC-SSD1683/) · [配置 / Configuration](tools/configs/ZK_EL_GR42V_V1.2_w_NFC-SSD1683.toml)
 
 ```powershell
-.\tools\flash-zh.bat -Firmware ".\full\app-full.zip" -Config ".\tools\configs\ZK_EL_GR42V_V1.2_w_NFC-SSD1683.toml"
+.\tools\flash-zh.bat -Firmware ".\full\InkTag-BASIC-0.2.2.1-gr551x_zkel-full.zip" -Config ".\tools\configs\ZK_EL_GR42V_V1.2_w_NFC-SSD1683.toml"
 ```
 
 ### zkc42vm_eailier_version
 
-[BIN / HEX](programmer/zkc42vm_eailier_version/) · [配置 / Configuration](tools/configs/zkc42vm_eailier_version.toml)
+[BIN](flash-images/zkc42vm_eailier_version/) · [配置 / Configuration](tools/configs/zkc42vm_eailier_version.toml)
 
 ```powershell
-.\tools\flash-zh.bat -Firmware ".\full\app-full.zip" -Config ".\tools\configs\zkc42vm_eailier_version.toml"
+.\tools\flash-zh.bat -Firmware ".\full\InkTag-BASIC-0.2.2.1-gr551x_zkel-full.zip" -Config ".\tools\configs\zkc42vm_eailier_version.toml"
 ```

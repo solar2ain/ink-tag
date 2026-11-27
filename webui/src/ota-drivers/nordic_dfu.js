@@ -721,7 +721,8 @@
         for (let attempt = 0; attempt < DFU_VALIDATE_ATTEMPTS; attempt++) {
             try {
                 onStatus(`Recovery 通道校验 ${attempt + 1}/${DFU_VALIDATE_ATTEMPTS}`);
-                const server = await native.connect(() => device.gatt.connect());
+                const server = device.gatt.connected ? device.gatt
+                    : await native.connect(() => device.gatt.connect());
                 const service = await native.discovery('校验升级服务', () => server.getPrimaryService(SERVICE_UUID));
                 await native.discovery('校验控制通道', () => service.getCharacteristic(CONTROL_UUID));
                 await native.discovery('校验数据通道', () => service.getCharacteristic(PACKET_UUID));

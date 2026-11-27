@@ -1,44 +1,43 @@
-# InkTag 0.2.2
+# InkTag 0.2.2.1
 
-基础版（BASIC）的固件源码、WebUI 和 CLI 随本版提供。高级版固件请通过 [InkTag QQ 群 418446983 获取](https://github.com/solar2ain/ink-tag/blob/main/docs/zh-CN/pro.md#获取高级版固件)。
+这是 0.2.2 的维护更新。图片处理、网页 NFC 和设备更新流程均有改进。
 
-## 基础版与客户端
+## 新增功能
 
-- **自己编译和安装**。按主控和主板选择 BASIC 固件。发布材料提供[固件构建说明](https://github.com/solar2ain/ink-tag/blob/main/docs/build-firmware.md)、OTA 包、完整烧录包、预转换的 BIN／Intel HEX，以及 Windows 烧录入口。
-- **基础版固件体积**。同一主控和主板上，基础版的 App 比高级版小约 30–61 KiB。不同屏幕、布局和存储配置仍需使用配套文件。
-- **按实际容量保存图片**。图槽数量随屏幕和可用存储而定。设备信息页用 `BASIC` 和 `PRO` 标识档位。
-- **创作字体**。小屏默认用 10 px 缝合像素字体，大屏默认用 12 px Z 工坊像素黑体。新增原生点阵字号，改善课表中加粗汉字的间距。创作的设备效果预览支持窗口适配、1:1 和细步进缩放。[字体指南](https://github.com/solar2ain/ink-tag/blob/main/docs/creation-fonts.md)
-- **图片与升级**。WebUI 和 CLI 可调整图片亮度。WebUI 支持下载发布渠道中与设备匹配的 OTA 包，并在页面中升级。
-- **使用体验**。改善日历和有线刷机提示。双击 `flash.bat` 或 `flash-zh.bat` 可按提示操作。
+- **网页 NFC。** 电脑可通过 Web Serial 和 PN532／PCR532 读卡器，向支持 NFC 的高级版设备发送图片和命令。支持 Web NFC 的安卓浏览器可发送文本命令。网页和小程序的 NFC 日历、时钟快捷命令会同步当前时间和时区。
+- **图片暖色模式。** 大面积蓝绿的图片在三色、四色屏上更容易保留色彩，处理时尽量保留人物肤色。
+- **Find 本机备份。** 静态版和独立版 WebUI 在开启 Find 前先保存加密备份，之后可在当前浏览器离线导出。微信小程序也可以在本机管理和导出备份。
 
-## 高级版
+## 修复与改进
 
-- **NFC 传图与校时**。指定 Goodix、OnMicro 和 Telink 主板搭配支持的 NFC 硬件和应用，可用手机传图。D3-Pro InkTag 版在 InkTag QQ 群获取，用法见 [NFC 指南](https://github.com/solar2ain/ink-tag/blob/main/docs/zh-CN/nfc.md)。NFC 校时可同步时区，单独校时保留当前画面。
-- **蓝牙广播方式**。支持的设备可在断开连接后延时关闭普通蓝牙广播。用受支持的按键或 NFC 恢复广播。已启用的 Find My 广播会继续工作。
-- **Find 身份管理**。验证原身份后可解除设备上的登记，同时保留本机资料。打开地图时保持页面滚动位置。
-- **日历和时区**。改进设备当地午夜换日和重启后保留时区的处理。
+- 修复手机端裁剪时图片可完全拖出画板的问题。
+- WebUI 与固件支持更多标准 SSD1680 屏幕尺寸，包括 152 × 296。请按实际屏幕选择颜色模式。
+- 修复 WebUI 进入 Recovery 后的 OTA 回连问题。CLI 在 TLSR OTA 后可校验完整的四段固件版本。
+- 小程序版本与 WebUI 对齐为 0.2.2.1，保留普通模板和本地固件包升级，天气入口与在线 OTA 已移除。
 
-安装前核对主控、主板丝印、屏幕和存储配置。需要配套屏幕资源的设备请按对应版型的[有线烧录说明](https://github.com/solar2ain/ink-tag/blob/main/docs/zh-CN/flash.md)更新。
+## 固件与安装
 
----
+统一了固件发布目录和命名。文件名包含版级、版本、目标和包类型。每个目标的 `ota/` 用于无线更新，`full/` 用于完整安装，`tools/` 放烧录脚本和板型配置。支持直接烧录的目标另有 `flash-images/`。GR 和 TLSR 提供 BIN 和地址表，nRF52832 提供 Intel HEX。OM6626、nRF52811 使用 Full ZIP，DA14585 使用 Full BIN。
 
-## BASIC and shared clients
+解压 `InkTag-BASIC-0.2.2.1-firmware.zip` 后按主板丝印打开目标的 `INSTALL.md`。克隆仓库也能从 `release/firmware/` 使用同一套文件。OM6626 随包提供 J-Link 设备文件，DA14585 的烧录脚本自动加载并校验随包的 SRAM helper。高级版固件可在 InkTag QQ 群 **418446983** 获取。 [高级版说明](https://github.com/solar2ain/ink-tag/blob/main/docs/zh-CN/pro.md#获取高级版固件) · [烧录说明](https://github.com/solar2ain/ink-tag/blob/main/docs/zh-CN/flash.md) · [使用手册](https://solar2ain.github.io/ink-tag-manual/)
 
-- **Build and install.** BASIC firmware, WebUI and CLI source ship with 0.2.2. Use the [firmware build guide](https://github.com/solar2ain/ink-tag/blob/main/docs/build-firmware.en.md) and choose the OTA, complete installation, BIN or Intel HEX file for your exact board. Windows users can run `flash.bat` for guided setup.
-- **Firmware size.** On the seven targets with both editions, the BASIC App uses about 30–61 KiB less flash than the PRO App.
-- **Image storage.** Available capacity determines the number of pictures you can store. The device information page shows `BASIC` or `PRO`.
-- **Creation fonts.** Small canvases default to 10 px Fusion Pixel and larger canvases to 12 px Z Labs Pixel CN. Native bitmap sizes and better spacing improve small text and timetable headings. The device-effect preview fits the available space and offers smaller zoom steps. [Font guide](https://github.com/solar2ain/ink-tag/blob/main/docs/creation-fonts.en.md)
-- **Images and updates.** Adjust brightness in WebUI or CLI. WebUI can download and install a compatible OTA package from the published update channel.
+## English
 
-## PRO
+### Features
 
-Obtain PRO firmware through the [InkTag QQ group 418446983](https://github.com/solar2ain/ink-tag/blob/main/docs/en/pro.md#get-pro-firmware).
+- **NFC in WebUI.** Use a PN532 or PCR532 reader over Web Serial on a computer to send images and commands to compatible PRO devices. Android browsers with Web NFC can send text commands. The WebUI and mini program NFC calendar and clock presets sync the current time and time zone.
+- **Warm colors for images.** Improves color on three- and four-color screens for images with large blue or green areas while aiming to preserve skin tones.
+- **Local Find backups.** The static and standalone WebUI save an encrypted backup before enabling Find. You can export it later from the same browser while offline. The WeChat mini program can also manage and export backups on the phone.
 
-- **NFC image transfer and time sync.** Available with supported Goodix, OnMicro and Telink boards and compatible hardware and apps. Get D3-Pro InkTag through the QQ group. Time sync can set the time zone and preserves the current screen. [NFC guide](https://github.com/solar2ain/ink-tag/blob/main/docs/en/nfc.md)
-- **Bluetooth advertising.** Supported devices can stop ordinary advertising after a configurable delay. An available button or NFC restores it. Enabled Find My advertising continues.
-- **Find registration.** Verify the current identity to deregister it from the device while retaining local data. Opening the map preserves the page's scroll position.
-- **Calendar and time zone.** Improved local-midnight rollover and time-zone retention across restarts.
+### Fixes and improvements
 
-Check the controller, board markings, display and storage configuration first. Follow the [wired flashing guide](https://github.com/solar2ain/ink-tag/blob/main/docs/en/flash.md) for devices that require matching display resources.
+- Fixes images being dragged entirely off the canvas when cropping on phones.
+- WebUI and firmware support more standard SSD1680 panel sizes, including 152 × 296. Select the palette that matches your panel.
+- Fixes OTA reconnection after entering Recovery in WebUI. The CLI verifies the full four-part version after a TLSR OTA update.
+- The mini program now reports version 0.2.2.1, matching WebUI. It keeps standard templates and updates from local firmware files. Weather and online OTA are no longer available in the mini program.
 
-Nordic 完整包中的 S112 和 S132 随附 [Nordic SoftDevice 许可](https://github.com/solar2ain/ink-tag/blob/main/release/firmware/Nordic-SoftDevice-LICENSE.txt)。 / Nordic Full packages include S112 or S132 under the [Nordic SoftDevice license](https://github.com/solar2ain/ink-tag/blob/main/release/firmware/Nordic-SoftDevice-LICENSE.txt).
+### Firmware and installation
+
+Firmware filenames and release directories are standardized. Filenames show the edition, version, target, and package type. Each target has `ota/` for wireless updates, `full/` for complete installation, and `tools/` for flashers and board presets. Where available, `flash-images/` contains ready-to-flash images. GR and TLSR provide BIN images with address maps. nRF52832 provides Intel HEX. OM6626 and nRF52811 use the Full ZIP, and DA14585 uses the Full BIN.
+
+Extract `InkTag-BASIC-0.2.2.1-firmware.zip` and open the target's `INSTALL.en.md` for your PCB marking. A Git clone includes the same files under `release/firmware/`. OM6626 includes the J-Link device files, and the DA14585 flasher automatically loads and verifies the bundled SRAM helper. Obtain PRO firmware from the InkTag QQ group **418446983**. [PRO guide](https://github.com/solar2ain/ink-tag/blob/main/docs/en/pro.md#get-pro-firmware) · [Flashing guide](https://github.com/solar2ain/ink-tag/blob/main/docs/en/flash.md) · [User manual](https://solar2ain.github.io/ink-tag-manual/en/index.html)

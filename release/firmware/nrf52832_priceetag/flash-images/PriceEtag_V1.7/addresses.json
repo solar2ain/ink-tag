@@ -1,0 +1,34 @@
+{
+  "skipRanges": [
+    {
+      "space": "FICR",
+      "bytes": 4096,
+      "address": 268435456
+    },
+    {
+      "space": "UICR",
+      "bytes": 4096,
+      "address": 268439552
+    }
+  ],
+  "deviceReadRequiredForGeneration": false,
+  "externalFlash": "not accessed",
+  "initializationMode": "clean",
+  "buildTarget": "nrf52832_priceetag",
+  "identity": "Hardware FICR/SDK address at startup; no foreign unit identity or Pro",
+  "pythonRequired": false,
+  "layout": "N3V1",
+  "compatibilityEpoch": 1,
+  "qr": "Not precomputed; import through WebUI",
+  "schemaVersion": 1,
+  "nativeFirmwareVersion": 65738,
+  "ranges": [
+    {
+      "sha256": "ff28cdc5e9625bd7d1511097196b2b42b26a0298d7b137792f98ca4aad2a3ad5",
+      "space": "internal-flash",
+      "file": "InkTag-BASIC-0.2.2.1-nrf52832_priceetag-PriceEtag_V1.7-flash.hex",
+      "address": 0,
+      "bytes": 524288
+    }
+  ]
+}

@@ -12,7 +12,7 @@
 <p>文件验证的勾选标志只表示包通过检查；传输到 100% 也不是最终成功。只有最终应用验证完成，才表示 OTA 完成。</p>
 <h2 id="recovery-的使用">Recovery 的使用</h2>
 <p>Recovery 是设备的无线更新模式，通常显示对应身份的 <code>_OTA</code> 蓝牙名。CLI 和 WebUI 可在已安装 Recovery 提供相应能力时安全返回正常应用。旧 Recovery 或应用无效时可能只允许上传合格固件，不能强制退出。</p>
-<p>CLI 入口为 <code>inktag-cli device -a ADDRESS recovery enter</code> 和 <code>inktag-cli device -a ADDRESS recovery resume-app</code>；应用进入 Recovery 仍受设备密码验证控制。Recovery 校验固件签名、兼容性和完整性，不会以退出操作替代这些检查。</p>
+<p>CLI 入口为 <code>inktag-cli device -a ADDRESS recovery enter</code> 和 <code>inktag-cli device -a ADDRESS recovery resume-app</code>。应用进入 Recovery 仍受设备密码验证控制。Recovery 检查固件兼容性和完整性，并按已安装版本的策略决定是否要求发布者签名。</p>
 <h2 id="发生中断或错误">发生中断或错误</h2>
 <p>保留错误提示和文件摘要，确认设备目前处于应用还是 Recovery。不要重放结果未知的退出、复位或写入命令。应用未返回时，进度完成不能当作成功；按客户端提示恢复传输或使用对应完整烧录恢复路径。</p>
 <p>蓝牙地址一致也不保证浏览器可直接复用缓存服务。角色切换时需要重新识别实际服务和身份；不要连接附近相似名称的另一台设备。</p></main></body></html>

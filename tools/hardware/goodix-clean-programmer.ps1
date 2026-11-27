@@ -29,16 +29,24 @@ function New-GrCleanMaterials {
 function Read-GrCleanMaterials {
     param([string]$Path,[string]$Port)
     $folder=[IO.Path]::GetFullPath($Path);$m=Get-GrJson ([InkTag.GoodixBytes]::ReadFile((Join-Path $folder 'flash-map.json'),65536))
-    Assert-Gr ($m.schema -ceq 'inktag-gr-clean-bin-v1' -and $m.files.firmware -ceq 'components.zip' -and $m.files.image -ceq 'mcu.bin' -and (!$m.files.gui -or $m.files.gui -ceq 'gui-font.bin') -and $m.files.config -cin @('board.toml','board.json') -and !$m.addressRetained -and !$m.proRetained -and $m.vendorRecordsRetained -eq 0) 'Not generic clean-initialization materials'
+    Assert-Gr ($m.schema -ceq 'inktag-gr-clean-bin-v1' -and (!$m.files.gui -or $m.files.gui -ceq 'gui-font.bin') -and $m.files.config -cin @('board.toml','board.json') -and !$m.addressRetained -and !$m.proRetained -and $m.vendorRecordsRetained -eq 0) 'Not generic clean-initialization materials'
     $c=Read-GrConfig (Join-Path $folder $m.files.config);Assert-Gr (($Port -ceq 'gr5331') -eq ($c.chip -ceq 'GR5331')) 'Wrong tool directory for PCB'
-    $f=Read-GrFirmware (Join-Path $folder 'components.zip') $c.chip;$gui=$f.gui
+    $firmwareDir=$folder
+    if($m.files.firmware -ceq 'components.zip') {
+        Assert-Gr ($m.files.image -ceq 'mcu.bin') 'Invalid legacy BIN filename'
+    } else {
+        Assert-Gr ($m.files.firmware -cmatch '^InkTag-(BASIC|PRO)-[0-9.]+-gr[A-Za-z0-9_]+-full\.zip$' -and $m.files.image -cmatch '^InkTag-(BASIC|PRO)-[0-9.]+-gr[A-Za-z0-9_]+-[A-Za-z0-9_.-]+-flash\.bin$') 'Invalid release firmware or BIN filename'
+        $firmwareDir=[IO.Path]::GetFullPath((Join-Path $folder '../../full'))
+    }
+    $firmwarePath=Join-Path $firmwareDir $m.files.firmware
+    $f=Read-GrFirmware $firmwarePath $c.chip;$gui=$f.gui
     # New materials use the already-bound component resource. Read historical
     # v1 materials without changing their GUI/input bindings or bytes.
     if($m.files.gui){$gui=[InkTag.GoodixBytes]::ReadFile((Join-Path $folder 'gui-font.bin'),32768)}
     Assert-GrRecord $f.raw $m.package;Assert-GrRecord $c.raw $m.config;Assert-GrRecord $gui $m.gui
-    $prepared=New-GrCleanImage $f $c -Gui $gui;$image=[InkTag.GoodixBytes]::ReadFile((Join-Path $folder 'mcu.bin'),1048576)
+    $prepared=New-GrCleanImage $f $c -Gui $gui;$image=[InkTag.GoodixBytes]::ReadFile((Join-Path $folder $m.files.image),1048576)
     Assert-GrRecord $image $m.image;Assert-Gr ([InkTag.GoodixBytes]::Equal($image,$prepared.image) -and $m.chip -ceq $c.chip -and $m.family -ceq $f.family -and $m.backend -ceq $c.backend) 'BIN differs from verified components/configuration'
-    @{firmware=$f;config=$c;prepared=$prepared}
+    @{firmware=$f;config=$c;prepared=$prepared;firmwarePath=$firmwarePath}
 }
 function Invoke-GrNative {
     param([string]$File,[string[]]$Arguments,[string]$Folder,[string]$Label,[int]$Timeout=300,[switch]$OptionalRead,[switch]$CancelWait)

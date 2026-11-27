@@ -26,6 +26,7 @@ def main() -> None:
     major = int(data["major"])
     minor = int(data["minor"])
     patch = int(data["patch"])
+    revision = int(data.get("revision", 0))
     protocol = int(data["protocolVersion"])
     ota = int(data["otaVersion"])
     version = str(data["version"])
@@ -37,12 +38,13 @@ def main() -> None:
     recovery_epoch = int(data["recoveryEpoch"])
     if not 1 <= recovery_epoch <= 0xFFFF:
         raise SystemExit("recoveryEpoch must be a nonzero 16-bit compatibility epoch")
-    expected_version = f"{major}.{minor}.{patch}"
+    base_version = f"{major}.{minor}.{patch}"
+    expected_version = f"{base_version}.{revision}" if revision else base_version
     expected_ota = major * 10000 + minor * 100 + patch
     if version != expected_version:
         raise SystemExit(f"version must be {expected_version}, got {version}")
-    if not all(0 <= value <= 255 for value in (major, minor, patch, protocol)):
-        raise SystemExit("major/minor/patch/protocolVersion must fit in one byte")
+    if not all(0 <= value <= 255 for value in (major, minor, patch, revision, protocol)):
+        raise SystemExit("major/minor/patch/revision/protocolVersion must fit in one byte")
     if ota != expected_ota or not 0 < ota <= 0xFFFF:
         raise SystemExit(
             f"otaVersion must be major*10000 + minor*100 + patch ({expected_ota}) "
@@ -56,11 +58,12 @@ def main() -> None:
 #define INKTAG_VERSION_MAJOR {major}u
 #define INKTAG_VERSION_MINOR {minor}u
 #define INKTAG_VERSION_PATCH {patch}u
+#define INKTAG_VERSION_REVISION {revision}u
 #define INKTAG_VERSION_STRING \"{version}\"
 #define INKTAG_PROTOCOL_VERSION 0x{protocol:02x}u
 #define INKTAG_OTA_VERSION {ota}u
 #define INKTAG_VERSION_GATT_BYTES \\
-    {{INKTAG_PROTOCOL_VERSION, INKTAG_VERSION_MAJOR, INKTAG_VERSION_MINOR, INKTAG_VERSION_PATCH}}
+    {{INKTAG_PROTOCOL_VERSION, INKTAG_VERSION_MAJOR, INKTAG_VERSION_MINOR, INKTAG_VERSION_PATCH, INKTAG_VERSION_REVISION}}
 
 #endif
 """

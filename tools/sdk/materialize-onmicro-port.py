@@ -1797,7 +1797,7 @@ const dfu_cb_itf_t dfu_cb_itf = {
     copy_file(user_src / "inktag_om_profile.h", boot_project / "src/inktag_om_profile.h")
     for name in ["inktag_om_boot.c", "inktag_om_flash_layout.h",
                   "inktag_om_address.c", "inktag_om_address.h",
-                  "inktag_om_pins.c", "inktag_om_pins.h", "inktag_om_pin_layout.h", "inktag_om_pin_layout.c",
+                  "inktag_om_pins.h",
                   "inktag_om_ble_reset.h",
                   "inktag_om_debug_retention.h",
                   "inktag_om_dfu_diagnostics.c",
@@ -1827,6 +1827,11 @@ const dfu_cb_itf_t dfu_cb_itf = {
               boot_project / "src" / "inktag_status.h")
     for name in ("inktag_pin_config.c", "inktag_pin_config.h", "inktag_aux_io.c", "inktag_aux_io.h", "inktag_release_v1.h"):
         copy_file(repo / "firmware/common/protocol" / name, boot_project / "src" / name)
+    # Use the common family validators in Recovery. The BASIC App still
+    # builds the ZKEL-only port from onmicro/common/src.
+    recovery_pins = repo / "firmware/ports/onmicro/om6626/recovery"
+    for name in ("inktag_om_pins.c", "inktag_om_pin_layout.h", "inktag_om_pin_layout.c"):
+        copy_file(recovery_pins / name, boot_project / "src" / name)
     for name in ("inktag_epd_screen.h", "inktag_protocol_v2.h"):
         copy_file(repo / "firmware/common/epd" / name, boot_project / "src" / name)
     for name in ["inktag_recovery.c", "inktag_recovery.h", "inktag_swap.h",

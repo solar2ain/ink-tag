@@ -4,7 +4,7 @@ These entries use Windows PowerShell 5.1, Windows .NET Framework and the existin
 
 The supplied configurations target EL022HWRL / CAL_VER06 with an actual nRF52811, 192 KiB Flash / 24 KiB RAM and the supported 512 KiB external Flash. Select the supplied original-panel or supported replacement-panel configuration. An MCU match alone does not qualify another board.
 
-Double-click `flash.bat` for English or `flash-zh.bat` for Chinese; the launcher also works from another current directory. The opening guide explains J-Link 7.88j, SWDIO / SWCLK / GND wiring, target power, initialization scope and cancellation. A single validated Full ZIP beside the tools or in a neighboring `firmware` or `full` directory is selected automatically; multiple valid files produce a selection menu. If none is available, a Windows file dialog opens. OTA archives and standalone Apps are not accepted as Full images. Only after firmware validation does the menu offer the supplied board-marking/panel configurations from `native-configs`.
+Double-click `flash.bat` for English or `flash-zh.bat` for Chinese; the launcher also works from another current directory. The opening guide explains J-Link 7.88j, SWDIO / SWCLK / GND wiring, target power, initialization scope and cancellation. A single validated Full ZIP beside the tools or in a neighboring `firmware` or `full` directory is selected automatically; multiple valid files produce a selection menu. If none is available, a Windows file dialog opens. OTA archives and standalone Apps are not accepted as Full images. Only after firmware validation does the menu offer the supplied board-marking/panel configurations from `configs`.
 
 After firmware and board validation, the tool explains the complete-flashing scope and asks whether to proceed, defaulting to No. Answering No or leaving it blank exits without probe enumeration, port or target access. Only after consent does it poll indefinitely for a USB probe and powered SWD target, display waiting status and accept Q or Esc to cancel. Target chip, capacity and all existing write checks still run before programming. Empty menu input cancels; an invalid number, missing dependency, validation error or programming failure remains visible until a key is pressed. Complete flashing resets ordinary settings and invalidates old image slots. Only pre-write discovery retries; failed writes are never replayed automatically.
 
@@ -13,13 +13,13 @@ CMD calls with parameters retain their existing behavior. Supplied inputs skip t
 The normal, recommended complete-flashing entry is `flash.bat`. It first attempts to preserve usable original information and uses defaults when it is absent. Complete flashing resets ordinary settings and invalidates old image slots; see the preservation scope below.
 
 ```bat
-flash.bat -Firmware "D:\Firmware\app-full.zip" -Config ".\native-configs\EL022HWRL.toml" -Yes
+flash.bat -Firmware "D:\Firmware\app-full.zip" -Config ".\configs\EL022HWRL.toml" -Yes
 ```
 
 To generate reusable HEX materials offline first, use these two entries:
 
 ```bat
-generate-hex.bat -Firmware "D:\Firmware\app-full.zip" -Config ".\native-configs\EL022HWRL.toml" -Output "D:\Firmware\new initialization"
+generate-hex.bat -Firmware "D:\Firmware\app-full.zip" -Config ".\configs\EL022HWRL.toml" -Output "D:\Firmware\new initialization"
 flash-hex.bat -Materials "D:\Firmware\new initialization" -Yes
 ```
 

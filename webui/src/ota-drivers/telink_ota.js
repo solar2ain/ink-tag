@@ -482,20 +482,20 @@
             const cached = server.connected && verifiedLinks.get(server);
             if (cached) return { ...scope, characteristic: cached.characteristic, service: cached.service };
             for (let attempt = 0; ; attempt++) {
+                if (!server.connected) await step('建立 GATT 连接', () => server.connect());
                 try {
-                    if (!server.connected) await step('建立 GATT 连接', () => server.connect());
                     const service = await step('发现升级服务', () => server.getPrimaryService(SERVICE_UUID));
                     const characteristic = await step('发现数据通道', () => service.getCharacteristic(CHARACTERISTIC_UUID));
                     return { ...scope, characteristic, service };
                 } catch (error) {
-                    // WinRT can resolve connect() against the retiring App link,
-                    // then explicitly reject discovery when that link drops.
-                    // Only this known, settled, pre-write handoff failure gets
-                    // one fresh discovery. Native timeouts stay quarantined;
-                    // no entry, compatibility check or image write is replayed.
-                    if (attempt || !context.afterAppEntry || !current() ||
-                            server.connected || !isTransientGattError(error)) throw error;
-                    note('TLSR Recovery：App 旧连接已断开，等待后重新发现一次（尚未发送固件）');
+                    // Retry a settled link loss once, before any OTA write.
+                    // A native timeout keeps this grant quarantined.
+                    if (attempt || !context.retryDiscovery || !current() || !isTransientGattError(error)) throw error;
+                    if (server.connected) {
+                        if (!/gatt server is disconnected/i.test(error?.message || '')) throw error;
+                        disconnectOwned();
+                    }
+                    note('TLSR Recovery：连接已断开，等待后重新发现一次（尚未发送固件）');
                     await delay(900);
                 }
             }
@@ -509,7 +509,7 @@
             throw sessionError('TLSR Recovery 缺少精确授权、当前代际或已核验包');
         }
         const handle = Object.freeze({});
-        const discovery = await recoveryCharacteristic(device, onStage, 45000, context);
+        const discovery = await recoveryCharacteristic(device, onStage, 45000, { ...context, retryDiscovery: true });
         const record = { discovery, context, original: pkg, firmware: pkg.firmware.slice(), state: 'acquiring', release: null };
         recoverySessions.set(handle, record);
         try {
@@ -592,7 +592,7 @@
         return { status: raw[0], raw };
     }
 
-    async function queryRecovery(server) {
+    async function queryRecovery(server, onPhase) {
         if (!server.device) {
             const service = await server.getPrimaryService(SERVICE_UUID);
             const characteristic = await service.getCharacteristic(CHARACTERISTIC_UUID);
@@ -600,7 +600,7 @@
             verifiedLinks.set(server, { service, characteristic });
             return proof;
         }
-        const scope = await recoveryCharacteristic(server.device);
+        const scope = await recoveryCharacteristic(server.device, onPhase);
         try {
             const proof = verifiedRecoveryStatus(await scope.step('读取升级状态', () => readStatus(scope.characteristic)));
             verifiedLinks.set(server, { service: scope.service, characteristic: scope.characteristic });

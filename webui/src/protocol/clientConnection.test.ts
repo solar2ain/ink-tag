@@ -49,7 +49,7 @@ describe('InkTag BLE connection lifecycle', () => {
     ;(client as unknown as { connectDevice: typeof reconnect }).connectDevice = reconnect
     useDeviceStore.getState().setAction('ota', 1)
     await client.reconnectDevice(device, 3210)
-    expect(reconnect).toHaveBeenCalledExactlyOnceWith(device, 3210)
+    expect(reconnect).toHaveBeenCalledExactlyOnceWith(device, 3210, false, false)
     expect(useDeviceStore.getState().action).toBe('ota')
   })
 
@@ -115,6 +115,19 @@ describe('InkTag BLE connection lifecycle', () => {
     expect(connectDevice).not.toHaveBeenCalled()
     expect(useDeviceStore.getState().connection).toBe('idle')
     expect(useDeviceStore.getState().logs.at(-1)).toMatchObject({ level: 'info', message: '已取消设备选择' })
+  })
+
+  it('reports a missing App service after selection as a connection failure', async () => {
+    const server = { getPrimaryService: vi.fn().mockRejectedValue(new DOMException('No InkTag service', 'NotFoundError')) }
+    const device = Object.assign(new EventTarget(), { id: 'selected-grant', name: 'IKT_GR_1234',
+      gatt: { connected: true, connect: vi.fn().mockResolvedValue(server), disconnect: vi.fn() } }) as unknown as BluetoothDevice
+    Object.defineProperty(globalThis.navigator, 'bluetooth', { configurable: true,
+      value: { requestDevice: vi.fn().mockResolvedValue(device) } })
+
+    await new InkTagClient().connect()
+
+    expect(useDeviceStore.getState().connection).toBe('error')
+    expect(useDeviceStore.getState().logs.at(-1)).toMatchObject({ level: 'error', message: '连接失败：NotFoundError: No InkTag service' })
   })
 
   it('reports a browser permission rejection without retrying selection or GATT', async () => {
@@ -1040,7 +1053,13 @@ describe('InkTag BLE connection lifecycle', () => {
     useDeviceStore.getState().setIdentity({ bleAddress: 'AA:BB:CC:DD:12:34' })
     useDeviceStore.getState().setCapabilities({ ota: type })
     await client.enterOtaRecovery()
-    await client.reconnectDevice(device)
+    const handoff = client.getExpectedRecoveryIdentity()
+    const discover = vi.mocked(server.getPrimaryService)
+    discover.mockResolvedValueOnce({ getCharacteristic } as unknown as BluetoothRemoteGATTService)
+    await expect(client.reconnectDevice(device, 10000, true)).rejects.toThrow('已返回应用')
+    expect(client.getExpectedRecoveryIdentity()).toEqual(handoff)
+    expect(getCharacteristic).not.toHaveBeenCalled()
+    await client.reconnectDevice(device, 10000, true)
     expect(client.getOtaRecoveryType()).toBe(type)
     expect(client.getVerifiedRecoveryName()).toBe(`IKT_${platform}_1234_OTA`)
     expect(verify).toHaveBeenCalledExactlyOnceWith(server)
@@ -1216,6 +1235,38 @@ describe('InkTag BLE connection lifecycle', () => {
     } as unknown as BluetoothDevice
     return { device, server }
   }
+
+  it.each(['chooser', 'remembered'] as const)('uses live TLSR Recovery proof for the same %s grant with a cached App name', async (entry) => {
+    const getPrimaryService = vi.fn(async (uuid: BluetoothServiceUUID) => {
+      if (uuid === '00010203-0405-0607-0809-0a0b0c0d1912') return {} as BluetoothRemoteGATTService
+      throw new DOMException('missing App service', 'NotFoundError')
+    })
+    const server = { getPrimaryService }
+    const device = Object.assign(new EventTarget(), { id: 'same-tlsr-grant', name: 'IKT_TL_1234',
+      gatt: { connected: true, connect: vi.fn().mockResolvedValue(server), disconnect: vi.fn() } }) as unknown as BluetoothDevice
+    Object.defineProperty(globalThis.navigator, 'bluetooth', { configurable: true,
+      value: { requestDevice: vi.fn().mockResolvedValue(device) } })
+    const client = new InkTagClient()
+
+    const connect = () => entry === 'chooser' ? client.connect() : client.connectKnownDevice(device)
+    await connect()
+
+    expect(device.gatt?.connect).toHaveBeenCalledOnce()
+    expect(verifyTelinkRecovery).toHaveBeenCalledExactlyOnceWith(server)
+    expect(client.getVerifiedRecoveryName()).toBe('IKT_TL_1234_OTA')
+    expect(useDeviceStore.getState()).toMatchObject({ connection: 'connected', deviceId: device.id, firmwareVersion: 'Recovery' })
+
+    client.disconnect()
+    vi.mocked(verifyTelinkRecovery).mockRejectedValueOnce(new Error('invalid TLSR Recovery profile'))
+    await connect()
+    expect(client.getOtaRecoveryType()).toBeNull()
+    expect(useDeviceStore.getState().logs.at(-1)?.message).toContain('invalid TLSR Recovery profile')
+
+    getPrimaryService.mockRejectedValueOnce(new DOMException('GATT lookup denied', 'SecurityError'))
+    await connect()
+    expect(useDeviceStore.getState().connection).toBe('error')
+    expect(verifyTelinkRecovery).toHaveBeenCalledTimes(2)
+  })
 
   it('connects a verified TLSR Recovery even with LOW_POWER, without App metadata or mutation', async () => {
     const server = { getPrimaryService: vi.fn(async (uuid: BluetoothServiceUUID) => {

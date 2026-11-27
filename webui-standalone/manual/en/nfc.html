@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="control-a-tag-and-send-images-with-phone-nfc">Control a tag and send images with phone NFC</h1>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;none&#x27;; script-src-attr &#x27;none&#x27;; style-src &#x27;self&#x27;; img-src &#x27;self&#x27; https:; object-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style.css"><title>InkTag manual</title></head><body><nav><a target="_blank" rel="noopener noreferrer" href="../../InkTag-WebUI.html">InkTag WebUI</a></nav><main><h1 id="control-a-tag-and-send-images-with-nfc">Control a tag and send images with NFC</h1>
 <p><a target="_blank" rel="noopener noreferrer" href="../zh-CN/nfc.html">简体中文</a></p>
 <p>Connect the tag in WebUI, check NFC in device interactions, and confirm that the tag has the matching PRO firmware and an active PRO license. Link reading, text commands and image transfer depend on the board and firmware.</p>
 <h2 id="open-the-device-link">Open the device link</h2>
@@ -41,6 +41,22 @@
 </tbody>
 </table></div>
 <p>Enter the saved image name by itself, without a command prefix. Watch the tag for completion. The phone's write confirmation can arrive while the display is still refreshing. For clock sync, D3-Pro InkTag can send the phone's current time.</p>
+<h2 id="use-nfc-in-webui">Use NFC in WebUI</h2>
+<h3 id="send-commands">Send commands</h3>
+<p>Open <strong>Dashboard → Quick controls → NFC control</strong>. WebUI shows the controls available in your browser.</p>
+<ul>
+<li><strong>Chrome on Android.</strong> Turn on NFC, open WebUI over HTTPS, and select a command. Grant NFC permission when prompted, then hold the phone against the target tag. Tap one tag at a time. To send images from your phone, use D3-Pro InkTag as described below.</li>
+<li><strong>Chrome or Edge on a computer.</strong> Open WebUI over HTTPS or on a local address that your browser trusts. Place the tag on the PN532/PCR532 reader and select a command. Choose the reader's serial port if prompted. The browser may reuse a port you previously authorized.</li>
+</ul>
+<p>The <strong>Calendar</strong> and <strong>Clock</strong> shortcuts include the current UTC timestamp and local time zone offset when they write the command. For example, <code>calendar#1795276800,+480</code> specifies UTC+8. For older firmware, send <code>calendar</code> or <code>clock</code> from <strong>Custom</strong> to keep the date, time, and time zone already on the tag. <strong>Clock</strong> asks for confirmation because frequent refreshes can increase power use. You can also enter an image slot number or use <strong>Custom</strong> to send an image name that your firmware recognizes.</p>
+<p>After WebUI confirms the write, check the tag's screen to see whether the command ran.</p>
+<h3 id="send-an-image-with-a-desktop-reader">Send an image with a desktop reader</h3>
+<ol>
+<li>Open the <strong>Pictures</strong> page, choose an image, and set the size, orientation, and colors for the tag's display.</li>
+<li>Place the tag on the reader, select <strong>NFC image transfer</strong>, and choose the serial port if prompted.</li>
+<li>WebUI reads the tag's display settings and sends the image once they match. Wait for the display to refresh after the transfer. The tag displays the image directly.</li>
+</ol>
+<p>Progress follows the data acknowledged by the tag. The displayed speed covers the data transfer phase and uses the compressed byte count when compression is active. If the transfer is interrupted or times out, check the tag before retrying.</p>
 <h2 id="send-an-image-from-android">Send an image from Android</h2>
 <ol>
 <li>Get <strong>D3-Pro InkTag</strong> from the <strong>InkTag QQ group 418446983</strong> and check the group's notes for the version that matches your firmware. <a target="_blank" rel="noopener noreferrer" href="pro.html#get-pro-firmware">Group access</a></li>
@@ -89,5 +105,5 @@
 </table></div>
 <p><strong>ZKONG Type 2 image transfer is slow. Use it for simple images that compress well on small screens. For other images, use Bluetooth.</strong></p>
 <p>Complex images usually compress less and take longer to send even on the same screen. Once the app confirms that the tag accepted the refresh, you can move the phone away and wait for the display to update. The original iOS D3-Pro also transferred images successfully to the tested 4.2-inch Type 4 tag. The table lists only the timed Android runs.</p>
-<h2 id="use-a-computer-and-nfc-reader">Use a computer and NFC reader</h2>
+<h2 id="use-an-nfc-reader-from-the-command-line">Use an NFC reader from the command line</h2>
 <p>The repository and full CLI ZIP include the PN532/PCR532 tool. It supports compatible Type 2 and Type 4 InkTag PRO tags, including link reading, text commands, time sync, and image transfer. <a target="_blank" rel="noopener noreferrer" href="https://github.com/solar2ain/ink-tag/blob/main/tools/nfc/README.en.md">PN532/PCR532 setup and commands</a></p></main></body></html>

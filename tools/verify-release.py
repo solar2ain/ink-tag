@@ -31,11 +31,11 @@ BASIC_TOOL_ASSETS = {
         'd3e34c2be735e84c484198b95c9b10c92798a20c1abacfbb8af3e3a26b854acf',
 }
 OM6626_DEVICE_PACK = {
-    'tools/platforms/onmicro/om6626/programmer/payload/device-pack/JLinkDevices.xml':
+    'release/firmware/om6626_zkel/tools/internal/device-pack/JLinkDevices.xml':
         '12f821b52aabddca30300bd10710ecae3be313d08d3b70da90481abf36f9ec60',
-    'tools/platforms/onmicro/om6626/programmer/payload/device-pack/Devices/Onmicro/OM662XX.elf':
+    'release/firmware/om6626_zkel/tools/internal/device-pack/Devices/Onmicro/OM662XX.elf':
         '8523643fc138b84601c850571499068d36da954b60e7a3aa0be68386ad8e13af',
-    'tools/platforms/onmicro/om6626/programmer/payload/device-pack/Devices/Onmicro/OM662XX_nombr.elf':
+    'release/firmware/om6626_zkel/tools/internal/device-pack/Devices/Onmicro/OM662XX_nombr.elf':
         '9a53c01b9363371e8eff44a7a9de80e2942e96025aede3ade8053875ab6ad640',
 }
 FORBIDDEN_SUFFIXES = {
@@ -199,12 +199,12 @@ def validate_manifest(repo: Path) -> tuple[dict, list[str]]:
     except (OSError, json.JSONDecodeError) as exc:
         return {}, [f"firmware/manifest.json is invalid: {exc}"]
     version = str(manifest.get("version", ""))
-    if not re.fullmatch(r"\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?", version):
+    if not re.fullmatch(r"\d+\.\d+\.\d+(?:\.\d+)?(?:[-+][0-9A-Za-z.-]+)?", version):
         failures.append(f"invalid semantic version: {version!r}")
     if manifest.get("schemaVersion") != 2:
         failures.append("unsupported manifest schemaVersion")
     release_tag = str(manifest.get("releaseTag", ""))
-    if not re.fullmatch(r"v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?", release_tag):
+    if not re.fullmatch(r"v\d+\.\d+\.\d+(?:\.\d+)?(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?", release_tag):
         failures.append(f"invalid release tag: {release_tag!r}")
     components = manifest.get("components", [])
     if not isinstance(components, list) or not components:
@@ -247,7 +247,10 @@ def validate_manifest(repo: Path) -> tuple[dict, list[str]]:
                 artifact.get('type') in {'ota','full'} and
                 (not variant or (isinstance(variant, str) and artifact.get('type') == 'full' and board_id == 'da14585_aesl' and variant in {'aesl29','aesl42','aesl42-ssd1683'})) and
                 re.fullmatch(r'InkTag-' + re.escape(board_id) + '-' + artifact['type'] + re.escape(qualifier) + '-v' + re.escape(board['firmwareVersion']) + r'-[0-9a-f]{12}\.(?:zip|bin|img)', name))
-            if not name.startswith(expected_fragment) and not canonical_name:
+            named_basic = (manifest.get('edition') == 'basic' and artifact.get('type') in {'ota', 'full'} and
+                           re.fullmatch(r'InkTag-BASIC-' + re.escape(board['firmwareVersion']) + '-' +
+                                        re.escape(board_id) + '-' + artifact['type'] + r'\.(?:zip|bin|img)', name))
+            if not name.startswith(expected_fragment) and not canonical_name and not named_basic:
                 failures.append(f"artifact name does not match board/version: {name}")
             if name in seen_assets:
                 failures.append(f"duplicate artifact name: {name}")
@@ -326,7 +329,8 @@ def validate_assets(manifest: dict, assets: Path, repo: Path | None = None) -> l
         for artifact in board.get("artifacts", []):
             expected[artifact["name"]] = artifact["sha256"]
             firmware_names.add(artifact['name'])
-    for key in ("web", "webStandalone", "webResources", "localServer", "flashTools"):
+    bundle = manifest.get('firmwareBundle')
+    for key in ("web", "webStandalone", "webResources", "localServer", "flashTools", "firmwareBundle"):
         web_asset = manifest.get(key)
         if web_asset:
             expected[web_asset["name"]] = web_asset["sha256"]
@@ -360,6 +364,12 @@ def validate_assets(manifest: dict, assets: Path, repo: Path | None = None) -> l
             failures.append(f"release asset is missing: {name}")
         elif digest(path) != expected_digest:
             failures.append(f"release asset SHA-256 mismatch: {name}")
+        elif bundle and name == bundle['name']:
+            try:
+                from basic_release import verify_firmware_bundle
+                verify_firmware_bundle(repo or Path(__file__).resolve().parents[1], path)
+            except (OSError, ValueError, KeyError, zipfile.BadZipFile) as error:
+                failures.append(f"invalid firmware bundle: {name}: {error}")
         elif path.suffix.lower() == '.zip':
             try:
                 with zipfile.ZipFile(path) as archive:
@@ -382,7 +392,7 @@ def validate_assets(manifest: dict, assets: Path, repo: Path | None = None) -> l
             except zipfile.BadZipFile:
                 failures.append(f"invalid release ZIP: {name}")
         descriptions = ([a for b in manifest.get('boards', []) for a in b.get('artifacts', [])] +
-            [manifest.get(k) for k in ('cli','web','webStandalone','webResources','localServer','flashTools')] +
+            [manifest.get(k) for k in ('cli','web','webStandalone','webResources','localServer','flashTools','firmwareBundle')] +
             manifest.get('cliDistributions', []) + manifest.get('sourceMaterials', []))
         description = next((a for a in descriptions if a and a.get('name') == name), None)
         if description and path.is_file() and path.stat().st_size != description.get('bytes'):

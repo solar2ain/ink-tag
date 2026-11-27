@@ -28,6 +28,10 @@ The components listed above retain their own copyright and licenses. InkTag proj
 
 License information for some plugins, fonts and images is not yet complete; this list does not grant redistribution rights to every asset. Original third-party license texts are retained in their original form and language.
 
+EPD-nRF5（GPL-3.0）是 InkTag 的早期参考。DA14585 和 nRF52811 仍保留部分来自上游的历法和字模资源，各项来源与许可见端口声明。[DA14585](firmware/ports/dialog/da14585/SOURCE_NOTICES.md) · [nRF52811](firmware/ports/nordic/nrf52811/THIRD_PARTY_NOTICES.md)
+
+EPD-nRF5 (GPL-3.0) was an early reference for InkTag. See the port notices for the sources and terms of the calendar and bitmap font resources retained by DA14585 and nRF52811. [DA14585](firmware/ports/dialog/da14585/SOURCE_NOTICES.md) · [nRF52811](firmware/ports/nordic/nrf52811/THIRD_PARTY_NOTICES.md)
+
 ## 创作字体 / Creation fonts
 
 | 字体 / Font | 许可 / License | 原文与声明 / License text and notices |

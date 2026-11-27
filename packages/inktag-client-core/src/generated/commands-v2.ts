@@ -604,7 +604,7 @@ export const ScreenRuleRegistryV2 = [
   { controller: 0x21, recipe: 0x00, colors: [1, 2], widthAlignment: 8, maxWidth: 152, maxHeight: 152, fixedSizes: [[152, 152]], colorFixedSizes: [], transferFormat: 0 },
   { controller: 0x21, recipe: 0x01, colors: [2], widthAlignment: 8, maxWidth: 152, maxHeight: 152, fixedSizes: [[152, 152]], colorFixedSizes: [], transferFormat: 0 },
   { controller: 0x22, recipe: 0x00, colors: [1, 2, 4], widthAlignment: 8, maxWidth: 960, maxHeight: 680, fixedSizes: [], colorFixedSizes: [{ color: 4, sizes: [[800, 480]] }], transferFormat: 0 },
-  { controller: 0x23, recipe: 0x00, colors: [1, 2], widthAlignment: 8, maxWidth: 128, maxHeight: 250, fixedSizes: [[128, 250]], colorFixedSizes: [], transferFormat: 0 },
+  { controller: 0x23, recipe: 0x00, colors: [1, 2], widthAlignment: 8, maxWidth: 176, maxHeight: 296, fixedSizes: [], colorFixedSizes: [], transferFormat: 0 },
   { controller: 0x23, recipe: 0x01, colors: [1, 2], widthAlignment: 8, maxWidth: 128, maxHeight: 250, fixedSizes: [[128, 250]], colorFixedSizes: [], transferFormat: 0 },
   { controller: 0x24, recipe: 0x00, colors: [1, 2], widthAlignment: 8, maxWidth: 400, maxHeight: 300, fixedSizes: [], colorFixedSizes: [], transferFormat: 0 },
   { controller: 0x24, recipe: 0x01, colors: [1, 2], widthAlignment: 8, maxWidth: 400, maxHeight: 300, fixedSizes: [], colorFixedSizes: [], transferFormat: 0 },

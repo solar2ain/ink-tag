@@ -90,7 +90,7 @@ def command(args, chip, action, directory, result, hold=False, request=None):
     if action == 'probe' and chip in GR551X:
         chip = 'gr551x'
     cmd = [args.powershell, '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File',
-           str(ROOT / 'firmware/ports/goodix/common/tools/internal/goodix-stock-entry.ps1'),
+           str(ROOT / 'tools/platforms/goodix/common/programmer/internal/goodix-stock-entry.ps1'),
            '-Action', action, '-Chip', chip, '-EvidenceDir', str(directory), '-ResultFile', str(result),
            '-FrequencyHz', str(args.frequency_hz)]
     if action == 'probe' and args.action == 'probe':

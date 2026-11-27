@@ -89,11 +89,41 @@ test('creation has blank, template and My pages entrances without the discarded 
   await page.getByPlaceholder('搜索模板').fill('设备信息')
   await expect(page.locator('.template-card')).toHaveCount(0)
   await page.getByPlaceholder('搜索模板').fill('')
-  await page.getByRole('button', { name: '选择模板开始', exact: true }).click()
-  await expect(page.getByRole('heading', { name: '选择模板开始' })).toBeFocused()
+  await expect(page.getByRole('button', { name: '选择模板开始', exact: true })).toHaveCount(0)
+  for (const width of [320, 390, 799, 800, 1280]) {
+    await page.setViewportSize({ width, height: 800 })
+    const title = (await page.getByRole('heading', { name: '创作', exact: true }).boundingBox())!
+    const create = (await page.getByRole('button', { name: '新建页面', exact: true }).boundingBox())!
+    const pages = (await page.getByRole('link', { name: '我的页面', exact: true }).boundingBox())!
+    expect(create.x).toBeGreaterThan(title.x + title.width)
+    expect(pages.x).toBeGreaterThan(create.x + create.width)
+    expect(pages.x + pages.width).toBeLessThanOrEqual(width)
+    if (width <= 799) expect(Math.abs(title.y + title.height / 2 - pages.y - pages.height / 2)).toBeLessThan(2)
+    const source = (await page.getByLabel('模板来源').boundingBox())!
+    const resolution = (await page.getByLabel('模板分辨率').boundingBox())!
+    const search = (await page.getByPlaceholder('搜索模板').boundingBox())!
+    expect(source.width).toBeLessThan(96)
+    expect(source.y).toBeGreaterThan(resolution.y + resolution.height)
+    expect(search.x).toBeGreaterThan(source.x + source.width)
+    expect(Math.abs(source.y + source.height / 2 - search.y - search.height / 2)).toBeLessThan(2)
+    expect(search.x + search.width).toBeLessThanOrEqual(width)
+  }
+  await page.getByLabel('模板来源').selectOption('mine')
+  await expect(page.locator('.template-card')).toHaveCount(0)
+  await page.getByLabel('模板来源').selectOption('all')
+  await expect(page.locator('.template-card').first()).toBeVisible()
   await page.getByRole('link', { name: '我的页面', exact: true }).click()
   await expect(page).toHaveURL(/library\?tab=pages/)
   await expect(page.getByRole('region', { name: '页面筛选' })).toBeVisible()
+  const importButton = page.getByRole('button', { name: '导入素材', exact: true })
+  await expect(importButton).toHaveCount(0)
+  await page.getByRole('button', { name: /图片素材/ }).click()
+  const chooser = page.waitForEvent('filechooser')
+  await importButton.click()
+  await (await chooser).setFiles(fileURLToPath(new URL('../../assets/image-slots/sources/bamboo-integrity.png', import.meta.url)))
+  await expect(page.getByText('bamboo-integrity.png')).toBeVisible()
+  await expect(importButton).toHaveCount(1)
+  await expect(page.locator('.page-header').getByRole('button', { name: '导入素材' })).toHaveCount(0)
 })
 
 test('device controls are collapsed and insert independent editable, undoable samples',async({page})=>{

@@ -11,7 +11,7 @@ beforeEach(() => {
   vi.useFakeTimers()
   useDeviceStore.getState().resetDevice()
   transfer = vi.fn().mockResolvedValue({ finalizationWriteConfirmed: false, applicationVerified: false })
-  vi.stubGlobal('window', { DialogSuota: { transferDevice: transfer } })
+  vi.stubGlobal('window', { DialogSuota: { transferServer: transfer } })
   vi.stubGlobal('document', { createElement: () => ({ remove() {} }), head: { appendChild() {} } })
   vi.spyOn(inktagClient, 'getDevice').mockReturnValue(device)
   vi.spyOn(inktagClient, 'getGattServer').mockReturnValue({ connected: true, device } as unknown as BluetoothRemoteGATTServer)
@@ -26,6 +26,25 @@ beforeEach(() => {
   sync = vi.spyOn(inktagClient, 'syncTime').mockResolvedValue(undefined)
 })
 afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); vi.useRealTimers() })
+
+it('DA App OTA writes only through the verified Recovery server', async () => {
+  const handoff = { deviceId: device.id, recoveryName: device.name! }
+  const recovery = { connected: true, device } as unknown as BluetoothRemoteGATTServer
+  vi.spyOn(inktagClient, 'getExpectedRecoveryIdentity').mockReturnValue(handoff)
+  vi.spyOn(inktagClient, 'getVerifiedRecoveryName').mockReturnValue(handoff.recoveryName)
+  const release = vi.spyOn(inktagClient, 'releaseForRecovery').mockResolvedValue(undefined)
+  vi.mocked(inktagClient.getOtaRecoveryType).mockReturnValue(null)
+  vi.mocked(inktagClient.reconnectDevice).mockImplementationOnce(async (_actual, _timeout, requireRecovery) => {
+    expect(requireRecovery).toBe(true)
+    vi.mocked(inktagClient.getOtaRecoveryType).mockReturnValue('dialog')
+    vi.mocked(inktagClient.getGattServer).mockReturnValue(recovery)
+  })
+  const pending = transferOta(pkg, vi.fn())
+  await vi.runAllTimersAsync(); await pending
+  expect(release).toHaveBeenCalledExactlyOnceWith(handoff)
+  expect(transfer).toHaveBeenCalledExactlyOnceWith(recovery, pkg.payload, expect.any(Function), expect.anything())
+  expect(sync).toHaveBeenCalledOnce()
+})
 
 it('unknown FE ATT reaches same-grant App attestation before one clock sync', async () => {
   const progress = vi.fn()
